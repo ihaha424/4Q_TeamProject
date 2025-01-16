@@ -180,6 +180,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="framework.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="SafeDelete.h" />
@@ -191,6 +192,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThrowIfFailed.h" />
     <ClInclude Include="Utilities.h" />
+    <ClInclude Include="Vector3.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
@@ -213,6 +215,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     </ClCompile>
     <ClCompile Include="SafeRelease.cpp" />
     <ClCompile Include="ThrowIfFailed.cpp" />
+    <ClCompile Include="Vector3.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>

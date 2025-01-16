@@ -1,11 +1,16 @@
 #pragma once
 
+namespace Engine::Component
+{
+	class Movement;
+}
+
 class Player : public Engine::Object
 {
 public:
-	Player();
+	void Initialize() override;
 	
 private:
-	//Engine::Component::Movement* _movement;
+	Engine::Component::Movement* _movement;
 };
 

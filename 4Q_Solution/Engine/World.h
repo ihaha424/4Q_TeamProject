@@ -14,14 +14,27 @@ namespace Engine
 		World& operator=(World&& other) noexcept = default;
 		virtual ~World() = default;
 
-		virtual void Initialize();
-		virtual void Attach();
-		virtual void Update(float deltaTime);
-		virtual void FixedUpdate();
-		virtual void Detach();
-		virtual void Finalize();
+		void Initialize();
+		void Attach();
+		void Update(float deltaTime);
+		void FixedUpdate();
+		void Detach();
+		void Finalize();
 		
 	protected:
+		virtual void PreInitialize();
+		virtual void PostInitialize();
+		virtual void PreAttach();
+		virtual void PostAttach();
+		virtual void PreUpdate(float deltaTime);
+		virtual void PostUpdate(float deltaTime);
+		virtual void PreFixedUpdate();
+		virtual void PostFixedUpdate();
+		virtual void PreDetach();
+		virtual void PostDetach();
+		virtual void PreFinalize();
+		virtual void PostFinalize();
+
 		void LoadWorldFromFile(const std::filesystem::path& filePath);
 
 	private:

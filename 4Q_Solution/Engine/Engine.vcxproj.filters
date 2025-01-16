@@ -64,6 +64,12 @@
     <Filter Include="Components\Movement">
       <UniqueIdentifier>{b8175831-f9c7-4a28-b81e-8ab48a576edf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{f585c9c3-5d6f-4a89-ae17-7f026dc1fc71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Vector3">
+      <UniqueIdentifier>{67aea730-d2e1-44c9-8263-3e8691b07b99}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -132,6 +138,12 @@
     <ClInclude Include="MovementComponent.h">
       <Filter>Components\Movement</Filter>
     </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Math\Vector3</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -178,6 +190,9 @@
     </ClCompile>
     <ClCompile Include="MovementComponent.cpp">
       <Filter>Components\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>Math\Vector3</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

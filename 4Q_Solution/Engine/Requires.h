@@ -14,6 +14,8 @@
 #include "GraphicsEngine/ILightSystem.h"
 #include "GraphicsEngine/ITextSystem.h"
 
+#include "Math.h"
+
 #include "Managers.h"
 #include "Components.h"
 #include "Object.h"

@@ -14,6 +14,14 @@ Engine::Application::Application(const HINSTANCE instanceHandle, std::wstring ti
 {
 }
 
+void Engine::Application::Begin()
+{
+	InitializeManagers();
+	DeclareInputActions(_inputManager);
+	CreateContents();
+	InitializeContents();
+}
+
 void Engine::Application::InitializeManagers() const
 {
 	CreateTimeManager(&_timeManager);
@@ -27,6 +35,11 @@ void Engine::Application::InitializeManagers() const
 
 	CreateGraphicsManager(&_graphicsManager);
 	_graphicsManager->Initialize(_windowManager->GetHandle(), L"../Shaders/", _size, false, 1);
+}
+
+void Engine::Application::DeclareInputActions(Manager::IInput* inputManager)
+{
+
 }
 
 void Engine::Application::CreateContents()
@@ -75,6 +88,13 @@ void Engine::Application::Run(const int showCommand)
 			_inputManager->Reset();
 		}
 	}
+}
+
+void Engine::Application::End()
+{
+	FinalizeContents();
+	DeleteContents();
+	FinalizeManagers();
 }
 
 void Engine::Application::FinalizeContents()

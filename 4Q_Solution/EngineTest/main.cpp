@@ -11,13 +11,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	GameApplication app(hInstance);
 
-	app.InitializeManagers();
-	app.CreateContents();
-	app.InitializeContents();
+    app.Begin();
 	app.Run(nCmdShow);
-	app.FinalizeContents();
-	app.DeleteContents();
-	app.FinalizeManagers();
+	app.End();
 
 	return 0;
 }

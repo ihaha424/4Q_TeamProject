@@ -7,19 +7,23 @@ namespace Engine
 	public:
 		Application(HINSTANCE instanceHandle, std::wstring title, SIZE size);
 
-		void InitializeManagers() const;
-		void CreateContents();
-		void InitializeContents();
+
+		void Begin();
 		void Run(int showCommand);
-		void FinalizeContents();
-		void DeleteContents();
-		void FinalizeManagers() const;
+		void End();
 
 		static Manager::ITime* GetTimeManager();
 		static Manager::IInput* GetInputManager();
 		static Manager::IGraphics* GetGraphicsManager();
 
 	protected:
+		void InitializeManagers() const;
+		virtual void DeclareInputActions(Manager::IInput* inputManager);
+		void CreateContents();
+		void InitializeContents();
+		void FinalizeContents();
+		void DeleteContents();
+		void FinalizeManagers() const;
 
 		HINSTANCE _instanceHandle;
 

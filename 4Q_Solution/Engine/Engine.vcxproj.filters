@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Application">
+      <UniqueIdentifier>{c855e523-3161-42c0-955c-50fbf3c360f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{0f944a06-e1fd-4a39-8097-2034c735033e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{13f161ca-4ca1-4384-b66b-40e9d61c1c33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities\ThrowIfFailed">
+      <UniqueIdentifier>{63cc1b09-2710-400c-a588-91ce28759365}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities\SafeRelease">
+      <UniqueIdentifier>{96f21709-eb70-4c66-a1b3-5407a8d2c999}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Window">
+      <UniqueIdentifier>{4ff711f7-3588-46be-9fd8-ed6c646031bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Time">
+      <UniqueIdentifier>{2260b6a3-4a8e-4980-b6e6-0cd6bca2d2a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Input">
+      <UniqueIdentifier>{122a0591-973a-43be-91e6-ba288d5247ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Drive">
+      <UniqueIdentifier>{a59af320-cec3-4a8b-99de-639155a7dba7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Graphics">
+      <UniqueIdentifier>{e7e9d4f0-7ec4-4842-834c-6722e4d8b7d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{33eaf238-cd64-4fab-9f84-f1d33c3e4383}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Camera">
+      <UniqueIdentifier>{48d7ee23-6083-412f-b54e-c7f2ceebfcc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Component">
+      <UniqueIdentifier>{2879682f-2ca0-40c3-9f7b-22969bda13cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities\SafeDelete">
+      <UniqueIdentifier>{d421d934-68d8-4523-bb09-4bd505587523}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World">
+      <UniqueIdentifier>{9e69749f-db37-43f2-be97-15387440c312}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>Managers\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Managers.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="ThrowIfFailed.h">
+      <Filter>Utilities\ThrowIfFailed</Filter>
+    </ClInclude>
+    <ClInclude Include="SafeRelease.h">
+      <Filter>Utilities\SafeRelease</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Managers\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Managers\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Drive.h">
+      <Filter>Drive</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Managers\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Components.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Requires.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraComponent.h">
+      <Filter>Components\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Components\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="SafeDelete.h">
+      <Filter>Utilities\SafeDelete</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>Managers\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="ThrowIfFailed.cpp">
+      <Filter>Utilities\ThrowIfFailed</Filter>
+    </ClCompile>
+    <ClCompile Include="SafeRelease.cpp">
+      <Filter>Utilities\SafeRelease</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Managers\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Managers\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Drive.cpp">
+      <Filter>Drive</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>Managers\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraComponent.cpp">
+      <Filter>Components\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Components\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="SafeDelete.cpp">
+      <Filter>Utilities\SafeDelete</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

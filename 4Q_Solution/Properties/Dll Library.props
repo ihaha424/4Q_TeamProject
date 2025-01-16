@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <OutDir>$(ProjectDir)bin\$(Configuration)</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <PostBuildEvent>
+      <Command>xcopy /y /d "$(OutDir)*.dll" "$(SolutionDir)dll\"
+xcopy /y /d "$(OutDir)*.lib" "$(SolutionDir)lib\"
+xcopy /y /d "$(OutDir)*.pbd" "$(SolutionDir)bin\"
+xcopy /y /d "$(OutDir)*.dll" "$(SolutionDir)bin\"
+xcopy /y /d "$(OutDir)*.cso" "$(SolutionDir)Resources\Shaders\"</Command>
+    </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup />
+</Project>

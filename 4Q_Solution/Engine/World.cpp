@@ -3,35 +3,35 @@
 
 void Engine::World::Initialize()
 {
-	// TODO: InitializeContents Objects
+	std::ranges::for_each(_objects, [](Object* object) { object->Initialize(); });
 }
 
 void Engine::World::Attach()
 {
-	// TODO: Attach Objects
+	std::ranges::for_each(_objects, [](Object* object) { object->Attach(); });
 }
 
 void Engine::World::Update(float deltaTime)
 {
-	// TODO: Update Objects
+	std::ranges::for_each(_objects, [deltaTime](Object* object) { object->Update(deltaTime); });
 }
 
 void Engine::World::FixedUpdate()
 {
-	// TODO: FixedUpdate Objects
+	std::ranges::for_each(_objects, [](Object* object) { object->FixedUpdate(); });
 }
 
 void Engine::World::Detach()
 {
-	// TODO: Detach Objects
+	std::ranges::for_each(_objects, [](Object* object) { object->Detach(); });
 }
 
 void Engine::World::Finalize()
 {
-	// TODO: FinalizeContents Objects
+	std::ranges::for_each(_objects, [](Object* object) { object->Finalize(); });
 }
 
-void Engine::World::LoadWorldFromFile(std::filesystem::path filePath)
+void Engine::World::LoadWorldFromFile(const std::filesystem::path& filePath)
 {
 	// TODO: Load World From File
 }

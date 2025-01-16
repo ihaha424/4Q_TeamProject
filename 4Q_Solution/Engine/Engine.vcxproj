@@ -180,6 +180,8 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="framework.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="MovementComponent.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="SafeDelete.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Managers.h" />
@@ -199,6 +201,8 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Drive.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="MovementComponent.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="SafeDelete.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="pch.cpp">

@@ -41,7 +41,6 @@ void Engine::Manager::Graphics::Initialize(const HWND windowHandle, const std::f
 	_animationSystem->Initialize(animationThreadCount);
 
 	_graphicsSystem->CreateLightSystem(&_lightSystem);
-	_graphicsSystem->CreateTextSystem(&_textSystem);
 }
 
 void Engine::Manager::Graphics::Update(const float deltaTime) const
@@ -59,7 +58,6 @@ void Engine::Manager::Graphics::Finalize()
 {
 	constexpr Utility::SafeRelease releaser;
 
-	releaser(&_textSystem);
 	releaser(&_animationSystem);
 	releaser(&_cameraSystem);
 	releaser(&_renderSystem);

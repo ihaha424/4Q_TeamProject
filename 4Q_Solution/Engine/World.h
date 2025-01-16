@@ -22,7 +22,7 @@ namespace Engine
 		virtual void Finalize();
 		
 	protected:
-		void LoadWorldFromFile(std::filesystem::path filePath);
+		void LoadWorldFromFile(const std::filesystem::path& filePath);
 
 	private:
 		std::vector<Object*> _objects;

@@ -1,7 +1,8 @@
 #include "pch.h"
 #include "Player.h"
 
-void Player::Initialize()
+void Player::PreInitialize()
 {
-	Object::Initialize();
+	Object::PreInitialize();
+	auto inputManager = Engine::Application::GetInputManager();
 }

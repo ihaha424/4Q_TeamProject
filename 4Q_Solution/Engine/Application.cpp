@@ -106,22 +106,17 @@ void Engine::Application::FinalizeManagers() const
 	deleter(&_timeManager);
 }
 
-Engine::Manager::Time* Engine::Application::GetTimeManager()
+Engine::Manager::ITime* Engine::Application::GetTimeManager()
 {
 	return _timeManager;
 }
 
-Engine::Manager::Window* Engine::Application::GetWindowManager()
-{
-	return _windowManager;
-}
-
-Engine::Manager::Input* Engine::Application::GetInputManager()
+Engine::Manager::IInput* Engine::Application::GetInputManager()
 {
 	return _inputManager;
 }
 
-Engine::Manager::Graphics* Engine::Application::GetGraphicsManager()
+Engine::Manager::IGraphics* Engine::Application::GetGraphicsManager()
 {
 	return _graphicsManager;
 }

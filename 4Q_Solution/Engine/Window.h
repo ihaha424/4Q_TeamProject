@@ -2,7 +2,19 @@
 
 namespace Engine::Manager
 {
-	class Window
+	struct IWindow
+	{
+		IWindow() = default;
+		IWindow(const IWindow& other) = default;
+		IWindow(IWindow&& other) noexcept = default;
+		IWindow& operator=(const IWindow& other) = default;
+		IWindow& operator=(IWindow&& other) noexcept = default;
+		virtual ~IWindow() = default;
+
+		[[nodiscard]] virtual HWND GetHandle() const = 0;
+	};
+
+	class Window final : public IWindow
 	{
 	public:
 		Window() = default;
@@ -14,7 +26,7 @@ namespace Engine::Manager
 		void Update() const;
 		void SetCursorDefault() const;
 
-		[[nodiscard]] HWND GetHandle() const;
+		[[nodiscard]] HWND GetHandle() const override;
 
 	private:
 		static LRESULT WindowProcedure(const HWND windowHandle, const UINT message, const WPARAM wParam, const LPARAM lParam);

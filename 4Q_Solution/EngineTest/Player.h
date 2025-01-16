@@ -7,9 +7,8 @@ namespace Engine::Component
 
 class Player : public Engine::Object
 {
-public:
-	void Initialize() override;
-	
+protected:
+	void PreInitialize() override;
 private:
 	Engine::Component::Movement* _movement;
 };

@@ -15,10 +15,9 @@ namespace Engine
 		void DeleteContents();
 		void FinalizeManagers() const;
 
-		static Manager::Time* GetTimeManager();
-		static Manager::Window* GetWindowManager();
-		static Manager::Input* GetInputManager();
-		static Manager::Graphics* GetGraphicsManager();
+		static Manager::ITime* GetTimeManager();
+		static Manager::IInput* GetInputManager();
+		static Manager::IGraphics* GetGraphicsManager();
 
 	protected:
 

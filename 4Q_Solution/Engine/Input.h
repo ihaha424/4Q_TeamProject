@@ -2,7 +2,17 @@
 
 namespace Engine::Manager
 {
-	class Input
+	struct IInput
+	{
+		IInput() = default;
+		IInput(const IInput& other) = default;
+		IInput(IInput&& other) noexcept = default;
+		IInput& operator=(const IInput& other) = default;
+		IInput& operator=(IInput&& other) noexcept = default;
+		virtual ~IInput() = default;
+	};
+
+	class Input final : public IInput
 	{
 	public:
 		Input() = default;

@@ -10,7 +10,7 @@ Engine::Component::CameraComponent::CameraComponent(std::wstring name, const flo
 void Engine::Component::CameraComponent::Initialize()
 {
 	Component::Initialize();
-	Application::GetGraphicsManager()->CreateCamera(&_camera);
+	Application::GetGraphicsManager()->GetCameraSystem()->CreateCamera(&_camera);
 	_camera->SetPerspective(_nearZ, _farZ, static_cast<float>(_size.cx) / static_cast<float>(_size.cy), _fov);
 	_camera->SetPosition(0.f, 50.f, -300.f); // TODO: Get position from object.
 }
@@ -18,13 +18,13 @@ void Engine::Component::CameraComponent::Initialize()
 void Engine::Component::CameraComponent::Attach()
 {
 	Component::Attach();
-	Application::GetGraphicsManager()->RegisterCamera(_name, _camera);
+	Application::GetGraphicsManager()->GetCameraSystem()->RegisterCamera(_name, _camera);
 }
 
 void Engine::Component::CameraComponent::Detach()
 {
 	Component::Detach();
-	Application::GetGraphicsManager()->Unregister(_name);
+	Application::GetGraphicsManager()->GetCameraSystem()->Unregister(_name);
 }
 
 void Engine::Component::CameraComponent::Finalize()
@@ -36,5 +36,5 @@ void Engine::Component::CameraComponent::Finalize()
 
 void Engine::Component::CameraComponent::Activate() const
 {
-	Application::GetGraphicsManager()->SetCurrentCamera(_name);
+	Application::GetGraphicsManager()->GetCameraSystem()->SetCurrentCamera(_name);
 }

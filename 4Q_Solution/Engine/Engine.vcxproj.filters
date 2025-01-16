@@ -58,6 +58,33 @@
     <Filter Include="World">
       <UniqueIdentifier>{9e69749f-db37-43f2-be97-15387440c312}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{195b9425-0ddc-480f-b797-1ba33127b668}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Movement">
+      <UniqueIdentifier>{b8175831-f9c7-4a28-b81e-8ab48a576edf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{f585c9c3-5d6f-4a89-ae17-7f026dc1fc71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Vector3">
+      <UniqueIdentifier>{67aea730-d2e1-44c9-8263-3e8691b07b99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Graphics\GraphicsSystems">
+      <UniqueIdentifier>{717ca8ed-8146-4412-b24a-7d8e42064855}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Graphics\GraphicsSystems\CameraSystem">
+      <UniqueIdentifier>{eb326403-5bf4-4176-85c3-35dcb7696a05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Graphics\GraphicsSystems\RenderSystem">
+      <UniqueIdentifier>{f02b1442-1d89-4f1d-be11-712307bb7f3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Graphics\GraphicsSystems\AnimationSystem">
+      <UniqueIdentifier>{84ddbec6-2c5a-4b2b-86db-854e841f5027}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Graphics\GraphicsSystems\LightSystem">
+      <UniqueIdentifier>{c4e61119-7cc1-44a9-9e84-2a1e0c5e12da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -118,7 +145,34 @@
       <Filter>Utilities\SafeDelete</Filter>
     </ClInclude>
     <ClInclude Include="World.h">
-      <Filter>Header Files</Filter>
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementComponent.h">
+      <Filter>Components\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Math\Vector3</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsSystems.h">
+      <Filter>Managers\Graphics\GraphicsSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraSystem.h">
+      <Filter>Managers\Graphics\GraphicsSystems\CameraSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSystem.h">
+      <Filter>Managers\Graphics\GraphicsSystems\RenderSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationSystem.h">
+      <Filter>Managers\Graphics\GraphicsSystems\AnimationSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="LightSystem.h">
+      <Filter>Managers\Graphics\GraphicsSystems\LightSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -159,7 +213,28 @@
       <Filter>Utilities\SafeDelete</Filter>
     </ClCompile>
     <ClCompile Include="World.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementComponent.cpp">
+      <Filter>Components\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>Math\Vector3</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraSystem.cpp">
+      <Filter>Managers\Graphics\GraphicsSystems\CameraSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderSystem.cpp">
+      <Filter>Managers\Graphics\GraphicsSystems\RenderSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationSystem.cpp">
+      <Filter>Managers\Graphics\GraphicsSystems\AnimationSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="LightSystem.cpp">
+      <Filter>Managers\Graphics\GraphicsSystems\LightSystem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

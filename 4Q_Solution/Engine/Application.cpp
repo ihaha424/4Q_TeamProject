@@ -14,6 +14,14 @@ Engine::Application::Application(const HINSTANCE instanceHandle, std::wstring ti
 {
 }
 
+void Engine::Application::Begin()
+{
+	InitializeManagers();
+	DeclareInputActions(_inputManager);
+	CreateContents();
+	InitializeContents();
+}
+
 void Engine::Application::InitializeManagers() const
 {
 	CreateTimeManager(&_timeManager);
@@ -27,6 +35,11 @@ void Engine::Application::InitializeManagers() const
 
 	CreateGraphicsManager(&_graphicsManager);
 	_graphicsManager->Initialize(_windowManager->GetHandle(), L"../Shaders/", _size, false, 1);
+}
+
+void Engine::Application::DeclareInputActions(Manager::IInput* inputManager)
+{
+
 }
 
 void Engine::Application::CreateContents()
@@ -77,6 +90,13 @@ void Engine::Application::Run(const int showCommand)
 	}
 }
 
+void Engine::Application::End()
+{
+	FinalizeContents();
+	DeleteContents();
+	FinalizeManagers();
+}
+
 void Engine::Application::FinalizeContents()
 {
 	// TODO: WOC Manager Finalize;
@@ -106,22 +126,17 @@ void Engine::Application::FinalizeManagers() const
 	deleter(&_timeManager);
 }
 
-Engine::Manager::Time* Engine::Application::GetTimeManager()
+Engine::Manager::ITime* Engine::Application::GetTimeManager()
 {
 	return _timeManager;
 }
 
-Engine::Manager::Window* Engine::Application::GetWindowManager()
-{
-	return _windowManager;
-}
-
-Engine::Manager::Input* Engine::Application::GetInputManager()
+Engine::Manager::IInput* Engine::Application::GetInputManager()
 {
 	return _inputManager;
 }
 
-Engine::Manager::Graphics* Engine::Application::GetGraphicsManager()
+Engine::Manager::IGraphics* Engine::Application::GetGraphicsManager()
 {
 	return _graphicsManager;
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <assert.h>
 #include <string>
 #include <filesystem>
 
@@ -14,8 +15,11 @@
 #include "GraphicsEngine/ILightSystem.h"
 #include "GraphicsEngine/ITextSystem.h"
 
+#include "Math.h"
+
 #include "Managers.h"
+#include "Components.h"
+#include "Object.h"
 #include "World.h"
 #include "Drive.h"
-#include "Components.h"
 #include "Application.h"

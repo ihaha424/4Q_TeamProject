@@ -3,35 +3,95 @@
 
 void Engine::World::Initialize()
 {
-	// TODO: InitializeContents Objects
+	PreInitialize();
+	std::ranges::for_each(_objects, [](Object* object) { object->Initialize(); });
+	PostInitialize();
 }
 
 void Engine::World::Attach()
 {
-	// TODO: Attach Objects
+	PreAttach();
+	std::ranges::for_each(_objects, [](Object* object) { object->Attach(); });
+	PostAttach();
 }
 
 void Engine::World::Update(float deltaTime)
 {
-	// TODO: Update Objects
+	PreUpdate(deltaTime);
+	std::ranges::for_each(_objects, [deltaTime](Object* object) { object->Update(deltaTime); });
+	PostUpdate(deltaTime);
 }
 
 void Engine::World::FixedUpdate()
 {
-	// TODO: FixedUpdate Objects
+	PreFixedUpdate();
+	std::ranges::for_each(_objects, [](Object* object) { object->FixedUpdate(); });
+	PostFixedUpdate();
 }
 
 void Engine::World::Detach()
 {
-	// TODO: Detach Objects
+	PreDetach();
+	std::ranges::for_each(_objects, [](Object* object) { object->Detach(); });
+	PostDetach();
 }
 
 void Engine::World::Finalize()
 {
-	// TODO: FinalizeContents Objects
+	PreFinalize();
+	std::ranges::for_each(_objects, [](Object* object) { object->Finalize(); });
+	PostFinalize();
 }
 
-void Engine::World::LoadWorldFromFile(std::filesystem::path filePath)
+void Engine::World::PreInitialize()
+{
+}
+
+void Engine::World::PostInitialize()
+{
+}
+
+void Engine::World::PreAttach()
+{
+}
+
+void Engine::World::PostAttach()
+{
+}
+
+void Engine::World::PreUpdate(float deltaTime)
+{
+}
+
+void Engine::World::PostUpdate(float deltaTime)
+{
+}
+
+void Engine::World::PreFixedUpdate()
+{
+}
+
+void Engine::World::PostFixedUpdate()
+{
+}
+
+void Engine::World::PreDetach()
+{
+}
+
+void Engine::World::PostDetach()
+{
+}
+
+void Engine::World::PreFinalize()
+{
+}
+
+void Engine::World::PostFinalize()
+{
+}
+
+void Engine::World::LoadWorldFromFile(const std::filesystem::path& filePath)
 {
 	// TODO: Load World From File
 }

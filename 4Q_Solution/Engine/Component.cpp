@@ -13,6 +13,10 @@ void Engine::Component::Component::Update(float deltaTime)
 {
 }
 
+void Engine::Component::Component::FixedUpdate()
+{
+}
+
 void Engine::Component::Component::Detach()
 {
 }

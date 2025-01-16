@@ -2,17 +2,20 @@
 
 namespace Engine
 {
-	class Object;
+	namespace Component
+	{
+		class Component;
+	}
 
-	class World
+	class Object
 	{
 	public:
-		World() = default;
-		World(const World& other) = default;
-		World(World&& other) noexcept = default;
-		World& operator=(const World& other) = default;
-		World& operator=(World&& other) noexcept = default;
-		virtual ~World() = default;
+		Object() = default;
+		Object(const Object& other) = default;
+		Object(Object&& other) noexcept = default;
+		Object& operator=(const Object& other) = default;
+		Object& operator=(Object&& other) noexcept = default;
+		virtual ~Object() = default;
 
 		void Initialize();
 		void Attach();
@@ -20,7 +23,7 @@ namespace Engine
 		void FixedUpdate();
 		void Detach();
 		void Finalize();
-		
+
 	protected:
 		virtual void PreInitialize();
 		virtual void PostInitialize();
@@ -35,9 +38,7 @@ namespace Engine
 		virtual void PreFinalize();
 		virtual void PostFinalize();
 
-		void LoadWorldFromFile(const std::filesystem::path& filePath);
-
 	private:
-		std::vector<Object*> _objects;
+		std::vector<Component::Component*> _components;
 	};
 }

@@ -152,6 +152,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameApplication.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestWorld.h" />
@@ -165,6 +166,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="TestWorld.cpp" />
   </ItemGroup>
   <ItemGroup>

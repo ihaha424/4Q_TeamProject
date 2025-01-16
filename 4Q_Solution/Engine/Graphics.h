@@ -1,8 +1,24 @@
 ﻿#pragma once
+#include "GraphicsSystems.h"
 
 namespace Engine::Manager
 {
-	class Graphics
+	struct IGraphics
+	{
+		IGraphics() = default;
+		IGraphics(const IGraphics& other) = default;
+		IGraphics(IGraphics&& other) noexcept = default;
+		IGraphics& operator=(const IGraphics& other) = default;
+		IGraphics& operator=(IGraphics&& other) noexcept = default;
+		virtual ~IGraphics() = default;
+
+		[[nodiscard]] virtual GraphicsSystem::ICameraSystem* GetCameraSystem() = 0;
+		[[nodiscard]] virtual GraphicsSystem::IRenderSystem* GetRenderSystem() = 0;
+		[[nodiscard]] virtual GraphicsSystem::IAnimationSystem* GetAnimationSystem() = 0;
+		[[nodiscard]] virtual GraphicsSystem::ILightSystem* GetLightSystem() = 0;
+	};
+
+	class Graphics final : public IGraphics
 	{
 		using CreateInstanceFunction = HRESULT(__stdcall*)(void* ppv);
 	public:
@@ -13,43 +29,21 @@ namespace Engine::Manager
 		void Render() const;
 		void Finalize();
 
-		// CameraSystem
-		void CreateCamera(GE::ICamera** camera) const;
-		void RegisterCamera(std::wstring_view name, GE::ICamera* camera) const;
-		void Unregister(std::wstring_view name) const;
-		void SetCurrentCamera(std::wstring_view name) const;
-
-		// RenderSystem
-		void CreateMatrix(GE::IMatrix** matrix) const;
-		void CreateMeshRenderer(GE::IMeshRenderer** component, const GE::MESH_RENDERER_DESC* desc) const;
-		void RegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* component, GE::IMatrix* matrix) const;
-		void UnRegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* component) const;
-
-		// AnimationSystem
-		void CreateAnimator(GE::IMeshRenderer* meshRenderer, GE::IAnimator** outAnimator) const;
-		void RegisterAnimator(GE::IAnimator* animator) const;
-		void UnRegisterAnimator(GE::IAnimator* animator) const;
-
-		// LightSystem
-		void CreateLight(GE::ILight** outLight) const;
-		void RegisterLight(GE::ILight* light) const;
-		void UnRegisterLight(GE::ILight* light) const;
-
-		// TextSystem
-		void RegisterFont(const wchar_t* name, const wchar_t* filePath) const;
-		void CreateTextRenderer(GE::ITextRenderer** textRenderer) const;
-		void RegisterRenderQueue(GE::ITextRenderer* textRenderer) const;
-		void UnRegisterRenderQueue(GE::ITextRenderer* textRenderer) const;
+		[[nodiscard]] GraphicsSystem::ICameraSystem* GetCameraSystem() override;
+		[[nodiscard]] GraphicsSystem::IRenderSystem* GetRenderSystem() override;
+		[[nodiscard]] GraphicsSystem::IAnimationSystem* GetAnimationSystem() override;
+		[[nodiscard]] GraphicsSystem::ILightSystem* GetLightSystem() override;
 
 	private:
 		HMODULE _dll;
 
 		GE::IGraphicsSystem* _graphicsSystem;
-		GE::ICameraSystem* _cameraSystem;
-		GE::IRenderSystem* _renderSystem;
-		GE::IAnimationSystem* _animationSystem;
-		GE::ILightSystem* _lightSystem;
-		GE::ITextSystem* _textSystem;
+
+		// Sub systems
+		GraphicsSystem::RenderSystem _renderSystem;
+		GraphicsSystem::CameraSystem _cameraSystem;
+		GraphicsSystem::AnimationSystem _animationSystem;
+		GraphicsSystem::LightSystem _lightSystem;
 	};
 }
 

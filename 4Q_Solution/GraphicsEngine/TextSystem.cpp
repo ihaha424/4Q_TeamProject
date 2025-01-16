@@ -77,5 +77,4 @@ void TextSystem::Free()
 		delete font.second;
 
 	delete _pSpriteBatch;
-	delete this;
 }

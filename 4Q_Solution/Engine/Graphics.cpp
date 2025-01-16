@@ -31,6 +31,7 @@ void Engine::Manager::Graphics::Initialize(const HWND windowHandle, const std::f
 		.width = static_cast<float>(screenSize.cx),
 		.height = static_cast<float>(screenSize.cy),
 		.type = GE::RENDERER_DESC::Type::DX11,
+		.maxLayer = 1,
 		.isFullScreen = isFullScreen
 	};
 
@@ -41,7 +42,6 @@ void Engine::Manager::Graphics::Initialize(const HWND windowHandle, const std::f
 	_animationSystem->Initialize(animationThreadCount);
 
 	_graphicsSystem->CreateLightSystem(&_lightSystem);
-	_graphicsSystem->CreateTextSystem(&_textSystem);
 }
 
 void Engine::Manager::Graphics::Update(const float deltaTime) const
@@ -59,7 +59,6 @@ void Engine::Manager::Graphics::Finalize()
 {
 	constexpr Utility::SafeRelease releaser;
 
-	releaser(&_textSystem);
 	releaser(&_animationSystem);
 	releaser(&_cameraSystem);
 	releaser(&_renderSystem);
@@ -99,14 +98,14 @@ void Engine::Manager::Graphics::CreateMeshRenderer(GE::IMeshRenderer** component
 	_renderSystem->CreateMeshRenderer(component, desc);
 }
 
-void Engine::Manager::Graphics::RegisterRenderQueue(GE::IMeshRenderer* component, GE::IMatrix* matrix) const
+void Engine::Manager::Graphics::RegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* component, GE::IMatrix* matrix) const
 {
-	_renderSystem->RegisterRenderQueue(component, matrix);
+	_renderSystem->RegisterRenderQueue(layer, component, matrix);
 }
 
-void Engine::Manager::Graphics::UnRegisterRenderQueue(GE::IMeshRenderer* component) const
+void Engine::Manager::Graphics::UnRegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* component) const
 {
-	_renderSystem->UnRegisterRenderQueue(component);
+	_renderSystem->UnRegisterRenderQueue(layer, component);
 }
 
 void Engine::Manager::Graphics::CreateAnimator(GE::IMeshRenderer* meshRenderer, GE::IAnimator** outAnimator) const

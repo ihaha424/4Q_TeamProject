@@ -23,6 +23,9 @@ public:
 	virtual ~PixelShader();
 
 public:
+	ID3D11PixelShader* Get() const { return _pPixelShader; }
+
+public:
 	void SetPixelShader();
 	void SetShaderResource(TextureType type, ID3D11ShaderResourceView* pShaderResourece);
 

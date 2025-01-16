@@ -2,6 +2,8 @@
 #include "GraphicsSystem.h"
 #include "AnimationSystem.h"
 #include "RenderSystem.h"
+#include "CameraSystem.h"
+#include "LightSystem.h"
 
 // Common
 ResourceManager*	g_pResourceMgr;

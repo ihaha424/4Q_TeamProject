@@ -22,8 +22,8 @@ namespace Engine::Manager
 		// RenderSystem
 		void CreateMatrix(GE::IMatrix** matrix) const;
 		void CreateMeshRenderer(GE::IMeshRenderer** component, const GE::MESH_RENDERER_DESC* desc) const;
-		void RegisterRenderQueue(GE::IMeshRenderer* component, GE::IMatrix* matrix) const;
-		void UnRegisterRenderQueue(GE::IMeshRenderer* component) const;
+		void RegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* component, GE::IMatrix* matrix) const;
+		void UnRegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* component) const;
 
 		// AnimationSystem
 		void CreateAnimator(GE::IMeshRenderer* meshRenderer, GE::IAnimator** outAnimator) const;

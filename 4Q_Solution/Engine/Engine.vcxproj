@@ -171,22 +171,33 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
     <ClInclude Include="AnimationSystem.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="CameraSystem.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Components.h" />
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="Drive.h" />
+    <ClInclude Include="DSHAction.h" />
+    <ClInclude Include="DSHInputManager.h" />
+    <ClInclude Include="DSHMappingContext.h" />
+    <ClInclude Include="DSHMouse.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="GraphicsSystems.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Keyboard.h" />
     <ClInclude Include="LightSystem.h" />
+    <ClInclude Include="MappingContext.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="Mouse.h" />
     <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="Point.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="SafeDelete.h" />
     <ClInclude Include="Time.h" />
@@ -197,22 +208,33 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThrowIfFailed.h" />
     <ClInclude Include="Utilities.h" />
+    <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Action.cpp" />
     <ClCompile Include="AnimationSystem.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="CameraSystem.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Drive.cpp" />
+    <ClCompile Include="DSHAction.cpp" />
+    <ClCompile Include="DSHInputManager.cpp" />
+    <ClCompile Include="DSHMappingContext.cpp" />
+    <ClCompile Include="DSHMouse.cpp" />
     <ClCompile Include="Graphics.cpp" />
-    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="LightSystem.cpp" />
+    <ClCompile Include="MappingContext.cpp" />
+    <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Point.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="SafeDelete.cpp" />
     <ClCompile Include="Time.cpp" />
@@ -224,6 +246,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     </ClCompile>
     <ClCompile Include="SafeRelease.cpp" />
     <ClCompile Include="ThrowIfFailed.cpp" />
+    <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector3.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="World.cpp" />

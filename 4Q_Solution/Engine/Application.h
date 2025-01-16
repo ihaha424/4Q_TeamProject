@@ -13,12 +13,12 @@ namespace Engine
 		void End();
 
 		static Manager::ITime* GetTimeManager();
-		static Manager::IInput* GetInputManager();
+		static Input::IManager* GetInputManager();
 		static Manager::IGraphics* GetGraphicsManager();
 
 	protected:
 		void InitializeManagers() const;
-		virtual void DeclareInputActions(Manager::IInput* inputManager);
+		virtual void DeclareInputActions(Input::IManager* inputManager);
 		void CreateContents();
 		void InitializeContents();
 		void FinalizeContents();
@@ -30,12 +30,12 @@ namespace Engine
 	private:
 		static void CreateTimeManager(Manager::Time** timeManager);
 		static void CreateWindowManager(Manager::Window** windowManager);
-		static void CreateInputManager(Manager::Input** inputManager);
+		static void CreateInputManager(Input::Manager** inputManager);
 		static void CreateGraphicsManager(Manager::Graphics** graphicsManager);
 
 		static Manager::Time* _timeManager;
 		static Manager::Window* _windowManager;
-		static Manager::Input* _inputManager;
+		static Input::Manager* _inputManager;
 		static Manager::Graphics* _graphicsManager;
 
 		std::wstring _title;

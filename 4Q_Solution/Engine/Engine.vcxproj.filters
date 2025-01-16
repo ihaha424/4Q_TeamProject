@@ -34,9 +34,6 @@
     <Filter Include="Managers\Time">
       <UniqueIdentifier>{2260b6a3-4a8e-4980-b6e6-0cd6bca2d2a5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Managers\Input">
-      <UniqueIdentifier>{122a0591-973a-43be-91e6-ba288d5247ed}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Drive">
       <UniqueIdentifier>{a59af320-cec3-4a8b-99de-639155a7dba7}</UniqueIdentifier>
     </Filter>
@@ -85,6 +82,60 @@
     <Filter Include="Managers\Graphics\GraphicsSystems\LightSystem">
       <UniqueIdentifier>{c4e61119-7cc1-44a9-9e84-2a1e0c5e12da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{3b85251b-3e6b-4e61-b916-c5cafbf023f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\Manager">
+      <UniqueIdentifier>{ed2c4218-632d-4d89-bc88-cba45459d845}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Time">
+      <UniqueIdentifier>{75d6bf8d-aba9-47d4-b0ac-01cf524a1747}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Time\Manager">
+      <UniqueIdentifier>{55e6d5eb-e66e-4ee6-89d2-c61862575e95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\Device">
+      <UniqueIdentifier>{2c473296-5b7a-4255-a08d-270556924326}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\Device\Mouse">
+      <UniqueIdentifier>{6f26a27e-1ef0-416f-ad9e-f00fd227a657}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\Device\Keyboard">
+      <UniqueIdentifier>{14adb43c-7cc8-4318-9645-e2010df67ccd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\Device\Controller">
+      <UniqueIdentifier>{739ea4db-ad6d-4940-a75b-489a0f79ba9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Vector2">
+      <UniqueIdentifier>{38af7acd-3236-44f2-818d-0c80e5bb04fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Point">
+      <UniqueIdentifier>{b7196d43-bb85-4a82-91c7-8e29364ebacf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\MappingContext">
+      <UniqueIdentifier>{1d392dfa-c464-4743-b4bf-8bbb3fca3653}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\DSHInput">
+      <UniqueIdentifier>{7d0c8699-2252-4a3c-b640-bf7030e50252}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\DSHInput\Manager">
+      <UniqueIdentifier>{687af270-3e5e-457b-aff4-56cb405c86e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\DSHInput\Device">
+      <UniqueIdentifier>{3d9c8509-85b3-4269-8fd3-29324f4126f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\DSHInput\Device\Mouse">
+      <UniqueIdentifier>{560016b8-64e8-4060-8bb5-11417c8c8dc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\DSHInput\MappingContext">
+      <UniqueIdentifier>{51565dc8-035a-4670-b3ea-d6db994f59c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\Action">
+      <UniqueIdentifier>{88ef10c1-442c-4099-83ff-b20526c7c549}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\DSHInput\Action">
+      <UniqueIdentifier>{a42f79da-756b-446d-b6a1-4bd81181b270}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -113,9 +164,6 @@
     </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>Managers\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Managers\Input</Filter>
     </ClInclude>
     <ClInclude Include="Drive.h">
       <Filter>Drive</Filter>
@@ -174,6 +222,45 @@
     <ClInclude Include="LightSystem.h">
       <Filter>Managers\Graphics\GraphicsSystems\LightSystem</Filter>
     </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Input\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHInputManager.h">
+      <Filter>Input\DSHInput\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>Input\Device\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>Input\Device\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Input\Device\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Math\Vector2</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Math\Point</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHMouse.h">
+      <Filter>Input\DSHInput\Device\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="MappingContext.h">
+      <Filter>Input\MappingContext</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHMappingContext.h">
+      <Filter>Input\DSHInput\MappingContext</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Input\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHAction.h">
+      <Filter>Input\DSHInput\Action</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -193,9 +280,6 @@
     </ClCompile>
     <ClCompile Include="Window.cpp">
       <Filter>Managers\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Managers\Input</Filter>
     </ClCompile>
     <ClCompile Include="Drive.cpp">
       <Filter>Drive</Filter>
@@ -235,6 +319,42 @@
     </ClCompile>
     <ClCompile Include="LightSystem.cpp">
       <Filter>Managers\Graphics\GraphicsSystems\LightSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Input\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHInputManager.cpp">
+      <Filter>Input\DSHInput\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>Input\Device\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>Input\Device\Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Input\Device\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>Math\Vector2</Filter>
+    </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>Math\Point</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHMouse.cpp">
+      <Filter>Input\DSHInput\Device\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="MappingContext.cpp">
+      <Filter>Input\MappingContext</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHMappingContext.cpp">
+      <Filter>Input\DSHInput\MappingContext</Filter>
+    </ClCompile>
+    <ClCompile Include="Action.cpp">
+      <Filter>Input\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHAction.cpp">
+      <Filter>Input\DSHInput\Action</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

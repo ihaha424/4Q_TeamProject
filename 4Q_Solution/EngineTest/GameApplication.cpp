@@ -10,6 +10,22 @@ GameApplication::GameApplication(const HINSTANCE instanceHandle) :
 {
 }
 
+void GameApplication::DeclareInputActions(Engine::Input::IManager* inputManager)
+{
+	Application::DeclareInputActions(inputManager);
+
+	auto defaultMappingContext = inputManager->GetMappingContext(L"Default");
+
+	auto moveAction = defaultMappingContext->GetAction(L"Move");
+
+	moveAction->AddTrigger(Engine::Input::TriggerType::Down, Engine::Input::Device::IMouse::Button::Left, Negative);
+	moveAction->AddTrigger(Engine::Input::TriggerType::Down, Engine::Input::Device::IMouse::Button::Right, );
+	moveAction->AddTrigger(Engine::Input::TriggerType::Down, Engine::Input::Device::IMouse::Button::Left, );
+	moveAction->AddTrigger(Engine::Input::TriggerType::Down, Engine::Input::Device::IMouse::Button::Left);
+
+	inputManager->SetActiveMappingContext(defaultMappingContext);
+}
+
 void GameApplication::DeclareInputActions(Engine::Manager::IInput* inputManager)
 {
 	Application::DeclareInputActions(inputManager);
@@ -27,7 +43,6 @@ void GameApplication::DeclareInputActions(Engine::Manager::IInput* inputManager)
 	const auto mappingContext = inputManager->GetMappingContext();
 	DSH::Input::IAction* action = nullptr;
 	thrower(mappingContext->GetAction(L"Move", &action));
-
 	DSH::Input::Trigger::IDown* leftTrigger = nullptr;
 	DSH::Input::Trigger::IDown* rightTrigger = nullptr;
 	DSH::Input::Trigger::IDown* upTrigger = nullptr;

@@ -12,7 +12,7 @@ namespace Engine::Input
 		IMappingContext& operator=(IMappingContext&& other) noexcept = default;
 		virtual ~IMappingContext() = default;
 
-		[[nodiscard]] virtual IAction* GetAction(const wchar_t* name) const = 0;
+		[[nodiscard]] virtual IAction* GetAction(const wchar_t* name) = 0;
 	};
 
 	struct MappingContext : IMappingContext

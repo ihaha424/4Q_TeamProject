@@ -34,17 +34,17 @@ void Engine::Manager::GraphicsSystem::RenderSystem::CreateMeshRenderer(GE::IMesh
 	_renderSystem->CreateMeshRenderer(component, desc);
 }
 
-void Engine::Manager::GraphicsSystem::RenderSystem::RegisterRenderQueue(GE::IMeshRenderer* component,
+void Engine::Manager::GraphicsSystem::RenderSystem::RegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* component,
 	GE::IMatrix* matrix) const
 {
 	assert(_renderSystem != nullptr);
-	_renderSystem->RegisterRenderQueue(component, matrix);
+	_renderSystem->RegisterRenderQueue(layer, component, matrix);
 }
 
-void Engine::Manager::GraphicsSystem::RenderSystem::UnRegisterRenderQueue(GE::IMeshRenderer* component) const
+void Engine::Manager::GraphicsSystem::RenderSystem::UnRegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* component) const
 {
 	assert(_renderSystem != nullptr);
-	_renderSystem->UnRegisterRenderQueue(component);
+	_renderSystem->UnRegisterRenderQueue(layer, component);
 }
 
 void Engine::Manager::GraphicsSystem::RenderSystem::RegisterFont(const wchar_t* name, const wchar_t* filePath) const

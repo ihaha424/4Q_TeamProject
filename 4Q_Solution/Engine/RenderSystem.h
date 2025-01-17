@@ -13,8 +13,8 @@ namespace Engine::Manager::GraphicsSystem
 
 		virtual void CreateMatrix(GE::IMatrix** matrix) const = 0;
 		virtual void CreateMeshRenderer(GE::IMeshRenderer** component, const GE::MESH_RENDERER_DESC* desc) const = 0;
-		virtual void RegisterRenderQueue(GE::IMeshRenderer* component, GE::IMatrix* matrix) const = 0;
-		virtual void UnRegisterRenderQueue(GE::IMeshRenderer* component) const = 0;
+		virtual void RegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* component, GE::IMatrix* matrix) const = 0;
+		virtual void UnRegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* component) const = 0;
 	};
 
 	class RenderSystem final : public IRenderSystem
@@ -28,8 +28,8 @@ namespace Engine::Manager::GraphicsSystem
 
 		void CreateMatrix(GE::IMatrix** matrix) const override;
 		void CreateMeshRenderer(GE::IMeshRenderer** component, const GE::MESH_RENDERER_DESC* desc) const override;
-		void RegisterRenderQueue(GE::IMeshRenderer* component, GE::IMatrix* matrix) const override;
-		void UnRegisterRenderQueue(GE::IMeshRenderer* component) const override;
+		void RegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* component, GE::IMatrix* matrix) const override;
+		void UnRegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* component) const override;
 
 		void RegisterFont(const wchar_t* name, const wchar_t* filePath) const;
 		void CreateTextRenderer(GE::ITextRenderer** textRenderer) const;

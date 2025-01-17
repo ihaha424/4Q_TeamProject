@@ -263,7 +263,7 @@ void DX11Renderer::ForwardPass(std::list<Mesh*>& renderData, ID3D11RenderTargetV
 
 	_psLighting->SetPixelShader();
 
-	RenderMesh(renderData, _psLighting);	
+	RenderMesh(renderData, _psLighting);
 }
 
 void DX11Renderer::SkyBoxPass(std::list<SkyBoxRenderer*>& skyBoxes)
@@ -286,19 +286,15 @@ void DX11Renderer::PostProcessing()
 	{
 		auto& filters = g_pPostProcessSystem->GetFilters(i);
 
-		wchar_t buffer[16]{};
-		wsprintf(buffer, L"Layer%d", i);
-		ID3D11ShaderResourceView* pSRV = g_pViewManagement->GetShaderResourceView(buffer);
-
 		for (auto& filter : filters)
 		{
-			filter->Render(pSRV);
+			filter->Render(_layerSRVs[i]);
 		}
 	}
 }
 
 void DX11Renderer::BlendPass()
-{
+{	
 	ID3D11ShaderResourceView* pBlendTargetTexture = g_pViewManagement->GetShaderResourceView(L"Blend");
 	ID3D11RenderTargetView* pBackBuffer = g_pGraphicDevice->GetBackBuffer();
 
@@ -376,13 +372,17 @@ void DX11Renderer::InitMRT()
 	g_pViewManagement->AddRenderTargetGroup(L"Deferred", L"ShadowPosition");
 
 	const unsigned int maxLayer = g_pRenderGroup->GetMaxLayer();
+	_layerSRVs.resize(maxLayer);
 
 	for (unsigned int i = 0; i < maxLayer; i++)
 	{
 		wchar_t buffer[16]{};
 		wsprintf(buffer, L"Layer%d", i);
 		g_pViewManagement->AddRenderTargetView(buffer, Vector2(g_width, g_height));
+		_layerSRVs[i] = g_pViewManagement->GetShaderResourceView(buffer);
 	}
+
+	g_pViewManagement->AddRenderTargetView(L"Blend", Vector2(g_width, g_height));
 }
 
 void DX11Renderer::InitShader()
@@ -433,6 +433,9 @@ void DX11Renderer::InitStructuredBuffer()
 {
 	g_pStructuredBuffer->AddStructuredBuffer(L"WorldMatrices", sizeof(XMMATRIX) * MAX_DRAW_OBJECT, MAX_DRAW_OBJECT);
 	g_pStructuredBuffer->AddStructuredBuffer(L"BoneMatrices", sizeof(XMMATRIX) * MAX_DRAW_OBJECT * MAX_BONE_MATRIX, MAX_DRAW_OBJECT * MAX_BONE_MATRIX);
+
+	const unsigned int maxLayer = g_pRenderGroup->GetMaxLayer();
+	g_pStructuredBuffer->AddStructuredBuffer(L"Layers", g_width * g_height * sizeof(float) * maxLayer, maxLayer);
 }
 
 void DX11Renderer::Free()

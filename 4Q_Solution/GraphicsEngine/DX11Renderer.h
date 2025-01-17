@@ -68,4 +68,7 @@ private:
 	// State
 	ID3D11BlendState*					_pBlendState{ nullptr };
 	ID3D11RasterizerState*				_pRSSkyBoxState{ nullptr };
+
+	// Layer
+	std::vector<ID3D11ShaderResourceView*> _layerSRVs;
 };

@@ -20,7 +20,6 @@ namespace Client {
 	SERVER_API PacketQueue* GetPacketContainer();
 	void SERVER_API SavePacketData(std::string msg, short packetId);
 
-	void SERVER_API RecvUpdate();
 	void SERVER_API SendUpdate();
 	void SERVER_API Finalize();
 }

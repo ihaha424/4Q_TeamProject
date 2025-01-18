@@ -31,5 +31,6 @@ private:
 	StreamBuffer* _saveRecvData = nullptr;
 	PacketDispatcher* _packetDispatcherInstance = nullptr;
 
+	std::thread _recvThread;
 };
 

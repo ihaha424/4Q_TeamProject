@@ -35,11 +35,6 @@ void SERVER_API Client::SavePacketData(std::string msg, short packetId)
 	_packetDispatcherInstance->SaveBroadCastPacket(msg, packetId);
 }
 
-void SERVER_API Client::RecvUpdate()
-{
-	_mainEntrance->RecvUpdate();
-}
-
 SERVER_API PacketQueue* Client::GetPacketContainer()
 {
 	return _packetDispatcherInstance->GetMessageContainer();

@@ -83,6 +83,16 @@ bool ClientNetwork::ConnectToServer()
 
 	_packetDispatcherInstance->SessionCreated(0);
 
+	_recvThread = std::thread(
+		[&]() {
+			while (true) {
+				int res = RecvUpdate();
+				if (res == -1) {
+					break;
+				}
+			}
+		});
+
 	return true;
 }
 
@@ -133,6 +143,8 @@ int ClientNetwork::SendUpdate()
 
 void ClientNetwork::Finalize()
 {
+	shutdown(_server->GetSocket(), SD_RECEIVE);
+
 	closesocket(_server->GetSocket());
 	delete _server;
 

@@ -2,7 +2,7 @@
 
 namespace Engine::Input::Modifier
 {
-	struct ISwizzleAxis
+	struct ISwizzleAxis : Modifier
 	{
 		enum class Type : unsigned char
 		{
@@ -14,13 +14,6 @@ namespace Engine::Input::Modifier
 			ZYX,
 			MAX
 		};
-
-		ISwizzleAxis() = default;
-		ISwizzleAxis(const ISwizzleAxis& other) = default;
-		ISwizzleAxis(ISwizzleAxis&& other) noexcept = default;
-		ISwizzleAxis& operator=(const ISwizzleAxis& other) = default;
-		ISwizzleAxis& operator=(ISwizzleAxis&& other) noexcept = default;
-		virtual ~ISwizzleAxis() = default;
 	};
 
 	struct SwizzleAxis : ISwizzleAxis

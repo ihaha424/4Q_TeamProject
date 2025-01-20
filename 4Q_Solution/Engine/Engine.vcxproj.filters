@@ -169,6 +169,15 @@
     <Filter Include="Module\Difinition\DSHInput\Modifiers\SwizzleAxis">
       <UniqueIdentifier>{a3db8306-6ec0-4141-a529-67d0fac614e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Module\Interfaces\Input\Triggers">
+      <UniqueIdentifier>{aa8f9cbc-6a86-4412-a7a2-5608877d659f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Module\Difinition\DSHInput\Triggers">
+      <UniqueIdentifier>{0dcdd01f-086f-4c9e-9f2d-a5283fb7f208}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Module\Interfaces\Input\Triggers\Trigger">
+      <UniqueIdentifier>{13ec31c6-6c10-44fd-bf11-be2676e3d506}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -312,6 +321,9 @@
     <ClInclude Include="DSHSwizzleAxis.h">
       <Filter>Module\Difinition\DSHInput\Modifiers\SwizzleAxis</Filter>
     </ClInclude>
+    <ClInclude Include="Trigger.h">
+      <Filter>Module\Interfaces\Input\Triggers\Trigger</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -424,6 +436,9 @@
     </ClCompile>
     <ClCompile Include="DSHSwizzleAxis.cpp">
       <Filter>Module\Difinition\DSHInput\Modifiers\SwizzleAxis</Filter>
+    </ClCompile>
+    <ClCompile Include="Trigger.cpp">
+      <Filter>Module\Interfaces\Input\Triggers\Trigger</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -10,6 +10,8 @@ namespace Engine::DSHInput::Modifier
 
 		void Setup(DSH::Input::Modifier::ISwizzleAxis* swizzleAxis);
 
+		void Finalize() override;
+
 		void SetType(Type type) override;
 
 	private:

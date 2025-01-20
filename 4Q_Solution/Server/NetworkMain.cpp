@@ -75,11 +75,14 @@ bool NetworkMain::Initialize()
 	printf("[Initialize] Socket Listen Success.\n");
 
 
-	res = CreateWaitingSession();
-	if(res == false){
-		printf("Make Pending Accept Session Failed. Code : %d\n", GetLastError());
-		return false;
+	for (int i = 0; i < 2; i++) {
+		res = CreateWaitingSession();
+		if (res == false) {
+			printf("Make Pending Accept Session Failed. Code : %d\n", GetLastError());
+			return false;
+		}
 	}
+
 	printf("[Initialize] Make Pending Accept Session Success.\n");
 
 	HANDLE completionPort = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, 0, threadCount);
@@ -172,6 +175,8 @@ void NetworkMain::IOWork(HANDLE completionPort)
 				Lock lock(_sessionMtx);
 				_sessionMap.insert({ newSession->GetSessionID(), newSession });
 				
+				res = CreateWaitingSession();
+
 				delete acceptOverlapped;
 
 				continue;
@@ -189,41 +194,25 @@ void NetworkMain::IOWork(HANDLE completionPort)
 bool NetworkMain::CreateWaitingSession()
 {
 	bool res = true;
-	for (int i = 0; i < 10; i++) {
-		AcceptOverlapped* acceptOl = new AcceptOverlapped();
-		acceptOl->_overlappedType = OlType::Accept;
-		acceptOl->_listen = _listen->GetSocket();
-		acceptOl->_client = new Socket();
-		res = acceptOl->_client->Open(IPPROTO_TCP);
-		if (res == false) {
-			break;
-		}
-		acceptOl->_session = new Session();
-		acceptOl->_session->Initialize(acceptOl->_client);
 
-		_acceptOlContainer.push(std::move(acceptOl));
-	}
+	AcceptOverlapped* acceptOl = new AcceptOverlapped();
+	acceptOl->_overlappedType = OlType::Accept;
+	acceptOl->_listen = _listen->GetSocket();
+	acceptOl->_client = new Socket();
+	res = acceptOl->_client->Open(IPPROTO_TCP);
 	if (res == false) {
-		printf("Socket Open Failed.\n");
-		while (!_acceptOlContainer.empty()) {
-			AcceptOverlapped* overlapped = _acceptOlContainer.front();
-			_acceptOlContainer.pop();
-			overlapped->_client->Close();
-			overlapped->_session->Release();
-
-			delete overlapped->_client;
-			delete overlapped->_session;
-			delete overlapped;
-		}
+		printf("[CreateWaitingSession] Socket Open Failed.\n");
+		delete acceptOl->_client;
+		delete acceptOl;
 		return false;
 	}
-	while (!_acceptOlContainer.empty()) {
-		AcceptOverlapped* overlapped = _acceptOlContainer.front();
-		_acceptOlContainer.pop();
 
-		_listen->AcceptExtend(*overlapped);
-		printf("[CreateWaitingSession] Pending Accept Completed.\n");
-	}
+	acceptOl->_session = new Session();
+	acceptOl->_session->Initialize(acceptOl->_client);
+
+	_listen->AcceptExtend(*acceptOl);
+	printf("[CreateWaitingSession] Pending Accept Completed.\n");
+
 	return true;
 }
 

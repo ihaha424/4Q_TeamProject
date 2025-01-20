@@ -51,7 +51,6 @@ void GameApplication::DeclareInputActions(Engine::Manager::IInput* inputManager)
 	thrower(system->CreateModifier(&swizzleAxis));
 	swizzleAxis->SetType(DSH::Input::Modifier::ISwizzleAxis::Type::YXZ);
 
-
 	const auto mappingContext = inputManager->GetMappingContext();
 	DSH::Input::IAction* action = nullptr;
 	thrower(mappingContext->GetAction(L"Move", &action));

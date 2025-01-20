@@ -184,6 +184,12 @@
     <Filter Include="Module\Interfaces\Input\Value">
       <UniqueIdentifier>{8fa22aad-aad7-443b-9984-13b8bf16e54f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Module\Interfaces\Input\Triggers\Down">
+      <UniqueIdentifier>{cb4abfb9-4d60-4a40-a415-cfc7745ef9ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Module\Difinition\DSHInput\Triggers\Down">
+      <UniqueIdentifier>{38314bfc-1d1f-483c-be5d-1ab96443b626}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -336,6 +342,12 @@
     <ClInclude Include="Value.h">
       <Filter>Module\Interfaces\Input\Value</Filter>
     </ClInclude>
+    <ClInclude Include="Down.h">
+      <Filter>Module\Interfaces\Input\Triggers\Down</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHDown.h">
+      <Filter>Module\Difinition\DSHInput\Triggers\Down</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -457,6 +469,12 @@
     </ClCompile>
     <ClCompile Include="Value.cpp">
       <Filter>Module\Interfaces\Input\Value</Filter>
+    </ClCompile>
+    <ClCompile Include="Down.cpp">
+      <Filter>Module\Interfaces\Input\Triggers\Down</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHDown.cpp">
+      <Filter>Module\Difinition\DSHInput\Triggers\Down</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

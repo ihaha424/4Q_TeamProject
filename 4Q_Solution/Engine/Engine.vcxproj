@@ -179,9 +179,11 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Component.h" />
     <ClInclude Include="Components.h" />
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="Down.h" />
     <ClInclude Include="Drive.h" />
     <ClInclude Include="DSHAction.h" />
     <ClInclude Include="DSHController.h" />
+    <ClInclude Include="DSHDown.h" />
     <ClInclude Include="DSHInputManager.h" />
     <ClInclude Include="DSHKeyboard.h" />
     <ClInclude Include="DSHMappingContext.h" />
@@ -230,9 +232,11 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="CameraSystem.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="Down.cpp" />
     <ClCompile Include="Drive.cpp" />
     <ClCompile Include="DSHAction.cpp" />
     <ClCompile Include="DSHController.cpp" />
+    <ClCompile Include="DSHDown.cpp" />
     <ClCompile Include="DSHInputManager.cpp" />
     <ClCompile Include="DSHKeyboard.cpp" />
     <ClCompile Include="DSHMappingContext.cpp" />

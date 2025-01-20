@@ -4,12 +4,12 @@ namespace Engine::Input
 {
 	namespace Component
 	{
-		struct IComponent;
+		struct Component;
 	}
 
 	namespace Modifier
 	{
-		struct IModifier;
+		struct Modifier;
 	}
 
 	namespace Trigger
@@ -23,8 +23,8 @@ namespace Engine::Input
 			Trigger& operator=(Trigger&& other) noexcept = default;
 			virtual ~Trigger() = default;
 
-			virtual void SetComponent(Component::IComponent* component) = 0;
-			virtual void SetModifier(Modifier::IModifier* modifier) = 0;
+			virtual void SetComponent(Component::Component* component) = 0;
+			virtual void SetModifier(Modifier::Modifier* modifier) = 0;
 		};
 	}
 }

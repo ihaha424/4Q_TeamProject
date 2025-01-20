@@ -3,19 +3,27 @@
 
 void Skeleton::Initialize(const aiScene* paiScene, std::unordered_map<std::string, std::pair<unsigned int, Matrix>>& boneInfoTable)
 {
-	LoadSkeleton(_rootBone, paiScene->mRootNode, boneInfoTable);
+	LoadSkeleton(_rootBone, paiScene->mRootNode, boneInfoTable);	
+}
 
-	std::queue<const Bone*> bfs;
+void Skeleton::SetUpSplitBone(const unsigned int maxSplit)
+{
+	_bones.resize(maxSplit);
+}
+
+void Skeleton::SplitBone(const unsigned int ID, const char* boneName)
+{	
+	std::queue<Bone*> bfs;
 	bfs.push(&_rootBone);
 
 	while (!bfs.empty())
 	{
-		const Bone* bone = bfs.front();
+		Bone* bone = bfs.front();
 		bfs.pop();
 
-		if (bone->name == "Bip01-Spine1")
+		if (bone->name == boneName)
 		{
-			_spine = *bone;
+			_bones[ID] = bone;
 			break;
 		}
 

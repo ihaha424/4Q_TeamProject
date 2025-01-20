@@ -181,6 +181,9 @@
     <Filter Include="Module\Interfaces\Input\Modifiers\Modifier">
       <UniqueIdentifier>{d74daebe-8430-42d0-baaa-8457afea5f9c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Module\Interfaces\Input\Value">
+      <UniqueIdentifier>{8fa22aad-aad7-443b-9984-13b8bf16e54f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -330,6 +333,9 @@
     <ClInclude Include="Modifier.h">
       <Filter>Module\Interfaces\Input\Modifiers\Modifier</Filter>
     </ClInclude>
+    <ClInclude Include="Value.h">
+      <Filter>Module\Interfaces\Input\Value</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -448,6 +454,9 @@
     </ClCompile>
     <ClCompile Include="Modifier.cpp">
       <Filter>Module\Interfaces\Input\Modifiers\Modifier</Filter>
+    </ClCompile>
+    <ClCompile Include="Value.cpp">
+      <Filter>Module\Interfaces\Input\Value</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

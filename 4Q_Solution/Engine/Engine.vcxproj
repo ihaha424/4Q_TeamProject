@@ -216,6 +216,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="ThrowIfFailed.h" />
     <ClInclude Include="Trigger.h" />
     <ClInclude Include="Utilities.h" />
+    <ClInclude Include="Value.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="Window.h" />
@@ -262,6 +263,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="SafeRelease.cpp" />
     <ClCompile Include="ThrowIfFailed.cpp" />
     <ClCompile Include="Trigger.cpp" />
+    <ClCompile Include="Value.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector3.cpp" />
     <ClCompile Include="Window.cpp" />

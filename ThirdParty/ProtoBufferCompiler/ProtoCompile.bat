@@ -1,4 +1,4 @@
-SET PROTOC="protoc.exe"
+SET PROTOC="C:\Users\user\Desktop\4Q\4Q_TeamProject\ThirdParty\ProtoBufferCompiler\protoc.exe"
 SET OUT_DIR="./ProtoCpp"
 
 if not exist %OUT_DIR% mkdir %OUT_DIR%

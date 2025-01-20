@@ -15,7 +15,7 @@ namespace Engine::DSHInput
 		void Reset() override;
 		void Finalize() override;
 
-		Input::IAction* GetAction(const wchar_t* name) override;
+		void GetAction(const wchar_t* name, Input::IAction** action) override;
 
 	private:
 		DSH::Input::IMappingContext* _mappingContext;

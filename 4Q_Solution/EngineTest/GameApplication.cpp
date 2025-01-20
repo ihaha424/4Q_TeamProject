@@ -14,14 +14,25 @@ void GameApplication::DeclareInputActions(Engine::Input::IManager* inputManager)
 {
 	Application::DeclareInputActions(inputManager);
 
-	auto defaultMappingContext = inputManager->GetMappingContext(L"Default");
+	Engine::Input::Modifier::INegative* negative = nullptr;
+	Engine::Input::Modifier::ISwizzleAxis* swizzleAxis = nullptr;
+	inputManager->GetModifier(&negative);
+	inputManager->GetModifier(Engine::Input::Modifier::ISwizzleAxis::Type::YXZ, &swizzleAxis);
 
-	auto moveAction = defaultMappingContext->GetAction(L"Move");
+	Engine::Input::IMappingContext* mappingContext = nullptr;
+	inputManager->GetMappingContext(L"Default", &mappingContext);
 
-	moveAction->AddTrigger(Engine::Input::TriggerType::Down, Engine::Input::Device::IMouse::Button::Left, Negative);
-	moveAction->AddTrigger(Engine::Input::TriggerType::Down, Engine::Input::Device::IMouse::Button::Right, );
-	moveAction->AddTrigger(Engine::Input::TriggerType::Down, Engine::Input::Device::IMouse::Button::Left, );
-	moveAction->AddTrigger(Engine::Input::TriggerType::Down, Engine::Input::Device::IMouse::Button::Left);
+	Engine::Input::IAction* moveAction = nullptr;
+	mappingContext->GetAction(L"Move", &moveAction);
+
+	DSH::Input::Trigger::IDown* leftTrigger = nullptr;
+	DSH::Input::Trigger::IDown* rightTrigger = nullptr;
+	DSH::Input::Trigger::IDown* upTrigger = nullptr;
+	DSH::Input::Trigger::IDown* downTrigger = nullptr;
+	thrower(action->GetTrigger(&leftTrigger));
+	thrower(action->GetTrigger(&rightTrigger));
+	thrower(action->GetTrigger(&upTrigger));
+	thrower(action->GetTrigger(&downTrigger));
 
 	inputManager->SetActiveMappingContext(defaultMappingContext);
 }
@@ -39,6 +50,7 @@ void GameApplication::DeclareInputActions(Engine::Manager::IInput* inputManager)
 	thrower(system->CreateModifier(&negative));
 	thrower(system->CreateModifier(&swizzleAxis));
 	swizzleAxis->SetType(DSH::Input::Modifier::ISwizzleAxis::Type::YXZ);
+
 
 	const auto mappingContext = inputManager->GetMappingContext();
 	DSH::Input::IAction* action = nullptr;

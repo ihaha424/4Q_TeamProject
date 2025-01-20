@@ -6,11 +6,12 @@ namespace Engine::Input::Device
 	{
 		enum class Button : unsigned char
 		{
-			Left,
-			Right,
-			Middle,
-			X1,
-			X2
+			Left = VK_LBUTTON,
+			Right = VK_RBUTTON,
+			Middle = VK_MBUTTON,
+			X1 = VK_XBUTTON1,
+			X2 = VK_XBUTTON2,
+			Max = 0x07
 		};
 
 		IMouse() = default;

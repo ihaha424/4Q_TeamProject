@@ -32,14 +32,15 @@ void Engine::DSHInput::MappingContext::Finalize()
 	Utility::SafeRelease()(&_mappingContext, "Mapping context is still being referenced.");
 }
 
-Engine::Input::IAction* Engine::DSHInput::MappingContext::GetAction(const wchar_t* name)
+void Engine::DSHInput::MappingContext::GetAction(const wchar_t* name, Input::IAction** action)
 {
 	constexpr Utility::ThrowIfFailed thrower;
 	if (name == nullptr) thrower(E_INVALIDARG);
-	if (_actions.contains(name)) return &_actions[name];
-	DSH::Input::IAction* action = nullptr;
-	thrower(_mappingContext->GetAction(name, &action));
-	_actions[name].Setup(action);
-	Utility::SafeRelease()(&action);
-	return &_actions[name];
+	if (action == nullptr) thrower(E_INVALIDARG);
+	if (_actions.contains(name)) *action = &_actions[name];
+	DSH::Input::IAction* dshAction = nullptr;
+	thrower(_mappingContext->GetAction(name, &dshAction));
+	_actions[name].Setup(dshAction);
+	Utility::SafeRelease()(&dshAction);
+	*action = &_actions[name];
 }

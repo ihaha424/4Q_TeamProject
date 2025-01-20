@@ -11,6 +11,12 @@ namespace Engine::Input
 		struct IController;
 	}
 
+	namespace Modifier
+	{
+		struct INegative;
+		struct ISwizzleAxis;
+	}
+
 	struct IManager
 	{
 		IManager() = default;
@@ -20,11 +26,14 @@ namespace Engine::Input
 		IManager& operator=(IManager&& other) noexcept = default;
 		virtual ~IManager() = default;
 
-		virtual Device::IMouse* GetMouse() = 0;
-		virtual Device::IKeyboard* GetKeyboard() = 0;
-		virtual Device::IController* GetController() = 0;
+		virtual void GetDevice(Device::IMouse** mouse) = 0;
+		virtual void GetDevice(Device::IKeyboard** keyboard) = 0;
+		virtual void GetDevice(Device::IController** controller) = 0;
 
-		virtual IMappingContext* GetMappingContext(const wchar_t* name) = 0;
+		virtual void GetMappingContext(const wchar_t* name, IMappingContext** mappingContext) = 0;
+
+		virtual void GetModifier(Modifier::INegative** negative) = 0;
+		virtual void GetModifier(Modifier::ISwizzleAxis::Type type, Modifier::ISwizzleAxis** swizzleAxis) = 0;
 	};
 
 

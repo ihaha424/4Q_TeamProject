@@ -14,7 +14,8 @@ namespace DSH::Input::Modifier
 			YXZ,
 			YZX,
 			ZXY,
-			ZYX
+			ZYX,
+			MAX
 		};
 
 		virtual void SetType(

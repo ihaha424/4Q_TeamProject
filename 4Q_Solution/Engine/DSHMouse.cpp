@@ -5,11 +5,10 @@
 Engine::DSHInput::Device::Mouse::Mouse() :
 	_mouse(nullptr)
 {
-	_buttonMap[Button::Left] = DSH::Input::Device::IMouse::Button::Left;
-	_buttonMap[Button::Right] = DSH::Input::Device::IMouse::Button::Right;
-	_buttonMap[Button::Middle] = DSH::Input::Device::IMouse::Button::Middle;
-	_buttonMap[Button::X1] = DSH::Input::Device::IMouse::Button::X1;
-	_buttonMap[Button::X2] = DSH::Input::Device::IMouse::Button::X2;
+	for (unsigned char button = 0; button < static_cast<unsigned char>(Button::Max); ++button)
+	{
+		_buttonMap[static_cast<Button>(button)] = static_cast<DSH::Input::Device::IMouse::Button>(button);
+	}
 }
 
 void Engine::DSHInput::Device::Mouse::Setup(DSH::Input::Device::IMouse* mouse)

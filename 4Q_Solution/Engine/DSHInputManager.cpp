@@ -1,9 +1,12 @@
 #include "pch.h"
 #include "DSHInputManager.h"
+#include "DSHNegative.h"
+#include "DSHController.h"
 
 Engine::DSHInput::Manager::Manager() :
 	_system(nullptr), _mappingContext(nullptr)
 {
+	
 }
 
 void Engine::DSHInput::Manager::Initialize(const HWND windowHandle)
@@ -20,6 +23,11 @@ void Engine::DSHInput::Manager::Initialize(const HWND windowHandle)
 	releaser(&mouse);
 
 	// TODO: Initialize Devices;
+
+	DSH::Input::Modifier::INegative* negative = nullptr;
+	thrower(_system->CreateModifier(&negative));
+	_negative.Setup(negative);
+	releaser(&negative);
 }
 
 void Engine::DSHInput::Manager::Update(const float deltaTime)
@@ -40,34 +48,60 @@ void Engine::DSHInput::Manager::Finalize()
 {
 	_mouse.Finalize();
 	// TODO: Finalize Devices;
+
+	_negative.Finalize();
+	std::ranges::for_each(_swizzleAxes, [](std::pair<const Input::Modifier::ISwizzleAxis::Type, Modifier::SwizzleAxis>& swizzleAxis) { swizzleAxis.second.Finalize(); });
+	_swizzleAxes.clear();
+
 	std::ranges::for_each(_mappingContexts, [](std::pair<const std::wstring, MappingContext>& mappingContext) { mappingContext.second.Finalize(); });
 	_mappingContexts.clear();
 	Utility::SafeRelease()(&_system);
 }
 
-Engine::Input::Device::IMouse* Engine::DSHInput::Manager::GetMouse()
+void Engine::DSHInput::Manager::GetDevice(Input::Device::IMouse** mouse)
 {
-	return &_mouse;
+	if (mouse == nullptr) Utility::ThrowIfFailed()(E_INVALIDARG);
+	*mouse = &_mouse;
 }
 
-Engine::Input::Device::IKeyboard* Engine::DSHInput::Manager::GetKeyboard()
+void Engine::DSHInput::Manager::GetDevice(Input::Device::IKeyboard** keyboard)
 {
-	// TODO: Implement GetKeyboard;
+	if (keyboard == nullptr) Utility::ThrowIfFailed()(E_INVALIDARG);
+	*keyboard = &_keyboard;
 }
 
-Engine::Input::Device::IController* Engine::DSHInput::Manager::GetController()
+void Engine::DSHInput::Manager::GetDevice(Input::Device::IController** controller)
 {
-	// TODO: Implement GetController;
+	if (controller == nullptr) Utility::ThrowIfFailed()(E_INVALIDARG);
+	*controller = &_controller;
 }
 
-Engine::Input::IMappingContext* Engine::DSHInput::Manager::GetMappingContext(const wchar_t* name)
+void Engine::DSHInput::Manager::GetMappingContext(const wchar_t* name, Input::IMappingContext** mappingContext)
 {
-	constexpr Utility::ThrowIfFailed thrower;
-	if (name == nullptr) thrower(E_INVALIDARG);
-	if (_mappingContexts.contains(name)) return &_mappingContexts[name];
-	DSH::Input::IMappingContext* mappingContext = nullptr;
-	thrower(_system->CreateMappingContext(&mappingContext));
-	_mappingContexts[name].Setup(mappingContext);
-	Utility::SafeRelease()(&mappingContext);
-	return &_mappingContexts[name];
+	if (name == nullptr) Utility::ThrowIfFailed()(E_INVALIDARG);
+	if (mappingContext == nullptr) Utility::ThrowIfFailed()(E_INVALIDARG);
+	if (_mappingContexts.contains(name)) *mappingContext = &_mappingContexts[name];
+	DSH::Input::IMappingContext* mappingContextPointer = nullptr;
+	Utility::ThrowIfFailed()(_system->CreateMappingContext(&mappingContextPointer));
+	_mappingContexts[name].Setup(mappingContextPointer);
+	Utility::SafeRelease()(&mappingContextPointer);
+	*mappingContext = &_mappingContexts[name];
+}
+
+void Engine::DSHInput::Manager::GetModifier(Input::Modifier::INegative** negative)
+{
+	if (negative == nullptr) Utility::ThrowIfFailed()(E_INVALIDARG);
+	*negative = &_negative;
+}
+
+void Engine::DSHInput::Manager::GetModifier(const Input::Modifier::ISwizzleAxis::Type type,
+	Input::Modifier::ISwizzleAxis** swizzleAxis)
+{
+	if (swizzleAxis == nullptr) Utility::ThrowIfFailed()(E_INVALIDARG);
+	if (_swizzleAxes.contains(type)) *swizzleAxis = &_swizzleAxes[type];
+	DSH::Input::Modifier::ISwizzleAxis* swizzleAxisPointer = nullptr;
+	Utility::ThrowIfFailed()(_system->CreateModifier(&swizzleAxisPointer));
+	_swizzleAxes[type].Setup(swizzleAxisPointer);
+	Utility::SafeRelease()(&swizzleAxisPointer);
+	*swizzleAxis = &_swizzleAxes[type];
 }

@@ -48,8 +48,8 @@ constexpr ULL ThreadCount = 2;
 // ============ Global Variable ============
 // 설정 파일을 통해 들어오는 값입니다.
 
-ULL serverPort;
-ULL bufferSize;
-ULL threadCount;
+static ULL serverPort;
+static ULL bufferSize;
+static ULL threadCount;
 
 #endif

@@ -6,8 +6,8 @@
 
 inline float3 CalculatePointLightIntensity(float distance, float range, float intensity, float3 K)
 {
-    if (range < distance)
-        return 0;
+    //if (range < distance)
+    //    return 0;
     
     // float attenuation = 1.0 / (K.x + K.y * distance + K.z * distance * distance);
     // return intensity * attenuation;

@@ -41,7 +41,7 @@ HRESULT PixelShader::LoadResource(const std::filesystem::path& filePath)
 	ID3D11Device* pDevice = g_pGraphicDevice->GetDevice();
 	_pDeviceContext = g_pGraphicDevice->GetDeviceContext();
 
-#ifdef __DEBUG
+#ifdef _DEBUG
 	// 컴파일된 cso 파일로부터 쉐이더 정보를 불러옴
 	std::vector<uint8_t> pixelShaderData;
 	CompileShader(pixelShaderData, filePath, "main", "ps_5_0");

@@ -2,12 +2,6 @@
 
 namespace Engine::Input
 {
-	enum class TriggerType : unsigned char
-	{
-		Down,
-		// TODO: Add more trigger types.
-	};
-
 	struct IAction
 	{
 		IAction() = default;
@@ -17,10 +11,11 @@ namespace Engine::Input
 		IAction& operator=(IAction&& other) noexcept = default;
 		virtual ~IAction() = default;
 
-		virtual void AddTrigger(TriggerType triggerType, Device::IMouse::Button button) = 0;
+		virtual void GetTrigger(Trigger::IDown** trigger) = 0;
 	};
 
 	struct Action : IAction
 	{
+		virtual void Finalize() = 0;
 	};
 }

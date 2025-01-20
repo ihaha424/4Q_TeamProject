@@ -184,6 +184,8 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="DSHAction.h" />
     <ClInclude Include="DSHController.h" />
     <ClInclude Include="DSHDown.h" />
+    <ClInclude Include="DSHInputAxisComponent.h" />
+    <ClInclude Include="DSHInputButtonComponent.h" />
     <ClInclude Include="DSHInputManager.h" />
     <ClInclude Include="DSHKeyboard.h" />
     <ClInclude Include="DSHMappingContext.h" />
@@ -195,6 +197,9 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="GraphicsSystems.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="InputAxisComponent.h" />
+    <ClInclude Include="InputButtonComponent.h" />
+    <ClInclude Include="InputComponent.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="LightSystem.h" />
@@ -237,6 +242,8 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="DSHAction.cpp" />
     <ClCompile Include="DSHController.cpp" />
     <ClCompile Include="DSHDown.cpp" />
+    <ClCompile Include="DSHInputAxisComponent.cpp" />
+    <ClCompile Include="DSHInputButtonComponent.cpp" />
     <ClCompile Include="DSHInputManager.cpp" />
     <ClCompile Include="DSHKeyboard.cpp" />
     <ClCompile Include="DSHMappingContext.cpp" />
@@ -244,6 +251,9 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="DSHNegative.cpp" />
     <ClCompile Include="DSHSwizzleAxis.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="InputAxisComponent.cpp" />
+    <ClCompile Include="InputButtonComponent.cpp" />
+    <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="LightSystem.cpp" />

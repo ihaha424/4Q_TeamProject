@@ -38,19 +38,23 @@ void Engine::DSHInput::Device::Controller::Finalize()
 bool Engine::DSHInput::Device::Controller::IsButtonDown(Button button) const
 {
 	// TODO: Implement this function.
+	return false;
 }
 
 bool Engine::DSHInput::Device::Controller::IsButtonUp(Button button) const
 {
 	// TODO: Implement this function.
+	return false;
 }
 
 bool Engine::DSHInput::Device::Controller::IsButtonPressed(Button button) const
 {
 	// TODO: Implement this function.
+	return false;
 }
 
 bool Engine::DSHInput::Device::Controller::IsButtonReleased(Button button) const
 {
 	// TODO: Implement this function.
+	return false;
 }

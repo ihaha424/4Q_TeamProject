@@ -10,7 +10,5 @@ namespace Engine::Input::Modifier
 		Modifier& operator=(const Modifier& other) = default;
 		Modifier& operator=(Modifier&& other) noexcept = default;
 		virtual ~Modifier() = default;
-
-		[[nodiscard]] virtual Input::Value Modify(const Input::Value& value) const = 0;
 	};
 }

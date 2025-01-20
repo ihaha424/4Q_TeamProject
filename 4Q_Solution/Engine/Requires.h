@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <string>
 #include <filesystem>
+#include <ranges>
 
 #include "DSHTime/Time.h"
 #include "DSHWindow/Window.h"

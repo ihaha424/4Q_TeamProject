@@ -12,6 +12,8 @@ namespace Engine::DSHInput::Modifier
 
 		void Finalize() override;
 
+		DSH::Input::Modifier::INegative* Get() const;
+
 	private:
 		DSH::Input::Modifier::INegative* _negative;
 	};

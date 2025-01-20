@@ -16,3 +16,8 @@ void Engine::DSHInput::Modifier::Negative::Finalize()
 {
 	Utility::SafeRelease()(&_negative);
 }
+
+DSH::Input::Modifier::INegative* Engine::DSHInput::Modifier::Negative::Get() const
+{
+	return _negative;;
+}

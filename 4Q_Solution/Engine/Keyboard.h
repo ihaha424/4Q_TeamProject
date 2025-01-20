@@ -176,6 +176,8 @@ namespace Engine::Input::Device
 		[[nodiscard]] virtual bool IsKeyUp(Key key) const = 0;
 		[[nodiscard]] virtual bool IsKeyPressed(Key key) const = 0;
 		[[nodiscard]] virtual bool IsKeyReleased(Key key) const = 0;
+
+		virtual void GetComponent(Key key, Component::IButtonComponent** button) = 0;
 	};
 
 	struct Keyboard : IKeyboard

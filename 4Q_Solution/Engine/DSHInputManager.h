@@ -24,6 +24,7 @@ namespace Engine::DSHInput
 		void GetDevice(Input::Device::IController** controller) override;
 
 		void GetMappingContext(const wchar_t* name, Input::IMappingContext** mappingContext) override;
+		void SetActiveMappingContext(Input::IMappingContext* mappingContext) override;
 
 		void GetModifier(Input::Modifier::INegative** negative) override;
 		void GetModifier(Input::Modifier::ISwizzleAxis::Type type, Input::Modifier::ISwizzleAxis** swizzleAxis) override;

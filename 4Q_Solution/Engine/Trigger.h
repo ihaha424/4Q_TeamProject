@@ -23,8 +23,11 @@ namespace Engine::Input
 			Trigger& operator=(Trigger&& other) noexcept = default;
 			virtual ~Trigger() = default;
 
-			virtual void SetComponent(Component::Component* component) = 0;
-			virtual void SetModifier(Modifier::Modifier* modifier) = 0;
+			virtual void SetComponent(Component::IButtonComponent* component) = 0;
+			virtual void SetComponent(Component::IAxisComponent* component) = 0;
+
+			virtual void AddModifier(Modifier::INegative* modifier) = 0;
+			virtual void AddModifier(Modifier::ISwizzleAxis* modifier) = 0;
 		};
 	}
 }

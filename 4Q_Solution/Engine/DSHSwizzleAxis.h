@@ -14,6 +14,8 @@ namespace Engine::DSHInput::Modifier
 
 		void SetType(Type type) override;
 
+		DSH::Input::Modifier::ISwizzleAxis* Get() const;
+
 	private:
 		DSH::Input::Modifier::ISwizzleAxis* _swizzleAxis;
 

@@ -31,6 +31,7 @@ namespace Engine::Input
 		virtual void GetDevice(Device::IController** controller) = 0;
 
 		virtual void GetMappingContext(const wchar_t* name, IMappingContext** mappingContext) = 0;
+		virtual void SetActiveMappingContext(IMappingContext* mappingContext) = 0;
 
 		virtual void GetModifier(Modifier::INegative** negative) = 0;
 		virtual void GetModifier(Modifier::ISwizzleAxis::Type type, Modifier::ISwizzleAxis** swizzleAxis) = 0;

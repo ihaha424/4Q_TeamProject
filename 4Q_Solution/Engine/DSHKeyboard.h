@@ -20,9 +20,12 @@ namespace Engine::DSHInput::Device
 		[[nodiscard]] bool IsKeyPressed(Key key) const override;
 		[[nodiscard]] bool IsKeyReleased(Key key) const override;
 
+		void GetComponent(Key key, Input::Component::IButtonComponent** button) override;
+
 	private:
 		DSH::Input::Device::IKeyboard* _keyboard;
 
 		std::unordered_map<Key, DSH::Input::Device::IKeyboard::Key> _keyMap;
+		std::unordered_map<Key, Input::Component::IButtonComponent*> _buttons;
 	};
 }

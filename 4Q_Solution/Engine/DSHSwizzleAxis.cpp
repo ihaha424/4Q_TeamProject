@@ -25,3 +25,8 @@ void Engine::DSHInput::Modifier::SwizzleAxis::SetType(const Type type)
 {
 	_swizzleAxis->SetType(_typeMap[type]);
 }
+
+DSH::Input::Modifier::ISwizzleAxis* Engine::DSHInput::Modifier::SwizzleAxis::Get() const
+{
+	return _swizzleAxis;
+}

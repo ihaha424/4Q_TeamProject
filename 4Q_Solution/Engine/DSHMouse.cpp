@@ -45,19 +45,23 @@ Engine::Math::Point Engine::DSHInput::Device::Mouse::GetPosition() const
 bool Engine::DSHInput::Device::Mouse::IsButtonDown(Button button) const
 {
 	// TODO: Implement this function.
+	return false;
 }
 
 bool Engine::DSHInput::Device::Mouse::IsButtonUp(Button button) const
 {
 	// TODO: Implement this function.
+	return false;
 }
 
 bool Engine::DSHInput::Device::Mouse::IsButtonPressed(Button button) const
 {
 	// TODO: Implement this function.
+	return false;
 }
 
 bool Engine::DSHInput::Device::Mouse::IsButtonReleased(Button button) const
 {
 	// TODO: Implement this function.
+	return false;
 }

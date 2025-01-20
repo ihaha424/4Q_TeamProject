@@ -4,6 +4,9 @@ namespace DSH::Input
 {
 	EXTERN_C union DSH_INPUT_LIBRARY_API Value
 	{
+		Value();
+		Value(float x, float y, float z);
+
 		static Value Zero();
 
 		Value& operator+=(const Value& rhs);

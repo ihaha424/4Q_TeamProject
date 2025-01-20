@@ -28,6 +28,7 @@ void Engine::DSHInput::MappingContext::Reset()
 
 void Engine::DSHInput::MappingContext::Finalize()
 {
+	std::ranges::for_each(_actions, [](auto& pair) { pair.second.Finalize(); });
 	_actions.clear();
 	Utility::SafeRelease()(&_mappingContext, "Mapping context is still being referenced.");
 }

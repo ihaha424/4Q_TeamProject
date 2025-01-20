@@ -4,6 +4,9 @@ namespace Engine::Input
 {
 	union Value
 	{
+		Value();
+		Value(float x, float y, float z);
+
 		Value& operator+=(const Value& rhs);
 
 		bool operator==(const Value& rhs) const;

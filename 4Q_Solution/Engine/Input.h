@@ -5,6 +5,10 @@
 #include "Negative.h"
 #include "SwizzleAxis.h"
 
+#include "InputComponent.h"
+#include "InputButtonComponent.h"
+#include "InputAxisComponent.h"
+
 #include "Trigger.h"
 #include "Down.h"
 

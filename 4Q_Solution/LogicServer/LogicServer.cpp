@@ -1,7 +1,9 @@
 ﻿#include <iostream>
 #include "Server/ServerEntrance.h"
+#include "PacketID.h"
 
 bool Initialize();
+void MessageDispatch();
 
 PacketQueue* messageContainer = nullptr;
 
@@ -16,6 +18,13 @@ int main()
         printf("[main] Server Initialize Failed. Code : %d\n", GetLastError());
     }
 
+    while (true) {
+        MessageDispatch();
+
+        // TODO: 내부적으로 업데이트 할 로직을 여기다 넣습니다.
+
+        Server::SendUpdate();
+    }
 
 }
 
@@ -28,4 +37,26 @@ bool Initialize() {
     messageContainer = Server::GetPacketContainer();
 
     return true;
+}
+
+void MessageDispatch() {
+    if (messageContainer->empty()) {
+        bool res = Server::SwapPacketContainer();
+        if (res == false) {
+            return;
+        }
+    }
+
+    while (!messageContainer->empty()) {
+        Packet packet = messageContainer->front();
+        messageContainer->pop();
+
+        switch ((PacketID)packet._packetId) {
+
+
+        default:
+            break;
+        }
+    }
+
 }

@@ -198,6 +198,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="LightSystem.h" />
     <ClInclude Include="MappingContext.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="Modifier.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="Negative.h" />
@@ -242,6 +243,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="LightSystem.cpp" />
     <ClCompile Include="MappingContext.cpp" />
+    <ClCompile Include="Modifier.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="Negative.cpp" />

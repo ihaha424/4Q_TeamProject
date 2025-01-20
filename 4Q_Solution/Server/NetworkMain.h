@@ -22,6 +22,7 @@ public:
 	bool Initialize();
 	void SendUpdate();
 	void Finalize();
+	void Disconnect(SessionID sid);
 
 private:
 	CompletionPortContainer _cpContainer;
@@ -33,7 +34,6 @@ private:
 	
 	AcceptOverlapped _acceptOverlapped1;
 	AcceptOverlapped _acceptOverlapped2;
-	std::queue<AcceptOverlapped*> _acceptOlContainer;
 
 	std::mutex _sessionMtx;
 

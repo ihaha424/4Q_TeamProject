@@ -14,7 +14,7 @@ namespace Engine::Input
 
 	namespace Trigger
 	{
-		enum Event : unsigned char
+		enum class Event : unsigned char
 		{
 			Triggered = 4,
 			Started = 2,

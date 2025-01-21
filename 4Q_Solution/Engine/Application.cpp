@@ -13,8 +13,7 @@ Engine::Input::Manager* Engine::Application::_inputManager = nullptr;
 Engine::Application::Application(const HINSTANCE instanceHandle, std::wstring title, const SIZE size) :
 	_instanceHandle(instanceHandle),
 	_title(std::move(title)),
-	_size(size),
-	_cameraComponent(nullptr)
+	_size(size)
 {
 }
 
@@ -22,7 +21,8 @@ void Engine::Application::Begin()
 {
 	InitializeManagers();
 	DeclareInputActions(_inputManager);
-	CreateContents();
+	Addition(); // TODO: Refactor this.
+	Setup({ _graphicsManager });
 	InitializeContents();
 }
 
@@ -45,19 +45,20 @@ void Engine::Application::DeclareInputActions(Input::IManager* inputManager)
 {
 }
 
-void Engine::Application::CreateContents()
+void Engine::Application::Addition()
 {
-	// TODO: World / Object / Component Manager Create;
-	_cameraComponent = new Component::CameraComponent(L"MainCamera", 1.f, 1000.f, _size, 3.141592f / 4);
-	_cameraComponent->Setup({ _graphicsManager });
 }
+
+void Engine::Application::Setup(Modules modules)
+{
+	std::ranges::for_each(_worlds, [modules](World* world) { world->Setup(modules); });
+}
+
 
 void Engine::Application::InitializeContents()
 {
 	// TODO: WOC Manager Initialize;
-	_cameraComponent->Initialize(); // TODO: Remove this.
-	_cameraComponent->Attach();
-	_cameraComponent->Activate(); // TODO: Remove this.
+	std::ranges::for_each(_worlds, [](World* world) { world->Initialize(); });
 }
 
 void Engine::Application::Run(const int showCommand)
@@ -85,8 +86,6 @@ void Engine::Application::Run(const int showCommand)
 			_drive.Update(deltaTime);
 			// TODO: Alarm Timer for Fixed Update
 
-			_cameraComponent->Update(deltaTime); // TODO: Remove this.
-
 			_graphicsManager->Render();
 			_inputManager->Reset();
 		}
@@ -96,23 +95,13 @@ void Engine::Application::Run(const int showCommand)
 void Engine::Application::End()
 {
 	FinalizeContents();
-	DeleteContents();
 	FinalizeManagers();
 }
 
 void Engine::Application::FinalizeContents()
 {
 	// TODO: WOC Manager Finalize;
-
-	_cameraComponent->Finalize(); // TODO: Remove this.
-}
-
-void Engine::Application::DeleteContents()
-{
-	// TODO: WOC Manager Delete;
-
-	constexpr Utility::SafeDelete deleter;
-	deleter(&_cameraComponent);
+	std::ranges::for_each(_worlds, [](World* world) { world->Finalize(); });
 }
 
 void Engine::Application::FinalizeManagers() const
@@ -142,6 +131,16 @@ Engine::Input::IManager* Engine::Application::GetInputManager()
 Engine::Graphics::IManager* Engine::Application::GetGraphicsManager()
 {
 	return _graphicsManager;
+}
+
+void Engine::Application::AddWorld(World* world)
+{
+	_worlds.push_back(world);
+}
+
+void Engine::Application::Attach(World* world)
+{
+	_drive.AttachWorld(world, nullptr);
 }
 
 void Engine::Application::CreateTimeManager(Time::Manager** timeManager)

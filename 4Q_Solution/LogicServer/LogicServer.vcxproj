@@ -143,9 +143,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="LogicServer.cpp" />
+    <ClCompile Include="ServerLogic.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PacketID.h" />
+    <ClInclude Include="ServerLogic.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

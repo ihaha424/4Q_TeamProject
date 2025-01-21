@@ -38,6 +38,11 @@ namespace Engine
 		virtual void PreFinalize();
 		virtual void PostFinalize();
 
+		void AddComponent(Component::Component* component); // TODO: Refactor
+
+		Transform _transform;
+
+		// TODO: Owner
 	private:
 		std::vector<Component::Component*> _components;
 	};

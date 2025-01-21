@@ -95,3 +95,8 @@ void Engine::World::LoadWorldFromFile(const std::filesystem::path& filePath)
 {
 	// TODO: Load World From File
 }
+
+void Engine::World::AddObject(Object* object)
+{
+	_objects.push_back(object);
+}

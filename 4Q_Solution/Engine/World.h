@@ -37,6 +37,8 @@ namespace Engine
 
 		void LoadWorldFromFile(const std::filesystem::path& filePath);
 
+		void AddObject(Object* object); // TODO: Refactor
+
 	private:
 		std::vector<Object*> _objects;
 	};

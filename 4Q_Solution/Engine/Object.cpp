@@ -90,3 +90,8 @@ void Engine::Object::PreFinalize()
 void Engine::Object::PostFinalize()
 {
 }
+
+void Engine::Object::AddComponent(Component::Component* component)
+{
+	_components.push_back(component);
+}

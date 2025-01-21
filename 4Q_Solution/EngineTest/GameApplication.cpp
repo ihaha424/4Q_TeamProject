@@ -10,51 +10,32 @@ GameApplication::GameApplication(const HINSTANCE instanceHandle) :
 {
 }
 
-void GameApplication::DeclareInputActions(Engine::Manager::IInput* inputManager)
+void GameApplication::DeclareInputActions(Engine::Input::IManager* inputManager)
 {
 	Application::DeclareInputActions(inputManager);
 
-	constexpr Engine::Utility::ThrowIfFailed thrower;
-	constexpr Engine::Utility::SafeRelease releaser;
+	Engine::Input::Modifier::INegative* negative = nullptr;
 
-	const auto system = inputManager->GetSystem();
-	DSH::Input::Modifier::INegative* negative = nullptr;
-	DSH::Input::Modifier::ISwizzleAxis* swizzleAxis = nullptr;
-	thrower(system->CreateModifier(&negative));
-	thrower(system->CreateModifier(&swizzleAxis));
-	swizzleAxis->SetType(DSH::Input::Modifier::ISwizzleAxis::Type::YXZ);
+	Engine::Input::Modifier::ISwizzleAxis* swizzleAxis = nullptr;
+	inputManager->GetModifier(&negative);
+	inputManager->GetModifier(Engine::Input::Modifier::ISwizzleAxis::Type::YXZ, &swizzleAxis);
 
-	const auto mappingContext = inputManager->GetMappingContext();
-	DSH::Input::IAction* action = nullptr;
-	thrower(mappingContext->GetAction(L"Move", &action));
+	Engine::Input::IMappingContext* mappingContext = nullptr;
+	inputManager->GetMappingContext(L"Default", &mappingContext);
 
-	DSH::Input::Trigger::IDown* leftTrigger = nullptr;
-	DSH::Input::Trigger::IDown* rightTrigger = nullptr;
-	DSH::Input::Trigger::IDown* upTrigger = nullptr;
-	DSH::Input::Trigger::IDown* downTrigger = nullptr;
-	thrower(action->GetTrigger(&leftTrigger));
-	thrower(action->GetTrigger(&rightTrigger));
-	thrower(action->GetTrigger(&upTrigger));
-	thrower(action->GetTrigger(&downTrigger));
+	Engine::Input::IAction* moveAction = nullptr;
+	mappingContext->GetAction(L"Move", &moveAction);
 
-	const auto keyboard = inputManager->GetKeyboard();
-	DSH::Input::Component::IButtonComponent* left = nullptr;
-	DSH::Input::Component::IButtonComponent* right = nullptr;
-	DSH::Input::Component::IButtonComponent* up = nullptr;
-	DSH::Input::Component::IButtonComponent* down = nullptr;
-	thrower(keyboard->GetComponent(DSH::Input::Device::IKeyboard::Key::Left, &left));
-	thrower(keyboard->GetComponent(DSH::Input::Device::IKeyboard::Key::Right, &right));
-	thrower(keyboard->GetComponent(DSH::Input::Device::IKeyboard::Key::Up, &up));
-	thrower(keyboard->GetComponent(DSH::Input::Device::IKeyboard::Key::Down, &down));
+	Engine::Input::Trigger::IDown* leftTrigger = nullptr;
+	moveAction->GetTrigger(&leftTrigger);
 
-	leftTrigger->SetComponent(left);
 	leftTrigger->AddModifier(negative);
-	rightTrigger->SetComponent(right);
-	upTrigger->SetComponent(up);
-	downTrigger->SetComponent(down);
-	downTrigger->AddModifier(negative);
-	downTrigger->AddModifier(swizzleAxis);
 
-	releaser(&negative);
-	releaser(&swizzleAxis);
+	Engine::Input::Component::IButtonComponent* left = nullptr;
+	Engine::Input::Device::IKeyboard* keyboard = nullptr;
+	inputManager->GetDevice(&keyboard);
+	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::Left, &left);
+	leftTrigger->SetComponent(left);
+
+	inputManager->SetActiveMappingContext(mappingContext);
 }

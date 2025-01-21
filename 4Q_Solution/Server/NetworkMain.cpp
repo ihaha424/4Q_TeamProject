@@ -30,16 +30,16 @@ bool NetworkMain::Initialize()
 		WriteToIniFile(L"System", L"BufferSize", std::to_wstring(bufferSize), configFilePath);
 		WriteToIniFile(L"System", L"ThreadCount", std::to_wstring(threadCount), configFilePath);
 	}
-	else {
-		serverPort = GetIntDataFromIniFile(L"Server", L"ServerPort", configFilePath);
-		printf("[Initialize] ServerPort Load. PortNum : %llu\n", serverPort);
 
-		bufferSize = GetIntDataFromIniFile(L"System", L"BufferSize", configFilePath);
-		printf("[Initialize] BufferSize Load. BufferSize : %llu\n", bufferSize);
+	serverPort = GetIntDataFromIniFile(L"Server", L"ServerPort", configFilePath);
+	printf("[Initialize] ServerPort Load. PortNum : %llu\n", serverPort);
 
-		threadCount = GetIntDataFromIniFile(L"System", L"ThreadCount", configFilePath);
-		printf("[Initialize] ThreadCount Load. ThreadCount : %llu\n", threadCount);
-	}
+	bufferSize = GetIntDataFromIniFile(L"System", L"BufferSize", configFilePath);
+	printf("[Initialize] BufferSize Load. BufferSize : %llu\n", bufferSize);
+
+	threadCount = GetIntDataFromIniFile(L"System", L"ThreadCount", configFilePath);
+	printf("[Initialize] ThreadCount Load. ThreadCount : %llu\n", threadCount);
+
 	printf("\n[Initialize] Server Config Load Completed.\n");
 
 

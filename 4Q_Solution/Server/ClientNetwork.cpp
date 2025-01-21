@@ -29,18 +29,18 @@ bool ClientNetwork::Initialize()
 		WritePrivateProfileString(L"Server", L"ServerIP", L"127.0.0.1", configFilePath.c_str());
 		WritePrivateProfileString(L"System", L"BufferSize", std::to_wstring(bufferSize).c_str(), configFilePath.c_str());
 	}
-	else {
-		serverPort = GetPrivateProfileInt(L"Server", L"ServerPort", 2147483647, configFilePath.c_str());
-		printf("[Initialize] ServerPort Load. PortNum : %llu\n", serverPort);
+	
+	serverPort = GetPrivateProfileInt(L"Server", L"ServerPort", 2147483647, configFilePath.c_str());
+	printf("[Initialize] ServerPort Load. PortNum : %llu\n", serverPort);
 
-		bufferSize = GetPrivateProfileInt(L"System", L"BufferSize", 2147483647, configFilePath.c_str());
-		printf("[Initialize] BufferSize Load. BufferSize : %llu\n", bufferSize);
+	bufferSize = GetPrivateProfileInt(L"System", L"BufferSize", 2147483647, configFilePath.c_str());
+	printf("[Initialize] BufferSize Load. BufferSize : %llu\n", bufferSize);
 
-		std::wstring ip(INET_ADDRSTRLEN, L'\0');
-		GetPrivateProfileString(L"Server", L"ServerIP", L"127.0.0.1", ip.data(), INET_ADDRSTRLEN, configFilePath.c_str());
-		serverIp.assign(ip.begin(), ip.end());
-		printf("[Initialize] ServerIp Load. Server Ip : %s\n", serverIp.c_str());
-	}
+	std::wstring ip(INET_ADDRSTRLEN, L'\0');
+	GetPrivateProfileString(L"Server", L"ServerIP", L"127.0.0.1", ip.data(), INET_ADDRSTRLEN, configFilePath.c_str());
+	serverIp.assign(ip.begin(), ip.end());
+	printf("[Initialize] ServerIp Load. Server Ip : %s\n", serverIp.c_str());
+
 	printf("\n[Initialize] Server Config Load Completed.\n");
 
 	WSADATA wsaData;

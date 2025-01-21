@@ -36,11 +36,12 @@ void Animator::Update(const float deltaTime)
 		}
 	}
 
-	XMMATRIX prevRoot = _root;
+	/*XMMATRIX prevRoot = _root;*/
 	UpdateAnimationTransform(_pSkeleton->_rootBone, identity, _controllers.data());
 
-	XMVECTOR deltaPosition = XMVectorSubtract(_root.Translation(), prevRoot.r[3]);
-	deltaPosition.m128_f32[1] = 0.f;
+	/*XMVECTOR deltaPosition = XMVectorSubtract(_root.Translation(), prevRoot.r[3]);
+	deltaPosition.m128_f32[1] = 0.f;*/
+	
 
 	if (_blendInfo.isBlending)
 	{

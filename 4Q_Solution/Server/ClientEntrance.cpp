@@ -30,9 +30,9 @@ void SERVER_API Client::Finalize()
 	_mainEntrance = nullptr;
 }
 
-void SERVER_API Client::SavePacketData(std::string msg, short packetId)
+void SERVER_API Client::SavePacketData(std::string msg, short packetId, long dataSize)
 {
-	_packetDispatcherInstance->SaveBroadCastPacket(msg, packetId);
+	_packetDispatcherInstance->SaveBroadCastPacket(msg, packetId, dataSize);
 }
 
 SERVER_API PacketQueue* Client::GetPacketContainer()

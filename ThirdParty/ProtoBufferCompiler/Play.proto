@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package PlayMsg;
+
+message SelectPart {
+	optional int32 serialnumber = 1;
+	optional int32 selectpart = 2;
+}
+
+message InteractDialog {
+	optional int32 dialogid = 1;
+	optional int32 buttonid = 2;
+}
+
+message DialogProgress {
+	optional int32 nextdialogid = 1;
+}
+

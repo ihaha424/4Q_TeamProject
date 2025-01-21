@@ -15,10 +15,10 @@ namespace Server {
 
 	bool SERVER_API Initialize();
 	void SERVER_API Finalize();
-	void SERVER_API SavePacketData(std::string msg, SessionID sid, short packetId);
+	void SERVER_API SavePacketData(std::string msg, SessionID sid, short packetId, long dataSize);
 	SERVER_API PacketQueue* GetPacketContainer();
 	bool SERVER_API SwapPacketContainer();
 	void SERVER_API SendUpdate();
-	void SERVER_API BroadCast(std::string msg, short packetId);
+	void SERVER_API BroadCast(std::string msg, short packetId, long dataSize);
 
 }

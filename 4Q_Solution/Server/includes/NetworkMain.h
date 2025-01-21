@@ -22,6 +22,7 @@ public:
 	bool Initialize();
 	void SendUpdate();
 	void Finalize();
+	void Disconnect(SessionID sid);
 
 private:
 	CompletionPortContainer _cpContainer;
@@ -33,11 +34,17 @@ private:
 	
 	AcceptOverlapped _acceptOverlapped1;
 	AcceptOverlapped _acceptOverlapped2;
-	std::queue<AcceptOverlapped*> _acceptOlContainer;
+
+	ULL _bufferSize = 0;
+	ULL _threadCount = 0;
+	ULL _serverPort = 0;
 
 	std::mutex _sessionMtx;
 
 	void IOWork(HANDLE completionPort);
 	bool CreateWaitingSession();
+
+	void WriteToIniFile(const wchar_t* section, const wchar_t* key, std::wstring value, std::wstring& filePath);
+	int GetIntDataFromIniFile(const wchar_t* section, const wchar_t* key, std::wstring& filePath, int defaultValue = (std::numeric_limits<int>::max)());
 };
 

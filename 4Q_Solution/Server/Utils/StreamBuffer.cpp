@@ -3,11 +3,16 @@
 #include "../GlobalDef.h"
 //#include "Pools/BufferPool.h"
 
-StreamBuffer::StreamBuffer() : _bufferSize(bufferSize)
+//StreamBuffer::StreamBuffer() : _bufferSize(bufferSize)
+//{
+//	//BufferPool::GetInstance()->AllocBuffer(_buffer);
+//	//_bufferSize = BufferPool::GetInstance()->GetBufferSize();
+//	_buffer = new char[bufferSize];
+//}
+
+StreamBuffer::StreamBuffer(unsigned long long size) : _bufferSize(size)
 {
-	//BufferPool::GetInstance()->AllocBuffer(_buffer);
-	//_bufferSize = BufferPool::GetInstance()->GetBufferSize();
-	_buffer = new char[bufferSize];
+	_buffer = new char[size];
 }
 
 StreamBuffer::~StreamBuffer()

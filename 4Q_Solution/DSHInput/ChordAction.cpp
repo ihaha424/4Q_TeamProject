@@ -22,11 +22,7 @@ DSH::Input::Trigger::ChordAction::~ChordAction()
 		_precedingAction = nullptr;
 	}
 
-	std::ranges::for_each(_modifiers, [](Modifier::IModifier* modifier)
-		{
-			modifier->Release();
-			modifier = nullptr;
-		});
+	std::ranges::for_each(_modifiers, [](Modifier::IModifier* modifier){ modifier->Release(); });
 	_modifiers.clear();
 }
 

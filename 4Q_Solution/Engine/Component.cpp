@@ -1,6 +1,11 @@
 #include "pch.h"
 #include "Component.h"
 
+void Engine::Component::Component::Setup(Modules modules)
+{
+
+}
+
 void Engine::Component::Component::Initialize()
 {
 }

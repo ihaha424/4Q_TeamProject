@@ -10,7 +10,7 @@ DSH::Input::Device::Keyboard::Keyboard() :
 
 DSH::Input::Device::Keyboard::~Keyboard()
 {
-	std::ranges::for_each(_keys, [](const std::pair<const Key, Component::ButtonComponent*>& keyPair) { keyPair.second->Release(); });
+	std::ranges::for_each(_keys | std::views::values, [](Component::ButtonComponent* key) { key->Release(); });
 	_keys.clear();
 }
 
@@ -43,7 +43,7 @@ void DSH::Input::Device::Keyboard::Update()
 
 void DSH::Input::Device::Keyboard::Reset()
 {
-	std::ranges::for_each(_keys, [](const std::pair<const Key, Component::ButtonComponent*>& keyPair) { keyPair.second->Reset(); });
+	std::ranges::for_each(_keys | std::views::values, [](Component::ButtonComponent* key) { key->Reset(); });
 }
 
 HRESULT DSH::Input::Device::Keyboard::GetComponent(const Key key, Component::IButtonComponent** ppComponent)

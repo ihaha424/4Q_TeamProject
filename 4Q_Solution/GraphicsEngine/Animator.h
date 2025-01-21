@@ -40,7 +40,10 @@ public:
 	// IAnimator을(를) 통해 상속됨
 	void Release() override;
 	void ChangeAnimation(const char* animation) override;
+	void ChangeAnimation(const char* animation, const unsigned int ID) override;
 	bool IsLastFrame(float interval) const override;
+	void SetUpSplitBone(const unsigned int maxSplit) override;
+	void SplitBone(const unsigned int ID, const char* boneName) override;
 
 private:
 	void UpdateAnimationTransform(const Bone& skeletion, const XMMATRIX& parentTransform, Controller* controller);
@@ -61,17 +64,18 @@ private:
 		return size - 2;
 	}
 
-	void BoneMasking(const Bone& bone, int mask);
+	void BoneMasking(const Bone* bone, int mask);
 
 private:
 	std::unordered_map<std::string, int>	_boneMask;
 	Matrix									_root;
 	BlendInfo								_blendInfo;
 	std::vector<Matrix>						_animationTransforms;
-	Controller								_controller[End];
-	Controller								_prevController[End];
+	std::vector<Controller>					_controllers;
+	std::vector<Controller>					_prevControllers;
 	std::shared_ptr<Animation>				_animation;
 	Skeleton*								_pSkeleton{ nullptr };
 	static unsigned int						_globalID;
 	unsigned int							_ID{ 0 };
+	unsigned int							_maxSplit{ 0 };
 };

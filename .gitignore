@@ -642,3 +642,7 @@ FodyWeavers.xsd
 
 # config file
 *.ini
+# End of https://www.toptal.com/developers/gitignore/api/windows,c++,visualstudio,rider,clion,cmake
+
+# vcpkg
+vcpkg_installed

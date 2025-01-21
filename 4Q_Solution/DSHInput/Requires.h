@@ -9,6 +9,7 @@
 #include <string>
 #include <functional>
 #include <numeric>
+#include <ranges>
 
 #include "Exports.h"
 #include "Interfaces.h"

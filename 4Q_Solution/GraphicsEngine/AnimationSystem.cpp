@@ -47,7 +47,7 @@ void AnimationSystem::RegisterAnimator(GE::IAnimator* pAnimator)
 
 	if (std::ranges::any_of(_components, compare))
 	{
-		ASSERT(false, L"Animator 타입이 아닙니다.");
+		ASSERT(false, L"이미 등록된 Animator 입니다.");
 		return;
 	}
 

@@ -31,17 +31,8 @@
     <Filter Include="Managers\Window">
       <UniqueIdentifier>{4ff711f7-3588-46be-9fd8-ed6c646031bd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Managers\Time">
-      <UniqueIdentifier>{2260b6a3-4a8e-4980-b6e6-0cd6bca2d2a5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Managers\Input">
-      <UniqueIdentifier>{122a0591-973a-43be-91e6-ba288d5247ed}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Drive">
       <UniqueIdentifier>{a59af320-cec3-4a8b-99de-639155a7dba7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Managers\Graphics">
-      <UniqueIdentifier>{e7e9d4f0-7ec4-4842-834c-6722e4d8b7d1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Components">
       <UniqueIdentifier>{33eaf238-cd64-4fab-9f84-f1d33c3e4383}</UniqueIdentifier>
@@ -70,20 +61,164 @@
     <Filter Include="Math\Vector3">
       <UniqueIdentifier>{67aea730-d2e1-44c9-8263-3e8691b07b99}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Managers\Graphics\GraphicsSystems">
-      <UniqueIdentifier>{717ca8ed-8146-4412-b24a-7d8e42064855}</UniqueIdentifier>
+    <Filter Include="Math\Vector2">
+      <UniqueIdentifier>{38af7acd-3236-44f2-818d-0c80e5bb04fa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Managers\Graphics\GraphicsSystems\CameraSystem">
-      <UniqueIdentifier>{eb326403-5bf4-4176-85c3-35dcb7696a05}</UniqueIdentifier>
+    <Filter Include="Math\Point">
+      <UniqueIdentifier>{b7196d43-bb85-4a82-91c7-8e29364ebacf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Managers\Graphics\GraphicsSystems\RenderSystem">
-      <UniqueIdentifier>{f02b1442-1d89-4f1d-be11-712307bb7f3a}</UniqueIdentifier>
+    <Filter Include="Transform">
+      <UniqueIdentifier>{205feb36-f3ef-4afd-b893-6e415b7dd2c2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Managers\Graphics\GraphicsSystems\AnimationSystem">
-      <UniqueIdentifier>{84ddbec6-2c5a-4b2b-86db-854e841f5027}</UniqueIdentifier>
+    <Filter Include="Math\Quaternion">
+      <UniqueIdentifier>{a85fcc3e-d4a0-4648-b8ad-c6b51256e8df}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Managers\Graphics\GraphicsSystems\LightSystem">
-      <UniqueIdentifier>{c4e61119-7cc1-44a9-9e84-2a1e0c5e12da}</UniqueIdentifier>
+    <Filter Include="Modules">
+      <UniqueIdentifier>{036d0d1d-49b5-4a86-83a1-cd50470ee9ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces">
+      <UniqueIdentifier>{8fcf34d2-7723-4c4d-b44f-375e94eb543e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Input">
+      <UniqueIdentifier>{3b85251b-3e6b-4e61-b916-c5cafbf023f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Input\Manager">
+      <UniqueIdentifier>{ed2c4218-632d-4d89-bc88-cba45459d845}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Input\Device">
+      <UniqueIdentifier>{2c473296-5b7a-4255-a08d-270556924326}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Input\Device\Mouse">
+      <UniqueIdentifier>{6f26a27e-1ef0-416f-ad9e-f00fd227a657}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Input\Device\Keyboard">
+      <UniqueIdentifier>{14adb43c-7cc8-4318-9645-e2010df67ccd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Input\Device\Controller">
+      <UniqueIdentifier>{739ea4db-ad6d-4940-a75b-489a0f79ba9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Input\MappingContext">
+      <UniqueIdentifier>{1d392dfa-c464-4743-b4bf-8bbb3fca3653}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Input\Action">
+      <UniqueIdentifier>{88ef10c1-442c-4099-83ff-b20526c7c549}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Input\Modifiers">
+      <UniqueIdentifier>{814f9779-bca4-40a9-b838-131b1dd98cf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Input\Modifiers\Negative">
+      <UniqueIdentifier>{1caa9886-7f9c-46ff-a7ec-5a854e2fe680}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Input\Modifiers\SwizzleAxis">
+      <UniqueIdentifier>{cd171d57-344f-4616-a09b-828a74402b66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Input\Modifiers\Modifier">
+      <UniqueIdentifier>{d74daebe-8430-42d0-baaa-8457afea5f9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Input\Triggers">
+      <UniqueIdentifier>{aa8f9cbc-6a86-4412-a7a2-5608877d659f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Input\Triggers\Down">
+      <UniqueIdentifier>{cb4abfb9-4d60-4a40-a415-cfc7745ef9ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Input\Triggers\Trigger">
+      <UniqueIdentifier>{13ec31c6-6c10-44fd-bf11-be2676e3d506}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Input\Value">
+      <UniqueIdentifier>{8fa22aad-aad7-443b-9984-13b8bf16e54f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Input\Components">
+      <UniqueIdentifier>{ea3dc7a2-84ae-45ab-a117-1805ef269297}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Input\Components\Component">
+      <UniqueIdentifier>{4753647c-d9be-4ec3-bebb-8ecc473eaaac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Input\Components\ButtonComponent">
+      <UniqueIdentifier>{133e77b2-6a7a-44d1-b986-c0939f990050}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Input\Components\AxisComponent">
+      <UniqueIdentifier>{4e6dcd01-bbba-4003-826c-3e7833c306ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Time">
+      <UniqueIdentifier>{23b3216b-d456-4e7b-9a2d-86f7314b4d28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Time\Manager">
+      <UniqueIdentifier>{c3396c02-52ad-4efe-82d8-1bc98f59b592}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition">
+      <UniqueIdentifier>{28a1c057-7a4a-410c-a92a-8087aa0f6759}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHInput">
+      <UniqueIdentifier>{7d0c8699-2252-4a3c-b640-bf7030e50252}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHInput\Manager">
+      <UniqueIdentifier>{687af270-3e5e-457b-aff4-56cb405c86e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHInput\Device">
+      <UniqueIdentifier>{3d9c8509-85b3-4269-8fd3-29324f4126f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHInput\Device\Mouse">
+      <UniqueIdentifier>{560016b8-64e8-4060-8bb5-11417c8c8dc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHInput\Device\Keyboard">
+      <UniqueIdentifier>{9972c59a-1d7c-4c00-9d04-474794e6d89f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHInput\Device\Controller">
+      <UniqueIdentifier>{ac0b5feb-859e-4ea7-9b98-81602ef923af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHInput\MappingContext">
+      <UniqueIdentifier>{51565dc8-035a-4670-b3ea-d6db994f59c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHInput\Action">
+      <UniqueIdentifier>{a42f79da-756b-446d-b6a1-4bd81181b270}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHInput\Modifiers">
+      <UniqueIdentifier>{55af80c0-ccad-4f86-b36e-4723418ae4b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHInput\Modifiers\Negative">
+      <UniqueIdentifier>{d469cbb8-11d4-483e-94c0-b04904d7f007}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHInput\Modifiers\SwizzleAxis">
+      <UniqueIdentifier>{a3db8306-6ec0-4141-a529-67d0fac614e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHInput\Triggers">
+      <UniqueIdentifier>{0dcdd01f-086f-4c9e-9f2d-a5283fb7f208}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHInput\Triggers\Down">
+      <UniqueIdentifier>{38314bfc-1d1f-483c-be5d-1ab96443b626}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHInput\Components">
+      <UniqueIdentifier>{cad155bd-f5e3-41bf-9f22-e1ca8c6a131c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHInput\Components\ButtonComponent">
+      <UniqueIdentifier>{04fda055-7941-436d-892e-eef66b1f77f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHInput\Components\AxisComponent">
+      <UniqueIdentifier>{0aea0c03-ac22-4bf3-b795-5faddeba5153}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHTime">
+      <UniqueIdentifier>{18001345-e896-4662-bae6-5402a7bf8dc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHTime\Manager">
+      <UniqueIdentifier>{3d125ea3-097e-4d30-a5f4-11e94f720c54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Graphics">
+      <UniqueIdentifier>{75d08092-787e-44e5-9f67-c3442082cd99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Graphics\Manager">
+      <UniqueIdentifier>{bef60d29-be4b-46c2-b698-f0ff36b0e955}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\GE">
+      <UniqueIdentifier>{1c22bcdb-2d98-4f72-9ba2-28b7255122cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\GE\Manager">
+      <UniqueIdentifier>{5948df0a-7b9f-42ae-86f1-fbdeb2b4726e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Graphics\Camera">
+      <UniqueIdentifier>{74d8ba60-fc4e-4525-a9e6-4db51bba4415}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\GE\Camera">
+      <UniqueIdentifier>{8fd3ffda-eb0e-4f9c-8c70-cffdce358395}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -95,9 +230,6 @@
     </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Time.h">
-      <Filter>Managers\Time</Filter>
     </ClInclude>
     <ClInclude Include="Managers.h">
       <Filter>Managers</Filter>
@@ -114,14 +246,8 @@
     <ClInclude Include="Window.h">
       <Filter>Managers\Window</Filter>
     </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Managers\Input</Filter>
-    </ClInclude>
     <ClInclude Include="Drive.h">
       <Filter>Drive</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics.h">
-      <Filter>Managers\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Components.h">
       <Filter>Components</Filter>
@@ -159,20 +285,125 @@
     <ClInclude Include="Vector3.h">
       <Filter>Math\Vector3</Filter>
     </ClInclude>
-    <ClInclude Include="GraphicsSystems.h">
-      <Filter>Managers\Graphics\GraphicsSystems</Filter>
+    <ClInclude Include="InputManager.h">
+      <Filter>Modules\Interfaces\Input\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="CameraSystem.h">
-      <Filter>Managers\Graphics\GraphicsSystems\CameraSystem</Filter>
+    <ClInclude Include="DSHInputManager.h">
+      <Filter>Modules\Difinition\DSHInput\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="RenderSystem.h">
-      <Filter>Managers\Graphics\GraphicsSystems\RenderSystem</Filter>
+    <ClInclude Include="Mouse.h">
+      <Filter>Modules\Interfaces\Input\Device\Mouse</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationSystem.h">
-      <Filter>Managers\Graphics\GraphicsSystems\AnimationSystem</Filter>
+    <ClInclude Include="Keyboard.h">
+      <Filter>Modules\Interfaces\Input\Device\Keyboard</Filter>
     </ClInclude>
-    <ClInclude Include="LightSystem.h">
-      <Filter>Managers\Graphics\GraphicsSystems\LightSystem</Filter>
+    <ClInclude Include="Controller.h">
+      <Filter>Modules\Interfaces\Input\Device\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Math\Vector2</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Math\Point</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHMouse.h">
+      <Filter>Modules\Difinition\DSHInput\Device\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Modules\Interfaces\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="MappingContext.h">
+      <Filter>Modules\Interfaces\Input\MappingContext</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHMappingContext.h">
+      <Filter>Modules\Difinition\DSHInput\MappingContext</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Modules\Interfaces\Input\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHAction.h">
+      <Filter>Modules\Difinition\DSHInput\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHKeyboard.h">
+      <Filter>Modules\Difinition\DSHInput\Device\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHController.h">
+      <Filter>Modules\Difinition\DSHInput\Device\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Negative.h">
+      <Filter>Modules\Interfaces\Input\Modifiers\Negative</Filter>
+    </ClInclude>
+    <ClInclude Include="SwizzleAxis.h">
+      <Filter>Modules\Interfaces\Input\Modifiers\SwizzleAxis</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHNegative.h">
+      <Filter>Modules\Difinition\DSHInput\Modifiers\Negative</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHSwizzleAxis.h">
+      <Filter>Modules\Difinition\DSHInput\Modifiers\SwizzleAxis</Filter>
+    </ClInclude>
+    <ClInclude Include="Trigger.h">
+      <Filter>Modules\Interfaces\Input\Triggers\Trigger</Filter>
+    </ClInclude>
+    <ClInclude Include="Modifier.h">
+      <Filter>Modules\Interfaces\Input\Modifiers\Modifier</Filter>
+    </ClInclude>
+    <ClInclude Include="Value.h">
+      <Filter>Modules\Interfaces\Input\Value</Filter>
+    </ClInclude>
+    <ClInclude Include="Down.h">
+      <Filter>Modules\Interfaces\Input\Triggers\Down</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHDown.h">
+      <Filter>Modules\Difinition\DSHInput\Triggers\Down</Filter>
+    </ClInclude>
+    <ClInclude Include="InputComponent.h">
+      <Filter>Modules\Interfaces\Input\Components\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="InputButtonComponent.h">
+      <Filter>Modules\Interfaces\Input\Components\ButtonComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="InputAxisComponent.h">
+      <Filter>Modules\Interfaces\Input\Components\AxisComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHInputButtonComponent.h">
+      <Filter>Modules\Difinition\DSHInput\Components\ButtonComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHInputAxisComponent.h">
+      <Filter>Modules\Difinition\DSHInput\Components\AxisComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>Math\Quaternion</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>Modules\Interfaces\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>Modules\Interfaces\Time\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHTimeManager.h">
+      <Filter>Modules\Difinition\DSHTime\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Modules\Interfaces\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsManager.h">
+      <Filter>Modules\Interfaces\Graphics\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GEGraphicsManager.h">
+      <Filter>Modules\Difinition\GE\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsCamera.h">
+      <Filter>Modules\Interfaces\Graphics\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="GEGraphicsCamera.h">
+      <Filter>Modules\Difinition\GE\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -181,9 +412,6 @@
     </ClCompile>
     <ClCompile Include="Application.cpp">
       <Filter>Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Time.cpp">
-      <Filter>Managers\Time</Filter>
     </ClCompile>
     <ClCompile Include="ThrowIfFailed.cpp">
       <Filter>Utilities\ThrowIfFailed</Filter>
@@ -194,14 +422,8 @@
     <ClCompile Include="Window.cpp">
       <Filter>Managers\Window</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Managers\Input</Filter>
-    </ClCompile>
     <ClCompile Include="Drive.cpp">
       <Filter>Drive</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics.cpp">
-      <Filter>Managers\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="CameraComponent.cpp">
       <Filter>Components\Camera</Filter>
@@ -224,17 +446,113 @@
     <ClCompile Include="Vector3.cpp">
       <Filter>Math\Vector3</Filter>
     </ClCompile>
-    <ClCompile Include="CameraSystem.cpp">
-      <Filter>Managers\Graphics\GraphicsSystems\CameraSystem</Filter>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Modules\Interfaces\Input\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="RenderSystem.cpp">
-      <Filter>Managers\Graphics\GraphicsSystems\RenderSystem</Filter>
+    <ClCompile Include="DSHInputManager.cpp">
+      <Filter>Modules\Difinition\DSHInput\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationSystem.cpp">
-      <Filter>Managers\Graphics\GraphicsSystems\AnimationSystem</Filter>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>Modules\Interfaces\Input\Device\Mouse</Filter>
     </ClCompile>
-    <ClCompile Include="LightSystem.cpp">
-      <Filter>Managers\Graphics\GraphicsSystems\LightSystem</Filter>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>Modules\Interfaces\Input\Device\Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Modules\Interfaces\Input\Device\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>Math\Vector2</Filter>
+    </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>Math\Point</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHMouse.cpp">
+      <Filter>Modules\Difinition\DSHInput\Device\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="MappingContext.cpp">
+      <Filter>Modules\Interfaces\Input\MappingContext</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHMappingContext.cpp">
+      <Filter>Modules\Difinition\DSHInput\MappingContext</Filter>
+    </ClCompile>
+    <ClCompile Include="Action.cpp">
+      <Filter>Modules\Interfaces\Input\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHAction.cpp">
+      <Filter>Modules\Difinition\DSHInput\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHKeyboard.cpp">
+      <Filter>Modules\Difinition\DSHInput\Device\Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHController.cpp">
+      <Filter>Modules\Difinition\DSHInput\Device\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Negative.cpp">
+      <Filter>Modules\Interfaces\Input\Modifiers\Negative</Filter>
+    </ClCompile>
+    <ClCompile Include="SwizzleAxis.cpp">
+      <Filter>Modules\Interfaces\Input\Modifiers\SwizzleAxis</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHNegative.cpp">
+      <Filter>Modules\Difinition\DSHInput\Modifiers\Negative</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHSwizzleAxis.cpp">
+      <Filter>Modules\Difinition\DSHInput\Modifiers\SwizzleAxis</Filter>
+    </ClCompile>
+    <ClCompile Include="Trigger.cpp">
+      <Filter>Modules\Interfaces\Input\Triggers\Trigger</Filter>
+    </ClCompile>
+    <ClCompile Include="Modifier.cpp">
+      <Filter>Modules\Interfaces\Input\Modifiers\Modifier</Filter>
+    </ClCompile>
+    <ClCompile Include="Value.cpp">
+      <Filter>Modules\Interfaces\Input\Value</Filter>
+    </ClCompile>
+    <ClCompile Include="Down.cpp">
+      <Filter>Modules\Interfaces\Input\Triggers\Down</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHDown.cpp">
+      <Filter>Modules\Difinition\DSHInput\Triggers\Down</Filter>
+    </ClCompile>
+    <ClCompile Include="InputComponent.cpp">
+      <Filter>Modules\Interfaces\Input\Components\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="InputButtonComponent.cpp">
+      <Filter>Modules\Interfaces\Input\Components\ButtonComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="InputAxisComponent.cpp">
+      <Filter>Modules\Interfaces\Input\Components\AxisComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHInputButtonComponent.cpp">
+      <Filter>Modules\Difinition\DSHInput\Components\ButtonComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHInputAxisComponent.cpp">
+      <Filter>Modules\Difinition\DSHInput\Components\AxisComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Quaternion.cpp">
+      <Filter>Math\Quaternion</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>Modules\Interfaces\Time\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHTimeManager.cpp">
+      <Filter>Modules\Difinition\DSHTime\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsManager.cpp">
+      <Filter>Modules\Interfaces\Graphics\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GEGraphicsManager.cpp">
+      <Filter>Modules\Difinition\GE\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsCamera.cpp">
+      <Filter>Modules\Interfaces\Graphics\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="GEGraphicsCamera.cpp">
+      <Filter>Modules\Difinition\GE\Camera</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

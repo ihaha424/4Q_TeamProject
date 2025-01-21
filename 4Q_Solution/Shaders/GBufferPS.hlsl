@@ -42,8 +42,8 @@ PS_OUTPUT main(PS_INPUT input)
     output.normal = float4(normalize(mul(normal * 2.0f - 1.0f, TBN)), 1);
     
     // pbr
-    output.specular.r = txMetalness.Sample(samLinear_wrap, input.uv).r;
-    output.specular.g = txRoughness.Sample(samLinear_wrap, input.uv).r;
+    output.specular.r = txRoughness.Sample(samLinear_wrap, input.uv).r;
+    output.specular.g = txMetalness.Sample(samLinear_wrap, input.uv).r;
 
     // emissive
     output.emissive = txEmissive.Sample(samLinear_wrap, input.uv);

@@ -40,4 +40,3 @@ private:
 	std::vector<TextRenderer*> _components;
 	SpriteBatch* _pSpriteBatch{ nullptr };
 };
-

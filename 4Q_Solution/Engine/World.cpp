@@ -1,6 +1,12 @@
 #include "pch.h"
 #include "World.h"
 
+void Engine::World::Setup(Modules modules)
+{
+	Addition();
+	std::ranges::for_each(_objects, [modules](Object* object) { object->Setup(modules); });
+}
+
 void Engine::World::Initialize()
 {
 	PreInitialize();
@@ -41,6 +47,10 @@ void Engine::World::Finalize()
 	PreFinalize();
 	std::ranges::for_each(_objects, [](Object* object) { object->Finalize(); });
 	PostFinalize();
+}
+
+void Engine::World::Addition()
+{
 }
 
 void Engine::World::PreInitialize()
@@ -94,4 +104,9 @@ void Engine::World::PostFinalize()
 void Engine::World::LoadWorldFromFile(const std::filesystem::path& filePath)
 {
 	// TODO: Load World From File
+}
+
+void Engine::World::AddObject(Object* object)
+{
+	_objects.push_back(object);
 }

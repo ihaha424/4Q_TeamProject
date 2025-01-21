@@ -14,6 +14,7 @@ namespace Engine
 		World& operator=(World&& other) noexcept = default;
 		virtual ~World() = default;
 
+		void Setup(Modules modules); // Refactor this.
 		void Initialize();
 		void Attach();
 		void Update(float deltaTime);
@@ -22,6 +23,7 @@ namespace Engine
 		void Finalize();
 		
 	protected:
+		virtual void Addition(); // TODO: Remove this.
 		virtual void PreInitialize();
 		virtual void PostInitialize();
 		virtual void PreAttach();
@@ -36,6 +38,8 @@ namespace Engine
 		virtual void PostFinalize();
 
 		void LoadWorldFromFile(const std::filesystem::path& filePath);
+
+		void AddObject(Object* object); // TODO: Refactor
 
 	private:
 		std::vector<Object*> _objects;

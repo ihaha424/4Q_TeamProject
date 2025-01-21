@@ -2,11 +2,13 @@
 #include "RenderSystem.h"
 
 #include "DX11Renderer.h"
-#include "VIBuffer.h"
 
 #include "StaticMeshRenderer.h"
 #include "SkeletalMeshRenderer.h"
+
+#include "Sampler.h"
 #include "TextSystem.h"
+#include "StructuredBuffer.h"
 
 StructuredBuffer*	g_pStructuredBuffer;
 ConstantBuffer*		g_pConstantBuffer;
@@ -14,7 +16,8 @@ GraphicDevice*		g_pGraphicDevice;
 Sampler*			g_pSampler;
 ViewManagement*		g_pViewManagement;
 RenderGroup*		g_pRenderGroup;
-VIBuffer*			g_pQuad;
+PostProcessSystem*	g_pPostProcessSystem;
+Quad*				g_pQuad;
 float				g_width;
 float				g_height;
 
@@ -28,7 +31,7 @@ void RenderSystem::Initialize(const GE::RENDERER_DESC* pDesc)
 	switch (pDesc->type)
 	{
 	case GE::RENDERER_DESC::Type::DX11:
-		InitializeDX11(pDesc->hWnd, pDesc->isFullScreen);
+		InitializeDX11(pDesc->hWnd, pDesc->isFullScreen, pDesc->maxLayer);
 		break;
 	case GE::RENDERER_DESC::Type::DX12:
 		InitializeDX12();
@@ -70,6 +73,11 @@ void RenderSystem::GetTextSystem(GE::ITextSystem** ppTextSystem)
 	(*ppTextSystem) = _pTextSystem;
 }
 
+void RenderSystem::GetPostProcessSystem(GE::IPostProcessSystem** ppPostProcessSystem)
+{
+	(*ppPostProcessSystem) = g_pPostProcessSystem;
+}
+
 void RenderSystem::CreateMatrix(GE::IMatrix** ppMatrix)
 {
 	(*ppMatrix) = new Matrix4x4;
@@ -93,17 +101,17 @@ void RenderSystem::CreateMeshRenderer(GE::IMeshRenderer** ppComponent, const GE:
 	(*ppComponent) = pMeshRenderer;
 }
 
-void RenderSystem::RegisterRenderQueue(GE::IMeshRenderer* pComponent, GE::IMatrix* pMatrix)
+void RenderSystem::RegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* pComponent, GE::IMatrix* pMatrix)
 {
-	g_pRenderGroup->RegisterRenderQueue(pComponent, pMatrix);
+	g_pRenderGroup->RegisterRenderQueue(layer, pComponent, pMatrix);
 }
 
-void RenderSystem::UnRegisterRenderQueue(GE::IMeshRenderer* pComponent)
+void RenderSystem::UnRegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* pComponent)
 {
-	g_pRenderGroup->UnRegisterRenderQueue(pComponent);
+	g_pRenderGroup->UnRegisterRenderQueue(layer, pComponent);
 }
 
-void RenderSystem::InitializeDX11(HWND hWnd, bool isFullScreen)
+void RenderSystem::InitializeDX11(HWND hWnd, bool isFullScreen, const unsigned int maxLayer)
 {
 	g_pGraphicDevice = new GraphicDevice;
 	g_pGraphicDevice->Initialize(hWnd, isFullScreen);
@@ -111,47 +119,24 @@ void RenderSystem::InitializeDX11(HWND hWnd, bool isFullScreen)
 	g_pViewManagement = new ViewManagement;
 	g_pStructuredBuffer = new StructuredBuffer;
 	g_pConstantBuffer = new ConstantBuffer;
+	
 	g_pRenderGroup = new RenderGroup;
+	g_pRenderGroup->Initialize(maxLayer);
 
 	g_pSampler = new Sampler;
 	g_pSampler->Initialize();
 	
-	g_pQuad = new VIBuffer;
-
-	std::vector<std::pair<Vector4, Vector2>> vertices(4);
-	unsigned int indices[6];
-
-	vertices[0] = { { -1.0f, -1.0f, 0.0f, 1.f }, { 0.0f, 1.0f } };
-	vertices[1] = { { -1.0f,  1.0f, 0.0f, 1.f }, { 0.0f, 0.0f } };
-	vertices[2] = { {  1.0f,  1.0f, 0.0f, 1.f }, { 1.0f, 0.0f } };
-	vertices[3] = { {  1.0f, -1.0f, 0.0f, 1.f }, { 1.0f, 1.0f } };
-
-	indices[0] = 0;
-	indices[1] = 1;
-	indices[2] = 2;
-
-	indices[3] = 0;
-	indices[4] = 2;
-	indices[5] = 3;
-
-	VIBuffer::VIBufferInfo info
-	{
-		.vertices = vertices.data(),
-		.indices = indices,
-		.vertexByteWidth = (unsigned int)vertices.size() * sizeof(std::pair<Vector4, Vector2>),
-		.vertexBufferStride = sizeof(std::pair<Vector4, Vector2>),
-		.vertexBufferOffset = 0,
-		.indexByteWidth = sizeof(indices),
-		.indexCount = 6
-	};
-
-	g_pQuad->Initialize(info);
+	g_pQuad = new Quad;
+	g_pQuad->Initialize();
 
 	_pRenderer = new DX11Renderer;
 	_pRenderer->Initialize();
 
 	_pTextSystem = new TextSystem;
 	_pTextSystem->Initialize();
+
+	g_pPostProcessSystem = new PostProcessSystem;
+	g_pPostProcessSystem->Initialize(maxLayer);
 }
 
 void RenderSystem::InitializeDX12()

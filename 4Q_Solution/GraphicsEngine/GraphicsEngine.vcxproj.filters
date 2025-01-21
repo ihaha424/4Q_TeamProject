@@ -61,9 +61,6 @@
     <Filter Include="96. Interface">
       <UniqueIdentifier>{729f1efa-344a-4d1d-a4d0-c17421630528}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00. Common\Queue">
-      <UniqueIdentifier>{1dd71c47-b56a-40fb-b1cf-5e78e5406844}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00. Common\Light">
       <UniqueIdentifier>{b8feb7a1-40b2-4f7b-bca0-e690394a696e}</UniqueIdentifier>
     </Filter>
@@ -73,59 +70,80 @@
     <Filter Include="00. Common\Component\MeshRenderer\SkyBoxRenderer">
       <UniqueIdentifier>{5820d84d-1c5d-40d2-9c01-372172dc0d16}</UniqueIdentifier>
     </Filter>
-    <Filter Include="07. DX11">
-      <UniqueIdentifier>{e00d1ba6-2849-4aa0-937c-0c8d932e05d0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. DX11\GraphicDevice">
-      <UniqueIdentifier>{b4e9ee8b-8dcd-4a07-aa01-f114f6e302a6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. DX11\Material">
-      <UniqueIdentifier>{87c9ec11-9f10-4fdb-b4d6-554f4d51f4af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. DX11\Model">
-      <UniqueIdentifier>{4e789fe2-c7f1-43f5-b050-186ac80e7d82}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. DX11\Renderer">
-      <UniqueIdentifier>{4ef321ac-047e-4551-92e2-cd3474c0f4d5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. DX11\PostProcess">
-      <UniqueIdentifier>{81c423dd-6dbe-46b1-badc-6d72bb7067f9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. DX11\RenderGroup">
-      <UniqueIdentifier>{407d8039-9b8c-421d-a89c-72ade9a15f68}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. DX11\Sampler">
-      <UniqueIdentifier>{c7a24301-1fd8-478c-872d-136c718fdc29}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. DX11\Shader">
-      <UniqueIdentifier>{5ffc0473-2bb0-4fba-bca7-72343ed5ab9e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. DX11\Texture">
-      <UniqueIdentifier>{14b40006-92ad-4ecc-89da-a56214a2c8d2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. DX11\Buffer">
-      <UniqueIdentifier>{0c83dd08-4049-421c-9c06-367520f74a19}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. DX11\Buffer\VI">
-      <UniqueIdentifier>{5a7e4169-c567-492a-b5c6-8c43e40a95e0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. DX11\Buffer\Constant">
-      <UniqueIdentifier>{d2b48711-398f-4654-95f4-81ee5ff7a949}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. DX11\Buffer\Mesh">
-      <UniqueIdentifier>{36d8fd6b-306c-462f-a356-c96741a18887}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. DX11\Buffer\Structured">
-      <UniqueIdentifier>{8a967d44-ee8e-4274-9a85-e6fa740bbd0f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. DX11\ViewManagement">
-      <UniqueIdentifier>{4bed19cb-be4d-46bf-8313-f57e0264eda2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="08. DX12">
       <UniqueIdentifier>{5a5dabd3-0269-4509-8a53-a8d5a3da4026}</UniqueIdentifier>
     </Filter>
     <Filter Include="06. TextSystem">
       <UniqueIdentifier>{84452d4d-a99f-4f04-8dca-a6427ff75383}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97. Include\PostProcess">
+      <UniqueIdentifier>{12fa7664-4d53-486e-807c-dd8230d3a515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Common\HLSL\PostProcess">
+      <UniqueIdentifier>{1ee5dd36-7358-4c3f-9efc-b15363fe9739}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. DX11">
+      <UniqueIdentifier>{e00d1ba6-2849-4aa0-937c-0c8d932e05d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. DX11\GraphicDevice">
+      <UniqueIdentifier>{b4e9ee8b-8dcd-4a07-aa01-f114f6e302a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. DX11\Material">
+      <UniqueIdentifier>{87c9ec11-9f10-4fdb-b4d6-554f4d51f4af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. DX11\Model">
+      <UniqueIdentifier>{4e789fe2-c7f1-43f5-b050-186ac80e7d82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. DX11\Renderer">
+      <UniqueIdentifier>{4ef321ac-047e-4551-92e2-cd3474c0f4d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. DX11\PostProcess">
+      <UniqueIdentifier>{81c423dd-6dbe-46b1-badc-6d72bb7067f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. DX11\RenderGroup">
+      <UniqueIdentifier>{407d8039-9b8c-421d-a89c-72ade9a15f68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. DX11\Sampler">
+      <UniqueIdentifier>{c7a24301-1fd8-478c-872d-136c718fdc29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. DX11\Shader">
+      <UniqueIdentifier>{5ffc0473-2bb0-4fba-bca7-72343ed5ab9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. DX11\Texture">
+      <UniqueIdentifier>{14b40006-92ad-4ecc-89da-a56214a2c8d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. DX11\Buffer">
+      <UniqueIdentifier>{0c83dd08-4049-421c-9c06-367520f74a19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. DX11\Buffer\VI">
+      <UniqueIdentifier>{5a7e4169-c567-492a-b5c6-8c43e40a95e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. DX11\Buffer\Constant">
+      <UniqueIdentifier>{d2b48711-398f-4654-95f4-81ee5ff7a949}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. DX11\Buffer\Mesh">
+      <UniqueIdentifier>{36d8fd6b-306c-462f-a356-c96741a18887}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. DX11\Buffer\Structured">
+      <UniqueIdentifier>{8a967d44-ee8e-4274-9a85-e6fa740bbd0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. DX11\ViewManagement">
+      <UniqueIdentifier>{4bed19cb-be4d-46bf-8313-f57e0264eda2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. PostProcessSystem">
+      <UniqueIdentifier>{a4723174-8b6b-44ef-9d38-c30f6294bcb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97. Include\System">
+      <UniqueIdentifier>{634cdd85-721e-463d-b34d-49add38af7a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97. Include\Component">
+      <UniqueIdentifier>{1e093da5-e765-4630-bf6b-87d3ac4dece3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. DX11\PostProcess\Bloom">
+      <UniqueIdentifier>{a3dc2c18-d957-4325-b10a-65fc36cc6f39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. DX11\Quad">
+      <UniqueIdentifier>{d1fd7023-e6af-4d49-9683-d3fc452b9aa7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -136,25 +154,25 @@
       <Filter>00. Common\Animation</Filter>
     </ClInclude>
     <ClInclude Include="ConstantBuffer.h">
-      <Filter>07. DX11\Buffer\Constant</Filter>
+      <Filter>08. DX11\Buffer\Constant</Filter>
     </ClInclude>
     <ClInclude Include="VIBuffer.h">
-      <Filter>07. DX11\Buffer\VI</Filter>
+      <Filter>08. DX11\Buffer\VI</Filter>
     </ClInclude>
     <ClInclude Include="PixelShader.h">
-      <Filter>07. DX11\Shader</Filter>
+      <Filter>08. DX11\Shader</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>07. DX11\Shader</Filter>
+      <Filter>08. DX11\Shader</Filter>
     </ClInclude>
     <ClInclude Include="VertexShader.h">
-      <Filter>07. DX11\Shader</Filter>
+      <Filter>08. DX11\Shader</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">
-      <Filter>07. DX11\Material</Filter>
+      <Filter>08. DX11\Material</Filter>
     </ClInclude>
     <ClInclude Include="Sampler.h">
-      <Filter>07. DX11\Sampler</Filter>
+      <Filter>08. DX11\Sampler</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>00. Common\Resource</Filter>
@@ -163,13 +181,13 @@
       <Filter>00. Common\Resource</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
-      <Filter>07. DX11\Model</Filter>
+      <Filter>08. DX11\Model</Filter>
     </ClInclude>
     <ClInclude Include="Skeleton.h">
-      <Filter>07. DX11\Model</Filter>
+      <Filter>08. DX11\Model</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>07. DX11\Texture</Filter>
+      <Filter>08. DX11\Texture</Filter>
     </ClInclude>
     <ClInclude Include="TextRenderer.h">
       <Filter>00. Common\Component\TextRenderer</Filter>
@@ -199,16 +217,16 @@
       <Filter>03. CameraSystem</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
-      <Filter>07. DX11\Buffer\Mesh</Filter>
+      <Filter>08. DX11\Buffer\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="GraphicDevice.h">
-      <Filter>07. DX11\GraphicDevice</Filter>
+      <Filter>08. DX11\GraphicDevice</Filter>
     </ClInclude>
-    <ClInclude Include="PostProcess.h">
-      <Filter>07. DX11\PostProcess</Filter>
+    <ClInclude Include="Filter.h">
+      <Filter>08. DX11\PostProcess</Filter>
     </ClInclude>
     <ClInclude Include="RenderGroup.h">
-      <Filter>07. DX11\RenderGroup</Filter>
+      <Filter>08. DX11\RenderGroup</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsSystem.h">
       <Filter>01. GraphicsSystem</Filter>
@@ -229,13 +247,13 @@
       <Filter>00. Common\Component\MeshRenderer</Filter>
     </ClInclude>
     <ClInclude Include="SkeletalMesh.h">
-      <Filter>07. DX11\Model</Filter>
+      <Filter>08. DX11\Model</Filter>
     </ClInclude>
     <ClInclude Include="StaticMesh.h">
-      <Filter>07. DX11\Model</Filter>
+      <Filter>08. DX11\Model</Filter>
     </ClInclude>
     <ClInclude Include="ViewManagement.h">
-      <Filter>07. DX11\ViewManagement</Filter>
+      <Filter>08. DX11\ViewManagement</Filter>
     </ClInclude>
     <ClInclude Include="AnimationSystem.h">
       <Filter>04. AnimationSystem</Filter>
@@ -244,13 +262,10 @@
       <Filter>96. Interface</Filter>
     </ClInclude>
     <ClInclude Include="DX11Renderer.h">
-      <Filter>07. DX11\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Queue.h">
-      <Filter>00. Common\Queue</Filter>
+      <Filter>08. DX11\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="StructuredBuffer.h">
-      <Filter>07. DX11\Buffer\Structured</Filter>
+      <Filter>08. DX11\Buffer\Structured</Filter>
     </ClInclude>
     <ClInclude Include="LightSystem.h">
       <Filter>05. LightSystem</Filter>
@@ -261,56 +276,74 @@
     <ClInclude Include="Utility.h">
       <Filter>98. Headers</Filter>
     </ClInclude>
-    <ClInclude Include="includes\IAnimationSystem.h">
-      <Filter>97. Include</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\IAnimator.h">
-      <Filter>97. Include</Filter>
-    </ClInclude>
     <ClInclude Include="includes\IBash.h">
-      <Filter>97. Include</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\ICamera.h">
-      <Filter>97. Include</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\ICameraSystem.h">
-      <Filter>97. Include</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\IGraphicsSystem.h">
-      <Filter>97. Include</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\ILight.h">
-      <Filter>97. Include</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\ILightSystem.h">
-      <Filter>97. Include</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\IMatrix.h">
-      <Filter>97. Include</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\IMeshRenderer.h">
-      <Filter>97. Include</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\IRenderSystem.h">
       <Filter>97. Include</Filter>
     </ClInclude>
     <ClInclude Include="SkyBoxRenderer.h">
       <Filter>00. Common\Component\MeshRenderer\SkyBoxRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\ISkyBoxRenderer.h">
-      <Filter>97. Include</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\ITextRenderer.h">
-      <Filter>97. Include</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\ITextSystem.h">
-      <Filter>97. Include</Filter>
     </ClInclude>
     <ClInclude Include="TextSystem.h">
       <Filter>06. TextSystem</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>00. Common\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Bloom.h">
+      <Filter>08. DX11\PostProcess\Bloom</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\IBloom.h">
+      <Filter>97. Include\PostProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcessSystem.h">
+      <Filter>07. PostProcessSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\IFilter.h">
+      <Filter>97. Include\PostProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\IAnimationSystem.h">
+      <Filter>97. Include\System</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\ICameraSystem.h">
+      <Filter>97. Include\System</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\IGraphicsSystem.h">
+      <Filter>97. Include\System</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\ILightSystem.h">
+      <Filter>97. Include\System</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\IRenderSystem.h">
+      <Filter>97. Include\System</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\ITextSystem.h">
+      <Filter>97. Include\System</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\IPostProcessSystem.h">
+      <Filter>97. Include\System</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\IAnimator.h">
+      <Filter>97. Include\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\ICamera.h">
+      <Filter>97. Include\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\ILight.h">
+      <Filter>97. Include\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\IMatrix.h">
+      <Filter>97. Include\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\IMeshRenderer.h">
+      <Filter>97. Include\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\ISkyBoxRenderer.h">
+      <Filter>97. Include\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\ITextRenderer.h">
+      <Filter>97. Include\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Quad.h">
+      <Filter>08. DX11\Quad</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -321,31 +354,31 @@
       <Filter>00. Common\Animation</Filter>
     </ClCompile>
     <ClCompile Include="Material.cpp">
-      <Filter>07. DX11\Material</Filter>
+      <Filter>08. DX11\Material</Filter>
     </ClCompile>
     <ClCompile Include="Model.cpp">
-      <Filter>07. DX11\Model</Filter>
+      <Filter>08. DX11\Model</Filter>
     </ClCompile>
     <ClCompile Include="Skeleton.cpp">
-      <Filter>07. DX11\Model</Filter>
+      <Filter>08. DX11\Model</Filter>
     </ClCompile>
     <ClCompile Include="VertexShader.cpp">
-      <Filter>07. DX11\Shader</Filter>
+      <Filter>08. DX11\Shader</Filter>
     </ClCompile>
     <ClCompile Include="PixelShader.cpp">
-      <Filter>07. DX11\Shader</Filter>
+      <Filter>08. DX11\Shader</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
-      <Filter>07. DX11\Shader</Filter>
+      <Filter>08. DX11\Shader</Filter>
     </ClCompile>
     <ClCompile Include="ConstantBuffer.cpp">
-      <Filter>07. DX11\Buffer\Constant</Filter>
+      <Filter>08. DX11\Buffer\Constant</Filter>
     </ClCompile>
     <ClCompile Include="VIBuffer.cpp">
-      <Filter>07. DX11\Buffer\VI</Filter>
+      <Filter>08. DX11\Buffer\VI</Filter>
     </ClCompile>
     <ClCompile Include="Sampler.cpp">
-      <Filter>07. DX11\Sampler</Filter>
+      <Filter>08. DX11\Sampler</Filter>
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>00. Common\Resource</Filter>
@@ -354,7 +387,7 @@
       <Filter>00. Common\Component\TextRenderer</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
-      <Filter>07. DX11\Texture</Filter>
+      <Filter>08. DX11\Texture</Filter>
     </ClCompile>
     <ClCompile Include="dllmain.cpp">
       <Filter>99. Default</Filter>
@@ -369,16 +402,16 @@
       <Filter>03. CameraSystem</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
-      <Filter>07. DX11\Buffer\Mesh</Filter>
+      <Filter>08. DX11\Buffer\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="GraphicDevice.cpp">
-      <Filter>07. DX11\GraphicDevice</Filter>
+      <Filter>08. DX11\GraphicDevice</Filter>
     </ClCompile>
-    <ClCompile Include="PostProcess.cpp">
-      <Filter>07. DX11\PostProcess</Filter>
+    <ClCompile Include="Filter.cpp">
+      <Filter>08. DX11\PostProcess</Filter>
     </ClCompile>
     <ClCompile Include="RenderGroup.cpp">
-      <Filter>07. DX11\RenderGroup</Filter>
+      <Filter>08. DX11\RenderGroup</Filter>
     </ClCompile>
     <ClCompile Include="GraphicsSystem.cpp">
       <Filter>01. GraphicsSystem</Filter>
@@ -399,19 +432,16 @@
       <Filter>00. Common\Component\MeshRenderer</Filter>
     </ClCompile>
     <ClCompile Include="ViewManagement.cpp">
-      <Filter>07. DX11\ViewManagement</Filter>
+      <Filter>08. DX11\ViewManagement</Filter>
     </ClCompile>
     <ClCompile Include="AnimationSystem.cpp">
       <Filter>04. AnimationSystem</Filter>
     </ClCompile>
     <ClCompile Include="DX11Renderer.cpp">
-      <Filter>07. DX11\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="Queue.cpp">
-      <Filter>00. Common\Queue</Filter>
+      <Filter>08. DX11\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="StructuredBuffer.cpp">
-      <Filter>07. DX11\Buffer\Structured</Filter>
+      <Filter>08. DX11\Buffer\Structured</Filter>
     </ClCompile>
     <ClCompile Include="LightSystem.cpp">
       <Filter>05. LightSystem</Filter>
@@ -427,6 +457,15 @@
     </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>00. Common\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Bloom.cpp">
+      <Filter>08. DX11\PostProcess\Bloom</Filter>
+    </ClCompile>
+    <ClCompile Include="PostProcessSystem.cpp">
+      <Filter>07. PostProcessSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Quad.cpp">
+      <Filter>08. DX11\Quad</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -473,6 +512,15 @@
     </FxCompile>
     <FxCompile Include="..\Shaders\SkyBoxVS.hlsl">
       <Filter>00. Common\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\GaussianBlurPS.hlsl">
+      <Filter>00. Common\HLSL\PostProcess</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\SamplingPS.hlsl">
+      <Filter>00. Common\HLSL\PostProcess</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\BloomCurvePS.hlsl">
+      <Filter>00. Common\HLSL\PostProcess</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

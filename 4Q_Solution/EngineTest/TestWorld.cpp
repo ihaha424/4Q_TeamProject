@@ -1,7 +1,8 @@
 #include "pch.h"
 #include "TestWorld.h"
 
-TestWorld::TestWorld(const int a) :
-	_a(a)
+void TestWorld::Addition()
 {
+	World::Addition();
+	AddObject(&_player);
 }

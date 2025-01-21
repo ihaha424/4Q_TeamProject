@@ -13,7 +13,6 @@
 #include <directxtk/SimpleMath.h>
 #include <comdef.h>
 #include <d3dcompiler.h>
-#include <wrl.h>
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
@@ -22,12 +21,12 @@ using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
 #include <fstream>
+#include <typeindex>
 #include <vector>
 #include <unordered_map>
 #include <queue>
 #include <string>
 #include <filesystem>
-#include <typeindex>
 #include <memory>
 #include <thread>
 #include <condition_variable>
@@ -37,7 +36,6 @@ using namespace DirectX::SimpleMath;
 #include "framework.h"
 
 #include "Utility.h"
-#include "Queue.h"
 
 #include "Extern.h"
 #include "Struct.h"
@@ -48,12 +46,10 @@ using namespace DirectX::SimpleMath;
 #include "GraphicDevice.h"
 #include "ResourceManager.h"
 #include "ConstantBuffer.h"
-#include "StructuredBuffer.h"
-#include "ViewManagement.h"
 #include "RenderGroup.h"
-#include "Sampler.h"
-#include "CameraSystem.h"
-#include "LightSystem.h"
+#include "PostProcessSystem.h"
+#include "ViewManagement.h"
+#include "Quad.h"
 
 #pragma comment (lib, "d3d11.lib")
 #pragma comment (lib, "d3dcompiler.lib")

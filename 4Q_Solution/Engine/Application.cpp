@@ -1,16 +1,19 @@
 #include "pch.h"
 #include "Application.h"
 
-Engine::Manager::Time* Engine::Application::_timeManager = nullptr;
+#include "DSHInputManager.h"
+#include "DSHTimeManager.h"
+#include "GEGraphicsManager.h"
+
+Engine::Time::Manager* Engine::Application::_timeManager = nullptr;
 Engine::Manager::Window* Engine::Application::_windowManager = nullptr;
-Engine::Manager::Input* Engine::Application::_inputManager = nullptr;
-Engine::Manager::Graphics* Engine::Application::_graphicsManager = nullptr;
+Engine::Graphics::Manager* Engine::Application::_graphicsManager = nullptr;
+Engine::Input::Manager* Engine::Application::_inputManager = nullptr;
 
 Engine::Application::Application(const HINSTANCE instanceHandle, std::wstring title, const SIZE size) :
 	_instanceHandle(instanceHandle),
 	_title(std::move(title)),
-	_size(size),
-	_cameraComponent(nullptr)
+	_size(size)
 {
 }
 
@@ -18,7 +21,8 @@ void Engine::Application::Begin()
 {
 	InitializeManagers();
 	DeclareInputActions(_inputManager);
-	CreateContents();
+	Addition(); // TODO: Refactor this.
+	Setup({ _graphicsManager });
 	InitializeContents();
 }
 
@@ -37,23 +41,24 @@ void Engine::Application::InitializeManagers() const
 	_graphicsManager->Initialize(_windowManager->GetHandle(), L"../Shaders/", _size, false, 1);
 }
 
-void Engine::Application::DeclareInputActions(Manager::IInput* inputManager)
+void Engine::Application::DeclareInputActions(Input::IManager* inputManager)
 {
-
 }
 
-void Engine::Application::CreateContents()
+void Engine::Application::Addition()
 {
-	// TODO: World / Object / Component Manager Create;
-	_cameraComponent = new Component::CameraComponent(L"MainCamera", 1.f, 1000.f, _size, 3.141592f / 4);
 }
+
+void Engine::Application::Setup(Modules modules)
+{
+	std::ranges::for_each(_worlds, [modules](World* world) { world->Setup(modules); });
+}
+
 
 void Engine::Application::InitializeContents()
 {
 	// TODO: WOC Manager Initialize;
-	_cameraComponent->Initialize(); // TODO: Remove this.
-	_cameraComponent->Attach();
-	_cameraComponent->Activate(); // TODO: Remove this.
+	std::ranges::for_each(_worlds, [](World* world) { world->Initialize(); });
 }
 
 void Engine::Application::Run(const int showCommand)
@@ -74,15 +79,12 @@ void Engine::Application::Run(const int showCommand)
 		{
 			const float metaTime = _timeManager->GetDeltaMetaTime();
 			const float deltaTime = _timeManager->GetDeltaTime();
-
 			_timeManager->Tick();
 			_inputManager->Update(metaTime);
 			_graphicsManager->Update(deltaTime);
 
 			_drive.Update(deltaTime);
 			// TODO: Alarm Timer for Fixed Update
-
-			_cameraComponent->Update(deltaTime); // TODO: Remove this.
 
 			_graphicsManager->Render();
 			_inputManager->Reset();
@@ -93,23 +95,13 @@ void Engine::Application::Run(const int showCommand)
 void Engine::Application::End()
 {
 	FinalizeContents();
-	DeleteContents();
 	FinalizeManagers();
 }
 
 void Engine::Application::FinalizeContents()
 {
 	// TODO: WOC Manager Finalize;
-
-	_cameraComponent->Finalize(); // TODO: Remove this.
-}
-
-void Engine::Application::DeleteContents()
-{
-	// TODO: WOC Manager Delete;
-
-	constexpr Utility::SafeDelete deleter;
-	deleter(&_cameraComponent);
+	std::ranges::for_each(_worlds, [](World* world) { world->Finalize(); });
 }
 
 void Engine::Application::FinalizeManagers() const
@@ -126,26 +118,36 @@ void Engine::Application::FinalizeManagers() const
 	deleter(&_timeManager);
 }
 
-Engine::Manager::ITime* Engine::Application::GetTimeManager()
+Engine::Time::IManager* Engine::Application::GetTimeManager()
 {
 	return _timeManager;
 }
 
-Engine::Manager::IInput* Engine::Application::GetInputManager()
+Engine::Input::IManager* Engine::Application::GetInputManager()
 {
 	return _inputManager;
 }
 
-Engine::Manager::IGraphics* Engine::Application::GetGraphicsManager()
+Engine::Graphics::IManager* Engine::Application::GetGraphicsManager()
 {
 	return _graphicsManager;
 }
 
-void Engine::Application::CreateTimeManager(Manager::Time** timeManager)
+void Engine::Application::AddWorld(World* world)
+{
+	_worlds.push_back(world);
+}
+
+void Engine::Application::Attach(World* world)
+{
+	_drive.AttachWorld(world, nullptr);
+}
+
+void Engine::Application::CreateTimeManager(Time::Manager** timeManager)
 {
 	constexpr Utility::ThrowIfFailed thrower;
 	if (timeManager == nullptr) thrower(E_INVALIDARG);
-	Manager::Time* manager = new Manager::Time();
+	Time::Manager* manager = new DSHTime::Manager();
 	if (manager == nullptr) thrower(E_OUTOFMEMORY);
 	*timeManager = manager;
 }
@@ -159,20 +161,20 @@ void Engine::Application::CreateWindowManager(Manager::Window** windowManager)
 	*windowManager = manager;
 }
 
-void Engine::Application::CreateInputManager(Manager::Input** inputManager)
+void Engine::Application::CreateInputManager(Input::Manager** inputManager)
 {
 	constexpr Utility::ThrowIfFailed thrower;
 	if (inputManager == nullptr) thrower(E_INVALIDARG);
-	Manager::Input* manager = new Manager::Input();
+	Input::Manager* manager = new DSHInput::Manager();
 	if (manager == nullptr) thrower(E_OUTOFMEMORY);
 	*inputManager = manager;
 }
 
-void Engine::Application::CreateGraphicsManager(Manager::Graphics** graphicsManager)
+void Engine::Application::CreateGraphicsManager(Graphics::Manager** graphicsManager)
 {
 	constexpr Utility::ThrowIfFailed thrower;
 	if (graphicsManager == nullptr) thrower(E_INVALIDARG);
-	Manager::Graphics* manager = new Manager::Graphics();
+	Graphics::Manager* manager = new GEGraphics::Manager();
 	if (manager == nullptr) thrower(E_OUTOFMEMORY);
 	*graphicsManager = manager;
 }

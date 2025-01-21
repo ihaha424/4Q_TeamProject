@@ -12,12 +12,17 @@ namespace Engine::Component
 		Component& operator=(Component&& other) noexcept = default;
 		virtual ~Component() = default;
 
+		virtual void Setup(Modules modules);
+
 		virtual void Initialize();
 		virtual void Attach();
 		virtual void Update(float deltaTime);
 		virtual void FixedUpdate();
 		virtual void Detach();
 		virtual void Finalize();
+
+	protected:
+		// TODO: Owner
 	};
 }
 

@@ -23,10 +23,11 @@ private:
 	void SetViewport(float width, float height);
 
 	void ShadowPass();
-	void DeferredPass(std::list<Mesh*>& renderData);
-	void ForwardPass(std::list<Mesh*>& renderData);
+	void DeferredPass(std::list<Mesh*>& renderData, ID3D11RenderTargetView* pRTV);
+	void ForwardPass(std::list<Mesh*>& renderData, ID3D11RenderTargetView* pRTV);
 	void SkyBoxPass(std::list<SkyBoxRenderer*>& skyBoxes);
 	void PostProcessing();
+	void BlendPass();
 	void RenderMesh(std::list<Mesh*>& renderData, std::shared_ptr<PixelShader>& pixelShader);
 
 private:
@@ -49,7 +50,6 @@ private:
 	D3D11_VIEWPORT						_viewport{};
 
 	// Shaders
-	std::shared_ptr<VertexShader>		_vsQuad;
 	std::shared_ptr<VertexShader>		_vsShadow[MeshType::End];
 	std::shared_ptr<PixelShader>		_psDeferred;
 	std::shared_ptr<PixelShader>		_psBlend;
@@ -68,4 +68,7 @@ private:
 	// State
 	ID3D11BlendState*					_pBlendState{ nullptr };
 	ID3D11RasterizerState*				_pRSSkyBoxState{ nullptr };
+
+	// Layer
+	std::vector<ID3D11ShaderResourceView*> _layerSRVs;
 };

@@ -18,10 +18,12 @@ public:
 	virtual ~Skeleton() = default;
 
 public:
-	const Bone& GetBone() const { return _rootBone; }
+	Bone* GetBone(const unsigned int ID) const { return _bones[ID]; }
 
 public:
 	void Initialize(const aiScene* paiScene, std::unordered_map<std::string, std::pair<unsigned int, Matrix>>& boneInfo);
+	void SetUpSplitBone(const unsigned int maxSplit);
+	void SplitBone(const unsigned int ID, const char* boneName);
 
 private:
 	bool LoadSkeleton(Bone& bone, aiNode* paiNode, std::unordered_map<std::string, std::pair<unsigned int, Matrix>>& boneInfo);
@@ -32,5 +34,5 @@ private:
 
 private:
 	Bone _rootBone;
-	Bone _spine;
+	std::vector<Bone*> _bones;
 };

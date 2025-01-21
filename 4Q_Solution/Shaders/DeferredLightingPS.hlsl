@@ -36,20 +36,11 @@ float4 main(PS_INPUT input) : SV_Target
     float  shadowFactor = 1.0;
     
 // PBR
-    float3 F0 = lerp(Fdielectric, albedo, specular.r);
-    float  NdotV = max(0, dot(N, V));
-    
-    for (uint i = 0; i < numDirectionalLights; i++)
-    {
-        Light light = DirectionalLights[i];        
-        directLighting += ComputeDirectionalLightPBR(light, N, V, F0, albedo, specular.g, specular.r, NdotV);
-    }
+    // PBR_Directional
+    directLighting += DirectionalLightPBR(worldPosition, N, V, albedo, specular.r, specular.g);
 
-    for (uint j = 0; j < numPointLights; j++)
-    {
-        Light light = PointLights[j];
-        directLighting += ComputePointLightPBR(light, worldPosition, N, V, F0, albedo, specular.g, specular.r, NdotV);
-    }
+    // PBR_Point
+    directLighting += PointLightPBR(worldPosition, N, V, albedo, specular.r, specular.g);
     
 // IBL
     //float3 irradiance = txIBL_Diffuse.Sample(samLinear_wrap, N).rgb;

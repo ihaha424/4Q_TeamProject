@@ -16,15 +16,20 @@ public:
 	virtual ~RenderGroup() = default;
 
 public:
-	const std::list<RenderData>& GetRenderData() { return _datas; }
+	const std::list<RenderData>& GetRenderData(const unsigned int layer) { return _datas[layer]; }
+	const std::list<RenderData>* GetRenderDatas() { return _datas; }
+	const unsigned int GetMaxLayer() const { return _maxLayer; }
 
-	void RegisterRenderQueue(GE::IMeshRenderer* pComponent, GE::IMatrix* pMatrix);
-	void UnRegisterRenderQueue(GE::IMeshRenderer* pComponent);
+public:
+	void Initialize(const unsigned int maxLayer);
+	void RegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* pMeshRenderer, GE::IMatrix* pMatrix);
+	void UnRegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* pMeshRenderer);
 
 private:
 	// Base을(를) 통해 상속됨
 	void Free() override;
 
 private:
-	std::list<RenderData> _datas;
+	std::list<RenderData>* _datas;
+	unsigned int _maxLayer{ 0 };
 };

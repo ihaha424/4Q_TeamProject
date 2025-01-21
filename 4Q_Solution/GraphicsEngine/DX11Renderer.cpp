@@ -1,17 +1,22 @@
 #include "pch.h"
+#include "Animator.h"
+#include "Camera.h"
 #include "DX11Renderer.h"
-#include "VertexShader.h"
-#include "PixelShader.h"
+#include "Filter.h"
+#include "Light.h"
+#include "Material.h"
+#include "Mesh.h"
 #include "MeshRenderer.h"
+#include "Model.h"
+#include "PixelShader.h"
 #include "SkeletalMeshRenderer.h"
 #include "SkyBoxRenderer.h"
-#include "Animator.h"
-#include "Model.h"
-#include "Mesh.h"
-#include "Camera.h"
+#include "VertexShader.h"
 #include "VIBuffer.h"
-#include "Material.h"
-#include "Light.h"
+
+#include "CameraSystem.h"
+#include "LightSystem.h"
+#include "StructuredBuffer.h"
 
 void DX11Renderer::Initialize()
 {
@@ -19,7 +24,7 @@ void DX11Renderer::Initialize()
 
 	_matrices.resize(MAX_DRAW_OBJECT);
 	_boneMatrices.resize(MAX_DRAW_OBJECT * MAX_BONE_MATRIX);
-	_directionalLights.resize(8);
+	_directionalLights.resize(4);
 	_pointLights.resize(64);
 
 	// Viewport
@@ -79,44 +84,50 @@ void DX11Renderer::Render()
 	g_pConstantBuffer->UpdateConstantBuffer(L"ViewProjection", &vp);
 	g_pConstantBuffer->UpdateConstantBuffer(L"CameraDesc", &cameraDesc);
 
-	const auto& renderData = g_pRenderGroup->GetRenderData();
-	std::list<Mesh*> meshes[RenderType::End];
+	const auto* renderData = g_pRenderGroup->GetRenderDatas();
+	const unsigned int maxLayer = g_pRenderGroup->GetMaxLayer();
+	std::vector<std::pair<std::list<Mesh*>, std::list<Mesh*>>> meshes;
 	std::list<SkyBoxRenderer*> skyBoxes;
+	
+	meshes.resize(maxLayer);
 
 	unsigned int ID = 0;
-	for (const auto& [component, matrix] : renderData)
+	for (unsigned int i = 0; i < maxLayer; i++)
 	{
-		auto& model = component->GetModel();
-		_matrices[ID] = XMMatrixTranspose(XMMATRIX(&matrix->_11));
+		for (const auto& [component, matrix] : renderData[i])
+		{
+			auto& model = component->GetModel();
+			_matrices[ID] = XMMatrixTranspose(XMMATRIX(&matrix->_11));
 
-		switch (component->GetType())
-		{
-		case MeshType::Skeletal:
-		{
-			Animator* pAnimator = static_cast<SkeletalMeshRenderer*>(component)->GetAnimator();
-			memcpy(&_boneMatrices[ID * MAX_BONE_MATRIX], pAnimator->GetAnimationTransform().data(), sizeof(Matrix) * MAX_BONE_MATRIX);
-			break;
-		}
-		case MeshType::SkyBox:
-			skyBoxes.push_back(static_cast<SkyBoxRenderer*>(component));
-			break;
-		}
-
-		for (auto& mesh : model->_meshs)
-		{
-			mesh->SetID(ID);
-			
-			if (mesh->_pMaterial->IsAlpha())
+			switch (component->GetType())
 			{
-				meshes[RenderType::Alpha].push_back(mesh);
-			}
-			else
+			case MeshType::Skeletal:
 			{
-				meshes[RenderType::NoneAlpha].push_back(mesh);
+				Animator* pAnimator = static_cast<SkeletalMeshRenderer*>(component)->GetAnimator();
+				memcpy(&_boneMatrices[ID * MAX_BONE_MATRIX], pAnimator->GetAnimationTransform().data(), sizeof(Matrix) * MAX_BONE_MATRIX);
+				break;
 			}
-		}
+			case MeshType::SkyBox:
+				skyBoxes.push_back(static_cast<SkyBoxRenderer*>(component));
+				break;
+			}
 
-		ID++;
+			for (auto& mesh : model->_meshs)
+			{
+				mesh->SetID(ID);
+
+				if (mesh->_pMaterial->IsAlpha())
+				{
+					meshes[i].second.push_back(mesh);
+				}
+				else
+				{
+					meshes[i].first.push_back(mesh);
+				}
+			}
+
+			ID++;
+		}
 	}
 
 	// Alpha Sort
@@ -150,10 +161,23 @@ void DX11Renderer::Render()
 	g_pStructuredBuffer->SetStructuredBuffer(L"BoneMatrices", ShaderType::Vertex, 1, 1);
 
 	ShadowPass();
-	DeferredPass(meshes[RenderType::NoneAlpha]);
-	ForwardPass(meshes[RenderType::Alpha]);
-	SkyBoxPass(skyBoxes);
+
+	_pDeviceContext->PSSetShaderResources(10, 1, &_pShadowSRV);
+	for (unsigned int i = 0; i < maxLayer; i++)
+	{
+		wchar_t buffer[16]{};
+		wsprintf(buffer, L"Layer%d", i);
+		ID3D11RenderTargetView* pRTV = g_pViewManagement->GetRenderTargetView(buffer);
+
+		DeferredPass(meshes[i].first, pRTV);
+		ForwardPass(meshes[i].second, pRTV);
+	}
+	ID3D11ShaderResourceView* nullSRV = nullptr;
+	_pDeviceContext->PSSetShaderResources(10, 1, &nullSRV);
+	
 	PostProcessing();
+	BlendPass();
+	SkyBoxPass(skyBoxes);
 }
 
 void DX11Renderer::SetViewport(float width, float height)
@@ -170,32 +194,36 @@ void DX11Renderer::ShadowPass()
 	_pDeviceContext->ClearDepthStencilView(_pShadowDSV, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 	_pDeviceContext->PSSetShader(nullptr, nullptr, 0);
 
-	const auto& renderData = g_pRenderGroup->GetRenderData();
+	const auto* renderDatas = g_pRenderGroup->GetRenderDatas();
+	const unsigned int maxLayer = g_pRenderGroup->GetMaxLayer();
 	auto prevType = MeshType::End;
 	unsigned int offset[2]{ 0, MAX_BONE_MATRIX };
 
-	for (auto& [component, matrix] : renderData)
+	for (unsigned int i = 0; i < maxLayer; i++)
 	{
-		auto type = component->GetType();
-		if (prevType != type)
+		for (auto& [component, matrix] : renderDatas[i])
 		{
-			_vsShadow[(int)type]->SetVertexShader();
-			prevType = type;
-		}
+			auto type = component->GetType();
+			if (prevType != type)
+			{
+				_vsShadow[(int)type]->SetVertexShader();
+				prevType = type;
+			}
 
-		std::shared_ptr<Model>& model = component->GetModel();
+			std::shared_ptr<Model>& model = component->GetModel();
 
-		for (auto& mesh : model->_meshs)
-		{
-			offset[0] = mesh->GetID();
-			g_pConstantBuffer->UpdateConstantBuffer(L"ModelIndex", &offset);
-			mesh->_pVIBuffer->SetParameters(_pDeviceContext);
-			mesh->_pVIBuffer->DrawIndexed(_pDeviceContext);
+			for (auto& mesh : model->_meshs)
+			{
+				offset[0] = mesh->GetID();
+				g_pConstantBuffer->UpdateConstantBuffer(L"ModelIndex", &offset);
+				mesh->_pVIBuffer->SetParameters(_pDeviceContext);
+				mesh->_pVIBuffer->DrawIndexed(_pDeviceContext);
+			}
 		}
 	}
 }
 
-void DX11Renderer::DeferredPass(std::list<Mesh*>& renderData)
+void DX11Renderer::DeferredPass(std::list<Mesh*>& renderData, ID3D11RenderTargetView* pRTV)
 {
 	SetViewport(g_width, g_height);
 	_pDeviceContext->OMSetBlendState(nullptr, nullptr, 0xFFFFFFFF);
@@ -205,50 +233,37 @@ void DX11Renderer::DeferredPass(std::list<Mesh*>& renderData)
 	_pDeviceContext->OMSetRenderTargets((unsigned int)renderTargets.size(), renderTargets.data(), _pDefaultDSV);
 	_pDeviceContext->ClearDepthStencilView(_pDefaultDSV, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 
-	float color[4]{ 0.0f, 0.0f, 0.0f, 1.f };
 	for (int i = 0; i < End; i++)
-		_pDeviceContext->ClearRenderTargetView(renderTargets[i], color);
+		_pDeviceContext->ClearRenderTargetView(renderTargets[i], COLOR_ZERO);
 
 	_psGBuffer->SetPixelShader();
 
 	RenderMesh(renderData, _psGBuffer);	
 
-	ID3D11RenderTargetView* pBlendTarget = g_pViewManagement->GetRenderTargetView(L"Blend");
+	_pDeviceContext->OMSetRenderTargets(1, &pRTV, nullptr);
+	_pDeviceContext->ClearRenderTargetView(pRTV, COLOR_ZERO);
 
-	_pDeviceContext->OMSetRenderTargets(1, &pBlendTarget, nullptr);
-	_pDeviceContext->ClearRenderTargetView(pBlendTarget, color);
-
-	_vsQuad->SetVertexShader();
 	_psDeferred->SetPixelShader();
 	
 	_pDeviceContext->PSSetShaderResources(0, End, textures.data());
 	_pDeviceContext->PSSetShaderResources(5, 1, &_pDefaultSRV);
-	_pDeviceContext->PSSetShaderResources(10, 1, &_pShadowSRV);
 
-	g_pQuad->SetParameters(_pDeviceContext);
-	g_pQuad->DrawIndexed(_pDeviceContext);
+	g_pQuad->Render();
 
-	ID3D11ShaderResourceView* nullSRV[End]{ nullptr, };
-	_pDeviceContext->PSSetShaderResources(0, End, nullSRV);
-	_pDeviceContext->PSSetShaderResources(5, 1, nullSRV);
-	_pDeviceContext->PSSetShaderResources(10, 1, nullSRV);
+	ID3D11ShaderResourceView* nullSRV[End + 1]{ nullptr, };
+	_pDeviceContext->PSSetShaderResources(0, End + 1, nullSRV);
 }
 
-void DX11Renderer::ForwardPass(std::list<Mesh*>& renderData)
+void DX11Renderer::ForwardPass(std::list<Mesh*>& renderData, ID3D11RenderTargetView* pRTV)
 {
 	float blendFactor[4]{ 0.f, 0.f, 0.f, 0.f };
-	ID3D11RenderTargetView* pBlendTarget = g_pViewManagement->GetRenderTargetView(L"Blend");
 
-	_pDeviceContext->OMSetRenderTargets(1, &pBlendTarget, _pDefaultDSV);
+	_pDeviceContext->OMSetRenderTargets(1, &pRTV, _pDefaultDSV);
 	_pDeviceContext->OMSetBlendState(_pBlendState, blendFactor, 0xFFFFFFFF);
 
-	_pDeviceContext->PSSetShaderResources(10, 1, &_pShadowSRV);
 	_psLighting->SetPixelShader();
 
 	RenderMesh(renderData, _psLighting);
-
-	ID3D11ShaderResourceView* nullSRV = nullptr;
-	_pDeviceContext->PSSetShaderResources(10, 1, &nullSRV);
 }
 
 void DX11Renderer::SkyBoxPass(std::list<SkyBoxRenderer*>& skyBoxes)
@@ -265,17 +280,29 @@ void DX11Renderer::SkyBoxPass(std::list<SkyBoxRenderer*>& skyBoxes)
 
 void DX11Renderer::PostProcessing()
 {
+	const unsigned int maxLayer = g_pRenderGroup->GetMaxLayer();
+
+	for (unsigned int i = 0; i < maxLayer; i++)
+	{
+		auto& filters = g_pPostProcessSystem->GetFilters(i);
+
+		for (auto& filter : filters)
+		{
+			filter->Render(_layerSRVs[i]);
+		}
+	}
+}
+
+void DX11Renderer::BlendPass()
+{	
 	ID3D11ShaderResourceView* pBlendTargetTexture = g_pViewManagement->GetShaderResourceView(L"Blend");
 	ID3D11RenderTargetView* pBackBuffer = g_pGraphicDevice->GetBackBuffer();
 
 	_pDeviceContext->OMSetRenderTargets(1, &pBackBuffer, nullptr);
 
-	_vsQuad->SetVertexShader();
 	_psBlend->SetPixelShader();
-
 	_pDeviceContext->PSSetShaderResources(0, 1, &pBlendTargetTexture);
-	g_pQuad->SetParameters(_pDeviceContext);
-	g_pQuad->DrawIndexed(_pDeviceContext);
+	g_pQuad->Render();
 }
 
 void DX11Renderer::RenderMesh(std::list<Mesh*>& renderData, std::shared_ptr<PixelShader>& pixelShader)
@@ -344,14 +371,24 @@ void DX11Renderer::InitMRT()
 	g_pViewManagement->AddRenderTargetGroup(L"Deferred", L"Emissive");
 	g_pViewManagement->AddRenderTargetGroup(L"Deferred", L"ShadowPosition");
 
+	const unsigned int maxLayer = g_pRenderGroup->GetMaxLayer();
+	_layerSRVs.resize(maxLayer);
+
+	for (unsigned int i = 0; i < maxLayer; i++)
+	{
+		wchar_t buffer[16]{};
+		wsprintf(buffer, L"Layer%d", i);
+		g_pViewManagement->AddRenderTargetView(buffer, Vector2(g_width, g_height));
+		_layerSRVs[i] = g_pViewManagement->GetShaderResourceView(buffer);
+	}
+
 	g_pViewManagement->AddRenderTargetView(L"Blend", Vector2(g_width, g_height));
 }
 
 void DX11Renderer::InitShader()
 {
 	_vsShadow[MeshType::Static] = g_pResourceMgr->LoadResource<VertexShader>(L"../Resources/Shaders/ShadowVS.cso");
-	_vsShadow[MeshType::Skeletal] = g_pResourceMgr->LoadResource<VertexShader>(L"../Resources/Shaders/ShadowVS_Skeletal.cso");
-	_vsQuad = g_pResourceMgr->LoadResource<VertexShader>(L"../Resources/Shaders/QuadVS.cso");
+	_vsShadow[MeshType::Skeletal] = g_pResourceMgr->LoadResource<VertexShader>(L"../Resources/Shaders/ShadowVS_Skeletal.cso");	
 
 	_psDeferred = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/DeferredLightingPS.cso");
 	_psGBuffer = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/GBufferPS.cso");
@@ -396,6 +433,9 @@ void DX11Renderer::InitStructuredBuffer()
 {
 	g_pStructuredBuffer->AddStructuredBuffer(L"WorldMatrices", sizeof(XMMATRIX) * MAX_DRAW_OBJECT, MAX_DRAW_OBJECT);
 	g_pStructuredBuffer->AddStructuredBuffer(L"BoneMatrices", sizeof(XMMATRIX) * MAX_DRAW_OBJECT * MAX_BONE_MATRIX, MAX_DRAW_OBJECT * MAX_BONE_MATRIX);
+
+	const unsigned int maxLayer = g_pRenderGroup->GetMaxLayer();
+	g_pStructuredBuffer->AddStructuredBuffer(L"Layers", g_width * g_height * sizeof(float) * maxLayer, maxLayer);
 }
 
 void DX11Renderer::Free()

@@ -16,13 +16,14 @@ public:
 	void Render() override;
 
 	void GetTextSystem(GE::ITextSystem** ppTextSystem) override;
+	void GetPostProcessSystem(GE::IPostProcessSystem** ppPostProcessSystem) override;
 	void CreateMatrix(GE::IMatrix** ppMatrix) override;
 	void CreateMeshRenderer(GE::IMeshRenderer** ppComponent, const GE::MESH_RENDERER_DESC* pDesc) override;
-	void RegisterRenderQueue(GE::IMeshRenderer* pComponent, GE::IMatrix* pMatrix) override;
-	void UnRegisterRenderQueue(GE::IMeshRenderer* pComponent) override;
+	void RegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* pComponent, GE::IMatrix* pMatrix) override;
+	void UnRegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* pComponent) override;
 
 private:
-	void InitializeDX11(HWND hWnd, bool isFullScreen);
+	void InitializeDX11(HWND hWnd, bool isFullScreen, const unsigned int maxLayer);
 	void InitializeDX12();
 	void InitializeDXR();
 

@@ -23,20 +23,18 @@ void Engine::Drive::AttachWorld(World* newWorld, World** oldWorld)
 {
 	constexpr Utility::ThrowIfFailed thrower;
 
-	if (oldWorld == nullptr) thrower(E_INVALIDARG);
-	if (_world != nullptr) _world->Attach();
-	*oldWorld = _world;
-	_world = newWorld;
+	if (oldWorld != nullptr) *oldWorld = _world;
 	if (_world != nullptr) _world->Detach();
+	_world = newWorld;
+	if (_world != nullptr) _world->Attach();
 }
 
 void Engine::Drive::AttachHUD(HUD* newHUD, HUD** oldHUD)
 {
 	constexpr Utility::ThrowIfFailed thrower;
 
-	if (oldHUD == nullptr) thrower(E_INVALIDARG);
-	if (_hud != nullptr) {} // TODO: Attach HUD
-	*oldHUD = _hud;
-	_hud = newHUD;
+	if (oldHUD != nullptr) 	*oldHUD = _hud;
 	if (_hud != nullptr) {} // TODO: Detach HUD
+	_hud = newHUD;
+	if (_hud != nullptr) {} // TODO: Attach HUD
 }

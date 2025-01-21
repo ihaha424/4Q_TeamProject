@@ -1,4 +1,5 @@
 #pragma once
+#include "TestWorld.h"
 
 class GameApplication : public Engine::Application
 {
@@ -7,8 +8,10 @@ public:
 
 protected:
 	void DeclareInputActions(Engine::Input::IManager* inputManager) override;
+	void Addition() override;
+	void InitializeContents() override;
 
 private:
-	std::vector<Engine::World*> _worlds;
+	TestWorld _world;
 };
 

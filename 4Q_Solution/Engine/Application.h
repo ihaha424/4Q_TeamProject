@@ -17,12 +17,15 @@ namespace Engine
 		static Graphics::IManager* GetGraphicsManager();
 
 	protected:
+		void AddWorld(World* world); // TODO: Remove this.
+		void Attach(World* world);
+
 		void InitializeManagers() const;
 		virtual void DeclareInputActions(Input::IManager* inputManager);
-		void CreateContents();
-		void InitializeContents();
-		void FinalizeContents();
-		void DeleteContents();
+		virtual void Addition(); // TODO: Remove this.
+		void Setup(Modules modules);
+		virtual void InitializeContents();
+		virtual void FinalizeContents();
 		void FinalizeManagers() const;
 
 		HINSTANCE _instanceHandle;
@@ -43,7 +46,7 @@ namespace Engine
 
 		Drive _drive;
 
-		Component::CameraComponent* _cameraComponent; // TODO: Remove this.
+		std::vector<World*> _worlds; // TODO: Remove this.
 	};
 }
 

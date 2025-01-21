@@ -18,7 +18,7 @@ void Engine::DSHInput::Modifier::SwizzleAxis::Setup(DSH::Input::Modifier::ISwizz
 
 void Engine::DSHInput::Modifier::SwizzleAxis::Finalize()
 {
-	Utility::SafeRelease()(&_swizzleAxis, "Swizzle axis is still being referenced.");
+	Utility::SafeRelease()(&_swizzleAxis);
 }
 
 void Engine::DSHInput::Modifier::SwizzleAxis::SetType(const Type type)

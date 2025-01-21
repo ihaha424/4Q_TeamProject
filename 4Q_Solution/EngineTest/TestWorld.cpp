@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "TestWorld.h"
 
-void TestWorld::PreInitialize()
+void TestWorld::Addition()
 {
-	World::PreInitialize();
+	World::Addition();
 	AddObject(&_player);
 }

@@ -4,7 +4,7 @@
 class TestWorld : public Engine::World
 {
 protected:
-	void PreInitialize() override;
+	void Addition() override;
 
 private:
 	Player _player;

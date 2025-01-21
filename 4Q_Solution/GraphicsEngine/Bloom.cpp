@@ -72,7 +72,6 @@ void Bloom::Render(ID3D11ShaderResourceView* pSourceSRV)
 	_psBloomCurve->SetPixelShader();
 	g_pQuad->Render();
 
-
 	auto& [RTVs, SRVs] = g_pViewManagement->GetRenderTargetGroup(L"DownScale");
 	size_t count = RTVs.size();
 

@@ -41,23 +41,14 @@ float4 main(PS_INPUT input) : SV_Target
     float3 V = normalize(cameraPosition - input.worldPosition);
 
 #ifdef PBR
-    float metalness = txMetalness.Sample(samLinear_wrap, input.uv).r;
     float roughness = txRoughness.Sample(samLinear_wrap, input.uv).r;
+    float metalness = txMetalness.Sample(samLinear_wrap, input.uv).r;
     
-    float3 F0 = lerp(Fdielectric, albedo, metalness);
-    float NdotV = max(0, dot(N, V));
-    
-    for (uint i = 0; i < numDirectionalLights; i++)
-    {
-        Light light = DirectionalLights[i];
-        directLighting += ComputeDirectionalLightPBR(light, N, V, F0, albedo, roughness, metalness, NdotV);
-    }
+    // PBR_Directional
+    directLighting += DirectionalLightPBR(input.worldPosition, N, V, albedo, roughness, metalness);
 
-    for (uint j = 0; j < numPointLights; j++)
-    {
-        Light light = PointLights[j];
-        directLighting += ComputePointLightPBR(light, input.worldPosition, N, V, F0, albedo, roughness, metalness, NdotV);
-    }
+    // PBR_Point
+    directLighting += PointLightPBR(input.worldPosition, N, V, albedo, roughness, metalness);
 #endif
     
 #ifdef IBL

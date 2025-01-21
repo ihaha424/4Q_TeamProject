@@ -35,6 +35,10 @@ private:
 	AcceptOverlapped _acceptOverlapped1;
 	AcceptOverlapped _acceptOverlapped2;
 
+	ULL _bufferSize = 0;
+	ULL _threadCount = 0;
+	ULL _serverPort = 0;
+
 	std::mutex _sessionMtx;
 
 	void IOWork(HANDLE completionPort);

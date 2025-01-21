@@ -20,7 +20,7 @@ class ISession {
 public:
 	ISession() : _sessionId(++_sid) {}
 	virtual ~ISession() = default;
-	virtual void Initialize(Socket* socket) = 0;
+	virtual void Initialize(Socket* socket, ULL size) = 0;
 	virtual bool SendUpdate() = 0;
 	virtual bool RecvUpdate() = 0;
 

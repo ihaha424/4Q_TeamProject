@@ -9,7 +9,7 @@ public:
 	Session() = default;
 	~Session() = default;
 
-	void Initialize(Socket* socket) override;
+	void Initialize(Socket* socket, ULL size) override;
 	bool SendUpdate() override;
 	bool RecvUpdate() override;
 	Socket* Release() override;

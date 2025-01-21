@@ -22,23 +22,23 @@ bool NetworkMain::Initialize()
 	// 파일이 존재하지 않으면 기본 설정값으로 설정하고,
 	// 설정 파일을 생성합니다.
 	if (!PathFileExists(configFilePath.c_str())) {
-		serverPort = ServerPort;
-		bufferSize = BufferSize;
-		threadCount = ThreadCount;
+		_serverPort = ServerPort;
+		_bufferSize = BufferSize;
+		_threadCount = ThreadCount;
 
-		WriteToIniFile(L"Server", L"ServerPort", std::to_wstring(serverPort), configFilePath);
-		WriteToIniFile(L"System", L"BufferSize", std::to_wstring(bufferSize), configFilePath);
-		WriteToIniFile(L"System", L"ThreadCount", std::to_wstring(threadCount), configFilePath);
+		WriteToIniFile(L"Server", L"ServerPort", std::to_wstring(_serverPort), configFilePath);
+		WriteToIniFile(L"System", L"BufferSize", std::to_wstring(_bufferSize), configFilePath);
+		WriteToIniFile(L"System", L"ThreadCount", std::to_wstring(_threadCount), configFilePath);
 	}
 
-	serverPort = GetIntDataFromIniFile(L"Server", L"ServerPort", configFilePath);
-	printf("[Initialize] ServerPort Load. PortNum : %llu\n", serverPort);
+	_serverPort = GetIntDataFromIniFile(L"Server", L"ServerPort", configFilePath);
+	printf("[Initialize] ServerPort Load. PortNum : %llu\n", _serverPort);
 
-	bufferSize = GetIntDataFromIniFile(L"System", L"BufferSize", configFilePath);
-	printf("[Initialize] BufferSize Load. BufferSize : %llu\n", bufferSize);
+	_bufferSize = GetIntDataFromIniFile(L"System", L"BufferSize", configFilePath);
+	printf("[Initialize] BufferSize Load. BufferSize : %llu\n", _bufferSize);
 
-	threadCount = GetIntDataFromIniFile(L"System", L"ThreadCount", configFilePath);
-	printf("[Initialize] ThreadCount Load. ThreadCount : %llu\n", threadCount);
+	_threadCount = GetIntDataFromIniFile(L"System", L"ThreadCount", configFilePath);
+	printf("[Initialize] ThreadCount Load. ThreadCount : %llu\n", _threadCount);
 
 	printf("\n[Initialize] Server Config Load Completed.\n");
 
@@ -50,7 +50,7 @@ bool NetworkMain::Initialize()
 	printf("[Initialize] WSAStartup Success.\n");
 
 	_serverAddr.sin_family = AF_INET;
-	_serverAddr.sin_port = htons(serverPort);
+	_serverAddr.sin_port = htons(_serverPort);
 	_serverAddr.sin_addr.s_addr = htonl(INADDR_ANY);
 
 	_listen = new Socket();
@@ -85,7 +85,7 @@ bool NetworkMain::Initialize()
 
 	printf("[Initialize] Make Pending Accept Session Success.\n");
 
-	HANDLE completionPort = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, 0, threadCount);
+	HANDLE completionPort = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, 0, _threadCount);
 	if (completionPort == INVALID_HANDLE_VALUE) {
 		printf("[Initialize] Completion Port Create Failed. Code : %d\n", GetLastError());
 	}
@@ -97,7 +97,7 @@ bool NetworkMain::Initialize()
 
 
 
-	for (int i = 0; i < threadCount; i++) {
+	for (int i = 0; i < _threadCount; i++) {
 		std::thread thread(&NetworkMain::IOWork, this, completionPort);
 		thread.detach();
 	}
@@ -117,7 +117,7 @@ void NetworkMain::SendUpdate()
 void NetworkMain::Finalize()
 {
 	for (HANDLE cp : _cpContainer) {
-		for (size_t i = 0; i < threadCount; i++) {
+		for (size_t i = 0; i < _threadCount; i++) {
 			PostQueuedCompletionStatus(cp, DWMAX, 0, 0);
 		}
 	}
@@ -213,7 +213,7 @@ bool NetworkMain::CreateWaitingSession()
 	}
 
 	acceptOl->_session = new Session();
-	acceptOl->_session->Initialize(acceptOl->_client);
+	acceptOl->_session->Initialize(acceptOl->_client, _bufferSize);
 
 	_listen->AcceptExtend(*acceptOl);
 	printf("[CreateWaitingSession] Pending Accept Completed.\n");

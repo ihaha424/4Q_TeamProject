@@ -20,6 +20,8 @@
 
 #include "Transform.h"
 
+#include "Modules.h"
+
 #include "Managers.h"
 #include "Components.h"
 #include "Object.h"

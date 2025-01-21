@@ -192,6 +192,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="DSHMouse.h" />
     <ClInclude Include="DSHNegative.h" />
     <ClInclude Include="DSHSwizzleAxis.h" />
+    <ClInclude Include="DSHTimeManager.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Graphics.h" />
@@ -206,6 +207,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="MappingContext.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Modifier.h" />
+    <ClInclude Include="Modules.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="Negative.h" />
@@ -222,6 +224,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="SafeRelease.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThrowIfFailed.h" />
+    <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Trigger.h" />
     <ClInclude Include="Utilities.h" />
@@ -252,6 +255,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="DSHMouse.cpp" />
     <ClCompile Include="DSHNegative.cpp" />
     <ClCompile Include="DSHSwizzleAxis.cpp" />
+    <ClCompile Include="DSHTimeManager.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="InputAxisComponent.cpp" />
     <ClCompile Include="InputButtonComponent.cpp" />
@@ -270,7 +274,6 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="SafeDelete.cpp" />
     <ClCompile Include="SwizzleAxis.cpp" />
-    <ClCompile Include="Time.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -279,6 +282,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     </ClCompile>
     <ClCompile Include="SafeRelease.cpp" />
     <ClCompile Include="ThrowIfFailed.cpp" />
+    <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Trigger.cpp" />
     <ClCompile Include="Value.cpp" />

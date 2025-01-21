@@ -2,8 +2,9 @@
 #include "Application.h"
 
 #include "DSHInputManager.h"
+#include "DSHTimeManager.h"
 
-Engine::Manager::Time* Engine::Application::_timeManager = nullptr;
+Engine::Time::Manager* Engine::Application::_timeManager = nullptr;
 Engine::Manager::Window* Engine::Application::_windowManager = nullptr;
 Engine::Manager::Graphics* Engine::Application::_graphicsManager = nullptr;
 Engine::Input::Manager* Engine::Application::_inputManager = nullptr;
@@ -75,7 +76,6 @@ void Engine::Application::Run(const int showCommand)
 		{
 			const float metaTime = _timeManager->GetDeltaMetaTime();
 			const float deltaTime = _timeManager->GetDeltaTime();
-
 			_timeManager->Tick();
 			_inputManager->Update(metaTime);
 			_graphicsManager->Update(deltaTime);
@@ -127,7 +127,7 @@ void Engine::Application::FinalizeManagers() const
 	deleter(&_timeManager);
 }
 
-Engine::Manager::ITime* Engine::Application::GetTimeManager()
+Engine::Time::IManager* Engine::Application::GetTimeManager()
 {
 	return _timeManager;
 }
@@ -142,11 +142,11 @@ Engine::Manager::IGraphics* Engine::Application::GetGraphicsManager()
 	return _graphicsManager;
 }
 
-void Engine::Application::CreateTimeManager(Manager::Time** timeManager)
+void Engine::Application::CreateTimeManager(Time::Manager** timeManager)
 {
 	constexpr Utility::ThrowIfFailed thrower;
 	if (timeManager == nullptr) thrower(E_INVALIDARG);
-	Manager::Time* manager = new Manager::Time();
+	Time::Manager* manager = new DSHTime::Manager();
 	if (manager == nullptr) thrower(E_OUTOFMEMORY);
 	*timeManager = manager;
 }

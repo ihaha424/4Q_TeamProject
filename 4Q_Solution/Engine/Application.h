@@ -12,7 +12,7 @@ namespace Engine
 		void Run(int showCommand);
 		void End();
 
-		static Manager::ITime* GetTimeManager();
+		static Time::IManager* GetTimeManager();
 		static Input::IManager* GetInputManager();
 		static Manager::IGraphics* GetGraphicsManager();
 
@@ -28,12 +28,12 @@ namespace Engine
 		HINSTANCE _instanceHandle;
 
 	private:
-		static void CreateTimeManager(Manager::Time** timeManager);
+		static void CreateTimeManager(Time::Manager** timeManager);
 		static void CreateWindowManager(Manager::Window** windowManager);
 		static void CreateInputManager(Input::Manager** inputManager);
 		static void CreateGraphicsManager(Manager::Graphics** graphicsManager);
 
-		static Manager::Time* _timeManager;
+		static Time::Manager* _timeManager;
 		static Manager::Window* _windowManager;
 		static Input::Manager* _inputManager;
 		static Manager::Graphics* _graphicsManager;

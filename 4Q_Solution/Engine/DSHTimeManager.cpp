@@ -1,8 +1,7 @@
 #include "pch.h"
-#include "Time.h"
+#include "DSHTimeManager.h"
 
-
-void Engine::Manager::Time::Initialize()
+void Engine::DSHTime::Manager::Initialize()
 {
 	constexpr Utility::ThrowIfFailed thrower;
 
@@ -10,12 +9,12 @@ void Engine::Manager::Time::Initialize()
 	thrower(_system->CreateTickTimer(&_tickTimer));
 }
 
-void Engine::Manager::Time::Tick() const
+void Engine::DSHTime::Manager::Tick() const
 {
 	_tickTimer->Tick();
 }
 
-void Engine::Manager::Time::Finalize()
+void Engine::DSHTime::Manager::Finalize()
 {
 	constexpr Utility::SafeRelease releaser;
 
@@ -23,12 +22,12 @@ void Engine::Manager::Time::Finalize()
 	releaser(&_system, "Time system is still being referenced.");
 }
 
-float Engine::Manager::Time::GetDeltaTime() const
+float Engine::DSHTime::Manager::GetDeltaTime() const
 {
 	return _tickTimer->GetDeltaTime();
 }
 
-float Engine::Manager::Time::GetDeltaMetaTime() const
+float Engine::DSHTime::Manager::GetDeltaMetaTime() const
 {
 	return _tickTimer->GetDeltaMetaTime();
 }

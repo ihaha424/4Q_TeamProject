@@ -16,9 +16,6 @@
     <Filter Include="Application">
       <UniqueIdentifier>{c855e523-3161-42c0-955c-50fbf3c360f0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Managers">
-      <UniqueIdentifier>{0f944a06-e1fd-4a39-8097-2034c735033e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Utilities">
       <UniqueIdentifier>{13f161ca-4ca1-4384-b66b-40e9d61c1c33}</UniqueIdentifier>
     </Filter>
@@ -27,9 +24,6 @@
     </Filter>
     <Filter Include="Utilities\SafeRelease">
       <UniqueIdentifier>{96f21709-eb70-4c66-a1b3-5407a8d2c999}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Managers\Window">
-      <UniqueIdentifier>{4ff711f7-3588-46be-9fd8-ed6c646031bd}</UniqueIdentifier>
     </Filter>
     <Filter Include="Drive">
       <UniqueIdentifier>{a59af320-cec3-4a8b-99de-639155a7dba7}</UniqueIdentifier>
@@ -220,6 +214,18 @@
     <Filter Include="Modules\Difinition\GE\Camera">
       <UniqueIdentifier>{8fd3ffda-eb0e-4f9c-8c70-cffdce358395}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Interfaces\Window">
+      <UniqueIdentifier>{c4f309b4-53fc-41f6-abed-727b80abd0e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Window\Manager">
+      <UniqueIdentifier>{ff25d1ab-76c8-426e-855a-8c0c6e85fbcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHWindow">
+      <UniqueIdentifier>{a4a983a4-b96f-4db4-a2db-fc500ebfe4c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHWindow\Manager">
+      <UniqueIdentifier>{1103d276-8e0d-4261-a42d-ed00f581b3bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -231,9 +237,6 @@
     <ClInclude Include="Application.h">
       <Filter>Application</Filter>
     </ClInclude>
-    <ClInclude Include="Managers.h">
-      <Filter>Managers</Filter>
-    </ClInclude>
     <ClInclude Include="Utilities.h">
       <Filter>Utilities</Filter>
     </ClInclude>
@@ -242,9 +245,6 @@
     </ClInclude>
     <ClInclude Include="SafeRelease.h">
       <Filter>Utilities\SafeRelease</Filter>
-    </ClInclude>
-    <ClInclude Include="Window.h">
-      <Filter>Managers\Window</Filter>
     </ClInclude>
     <ClInclude Include="Drive.h">
       <Filter>Drive</Filter>
@@ -405,6 +405,15 @@
     <ClInclude Include="GEGraphicsCamera.h">
       <Filter>Modules\Difinition\GE\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Modules\Interfaces\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowManager.h">
+      <Filter>Modules\Interfaces\Window\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHWindowManager.h">
+      <Filter>Modules\Difinition\DSHWindow\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -418,9 +427,6 @@
     </ClCompile>
     <ClCompile Include="SafeRelease.cpp">
       <Filter>Utilities\SafeRelease</Filter>
-    </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>Managers\Window</Filter>
     </ClCompile>
     <ClCompile Include="Drive.cpp">
       <Filter>Drive</Filter>
@@ -553,6 +559,12 @@
     </ClCompile>
     <ClCompile Include="GEGraphicsCamera.cpp">
       <Filter>Modules\Difinition\GE\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowManager.cpp">
+      <Filter>Modules\Interfaces\Window\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHWindowManager.cpp">
+      <Filter>Modules\Difinition\DSHWindow\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

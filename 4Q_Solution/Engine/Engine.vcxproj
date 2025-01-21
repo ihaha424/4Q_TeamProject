@@ -191,6 +191,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="DSHNegative.h" />
     <ClInclude Include="DSHSwizzleAxis.h" />
     <ClInclude Include="DSHTimeManager.h" />
+    <ClInclude Include="DSHWindowManager.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GEGraphicsCamera.h" />
@@ -217,7 +218,6 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="SafeDelete.h" />
     <ClInclude Include="SwizzleAxis.h" />
     <ClInclude Include="Time.h" />
-    <ClInclude Include="Managers.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Requires.h" />
     <ClInclude Include="SafeRelease.h" />
@@ -231,6 +231,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="Window.h" />
+    <ClInclude Include="WindowManager.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
@@ -253,6 +254,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="DSHNegative.cpp" />
     <ClCompile Include="DSHSwizzleAxis.cpp" />
     <ClCompile Include="DSHTimeManager.cpp" />
+    <ClCompile Include="DSHWindowManager.cpp" />
     <ClCompile Include="GEGraphicsCamera.cpp" />
     <ClCompile Include="GEGraphicsManager.cpp" />
     <ClCompile Include="GraphicsCamera.cpp" />
@@ -286,7 +288,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Value.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector3.cpp" />
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="WindowManager.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

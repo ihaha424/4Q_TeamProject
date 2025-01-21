@@ -6,6 +6,7 @@ namespace Engine
 	{
 	public:
 		Application(HINSTANCE instanceHandle, std::wstring title, SIZE size);
+		virtual ~Application() = default;
 
 
 		void Begin();
@@ -32,12 +33,12 @@ namespace Engine
 
 	private:
 		static void CreateTimeManager(Time::Manager** timeManager);
-		static void CreateWindowManager(Manager::Window** windowManager);
+		static void CreateWindowManager(Window::Manager** windowManager);
 		static void CreateInputManager(Input::Manager** inputManager);
 		static void CreateGraphicsManager(Graphics::Manager** graphicsManager);
 
 		static Time::Manager* _timeManager;
-		static Manager::Window* _windowManager;
+		static Window::Manager* _windowManager;
 		static Input::Manager* _inputManager;
 		static Graphics::Manager* _graphicsManager;
 

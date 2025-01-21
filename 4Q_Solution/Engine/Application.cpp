@@ -3,10 +3,11 @@
 
 #include "DSHInputManager.h"
 #include "DSHTimeManager.h"
+#include "DSHWindowManager.h"
 #include "GEGraphicsManager.h"
 
 Engine::Time::Manager* Engine::Application::_timeManager = nullptr;
-Engine::Manager::Window* Engine::Application::_windowManager = nullptr;
+Engine::Window::Manager* Engine::Application::_windowManager = nullptr;
 Engine::Graphics::Manager* Engine::Application::_graphicsManager = nullptr;
 Engine::Input::Manager* Engine::Application::_inputManager = nullptr;
 
@@ -152,11 +153,11 @@ void Engine::Application::CreateTimeManager(Time::Manager** timeManager)
 	*timeManager = manager;
 }
 
-void Engine::Application::CreateWindowManager(Manager::Window** windowManager)
+void Engine::Application::CreateWindowManager(Window::Manager** windowManager)
 {
 	constexpr Utility::ThrowIfFailed thrower;
 	if (windowManager == nullptr) thrower(E_INVALIDARG);
-	Manager::Window* manager = new Manager::Window();
+	Window::Manager* manager = new DSHWindow::Manager();
 	if (manager == nullptr) thrower(E_OUTOFMEMORY);
 	*windowManager = manager;
 }

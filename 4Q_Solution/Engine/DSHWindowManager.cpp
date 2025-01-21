@@ -1,7 +1,7 @@
 #include "pch.h"
-#include "Window.h"
+#include "DSHWindowManager.h"
 
-void Engine::Manager::Window::Initialize(const HINSTANCE instanceHandle, const LPCWSTR name, const SIZE size)
+void Engine::DSHWindow::Manager::Initialize(HINSTANCE instanceHandle, LPCWSTR name, SIZE size)
 {
 	constexpr Utility::ThrowIfFailed thrower;
 
@@ -23,7 +23,7 @@ void Engine::Manager::Window::Initialize(const HINSTANCE instanceHandle, const L
 	thrower(_class->Create(rect, &_handle));
 }
 
-void Engine::Manager::Window::Finalize()
+void Engine::DSHWindow::Manager::Finalize()
 {
 	constexpr Utility::SafeRelease releaser;
 
@@ -32,24 +32,24 @@ void Engine::Manager::Window::Finalize()
 	releaser(&_system, "Window system is still being referenced.");
 }
 
-void Engine::Manager::Window::Show(const int showCommand) const
+HWND Engine::DSHWindow::Manager::GetHandle() const
+{
+	return _handle->Get();
+}
+
+void Engine::DSHWindow::Manager::Show(const int showCommand) const
 {
 	_handle->Show(showCommand);
 }
 
-void Engine::Manager::Window::Update() const
+void Engine::DSHWindow::Manager::Update() const
 {
 	_handle->Update();
 }
 
-void Engine::Manager::Window::SetCursorDefault() const
+void Engine::DSHWindow::Manager::SetCursorDefault() const
 {
 	_handle->SetCursor(DSH::Window::IHandle::Cursor::Arrow);
-}
-
-HWND Engine::Manager::Window::GetHandle() const
-{
-	return _handle->Get();
 }
 
 extern void PlaceInCenterOfScreen(const HWND windowHandle)
@@ -65,8 +65,8 @@ extern void PlaceInCenterOfScreen(const HWND windowHandle)
 		clientWidth, clientHeight, NULL);
 }
 
-LRESULT Engine::Manager::Window::WindowProcedure(const HWND windowHandle, const UINT message, const WPARAM wParam,
-	const LPARAM lParam)
+
+LRESULT Engine::DSHWindow::Manager::WindowProcedure(const HWND windowHandle, const UINT message, const WPARAM wParam, const LPARAM lParam)
 {
 	switch (message)
 	{

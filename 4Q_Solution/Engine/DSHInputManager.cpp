@@ -22,7 +22,17 @@ void Engine::DSHInput::Manager::Initialize(const HWND windowHandle)
 	_mouse.Initialize();
 	releaser(&mouse);
 
-	// TODO: Initialize Devices;
+	DSH::Input::Device::IKeyboard* keyboard = nullptr;
+	thrower(_system->CreateKeyboard(&keyboard));
+	_keyboard.Setup(keyboard);
+	_keyboard.Initialize();
+	releaser(&keyboard);
+
+	DSH::Input::Device::IController* controller = nullptr;
+	thrower(_system->CreateController(&controller));
+	_controller.Setup(controller);
+	_controller.Initialize();
+	releaser(&controller);
 
 	DSH::Input::Modifier::INegative* negative = nullptr;
 	thrower(_system->CreateModifier(&negative));

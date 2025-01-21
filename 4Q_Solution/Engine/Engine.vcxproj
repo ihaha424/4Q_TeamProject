@@ -211,6 +211,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Negative.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="Quaternion.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="SafeDelete.h" />
     <ClInclude Include="SwizzleAxis.h" />
@@ -221,6 +222,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="SafeRelease.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThrowIfFailed.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="Trigger.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="Value.h" />
@@ -264,6 +266,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Negative.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Point.cpp" />
+    <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="SafeDelete.cpp" />
     <ClCompile Include="SwizzleAxis.cpp" />
@@ -276,6 +279,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     </ClCompile>
     <ClCompile Include="SafeRelease.cpp" />
     <ClCompile Include="ThrowIfFailed.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Trigger.cpp" />
     <ClCompile Include="Value.cpp" />
     <ClCompile Include="Vector2.cpp" />

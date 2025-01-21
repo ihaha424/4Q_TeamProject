@@ -18,6 +18,9 @@ namespace Engine::Component
 		virtual void FixedUpdate();
 		virtual void Detach();
 		virtual void Finalize();
+
+	protected:
+		// TODO: Owner
 	};
 }
 

@@ -14,7 +14,11 @@ namespace Engine::DSHInput
 		
 		void GetTrigger(Input::Trigger::IDown** trigger) override;
 
+		void AddListener(Input::Trigger::Event event, Listener listener) override;
+
 	private:
+		static std::unordered_map<Input::Trigger::Event, DSH::Input::Trigger::Event> _eventMap;
+
 		DSH::Input::IAction* _action;
 
 		std::vector<Input::Trigger::Trigger*> _triggers;

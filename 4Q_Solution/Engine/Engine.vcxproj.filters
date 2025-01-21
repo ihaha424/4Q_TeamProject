@@ -208,8 +208,14 @@
     <Filter Include="Module\Difinition\DSHInput\Components\AxisComponent">
       <UniqueIdentifier>{0aea0c03-ac22-4bf3-b795-5faddeba5153}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Module\Interfaces\Input\Components\AxisComponent\Trigger">
+    <Filter Include="Module\Interfaces\Input\Triggers\Trigger">
       <UniqueIdentifier>{13ec31c6-6c10-44fd-bf11-be2676e3d506}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Transform">
+      <UniqueIdentifier>{205feb36-f3ef-4afd-b893-6e415b7dd2c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Quaternion">
+      <UniqueIdentifier>{a85fcc3e-d4a0-4648-b8ad-c6b51256e8df}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -355,7 +361,7 @@
       <Filter>Module\Difinition\DSHInput\Modifiers\SwizzleAxis</Filter>
     </ClInclude>
     <ClInclude Include="Trigger.h">
-      <Filter>Module\Interfaces\Input\Components\AxisComponent\Trigger</Filter>
+      <Filter>Module\Interfaces\Input\Triggers\Trigger</Filter>
     </ClInclude>
     <ClInclude Include="Modifier.h">
       <Filter>Module\Interfaces\Input\Modifiers\Modifier</Filter>
@@ -383,6 +389,12 @@
     </ClInclude>
     <ClInclude Include="DSHInputAxisComponent.h">
       <Filter>Module\Difinition\DSHInput\Components\AxisComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>Math\Quaternion</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -498,7 +510,7 @@
       <Filter>Module\Difinition\DSHInput\Modifiers\SwizzleAxis</Filter>
     </ClCompile>
     <ClCompile Include="Trigger.cpp">
-      <Filter>Module\Interfaces\Input\Components\AxisComponent\Trigger</Filter>
+      <Filter>Module\Interfaces\Input\Triggers\Trigger</Filter>
     </ClCompile>
     <ClCompile Include="Modifier.cpp">
       <Filter>Module\Interfaces\Input\Modifiers\Modifier</Filter>
@@ -526,6 +538,12 @@
     </ClCompile>
     <ClCompile Include="DSHInputAxisComponent.cpp">
       <Filter>Module\Difinition\DSHInput\Components\AxisComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Quaternion.cpp">
+      <Filter>Math\Quaternion</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

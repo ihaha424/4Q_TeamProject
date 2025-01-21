@@ -18,6 +18,8 @@
 
 #include "Math.h"
 
+#include "Transform.h"
+
 #include "Managers.h"
 #include "Components.h"
 #include "Object.h"

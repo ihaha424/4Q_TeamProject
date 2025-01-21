@@ -30,9 +30,9 @@ void SERVER_API Server::Finalize()
 	_mainEntrance = nullptr;
 }
 
-void SERVER_API Server::SavePacketData(std::string msg, SessionID sid, short packetId)
+void SERVER_API Server::SavePacketData(std::string msg, SessionID sid, short packetId, long dataSize)
 {
-	_packetDispatcherInstance->SaveSendPacket(msg, sid, packetId);
+	_packetDispatcherInstance->SaveSendPacket(msg, sid, packetId, dataSize);
 }
 
 SERVER_API PacketQueue* Server::GetPacketContainer()
@@ -50,7 +50,7 @@ void SERVER_API Server::SendUpdate()
 	_mainEntrance->SendUpdate();
 }
 
-void SERVER_API Server::BroadCast(std::string msg, short packetId)
+void SERVER_API Server::BroadCast(std::string msg, short packetId, long dataSize)
 {
-	_packetDispatcherInstance->SaveBroadCastPacket(msg, packetId);
+	_packetDispatcherInstance->SaveBroadCastPacket(msg, packetId, dataSize);
 }

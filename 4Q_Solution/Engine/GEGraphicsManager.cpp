@@ -103,3 +103,42 @@ void Engine::GEGraphics::Manager::SetActiveCamera(const std::wstring_view name)
 {
 	_cameraSystem->SetCurrentCamera(name.data());
 }
+
+//void Engine::GEGraphics::Manager::CreateSkeletalMesh(Component::SkeletalMesh* component)
+//{
+//	GE::IMeshRenderer* meshRenderer = nullptr;
+//	GE::MESH_RENDERER_DESC desc
+//	{
+//		.filePath = component->GetFilePath().c_str(),
+//		.type = GE::MESH_RENDERER_DESC::Type::Skeletal
+//	};
+//
+//	_renderSystem->CreateMeshRenderer(&meshRenderer, &desc);
+//
+//	GE::IMatrix* matrix = nullptr;
+//	_renderSystem->CreateMatrix(&matrix);
+//
+//	component->Setup(meshRenderer, matrix);
+//}
+//
+//void Engine::GEGraphics::Manager::RegisterRenderQueue(const unsigned int layer, Component::Mesh* component)
+//{
+//	_renderSystem->RegisterRenderQueue(layer, component->GetMeshRenderer(), component->GetMatrix());
+//}
+//
+//void Engine::GEGraphics::Manager::UnRegisterRenderQueue(const unsigned int layer, Component::Mesh* component)
+//{
+//	_renderSystem->UnRegisterRenderQueue(layer, component->GetMeshRenderer());
+//}
+
+//void Engine::GEGraphics::Manager::CreateLight(Engine::Component::Light** outLight)
+//{
+//}
+//
+//void Engine::GEGraphics::Manager::RegisterLight(Engine::Component::Light* light)
+//{
+//}
+//
+//void Engine::GEGraphics::Manager::UnRegisterLight(Engine::Component::Light* light)
+//{
+//}

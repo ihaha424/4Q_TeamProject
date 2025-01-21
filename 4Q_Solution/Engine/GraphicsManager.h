@@ -19,6 +19,7 @@ namespace Engine::Graphics
 		virtual void Render() const = 0;
 		virtual void Finalize() = 0;
 
+		// Camera
 		virtual void CreateCamera(Camera** camera) = 0;
 		virtual void RegisterCamera(std::wstring_view name, Camera* camera) = 0;
 		virtual void UnregisterCamera(std::wstring_view name) = 0;

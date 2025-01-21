@@ -4,11 +4,11 @@
 #include "PacketDispatcher.h"
 #include "Packet.h"
 
-void Session::Initialize(Socket* socket)
+void Session::Initialize(Socket* socket, ULL size)
 {
 	// TODO: Initialize 할 때 PacketDispatcher 인스턴스를 가져와야 합니다
 	_packetDispatcherInstance = PacketDispatcher::GetInstance();
-	_saveRecvData = new StreamBuffer();
+	_saveRecvData = new StreamBuffer(size);
 
 	_socket = socket;
 	_recvOl._listen = _socket->GetSocket();

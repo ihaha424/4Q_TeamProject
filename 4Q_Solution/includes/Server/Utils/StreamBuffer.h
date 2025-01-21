@@ -2,7 +2,8 @@
 class StreamBuffer
 {
 public:
-	StreamBuffer();
+	StreamBuffer() = default;
+	StreamBuffer(unsigned long long size);
 	~StreamBuffer();
 
 	bool Peek(char* buffer, int len) const;

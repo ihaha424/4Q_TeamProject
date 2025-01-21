@@ -30,5 +30,10 @@ private:
 	char* _sendData = nullptr;
 	StreamBuffer* _saveRecvData = nullptr;
 	PacketDispatcher* _packetDispatcherInstance = nullptr;
+
+	ULL _serverPort = 0;
+	ULL _bufferSize = 0;
+
+	std::thread _recvThread;
 };
 

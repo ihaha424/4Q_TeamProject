@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CameraComponent.h"
-
+#include "GEGraphicsManager.h"
 
 Engine::Component::CameraComponent::CameraComponent(std::wstring name, const float nearZ, const float farZ, const SIZE size, const float fov) :
 	_name(std::move(name)), _nearZ(nearZ), _farZ(farZ),

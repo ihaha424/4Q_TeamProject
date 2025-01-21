@@ -12,9 +12,13 @@
 #include "GraphicsEngine/ICameraSystem.h"
 #include "GraphicsEngine/IRenderSystem.h"
 #include "GraphicsEngine/IAnimationSystem.h"
-#include "GraphicsEngine/ICamera.h"
 #include "GraphicsEngine/ILightSystem.h"
 #include "GraphicsEngine/ITextSystem.h"
+#include "GraphicsEngine/ICamera.h"
+#include "GraphicsEngine/IAnimator.h"
+#include "GraphicsEngine/IMatrix.h"
+#include "GraphicsEngine/ILight.h"
+#include "GraphicsEngine/IMeshRenderer.h"
 
 #include "Math.h"
 

@@ -160,8 +160,10 @@ void DX11Renderer::Render()
 	g_pStructuredBuffer->SetStructuredBuffer(L"WorldMatrices", ShaderType::Vertex, 0, 1);
 	g_pStructuredBuffer->SetStructuredBuffer(L"BoneMatrices", ShaderType::Vertex, 1, 1);
 
-	ShadowPass();
+	_pDeviceContext->OMSetDepthStencilState(nullptr, 0XFF);
 
+	ShadowPass();
+	
 	_pDeviceContext->PSSetShaderResources(10, 1, &_pShadowSRV);
 	for (unsigned int i = 0; i < maxLayer; i++)
 	{
@@ -221,12 +223,13 @@ void DX11Renderer::ShadowPass()
 			}
 		}
 	}
+
+	_pDeviceContext->OMSetRenderTargets(0, nullptr, nullptr);
 }
 
 void DX11Renderer::DeferredPass(std::list<Mesh*>& renderData, ID3D11RenderTargetView* pRTV)
 {
 	SetViewport(g_width, g_height);
-	_pDeviceContext->OMSetBlendState(nullptr, nullptr, 0xFFFFFFFF);
 
 	auto& [renderTargets, textures] = g_pViewManagement->GetRenderTargetGroup(L"Deferred");
 
@@ -264,6 +267,8 @@ void DX11Renderer::ForwardPass(std::list<Mesh*>& renderData, ID3D11RenderTargetV
 	_psLighting->SetPixelShader();
 
 	RenderMesh(renderData, _psLighting);
+
+	_pDeviceContext->OMSetBlendState(nullptr, nullptr, 0xFFFFFFF);
 }
 
 void DX11Renderer::SkyBoxPass(std::list<SkyBoxRenderer*>& skyBoxes)
@@ -295,14 +300,20 @@ void DX11Renderer::PostProcessing()
 
 void DX11Renderer::BlendPass()
 {	
-	ID3D11ShaderResourceView* pBlendTargetTexture = g_pViewManagement->GetShaderResourceView(L"Blend");
 	ID3D11RenderTargetView* pBackBuffer = g_pGraphicDevice->GetBackBuffer();
-
 	_pDeviceContext->OMSetRenderTargets(1, &pBackBuffer, nullptr);
-
 	_psBlend->SetPixelShader();
-	_pDeviceContext->PSSetShaderResources(0, 1, &pBlendTargetTexture);
-	g_pQuad->Render();
+
+	const unsigned int maxLayer = g_pRenderGroup->GetMaxLayer();
+
+	for (unsigned int i = 0; i < maxLayer; i++)
+	{
+		wchar_t buffer[16]{};
+		wsprintf(buffer, L"Layer%d", i);
+		ID3D11ShaderResourceView* pSRV = g_pViewManagement->GetShaderResourceView(buffer);
+		_pDeviceContext->PSSetShaderResources(0, 1, &pSRV);		
+		g_pQuad->Render();
+	}
 }
 
 void DX11Renderer::RenderMesh(std::list<Mesh*>& renderData, std::shared_ptr<PixelShader>& pixelShader)
@@ -381,8 +392,6 @@ void DX11Renderer::InitMRT()
 		g_pViewManagement->AddRenderTargetView(buffer, Vector2(g_width, g_height));
 		_layerSRVs[i] = g_pViewManagement->GetShaderResourceView(buffer);
 	}
-
-	g_pViewManagement->AddRenderTargetView(L"Blend", Vector2(g_width, g_height));
 }
 
 void DX11Renderer::InitShader()
@@ -404,22 +413,25 @@ void DX11Renderer::InitDepthStencil()
 		.Height = (unsigned int)g_height,
 		.MipLevels = 1,
 		.ArraySize = 1,
-		.Format = DXGI_FORMAT_R32_TYPELESS,
+		.Format = DXGI_FORMAT_D24_UNORM_S8_UINT,
 		.SampleDesc {.Count = 1 },
 		.Usage = D3D11_USAGE_DEFAULT,
-		.BindFlags = D3D11_BIND_DEPTH_STENCIL | D3D11_BIND_SHADER_RESOURCE,
+		.BindFlags = D3D11_BIND_DEPTH_STENCIL,
 	};
 
 	D3D11_DEPTH_STENCIL_VIEW_DESC dsvDesc
 	{
-		.Format = DXGI_FORMAT_D32_FLOAT,
+		.Format = textureDesc.Format,
 		.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D,
 	};
-
+	
 	g_pViewManagement->AddDepthStencilView(L"Default", textureDesc, dsvDesc);
 
 	textureDesc.Width = (unsigned int)SHADOW_WIDTH;
 	textureDesc.Height = (unsigned int)SHADOW_HEIGHT;
+	textureDesc.BindFlags |= D3D11_BIND_SHADER_RESOURCE;
+	textureDesc.Format = DXGI_FORMAT_R32_TYPELESS;
+	dsvDesc.Format = DXGI_FORMAT_D32_FLOAT;
 
 	g_pViewManagement->AddDepthStencilView(L"Shadow", textureDesc, dsvDesc);
 

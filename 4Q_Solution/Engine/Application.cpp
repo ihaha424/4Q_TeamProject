@@ -8,7 +8,7 @@
 
 Engine::Time::Manager* Engine::Application::_timeManager = nullptr;
 Engine::Window::Manager* Engine::Application::_windowManager = nullptr;
-Engine::Graphics::Manager* Engine::Application::_graphicsManager = nullptr;
+Engine::GEGraphics::Manager* Engine::Application::_graphicsManager = nullptr;
 Engine::Input::Manager* Engine::Application::_inputManager = nullptr;
 
 Engine::Application::Application(const HINSTANCE instanceHandle, std::wstring title, const SIZE size) :
@@ -171,11 +171,11 @@ void Engine::Application::CreateInputManager(Input::Manager** inputManager)
 	*inputManager = manager;
 }
 
-void Engine::Application::CreateGraphicsManager(Graphics::Manager** graphicsManager)
+void Engine::Application::CreateGraphicsManager(GEGraphics::Manager** graphicsManager)
 {
 	constexpr Utility::ThrowIfFailed thrower;
 	if (graphicsManager == nullptr) thrower(E_INVALIDARG);
-	Graphics::Manager* manager = new GEGraphics::Manager();
+	GEGraphics::Manager* manager = new GEGraphics::Manager();
 	if (manager == nullptr) thrower(E_OUTOFMEMORY);
 	*graphicsManager = manager;
 }

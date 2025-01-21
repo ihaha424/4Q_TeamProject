@@ -1,14 +1,27 @@
 ﻿#include <iostream>
 #include "Server/ServerEntrance.h"
 #include "PacketID.h"
+#include "DSHTime/Time.h"
 
 bool Initialize();
+void Finalize();
 void MessageDispatch();
 
 PacketQueue* messageContainer = nullptr;
 
-// TODO: 서버에서 종료 패킷을 수신했을 때 내부 서버로직으로 해당 세션을 종료시키는 로직을 추가해야함.
+DSH::Time::ISystem* _system = nullptr;
+DSH::Time::ITickTimer* _timer = nullptr;
 
+
+
+// TODO: 서버에서 종료 패킷을 수신했을 때 내부 서버로직으로 해당 세션을 종료시키는 로직을 추가해야함
+// TODO: 서버 시간을 추가해야함.
+// TODO: 플레이어 오브젝트 추가.
+// TODO: 
+// TODO: 
+// TODO: 
+// TODO: 
+// TODO: 
 
 int main()
 {
@@ -19,6 +32,8 @@ int main()
     }
 
     while (true) {
+        _timer->Tick();
+
         MessageDispatch();
 
         // TODO: 내부적으로 업데이트 할 로직을 여기다 넣습니다.
@@ -36,7 +51,16 @@ bool Initialize() {
     }
     messageContainer = Server::GetPacketContainer();
 
+    DSH::Time::CreateSystem()(&_system);
+    _system->CreateTickTimer(&_timer);
+
+    delete _system;
+
     return true;
+}
+
+void Finalize() {
+    delete _timer;
 }
 
 void MessageDispatch() {

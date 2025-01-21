@@ -34,9 +34,6 @@
     <Filter Include="Drive">
       <UniqueIdentifier>{a59af320-cec3-4a8b-99de-639155a7dba7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Managers\Graphics">
-      <UniqueIdentifier>{e7e9d4f0-7ec4-4842-834c-6722e4d8b7d1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Components">
       <UniqueIdentifier>{33eaf238-cd64-4fab-9f84-f1d33c3e4383}</UniqueIdentifier>
     </Filter>
@@ -63,21 +60,6 @@
     </Filter>
     <Filter Include="Math\Vector3">
       <UniqueIdentifier>{67aea730-d2e1-44c9-8263-3e8691b07b99}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Managers\Graphics\GraphicsSystems">
-      <UniqueIdentifier>{717ca8ed-8146-4412-b24a-7d8e42064855}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Managers\Graphics\GraphicsSystems\CameraSystem">
-      <UniqueIdentifier>{eb326403-5bf4-4176-85c3-35dcb7696a05}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Managers\Graphics\GraphicsSystems\RenderSystem">
-      <UniqueIdentifier>{f02b1442-1d89-4f1d-be11-712307bb7f3a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Managers\Graphics\GraphicsSystems\AnimationSystem">
-      <UniqueIdentifier>{84ddbec6-2c5a-4b2b-86db-854e841f5027}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Managers\Graphics\GraphicsSystems\LightSystem">
-      <UniqueIdentifier>{c4e61119-7cc1-44a9-9e84-2a1e0c5e12da}</UniqueIdentifier>
     </Filter>
     <Filter Include="Math\Vector2">
       <UniqueIdentifier>{38af7acd-3236-44f2-818d-0c80e5bb04fa}</UniqueIdentifier>
@@ -220,6 +202,24 @@
     <Filter Include="Modules\Difinition\DSHTime\Manager">
       <UniqueIdentifier>{3d125ea3-097e-4d30-a5f4-11e94f720c54}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Interfaces\Graphics">
+      <UniqueIdentifier>{75d08092-787e-44e5-9f67-c3442082cd99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Graphics\Manager">
+      <UniqueIdentifier>{bef60d29-be4b-46c2-b698-f0ff36b0e955}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\GE">
+      <UniqueIdentifier>{1c22bcdb-2d98-4f72-9ba2-28b7255122cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\GE\Manager">
+      <UniqueIdentifier>{5948df0a-7b9f-42ae-86f1-fbdeb2b4726e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Graphics\Camera">
+      <UniqueIdentifier>{74d8ba60-fc4e-4525-a9e6-4db51bba4415}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\GE\Camera">
+      <UniqueIdentifier>{8fd3ffda-eb0e-4f9c-8c70-cffdce358395}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -248,9 +248,6 @@
     </ClInclude>
     <ClInclude Include="Drive.h">
       <Filter>Drive</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics.h">
-      <Filter>Managers\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Components.h">
       <Filter>Components</Filter>
@@ -287,21 +284,6 @@
     </ClInclude>
     <ClInclude Include="Vector3.h">
       <Filter>Math\Vector3</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsSystems.h">
-      <Filter>Managers\Graphics\GraphicsSystems</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraSystem.h">
-      <Filter>Managers\Graphics\GraphicsSystems\CameraSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderSystem.h">
-      <Filter>Managers\Graphics\GraphicsSystems\RenderSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationSystem.h">
-      <Filter>Managers\Graphics\GraphicsSystems\AnimationSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="LightSystem.h">
-      <Filter>Managers\Graphics\GraphicsSystems\LightSystem</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>Modules\Interfaces\Input\Manager</Filter>
@@ -408,6 +390,21 @@
     <ClInclude Include="Modules.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Modules\Interfaces\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsManager.h">
+      <Filter>Modules\Interfaces\Graphics\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GEGraphicsManager.h">
+      <Filter>Modules\Difinition\GE\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsCamera.h">
+      <Filter>Modules\Interfaces\Graphics\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="GEGraphicsCamera.h">
+      <Filter>Modules\Difinition\GE\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -427,9 +424,6 @@
     </ClCompile>
     <ClCompile Include="Drive.cpp">
       <Filter>Drive</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics.cpp">
-      <Filter>Managers\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="CameraComponent.cpp">
       <Filter>Components\Camera</Filter>
@@ -451,18 +445,6 @@
     </ClCompile>
     <ClCompile Include="Vector3.cpp">
       <Filter>Math\Vector3</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraSystem.cpp">
-      <Filter>Managers\Graphics\GraphicsSystems\CameraSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderSystem.cpp">
-      <Filter>Managers\Graphics\GraphicsSystems\RenderSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimationSystem.cpp">
-      <Filter>Managers\Graphics\GraphicsSystems\AnimationSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="LightSystem.cpp">
-      <Filter>Managers\Graphics\GraphicsSystems\LightSystem</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Modules\Interfaces\Input\Manager</Filter>
@@ -559,6 +541,18 @@
     </ClCompile>
     <ClCompile Include="DSHTimeManager.cpp">
       <Filter>Modules\Difinition\DSHTime\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsManager.cpp">
+      <Filter>Modules\Interfaces\Graphics\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GEGraphicsManager.cpp">
+      <Filter>Modules\Difinition\GE\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsCamera.cpp">
+      <Filter>Modules\Interfaces\Graphics\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="GEGraphicsCamera.cpp">
+      <Filter>Modules\Difinition\GE\Camera</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

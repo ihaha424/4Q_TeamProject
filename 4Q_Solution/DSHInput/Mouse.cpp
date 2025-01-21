@@ -12,9 +12,9 @@ DSH::Input::Device::Mouse::Mouse() :
 
 DSH::Input::Device::Mouse::~Mouse()
 {
-	std::ranges::for_each(_axes, [](const std::pair<const Axis, Component::AxisComponent*>& axisPair) { axisPair.second->Release(); });
+	std::ranges::for_each(_axes | std::views::values , [](Component::AxisComponent* axis) { axis->Release(); });
 	_axes.clear();
-	std::ranges::for_each(_buttons, [](const std::pair<const Button, Component::ButtonComponent*>& buttonPair) { buttonPair.second->Release(); });
+	std::ranges::for_each(_buttons | std::views::values, [](Component::ButtonComponent* button) { button->Release(); });
 	_buttons.clear();
 }
 
@@ -48,8 +48,8 @@ void DSH::Input::Device::Mouse::Update()
 
 void DSH::Input::Device::Mouse::Reset()
 {
-	std::ranges::for_each(_axes, [](const std::pair<const Axis, Component::AxisComponent*>& axisPair) { axisPair.second->Reset(); });
-	std::ranges::for_each(_buttons, [](const std::pair<const Button, Component::ButtonComponent*>& buttonPair) { buttonPair.second->Reset(); });
+	std::ranges::for_each(_axes | std::views::values, [](Component::AxisComponent* axis) { axis->Reset(); });
+	std::ranges::for_each(_buttons | std::views::values, [](Component::ButtonComponent* button) { button->Reset(); });
 }
 
 void DSH::Input::Device::Mouse::SetHandle(const HWND handle)

@@ -60,10 +60,10 @@ void Engine::DSHInput::Manager::Finalize()
 	// TODO: Finalize Devices;
 
 	_negative.Finalize();
-	std::ranges::for_each(_swizzleAxes, [](std::pair<const Input::Modifier::ISwizzleAxis::Type, Modifier::SwizzleAxis>& swizzleAxis) { swizzleAxis.second.Finalize(); });
+	std::ranges::for_each(_swizzleAxes | std::views::values, [](Modifier::SwizzleAxis& swizzleAxis) { swizzleAxis.Finalize(); });
 	_swizzleAxes.clear();
 
-	std::ranges::for_each(_mappingContexts, [](std::pair<const std::wstring, MappingContext>& mappingContext) { mappingContext.second.Finalize(); });
+	std::ranges::for_each(_mappingContexts | std::views::values, [](MappingContext& mappingContext) { mappingContext.Finalize(); });
 	_mappingContexts.clear();
 	Utility::SafeRelease()(&_system);
 }

@@ -3,10 +3,11 @@
 
 #include "DSHInputManager.h"
 #include "DSHTimeManager.h"
+#include "GEGraphicsManager.h"
 
 Engine::Time::Manager* Engine::Application::_timeManager = nullptr;
 Engine::Manager::Window* Engine::Application::_windowManager = nullptr;
-Engine::Manager::Graphics* Engine::Application::_graphicsManager = nullptr;
+Engine::Graphics::Manager* Engine::Application::_graphicsManager = nullptr;
 Engine::Input::Manager* Engine::Application::_inputManager = nullptr;
 
 Engine::Application::Application(const HINSTANCE instanceHandle, std::wstring title, const SIZE size) :
@@ -48,6 +49,7 @@ void Engine::Application::CreateContents()
 {
 	// TODO: World / Object / Component Manager Create;
 	_cameraComponent = new Component::CameraComponent(L"MainCamera", 1.f, 1000.f, _size, 3.141592f / 4);
+	_cameraComponent->Setup({ _graphicsManager });
 }
 
 void Engine::Application::InitializeContents()
@@ -137,7 +139,7 @@ Engine::Input::IManager* Engine::Application::GetInputManager()
 	return _inputManager;
 }
 
-Engine::Manager::IGraphics* Engine::Application::GetGraphicsManager()
+Engine::Graphics::IManager* Engine::Application::GetGraphicsManager()
 {
 	return _graphicsManager;
 }
@@ -169,11 +171,11 @@ void Engine::Application::CreateInputManager(Input::Manager** inputManager)
 	*inputManager = manager;
 }
 
-void Engine::Application::CreateGraphicsManager(Manager::Graphics** graphicsManager)
+void Engine::Application::CreateGraphicsManager(Graphics::Manager** graphicsManager)
 {
 	constexpr Utility::ThrowIfFailed thrower;
 	if (graphicsManager == nullptr) thrower(E_INVALIDARG);
-	Manager::Graphics* manager = new Manager::Graphics();
+	Graphics::Manager* manager = new GEGraphics::Manager();
 	if (manager == nullptr) thrower(E_OUTOFMEMORY);
 	*graphicsManager = manager;
 }

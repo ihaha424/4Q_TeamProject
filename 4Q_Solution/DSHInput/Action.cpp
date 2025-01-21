@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "Action.h"
 
-#include <algorithm>
-
 #include "ChordAction.h"
 #include "Down.h"
 

@@ -1,14 +1,11 @@
 #include "pch.h"
 #include "MappingContext.h"
 
-#include <ranges>
-
 #include "Action.h"
 
 DSH::Input::MappingContext::MappingContext() :
 	_referenceCount(1)
 {
-
 }
 
 DSH::Input::MappingContext::~MappingContext()
@@ -44,12 +41,12 @@ ULONG DSH::Input::MappingContext::Release()
 
 void DSH::Input::MappingContext::Update(float deltaTime)
 {
-	std::ranges::for_each(_actions, [deltaTime](const std::pair<const std::wstring, Action*>& action) { action.second->Update(deltaTime); });
+	std::ranges::for_each(_actions | std::views::values , [deltaTime](Action* action) { action->Update(deltaTime); });
 }
 
 void DSH::Input::MappingContext::Reset()
 {
-	std::ranges::for_each(_actions, [](const std::pair<const std::wstring, Action*>& action) { action.second->Reset(); });
+	std::ranges::for_each(_actions | std::views::values, [](Action* action) { action->Reset(); });
 }
 
 HRESULT DSH::Input::MappingContext::GetAction(const wchar_t* name, IAction** ppAction)

@@ -12,11 +12,11 @@ DSH::Input::Device::Controller::Controller() :
 
 DSH::Input::Device::Controller::~Controller()
 {
-	std::ranges::for_each(_buttons, [](const std::pair<const Button, Component::ButtonComponent*>& buttonPair) { buttonPair.second->Release(); });
+	std::ranges::for_each(_buttons | std::views::values, [](Component::ButtonComponent* button) { button->Release(); });
 	_buttons.clear();
-	std::ranges::for_each(_triggers, [](const std::pair<const Trigger, Component::AxisComponent*>& axisPair) { axisPair.second->Release(); });
+	std::ranges::for_each(_triggers | std::views::values, [](Component::AxisComponent* axis) { axis->Release(); });
 	_triggers.clear();
-	std::ranges::for_each(_thumbs, [](const std::pair<const Thumb, Component::AxisComponent*>& axisPair) { axisPair.second->Release(); });
+	std::ranges::for_each(_thumbs | std::views::values, [](Component::AxisComponent* thumb) { thumb->Release(); });
 	_thumbs.clear();
 }
 
@@ -61,9 +61,9 @@ void DSH::Input::Device::Controller::Update()
 
 void DSH::Input::Device::Controller::Reset()
 {
-	std::ranges::for_each(_buttons, [](const std::pair<const Button, Component::ButtonComponent*>& buttonPair) { buttonPair.second->Reset(); });
-	std::ranges::for_each(_triggers, [](const std::pair<const Trigger, Component::AxisComponent*>& axisPair) { axisPair.second->Reset(); });
-	std::ranges::for_each(_thumbs, [](const std::pair<const Thumb, Component::AxisComponent*>& axisPair) { axisPair.second->Reset(); });
+	std::ranges::for_each(_buttons | std::views::values, [](Component::ButtonComponent* button) { button->Reset(); });
+	std::ranges::for_each(_triggers | std::views::values, [](Component::AxisComponent* axis) { axis->Reset(); });
+	std::ranges::for_each(_thumbs | std::views::values, [](Component::AxisComponent* thumb) { thumb->Reset(); });
 }
 
 void DSH::Input::Device::Controller::SetControllerIndex(const DWORD index)

@@ -7,6 +7,6 @@ protected:
 
 
 private:
-	Engine::Component::MovementComponent* _movement;
+	Engine::Component::MovementComponent _movement;
 };
 

@@ -1,10 +1,12 @@
 #include "pch.h"
 #include "Application.h"
 
+#include "DSHInputManager.h"
+
 Engine::Manager::Time* Engine::Application::_timeManager = nullptr;
 Engine::Manager::Window* Engine::Application::_windowManager = nullptr;
-Engine::Manager::Input* Engine::Application::_inputManager = nullptr;
 Engine::Manager::Graphics* Engine::Application::_graphicsManager = nullptr;
+Engine::Input::Manager* Engine::Application::_inputManager = nullptr;
 
 Engine::Application::Application(const HINSTANCE instanceHandle, std::wstring title, const SIZE size) :
 	_instanceHandle(instanceHandle),
@@ -37,9 +39,8 @@ void Engine::Application::InitializeManagers() const
 	_graphicsManager->Initialize(_windowManager->GetHandle(), L"../Shaders/", _size, false, 1);
 }
 
-void Engine::Application::DeclareInputActions(Manager::IInput* inputManager)
+void Engine::Application::DeclareInputActions(Input::IManager* inputManager)
 {
-
 }
 
 void Engine::Application::CreateContents()
@@ -131,7 +132,7 @@ Engine::Manager::ITime* Engine::Application::GetTimeManager()
 	return _timeManager;
 }
 
-Engine::Manager::IInput* Engine::Application::GetInputManager()
+Engine::Input::IManager* Engine::Application::GetInputManager()
 {
 	return _inputManager;
 }
@@ -159,11 +160,11 @@ void Engine::Application::CreateWindowManager(Manager::Window** windowManager)
 	*windowManager = manager;
 }
 
-void Engine::Application::CreateInputManager(Manager::Input** inputManager)
+void Engine::Application::CreateInputManager(Input::Manager** inputManager)
 {
 	constexpr Utility::ThrowIfFailed thrower;
 	if (inputManager == nullptr) thrower(E_INVALIDARG);
-	Manager::Input* manager = new Manager::Input();
+	Input::Manager* manager = new DSHInput::Manager();
 	if (manager == nullptr) thrower(E_OUTOFMEMORY);
 	*inputManager = manager;
 }

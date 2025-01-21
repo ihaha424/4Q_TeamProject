@@ -1,14 +1,12 @@
 #pragma once
-
+#include "Player.h"
 
 class TestWorld : public Engine::World
 {
-public:
-	explicit TestWorld(int a);
+protected:
+	void PreInitialize() override;
 
 private:
-	int _a;
-
-
+	Player _player;
 };
 

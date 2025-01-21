@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <string>
 #include <filesystem>
+#include <ranges>
 
 #include "DSHTime/Time.h"
 #include "DSHWindow/Window.h"
@@ -16,6 +17,8 @@
 #include "GraphicsEngine/ITextSystem.h"
 
 #include "Math.h"
+
+#include "Transform.h"
 
 #include "Managers.h"
 #include "Components.h"

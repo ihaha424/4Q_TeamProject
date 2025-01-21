@@ -6,7 +6,7 @@ public:
 	explicit GameApplication(HINSTANCE instanceHandle);
 
 protected:
-	void DeclareInputActions(Engine::Manager::IInput* inputManager) override;
+	void DeclareInputActions(Engine::Input::IManager* inputManager) override;
 
 private:
 	std::vector<Engine::World*> _worlds;

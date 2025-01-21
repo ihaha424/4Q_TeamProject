@@ -29,9 +29,9 @@
     함수의 반환값이 false면 두 컨테이너 모두 비어있다는 뜻입니다.
     
 
-## void SavePacketData(std::string msg, short packetId)
+## void SavePacketData(std::string msg, short packetId, long dataSize)
 
-- SerializedAsString()함수를 통해 직렬화된 protobuf 메시지와 패킷 타입의 식별Id를 입력해주면 됩니다.
+- SerializedAsString()함수를 통해 직렬화된 protobuf 메시지와 패킷 타입의 식별Id, 데이터 사이즈를 입력해주면 됩니다.
     
     내부에서 자동으로 패킷정보에 합쳐 전송하게 됩니다.
     

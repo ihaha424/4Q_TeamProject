@@ -198,6 +198,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="GEGraphicsManager.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="GraphicsCamera.h" />
+    <ClInclude Include="GraphicsComponent.h" />
     <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="InputAxisComponent.h" />
@@ -262,6 +263,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="GEGraphicsCamera.cpp" />
     <ClCompile Include="GEGraphicsManager.cpp" />
     <ClCompile Include="GraphicsCamera.cpp" />
+    <ClCompile Include="GraphicsComponent.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="InputAxisComponent.cpp" />
     <ClCompile Include="InputButtonComponent.cpp" />

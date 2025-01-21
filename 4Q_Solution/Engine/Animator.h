@@ -2,10 +2,18 @@
 
 namespace Engine::Component
 {
-    class Animator : public Component
+    class Animator : public GraphicsComponent
     {
     public:
         Animator();
+
+    public:
+        void Attach() override;
+        void Detach() override;
+        void Finalize() override;
+
+    public:
+        void SetAnimator(GE::IAnimator* geAnimator) { _geAnimator = geAnimator; }
 
     public:
         void ChangeAnimation(const char* animation) const;
@@ -15,6 +23,6 @@ namespace Engine::Component
         void SplitBone(const unsigned int ID, const char* boneName) const;
 
     private:
-        GE::IAnimator* _animator;
+        GE::IAnimator* _geAnimator;
     };
 }

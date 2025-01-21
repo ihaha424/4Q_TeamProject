@@ -10,7 +10,10 @@ namespace Engine::Component
         SkeletalMesh(std::filesystem::path filePath);
 
     public:
-        //Animator& GetAnimator() { return _animator; }
+        Animator* GetAnimator() { return _animator; }
+
+    public:
+        void Initialize() override;
 
     private:
         Animator* _animator;

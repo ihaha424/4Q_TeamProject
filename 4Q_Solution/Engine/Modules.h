@@ -6,8 +6,12 @@
 
 namespace Engine
 {
+	namespace GEGraphics
+	{
+		class Manager;
+	}
 	struct Modules
 	{
-		Graphics::Manager* graphicsManager;
+		GEGraphics::Manager* graphicsManager;
 	};
 }

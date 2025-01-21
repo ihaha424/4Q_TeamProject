@@ -1,5 +1,10 @@
 #pragma once
 
+namespace Engine::GEGraphics
+{
+	class Manager;
+}
+
 namespace Engine
 {
 	class Application
@@ -34,12 +39,12 @@ namespace Engine
 		static void CreateTimeManager(Time::Manager** timeManager);
 		static void CreateWindowManager(Manager::Window** windowManager);
 		static void CreateInputManager(Input::Manager** inputManager);
-		static void CreateGraphicsManager(Graphics::Manager** graphicsManager);
+		static void CreateGraphicsManager(GEGraphics::Manager** graphicsManager);
 
 		static Time::Manager* _timeManager;
 		static Manager::Window* _windowManager;
 		static Input::Manager* _inputManager;
-		static Graphics::Manager* _graphicsManager;
+		static GEGraphics::Manager* _graphicsManager;
 
 		std::wstring _title;
 		SIZE _size;

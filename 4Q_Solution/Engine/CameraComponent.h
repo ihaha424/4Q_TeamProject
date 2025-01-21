@@ -23,7 +23,7 @@ namespace Engine::Component
 		SIZE _size;
 		float _fov;
 
-		Graphics::Manager* _graphicsManager;
+		GEGraphics::Manager* _graphicsManager;
 		Graphics::Camera* _camera;
 	};
 }

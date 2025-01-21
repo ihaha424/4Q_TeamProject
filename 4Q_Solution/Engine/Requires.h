@@ -25,9 +25,9 @@
 #include "Transform.h"
 
 #include "Modules.h"
+#include "Components.h"
 
 #include "Managers.h"
-#include "Components.h"
 #include "Object.h"
 #include "World.h"
 #include "Drive.h"

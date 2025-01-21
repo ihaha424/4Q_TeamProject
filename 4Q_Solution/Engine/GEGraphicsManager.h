@@ -14,11 +14,17 @@ namespace Engine::GEGraphics
 		void Render() const override;
 		void Finalize() override;
 
+		// Camera
 		void CreateCamera(Graphics::Camera** camera) override;
 		void RegisterCamera(std::wstring_view name, Graphics::Camera* camera) override;
-
 		void UnregisterCamera(std::wstring_view name) override;
 		void SetActiveCamera(std::wstring_view name) override;
+
+		GE::IRenderSystem* GetRenderSystem() const { return _renderSystem; }
+		GE::ICameraSystem* GetCameraSystem() const  { return _cameraSystem; }
+		GE::IAnimationSystem* GetAnimationSystem() const { return _animationSystem; }
+		GE::ILightSystem* GetLightSystem() const  { return _lightSystem; }
+		GE::ITextSystem* GetTextSystem() const  { return _textSystem; }
 
 	private:
 		HMODULE _dll;
@@ -31,5 +37,7 @@ namespace Engine::GEGraphics
 		GE::IAnimationSystem* _animationSystem;
 		GE::ILightSystem* _lightSystem;
 		GE::ITextSystem* _textSystem;
+
+		
 	};
 }

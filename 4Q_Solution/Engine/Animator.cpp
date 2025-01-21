@@ -1,32 +1,52 @@
 #include "pch.h"
 #include "Animator.h"
+#include "GEGraphicsManager.h"
 
 Engine::Component::Animator::Animator()
-	: _animator(nullptr)
+	: _geAnimator(nullptr)
 {
+}
+
+void Engine::Component::Animator::Attach()
+{
+	Component::Attach();
+	auto animationSystem = _graphicsManager->GetAnimationSystem();
+	animationSystem->RegisterAnimator(_geAnimator);
+}
+
+void Engine::Component::Animator::Detach()
+{
+	Component::Detach();
+	auto animationSystem = _graphicsManager->GetAnimationSystem();
+	animationSystem->UnRegisterAnimator(_geAnimator);
+}
+
+void Engine::Component::Animator::Finalize()
+{
+	_geAnimator->Release();
 }
 
 void Engine::Component::Animator::ChangeAnimation(const char* animation) const
 {
-	_animator->ChangeAnimation(animation);
+	_geAnimator->ChangeAnimation(animation);
 }
 
 void Engine::Component::Animator::ChangeAnimation(const char* animation, const unsigned int ID) const
 {
-	_animator->ChangeAnimation(animation, ID);
+	_geAnimator->ChangeAnimation(animation, ID);
 }
 
 bool Engine::Component::Animator::IsLastFrame(float interval) const
 {
-	return _animator->IsLastFrame(interval);
+	return _geAnimator->IsLastFrame(interval);
 }
 
 void Engine::Component::Animator::SetUpSplitBone(const unsigned int maxSplit) const
 {
-	_animator->SetUpSplitBone(maxSplit);
+	_geAnimator->SetUpSplitBone(maxSplit);
 }
 
 void Engine::Component::Animator::SplitBone(const unsigned int ID, const char* boneName) const
 {
-	_animator->SplitBone(ID, boneName);
+	_geAnimator->SplitBone(ID, boneName);
 }

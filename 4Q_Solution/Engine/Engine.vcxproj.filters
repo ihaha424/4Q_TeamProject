@@ -223,6 +223,12 @@
     <Filter Include="Components\Mesh">
       <UniqueIdentifier>{65736189-54c4-4d0e-85dc-304ceb5b68ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Animator">
+      <UniqueIdentifier>{370621ae-b155-42c3-8e23-a3bd6a6d2fd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Light">
+      <UniqueIdentifier>{334cd88b-40c4-4078-96f2-ee51408eb90c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -408,12 +414,6 @@
     <ClInclude Include="GEGraphicsCamera.h">
       <Filter>Modules\Difinition\GE\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Animator.h">
-      <Filter>Components\Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="Light.h">
-      <Filter>Components\Mesh</Filter>
-    </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>Components\Mesh</Filter>
     </ClInclude>
@@ -422,6 +422,15 @@
     </ClInclude>
     <ClInclude Include="StaticMesh.h">
       <Filter>Components\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>Components\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Components\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsComponent.h">
+      <Filter>Components\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -572,12 +581,6 @@
     <ClCompile Include="GEGraphicsCamera.cpp">
       <Filter>Modules\Difinition\GE\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Animator.cpp">
-      <Filter>Components\Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="Light.cpp">
-      <Filter>Components\Mesh</Filter>
-    </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>Components\Mesh</Filter>
     </ClCompile>
@@ -586,6 +589,15 @@
     </ClCompile>
     <ClCompile Include="StaticMesh.cpp">
       <Filter>Components\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>Components\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Components\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsComponent.cpp">
+      <Filter>Components\Component</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

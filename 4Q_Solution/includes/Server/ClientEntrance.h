@@ -1,5 +1,6 @@
 #pragma once
 #include "DLLSetting.h"
+#include "GlobalDef.h"
 #include "IPacketDispatcher.h"
 #include <string>
 
@@ -17,7 +18,7 @@ namespace Client {
 
 	bool SERVER_API SwapPacketContainer();
 	SERVER_API PacketQueue* GetPacketContainer();
-	void SERVER_API SavePacketData(std::string msg, short packetId);
+	void SERVER_API SavePacketData(std::string msg, short packetId, long dataSize);
 
 	void SERVER_API SendUpdate();
 	void SERVER_API Finalize();

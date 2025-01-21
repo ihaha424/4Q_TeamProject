@@ -220,6 +220,9 @@
     <Filter Include="Modules\Difinition\GE\Camera">
       <UniqueIdentifier>{8fd3ffda-eb0e-4f9c-8c70-cffdce358395}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Mesh">
+      <UniqueIdentifier>{65736189-54c4-4d0e-85dc-304ceb5b68ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -405,6 +408,21 @@
     <ClInclude Include="GEGraphicsCamera.h">
       <Filter>Modules\Difinition\GE\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>Components\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Components\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Components\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="SkeletalMesh.h">
+      <Filter>Components\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticMesh.h">
+      <Filter>Components\Mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -553,6 +571,21 @@
     </ClCompile>
     <ClCompile Include="GEGraphicsCamera.cpp">
       <Filter>Modules\Difinition\GE\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>Components\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Components\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Components\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="SkeletalMesh.cpp">
+      <Filter>Components\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticMesh.cpp">
+      <Filter>Components\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

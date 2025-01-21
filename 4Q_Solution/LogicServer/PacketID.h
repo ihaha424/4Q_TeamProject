@@ -8,6 +8,9 @@ enum class PacketID : unsigned short {
 	Sync,
 	Move,
 	Jump,
-	
+	SelectPart,
+	DialogOpen,
+	DialogNext,
+
 
 };

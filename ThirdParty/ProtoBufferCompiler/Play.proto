@@ -6,3 +6,13 @@ message SelectPart {
 	optional int serialnumber = 1;
 	optional int selectpart = 2;
 }
+
+message InteractDialog {
+	optional int dialogid = 1;
+	optional int buttonid = 2;
+}
+
+message DialogProgress {
+	optional int nextdialogid = 1;
+}
+

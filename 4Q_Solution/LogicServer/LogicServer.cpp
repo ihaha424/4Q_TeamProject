@@ -15,9 +15,8 @@ DSH::Time::ITickTimer* _timer = nullptr;
 
 
 // TODO: 서버에서 종료 패킷을 수신했을 때 내부 서버로직으로 해당 세션을 종료시키는 로직을 추가해야함
-// TODO: 서버 시간을 추가해야함.
 // TODO: 플레이어 오브젝트 추가.
-// TODO: 
+// TODO: 움직임 동기화 제어
 // TODO: 
 // TODO: 
 // TODO: 
@@ -41,6 +40,7 @@ int main()
         Server::SendUpdate();
     }
 
+    Finalize();
 }
 
 bool Initialize() {
@@ -53,7 +53,6 @@ bool Initialize() {
 
     DSH::Time::CreateSystem()(&_system);
     _system->CreateTickTimer(&_timer);
-
     delete _system;
 
     return true;

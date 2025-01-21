@@ -1,10 +1,12 @@
 #pragma once
 
-enum class PacketID : unsigned short {
+enum class PacketID : short {
 	Default = 0,
 	EnterRequest,
 	EnterAccept,
+	EnterReject,
 	Exit,
+	ExitOk,
 	Sync,
 	Move,
 	Jump,

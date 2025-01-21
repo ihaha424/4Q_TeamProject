@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\ProtoBuf">
+      <UniqueIdentifier>{bfca1285-987b-4959-93bf-22f7c99a76ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LogicServer.cpp">
@@ -21,12 +24,33 @@
     <ClCompile Include="ServerLogic.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="..\Packet\Connect.pb.cc">
+      <Filter>소스 파일\ProtoBuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packet\Move.pb.cc">
+      <Filter>소스 파일\ProtoBuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packet\Play.pb.cc">
+      <Filter>소스 파일\ProtoBuf</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="PacketID.h">
+    <ClInclude Include="ServerLogic.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="ServerLogic.h">
+    <ClInclude Include="..\Packet\Connect.pb.h">
+      <Filter>소스 파일\ProtoBuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\Move.pb.h">
+      <Filter>소스 파일\ProtoBuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\Play.pb.h">
+      <Filter>소스 파일\ProtoBuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\ProtoInclude.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\PacketID.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,7 +3,7 @@ syntax = "proto3";
 package MoveMsg;
 
 message Move {
-	optional int serialnumber = 1;
+	optional int32 serialnumber = 1;
 	optional float x = 2;
 	optional float y = 3;
 	optional float z = 4;
@@ -11,7 +11,7 @@ message Move {
 }
 
 message Jump {
-	optional int serialnumber = 1;
+	optional int32 serialnumber = 1;
 	optional float power = 2;
 }
 

@@ -116,6 +116,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,11 +143,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Packet\Connect.pb.cc" />
+    <ClCompile Include="..\Packet\Move.pb.cc" />
+    <ClCompile Include="..\Packet\Play.pb.cc" />
     <ClCompile Include="LogicServer.cpp" />
     <ClCompile Include="ServerLogic.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="PacketID.h" />
+    <ClInclude Include="..\Packet\Connect.pb.h" />
+    <ClInclude Include="..\Packet\Move.pb.h" />
+    <ClInclude Include="..\Packet\PacketID.h" />
+    <ClInclude Include="..\Packet\Play.pb.h" />
+    <ClInclude Include="..\Packet\ProtoInclude.h" />
     <ClInclude Include="ServerLogic.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

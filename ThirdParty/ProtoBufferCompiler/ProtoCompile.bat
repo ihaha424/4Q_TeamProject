@@ -1,5 +1,6 @@
 SET PROTOC="C:\Users\user\Desktop\4Q\4Q_TeamProject\ThirdParty\ProtoBufferCompiler\protoc.exe"
-SET OUT_DIR="./ProtoCpp"
+SET SOLUTION_DIR="..\..\4Q_Solution\
+SET OUT_DIR=%SOLUTION_DIR%Packet"
 
 if not exist %OUT_DIR% mkdir %OUT_DIR%
 

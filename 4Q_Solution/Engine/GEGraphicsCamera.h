@@ -13,6 +13,8 @@ namespace Engine::GEGraphics
 
 		void SetPerspective(float nearZ, float farZ, float aspectRatio, float fov) override;
 		void SetPosition(float x, float y, float z) override;
+		void SetRotationFromAngle(float x, float y, float z) override;
+		void SetRotationFromRadian(float x, float y, float z) override;
 
 		[[nodiscard]] GE::ICamera* Get() const;
 

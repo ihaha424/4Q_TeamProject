@@ -26,7 +26,7 @@ void Animator::Update(const float deltaTime)
 {
 	XMMATRIX identity = XMMatrixIdentity();
 
-	std::ranges::for_each(_animationTransforms, [this](Matrix& matrix) { matrix = XMMatrixIdentity();});
+	//std::ranges::for_each(_animationTransforms, [this](Matrix& matrix) { matrix = XMMatrixIdentity();});
 
 	for (unsigned int i = 0; i < _maxSplit; i++)
 	{
@@ -43,7 +43,7 @@ void Animator::Update(const float deltaTime)
 
 		/*XMMATRIX prevRoot = _root;*/
 
-		UpdateAnimationTransform(_pSkeleton->_rootBone, identity, _controllers.data());
+		UpdateAnimationTransform(*_pSkeleton->GetBone(i), identity, _controllers.data());
 
 		/*XMVECTOR deltaPosition = XMVectorSubtract(_root.Translation(), prevRoot.r[3]);
 		deltaPosition.m128_f32[1] = 0.f;*/
@@ -68,7 +68,7 @@ void Animator::Update(const float deltaTime)
 		//		std::vector<Matrix> currTransform(std::move(_animationTransforms));
 		//		_animationTransforms.resize(MAX_BONE_MATRIX);
 
-		//		UpdateAnimationTransform(_pSkeleton->_rootBone, identity, _prevControllers.data());
+		//		UpdateAnimationTransform(*_pSkeleton->GetBone(i), identity, _prevControllers.data());
 
 		//		//float cubic = sqrt(1 - powf(_blendInfo.blendTime - 1.f, 2));
 		//		float easing = 1 - (1 - _blendInfo.blendTime) * (1 - _blendInfo.blendTime);
@@ -196,7 +196,7 @@ void Animator::UpdateAnimationTransform(const Bone& skeletion,
 
 	if (-1 != skeletion.id)
 	{
-		_animationTransforms[skeletion.id] += XMMatrixTranspose(skeletion.offset * globalTransform);
+		_animationTransforms[skeletion.id] = XMMatrixTranspose(skeletion.offset * globalTransform);
 	}
 
 	for (const Bone& child : skeletion.children)

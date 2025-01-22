@@ -9,6 +9,7 @@ protected:
 	void PreInitialize() override;
 	void PostInitialize() override;
 	void PostAttach() override;
+	void PostUpdate(float deltaTime) override;
 
 private:
 	Engine::Component::MovementComponent _movement;
@@ -16,7 +17,6 @@ private:
 	//Engine::Component::StaticMesh _staticMesh;
 	Engine::Component::SkeletalMesh _skeltalMesh;
 	Engine::Component::Animator _animator;
-	Engine::Component::Light _tempLight;
 	Engine::Math::Matrix _worldMatrix;
 };
 

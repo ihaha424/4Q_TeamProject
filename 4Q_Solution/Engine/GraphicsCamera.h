@@ -16,6 +16,8 @@ namespace Engine::Graphics
 	{
 		virtual void SetPerspective(float nearZ, float farZ, float aspectRatio, float fov) = 0;
 		virtual void SetPosition(float x, float y, float z) = 0;
+		virtual void SetRotationFromAngle(float x, float y, float z) = 0;
+		virtual void SetRotationFromRadian(float x, float y, float z) = 0;
 
 		virtual void Finalize() = 0;
 	};

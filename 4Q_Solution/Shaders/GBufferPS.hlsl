@@ -45,9 +45,6 @@ PS_OUTPUT main(PS_INPUT input)
     output.specular.r = txRoughness.Sample(samLinear_wrap, input.uv).r;
     output.specular.g = txMetalness.Sample(samLinear_wrap, input.uv).r;
 
-    if(0.001 >= output.specular.r)
-        output.specular.r = 1;
-    
     // emissive
     output.emissive = txEmissive.Sample(samLinear_wrap, input.uv);
     

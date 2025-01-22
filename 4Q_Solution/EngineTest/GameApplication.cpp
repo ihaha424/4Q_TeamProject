@@ -47,6 +47,13 @@ void GameApplication::DeclareInputActions(Engine::Input::IManager* inputManager)
 	upTrigger->AddModifier(swizzleAxis);
 	upTrigger->SetComponent(up);
 
+	Engine::Input::Trigger::IDown* downTrigger = nullptr;
+	moveAction->GetTrigger(&downTrigger);
+	Engine::Input::Component::IButtonComponent* down = nullptr;
+	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::Down, &down);
+	downTrigger->AddModifier(swizzleAxis);
+	downTrigger->SetComponent(down);
+
 	inputManager->SetActiveMappingContext(mappingContext);
 }
 

@@ -45,6 +45,9 @@ namespace PhysicsEngineAPI
 		
 		physx::PxShape* operator->() { return shape; }
 
+	public:
+		void Release() override;
+
 	private:
 		physx::PxShape* shape;
 

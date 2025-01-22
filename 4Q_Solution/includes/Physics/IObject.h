@@ -13,6 +13,7 @@ namespace PhysicsEngineAPI
 	__INTERFACE__
 	EXTERN_C class PHYSICS_API IObject
 		: virtual public IUserData
+		, virtual public IBase
 	{
 	public:
 		virtual bool	AttachShape(IShape* shape) = 0;
@@ -28,9 +29,6 @@ namespace PhysicsEngineAPI
 		virtual const	Utils::Math::Transform GetTransform() const				= 0;
 
 	public:
-		// Todo: Delete
-		virtual void Test() = 0;
-
 		// Todo:
 		// physx::PxActorFlag
 

@@ -6,11 +6,8 @@ namespace PhysicsEngineAPI
 	PhysXShape::PhysXShape(physx::PxShape* _shape)
 		: shape{ _shape }
 	{}
-	PhysXShape::~PhysXShape()
-	{
-		if (shape)
-			shape->release();
-	}
+	PhysXShape::~PhysXShape() { Release(); }
+	void PhysXShape::Release() { SAFE_RELEASE(shape); }
 
 	void PhysXShape::SetFlag(Utils::DataStructure::CollisionType flag, bool value)
 	{

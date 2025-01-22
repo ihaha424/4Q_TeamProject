@@ -8,11 +8,10 @@ namespace PhysicsEngineAPI
 	PhysXActor::PhysXActor(physx::PxRigidActor* _actor)
 		: actor{ _actor }
 	{}
-	PhysXActor::~PhysXActor()
-	{
-		if (actor)
-			actor->release();
-	}
+	PhysXActor::~PhysXActor() { Release(); }
+	void PhysXActor::Release() { SAFE_RELEASE(actor); }
+
+
 	void PhysXActor::SetTranslate(const Utils::Math::Vector3& position)
 	{
 		auto transform = actor->getGlobalPose();
@@ -70,12 +69,6 @@ namespace PhysicsEngineAPI
 	void PhysXActor::ClearUserData()
 	{
 		actor->userData = nullptr;
-	}
-
-	void PhysXActor::Test()
-	{
-		physx::PxRigidDynamic* _actor = reinterpret_cast<physx::PxRigidDynamic*>(actor);
-		_actor->setLinearDamping(0.5f);
 	}
 
 	const ICollision* PhysXActor::GetUserData() const

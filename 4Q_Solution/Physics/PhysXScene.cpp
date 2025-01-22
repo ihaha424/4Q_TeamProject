@@ -13,11 +13,9 @@ namespace PhysicsEngineAPI
 	{
 	}
 
-	PhysXScene::~PhysXScene()
-	{
-		if(scene)
-			scene->release();
-	}
+	PhysXScene::~PhysXScene() { Release(); }
+
+	void PhysXScene::Release() { SAFE_RELEASE(scene); }
 
 	bool PhysXScene::AddActor(IObject* object)
 	{

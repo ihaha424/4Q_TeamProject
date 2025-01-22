@@ -12,7 +12,8 @@ namespace PhysicsEngineAPI
 {
 	__INTERFACE__
 	EXTERN_C class PHYSICS_API IScene
-		: public ISceneQuery
+		: virtual public ISceneQuery
+		, virtual public IBase
 	{
 	public:
 		// Additional to Physics System

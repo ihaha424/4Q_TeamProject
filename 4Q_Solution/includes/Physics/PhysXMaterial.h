@@ -16,6 +16,11 @@ namespace PhysicsEngineAPI
 		const physx::PxMaterial* GetMaterial() const;
 
 		physx::PxMaterial* operator->() { return material; }
+
+
+	public:
+		void Release() override;
+
 	private:
 		physx::PxMaterial* material;
 

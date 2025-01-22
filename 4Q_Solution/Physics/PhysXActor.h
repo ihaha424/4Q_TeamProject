@@ -31,14 +31,14 @@ namespace PhysicsEngineAPI
 
 		physx::PxRigidActor* operator->() { return actor; }
 
+	public:
+		void Release() override;
+
 	protected:
 		physx::PxRigidActor* actor;
 
 		friend class PhysXScene;
 		friend class PhysXSystem;
-
-		// IObject을(를) 통해 상속됨
-		void Test() override;
 	};
 }
 

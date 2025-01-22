@@ -42,6 +42,8 @@ namespace PhysicsEngineAPI
 
 		physx::PxScene* operator->() { return scene; }
 
+	public:
+		void Release() override;
 	private:
 		physx::PxScene* scene;
 

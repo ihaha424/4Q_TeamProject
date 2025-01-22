@@ -8,6 +8,7 @@ namespace PhysicsEngineAPI
 	__INTERFACE__
 	EXTERN_C class PHYSICS_API IShape
 		: virtual public IUserData
+		, virtual public IBase
 	{
 	public:
 		virtual void SetFlag(Utils::DataStructure::CollisionType flag, bool value) = 0;

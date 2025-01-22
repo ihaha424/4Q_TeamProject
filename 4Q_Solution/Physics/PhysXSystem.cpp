@@ -21,13 +21,22 @@ namespace PhysicsEngineAPI
 		callbackList.reserve(3);
 	}
 
-	PhysXSystem::~PhysXSystem()
+	PhysXSystem::~PhysXSystem() { Release(); }
+
+	void PhysXSystem::Release()
 	{
+		for (auto& callback : callbackList)
+			SAFE_DELETE(callback);
 		for (auto& scene : sceneList)
-			delete scene;
-		dispatcher->release();
-		physics->release();
-		foundation->release();
+			SAFE_DELETE(scene);
+		SAFE_RELEASE(dispatcher);
+		SAFE_RELEASE(physics);
+		DEBUG_MODE
+		(
+			SAFE_RELEASE(pvd);
+			SAFE_RELEASE(transport);
+		)
+		SAFE_RELEASE(foundation);
 	}
 
 

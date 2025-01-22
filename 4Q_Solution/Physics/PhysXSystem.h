@@ -112,6 +112,11 @@ namespace PhysicsEngineAPI
 			IMaterial* material
 		) override;
 
+
+
+	public:
+		void Release() override;
+
 	private:
 		// Create Physics System Need
 		bool CreateFoundation();

@@ -9,11 +9,8 @@ namespace PhysicsEngineAPI
 		: geometry{ _geometry }
 	{}
 
-	PhysXGeometry::~PhysXGeometry()
-	{
-		if (geometry)
-			delete geometry;
-	}
+	PhysXGeometry::~PhysXGeometry() { Release(); }
+	void PhysXGeometry::Release() { SAFE_DELETE(geometry); }
 
 	const physx::PxGeometry* PhysXGeometry::GetGeometry() const
 	{

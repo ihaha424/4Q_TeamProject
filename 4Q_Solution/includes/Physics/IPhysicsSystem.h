@@ -9,6 +9,7 @@ namespace PhysicsEngineAPI
 		: virtual public ICreate
 		, virtual public IUpdate
 		, virtual public IFactory
+		, virtual public IBase
 	{
 	public:
 		enum class PhysicsType

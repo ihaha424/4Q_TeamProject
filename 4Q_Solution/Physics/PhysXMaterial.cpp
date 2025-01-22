@@ -6,11 +6,11 @@ namespace PhysicsEngineAPI
 	PhysXMaterial::PhysXMaterial(physx::PxMaterial* _material)
 		: material{ _material }
 	{}
-	PhysXMaterial::~PhysXMaterial()
-	{
-		if (material)
-			material->release();
-	}
+	PhysXMaterial::~PhysXMaterial() { Release(); }
+	void PhysXMaterial::Release() { SAFE_RELEASE(material); }
+
+
+
 	const physx::PxMaterial* PhysXMaterial::GetMaterial() const
 	{
 		return material;

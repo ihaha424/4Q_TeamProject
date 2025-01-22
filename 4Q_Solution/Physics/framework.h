@@ -31,6 +31,14 @@
 #define _IN_
 #define _OUT_
 
+
+#define SAFE_DELETE(pointer) \
+if(nullptr != pointer) delete pointer\
+
+#define SAFE_RELEASE(pointer) \
+if(nullptr != pointer) pointer->release()\
+
+
 #define OVERRIDE_SET_GET_FUNCTION_CREATOR(NAME, DATA_TYPE) \
 void	Set##NAME(const DATA_TYPE& ##NAME)	override; \
 const	DATA_TYPE& Get##NAME() const	override\

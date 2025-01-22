@@ -5,3 +5,11 @@
 #include "DataStructure.h"
 #include "Description.h"
 
+namespace PhysicsEngineAPI
+{
+	class IBase
+	{
+	public:
+		virtual void Release() = 0;
+	};
+}

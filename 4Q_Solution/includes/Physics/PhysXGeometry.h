@@ -18,6 +18,10 @@ namespace PhysicsEngineAPI
 
 		const physx::PxGeometry* GetGeometry() const;
 		physx::PxGeometry* operator->() { return geometry; }
+
+	public:
+		void Release() override;
+
 	private:
 		physx::PxGeometry* geometry;
 

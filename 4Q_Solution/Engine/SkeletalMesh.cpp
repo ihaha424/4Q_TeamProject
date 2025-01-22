@@ -4,7 +4,6 @@
 
 Engine::Component::SkeletalMesh::SkeletalMesh(std::filesystem::path filePath)
 	: Mesh(std::move(filePath))
-	, _animator(nullptr)
 {
 }
 
@@ -19,9 +18,4 @@ void Engine::Component::SkeletalMesh::Initialize()
 	auto renderSystem = _graphicsManager->GetRenderSystem();
 	renderSystem->CreateMeshRenderer(&_geMeshRenderer, &desc);
 	renderSystem->CreateMatrix(&_geMatrix);
-
-	auto animationSystem = _graphicsManager->GetAnimationSystem();
-	GE::IAnimator* geAnimator = nullptr;
-	animationSystem->CreateAnimator(_geMeshRenderer, &geAnimator);
-	_animator->SetAnimator(geAnimator);
 }

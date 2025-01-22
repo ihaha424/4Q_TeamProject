@@ -2,18 +2,17 @@
 
 namespace Engine::Component
 {
+    class SkeletalMesh;
     class Animator : public GraphicsComponent
     {
     public:
-        Animator();
+        Animator(SkeletalMesh* skeletalMesh);
 
     public:
+        void Initialize() override;
         void Attach() override;
         void Detach() override;
         void Finalize() override;
-
-    public:
-        void SetAnimator(GE::IAnimator* geAnimator) { _geAnimator = geAnimator; }
 
     public:
         void ChangeAnimation(const char* animation) const;
@@ -23,6 +22,7 @@ namespace Engine::Component
         void SplitBone(const unsigned int ID, const char* boneName) const;
 
     private:
+        SkeletalMesh* _skeletalMesh;
         GE::IAnimator* _geAnimator;
     };
 }

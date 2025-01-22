@@ -7,15 +7,19 @@ unsigned int Animator::_globalID = 0;
 
 Animator::Animator()
 	: _ID(_globalID++)
+	, _maxSplit(1)
 {
 }
 
-void Animator::Intialize(const wchar_t* filePath, Skeleton* pSkeleton)
+void Animator::Initialize(const wchar_t* filePath, Skeleton* pSkeleton)
 {
 	_animation = g_pResourceMgr->LoadResource<Animation>(filePath);
 	_animationTransforms.resize(MAX_BONE_MATRIX);
 
 	_pSkeleton = pSkeleton;	
+
+	_controllers.resize(1);
+	_prevControllers.resize(1);
 }
 
 void Animator::Update(const float deltaTime)
@@ -86,7 +90,6 @@ void Animator::Update(const float deltaTime)
 
 void Animator::Release()
 {
-	SafeRelease(_pSkeleton);
 	delete this;
 }
 
@@ -138,6 +141,10 @@ bool Animator::IsLastFrame(float interval) const
 void Animator::SetUpSplitBone(const unsigned int maxSplit)
 {
 	_pSkeleton->SetUpSplitBone(maxSplit);
+	_maxSplit = maxSplit;
+
+	_controllers.resize(maxSplit);
+	_prevControllers.resize(maxSplit);
 }
 
 void Animator::SplitBone(const unsigned int ID, const char* boneName)

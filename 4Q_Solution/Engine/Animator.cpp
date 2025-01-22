@@ -2,9 +2,17 @@
 #include "Animator.h"
 #include "GEGraphicsManager.h"
 
-Engine::Component::Animator::Animator()
+Engine::Component::Animator::Animator(SkeletalMesh* skeletalMesh)
 	: _geAnimator(nullptr)
+	, _skeletalMesh(skeletalMesh)
 {
+}
+
+void Engine::Component::Animator::Initialize()
+{
+	Component::Initialize();
+	auto animationSystem = _graphicsManager->GetAnimationSystem();
+	animationSystem->CreateAnimator(_skeletalMesh->_geMeshRenderer, &_geAnimator);
 }
 
 void Engine::Component::Animator::Attach()

@@ -33,7 +33,7 @@ public:
 	const unsigned int GetID() const { return _ID; }
 
 public:
-	void Intialize(const wchar_t* filePath, Skeleton* pSkeleton);
+	void Initialize(const wchar_t* filePath, Skeleton* pSkeleton);
 	void Update(const float deltaTime);
 
 public:

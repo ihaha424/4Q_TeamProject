@@ -179,7 +179,6 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Components.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="DotTween.h" />
-    <ClInclude Include="DotTween.h" />
     <ClInclude Include="Down.h" />
     <ClInclude Include="Drive.h" />
     <ClInclude Include="DSHAction.h" />

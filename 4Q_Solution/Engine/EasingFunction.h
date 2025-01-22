@@ -112,6 +112,7 @@ namespace Engine::Math
 	float EaseInBounce(float x);
 	float EaseOutBounce(float x);
 	float EaseInOutBounce(float x);
+
 	static std::function<float(float)> EasingFunction[EasingEffect::EasingEffectEnd] =
 	{
 		// Linear
@@ -167,5 +168,20 @@ namespace Engine::Math
 		EaseOutBounce,
 		EaseInOutBounce,
 	};;
+
+	/**
+	 * @brief				:	Interpolation with Easing Function
+	 * @tparam T			:	+-computable data type
+	 * @param a				:	front
+	 * @param b				:	back
+	 * @param t				:	Interpolated value (0 ~ 1)
+	 * @param easingEffect	:	Easing Function
+	 * @return				:	Interpolated T
+	 */
+	template<typename T>
+	T EasingInterpolation(T& a, T& b, float t, EasingEffect easingEffect = EasingEffect::Linear)
+	{
+		return a + (b - a) * EasingFunction[easingEffect];
+	}
 }
 

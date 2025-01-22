@@ -3,15 +3,13 @@
 
 namespace Engine::Math
 {
-	const double PI = 3.14159265358979;
-
 	// Linear
 	float EaseLinear(float x) { return x; }
 
 	// Sine
-	float EaseInSine(float x) { return 1 - std::cos((x * PI) / 2); }
-	float EaseOutSine(float x) { return std::sin((x * PI) / 2); }
-	float EaseInOutSine(float x) { return -(std::cos(PI * x) - 1) / 2; }
+	float EaseInSine(float x) { return 1 - std::cos((x * std::numbers::pi_v<float>) / 2); }
+	float EaseOutSine(float x) { return std::sin((x * std::numbers::pi_v<float>) / 2); }
+	float EaseInOutSine(float x) { return -(std::cos(std::numbers::pi_v<float> * x) - 1) / 2; }
 
 	// Quad
 	float EaseInQuad(float x) { return x * x; }
@@ -21,7 +19,7 @@ namespace Engine::Math
 	// Cubic
 	float EaseInCubic(float x) { return x * x * x; }
 	float EaseOutCubic(float x) { return 1 - std::pow(1 - x, 3); }
-	float EaseInOutCubic(float x) { return -(std::cos(PI * x) - 1) / 2; }
+	float EaseInOutCubic(float x) { return -(std::cos(std::numbers::pi_v<float> * x) - 1) / 2; }
 
 	// Quart
 	float EaseInQuart(float x) { return x * x * x * x; }
@@ -85,7 +83,7 @@ namespace Engine::Math
 	// Elastic
 	float EaseInElastic(float x)
 	{
-		const float c4 = (2 * PI) / 3;
+		const float c4 = (2 * std::numbers::pi_v<float>) / 3;
 
 		return x == 0
 			? 0
@@ -95,7 +93,7 @@ namespace Engine::Math
 	}
 	float EaseOutElastic(float x)
 	{
-		const float c4 = (2 * PI) / 3;
+		const float c4 = (2 * std::numbers::pi_v<float>) / 3;
 
 		return x == 0
 			? 0
@@ -105,7 +103,7 @@ namespace Engine::Math
 	}
 	float EaseInOutElastic(float x)
 	{
-		const float c5 = (2 * PI) / 4.5;
+		const float c5 = (2 * std::numbers::pi_v<float>) / 4.5;
 
 		return x == 0
 			? 0

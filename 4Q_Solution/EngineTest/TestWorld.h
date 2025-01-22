@@ -10,6 +10,7 @@ protected:
 
 private:
 	Player _player;
+	RemotePlayer _remote;
 	GlobalLight _light;
 	Terrain _terrain;
 };

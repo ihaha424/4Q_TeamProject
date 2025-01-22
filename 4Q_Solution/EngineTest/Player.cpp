@@ -48,10 +48,8 @@ void Player::PostInitialize()
 
 	/*_animator.SetUpSplitBone(2);
 	_animator.SplitBone(0, "Dummy_root");
-	_animator.SplitBone(1, "Bip01-Spine1");*/
-	_animator.ChangeAnimation("Wait");
-	
-	_worldMatrix = Engine::Math::Matrix::CreateScale(3.f);
+	_animator.SplitBone(1, "Bip01-Spine1");
+	_animator.ChangeAnimation("Wait");*/
 }
 
 void Player::PostAttach()
@@ -69,4 +67,17 @@ void Player::PostUpdate(float deltaTime)
 	tempPostion.y += 300.f;
 	_camera.SetPosition(tempPostion);
 	_camera.SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
+}
+
+RemotePlayer::RemotePlayer()
+	: _skeltalMesh(L"../Resources/Player/Player.X", &_worldMatrix)
+	, _animator(&_skeltalMesh)
+{
+}
+
+void RemotePlayer::Addition()
+{
+	Object::Addition();
+	AddComponent(&_skeltalMesh);
+	AddComponent(&_animator);
 }

@@ -15,5 +15,5 @@ void Terrain::Addition()
 
 void Terrain::PostInitialize()
 {
-	_matrix = Engine::Math::Matrix::CreateTranslation(0.f, 0.f, 0.f);
+	_matrix = Engine::Math::Matrix::CreateTranslation(0.f, 0.f, 100.f);
 }

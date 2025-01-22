@@ -2,6 +2,7 @@
 #include "GameApplication.h"
 
 #include "TestWorld.h"
+#include "NetworkTemp.h"
 
 GameApplication::GameApplication(const HINSTANCE instanceHandle) :
 	Application(instanceHandle, L"Test", SIZE{ 1920, 1080 })
@@ -65,6 +66,8 @@ void GameApplication::Addition()
 
 void GameApplication::InitializeContents()
 {
+	//NetworkTemp::GetInstance()->Initialize();
+
 	Application::InitializeContents();
 	Attach(&_world);
 }

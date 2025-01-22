@@ -2,6 +2,8 @@
 #include "NetworkTemp.h"
 #include "../Packet/PacketID.h"
 
+NetworkTemp* NetworkTemp::_instance = nullptr;
+
 bool NetworkTemp::Initialize()
 {
 	bool res = true;
@@ -22,7 +24,7 @@ bool NetworkTemp::Initialize()
 	}
 
 	Client::SavePacketData("", (short)PacketID::EnterRequest, 0);
-
+	Client::SendUpdate();
 	return true;
 }
 
@@ -45,6 +47,7 @@ void NetworkTemp::Dispatch()
 			_enterAccept.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
 
 			//curPlayer._serialNumber = _enterAccept.grantnumber();
+			acceptEnter->Invoke(&_enterAccept);
 
 			break;
 		}
@@ -63,6 +66,7 @@ void NetworkTemp::Dispatch()
 			//	remotePlayer._y = _syncPlayer.y();
 			//	remotePlayer._z = _syncPlayer.z();
 			//}
+			playerSync->Invoke(&_syncPlayer);
 
 			break;
 		}
@@ -72,4 +76,9 @@ void NetworkTemp::Dispatch()
 			break;
 		}
 	}
+}
+
+void NetworkTemp::SendUpdate()
+{
+	Client::SendUpdate();
 }

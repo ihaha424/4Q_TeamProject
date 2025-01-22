@@ -69,15 +69,15 @@ void Player::PostUpdate(float deltaTime)
 	_camera.SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
 }
 
-RemotePlayer::RemotePlayer()
-	: _skeltalMesh(L"../Resources/Player/Player.X", &_worldMatrix)
-	, _animator(&_skeltalMesh)
-{
-}
-
-void RemotePlayer::Addition()
-{
-	Object::Addition();
-	AddComponent(&_skeltalMesh);
-	AddComponent(&_animator);
-}
+//RemotePlayer::RemotePlayer()
+//	: _skeltalMesh(L"../Resources/Player/Player.X", &_worldMatrix)
+//	, _animator(&_skeltalMesh)
+//{
+//}
+//
+//void RemotePlayer::Addition()
+//{
+//	Object::Addition();
+//	AddComponent(&_skeltalMesh);
+//	AddComponent(&_animator);
+//}

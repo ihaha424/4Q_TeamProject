@@ -1,5 +1,6 @@
 #pragma once
 #include "RemoteMoveComponent.h"
+#include "../Packet/ProtoInclude.h"
 
 class RemotePlayer : public Engine::Object
 {
@@ -12,7 +13,8 @@ protected:
 	void PostAttach() override;
 	void PostUpdate(float deltaTime) override;
 
-	void SyncMove(float x, float y, float z, float speed);
+	void SyncMove(const ConnectMsg::SyncPlayer* msg);
+	void FirstInitialize(const ConnectMsg::SyncPlayer* msg);
 
 private:
 	//Engine::Component::MovementComponent _movement;

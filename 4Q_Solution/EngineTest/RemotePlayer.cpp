@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "RemotePlayer.h"
-
+#include "NetworkTemp.h"
 
 RemotePlayer::RemotePlayer() :
 	//_camera(L"MainCamera", 1.f, 1000.f, { 16,9 }, 3.141592f / 4) // TODO: Remove this.
@@ -8,6 +8,8 @@ RemotePlayer::RemotePlayer() :
 	//_skeltalMesh(L"../Resources/Player/Player.X", &_worldMatrix)
 	//, _animator(&_skeltalMesh)
 {
+	NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &RemotePlayer::FirstInitialize, this);
+	NetworkTemp::GetInstance()->AddCallback((short)PacketID::Move, &RemotePlayer::SyncMove, this);
 }
 
 void RemotePlayer::Addition()
@@ -27,6 +29,8 @@ void RemotePlayer::PreInitialize()
 
 	//_movement.SetTarget(&_transform);
 	_remoteMove.SetTarget(&_transform);
+
+	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &RemotePlayer::SyncMove, this);
 
 	const auto inputManager = Engine::Application::GetInputManager();
 	Engine::Input::IMappingContext* mappingContext = nullptr;
@@ -77,9 +81,15 @@ void RemotePlayer::PostUpdate(float deltaTime)
 	//_camera.SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
 }
 
-void RemotePlayer::SyncMove(float x, float y, float z, float speed)
+void RemotePlayer::SyncMove(const ConnectMsg::SyncPlayer* msg)
 {
-	Engine::Math::Vector3 nextLocation(x, y, z);
+	Engine::Math::Vector3 nextLocation(msg->x(), msg->y(), msg->z());
 	_remoteMove.SetNextLocation(nextLocation);
-	
 }
+
+void RemotePlayer::FirstInitialize(const ConnectMsg::SyncPlayer* msg)
+{
+	Engine::Math::Vector3 location(msg->x(), msg->y(), msg->z());
+	_transform.position = location;
+}
+

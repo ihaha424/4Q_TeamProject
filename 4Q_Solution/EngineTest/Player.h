@@ -20,15 +20,15 @@ private:
 	Engine::Math::Matrix _worldMatrix;
 };
 
-class RemotePlayer : public Engine::Object
-{
-public:
-	RemotePlayer();
-protected:
-	void Addition() override;
-
-private:
-	Engine::Component::SkeletalMesh _skeltalMesh;
-	Engine::Component::Animator _animator;
-	Engine::Math::Matrix _worldMatrix;
-};
+//class RemotePlayer : public Engine::Object
+//{
+//public:
+//	RemotePlayer();
+//protected:
+//	void Addition() override;
+//
+//private:
+//	Engine::Component::SkeletalMesh _skeltalMesh;
+//	Engine::Component::Animator _animator;
+//	Engine::Math::Matrix _worldMatrix;
+//};

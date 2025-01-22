@@ -31,7 +31,7 @@ SamplerState samLinear_wrap : register(s0);
 
 PS_OUTPUT main(PS_INPUT input)
 {
-    PS_OUTPUT output = (PS_OUTPUT)0;     
+    PS_OUTPUT output = (PS_OUTPUT)0;
     
     // diffuse
     output.diffuse = txDiffuse.Sample(samLinear_wrap, input.uv);
@@ -45,6 +45,9 @@ PS_OUTPUT main(PS_INPUT input)
     output.specular.r = txRoughness.Sample(samLinear_wrap, input.uv).r;
     output.specular.g = txMetalness.Sample(samLinear_wrap, input.uv).r;
 
+    if(0.001 >= output.specular.r)
+        output.specular.r = 1;
+    
     // emissive
     output.emissive = txEmissive.Sample(samLinear_wrap, input.uv);
     

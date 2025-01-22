@@ -56,7 +56,6 @@ float4 main(PS_INPUT input) : SV_Target
     //float3 specularIBL = (F0 * brdf.x + brdf.y) * preFilteredColor;
     
     //ambientLighting = diffuseIBL + specularIBL;
-
 //Shadow
     float4 shadowPosition = txShadowPosition.Sample(samLinear_wrap, input.uv);
     float currentShadowDepth = shadowPosition.z / shadowPosition.w;

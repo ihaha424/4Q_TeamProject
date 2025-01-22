@@ -10,7 +10,7 @@ void SkeletalMeshRenderer::Initialize(const wchar_t* filePath)
 	_model = g_pResourceMgr->LoadResource<SkeletalMesh>(filePath);
 
 	_pAnimator = new Animator;
-	_pAnimator->Intialize(filePath, _model->GetSkeleton());
+	_pAnimator->Initialize(filePath, _model->GetSkeleton());
 
 	_vertexShader = g_pResourceMgr->LoadResource<VertexShader>(L"../Resources/Shaders/MeshVS_Skeletal.cso");
 	_type = MeshType::Skeletal;

@@ -147,35 +147,47 @@ void Engine::Application::Attach(World* world)
 void Engine::Application::CreateTimeManager(Time::Manager** timeManager)
 {
 	constexpr Utility::ThrowIfFailed thrower;
-	if (timeManager == nullptr) thrower(E_INVALIDARG);
-	Time::Manager* manager = new DSHTime::Manager();
-	if (manager == nullptr) thrower(E_OUTOFMEMORY);
-	*timeManager = manager;
+	if (timeManager == nullptr)	thrower(E_INVALIDARG);
+	else
+	{
+		Time::Manager* manager = new DSHTime::Manager();
+		if (manager == nullptr) thrower(E_OUTOFMEMORY);
+		if (timeManager != nullptr) *timeManager = manager;
+	}
 }
 
 void Engine::Application::CreateWindowManager(Window::Manager** windowManager)
 {
 	constexpr Utility::ThrowIfFailed thrower;
 	if (windowManager == nullptr) thrower(E_INVALIDARG);
-	Window::Manager* manager = new DSHWindow::Manager();
-	if (manager == nullptr) thrower(E_OUTOFMEMORY);
-	*windowManager = manager;
+	else
+	{
+		Window::Manager* manager = new DSHWindow::Manager();
+		if (manager == nullptr) thrower(E_OUTOFMEMORY);
+		*windowManager = manager;
+	}
 }
 
 void Engine::Application::CreateInputManager(Input::Manager** inputManager)
 {
 	constexpr Utility::ThrowIfFailed thrower;
 	if (inputManager == nullptr) thrower(E_INVALIDARG);
-	Input::Manager* manager = new DSHInput::Manager();
-	if (manager == nullptr) thrower(E_OUTOFMEMORY);
-	*inputManager = manager;
+	else
+	{
+		Input::Manager* manager = new DSHInput::Manager();
+		if (manager == nullptr) thrower(E_OUTOFMEMORY);
+		*inputManager = manager;
+	}
 }
 
 void Engine::Application::CreateGraphicsManager(GEGraphics::Manager** graphicsManager)
 {
 	constexpr Utility::ThrowIfFailed thrower;
 	if (graphicsManager == nullptr) thrower(E_INVALIDARG);
-	GEGraphics::Manager* manager = new GEGraphics::Manager();
-	if (manager == nullptr) thrower(E_OUTOFMEMORY);
-	*graphicsManager = manager;
+	else
+	{
+		GEGraphics::Manager* manager = new GEGraphics::Manager();
+		if (manager == nullptr) thrower(E_OUTOFMEMORY);
+		*graphicsManager = manager;
+	}
 }

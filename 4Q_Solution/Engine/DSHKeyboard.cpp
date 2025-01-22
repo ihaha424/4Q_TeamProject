@@ -66,13 +66,16 @@ void Engine::DSHInput::Device::Keyboard::GetComponent(const Key key, Input::Comp
 {
 	constexpr Utility::ThrowIfFailed thrower;
 	if (button == nullptr) thrower(E_INVALIDARG);
-	if (_buttons.contains(key) == false)
+	else
 	{
-		Component::ButtonComponent* newButton = new Component::ButtonComponent();
-		DSH::Input::Component::IButtonComponent* dButton = nullptr;
-		thrower(_keyboard->GetComponent(_keyMap[key], &dButton));
-		newButton->Setup(dButton);
-		_buttons[key] = newButton;
+		if (_buttons.contains(key) == false)
+		{
+			Component::ButtonComponent* newButton = new Component::ButtonComponent();
+			DSH::Input::Component::IButtonComponent* dButton = nullptr;
+			thrower(_keyboard->GetComponent(_keyMap[key], &dButton));
+			newButton->Setup(dButton);
+			_buttons[key] = newButton;
+		}
+		*button = _buttons[key];
 	}
-	*button = _buttons[key];
 }

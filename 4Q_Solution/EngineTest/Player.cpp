@@ -31,7 +31,10 @@ void Player::PreInitialize()
 	inputManager->GetMappingContext(L"Default", &mappingContext);
 	Engine::Input::IAction* action = nullptr;
 	mappingContext->GetAction(L"Move", &action);
-	action->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value) { _movement.SetDirection(value); });
+	action->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
+	{
+		_movement.SetDirection(value);
+	});
 	action->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) { _animator.ChangeAnimation("Run"); });
 	action->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value) { _animator.ChangeAnimation("Wait"); });
 }

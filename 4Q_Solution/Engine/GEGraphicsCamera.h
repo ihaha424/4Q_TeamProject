@@ -5,7 +5,7 @@ namespace Engine::GEGraphics
 	class Camera final : public Graphics::Camera
 	{
 	public:
-		Camera() = default;
+		Camera();
 
 		void Setup(GE::ICamera* camera);
 

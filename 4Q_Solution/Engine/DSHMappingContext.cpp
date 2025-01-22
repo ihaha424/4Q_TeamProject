@@ -38,10 +38,12 @@ void Engine::DSHInput::MappingContext::GetAction(const wchar_t* name, Input::IAc
 	constexpr Utility::ThrowIfFailed thrower;
 	if (name == nullptr) thrower(E_INVALIDARG);
 	if (action == nullptr) thrower(E_INVALIDARG);
-	if (_actions.contains(name)) *action = &_actions[name];
-	DSH::Input::IAction* dshAction = nullptr;
-	thrower(_mappingContext->GetAction(name, &dshAction));
-	_actions[name].Setup(dshAction);
-	Utility::SafeRelease()(&dshAction);
+	if (_actions.contains(name) == false)
+	{
+		DSH::Input::IAction* dshAction = nullptr;
+		thrower(_mappingContext->GetAction(name, &dshAction));
+		_actions[name].Setup(dshAction);
+		Utility::SafeRelease()(&dshAction);
+	}
 	*action = &_actions[name];
 }

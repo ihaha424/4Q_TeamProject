@@ -1,6 +1,11 @@
 #include "pch.h"
 #include "GEGraphicsCamera.h"
 
+Engine::GEGraphics::Camera::Camera():
+	_camera(nullptr)
+{
+}
+
 void Engine::GEGraphics::Camera::Setup(GE::ICamera* camera)
 {
 	_camera = camera;

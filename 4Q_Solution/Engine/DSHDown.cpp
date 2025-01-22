@@ -23,24 +23,24 @@ void Engine::DSHInput::Trigger::Down::Finalize()
 
 void Engine::DSHInput::Trigger::Down::SetComponent(Input::Component::IButtonComponent* component)
 {
-	const Component::ButtonComponent* buttonComponent = static_cast<Component::ButtonComponent*>(component);
+	const Component::ButtonComponent* buttonComponent = reinterpret_cast<Component::ButtonComponent*>(component);
 	_down->SetComponent(buttonComponent->Get());
 }
 
 void Engine::DSHInput::Trigger::Down::SetComponent(Input::Component::IAxisComponent* component)
 {
-	const Component::AxisComponent* axisComponent = static_cast<Component::AxisComponent*>(component);
+	const Component::AxisComponent* axisComponent = reinterpret_cast<Component::AxisComponent*>(component);
 	_down->SetComponent(axisComponent->Get());
 }
 
 void Engine::DSHInput::Trigger::Down::AddModifier(Input::Modifier::INegative* modifier)
 {
-	const Modifier::Negative* negative = static_cast<Modifier::Negative*>(modifier);
+	const Modifier::Negative* negative = reinterpret_cast<Modifier::Negative*>(modifier);
 	_down->AddModifier(negative->Get());
 }
 
 void Engine::DSHInput::Trigger::Down::AddModifier(Input::Modifier::ISwizzleAxis* modifier)
 {
-	const Modifier::SwizzleAxis* swizzleAxis = static_cast<Modifier::SwizzleAxis*>(modifier);
+	const Modifier::SwizzleAxis* swizzleAxis = reinterpret_cast<Modifier::SwizzleAxis*>(modifier);
 	_down->AddModifier(swizzleAxis->Get());
 }

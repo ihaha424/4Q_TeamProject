@@ -76,21 +76,20 @@ void Engine::GEGraphics::Manager::Finalize()
 void Engine::GEGraphics::Manager::CreateCamera(Graphics::Camera** camera)
 {
 	if (camera == nullptr) Utility::ThrowIfFailed()(E_INVALIDARG);
-	GE::ICamera* geCamera = nullptr;
-	_cameraSystem->CreateCamera(&geCamera);
-	Camera* temp = new Camera();
-	if (temp == nullptr)
+	else
 	{
-		geCamera->Release();
-		Utility::ThrowIfFailed()(E_OUTOFMEMORY);
+		Camera* temp = new Camera();
+		if (temp == nullptr) Utility::ThrowIfFailed()(E_OUTOFMEMORY);
+		GE::ICamera* geCamera = nullptr;
+		_cameraSystem->CreateCamera(&geCamera);
+		temp->Setup(geCamera);
+		*camera = temp;
 	}
-	temp->Setup(geCamera);
-	*camera = temp;
 }
 
 void Engine::GEGraphics::Manager::RegisterCamera(const std::wstring_view name, Graphics::Camera* camera)
 {
-	const Camera* geCamera = static_cast<Camera*>(camera);
+	const Camera* geCamera = reinterpret_cast<Camera*>(camera);
 	_cameraSystem->RegisterCamera(name.data(), geCamera->Get());
 }
 

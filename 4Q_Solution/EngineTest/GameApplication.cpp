@@ -2,8 +2,6 @@
 #include "GameApplication.h"
 
 #include "TestWorld.h"
-#include "../Engine/SafeRelease.h"
-#include "../Engine/ThrowIfFailed.h"
 
 GameApplication::GameApplication(const HINSTANCE instanceHandle) :
 	Application(instanceHandle, L"Test", SIZE{ 1920, 1080 })
@@ -26,12 +24,11 @@ void GameApplication::DeclareInputActions(Engine::Input::IManager* inputManager)
 	Engine::Input::IAction* moveAction = nullptr;
 	mappingContext->GetAction(L"Move", &moveAction);
 
-	Engine::Input::Trigger::IDown* leftTrigger = nullptr;
-	moveAction->GetTrigger(&leftTrigger);
-
 	Engine::Input::Device::IKeyboard* keyboard = nullptr;
 	inputManager->GetDevice(&keyboard);
 
+	Engine::Input::Trigger::IDown* leftTrigger = nullptr;
+	moveAction->GetTrigger(&leftTrigger);
 	Engine::Input::Component::IButtonComponent* left = nullptr;
 	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::Left, &left);
 	leftTrigger->AddModifier(negative);
@@ -39,14 +36,12 @@ void GameApplication::DeclareInputActions(Engine::Input::IManager* inputManager)
 
 	Engine::Input::Trigger::IDown* rightTrigger = nullptr;
 	moveAction->GetTrigger(&rightTrigger);
-
 	Engine::Input::Component::IButtonComponent* right = nullptr;
 	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::Right, &right);
 	rightTrigger->SetComponent(right);
 
 	Engine::Input::Trigger::IDown* upTrigger = nullptr;
 	moveAction->GetTrigger(&upTrigger);
-
 	Engine::Input::Component::IButtonComponent* up = nullptr;
 	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::Up, &up);
 	upTrigger->AddModifier(swizzleAxis);

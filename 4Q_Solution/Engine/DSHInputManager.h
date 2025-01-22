@@ -36,7 +36,7 @@ namespace Engine::DSHInput
 		Device::Keyboard _keyboard;
 		Device::Controller _controller;
 
-		MappingContext* _mappingContext;
+		Input::MappingContext* _mappingContext;
 
 		std::unordered_map<std::wstring, MappingContext> _mappingContexts;
 

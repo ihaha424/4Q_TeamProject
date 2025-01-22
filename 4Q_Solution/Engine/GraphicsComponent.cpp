@@ -10,5 +10,5 @@ Engine::Component::GraphicsComponent::GraphicsComponent()
 void Engine::Component::GraphicsComponent::Setup(Modules modules)
 {
 	Component::Setup(modules);
-	_graphicsManager = static_cast<Engine::GEGraphics::Manager*>(modules.graphicsManager);
+	_graphicsManager = modules.graphicsManager;
 }

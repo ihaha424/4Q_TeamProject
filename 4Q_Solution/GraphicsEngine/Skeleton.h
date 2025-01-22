@@ -12,7 +12,6 @@ struct Bone
 
 class Skeleton : public Base
 {
-	friend class Animator;
 public:
 	explicit Skeleton() = default;
 	virtual ~Skeleton() = default;

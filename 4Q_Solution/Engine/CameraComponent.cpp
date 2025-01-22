@@ -21,6 +21,7 @@ void Engine::Component::CameraComponent::Initialize()
 	Component::Initialize();
 	_camera->SetPerspective(_nearZ, _farZ, static_cast<float>(_size.cx) / static_cast<float>(_size.cy), _fov);
 	_camera->SetPosition(0.f, 50.f, -300.f); // TODO: Get position from object.
+	_camera->SetRotationFromAngle(0.f, 0.f, 0.f);
 }
 
 void Engine::Component::CameraComponent::Attach()
@@ -44,4 +45,14 @@ void Engine::Component::CameraComponent::Finalize()
 void Engine::Component::CameraComponent::Activate() const
 {
 	_graphicsManager->SetActiveCamera(_name);
+}
+
+void Engine::Component::CameraComponent::SetPosition(Engine::Math::Vector3 position)
+{
+	_camera->SetPosition(position.x, position.y, position.z);
+}
+
+void Engine::Component::CameraComponent::SetRotation(Engine::Math::Vector3 rotation)
+{
+	_camera->SetRotationFromAngle(rotation.x, rotation.y, rotation.z);
 }

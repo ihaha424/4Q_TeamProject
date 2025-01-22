@@ -17,7 +17,6 @@ void Player::Addition()
 	//AddComponent(&_staticMesh);
 	AddComponent(&_skeltalMesh);
 	AddComponent(&_animator);
-	AddComponent(&_tempLight);
 }
 
 void Player::PreInitialize()
@@ -33,35 +32,41 @@ void Player::PreInitialize()
 	mappingContext->GetAction(L"Move", &action);
 	action->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
 	{
-		_movement.SetDirection(value);
+		_movement.SetDirection(value);		
 	});
-	action->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
-		{
-			_animator.ChangeAnimation("Run");
-			//_animator.ChangeAnimation("Combo 1Shot", 1);
+	action->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) { _animator.ChangeAnimation("Run"); });
+	action->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
+		{ 
+			_animator.ChangeAnimation("Wait"); 
+			_movement.SetDirection(Engine::Math::Vector3::Zero);
 		});
-	action->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value) { _animator.ChangeAnimation("Wait"); });
 }
 
 void Player::PostInitialize()
 {
-	_tempLight.SetType(Engine::Component::Light::Type::Directional);
-	_tempLight.SetDiffuse(1.f, 1.f, 1.f, 1.f);
-	_tempLight.SetDirection(0.f, 0.f, 1.f);
-	_tempLight.SetIntensity(1.f);
-	_tempLight.SetSpecular(1.f, 1.f, 1.f, 1.f);
-	_tempLight.SetAmbient(0.2f, 0.2f, 0.2f, 0.2f);
+	_movement.SetSpeed(100.f);	
 
 	/*_animator.SetUpSplitBone(2);
 	_animator.SplitBone(0, "Dummy_root");
 	_animator.SplitBone(1, "Bip01-Spine1");*/
 	_animator.ChangeAnimation("Wait");
 	
-	_worldMatrix = Engine::Math::Matrix::CreateScale(5.f, 5.f, 5.f);
+	_worldMatrix = Engine::Math::Matrix::CreateScale(3.f);
 }
 
 void Player::PostAttach()
 {
 	Object::PostAttach();
-	_camera.Activate();
+	_camera.Activate();	
+}
+
+void Player::PostUpdate(float deltaTime)
+{	
+	_worldMatrix = Engine::Math::Matrix::CreateScale(3.f) * Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
+
+	Engine::Math::Vector3 tempPostion = _transform.position;
+	tempPostion.z -= 300.f;
+	tempPostion.y += 300.f;
+	_camera.SetPosition(tempPostion);
+	_camera.SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
 }

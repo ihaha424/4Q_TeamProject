@@ -197,6 +197,7 @@
     <ClInclude Include="includes\IFilter.h" />
     <ClInclude Include="includes\IBloom.h" />
     <ClInclude Include="includes\IPostProcessSystem.h" />
+    <ClInclude Include="includes\Matrix4x4.h" />
     <ClInclude Include="PostProcessSystem.h" />
     <ClInclude Include="Quad.h" />
     <ClInclude Include="TextSystem.h" />
@@ -210,7 +211,6 @@
     <ClInclude Include="includes\IGraphicsSystem.h" />
     <ClInclude Include="includes\ILight.h" />
     <ClInclude Include="includes\ILightSystem.h" />
-    <ClInclude Include="includes\IMatrix.h" />
     <ClInclude Include="includes\IMeshRenderer.h" />
     <ClInclude Include="includes\IRenderSystem.h" />
     <ClInclude Include="includes\ISkyBoxRenderer.h" />
@@ -220,7 +220,6 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="LightSystem.h" />
     <ClInclude Include="Material.h" />
-    <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="DX11Renderer.h" />
@@ -267,7 +266,6 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="LightSystem.cpp" />
     <ClCompile Include="Material.cpp" />
-    <ClCompile Include="Matrix4x4.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="DX11Renderer.cpp" />

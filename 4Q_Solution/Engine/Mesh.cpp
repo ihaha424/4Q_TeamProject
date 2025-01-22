@@ -2,9 +2,9 @@
 #include "Mesh.h"
 #include "GEGraphicsManager.h"
 
-Engine::Component::Mesh::Mesh(std::filesystem::path filePath)
+Engine::Component::Mesh::Mesh(std::filesystem::path filePath, Engine::Math::Matrix* matrix)
 	: _filePath(std::move(filePath))
-	, _geMatrix(nullptr)
+	, _geMatrix(matrix)
 	, _geMeshRenderer(nullptr)
 	, _layer(0)
 {
@@ -24,6 +24,5 @@ void Engine::Component::Mesh::Detach()
 
 void Engine::Component::Mesh::Finalize()
 {
-	_geMatrix->Release();
 	_geMeshRenderer->Release();
 }

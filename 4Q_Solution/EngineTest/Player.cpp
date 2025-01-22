@@ -4,7 +4,7 @@
 Player::Player() :
 	_camera(L"MainCamera", 1.f, 1000.f, { 16,9 }, 3.141592f / 4) // TODO: Remove this.
 	//, _staticMesh(L"../Resources/FBX/char.fbx")
-	, _skeltalMesh(L"../Resources/Player/Player.X")
+	, _skeltalMesh(L"../Resources/Player/Player.X", &_worldMatrix)
 	, _animator(&_skeltalMesh)
 {
 }
@@ -35,7 +35,11 @@ void Player::PreInitialize()
 	{
 		_movement.SetDirection(value);
 	});
-	action->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) { _animator.ChangeAnimation("Run"); });
+	action->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
+		{
+			_animator.ChangeAnimation("Run");
+			//_animator.ChangeAnimation("Combo 1Shot", 1);
+		});
 	action->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value) { _animator.ChangeAnimation("Wait"); });
 }
 
@@ -48,7 +52,12 @@ void Player::PostInitialize()
 	_tempLight.SetSpecular(1.f, 1.f, 1.f, 1.f);
 	_tempLight.SetAmbient(0.2f, 0.2f, 0.2f, 0.2f);
 
+	/*_animator.SetUpSplitBone(2);
+	_animator.SplitBone(0, "Dummy_root");
+	_animator.SplitBone(1, "Bip01-Spine1");*/
 	_animator.ChangeAnimation("Wait");
+	
+	_worldMatrix = Engine::Math::Matrix::CreateScale(5.f, 5.f, 5.f);
 }
 
 void Player::PostAttach()

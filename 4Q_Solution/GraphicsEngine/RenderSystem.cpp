@@ -78,11 +78,6 @@ void RenderSystem::GetPostProcessSystem(GE::IPostProcessSystem** ppPostProcessSy
 	(*ppPostProcessSystem) = g_pPostProcessSystem;
 }
 
-void RenderSystem::CreateMatrix(GE::IMatrix** ppMatrix)
-{
-	(*ppMatrix) = new Matrix4x4;
-}
-
 void RenderSystem::CreateMeshRenderer(GE::IMeshRenderer** ppComponent, const GE::MESH_RENDERER_DESC* pDesc)
 {
 	MeshRenderer* pMeshRenderer = nullptr;
@@ -101,7 +96,7 @@ void RenderSystem::CreateMeshRenderer(GE::IMeshRenderer** ppComponent, const GE:
 	(*ppComponent) = pMeshRenderer;
 }
 
-void RenderSystem::RegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* pComponent, GE::IMatrix* pMatrix)
+void RenderSystem::RegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* pComponent, GE::Matrix4x4* pMatrix)
 {
 	g_pRenderGroup->RegisterRenderQueue(layer, pComponent, pMatrix);
 }

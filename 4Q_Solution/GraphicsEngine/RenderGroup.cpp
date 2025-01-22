@@ -8,7 +8,7 @@ void RenderGroup::Initialize(unsigned int maxLayer)
 	_maxLayer = maxLayer;
 }
 
-void RenderGroup::RegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* pMeshRenderer, GE::IMatrix* pMatrix)
+void RenderGroup::RegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* pMeshRenderer, Matrix* pMatrix)
 {
 	auto compare = [pMeshRenderer](const auto& pComponent)
 		{ return static_cast<MeshRenderer*>(pMeshRenderer)->GetID() == pComponent.first->GetID();};
@@ -19,7 +19,7 @@ void RenderGroup::RegisterRenderQueue(const unsigned int layer, GE::IMeshRendere
 		return;
 	}
 
-	_datas[layer].emplace_back(static_cast<MeshRenderer*>(pMeshRenderer), static_cast<Matrix4x4*>(pMatrix));
+	_datas[layer].emplace_back(static_cast<MeshRenderer*>(pMeshRenderer), pMatrix);
 }
 
 void RenderGroup::UnRegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* pMeshRenderer)

@@ -26,6 +26,8 @@ void Animator::Update(const float deltaTime)
 {
 	XMMATRIX identity = XMMatrixIdentity();
 
+	std::ranges::for_each(_animationTransforms, [this](Matrix& matrix) { matrix = XMMatrixIdentity();});
+
 	for (unsigned int i = 0; i < _maxSplit; i++)
 	{
 		const Animation::Channel& animation = _animation->_animations[_controllers[i].animation];
@@ -38,54 +40,55 @@ void Animator::Update(const float deltaTime)
 			_controllers[i].playTime = 0.f;
 			_root = XMMatrixIdentity();
 		}
-	}
 
-	/*XMMATRIX prevRoot = _root;*/
-	UpdateAnimationTransform(_pSkeleton->_rootBone, identity, _controllers.data());
+		/*XMMATRIX prevRoot = _root;*/
 
-	/*XMVECTOR deltaPosition = XMVectorSubtract(_root.Translation(), prevRoot.r[3]);
-	deltaPosition.m128_f32[1] = 0.f;*/
-	
+		UpdateAnimationTransform(_pSkeleton->_rootBone, identity, _controllers.data());
 
-	if (_blendInfo.isBlending)
-	{
-		/*Animation& prevAnimation = _animations[_blendInfo.prevAnimation];
-		_blendInfo.prevPlayTime += prevAnimation.ticksPerSecond * deltaTime;
-		_blendInfo.prevPlayTime = fmod(_blendInfo.prevPlayTime, prevAnimation.duration);
+		/*XMVECTOR deltaPosition = XMVectorSubtract(_root.Translation(), prevRoot.r[3]);
+		deltaPosition.m128_f32[1] = 0.f;*/
 
-		if (_blendInfo.prevPlayTime > prevAnimation.lastTime)
-			_blendInfo.prevPlayTime = 0.f;*/
 
-		if (1.f <= _blendInfo.blendTime)
+		//if (_blendInfo.isBlending)
+		//{
+		//	/*Animation& prevAnimation = _animations[_blendInfo.prevAnimation];
+		//	_blendInfo.prevPlayTime += prevAnimation.ticksPerSecond * deltaTime;
+		//	_blendInfo.prevPlayTime = fmod(_blendInfo.prevPlayTime, prevAnimation.duration);
+
+		//	if (_blendInfo.prevPlayTime > prevAnimation.lastTime)
+		//		_blendInfo.prevPlayTime = 0.f;*/
+
+		//	if (1.f <= _blendInfo.blendTime)
+		//	{
+		//		_blendInfo.blendTime = 0.f;
+		//		_blendInfo.isBlending = false;
+		//	}
+		//	else
+		//	{
+		//		std::vector<Matrix> currTransform(std::move(_animationTransforms));
+		//		_animationTransforms.resize(MAX_BONE_MATRIX);
+
+		//		UpdateAnimationTransform(_pSkeleton->_rootBone, identity, _prevControllers.data());
+
+		//		//float cubic = sqrt(1 - powf(_blendInfo.blendTime - 1.f, 2));
+		//		float easing = 1 - (1 - _blendInfo.blendTime) * (1 - _blendInfo.blendTime);
+
+		//		for (size_t i = 0; i < MAX_BONE_MATRIX; i++)
+		//		{
+		//			_animationTransforms[i] = BlendAnimationMatrix(XMMatrixTranspose(_animationTransforms[i]),
+		//				XMMatrixTranspose(currTransform[i]),
+		//				easing);
+		//		}
+		//	}
+
+		//	_blendInfo.blendTime += deltaTime * 5.f;
+		//}
+
+		/*if (5.f >= XMVector3Length(deltaPosition).m128_f32[0])
 		{
-			_blendInfo.blendTime = 0.f;
-			_blendInfo.isBlending = false;
-		}
-		else
-		{
-			std::vector<Matrix> currTransform(std::move(_animationTransforms));
-			_animationTransforms.resize(MAX_BONE_MATRIX);
-
-			UpdateAnimationTransform(_pSkeleton->_rootBone, identity, _prevControllers.data());
-
-			//float cubic = sqrt(1 - powf(_blendInfo.blendTime - 1.f, 2));
-			float easing = 1 - (1 - _blendInfo.blendTime) * (1 - _blendInfo.blendTime);
-
-			for (size_t i = 0; i < MAX_BONE_MATRIX; i++)
-			{
-				_animationTransforms[i] = BlendAnimationMatrix(XMMatrixTranspose(_animationTransforms[i]), 
-															   XMMatrixTranspose(currTransform[i]),
-															   easing);
-			}
-		}
-
-		_blendInfo.blendTime += deltaTime * 5.f;
+			_pTransform->_position += XMVector3TransformCoord(deltaPosition, XMMatrixRotationY(_pTransform->_rotation.y + XM_PIDIV2));
+		}*/
 	}
-
-	/*if (5.f >= XMVector3Length(deltaPosition).m128_f32[0])
-	{
-		_pTransform->_position += XMVector3TransformCoord(deltaPosition, XMMatrixRotationY(_pTransform->_rotation.y + XM_PIDIV2));
-	}*/
 }
 
 void Animator::Release()
@@ -193,7 +196,7 @@ void Animator::UpdateAnimationTransform(const Bone& skeletion,
 
 	if (-1 != skeletion.id)
 	{
-		_animationTransforms[skeletion.id] = XMMatrixTranspose(skeletion.offset * globalTransform);
+		_animationTransforms[skeletion.id] += XMMatrixTranspose(skeletion.offset * globalTransform);
 	}
 
 	for (const Bone& child : skeletion.children)

@@ -2,8 +2,8 @@
 #include "StaticMesh.h"
 #include "GEGraphicsManager.h"
 
-Engine::Component::StaticMesh::StaticMesh(std::filesystem::path filePath)
-	: Mesh(std::move(filePath))
+Engine::Component::StaticMesh::StaticMesh(std::filesystem::path filePath, Engine::Math::Matrix* matrix)
+	: Mesh(std::move(filePath), matrix)
 {
 }
 
@@ -17,5 +17,4 @@ void Engine::Component::StaticMesh::Initialize()
 
 	auto renderSystem = _graphicsManager->GetRenderSystem();
 	renderSystem->CreateMeshRenderer(&_geMeshRenderer, &desc);
-	renderSystem->CreateMatrix(&_geMatrix);
 }

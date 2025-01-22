@@ -3,14 +3,13 @@
 
 namespace GE
 {
-	class IMatrix;
 	class IMeshRenderer;
 }
 
 class MeshRenderer;
 class RenderGroup : public Base
 {
-	using RenderData = std::pair<MeshRenderer*, Matrix4x4*>;
+	using RenderData = std::pair<MeshRenderer*, Matrix*>;
 public:
 	explicit RenderGroup() = default;
 	virtual ~RenderGroup() = default;
@@ -22,7 +21,7 @@ public:
 
 public:
 	void Initialize(const unsigned int maxLayer);
-	void RegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* pMeshRenderer, GE::IMatrix* pMatrix);
+	void RegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* pMeshRenderer, Matrix* pMatrix);
 	void UnRegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* pMeshRenderer);
 
 private:

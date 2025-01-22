@@ -17,9 +17,8 @@ public:
 
 	void GetTextSystem(GE::ITextSystem** ppTextSystem) override;
 	void GetPostProcessSystem(GE::IPostProcessSystem** ppPostProcessSystem) override;
-	void CreateMatrix(GE::IMatrix** ppMatrix) override;
 	void CreateMeshRenderer(GE::IMeshRenderer** ppComponent, const GE::MESH_RENDERER_DESC* pDesc) override;
-	void RegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* pComponent, GE::IMatrix* pMatrix) override;
+	void RegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* pComponent, GE::Matrix4x4* pMatrix) override;
 	void UnRegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* pComponent) override;
 
 private:

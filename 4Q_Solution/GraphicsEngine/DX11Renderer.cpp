@@ -97,7 +97,7 @@ void DX11Renderer::Render()
 		for (const auto& [component, matrix] : renderData[i])
 		{
 			auto& model = component->GetModel();
-			_matrices[ID] = XMMatrixTranspose(XMMATRIX(&matrix->_11));
+			_matrices[ID] = XMMatrixTranspose(*matrix);
 
 			switch (component->GetType())
 			{

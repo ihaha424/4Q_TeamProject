@@ -238,6 +238,9 @@
     <Filter Include="Math\EasingFunction">
       <UniqueIdentifier>{621911fa-b5b7-4b62-88c5-14740221bb4d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math\Matrix">
+      <UniqueIdentifier>{63280bb6-83dd-4f40-8cc0-6086687df9b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -450,6 +453,9 @@
     <ClInclude Include="DotTween.h">
       <Filter>Math\EasingFunction</Filter>
     </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>Math\Matrix</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -625,6 +631,9 @@
     </ClCompile>
     <ClCompile Include="EasingFunction.cpp">
       <Filter>Math\EasingFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix.cpp">
+      <Filter>Math\Matrix</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -40,9 +40,6 @@
     <Filter Include="00. Common\Camera">
       <UniqueIdentifier>{0d968dc4-1eb0-4d4e-a8b4-f7e77012d5cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00. Common\Matrix4x4">
-      <UniqueIdentifier>{6dfff225-7f7d-45a0-afba-61d4550a9404}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. CameraSystem">
       <UniqueIdentifier>{bf13769a-48d0-4b3a-9cad-f4c321ebceb9}</UniqueIdentifier>
     </Filter>
@@ -231,9 +228,6 @@
     <ClInclude Include="GraphicsSystem.h">
       <Filter>01. GraphicsSystem</Filter>
     </ClInclude>
-    <ClInclude Include="Matrix4x4.h">
-      <Filter>00. Common\Matrix4x4</Filter>
-    </ClInclude>
     <ClInclude Include="RenderSystem.h">
       <Filter>02. RenderSystem</Filter>
     </ClInclude>
@@ -330,9 +324,6 @@
     <ClInclude Include="includes\ILight.h">
       <Filter>97. Include\Component</Filter>
     </ClInclude>
-    <ClInclude Include="includes\IMatrix.h">
-      <Filter>97. Include\Component</Filter>
-    </ClInclude>
     <ClInclude Include="includes\IMeshRenderer.h">
       <Filter>97. Include\Component</Filter>
     </ClInclude>
@@ -344,6 +335,9 @@
     </ClInclude>
     <ClInclude Include="Quad.h">
       <Filter>08. DX11\Quad</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\Matrix4x4.h">
+      <Filter>97. Include\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -415,9 +409,6 @@
     </ClCompile>
     <ClCompile Include="GraphicsSystem.cpp">
       <Filter>01. GraphicsSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix4x4.cpp">
-      <Filter>00. Common\Matrix4x4</Filter>
     </ClCompile>
     <ClCompile Include="RenderSystem.cpp">
       <Filter>02. RenderSystem</Filter>

@@ -7,7 +7,7 @@ namespace Engine::Component
     {
         friend class Animator;
     public:
-        SkeletalMesh(std::filesystem::path filePath);
+        SkeletalMesh(std::filesystem::path filePath, Engine::Math::Matrix* matrix);
 
     public:
         void Initialize() override;  

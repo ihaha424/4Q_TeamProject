@@ -17,5 +17,6 @@ private:
 	Engine::Component::SkeletalMesh _skeltalMesh;
 	Engine::Component::Animator _animator;
 	Engine::Component::Light _tempLight;
+	Engine::Math::Matrix _worldMatrix;
 };
 

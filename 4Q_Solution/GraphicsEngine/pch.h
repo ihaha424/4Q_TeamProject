@@ -40,7 +40,7 @@ using namespace DirectX::SimpleMath;
 #include "Extern.h"
 #include "Struct.h"
 #include "Enum.h"
-#include "Matrix4x4.h"
+#include "includes/Matrix4x4.h"
 
 // Global
 #include "GraphicDevice.h"

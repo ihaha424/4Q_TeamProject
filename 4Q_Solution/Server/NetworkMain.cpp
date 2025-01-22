@@ -144,6 +144,7 @@ void NetworkMain::IOWork(HANDLE completionPort)
 				printf("[IOWork] Socket Closed.\n");
 				SessionID sid = session->GetSessionID();
 				delete session;
+				_sessionMap[sid] = nullptr;
 				delete socket;
 
 				_sessionMap.erase(sid);
@@ -158,6 +159,8 @@ void NetworkMain::IOWork(HANDLE completionPort)
 		}
 		else if (byteTransferred == SEND) {
 			Session* session = (Session*)completionKey;
+			if (session == nullptr) continue;
+
 			session->SendUpdate();
 		}
 		else {

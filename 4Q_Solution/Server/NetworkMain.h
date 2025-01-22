@@ -10,6 +10,7 @@ class PacketDispatcher;
 using CompletionPortContainer = std::vector<HANDLE>;
 using SessionMap = std::unordered_map<SessionID, Session*>;
 using AcceptOverlappedContainer = std::vector<AcceptOverlapped>;
+using SendProcessing = std::map<SessionID, bool>;
 
 #define SEND DWMAX - 1
 
@@ -34,6 +35,8 @@ private:
 	
 	AcceptOverlapped _acceptOverlapped1;
 	AcceptOverlapped _acceptOverlapped2;
+
+	SendProcessing _sessionProcessCheck;
 
 	ULL _bufferSize = 0;
 	ULL _threadCount = 0;

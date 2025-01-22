@@ -44,25 +44,25 @@ void NetworkTemp::Dispatch()
 		{
 			_enterAccept.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
 
-			curPlayer._serialNumber = _enterAccept.grantnumber();
+			//curPlayer._serialNumber = _enterAccept.grantnumber();
 
 			break;
 		}
 		case PacketID::Sync:
 		{
-			_syncPlayer.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
-			if (curPlayer._serialNumber == _syncPlayer.serialnumber()) {
-				curPlayer._serialNumber = _syncPlayer.serialnumber();
-				curPlayer._x = _syncPlayer.x();
-				curPlayer._y = _syncPlayer.y();
-				curPlayer._z = _syncPlayer.z();
-			}
-			else {
-				remotePlayer._serialNumber = _syncPlayer.serialnumber();
-				remotePlayer._x = _syncPlayer.x();
-				remotePlayer._y = _syncPlayer.y();
-				remotePlayer._z = _syncPlayer.z();
-			}
+			//_syncPlayer.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+			//if (curPlayer._serialNumber == _syncPlayer.serialnumber()) {
+			//	curPlayer._serialNumber = _syncPlayer.serialnumber();
+			//	curPlayer._x = _syncPlayer.x();
+			//	curPlayer._y = _syncPlayer.y();
+			//	curPlayer._z = _syncPlayer.z();
+			//}
+			//else {
+			//	remotePlayer._serialNumber = _syncPlayer.serialnumber();
+			//	remotePlayer._x = _syncPlayer.x();
+			//	remotePlayer._y = _syncPlayer.y();
+			//	remotePlayer._z = _syncPlayer.z();
+			//}
 
 			break;
 		}

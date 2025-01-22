@@ -1,6 +1,7 @@
 #pragma once
 #include "Server/ClientEntrance.h"	
 #include "../Packet/ProtoInclude.h"
+#include "../Packet/PacketID.h"
 
 class NetworkTemp
 {
@@ -23,8 +24,8 @@ public:
 private:
 	PacketQueue* msgContainer = nullptr;
 
-	std::function<void(float...)> _syncCallback;
-	std::function<void(float...)> _enterSync;
+	std::function<void(float, float, float, float)> _moveSync;
+	std::function<void(float, float, float)> _enterSync;
 
 	ConnectMsg::EnterAccept _enterAccept;
 	ConnectMsg::Exit Exit;

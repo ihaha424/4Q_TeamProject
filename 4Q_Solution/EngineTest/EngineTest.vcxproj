@@ -168,9 +168,18 @@
     <ClInclude Include="TestWorld.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Packet\Connect.pb.cc" />
-    <ClCompile Include="..\Packet\Move.pb.cc" />
-    <ClCompile Include="..\Packet\Play.pb.cc" />
+    <ClCompile Include="..\Packet\Connect.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\Packet\Move.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\Packet\Play.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="GameApplication.cpp" />
     <ClCompile Include="GlobalLight.cpp" />
     <ClCompile Include="main.cpp" />

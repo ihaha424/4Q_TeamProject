@@ -86,7 +86,9 @@ void DX11Renderer::Render()
 
 	const auto* renderData = g_pRenderGroup->GetRenderDatas();
 	const unsigned int maxLayer = g_pRenderGroup->GetMaxLayer();
-	std::vector<std::pair<std::list<Mesh*>, std::list<Mesh*>>> meshes;
+
+	
+	std::vector<std::pair<std::list<DrawData>, std::list<DrawData>>> meshes;
 	std::list<SkyBoxRenderer*> skyBoxes;
 	
 	meshes.resize(maxLayer);
@@ -114,15 +116,13 @@ void DX11Renderer::Render()
 
 			for (auto& mesh : model->_meshs)
 			{
-				mesh->SetID(ID);
-
 				if (mesh->_pMaterial->IsAlpha())
 				{
-					meshes[i].second.push_back(mesh);
+					meshes[i].second.emplace_back(ID, mesh);
 				}
 				else
 				{
-					meshes[i].first.push_back(mesh);
+					meshes[i].first.emplace_back(ID, mesh);
 				}
 			}
 
@@ -201,6 +201,7 @@ void DX11Renderer::ShadowPass()
 	auto prevType = MeshType::End;
 	unsigned int offset[2]{ 0, MAX_BONE_MATRIX };
 
+	unsigned int ID = 0;
 	for (unsigned int i = 0; i < maxLayer; i++)
 	{
 		for (auto& [component, matrix] : renderDatas[i])
@@ -214,9 +215,9 @@ void DX11Renderer::ShadowPass()
 
 			std::shared_ptr<Model>& model = component->GetModel();
 
+			offset[0] = ID++;
 			for (auto& mesh : model->_meshs)
 			{
-				offset[0] = mesh->GetID();
 				g_pConstantBuffer->UpdateConstantBuffer(L"ModelIndex", &offset);
 				mesh->_pVIBuffer->SetParameters(_pDeviceContext);
 				mesh->_pVIBuffer->DrawIndexed(_pDeviceContext);
@@ -227,7 +228,7 @@ void DX11Renderer::ShadowPass()
 	_pDeviceContext->OMSetRenderTargets(0, nullptr, nullptr);
 }
 
-void DX11Renderer::DeferredPass(std::list<Mesh*>& renderData, ID3D11RenderTargetView* pRTV)
+void DX11Renderer::DeferredPass(std::list<DrawData>& renderData, ID3D11RenderTargetView* pRTV)
 {
 	SetViewport(g_width, g_height);
 
@@ -257,7 +258,7 @@ void DX11Renderer::DeferredPass(std::list<Mesh*>& renderData, ID3D11RenderTarget
 	_pDeviceContext->PSSetShaderResources(0, End + 1, nullSRV);
 }
 
-void DX11Renderer::ForwardPass(std::list<Mesh*>& renderData, ID3D11RenderTargetView* pRTV)
+void DX11Renderer::ForwardPass(std::list<DrawData>& renderData, ID3D11RenderTargetView* pRTV)
 {
 	float blendFactor[4]{ 0.f, 0.f, 0.f, 0.f };
 
@@ -316,13 +317,13 @@ void DX11Renderer::BlendPass()
 	}
 }
 
-void DX11Renderer::RenderMesh(std::list<Mesh*>& renderData, std::shared_ptr<PixelShader>& pixelShader)
+void DX11Renderer::RenderMesh(std::list<DrawData>& renderData, std::shared_ptr<PixelShader>& pixelShader)
 {
 	unsigned int offset[2]{ 0, MAX_BONE_MATRIX };
 
-	for (auto& mesh : renderData)
+	for (auto& [ID, mesh] : renderData)
 	{
-		offset[0] = mesh->GetID();
+		offset[0] = ID;
 		g_pConstantBuffer->UpdateConstantBuffer(L"ModelIndex", &offset);
 		mesh->SetVertexShader();
 		mesh->_pVIBuffer->SetParameters(_pDeviceContext);

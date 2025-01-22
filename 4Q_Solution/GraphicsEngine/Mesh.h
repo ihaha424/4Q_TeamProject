@@ -25,11 +25,7 @@ public:
 	virtual ~Mesh() = default;
 
 public:
-	const unsigned int GetID() const { return _ID; }
-
-public:
 	void SetVertexShader();
-	void SetID(unsigned int ID) { _ID = ID; }
 
 public:
 	void BindMaterial(Material* pMaterial) { _pMaterial = pMaterial; }
@@ -43,5 +39,4 @@ private:
 	std::shared_ptr<VertexShader>	_vertexShader;
 	VIBuffer*						_pVIBuffer{ nullptr };
 	Material*						_pMaterial{ nullptr };
-	unsigned int					_ID{ 0 };
 };

@@ -149,20 +149,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Packet\Connect.pb.h" />
+    <ClInclude Include="..\Packet\Move.pb.h" />
+    <ClInclude Include="..\Packet\PacketID.h" />
+    <ClInclude Include="..\Packet\Play.pb.h" />
+    <ClInclude Include="..\Packet\ProtoInclude.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameApplication.h" />
     <ClInclude Include="GlobalLight.h" />
+    <ClInclude Include="NetworkTemp.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RemoteMoveComponent.h" />
+    <ClInclude Include="RemotePlayer.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TestWorld.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Packet\Connect.pb.cc" />
+    <ClCompile Include="..\Packet\Move.pb.cc" />
+    <ClCompile Include="..\Packet\Play.pb.cc" />
     <ClCompile Include="GameApplication.cpp" />
     <ClCompile Include="GlobalLight.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NetworkTemp.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">pch.h</PrecompiledHeaderFile>
@@ -170,6 +182,8 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RemoteMoveComponent.cpp" />
+    <ClCompile Include="RemotePlayer.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TestWorld.cpp" />
   </ItemGroup>

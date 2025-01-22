@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
@@ -37,6 +33,16 @@
     <Filter Include="Objects\Terrain">
       <UniqueIdentifier>{ddef3b3c-4fd2-4006-b66a-8dbe813d27c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="NetworkTemp">
+      <UniqueIdentifier>{b5913cd3-6dde-4b26-bdaf-193656eb9409}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Proto">
+      <UniqueIdentifier>{b8424033-157c-4c0a-bc0c-a103550c8451}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -66,6 +72,30 @@
     <ClInclude Include="Terrain.h">
       <Filter>Objects\Terrain</Filter>
     </ClInclude>
+    <ClInclude Include="RemotePlayer.h">
+      <Filter>Objects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="RemoteMoveComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTemp.h">
+      <Filter>NetworkTemp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\Connect.pb.h">
+      <Filter>Proto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\Move.pb.h">
+      <Filter>Proto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\PacketID.h">
+      <Filter>Proto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\Play.pb.h">
+      <Filter>Proto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\ProtoInclude.h">
+      <Filter>Proto</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -88,6 +118,24 @@
     </ClCompile>
     <ClCompile Include="Terrain.cpp">
       <Filter>Objects\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="RemotePlayer.cpp">
+      <Filter>Objects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="RemoteMoveComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkTemp.cpp">
+      <Filter>NetworkTemp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packet\Connect.pb.cc">
+      <Filter>Proto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packet\Move.pb.cc">
+      <Filter>Proto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packet\Play.pb.cc">
+      <Filter>Proto</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -7,4 +7,5 @@ void TestWorld::Addition()
 	AddObject(&_player);
 	AddObject(&_light);
 	AddObject(&_terrain);
+	AddObject(&_remote);
 }

@@ -178,6 +178,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Component.h" />
     <ClInclude Include="Components.h" />
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="DotTween.h" />
     <ClInclude Include="Down.h" />
     <ClInclude Include="Drive.h" />
     <ClInclude Include="DSHAction.h" />
@@ -192,6 +193,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="DSHNegative.h" />
     <ClInclude Include="DSHSwizzleAxis.h" />
     <ClInclude Include="DSHTimeManager.h" />
+    <ClInclude Include="EasingFunction.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GEGraphicsCamera.h" />
@@ -246,6 +248,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="DotTween.cpp" />
     <ClCompile Include="Down.cpp" />
     <ClCompile Include="Drive.cpp" />
     <ClCompile Include="DSHAction.cpp" />
@@ -260,6 +263,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="DSHNegative.cpp" />
     <ClCompile Include="DSHSwizzleAxis.cpp" />
     <ClCompile Include="DSHTimeManager.cpp" />
+    <ClCompile Include="EasingFunction.cpp" />
     <ClCompile Include="GEGraphicsCamera.cpp" />
     <ClCompile Include="GEGraphicsManager.cpp" />
     <ClCompile Include="GraphicsCamera.cpp" />

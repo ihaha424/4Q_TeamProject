@@ -229,6 +229,9 @@
     <Filter Include="Components\Light">
       <UniqueIdentifier>{334cd88b-40c4-4078-96f2-ee51408eb90c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math\EasingFunction">
+      <UniqueIdentifier>{621911fa-b5b7-4b62-88c5-14740221bb4d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -432,6 +435,12 @@
     <ClInclude Include="GraphicsComponent.h">
       <Filter>Components\Component</Filter>
     </ClInclude>
+    <ClInclude Include="EasingFunction.h">
+      <Filter>Math\EasingFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="DotTween.h">
+      <Filter>Math\EasingFunction</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -598,6 +607,12 @@
     </ClCompile>
     <ClCompile Include="GraphicsComponent.cpp">
       <Filter>Components\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="DotTween.cpp">
+      <Filter>Math\EasingFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="EasingFunction.cpp">
+      <Filter>Math\EasingFunction</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

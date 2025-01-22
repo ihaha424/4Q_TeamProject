@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "IScene.h"
 
-namespace Physics
+namespace PhysicsEngineAPI
 {
 	unsigned int IScene::GetSceneNumber()
 	{

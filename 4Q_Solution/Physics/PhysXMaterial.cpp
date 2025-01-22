@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "PhysXMaterial.h"
 
-namespace Physics
+namespace PhysicsEngineAPI
 {
 	PhysXMaterial::PhysXMaterial(physx::PxMaterial* _material)
 		: material{ _material }

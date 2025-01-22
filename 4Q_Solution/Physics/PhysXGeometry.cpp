@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "PhysXGeometry.h"
 
-using namespace Physics::Utils::DataStructure;
+using namespace PhysicsEngineAPI::Utils::DataStructure;
 
-namespace Physics
+namespace PhysicsEngineAPI
 {
 	PhysXGeometry::PhysXGeometry(physx::PxGeometry* _geometry)
 		: geometry{ _geometry }

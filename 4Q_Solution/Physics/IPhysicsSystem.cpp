@@ -4,7 +4,7 @@
 
 #include "IScene.h"
 
-namespace Physics
+namespace PhysicsEngineAPI
 {
     bool CreateSystem(_OUT_ IPhysicsSystem** physicsSystem, IPhysicsSystem::PhysicsType flag)
     {

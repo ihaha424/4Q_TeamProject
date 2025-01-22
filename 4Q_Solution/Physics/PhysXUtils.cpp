@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "PhysXUtils.h"
 
-namespace Physics
+namespace PhysicsEngineAPI
 {
 	physx::PxVec3 Vector3ToPxVec3(const Utils::Math::Vector3& vector3)
 	{

@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "PhysXKinematicActor.h"
 
-namespace Physics
+namespace PhysicsEngineAPI
 {
 	PhysXKinematicActor::PhysXKinematicActor(physx::PxRigidDynamic* actor)
 		: PhysXDynamicActor(actor)

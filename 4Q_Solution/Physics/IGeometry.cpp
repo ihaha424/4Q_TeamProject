@@ -2,7 +2,7 @@
 #include "IGeometry.h"
 
 
-namespace Physics
+namespace PhysicsEngineAPI
 {
 	Utils::DataStructure::GeometryShape IGeometry::SetType(Utils::DataStructure::GeometryShape type)
 	{

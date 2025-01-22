@@ -238,6 +238,18 @@
     <Filter Include="Math\EasingFunction">
       <UniqueIdentifier>{621911fa-b5b7-4b62-88c5-14740221bb4d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Interfaces\Physics">
+      <UniqueIdentifier>{5b868709-48db-4353-86c0-77039d234230}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\PhysicsEngine">
+      <UniqueIdentifier>{f40f0b9d-9b13-46f7-bbcb-39476d238e5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\Manager">
+      <UniqueIdentifier>{d7375d06-09bd-45e8-85a7-73fab5ebb018}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\PhysicsEngine\Manager">
+      <UniqueIdentifier>{8540ef46-3413-4a41-8394-85db345430f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -450,6 +462,15 @@
     <ClInclude Include="DotTween.h">
       <Filter>Math\EasingFunction</Filter>
     </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>Modules\Interfaces\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsManager.h">
+      <Filter>Modules\Interfaces\Physics\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngineManager.h">
+      <Filter>Modules\Difinition\PhysicsEngine\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -625,6 +646,12 @@
     </ClCompile>
     <ClCompile Include="EasingFunction.cpp">
       <Filter>Math\EasingFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsManager.cpp">
+      <Filter>Modules\Interfaces\Physics\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngineManager.cpp">
+      <Filter>Modules\Difinition\PhysicsEngine\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

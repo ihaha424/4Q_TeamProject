@@ -2,7 +2,7 @@
 #include "PhysxCollision.h"
 
 using namespace physx;
-namespace Physics
+namespace PhysicsEngineAPI
 {
 	void PhysxCollisionEvent::onContact(const PxContactPairHeader& pairHeader, const PxContactPair* pairs, PxU32 nbPairs)
 	{

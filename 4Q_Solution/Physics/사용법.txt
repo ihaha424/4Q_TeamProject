@@ -89,15 +89,15 @@
 1. Basic Initialize
 
 	1.1 IPhysicsSystem초기화
-		Physics::IPhysicsSystem* physics;
+		IPhysicsSystem* physics;
 
 		// 어떠한 PhysicsSystem을 사용 할지 정한 후 초기화 & Physics모드 만들기(default true)
-		Physics::CreateSystem(&physics, Physics::IPhysicsSystem::Physx);
+		CreateSystem(&physics, IPhysicsSystem::Physx);
 		physics->CreatePhysics(true);
 
 	1.2 IScene초기화
-		Physics::IScene* m_physicsScene;
-		Physics::Utils::Description::SceneDesc sceneDesc;
+		IScene* m_physicsScene;
+		Utils::Description::SceneDesc sceneDesc;
 
 		// SceneDesc을 통해 중력과 CPU쓰래드 갯수를 정한 후
 		sceneDesc.gravity = { 0.0f, -9.81f * 5.f, 0.0f };
@@ -108,18 +108,18 @@
 
 	1.3 Object 만들기
 		// Object 생성
-		Physics::IObject* object;
-		physics->CreateObject(&object, Physics::Utils::DataStructure::RigidBodyType::Dynamic)
+		IObject* object;
+		physics->CreateObject(&object, Utils::DataStructure::RigidBodyType::Dynamic)
 
 		// Shape 생성
-		Physics::IShape* Shape;
-		Physics::IGeometry* Geometry;
-		Physics::IMaterial* Material;
+		IShape* Shape;
+		IGeometry* Geometry;
+		IMaterial* Material;
 
 		// Shape 생성을 위한 Geometry 생성
 			// GeometryDesc 설정 후 생성 GeometryDesc 예제의 경우 Box
-		Physics::Utils::Description::GeometryDesc geometryDesc;
-		geometryDesc.type = Physics::Utils::DataStructure::GeometryShape::Box;
+		Utils::Description::GeometryDesc geometryDesc;
+		geometryDesc.type = Utils::DataStructure::GeometryShape::Box;
 		geometryDesc.data = { 10, 10, 10 };
 		physics->CreateGeometry(&tempGeometry, geometryDesc);
 

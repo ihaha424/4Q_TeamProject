@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "PhysXShape.h"
 
-namespace Physics
+namespace PhysicsEngineAPI
 {
 	PhysXShape::PhysXShape(physx::PxShape* _shape)
 		: shape{ _shape }

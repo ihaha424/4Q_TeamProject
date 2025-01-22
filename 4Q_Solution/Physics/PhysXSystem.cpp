@@ -4,7 +4,7 @@
 #include "PhysXElement.h"
 #include "PhysxCollision.h"
 
-namespace Physics
+namespace PhysicsEngineAPI
 {
 	using namespace Utils::DataStructure;
 
@@ -492,11 +492,11 @@ namespace Physics
 
 	bool PhysXSystem::CreateDynamic(
 		_OUT_ IDynamicObject** destObject, 
-		const Physics::Utils::Math::Transform& _transform, 
+		const Utils::Math::Transform& _transform, 
 		const IGeometry* _geometry, 
 		IMaterial* _material,
 		float density, 
-		const Physics::Utils::Math::Transform& _shapeOffset)
+		const Utils::Math::Transform& _shapeOffset)
 	{
 		physx::PxTransform transform = { {_transform.position.x, _transform.position.y, _transform.position.z}, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} };
 		const PhysXGeometry* geometry = dynamic_cast<const PhysXGeometry*>(_geometry);
@@ -522,7 +522,7 @@ namespace Physics
 
 	bool PhysXSystem::CreateDynamic(
 		_OUT_ IDynamicObject** destObject, 
-		const Physics::Utils::Math::Transform& _transform, 
+		const Utils::Math::Transform& _transform, 
 		IShape* _shape, 
 		float density)
 	{
@@ -544,11 +544,11 @@ namespace Physics
 
 	bool PhysXSystem::CreateKinematic(
 		_OUT_ IKinematicObject** destObject, 
-		const Physics::Utils::Math::Transform& _transform, 
+		const Utils::Math::Transform& _transform, 
 		const IGeometry* _geometry, 
 		IMaterial* _material, 
 		float density, 
-		const Physics::Utils::Math::Transform& _shapeOffset)
+		const Utils::Math::Transform& _shapeOffset)
 	{
 		physx::PxTransform transform = { {_transform.position.x, _transform.position.y, _transform.position.z}, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} };
 		const PhysXGeometry* geometry = dynamic_cast<const PhysXGeometry*>(_geometry);
@@ -572,7 +572,7 @@ namespace Physics
 
 	bool PhysXSystem::CreateKinematic(
 		_OUT_ IKinematicObject** destObject, 
-		const Physics::Utils::Math::Transform& _transform, 
+		const Utils::Math::Transform& _transform, 
 		IShape* _shape, 
 		float density)
 	{
@@ -594,10 +594,10 @@ namespace Physics
 
 	bool PhysXSystem::CreateStatic(
 		_OUT_ IStaticObject** destObject, 
-		const Physics::Utils::Math::Transform& _transform, 
+		const Utils::Math::Transform& _transform, 
 		const IGeometry* _geometry, 
 		IMaterial* _material, 
-		const Physics::Utils::Math::Transform& _shapeOffset)
+		const Utils::Math::Transform& _shapeOffset)
 	{
 		physx::PxTransform transform = { {_transform.position.x, _transform.position.y, _transform.position.z}, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} };
 		const PhysXGeometry* geometry = dynamic_cast<const PhysXGeometry*>(_geometry);
@@ -621,7 +621,7 @@ namespace Physics
 
 	bool PhysXSystem::CreateStatic(
 		_OUT_ IStaticObject** destObject, 
-		const Physics::Utils::Math::Transform& _transform, 
+		const Utils::Math::Transform& _transform, 
 		IShape* _shape)
 	{
 		physx::PxTransform transform = { {_transform.position.x, _transform.position.y, _transform.position.z}, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} };
@@ -661,7 +661,7 @@ namespace Physics
 
 	bool PhysXSystem::CloneStatic(
 		_OUT_ IStaticObject** destObject, 
-		const Physics::Utils::Math::Transform& _transform, 
+		const Utils::Math::Transform& _transform, 
 		const IObject* _object)
 	{
 		physx::PxTransform transform = { {_transform.position.x, _transform.position.y, _transform.position.z}, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} };
@@ -681,7 +681,7 @@ namespace Physics
 
 	bool PhysXSystem::CloneDynamic(
 		_OUT_ IDynamicObject** destObject, 
-		const Physics::Utils::Math::Transform& _transform, 
+		const Utils::Math::Transform& _transform, 
 		const IObject* _object)
 	{
 		physx::PxTransform transform = { {_transform.position.x, _transform.position.y, _transform.position.z}, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} };

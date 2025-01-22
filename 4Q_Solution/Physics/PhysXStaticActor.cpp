@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "PhysXStaticActor.h"
 
-namespace Physics
+namespace PhysicsEngineAPI
 {
 	PhysXStaticActor::PhysXStaticActor(physx::PxRigidStatic* actor)
 		: PhysXActor(actor)

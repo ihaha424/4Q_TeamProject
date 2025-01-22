@@ -2,8 +2,8 @@
 #include "PhysXActor.h"
 #include "PhysXShape.h"
 
-using namespace Physics::Utils::DataStructure;
-namespace Physics
+using namespace  PhysicsEngineAPI::Utils::DataStructure;
+namespace PhysicsEngineAPI
 {
 	PhysXActor::PhysXActor(physx::PxRigidActor* _actor)
 		: actor{ _actor }

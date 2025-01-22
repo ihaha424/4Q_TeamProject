@@ -4,9 +4,9 @@
 #include "PhysXGeometry.h"
 
 using namespace physx;
-using namespace Physics::Utils::DataStructure;
+using namespace PhysicsEngineAPI::Utils::DataStructure;
 
-namespace Physics
+namespace PhysicsEngineAPI
 {
 	PhysXScene::PhysXScene()
 		: scene{ nullptr }
@@ -34,7 +34,7 @@ namespace Physics
 		//TODO:
 	}
 
-	bool PhysXScene::Raycast(Utils::DataStructure::AdditionalQueryData& raycastInfo, const Physics::Utils::Math::Vector3& startPosition, const Physics::Utils::Math::Vector3& direction, float distance)
+	bool PhysXScene::Raycast(Utils::DataStructure::AdditionalQueryData& raycastInfo, const Utils::Math::Vector3& startPosition, const Utils::Math::Vector3& direction, float distance)
 	{
 		PxRaycastBuffer HitBuffer;
 		physx::PxVec3 pos = Vector3ToPxVec3(startPosition);

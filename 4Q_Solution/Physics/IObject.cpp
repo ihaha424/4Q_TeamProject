@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "IObject.h"
 
-namespace Physics
+namespace PhysicsEngineAPI
 {
 }

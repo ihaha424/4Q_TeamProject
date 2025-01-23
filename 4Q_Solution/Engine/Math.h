@@ -6,3 +6,4 @@
 #include "EasingFunction.h"
 #include "DotTween.h"
 #include "Matrix.h"
+#include "Size.h"

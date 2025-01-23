@@ -4,7 +4,7 @@
 #include "TestWorld.h"
 
 GameApplication::GameApplication(const HINSTANCE instanceHandle) :
-	Application(instanceHandle, L"Test", SIZE{ 1920, 1080 })
+	Application(instanceHandle, L"Test", Engine::Math::Size{ 1920, 1080 })
 {
 }
 

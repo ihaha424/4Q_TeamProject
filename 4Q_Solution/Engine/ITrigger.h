@@ -23,14 +23,14 @@ namespace Engine::Input
 			Canceled = 3
 		};
 
-		struct Trigger
+		struct ITrigger
 		{
-			Trigger() = default;
-			Trigger(const Trigger& other) = default;
-			Trigger(Trigger&& other) noexcept = default;
-			Trigger& operator=(const Trigger& other) = default;
-			Trigger& operator=(Trigger&& other) noexcept = default;
-			virtual ~Trigger() = default;
+			ITrigger() = default;
+			ITrigger(const ITrigger& other) = default;
+			ITrigger(ITrigger&& other) noexcept = default;
+			ITrigger& operator=(const ITrigger& other) = default;
+			ITrigger& operator=(ITrigger&& other) noexcept = default;
+			virtual ~ITrigger() = default;
 
 			virtual void SetComponent(Component::IButtonComponent* component) = 0;
 			virtual void SetComponent(Component::IAxisComponent* component) = 0;

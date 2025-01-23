@@ -33,8 +33,7 @@ void Engine::DSHInput::Device::Keyboard::Reset()
 
 void Engine::DSHInput::Device::Keyboard::Finalize()
 {
-	auto a = _buttons | std::views::values;
-	std::ranges::for_each(_buttons | std::views::values, [](auto button) {delete button; });
+	std::ranges::for_each(_buttons | std::views::values, Utility::SafeDelete());
 	Utility::SafeRelease()(&_keyboard, "Keyboard is still being referenced.");
 }
 

@@ -6,7 +6,8 @@
 #include <ranges>
 #include <any>
 #include <optional>
-#include <unordered_set>
+#include <typeinfo>
+#include <typeindex>
 
 #include "directxtk/SimpleMath.h"
 

@@ -3,27 +3,27 @@
 namespace Engine::Utility
 {
 	template <class T>
-	concept CanReleaseRefCount = requires(T com)
+	concept can_release_ref_count = requires(T com)
 	{
 		{ com.Release() } -> std::convertible_to<ULONG>;
 	};
 
 	template <class T>
-	concept CanRelease = requires(T com)
+	concept can_release = requires(T com)
 	{
 		{ com.Release() } -> std::convertible_to<void>;
 	};
 
 	struct SafeRelease
 	{
-		void operator()(CanRelease auto** object) const;
+		void operator()(can_release auto** object) const;
 
-		ULONG operator()(CanReleaseRefCount auto** object) const;
+		ULONG operator()(can_release_ref_count auto** object) const;
 
-		void operator()(CanReleaseRefCount auto** object, char const* message) const;
+		void operator()(can_release_ref_count auto** object, char const* message) const;
 	};
 
-	void SafeRelease::operator()(CanRelease auto** object) const
+	void SafeRelease::operator()(can_release auto** object) const
 	{
 		if (object == nullptr ||
 			*object == nullptr) return;
@@ -31,7 +31,7 @@ namespace Engine::Utility
 		*object = nullptr;
 	}
 
-	ULONG SafeRelease::operator()(CanReleaseRefCount auto** object) const
+	ULONG SafeRelease::operator()(can_release_ref_count auto** object) const
 	{
 		if (object == nullptr ||
 			*object == nullptr) return 0;
@@ -40,7 +40,7 @@ namespace Engine::Utility
 		return refCount;
 	}
 
-	void SafeRelease::operator()(CanReleaseRefCount auto** object, char const* message) const
+	void SafeRelease::operator()(can_release_ref_count auto** object, char const* message) const
 	{
 		if (operator()(object) != 0) throw std::exception(message);
 	}

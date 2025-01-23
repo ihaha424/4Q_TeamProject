@@ -24,7 +24,7 @@ void Engine::DSHInput::Action::Setup(DSH::Input::IAction* action)
 
 void Engine::DSHInput::Action::Finalize()
 {
-	std::ranges::for_each(_triggers, [](const Input::Trigger::Trigger* trigger) {delete trigger; });
+	std::ranges::for_each(_triggers, Utility::SafeDelete());
 	_triggers.clear();
 	Utility::SafeRelease()(&_action);
 }

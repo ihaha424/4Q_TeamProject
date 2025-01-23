@@ -280,6 +280,9 @@
     <Filter Include="Modules\Interfaces\Content\Factory">
       <UniqueIdentifier>{4b6022f6-b7ee-432d-b41f-62462ac614c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utilities\SafeFinalize">
+      <UniqueIdentifier>{9e58cd4e-35b4-47c0-90f3-51c8f7b003d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -396,7 +399,7 @@
     <ClInclude Include="DSHSwizzleAxis.h">
       <Filter>Modules\Difinition\DSHInput\Modifiers\SwizzleAxis</Filter>
     </ClInclude>
-    <ClInclude Include="Trigger.h">
+    <ClInclude Include="ITrigger.h">
       <Filter>Modules\Interfaces\Input\Triggers\Trigger</Filter>
     </ClInclude>
     <ClInclude Include="Modifier.h">
@@ -525,6 +528,9 @@
     <ClInclude Include="ContentFactory.h">
       <Filter>Modules\Interfaces\Content\Factory</Filter>
     </ClInclude>
+    <ClInclude Include="SafeFinalize.h">
+      <Filter>Utilities\SafeFinalize</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -617,7 +623,7 @@
     <ClCompile Include="DSHSwizzleAxis.cpp">
       <Filter>Modules\Difinition\DSHInput\Modifiers\SwizzleAxis</Filter>
     </ClCompile>
-    <ClCompile Include="Trigger.cpp">
+    <ClCompile Include="ITrigger.cpp">
       <Filter>Modules\Interfaces\Input\Triggers\Trigger</Filter>
     </ClCompile>
     <ClCompile Include="Modifier.cpp">
@@ -727,6 +733,9 @@
     </ClCompile>
     <ClCompile Include="ContentFactory.cpp">
       <Filter>Modules\Interfaces\Content\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="SafeFinalize.cpp">
+      <Filter>Utilities\SafeFinalize</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

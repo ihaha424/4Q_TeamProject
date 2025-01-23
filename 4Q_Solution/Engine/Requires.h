@@ -19,6 +19,7 @@
 #include "GraphicsEngine/IMatrix.h"
 #include "GraphicsEngine/ILight.h"
 #include "GraphicsEngine/IMeshRenderer.h"
+#include "GraphicsEngine/ITextRenderer.h"
 
 #include "Math.h"
 

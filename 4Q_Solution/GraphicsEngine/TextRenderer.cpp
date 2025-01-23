@@ -15,7 +15,7 @@ void TextRenderer::Release()
 
 void TextRenderer::SetFont(const wchar_t* name)
 {
-	_pTextSystem->GetSpriteFont(name);
+	_pSpriteFont = _pTextSystem->GetSpriteFont(name);
 }
 
 void TextRenderer::SetFontScale(const float x, const float y)
@@ -43,9 +43,9 @@ void TextRenderer::SetRotationFromDegree(const float degree)
 	_rotation = XMConvertToRadians(degree);
 }
 
-void TextRenderer::SetPosition(const float x, const float y)
+void TextRenderer::SetPosition(const float x, const float y, const float z)
 {
-	_position = { x, y };
+	_position = { x, y, z };
 }
 
 void TextRenderer::SetText(const wchar_t* text)

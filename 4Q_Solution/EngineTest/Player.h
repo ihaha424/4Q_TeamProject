@@ -18,6 +18,7 @@ private:
 	Engine::Component::SkeletalMesh _skeltalMesh;
 	Engine::Component::Animator _animator;
 	Engine::Math::Matrix _worldMatrix;
+	Engine::Component::TextRenderer _textRenderer;
 };
 
 class RemotePlayer : public Engine::Object
@@ -31,4 +32,5 @@ private:
 	Engine::Component::SkeletalMesh _skeltalMesh;
 	Engine::Component::Animator _animator;
 	Engine::Math::Matrix _worldMatrix;
+	
 };

@@ -5,28 +5,29 @@
 #include <directxtk/SpriteFont.h>
 #include <directxtk/SpriteBatch.h>
 
-SpriteFont* TextSystem::GetSpriteFont(const wchar_t* name)
+SpriteFont* TextSystem::GetSpriteFont(const wchar_t* filePath)
 {
-	auto iter = _fonts.find(name);
+	auto iter = _fonts.find(filePath);
+
 	if (iter == _fonts.end())
 	{
-		ASSERT(false, L"등록되지 않은 폰트입니다.");
-		return nullptr;
+		RegisterFont(filePath);
 	}
 
-	return iter->second;
+	return _fonts[filePath];
 }
 
-void TextSystem::RegisterFont(const wchar_t* name, const wchar_t* filePath)
+void TextSystem::RegisterFont(const wchar_t* filePath)
 {
-	auto iter = _fonts.find(name);
-	if (iter != _fonts.end())
+	SpriteFont* pFont = new SpriteFont(g_pGraphicDevice->GetDevice(), filePath);
+
+	if (nullptr == pFont)
 	{
-		ASSERT(false, L"이미 등록된 폰트입니다.");
+		ASSERT(false, L"해당 Font를 로드할 수 없습니다.");
 		return;
 	}
 
-	_fonts[name] = new SpriteFont(g_pGraphicDevice->GetDevice(), filePath);
+	_fonts[filePath] = pFont;
 }
 
 void TextSystem::CreateTextRenderer(GE::ITextRenderer** ppTextRenderer)

@@ -128,6 +128,7 @@ void Engine::DSHInput::Manager::GetModifier(const Input::Modifier::ISwizzleAxis:
 			DSH::Input::Modifier::ISwizzleAxis* swizzleAxisPointer = nullptr;
 			Utility::ThrowIfFailed()(_system->CreateModifier(&swizzleAxisPointer));
 			_swizzleAxes[type].Setup(swizzleAxisPointer);
+			_swizzleAxes[type].SetType(type);
 			Utility::SafeRelease()(&swizzleAxisPointer);
 		}
 		*swizzleAxis = &_swizzleAxes[type];

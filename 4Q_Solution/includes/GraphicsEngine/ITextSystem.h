@@ -13,8 +13,7 @@ namespace GE
         ITextSystem& operator=(const ITextSystem&) = delete;
         ITextSystem& operator=(ITextSystem&&) = delete;
 
-    public:
-        virtual void RegisterFont(const wchar_t* name, const wchar_t* filePath) = 0;
+    public:      
         virtual void CreateTextRenderer(ITextRenderer** ppTextRenderer) = 0;
         virtual void RegisterRenderQueue(ITextRenderer* pComponent) = 0;
         virtual void UnRegisterRenderQueue(ITextRenderer* pComponent) = 0;

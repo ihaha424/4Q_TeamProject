@@ -241,6 +241,9 @@
     <Filter Include="Math\Matrix">
       <UniqueIdentifier>{63280bb6-83dd-4f40-8cc0-6086687df9b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\TextRenderer">
+      <UniqueIdentifier>{922e5f29-c1a8-42da-aadd-1b65620c25ff}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Math\Size">
       <UniqueIdentifier>{9bf72f7e-898f-4994-8f41-ee04332dd5c2}</UniqueIdentifier>
     </Filter>
@@ -477,6 +480,9 @@
     <ClInclude Include="Matrix.h">
       <Filter>Math\Matrix</Filter>
     </ClInclude>
+    <ClInclude Include="TextRenderer.h">
+      <Filter>Components\TextRenderer</Filter>
+    </ClInclude>
     <ClInclude Include="Size.h">
       <Filter>Math\Size</Filter>
     </ClInclude>
@@ -669,7 +675,10 @@
       <Filter>Math\EasingFunction</Filter>
     </ClCompile>
     <ClCompile Include="Matrix.cpp">
-      <Filter>Math\Matrix</Filter>
+      <Filter>Math\Matrix</Filter>  
+    </ClCompile>
+    <ClCompile Include="TextRenderer.cpp">
+      <Filter>Components\TextRenderer</Filter>
     </ClCompile>
     <ClCompile Include="Size.cpp">
       <Filter>Math\Size</Filter>

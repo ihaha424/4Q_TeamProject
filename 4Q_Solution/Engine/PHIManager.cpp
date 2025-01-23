@@ -1,8 +1,8 @@
 #include "pch.h"
-#include "PhysicsEngineManager.h"
+#include "PHIManager.h"
 
 
-namespace Engine::PhysicsEngine
+namespace Engine::PHI
 {
 	HRESULT BoolToHRESULT(bool isSuccess)
 	{
@@ -11,7 +11,7 @@ namespace Engine::PhysicsEngine
 
 	Manager::Manager()
 		: system{ nullptr }
-		, scene{ nullptr }
+		//, scene{ nullptr }
 	{}
 
 	void Manager::Initialize(PhysicsEngineAPI::IPhysicsSystem::PhysicsType physicsType)
@@ -20,9 +20,19 @@ namespace Engine::PhysicsEngine
 
 		thrower(BoolToHRESULT(PhysicsEngineAPI::CreateSystem(&system, physicsType)));
 		thrower(BoolToHRESULT(system->CreatePhysics()));
-		thrower(BoolToHRESULT(PhysicsEngineAPI::CreateSystem(&system, physicsType)));
+
+
+		//TODO: go to Load? 구조도에서 나온거 보고 어디서 로드할지를 찾아야 할듯?
+		//PhysicsEngineAPI::Utils::Description::SceneDesc sceneDesc;
+		//sceneDesc.gravity = { 0.f, 9.8f, 0.f };
+		//thrower(BoolToHRESULT(system->CreateScene(&scene, sceneDesc)));
 
 	}
+
+	void Manager::WorldInitialize()
+	{
+	}
+
 	void Manager::Update(float deltaTime) const
 	{
 	}
@@ -30,7 +40,7 @@ namespace Engine::PhysicsEngine
 	{
 		constexpr Utility::SafeRelease releaser;
 
-		releaser(&scene);
+		//releaser(&scene);
 		releaser(&system);
 	}
 }

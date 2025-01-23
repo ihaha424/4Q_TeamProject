@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "PhysicsManager.h"
+#include "PhysicsObject.h"
 
 namespace Engine::Physics
 {

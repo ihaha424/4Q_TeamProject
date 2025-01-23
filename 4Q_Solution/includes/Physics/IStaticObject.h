@@ -8,5 +8,6 @@ namespace PhysicsEngineAPI
 		: virtual public IObject
 	{
 	public:
+
 	};
 }

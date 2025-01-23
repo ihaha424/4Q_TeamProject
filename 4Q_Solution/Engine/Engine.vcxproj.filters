@@ -250,6 +250,15 @@
     <Filter Include="Modules\Difinition\PhysicsEngine\Manager">
       <UniqueIdentifier>{8540ef46-3413-4a41-8394-85db345430f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Interfaces\Physics\Factory">
+      <UniqueIdentifier>{5b846e69-1819-4488-8e38-1911ccd4970a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\Scene">
+      <UniqueIdentifier>{5b1484ff-9f0f-44be-8f11-145c3ab39bdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\PhysicsEngine\Scene">
+      <UniqueIdentifier>{4715709a-7d06-4e1c-8e8e-d536ace5d633}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -468,8 +477,14 @@
     <ClInclude Include="PhysicsManager.h">
       <Filter>Modules\Interfaces\Physics\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsEngineManager.h">
+    <ClInclude Include="PHIManager.h">
       <Filter>Modules\Difinition\PhysicsEngine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsScene.h">
+      <Filter>Modules\Interfaces\Physics\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="PHIScene.h">
+      <Filter>Modules\Difinition\PhysicsEngine\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -650,8 +665,14 @@
     <ClCompile Include="PhysicsManager.cpp">
       <Filter>Modules\Interfaces\Physics\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsEngineManager.cpp">
+    <ClCompile Include="PHIManager.cpp">
       <Filter>Modules\Difinition\PhysicsEngine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsScene.cpp">
+      <Filter>Modules\Interfaces\Physics\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PHIScene.cpp">
+      <Filter>Modules\Difinition\PhysicsEngine\Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

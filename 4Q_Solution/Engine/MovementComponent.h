@@ -13,6 +13,7 @@ namespace Engine::Component
 		[[nodiscard]] float GetSpeed() const;
 
 		void SetDirection(Math::Vector3 direction);
+		Engine::Math::Vector3 GetDirection() const;
 
 		void Update(float deltaTime) override;
 

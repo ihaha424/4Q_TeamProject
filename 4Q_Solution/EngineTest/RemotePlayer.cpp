@@ -4,12 +4,11 @@
 
 RemotePlayer::RemotePlayer() :
 	//_camera(L"MainCamera", 1.f, 1000.f, { 16,9 }, 3.141592f / 4) // TODO: Remove this.
-	_staticMesh(L"../Resources/FBX/char.fbx", &_worldMatrix)
+	_staticMesh(L"../Resources/Player/Player.X", &_worldMatrix)
 	//_skeltalMesh(L"../Resources/Player/Player.X", &_worldMatrix)
 	//, _animator(&_skeltalMesh)
 {
-	NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &RemotePlayer::FirstInitialize, this);
-	NetworkTemp::GetInstance()->AddCallback((short)PacketID::Move, &RemotePlayer::SyncMove, this);
+
 }
 
 void RemotePlayer::Addition()
@@ -30,6 +29,8 @@ void RemotePlayer::PreInitialize()
 	//_movement.SetTarget(&_transform);
 	_remoteMove.SetTarget(&_transform);
 
+	NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &RemotePlayer::FirstInitialize, this);
+	NetworkTemp::GetInstance()->AddCallback((short)PacketID::MoveSync, &RemotePlayer::SyncMove, this);
 	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &RemotePlayer::SyncMove, this);
 
 	const auto inputManager = Engine::Application::GetInputManager();
@@ -72,7 +73,7 @@ void RemotePlayer::PostAttach()
 
 void RemotePlayer::PostUpdate(float deltaTime)
 {
-	//_worldMatrix = Engine::Math::Matrix::CreateScale(1.f); *Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
+	_worldMatrix = Engine::Math::Matrix::CreateScale(1.f) * Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
 
 	//Engine::Math::Vector3 tempPostion = _transform.position;
 	//tempPostion.z -= 300.f;
@@ -81,7 +82,7 @@ void RemotePlayer::PostUpdate(float deltaTime)
 	//_camera.SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
 }
 
-void RemotePlayer::SyncMove(const ConnectMsg::SyncPlayer* msg)
+void RemotePlayer::SyncMove(const MoveMsg::MoveSync* msg)
 {
 	Engine::Math::Vector3 nextLocation(msg->x(), msg->y(), msg->z());
 	_remoteMove.SetNextLocation(nextLocation);

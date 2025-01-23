@@ -37,15 +37,16 @@ public:
 		if (packetId == (short)PacketID::EnterAccept) {
 			acceptEnter = new Delegate<C, Msg>(receiver, fn);
 		}
-		else if (packetId == (short)PacketID::Move) {
+		else if (packetId == (short)PacketID::MoveSync) {
 			moveSync = new Delegate<C, Msg>(receiver, fn);
 		}
 		else if (packetId == (short)PacketID::Sync) {
-			playerSync = new Delegate<C, Msg>(receiver, fn);
+			playerSync.push_back(new Delegate<C, Msg>(receiver, fn));
 		}
 	}
 
 	void SendUpdate();
+	
 
 	//void(*moveSync)(const ConnectMsg::SyncPlayer*);
 	//void(*acceptEnter)(const ConnectMsg::EnterAccept*);
@@ -53,7 +54,7 @@ public:
 
 	IDelegate* moveSync;
 	IDelegate* acceptEnter;
-	IDelegate* playerSync;
+	std::vector<IDelegate*> playerSync;
 
 	static NetworkTemp* GetInstance() {
 		if (_instance == nullptr) {
@@ -69,11 +70,6 @@ public:
 		}
 	}
 
-private:
-	PacketQueue* msgContainer = nullptr;
-
-	static NetworkTemp* _instance;
-
 	ConnectMsg::EnterAccept _enterAccept;
 	ConnectMsg::Exit Exit;
 	ConnectMsg::SetRoomMaster _setRoomMaster;
@@ -81,10 +77,17 @@ private:
 
 	MoveMsg::Move _move;
 	MoveMsg::Jump _jump;
+	MoveMsg::MoveSync _moveSync;
+	MoveMsg::StateChange _stateChange;
 
 	PlayMsg::SelectPart _selectPart;
 	PlayMsg::InteractDialog _interactDialog;
 	PlayMsg::DialogProgress _dialogProgress;
+
+private:
+	PacketQueue* msgContainer = nullptr;
+
+	static NetworkTemp* _instance;
 };
 
 

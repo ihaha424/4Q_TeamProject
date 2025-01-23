@@ -110,8 +110,9 @@ void NetworkMain::SendUpdate()
 	HANDLE cp = _cpContainer[0];
 	for (auto& [sid, session] : _sessionMap) {
 		if (_sessionProcessCheck[sid] == false) {
+			_sessionProcessCheck[sid] = true;
 			PostQueuedCompletionStatus(cp, SEND, (ULONG_PTR)session, 0);
-			_sessionProcessCheck[sid] == true;
+			//printf("[SendUpdate] sessionProcess Check false SessionID : %llu\n", session->GetSessionID());
 		}
 	}
 
@@ -168,6 +169,7 @@ void NetworkMain::IOWork(HANDLE completionPort)
 				session->SendUpdate();
 
 				_sessionProcessCheck[session->GetSessionID()] = false;
+				//printf("[IOWork] sessionProcess Check true SessionID : %llu\n", session->GetSessionID());
 
 			} // else if end
 			else {

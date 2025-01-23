@@ -66,11 +66,21 @@ void NetworkTemp::Dispatch()
 			//	remotePlayer._y = _syncPlayer.y();
 			//	remotePlayer._z = _syncPlayer.z();
 			//}
-			playerSync->Invoke(&_syncPlayer);
+			for (auto& delegate : playerSync) {
+				delegate->Invoke(&_syncPlayer);
+			}
+
 
 			break;
 		}
+		case PacketID::MoveSync:
+		{
+			_moveSync.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
 
+			moveSync->Invoke(&_moveSync);
+
+			break;
+		}
 
 		default:
 			break;

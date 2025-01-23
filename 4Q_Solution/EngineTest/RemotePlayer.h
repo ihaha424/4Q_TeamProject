@@ -13,7 +13,7 @@ protected:
 	void PostAttach() override;
 	void PostUpdate(float deltaTime) override;
 
-	void SyncMove(const ConnectMsg::SyncPlayer* msg);
+	void SyncMove(const MoveMsg::MoveSync* msg);
 	void FirstInitialize(const ConnectMsg::SyncPlayer* msg);
 
 private:

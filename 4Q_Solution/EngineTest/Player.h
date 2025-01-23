@@ -11,6 +11,7 @@ protected:
 	void PostAttach() override;
 	void PostUpdate(float deltaTime) override;
 
+	void PostFixedUpdate() override;
 private:
 	Engine::Component::MovementComponent _movement;
 	Engine::Component::CameraComponent _camera;

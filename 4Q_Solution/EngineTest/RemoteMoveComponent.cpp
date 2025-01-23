@@ -38,18 +38,19 @@ void RemoteMoveComponent::Update(float deltaTime)
 	
 	static float elapsed;
 	elapsed += deltaTime;
-	float maxElapseTime = 0.2f;
+	float maxElapseTime = 0.5f;
+
+	//float distance = _nextLocation;
 
 	float t = std::clamp(elapsed / maxElapseTime, 0.0f, 1.0f);
 
-	float x = std::lerp(currentLocation.x, _nextLocation.x, t);
-	float y = std::lerp(currentLocation.y, _nextLocation.y, t);
-	float z = std::lerp(currentLocation.z, _nextLocation.z, t);
+	Engine::Math::Vector3 lerpedLocation(Engine::Math::Vector3::Zero);
 
-	Engine::Math::Vector3 lerpedLocation(x, y, z);
+	lerpedLocation = Engine::Math::EasingInterpolation(currentLocation, _nextLocation, t, Engine::Math::EasingEffect::InOutQuad);
+
 	if (elapsed >= maxElapseTime) {
 		elapsed -= maxElapseTime;
 	}
-	_target->Translate(lerpedLocation);
-
+	_target->position = lerpedLocation;
+	
 }

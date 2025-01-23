@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Player.h"
+#include "NetworkTemp.h"
 
 Player::Player() :
 	_camera(L"MainCamera", 1.f, 1000.f, { 16,9 }, 3.141592f / 4) // TODO: Remove this.
@@ -25,21 +26,40 @@ void Player::PreInitialize()
 
 	_movement.SetTarget(&_transform);
 
-	const auto inputManager = Engine::Application::GetInputManager();
-	Engine::Input::IMappingContext* mappingContext = nullptr;
-	inputManager->GetMappingContext(L"Default", &mappingContext);
-	Engine::Input::IAction* action = nullptr;
-	mappingContext->GetAction(L"Move", &action);
-	action->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
-	{
-		_movement.SetDirection(value);		
-	});
-	action->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) { _animator.ChangeAnimation("Run"); });
-	action->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
-		{ 
-			_animator.ChangeAnimation("Wait"); 
-			_movement.SetDirection(Engine::Math::Vector3::Zero);
-		});
+	//const auto inputManager = Engine::Application::GetInputManager();
+	//Engine::Input::IMappingContext* mappingContext = nullptr;
+	//inputManager->GetMappingContext(L"Default", &mappingContext);
+	//Engine::Input::IAction* action = nullptr;
+	//mappingContext->GetAction(L"Move", &action);
+	//action->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
+	//{
+	//	_movement.SetDirection(value);		
+	//	
+	//});
+	//action->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) { 
+	//	_animator.ChangeAnimation("Run"); 
+	//	NetworkTemp::GetInstance()->_stateChange.set_serialnumber(1);
+	//	NetworkTemp::GetInstance()->_stateChange.set_stateinfo(1);
+
+	//	Client::SavePacketData(
+	//		NetworkTemp::GetInstance()->_stateChange.SerializeAsString(),
+	//		(short)PacketID::StateChange,
+	//		NetworkTemp::GetInstance()->_stateChange.ByteSizeLong());
+	//	});
+	//action->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
+	//	{ 
+	//		_animator.ChangeAnimation("Wait"); 
+	//		_movement.SetDirection(Engine::Math::Vector3::Zero);
+
+	//		NetworkTemp::GetInstance()->_stateChange.set_serialnumber(1);
+	//		NetworkTemp::GetInstance()->_stateChange.set_stateinfo(0);
+
+	//		Client::SavePacketData(
+	//			NetworkTemp::GetInstance()->_stateChange.SerializeAsString(),
+	//			(short)PacketID::StateChange,
+	//			NetworkTemp::GetInstance()->_stateChange.ByteSizeLong());
+
+	//	});
 }
 
 void Player::PostInitialize()
@@ -67,6 +87,27 @@ void Player::PostUpdate(float deltaTime)
 	tempPostion.y += 300.f;
 	_camera.SetPosition(tempPostion);
 	_camera.SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
+
+	//static float elapsedTime;
+	//elapsedTime += deltaTime;
+	//if (elapsedTime >= 0.2f) {
+	//	elapsedTime -= 0.2f;
+	//	NetworkTemp::GetInstance()->_move.set_serialnumber(1);
+	//	NetworkTemp::GetInstance()->_move.set_x(_transform.position.x);
+	//	NetworkTemp::GetInstance()->_move.set_y(_transform.position.y);
+	//	NetworkTemp::GetInstance()->_move.set_z(_transform.position.z);
+	//	NetworkTemp::GetInstance()->_move.set_speed(100.f);
+
+	//	Client::SavePacketData(
+	//		NetworkTemp::GetInstance()->_move.SerializeAsString(),
+	//		(short)PacketID::Move,
+	//		NetworkTemp::GetInstance()->_move.ByteSizeLong());
+	//}
+}
+
+void Player::PostFixedUpdate()
+{
+
 }
 
 //RemotePlayer::RemotePlayer()

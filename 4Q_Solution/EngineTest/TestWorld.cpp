@@ -8,7 +8,7 @@ void TestWorld::Addition()
 {
 	World::Addition();
 	AddObject(&_player);
-	//AddObject(&_remote);
+	AddObject(&_remote);
 	AddObject(&_light);
 	AddObject(&_terrain);
 
@@ -23,12 +23,13 @@ void TestWorld::PreInitialize()
 
 void TestWorld::PreUpdate(float deltaTime)
 {
-	//NetworkTemp::GetInstance()->Dispatch();
+	NetworkTemp::GetInstance()->Dispatch();
+	NetworkTemp::GetInstance()->SendUpdate();
 }
 
 void TestWorld::PostFixedUpdate()
 {
-	//NetworkTemp::GetInstance()->SendUpdate();
+
 }
 
 void TestWorld::EnterAccept(const ConnectMsg::EnterAccept* msg)
@@ -40,5 +41,6 @@ void TestWorld::SyncOtherPlayer(const ConnectMsg::SyncPlayer* msg)
 {
 	if (playerSerialNum == msg->serialnumber()) return;
 
-	AddObject(&_remote);
+	//AddObject(&_remote);
+	//_remote.Attach();
 }

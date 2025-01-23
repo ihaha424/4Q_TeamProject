@@ -6,12 +6,27 @@
 
 class ServerLogic
 {
-	struct Player {
-		int _serialNumber;
+	struct Vector3 {
 		float _x;
 		float _y;
 		float _z;
-		int state;
+		Vector3 operator*(float f) {
+			_x *= f;
+			_y *= f;
+			_z *= f;
+			return *this;
+		}
+		Vector3 operator+(Vector3& v) {
+			return Vector3(_x + v._x, _y + v._y, _z + v._z);
+		}
+	};
+
+	struct Player {
+		int _serialNumber;
+		int _state;
+		Vector3 _position;
+		Vector3 _direction;
+		float _speed;
 	};
 
 public:
@@ -30,6 +45,7 @@ private:
 	PacketQueue* _messageContainer = nullptr;
 
 	Player _playerSlot[2]{};
+	Vector3 _lastSendPosition[2]{};
 	
 	ConnectMsg::EnterAccept _enterAccept;
 	ConnectMsg::Exit _exit;
@@ -38,6 +54,8 @@ private:
 	
 	MoveMsg::Move _move;
 	MoveMsg::Jump _jump;
+	MoveMsg::MoveSync _moveSync;
+	MoveMsg::StateChange _stateChange;
 
 	PlayMsg::SelectPart _selectPart;
 	PlayMsg::InteractDialog _interactDialog;

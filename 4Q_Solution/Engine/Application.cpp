@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Application.h"
 
+#include "DSHContentManager.h"
 #include "DSHInputManager.h"
 #include "DSHLoadManager.h"
 #include "DSHTimeManager.h"
@@ -12,11 +13,10 @@ Engine::Window::Manager* Engine::Application::_windowManager = nullptr;
 Engine::GEGraphics::Manager* Engine::Application::_graphicsManager = nullptr;
 Engine::Input::Manager* Engine::Application::_inputManager = nullptr;
 Engine::Load::Manager* Engine::Application::_loadManager = nullptr;
+Engine::Content::Manager* Engine::Application::_contentManager = nullptr;
 
 Engine::Application::Application(const HINSTANCE instanceHandle, std::wstring title, const Math::Size size) :
-	_instanceHandle(instanceHandle),
-	_title(std::move(title)),
-	_size(size)
+	_instanceHandle(instanceHandle), _title(std::move(title)), _size(size)
 {
 }
 
@@ -27,15 +27,11 @@ void Engine::Application::Begin()
 	InitializeManagers();
 	LoadGameData();
 	DeclareInputActions(_inputManager);
+	Register(_loadManager, _contentManager);
 
 	//Before
-	Addition(); // TODO: Refactor this.
 	Setup({ _graphicsManager });
 	InitializeContents();
-}
-
-void Engine::Application::Addition()
-{
 }
 
 void Engine::Application::Setup(Modules modules)
@@ -114,6 +110,13 @@ Engine::Load::IManager* Engine::Application::GetLoadManager()
 	return _loadManager;
 }
 
+Engine::Content::IManager* Engine::Application::GetContentManager()
+{
+	static Content::Manager* contentManager = nullptr;
+	CreateContentManager(&contentManager);
+	return contentManager;
+}
+
 void Engine::Application::AddWorld(World* world)
 {
 	_worlds.push_back(world);
@@ -131,6 +134,7 @@ void Engine::Application::CreateManagers()
 	CreateInputManager(&_inputManager);
 	CreateGraphicsManager(&_graphicsManager);
 	CreateLoadManager(&_loadManager);
+	CreateContentManager(&_contentManager);
 }
 
 void Engine::Application::InitializeManagers() const
@@ -160,6 +164,7 @@ void Engine::Application::FinalizeManagers()
 	_inputManager->Finalize();
 	_graphicsManager->Finalize();
 	_loadManager->Finalize();
+	_contentManager->Finalize();
 }
 
 void Engine::Application::DeleteManagers()
@@ -170,6 +175,7 @@ void Engine::Application::DeleteManagers()
 	deleter(&_inputManager);
 	deleter(&_graphicsManager);
 	deleter(&_loadManager);
+	deleter(&_contentManager);
 }
 
 void Engine::Application::CreateTimeManager(Time::Manager** timeManager)
@@ -229,5 +235,17 @@ void Engine::Application::CreateLoadManager(Load::Manager** loadManager)
 		Load::Manager* manager = new DSHLoad::Manager();
 		if (manager == nullptr) thrower(E_OUTOFMEMORY);
 		*loadManager = manager;
+	}
+}
+
+void Engine::Application::CreateContentManager(Content::Manager** contentManager)
+{
+	constexpr Utility::ThrowIfFailed thrower;
+	if (contentManager == nullptr) thrower(E_INVALIDARG);
+	else
+	{
+		Content::Manager* manager = new DSHContent::Manager();
+		if (manager == nullptr) thrower(E_OUTOFMEMORY);
+		*contentManager = manager;
 	}
 }

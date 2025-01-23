@@ -8,9 +8,8 @@ public:
 
 protected:
 	void DeclareInputActions(Engine::Input::IManager* inputManager) override;
-	void Register(Engine::Load::IManager* loadManager) override;
+	void Register(Engine::Load::IManager* loadManager, Engine::Content::IManager* contentManager) override;
 
-	void Addition() override;
 	void InitializeContents() override;
 
 private:

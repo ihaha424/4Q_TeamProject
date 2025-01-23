@@ -10,8 +10,6 @@ GameApplication::GameApplication(const HINSTANCE instanceHandle) :
 
 void GameApplication::DeclareInputActions(Engine::Input::IManager* inputManager)
 {
-	Application::DeclareInputActions(inputManager);
-
 	Engine::Input::Modifier::INegative* negative = nullptr;
 
 	Engine::Input::Modifier::ISwizzleAxis* swizzleAxis = nullptr;
@@ -58,13 +56,8 @@ void GameApplication::DeclareInputActions(Engine::Input::IManager* inputManager)
 	inputManager->SetActiveMappingContext(mappingContext);
 }
 
-void GameApplication::Register(Engine::Load::IManager* loadManager)
+void GameApplication::Register(Engine::Load::IManager* loadManager, Engine::Content::IManager* contentManager)
 {
-}
-
-void GameApplication::Addition()
-{
-	Application::Addition();
 	AddWorld(&_world);
 }
 

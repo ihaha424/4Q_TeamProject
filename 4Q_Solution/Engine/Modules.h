@@ -5,6 +5,7 @@
 #include "Graphics.h"
 #include "Window.h"
 #include "Load.h"
+#include "Content.h"
 
 namespace Engine
 {

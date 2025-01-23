@@ -20,7 +20,7 @@ namespace GE
 		virtual void SetLayerDepth(const float depth) = 0;
 		virtual void SetPivot(const float x, const float y) = 0;
 		virtual void SetRotationFromDegree(const float degree) = 0;
-		virtual void SetPosition(const float x, const float y) = 0;
+		virtual void SetPosition(const float x, const float y, const float z) = 0;
 		virtual void SetText(const wchar_t* text) = 0;
 	};
 }

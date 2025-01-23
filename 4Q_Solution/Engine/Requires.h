@@ -5,6 +5,8 @@
 #include <filesystem>
 #include <ranges>
 
+#include "directxtk/SimpleMath.h"
+
 #include "DSHTime/Time.h"
 #include "DSHWindow/Window.h"
 #include "DSHInput/Input.h"
@@ -19,6 +21,7 @@
 #include "GraphicsEngine/IMatrix.h"
 #include "GraphicsEngine/ILight.h"
 #include "GraphicsEngine/IMeshRenderer.h"
+#include "GraphicsEngine/ITextRenderer.h"
 
 #include "Math.h"
 

@@ -7,6 +7,7 @@ Player::Player() :
 	//, _staticMesh(L"../Resources/FBX/char.fbx")
 	, _skeltalMesh(L"../Resources/Player/Player.X", &_worldMatrix)
 	, _animator(&_skeltalMesh)
+	, _textRenderer(L"../Resources/Font/±Ã¼­12.sfont")
 {
 }
 
@@ -18,6 +19,7 @@ void Player::Addition()
 	//AddComponent(&_staticMesh);
 	AddComponent(&_skeltalMesh);
 	AddComponent(&_animator);
+	AddComponent(&_textRenderer);
 }
 
 void Player::PreInitialize()
@@ -65,6 +67,9 @@ void Player::PreInitialize()
 void Player::PostInitialize()
 {
 	_movement.SetSpeed(100.f);	
+	_textRenderer.SetPosition(100, 100.f);
+	_textRenderer.SetText(L"ÁøÁöÇÑ ±Ã¼­Ã¼\nHello World!");
+	_textRenderer.SetFontColor(1.f, 0.f, 0.f, 1.f);
 
 	/*_animator.SetUpSplitBone(2);
 	_animator.SplitBone(0, "Dummy_root");

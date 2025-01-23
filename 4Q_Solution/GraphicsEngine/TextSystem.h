@@ -19,11 +19,11 @@ public:
 	virtual ~TextSystem() = default;
 
 public:
-	SpriteFont* GetSpriteFont(const wchar_t* name);
+	SpriteFont* GetSpriteFont(const wchar_t* filePath);
 
 public:
 	// ITextSystem을(를) 통해 상속됨
-	void RegisterFont(const wchar_t* name, const wchar_t* filePath) override;
+	void RegisterFont(const wchar_t* filePath);
 	void CreateTextRenderer(GE::ITextRenderer** ppTextRenderer) override;
 	void RegisterRenderQueue(GE::ITextRenderer* pTextRenderer) override;
 	void UnRegisterRenderQueue(GE::ITextRenderer* pTextRenderer) override;

@@ -8,5 +8,7 @@ namespace PhysicsEngineAPI
 		: public IObject
 	{
 	public:
+		virtual ~IStaticObject() = default;
+
 	};
 }

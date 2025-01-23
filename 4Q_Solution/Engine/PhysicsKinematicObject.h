@@ -4,12 +4,12 @@
 namespace Engine::Physics
 {
 	struct IKinematicObject
-		: virtual DynamicObject
+		: DynamicObject
 	{
 	};
 
 	struct KinematicObject
-		: virtual IKinematicObject
+		: IKinematicObject
 	{
 	};
 }

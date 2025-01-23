@@ -16,6 +16,9 @@ namespace PhysicsEngineAPI
 		, public IBase
 	{
 	public:
+		virtual ~IObject() = default;
+
+
 		virtual bool	AttachShape(IShape* shape) = 0;
 		virtual bool	DetachShape(IShape* shape) = 0;
 

@@ -7,6 +7,7 @@ namespace PhysicsEngineAPI
 	class IUserData
 	{
 	public:
+		virtual ~IUserData() = default;
 
 
 		virtual void SetName(const char* Name)	= 0; 

@@ -7,6 +7,8 @@ namespace PhysicsEngineAPI
 	class ICreate
 	{
 	public:
+		virtual ~ICreate() = default;
+
 		// Creat Physics System
 		virtual bool CreatePhysics(bool isVisualDebuger = true) = 0;
 		virtual bool CreateScene(_OUT_ IScene** scene, const Utils::Description::SceneDesc& sceneDescription, const char* name = nullptr) = 0;

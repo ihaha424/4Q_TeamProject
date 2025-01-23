@@ -8,5 +8,7 @@ namespace PhysicsEngineAPI
 		: public IDynamicObject
 	{
 	public:
+		virtual ~IKinematicObject() = default;
+
 	};
 }

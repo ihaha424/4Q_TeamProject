@@ -7,6 +7,9 @@ namespace PhysicsEngineAPI
 	class IUpdate
 	{
 	public:
+		virtual ~IUpdate() = default;
+
+
 		// Frame Per Physics System
 		virtual void UpdateSecne(unsigned int sceneNumber, const float deltaTime) = 0;
 		virtual void UpdateSecne(IScene* scene, const float deltaTime) = 0;

@@ -19,6 +19,9 @@ namespace PhysicsEngineAPI
 			End
 		};
 		using enum PhysicsType;
+
+		virtual ~IPhysicsSystem() = default;
+
 	protected:
 		void SetSecneNumber(IScene* scene, unsigned int _sceneNumber);
 	};

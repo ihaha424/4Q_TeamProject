@@ -7,6 +7,8 @@ namespace PhysicsEngineAPI
 		: public IBase
 	{
 	public:
+		virtual ~IGeometry() = default;
+
  		virtual void	SetScale(const Utils::Math::Vector3& position) = 0;
 		virtual const	Utils::Math::Vector3 GetScale() const = 0;
 

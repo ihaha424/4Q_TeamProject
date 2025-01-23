@@ -7,6 +7,8 @@ namespace PhysicsEngineAPI
 	class ISceneQuery
 	{
 	public:
+		virtual ~ISceneQuery() = default;
+
 		/**
 		 * @brief : SceneQuery
 		 */

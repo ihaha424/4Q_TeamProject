@@ -4,12 +4,12 @@
 namespace Engine::Physics
 {
 	struct IStaticObject
-		: virtual IObject
+		: IObject
 	{
 	};
 
 	struct StaticObject
-		: virtual IStaticObject
+		: IStaticObject
 	{
 	};
 }

@@ -16,6 +16,8 @@ namespace PhysicsEngineAPI
 		, public IBase
 	{
 	public:
+		virtual ~IScene() = default;
+
 		// Additional to Physics System
 		virtual bool AddActor(IObject* object) = 0;
 

@@ -5,35 +5,35 @@
 namespace Engine::Physics
 {
 	struct IDynamicObject
-		: virtual IObject
+		: IObject
 	{
-		virtual void	SetVelocity(const Utils::Math::Vector3& velocity) = 0;
-		virtual const	Utils::Math::Vector3 GetVelocity() const = 0;
+		void	SetVelocity(const Utils::Math::Vector3& velocity);
+		const	Utils::Math::Vector3 GetVelocity() const;
 
-		virtual void	SetLinearVelocity(const Utils::Math::Vector3& velocity) = 0;
-		virtual const	Utils::Math::Vector3& GetLinearVelocity() const = 0;
+		void	SetLinearVelocity(const Utils::Math::Vector3& velocity);
+		const	Utils::Math::Vector3& GetLinearVelocity() const;
 
-		virtual void	SetMaxLinearVelocity(const float velocity) = 0;
-		virtual const	float GetMaxLinearVelocity() const = 0;
+		void	SetMaxLinearVelocity(const float velocity);
+		const	float GetMaxLinearVelocity() const;
 
-		virtual void	SetAngularVelocity(const Utils::Math::Vector3& angularVelocity) = 0;
-		virtual const	Utils::Math::Vector3 GetAngularVelocity() const = 0;
+		void	SetAngularVelocity(const Utils::Math::Vector3& angularVelocity);
+		const	Utils::Math::Vector3 GetAngularVelocity() const;
 
-		virtual void	SetMaxAngularVelocity(const float velocity) = 0;
-		virtual const	float GetMaxAngularVelocity() const = 0;
+		void	SetMaxAngularVelocity(const float velocity);
+		const	float GetMaxAngularVelocity() const;
 
-		virtual void	Wakeup() = 0;
-		virtual bool	IsSleeping() = 0;
-		virtual void	PutToSleep() = 0;
-		virtual void	SetSleepThreshold() = 0;	// 잠자는 상태로 전환되기 위한 속도 임계값 설정
-		virtual void	SetWakeCounter(float timer) = 0;
-		virtual float	GetWakeCounter() = 0;
+		void	Wakeup();
+		bool	IsSleeping();
+		void	PutToSleep();
+		void	SetSleepThreshold();
+		void	SetWakeCounter(float timer);
+		float	GetWakeCounter();
 
 		// Force Related
-		virtual void	AddForce(const Utils::Math::Vector3& force) = 0;
-		virtual void	AddTorque(const Utils::Math::Vector3& force) = 0;
-		virtual void	ClearForce() = 0;
-		virtual void	ClearTorque() = 0;
+		void	AddForce(const Utils::Math::Vector3& force);
+		void	AddTorque(const Utils::Math::Vector3& force);
+		void	ClearForce();
+		void	ClearTorque();
 	};
 
 	struct DynamicObject

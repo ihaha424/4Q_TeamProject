@@ -7,6 +7,9 @@ namespace PhysicsEngineAPI
 		: public IBase
 	{
 	public:
+		virtual ~IMaterial() = default;
+
+
 		virtual void setRestitutionCombineMode() = 0;
 	};
 }

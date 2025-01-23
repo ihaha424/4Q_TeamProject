@@ -5,6 +5,8 @@
 #include <filesystem>
 #include <ranges>
 
+#include "directxtk/SimpleMath.h"
+
 #include "DSHTime/Time.h"
 #include "DSHWindow/Window.h"
 #include "DSHInput/Input.h"

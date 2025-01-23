@@ -2,11 +2,12 @@
 
 namespace Engine::Math
 {
-	struct Quaternion
+	struct Quaternion : DirectX::SimpleMath::Quaternion
 	{
-		// TODO: Implement
+		using DirectX::SimpleMath::Quaternion::Identity;
 
-		// Constants
-		static const Quaternion Identity;
+		Quaternion(const DirectX::SimpleMath::Quaternion& quaternion) noexcept;
+
+		Quaternion& operator=(const DirectX::SimpleMath::Quaternion& quaternion) noexcept;
 	};
 }

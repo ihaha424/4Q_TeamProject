@@ -22,7 +22,9 @@ namespace Engine
 		void AddWorld(World* world); // TODO: Remove this.
 		void Attach(World* world);
 
-		virtual void DeclareInputActions(Input::IManager* inputManager);
+		virtual void DeclareInputActions(Input::IManager* inputManager) = 0;
+		virtual void Register(Load::IManager* loadManager/*, Content::IManager* contentManager */) = 0;
+
 		virtual void Addition(); // TODO: Remove this.
 		void Setup(Modules modules);
 		virtual void InitializeContents();

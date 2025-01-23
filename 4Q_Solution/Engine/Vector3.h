@@ -13,6 +13,8 @@ namespace Engine::Math
 		using DirectX::SimpleMath::Vector3::Zero;
 		using DirectX::SimpleMath::Vector3::One;
 
+		Vector3() noexcept = default;
+
 		Vector3(float x, float y, float z) noexcept;
 		Vector3(DirectX::SimpleMath::Vector3 vector) noexcept;
 		Vector3(const Input::Value& value) noexcept;

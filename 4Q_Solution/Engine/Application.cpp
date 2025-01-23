@@ -34,10 +34,6 @@ void Engine::Application::Begin()
 	InitializeContents();
 }
 
-void Engine::Application::DeclareInputActions(Input::IManager* inputManager)
-{
-}
-
 void Engine::Application::Addition()
 {
 }

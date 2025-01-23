@@ -58,6 +58,10 @@ void GameApplication::DeclareInputActions(Engine::Input::IManager* inputManager)
 	inputManager->SetActiveMappingContext(mappingContext);
 }
 
+void GameApplication::Register(Engine::Load::IManager* loadManager)
+{
+}
+
 void GameApplication::Addition()
 {
 	Application::Addition();

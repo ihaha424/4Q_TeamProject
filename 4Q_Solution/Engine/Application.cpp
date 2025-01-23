@@ -2,6 +2,7 @@
 #include "Application.h"
 
 #include "DSHInputManager.h"
+#include "DSHLoadManager.h"
 #include "DSHTimeManager.h"
 #include "DSHWindowManager.h"
 #include "GEGraphicsManager.h"
@@ -10,6 +11,7 @@ Engine::Time::Manager* Engine::Application::_timeManager = nullptr;
 Engine::Window::Manager* Engine::Application::_windowManager = nullptr;
 Engine::GEGraphics::Manager* Engine::Application::_graphicsManager = nullptr;
 Engine::Input::Manager* Engine::Application::_inputManager = nullptr;
+Engine::Load::Manager* Engine::Application::_loadManager = nullptr;
 
 Engine::Application::Application(const HINSTANCE instanceHandle, std::wstring title, const Math::Size size) :
 	_instanceHandle(instanceHandle),
@@ -23,9 +25,10 @@ void Engine::Application::Begin()
 	// After
 	CreateManagers();
 	InitializeManagers();
-
-	// Before
+	LoadGameData();
 	DeclareInputActions(_inputManager);
+
+	//Before
 	Addition(); // TODO: Refactor this.
 	Setup({ _graphicsManager });
 	InitializeContents();
@@ -51,7 +54,7 @@ void Engine::Application::InitializeContents()
 	std::ranges::for_each(_worlds, [](World* world) { world->Initialize(); });
 }
 
-void Engine::Application::Run(const int showCommand)
+void Engine::Application::Run(const int showCommand) const
 {
 	_windowManager->Show(showCommand);
 	_windowManager->Update();
@@ -86,26 +89,13 @@ void Engine::Application::End()
 {
 	FinalizeContents();
 	FinalizeManagers();
+	DeleteManagers();
 }
 
 void Engine::Application::FinalizeContents()
 {
 	// TODO: WOC Manager Finalize;
 	std::ranges::for_each(_worlds, [](World* world) { world->Finalize(); });
-}
-
-void Engine::Application::FinalizeManagers() const
-{
-	constexpr Utility::SafeDelete deleter;
-
-	_graphicsManager->Finalize();
-	deleter(&_graphicsManager);
-	_inputManager->Finalize();
-	deleter(&_inputManager);
-	_windowManager->Finalize();
-	deleter(&_windowManager);
-	_timeManager->Finalize();
-	deleter(&_timeManager);
 }
 
 Engine::Time::IManager* Engine::Application::GetTimeManager()
@@ -121,6 +111,11 @@ Engine::Input::IManager* Engine::Application::GetInputManager()
 Engine::Graphics::IManager* Engine::Application::GetGraphicsManager()
 {
 	return _graphicsManager;
+}
+
+Engine::Load::IManager* Engine::Application::GetLoadManager()
+{
+	return _loadManager;
 }
 
 void Engine::Application::AddWorld(World* world)
@@ -139,6 +134,7 @@ void Engine::Application::CreateManagers()
 	CreateWindowManager(&_windowManager);
 	CreateInputManager(&_inputManager);
 	CreateGraphicsManager(&_graphicsManager);
+	CreateLoadManager(&_loadManager);
 }
 
 void Engine::Application::InitializeManagers() const
@@ -147,6 +143,37 @@ void Engine::Application::InitializeManagers() const
 	_windowManager->Initialize(_instanceHandle, _title.c_str(), _size);
 	_inputManager->Initialize(_windowManager->GetHandle());
 	_graphicsManager->Initialize(_windowManager->GetHandle(), L"../Shaders/", _size, false, 1);
+	_loadManager->Initialize();
+}
+
+void Engine::Application::LoadGameData()
+{
+	_loadManager->LoadGameData(_gameDataPath);
+
+	auto configData = _loadManager->GetGameConfigData();
+
+	// TODO: Get Data from ConfigData
+	//if (const auto opTitle = configData.GetProperty<std::wstring>(L"Title"); opTitle.has_value()) _title = *opTitle;
+	//if (const auto opSize = configData.GetProperty<Math::Size>(L"Size"); opSize.has_value()) _size = *opSize;
+}
+
+void Engine::Application::FinalizeManagers()
+{
+	_timeManager->Finalize();
+	_windowManager->Finalize();
+	_inputManager->Finalize();
+	_graphicsManager->Finalize();
+	_loadManager->Finalize();
+}
+
+void Engine::Application::DeleteManagers()
+{
+	constexpr Utility::SafeDelete deleter;
+	deleter(&_timeManager);
+	deleter(&_windowManager);
+	deleter(&_inputManager);
+	deleter(&_graphicsManager);
+	deleter(&_loadManager);
 }
 
 void Engine::Application::CreateTimeManager(Time::Manager** timeManager)
@@ -194,5 +221,17 @@ void Engine::Application::CreateGraphicsManager(GEGraphics::Manager** graphicsMa
 		GEGraphics::Manager* manager = new GEGraphics::Manager();
 		if (manager == nullptr) thrower(E_OUTOFMEMORY);
 		*graphicsManager = manager;
+	}
+}
+
+void Engine::Application::CreateLoadManager(Load::Manager** loadManager)
+{
+	constexpr Utility::ThrowIfFailed thrower;
+	if (loadManager == nullptr) thrower(E_INVALIDARG);
+	else
+	{
+		Load::Manager* manager = new DSHLoad::Manager();
+		if (manager == nullptr) thrower(E_OUTOFMEMORY);
+		*loadManager = manager;
 	}
 }

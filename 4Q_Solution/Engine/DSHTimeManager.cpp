@@ -1,6 +1,11 @@
 #include "pch.h"
 #include "DSHTimeManager.h"
 
+Engine::DSHTime::Manager::Manager():
+	_system(nullptr), _tickTimer(nullptr)
+{
+}
+
 void Engine::DSHTime::Manager::Initialize()
 {
 	constexpr Utility::ThrowIfFailed thrower;

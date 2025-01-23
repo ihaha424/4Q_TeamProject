@@ -5,7 +5,7 @@ namespace Engine::DSHTime
 	class Manager final: public Time::Manager
 	{
 	public:
-		Manager() = default;
+		Manager();
 
 		void Initialize() override;
 		void Tick() const override;

@@ -5,7 +5,7 @@ namespace Engine::DSHWindow
 	class Manager final: public Window::Manager
 	{
 	public:
-		Manager() = default;
+		Manager();
 
 		void Initialize(HINSTANCE instanceHandle, LPCWSTR name, SIZE size) override;
 		void Finalize() override;

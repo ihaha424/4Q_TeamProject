@@ -1,7 +1,12 @@
 #include "pch.h"
 #include "DSHWindowManager.h"
 
-void Engine::DSHWindow::Manager::Initialize(HINSTANCE instanceHandle, LPCWSTR name, SIZE size)
+Engine::DSHWindow::Manager::Manager():
+	_system(nullptr), _class(nullptr), _handle(nullptr)
+{
+}
+
+void Engine::DSHWindow::Manager::Initialize(const HINSTANCE instanceHandle, const LPCWSTR name, const SIZE size)
 {
 	constexpr Utility::ThrowIfFailed thrower;
 

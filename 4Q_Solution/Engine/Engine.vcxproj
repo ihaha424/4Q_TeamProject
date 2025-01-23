@@ -180,6 +180,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Components.h" />
+    <ClInclude Include="ConfigData.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="DotTween.h" />
     <ClInclude Include="Down.h" />
@@ -191,6 +192,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="DSHInputButtonComponent.h" />
     <ClInclude Include="DSHInputManager.h" />
     <ClInclude Include="DSHKeyboard.h" />
+    <ClInclude Include="DSHLoadManager.h" />
     <ClInclude Include="DSHMappingContext.h" />
     <ClInclude Include="DSHMouse.h" />
     <ClInclude Include="DSHNegative.h" />
@@ -213,6 +215,8 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="Load.h" />
+    <ClInclude Include="LoadManager.h" />
     <ClInclude Include="MappingContext.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Matrix.h" />
@@ -253,6 +257,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="ConfigData.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="DotTween.cpp" />
     <ClCompile Include="Down.cpp" />
@@ -264,6 +269,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="DSHInputButtonComponent.cpp" />
     <ClCompile Include="DSHInputManager.cpp" />
     <ClCompile Include="DSHKeyboard.cpp" />
+    <ClCompile Include="DSHLoadManager.cpp" />
     <ClCompile Include="DSHMappingContext.cpp" />
     <ClCompile Include="DSHMouse.cpp" />
     <ClCompile Include="DSHNegative.cpp" />
@@ -282,6 +288,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Light.cpp" />
+    <ClCompile Include="LoadManager.cpp" />
     <ClCompile Include="MappingContext.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="Mesh.cpp" />

@@ -244,6 +244,24 @@
     <Filter Include="Math\Size">
       <UniqueIdentifier>{9bf72f7e-898f-4994-8f41-ee04332dd5c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Interfaces\Load">
+      <UniqueIdentifier>{257337ba-2371-418b-bc4b-f9d961a2f1c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Load\Manager">
+      <UniqueIdentifier>{90eb4cc0-c801-4e9f-ad51-1c9679a8f4b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHLoad">
+      <UniqueIdentifier>{d933e9f9-bba1-416e-8e03-0d0a62633d7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHLoad\Manager">
+      <UniqueIdentifier>{534f1a42-69dd-4dfd-8e59-3282919a4319}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Load\ConfigData">
+      <UniqueIdentifier>{f74c565d-123a-4109-a6ed-626bb5cef0d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Load\ConfigData\ConfigData">
+      <UniqueIdentifier>{5b6ba07e-4e73-42ea-8e96-bb15fe3d7345}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -462,6 +480,18 @@
     <ClInclude Include="Size.h">
       <Filter>Math\Size</Filter>
     </ClInclude>
+    <ClInclude Include="Load.h">
+      <Filter>Modules\Interfaces\Load</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadManager.h">
+      <Filter>Modules\Interfaces\Load\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHLoadManager.h">
+      <Filter>Modules\Difinition\DSHLoad\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigData.h">
+      <Filter>Modules\Interfaces\Load\ConfigData\ConfigData</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -643,6 +673,15 @@
     </ClCompile>
     <ClCompile Include="Size.cpp">
       <Filter>Math\Size</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadManager.cpp">
+      <Filter>Modules\Interfaces\Load\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHLoadManager.cpp">
+      <Filter>Modules\Difinition\DSHLoad\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigData.cpp">
+      <Filter>Modules\Interfaces\Load\ConfigData\ConfigData</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

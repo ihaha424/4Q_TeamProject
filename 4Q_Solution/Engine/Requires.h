@@ -4,6 +4,8 @@
 #include <string>
 #include <filesystem>
 #include <ranges>
+#include <any>
+#include <optional>
 
 #include "DSHTime/Time.h"
 #include "DSHWindow/Window.h"

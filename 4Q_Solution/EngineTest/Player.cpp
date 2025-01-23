@@ -28,40 +28,53 @@ void Player::PreInitialize()
 
 	_movement.SetTarget(&_transform);
 
-	//const auto inputManager = Engine::Application::GetInputManager();
-	//Engine::Input::IMappingContext* mappingContext = nullptr;
-	//inputManager->GetMappingContext(L"Default", &mappingContext);
-	//Engine::Input::IAction* action = nullptr;
-	//mappingContext->GetAction(L"Move", &action);
-	//action->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
-	//{
-	//	_movement.SetDirection(value);		
-	//	
-	//});
-	//action->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) { 
-	//	_animator.ChangeAnimation("Run"); 
-	//	NetworkTemp::GetInstance()->_stateChange.set_serialnumber(1);
-	//	NetworkTemp::GetInstance()->_stateChange.set_stateinfo(1);
+	const auto inputManager = Engine::Application::GetInputManager();
+	Engine::Input::IMappingContext* mappingContext = nullptr;
+	inputManager->GetMappingContext(L"Default", &mappingContext);
+	Engine::Input::IAction* action = nullptr;
+	mappingContext->GetAction(L"Move", &action);
+	action->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
+	{
+		Engine::Math::Vector3 direction = _movement.GetDirection();
+		if (direction != Engine::Math::Vector3(value)) {
+			_movement.SetDirection(value);		
+			NetworkTemp::GetInstance()->_move.set_serialnumber(1);
+			NetworkTemp::GetInstance()->_move.set_x(value.x);
+			NetworkTemp::GetInstance()->_move.set_y(value.y);
+			NetworkTemp::GetInstance()->_move.set_z(value.z);
+			NetworkTemp::GetInstance()->_move.set_speed(_movement.GetSpeed());
 
-	//	Client::SavePacketData(
-	//		NetworkTemp::GetInstance()->_stateChange.SerializeAsString(),
-	//		(short)PacketID::StateChange,
-	//		NetworkTemp::GetInstance()->_stateChange.ByteSizeLong());
-	//	});
-	//action->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
-	//	{ 
-	//		_animator.ChangeAnimation("Wait"); 
-	//		_movement.SetDirection(Engine::Math::Vector3::Zero);
+			Client::SavePacketData(
+				NetworkTemp::GetInstance()->_move.SerializeAsString(),
+				(short)PacketID::Move,
+				NetworkTemp::GetInstance()->_move.ByteSizeLong());
+		}
+		
+	});
+	action->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) { 
+		_animator.ChangeAnimation("Run"); 
+		NetworkTemp::GetInstance()->_stateChange.set_serialnumber(1);
+		NetworkTemp::GetInstance()->_stateChange.set_stateinfo(1);
 
-	//		NetworkTemp::GetInstance()->_stateChange.set_serialnumber(1);
-	//		NetworkTemp::GetInstance()->_stateChange.set_stateinfo(0);
+		Client::SavePacketData(
+			NetworkTemp::GetInstance()->_stateChange.SerializeAsString(),
+			(short)PacketID::StateChange,
+			NetworkTemp::GetInstance()->_stateChange.ByteSizeLong());
+		});
+	action->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
+		{ 
+			_animator.ChangeAnimation("Wait"); 
+			_movement.SetDirection(Engine::Math::Vector3::Zero);
 
-	//		Client::SavePacketData(
-	//			NetworkTemp::GetInstance()->_stateChange.SerializeAsString(),
-	//			(short)PacketID::StateChange,
-	//			NetworkTemp::GetInstance()->_stateChange.ByteSizeLong());
+			NetworkTemp::GetInstance()->_stateChange.set_serialnumber(1);
+			NetworkTemp::GetInstance()->_stateChange.set_stateinfo(0);
 
-	//	});
+			Client::SavePacketData(
+				NetworkTemp::GetInstance()->_stateChange.SerializeAsString(),
+				(short)PacketID::StateChange,
+				NetworkTemp::GetInstance()->_stateChange.ByteSizeLong());
+
+		});
 }
 
 void Player::PostInitialize()
@@ -92,22 +105,6 @@ void Player::PostUpdate(float deltaTime)
 	tempPostion.y += 300.f;
 	_camera.SetPosition(tempPostion);
 	_camera.SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
-
-	//static float elapsedTime;
-	//elapsedTime += deltaTime;
-	//if (elapsedTime >= 0.2f) {
-	//	elapsedTime -= 0.2f;
-	//	NetworkTemp::GetInstance()->_move.set_serialnumber(1);
-	//	NetworkTemp::GetInstance()->_move.set_x(_transform.position.x);
-	//	NetworkTemp::GetInstance()->_move.set_y(_transform.position.y);
-	//	NetworkTemp::GetInstance()->_move.set_z(_transform.position.z);
-	//	NetworkTemp::GetInstance()->_move.set_speed(100.f);
-
-	//	Client::SavePacketData(
-	//		NetworkTemp::GetInstance()->_move.SerializeAsString(),
-	//		(short)PacketID::Move,
-	//		NetworkTemp::GetInstance()->_move.ByteSizeLong());
-	//}
 }
 
 void Player::PostFixedUpdate()

@@ -28,15 +28,17 @@ void ServerLogic::Update()
     elapsedTime += _timer->GetDeltaTime();
 
     for (int i = 0; i < 2; i++) {
-        // player idle
-        //if (_playerSlot[i]._state == 0) {
-        //    continue;
-        //} // if end
-        //Vector3 velocity = _playerSlot[i]._direction * _playerSlot[i]._speed * _timer->GetDeltaTime();
-        //_playerSlot[i]._position = _playerSlot[i]._position + velocity;
+
+        if (_playerSlot[i]._state == 0) {
+            continue;
+        } // if end
+
+        Vector3 velocity = _playerSlot[i]._direction * _playerSlot[i]._speed * _timer->GetDeltaTime();
+        _playerSlot[i]._position = _playerSlot[i]._position + velocity;
+
         if (_playerSlot[i]._serialNumber == 0) continue;
-        if (elapsedTime >= 0.01f) {
-            elapsedTime -= 0.01f;
+        if (elapsedTime >= 0.02f) {
+            elapsedTime -= 0.02f;
             _moveSync.set_serialnumber(i + 1);
             _moveSync.set_x(_playerSlot[i]._position._x);
             _moveSync.set_y(_playerSlot[i]._position._y);
@@ -45,9 +47,7 @@ void ServerLogic::Update()
             _moveSync.SerializeToString(&_msgBuffer);
             Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong());
         }
-        //if (i == 0) {
-        //    //printf("MovePlayer Position : %f, %f, %f\n", _playerSlot[i]._position._x, _playerSlot[i]._position._y, _playerSlot[i]._position._z);
-        //}
+
     } // for end
 
     Server::SendUpdate();
@@ -140,10 +140,24 @@ void ServerLogic::MessageDispatch()
             
             int serialNum = _move.serialnumber() - 1;
 
-            _playerSlot[serialNum]._position._x = _move.x();
-            _playerSlot[serialNum]._position._y = _move.y();
-            _playerSlot[serialNum]._position._z = _move.z();
+            Vector3 direction;
+            direction._x = _move.x();
+            direction._y = _move.y();
+            direction._z = _move.z();
             _playerSlot[serialNum]._speed = _move.speed();
+
+            if (direction != _playerSlot[serialNum]._direction) {
+                _playerSlot[serialNum]._direction = direction;
+
+                _moveSync.set_serialnumber(serialNum);
+                _moveSync.set_x(_playerSlot[serialNum]._position._x);
+                _moveSync.set_y(_playerSlot[serialNum]._position._y);
+                _moveSync.set_z(_playerSlot[serialNum]._position._z);
+
+                _moveSync.SerializeToString(&_msgBuffer);
+                Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong());
+            }
+
 
             //_syncPlayer.set_serialnumber(_playerSlot[serialNum]._serialNumber);
             //_syncPlayer.set_x(_playerSlot[serialNum]._position._x);

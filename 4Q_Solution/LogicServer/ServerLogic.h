@@ -11,13 +11,13 @@ class ServerLogic
 		float _y;
 		float _z;
 		Vector3 operator*(float f) {
-			_x *= f;
-			_y *= f;
-			_z *= f;
-			return *this;
+			return Vector3(_x * f, _y * f, _z * f);
 		}
 		Vector3 operator+(Vector3& v) {
 			return Vector3(_x + v._x, _y + v._y, _z + v._z);
+		}
+		bool operator!=(Vector3& v) {
+			return (_x != v._x) || (_y != v._y) || (_z != v._z);
 		}
 	};
 

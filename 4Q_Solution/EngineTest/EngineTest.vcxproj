@@ -85,12 +85,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)includes;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)includes;$(SolutionDir)..\ThridParty\ProtoBuffer\includes;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)lib;$(SolutionDir)..\ThirdParty\ProtoBuffer\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)includes;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)includes;$(SolutionDir)..\ThridParty\ProtoBuffer\includes;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)lib;$(SolutionDir)..\ThirdParty\ProtoBuffer\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />

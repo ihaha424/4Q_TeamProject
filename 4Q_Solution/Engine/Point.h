@@ -2,11 +2,12 @@
 
 namespace Engine::Math
 {
-	struct Point
+	struct Point : POINT
 	{
-		Point(unsigned long x, unsigned long y);
+		Point(long x, long y);
 
-		unsigned long x;
-		unsigned long y;
+		Point(const POINT& point) noexcept;
+
+		Point& operator=(const POINT& point) noexcept;
 	};
 }

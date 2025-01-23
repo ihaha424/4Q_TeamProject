@@ -9,7 +9,12 @@ class Mesh;
 class SkyBoxRenderer;
 class DX11Renderer : public IRenderer
 {
-	using DrawData = std::pair<unsigned int, Mesh*>;
+	struct DrawData
+	{
+		unsigned int modelID;
+		unsigned int layerMask;
+		Mesh* mesh;
+	};
 	enum TextureType { Diffuse, Normal, Specular, Emissive, ShadowPosition, End };
 public:
 	explicit DX11Renderer() = default;
@@ -27,7 +32,7 @@ private:
 	void ForwardPass(std::list<DrawData>& renderData, ID3D11RenderTargetView* pRTV);
 	void SkyBoxPass(std::list<SkyBoxRenderer*>& skyBoxes);
 	void PostProcessing();
-	void BlendPass();
+	void BlendPass(ID3D11RenderTargetView* pRTV, ID3D11ShaderResourceView* pSRV);
 	void RenderMesh(std::list<DrawData>& renderData, std::shared_ptr<PixelShader>& pixelShader);
 
 private:
@@ -66,9 +71,7 @@ private:
 	ID3D11ShaderResourceView*			_pShadowSRV{ nullptr };
 
 	// State
-	ID3D11BlendState*					_pBlendState{ nullptr };
+	ID3D11BlendState*					_pDeferredBlendState{ nullptr };
+	ID3D11BlendState*					_pForwardBlendState{ nullptr };
 	ID3D11RasterizerState*				_pRSSkyBoxState{ nullptr };
-
-	// Layer
-	std::vector<ID3D11ShaderResourceView*> _layerSRVs;
 };

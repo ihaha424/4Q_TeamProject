@@ -1,8 +1,5 @@
 #include "ShaderUtilities.hlsli"
-
-Texture2D txSource : register(t0);
-
-SamplerState samLinear_wrap : register(s0);
+#include "PostProcess.hlsli"
 
 float GetBloomCurve(float intensity, float threshold)
 {
@@ -13,11 +10,12 @@ float GetBloomCurve(float intensity, float threshold)
     return result * 0.5;
 }
 
-float4 main(float2 uv : TEXCOORD0) : SV_Target
+float4 main(PS_INPUT input) : SV_Target
 {
-    float3 source = GammaToLinearSpace(txSource.Sample(samLinear_wrap, uv).rgb);
+    float3 source = GammaToLinearSpace(txSource.Sample(samLinear_wrap, input.uv).rgb);
     
-    float intensity = dot(source, float3(0.3, 0.3, 0.3));
+    float3 factor = 0.5;
+    float intensity = dot(source, factor);
     float bloom_intensity = GetBloomCurve(intensity, 1);
     float3 bloom_color = source * bloom_intensity / intensity;
     

@@ -6,7 +6,7 @@ struct PS_INPUT
     float3 normal           : NORMAL;
     float3 tangent          : TANGENT;
     float3 biTangent        : BITANGENT;
-    float2 uv               : TEXCOORD;
+    float2 uv               : TEXCOORD0;
 };
 
 struct PS_OUTPUT
@@ -16,7 +16,13 @@ struct PS_OUTPUT
     float4 specular         : SV_Target2;
     float4 emissive         : SV_Target3;
     float4 shadowPosition   : SV_Target4;
+    uint   layerMask        : SV_Target5;
 };
+
+cbuffer LayerMask : register(b0)
+{
+    uint layerMask;
+}
 
 Texture2D txDiffuse          : register(t0);
 Texture2D txNormal           : register(t1);
@@ -54,6 +60,9 @@ PS_OUTPUT main(PS_INPUT input)
     
     // shadow
     output.shadowPosition = input.shadowPosition;    
+    
+    // layerMask
+    output.layerMask = layerMask;
     
     return output;
 }

@@ -5,7 +5,8 @@
 Bloom::Bloom()
 {
 	_psBloomCurve = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/BloomCurvePS.cso");
-	_psSampling = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/SamplingPS.cso");
+	_psDownSampling = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/SamplingPS.cso");
+	_psUpSampling = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/SamplingPS_Up.cso");
 
 	_desc =
 	{
@@ -14,10 +15,8 @@ Bloom::Bloom()
 	};
 }
 
-void Bloom::InitializeOnce()
+void Bloom::Initialize()
 {
-	g_pViewManagement->AddRenderTargetView(L"Bloom", Vector2(g_width, g_height));
-
 	float downScale = 0.5f;
 	g_pViewManagement->AddRenderTargetView(L"DownScale1/4", Vector2(g_width * downScale, g_height * downScale));
 	
@@ -58,13 +57,10 @@ void Bloom::SetDesc(GE::BlOOM_DESC* pInDesc)
 void Bloom::Render(ID3D11ShaderResourceView* pSourceSRV)
 {
 	float downScale = 1.f;
-	unsigned int numViewports = 0;
-	D3D11_VIEWPORT* oldViewPorts = nullptr;
-	_pDeviceContext->RSGetViewports(&numViewports, oldViewPorts);
 	
 	// BloomCurve
-	auto* pRTV = g_pViewManagement->GetRenderTargetView(L"Bloom");
-	auto* pSRV = g_pViewManagement->GetShaderResourceView(L"Bloom");
+	auto* pRTV = g_pViewManagement->GetRenderTargetView(L"PostProcess");
+	auto* pSRV = g_pViewManagement->GetShaderResourceView(L"PostProcess");
 
 	_pDeviceContext->OMSetRenderTargets(1, &pRTV, nullptr);
 	_pDeviceContext->ClearRenderTargetView(pRTV, COLOR_ZERO);
@@ -72,26 +68,38 @@ void Bloom::Render(ID3D11ShaderResourceView* pSourceSRV)
 	_psBloomCurve->SetPixelShader();
 	g_pQuad->Render();
 
+	ID3D11RenderTargetView* nullRTV = nullptr;
+	_pDeviceContext->OMSetRenderTargets(1, &nullRTV, nullptr);
+	_pDeviceContext->PSSetShaderResources(0, 1, &pSRV);
+
 	auto& [RTVs, SRVs] = g_pViewManagement->GetRenderTargetGroup(L"DownScale");
-	size_t count = RTVs.size();
+	int count = (int)RTVs.size();
 
 	// DownScale
-	for (size_t i = 0; i < count; i++)
+	for (int i = 0; i < count; i++)
 	{
 		downScale *= 0.5f;
 		Sampling(g_width * downScale, g_height * downScale, RTVs[i]);
 		_pDeviceContext->PSSetShaderResources(0, 1, &SRVs[i]);
 	}
 
-	// UpScale
-	for (size_t i = count - 1; i >= 0; i--)
-	{
-		Sampling(g_width * downScale, g_height * downScale, RTVs[i]);
-		_pDeviceContext->PSSetShaderResources(0, 1, &SRVs[i]);
-		downScale *= 2.f;
-	}
+	ID3D11ShaderResourceView* nullSRV = nullptr;
+	_pDeviceContext->PSSetShaderResources(0, 1, &nullSRV);
 
-	_pDeviceContext->RSSetViewports(numViewports, oldViewPorts);
+	// UpScale
+	D3D11_VIEWPORT viewport
+	{
+		.Width = g_width,
+		.Height = g_height,
+		.MaxDepth = 1.f
+	};
+
+	_pDeviceContext->RSSetViewports(1, &viewport);
+
+	_pDeviceContext->OMSetRenderTargets(1, &pRTV, nullptr);
+	_pDeviceContext->PSSetShaderResources(1, SRVs.size(), SRVs.data());
+	_psUpSampling->SetPixelShader();
+	g_pQuad->Render();
 }
 
 void Bloom::Sampling(float width, float height, ID3D11RenderTargetView* pRTV)
@@ -102,12 +110,13 @@ void Bloom::Sampling(float width, float height, ID3D11RenderTargetView* pRTV)
 		.Height = height,
 		.MaxDepth = 1.f
 	};
+
 	_pDeviceContext->RSSetViewports(1, &viewport);
 	_pDeviceContext->OMSetRenderTargets(1, &pRTV, nullptr);
 
-	_psSampling->SetPixelShader();
+	_psDownSampling->SetPixelShader();
 	g_pQuad->Render();
 
-	ID3D11RenderTargetView* nullSRV{ nullptr };
-	_pDeviceContext->OMSetRenderTargets(1, &nullSRV, nullptr);
+	ID3D11RenderTargetView* nullRTV{ nullptr };
+	_pDeviceContext->OMSetRenderTargets(1, &nullRTV, nullptr);
 }

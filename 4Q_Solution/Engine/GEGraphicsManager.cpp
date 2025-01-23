@@ -49,6 +49,9 @@ void Engine::GEGraphics::Manager::Initialize(HWND windowHandle, const std::files
 
 	// LightSystem
 	_graphicsSystem->CreateLightSystem(&_lightSystem);
+
+	// PostProcessSystem
+	_renderSystem->GetPostProcessSystem(&_postprocessSystem);
 }
 
 void Engine::GEGraphics::Manager::Update(const float deltaTime) const

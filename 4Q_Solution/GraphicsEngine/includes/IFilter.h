@@ -11,6 +11,6 @@ namespace GE
         IFilter(const IFilter&) = delete;
         IFilter(IFilter&&) = delete;
         IFilter& operator=(const IFilter&) = delete;
-        IFilter& operator=(IFilter&&) = delete;  
+        IFilter& operator=(IFilter&&) = delete;
     };
 }

@@ -11,7 +11,7 @@ Engine::Window::Manager* Engine::Application::_windowManager = nullptr;
 Engine::GEGraphics::Manager* Engine::Application::_graphicsManager = nullptr;
 Engine::Input::Manager* Engine::Application::_inputManager = nullptr;
 
-Engine::Application::Application(const HINSTANCE instanceHandle, std::wstring title, const SIZE size) :
+Engine::Application::Application(const HINSTANCE instanceHandle, std::wstring title, const Math::Size size) :
 	_instanceHandle(instanceHandle),
 	_title(std::move(title)),
 	_size(size)
@@ -20,26 +20,15 @@ Engine::Application::Application(const HINSTANCE instanceHandle, std::wstring ti
 
 void Engine::Application::Begin()
 {
+	// After
+	CreateManagers();
 	InitializeManagers();
+
+	// Before
 	DeclareInputActions(_inputManager);
 	Addition(); // TODO: Refactor this.
 	Setup({ _graphicsManager });
 	InitializeContents();
-}
-
-void Engine::Application::InitializeManagers() const
-{
-	CreateTimeManager(&_timeManager);
-	_timeManager->Initialize();
-
-	CreateWindowManager(&_windowManager);
-	_windowManager->Initialize(_instanceHandle, _title.c_str(), _size);
-
-	CreateInputManager(&_inputManager);
-	_inputManager->Initialize(_windowManager->GetHandle());
-
-	CreateGraphicsManager(&_graphicsManager);
-	_graphicsManager->Initialize(_windowManager->GetHandle(), L"../Shaders/", _size, false, 1);
 }
 
 void Engine::Application::DeclareInputActions(Input::IManager* inputManager)
@@ -142,6 +131,22 @@ void Engine::Application::AddWorld(World* world)
 void Engine::Application::Attach(World* world)
 {
 	_drive.AttachWorld(world, nullptr);
+}
+
+void Engine::Application::CreateManagers()
+{
+	CreateTimeManager(&_timeManager);
+	CreateWindowManager(&_windowManager);
+	CreateInputManager(&_inputManager);
+	CreateGraphicsManager(&_graphicsManager);
+}
+
+void Engine::Application::InitializeManagers() const
+{
+	_timeManager->Initialize();
+	_windowManager->Initialize(_instanceHandle, _title.c_str(), _size);
+	_inputManager->Initialize(_windowManager->GetHandle());
+	_graphicsManager->Initialize(_windowManager->GetHandle(), L"../Shaders/", _size, false, 1);
 }
 
 void Engine::Application::CreateTimeManager(Time::Manager** timeManager)

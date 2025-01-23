@@ -6,7 +6,7 @@
 namespace PhysicsEngineAPI
 {
 	class PhysxCollisionEvent
-		: virtual public physx::PxSimulationEventCallback
+		: public physx::PxSimulationEventCallback
 	{
 	public:
 		// PxSimulationEventCallback을(를) 통해 상속됨

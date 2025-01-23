@@ -7,7 +7,7 @@
 namespace PhysicsEngineAPI
 {
 	class PhysXGeometry
-		: virtual public IGeometry
+		: public IGeometry
 	{
 	public:
 		explicit	PhysXGeometry(physx::PxGeometry* geometry);

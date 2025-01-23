@@ -19,10 +19,10 @@ namespace PhysicsEngineAPI
 
 	bool PhysXScene::AddActor(IObject* object)
 	{
-		PhysXActor* actor = dynamic_cast<PhysXActor*>(object);
+		physx::PxActor* actor = static_cast<physx::PxActor*>(object->GetPhysicsObject());
 		if (nullptr == actor)
 			return false;
-		if (!scene->addActor(*(actor->actor)))
+		if (!scene->addActor(*actor))
 			return false;
 		return true;
 	}

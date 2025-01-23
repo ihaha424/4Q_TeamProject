@@ -5,7 +5,7 @@ namespace PhysicsEngineAPI
 {
 	__INTERFACE__
 	EXTERN_C class PHYSICS_API IDynamicObject
-		: virtual public IObject
+		: public IObject
 	{
 	public:
 		// Transform 관련 함수

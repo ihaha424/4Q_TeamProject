@@ -1,12 +1,12 @@
 #pragma once
 #include "IObject.h"
 #include "PhysXUtils.h"
-#include "PhysXScene.h"
+#include "PhysXActorFunction.h"
 
 namespace PhysicsEngineAPI
 {
 	class PhysXActor
-		: virtual public IObject
+		: public IObject
 	{
 	public:
 		explicit	PhysXActor(physx::PxRigidActor* actor);
@@ -29,6 +29,8 @@ namespace PhysicsEngineAPI
 		const ICollision* GetUserData() const	override;
 		void ClearUserData()					override;
 
+		void* GetPhysicsObject() override;
+
 		physx::PxRigidActor* operator->() { return actor; }
 
 	public:
@@ -36,8 +38,8 @@ namespace PhysicsEngineAPI
 
 	protected:
 		physx::PxRigidActor* actor;
+		PhysXActorFunction function;
 
-		friend class PhysXScene;
 		friend class PhysXSystem;
 	};
 }

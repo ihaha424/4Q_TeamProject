@@ -204,6 +204,7 @@ xcopy .\PhysXLibrary\$(Configuration)\*.dll $(OutDir) /Y</Command>
     <ClInclude Include="Math.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="IPhysicsSystem.h" />
+    <ClInclude Include="PhysXActorFunction.h" />
     <ClInclude Include="PhysxCollision.h" />
     <ClInclude Include="PhysXDynamicActor.h" />
     <ClInclude Include="PhysXElement.h" />
@@ -241,6 +242,7 @@ xcopy .\PhysXLibrary\$(Configuration)\*.dll $(OutDir) /Y</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="PhysXActorFunction.cpp" />
     <ClCompile Include="PhysxCollision.cpp" />
     <ClCompile Include="PhysXDynamicActor.cpp" />
     <ClCompile Include="PhysXGeometry.cpp" />

@@ -259,6 +259,45 @@
     <Filter Include="Modules\Difinition\PhysicsEngine\Scene">
       <UniqueIdentifier>{4715709a-7d06-4e1c-8e8e-d536ace5d633}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Interfaces\Physics\Object">
+      <UniqueIdentifier>{21957b80-503b-4ed4-b84c-cded2cdf4445}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\PhysicsEngine\Object">
+      <UniqueIdentifier>{47579cd0-94ba-4edf-a755-1ea990e6eab4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\Component">
+      <UniqueIdentifier>{47f465ea-7e07-451d-a3d4-38ca494749f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\Component\CollisionComponent">
+      <UniqueIdentifier>{ae21cec8-bb6b-4aff-9113-cc33f4545d28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\PhysicsEngine\Component">
+      <UniqueIdentifier>{34f1cdd5-3150-4226-ae3c-a7dd9a60ba9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\PhysicsEngine\Component\PHICollisionComponent">
+      <UniqueIdentifier>{2d94887d-b763-4805-951b-7718d1f441e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\Object\PhysicsStaticObject">
+      <UniqueIdentifier>{023846db-2551-4a5a-b00b-afb7b52fa9fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\Object\PhysicsDynamicObject">
+      <UniqueIdentifier>{2d747b1c-a158-474d-9251-e01a9399ebfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\Object\PhysicsKinematicObject">
+      <UniqueIdentifier>{e8dc0d04-bd51-4901-929f-c3dd674a30ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Vector4">
+      <UniqueIdentifier>{79d5a801-384e-4b2b-8d93-dbdeedeb7f24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\PhysicsEngine\Object\PHIStaticObject">
+      <UniqueIdentifier>{c2fd2c30-1cbc-40ae-b6d5-98b3c9524ca6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\PhysicsEngine\Object\PHIDynamicObject">
+      <UniqueIdentifier>{d1775a28-bf47-49d1-87b1-bc13cc707957}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\PhysicsEngine\Object\PHIKinematicObject">
+      <UniqueIdentifier>{cfdf6b0c-e796-4142-82f8-dedc1c3287d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -486,6 +525,42 @@
     <ClInclude Include="PHIScene.h">
       <Filter>Modules\Difinition\PhysicsEngine\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsObject.h">
+      <Filter>Modules\Interfaces\Physics\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PHIObject.h">
+      <Filter>Modules\Difinition\PhysicsEngine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsComponent.h">
+      <Filter>Modules\Interfaces\Physics\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsCollisionComponent.h">
+      <Filter>Modules\Interfaces\Physics\Component\CollisionComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="PHICollisionComponent.h">
+      <Filter>Modules\Difinition\PhysicsEngine\Component\PHICollisionComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsKinematicObject.h">
+      <Filter>Modules\Interfaces\Physics\Object\PhysicsKinematicObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsStaticObject.h">
+      <Filter>Modules\Interfaces\Physics\Object\PhysicsStaticObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsDynamicObject.h">
+      <Filter>Modules\Interfaces\Physics\Object\PhysicsDynamicObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4.h">
+      <Filter>Math\Vector4</Filter>
+    </ClInclude>
+    <ClInclude Include="PHIKinematicObject.h">
+      <Filter>Modules\Difinition\PhysicsEngine\Object\PHIKinematicObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PHIDynamicObject.h">
+      <Filter>Modules\Difinition\PhysicsEngine\Object\PHIDynamicObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PHIStaticObject.h">
+      <Filter>Modules\Difinition\PhysicsEngine\Object\PHIStaticObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -673,6 +748,42 @@
     </ClCompile>
     <ClCompile Include="PHIScene.cpp">
       <Filter>Modules\Difinition\PhysicsEngine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsObject.cpp">
+      <Filter>Modules\Interfaces\Physics\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="PHIObject.cpp">
+      <Filter>Modules\Difinition\PhysicsEngine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsComponent.cpp">
+      <Filter>Modules\Interfaces\Physics\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsCollisionComponent.cpp">
+      <Filter>Modules\Interfaces\Physics\Component\CollisionComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="PHICollisionComponent.cpp">
+      <Filter>Modules\Difinition\PhysicsEngine\Component\PHICollisionComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsKinematicObject.cpp">
+      <Filter>Modules\Interfaces\Physics\Object\PhysicsKinematicObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsStaticObject.cpp">
+      <Filter>Modules\Interfaces\Physics\Object\PhysicsStaticObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsDynamicObject.cpp">
+      <Filter>Modules\Interfaces\Physics\Object\PhysicsDynamicObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector4.cpp">
+      <Filter>Math\Vector4</Filter>
+    </ClCompile>
+    <ClCompile Include="PHIKinematicObject.cpp">
+      <Filter>Modules\Difinition\PhysicsEngine\Object\PHIKinematicObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PHIDynamicObject.cpp">
+      <Filter>Modules\Difinition\PhysicsEngine\Object\PHIDynamicObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PHIStaticObject.cpp">
+      <Filter>Modules\Difinition\PhysicsEngine\Object\PHIStaticObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

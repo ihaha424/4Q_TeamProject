@@ -4,7 +4,7 @@
 namespace PhysicsEngineAPI
 {
 	__INTERFACE__
-		class IFactory
+	class IFactory
 	{
 	public:
 		virtual bool CreateDynamic(

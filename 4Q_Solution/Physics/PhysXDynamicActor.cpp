@@ -3,144 +3,179 @@
 
 namespace PhysicsEngineAPI
 {
-	PhysXDynamicActor::PhysXDynamicActor(physx::PxRigidDynamic* actor)
-		: PhysXActor(actor)
+	PhysXDynamicActor::PhysXDynamicActor(physx::PxRigidDynamic* _actor)
+		: actor{ _actor }
 	{}
-	PhysXDynamicActor::~PhysXDynamicActor()
-	{}
+	PhysXDynamicActor::~PhysXDynamicActor() { Release(); }
+	void PhysXDynamicActor::Release() { function.Release(actor); }
 
-
-
-	void PhysXDynamicActor::SetVelocity(const Utils::Math::Vector3& velocity)
+	/*******************************************************************
+	PhysXDynamic
+	*********************************************************************/
+	void PhysXDynamicActor::SetVelocity(const Utils::Math::Vector3& velocity) 
 	{
-		physx::PxRigidDynamic* actor = reinterpret_cast<physx::PxRigidDynamic*>(this->actor);
-		actor->setLinearVelocity({ velocity.x, velocity.y, velocity.z });
+		function.SetVelocity(velocity, actor);
 	}
-
 	const Utils::Math::Vector3 PhysXDynamicActor::GetVelocity() const
 	{
-		physx::PxRigidDynamic* actor = reinterpret_cast<physx::PxRigidDynamic*>(this->actor);
-		auto velocity = actor->getLinearVelocity();
-		return Utils::Math::Vector3({ velocity.x, velocity.y, velocity.z });
+		return function.GetVelocity(actor);
 	}
-
-	void PhysXDynamicActor::SetLinearVelocity(const Utils::Math::Vector3& velocity)
+	void PhysXDynamicActor::SetLinearVelocity(const Utils::Math::Vector3& velocity) 
 	{
-		physx::PxRigidDynamic* actor = reinterpret_cast<physx::PxRigidDynamic*>(this->actor);
-		actor->setLinearVelocity({ velocity.x,velocity.y,velocity.z });
+		function.SetLinearVelocity(velocity, actor);
 	}
-
 	const Utils::Math::Vector3& PhysXDynamicActor::GetLinearVelocity() const
 	{
-		physx::PxRigidDynamic* actor = reinterpret_cast<physx::PxRigidDynamic*>(this->actor);
-		auto velocity = actor->getLinearVelocity();
-		return Utils::Math::Vector3({ velocity.x, velocity.y, velocity.z });
+		return function.GetLinearVelocity(actor);
 	}
-	void PhysXDynamicActor::SetMaxLinearVelocity(const float velocity)
+	void PhysXDynamicActor::SetMaxLinearVelocity(const float velocity) 
 	{
-		physx::PxRigidDynamic* actor = reinterpret_cast<physx::PxRigidDynamic*>(this->actor);
-		actor->setMaxLinearVelocity(velocity);
+		return function.SetMaxLinearVelocity(velocity, actor);
 	}
-
 	const float PhysXDynamicActor::GetMaxLinearVelocity() const
 	{
-		physx::PxRigidDynamic* actor = reinterpret_cast<physx::PxRigidDynamic*>(this->actor);
-		auto velocity = actor->getMaxLinearVelocity();
-		return velocity;
+		return function.GetMaxLinearVelocity(actor);
 	}
-
-	void PhysXDynamicActor::SetAngularVelocity(const Utils::Math::Vector3& angularVelocity)
+	void PhysXDynamicActor::SetAngularVelocity(const Utils::Math::Vector3& angularVelocity) 
 	{
-		physx::PxRigidDynamic* actor = reinterpret_cast<physx::PxRigidDynamic*>(this->actor);
-		actor->setAngularVelocity({ angularVelocity.x, angularVelocity.y, angularVelocity.z });
+		function.SetAngularVelocity(angularVelocity, actor);
 	}
-
 	const Utils::Math::Vector3 PhysXDynamicActor::GetAngularVelocity() const
 	{
-		physx::PxRigidDynamic* actor = reinterpret_cast<physx::PxRigidDynamic*>(this->actor);
-		auto angularVelocity = actor->getAngularVelocity();
-		return Utils::Math::Vector3({ angularVelocity.x, angularVelocity.y, angularVelocity.z });
+		return function.GetAngularVelocity(actor);
 	}
-
-	void PhysXDynamicActor::SetMaxAngularVelocity(const float velocity)
+	void PhysXDynamicActor::SetMaxAngularVelocity(const float velocity) 
 	{
-		physx::PxRigidDynamic* actor = reinterpret_cast<physx::PxRigidDynamic*>(this->actor);
-		actor->setMaxAngularVelocity(velocity);
+		function.SetMaxAngularVelocity(velocity, actor);
 	}
-
 	const float PhysXDynamicActor::GetMaxAngularVelocity() const
 	{
-		physx::PxRigidDynamic* actor = reinterpret_cast<physx::PxRigidDynamic*>(this->actor);
-		auto velocity = actor->getMaxAngularVelocity();
-		return velocity;
+		return function.GetMaxAngularVelocity(actor);
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	void PhysXDynamicActor::Wakeup()
+	void PhysXDynamicActor::Wakeup() 
 	{
+		function.Wakeup(actor);
 	}
-	bool PhysXDynamicActor::IsSleeping()
+	bool PhysXDynamicActor::IsSleeping() 
 	{
-		return false;
+		return function.IsSleeping(actor);
 	}
-	void PhysXDynamicActor::PutToSleep()
+	void PhysXDynamicActor::PutToSleep() 
 	{
+		function.PutToSleep(actor);
 	}
-	void PhysXDynamicActor::SetSleepThreshold()
+	void PhysXDynamicActor::SetSleepThreshold() 
 	{
+		function.SetSleepThreshold(actor);
 	}
-	void PhysXDynamicActor::SetWakeCounter(float timer)
+	void PhysXDynamicActor::SetWakeCounter(float timer) 
 	{
+		function.SetWakeCounter(timer, actor);
 	}
-	float PhysXDynamicActor::GetWakeCounter()
+	float PhysXDynamicActor::GetWakeCounter() 
 	{
-		return 0.0f;
+		return function.GetWakeCounter(actor);
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+			
 	void PhysXDynamicActor::AddForce(const Utils::Math::Vector3& force)
 	{
-		physx::PxRigidDynamic* actor = reinterpret_cast<physx::PxRigidDynamic*>(this->actor);
-		actor->addForce({ force.x,force.y,force.z });
+		function.AddForce(force, actor);
 	}
 	void PhysXDynamicActor::AddTorque(const Utils::Math::Vector3& force)
 	{
-		physx::PxRigidDynamic* actor = reinterpret_cast<physx::PxRigidDynamic*>(this->actor);
-		actor->addTorque({ force.x,force.y,force.z });
+		function.AddTorque(force, actor);
 	}
 	void PhysXDynamicActor::ClearForce()
 	{
-		physx::PxRigidDynamic* actor = reinterpret_cast<physx::PxRigidDynamic*>(this->actor);
-		actor->clearForce();
+		function.ClearForce(actor);
 	}
 	void PhysXDynamicActor::ClearTorque()
 	{
-		physx::PxRigidDynamic* actor = reinterpret_cast<physx::PxRigidDynamic*>(this->actor);
-		actor->clearTorque();
+		function.ClearTorque(actor);
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+	/*******************************************************************
+	PhysXActor
+	*********************************************************************/
+
+	void PhysXDynamicActor::SetTranslate(const Utils::Math::Vector3& position)
+	{
+		function.SetTranslate(position, actor);
+	}
+	const Utils::Math::Vector3 PhysXDynamicActor::GetTranslate() const
+	{
+		return function.GetTranslate(actor);
+	}
+
+	void PhysXDynamicActor::SetRotation(const Utils::Math::Vector4& Rotation)
+	{
+		return function.SetRotation(Rotation, actor);
+	}
+	const Utils::Math::Vector4 PhysXDynamicActor::GetRotation() const
+	{
+		return function.GetRotation(actor);
+	}
+
+	void PhysXDynamicActor::SetTransform(const Utils::Math::Transform& _transform)
+	{
+		return function.SetTransform(_transform, actor);
+	}
+	const Utils::Math::Transform PhysXDynamicActor::GetTransform() const
+	{
+		return function.GetTransform(actor);
+	}
+
+	void PhysXDynamicActor::SetName(const char* name)
+	{
+		return function.SetName(name, actor);
+	}
+
+	const char* PhysXDynamicActor::GetName() const
+	{
+		return function.GetName(actor);
+	}
+
+	void PhysXDynamicActor::SetUserData(ICollision* _userData)
+	{
+		function.SetUserData(_userData, actor);
+	}
+
+	void PhysXDynamicActor::ClearUserData()
+	{
+		function.ClearUserData(actor);
+	}
+
+	void* PhysXDynamicActor::GetPhysicsObject()
+	{
+		return actor;
+	}
+
+	const ICollision* PhysXDynamicActor::GetUserData() const
+	{
+		return function.GetUserData(actor);
+	}
+
+	bool PhysXDynamicActor::AttachShape(IShape* _shape)
+	{
+		return function.AttachShape(_shape, actor);
+	}
+	bool PhysXDynamicActor::DetachShape(IShape* _shape)
+	{
+		return function.DetachShape(_shape, actor);
+	}
+
+
+
 
 }

@@ -4,7 +4,7 @@ namespace PhysicsEngineAPI
 {
 	__INTERFACE__
 	EXTERN_C class PHYSICS_API IGeometry
-		: virtual public IBase
+		: public IBase
 	{
 	public:
  		virtual void	SetScale(const Utils::Math::Vector3& position) = 0;

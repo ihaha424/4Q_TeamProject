@@ -6,10 +6,10 @@ namespace PhysicsEngineAPI
 {
 	__INTERFACE__
 	EXTERN_C class PHYSICS_API IPhysicsSystem
-		: virtual public ICreate
-		, virtual public IUpdate
-		, virtual public IFactory
-		, virtual public IBase
+		: public ICreate
+		, public IUpdate
+		, public IFactory
+		, public IBase
 	{
 	public:
 		enum class PhysicsType

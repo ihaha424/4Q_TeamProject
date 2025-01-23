@@ -12,8 +12,8 @@ namespace PhysicsEngineAPI
 {
 	__INTERFACE__
 	EXTERN_C class PHYSICS_API IObject
-		: virtual public IUserData
-		, virtual public IBase
+		: public IUserData
+		, public IBase
 	{
 	public:
 		virtual bool	AttachShape(IShape* shape) = 0;
@@ -28,6 +28,7 @@ namespace PhysicsEngineAPI
 		virtual void	SetTransform(const Utils::Math::Transform& transform)	= 0;
 		virtual const	Utils::Math::Transform GetTransform() const				= 0;
 
+		virtual void*	GetPhysicsObject() = 0;
 	public:
 		// Todo:
 		// physx::PxActorFlag

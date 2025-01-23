@@ -1,13 +1,13 @@
 #pragma once
-
 #include "IShape.h"
+#include "PhysXActorFunction.h"
 #include "PhysXUtils.h"
-#include "PhysXActor.h"
+
 
 namespace PhysicsEngineAPI
 {
 	class PhysXShape
-		: virtual public IShape
+		: public IShape
 	{
 	public:
 		explicit	PhysXShape(physx::PxShape* shape);
@@ -51,7 +51,7 @@ namespace PhysicsEngineAPI
 	private:
 		physx::PxShape* shape;
 
-		friend class PhysXActor;
+		friend class PhysXActorFunction;
 		friend class PhysXSystem;
 	};
 }

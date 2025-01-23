@@ -5,7 +5,7 @@ namespace PhysicsEngineAPI
 {
 	__INTERFACE__
 	EXTERN_C class PHYSICS_API IKinematicObject
-		: virtual public IDynamicObject
+		: public IDynamicObject
 	{
 	public:
 	};

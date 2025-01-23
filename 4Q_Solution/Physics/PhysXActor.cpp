@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "PhysXActor.h"
-#include "PhysXShape.h"
+
 
 using namespace  PhysicsEngineAPI::Utils::DataStructure;
 namespace PhysicsEngineAPI
@@ -9,89 +9,71 @@ namespace PhysicsEngineAPI
 		: actor{ _actor }
 	{}
 	PhysXActor::~PhysXActor() { Release(); }
-	void PhysXActor::Release() { SAFE_RELEASE(actor); }
+	void PhysXActor::Release() { function.Release(actor); }
 
+	void* PhysXActor::GetPhysicsObject()
+	{
+		return actor;
+	}
 
 	void PhysXActor::SetTranslate(const Utils::Math::Vector3& position)
 	{
-		auto transform = actor->getGlobalPose();
-		transform.p = { position.x, position.y, position.z };
-		actor->setGlobalPose(transform);
+		function.SetTranslate(position, actor);
 	}
 	const Utils::Math::Vector3 PhysXActor::GetTranslate() const
 	{
-		auto transform = actor->getGlobalPose();
-		return Utils::Math::Vector3({ transform.p.x, transform.p.y, transform.p.z });
+		return function.GetTranslate(actor);
 	}
 
 	void PhysXActor::SetRotation(const Utils::Math::Vector4& Rotation)
 	{
-		auto transform = actor->getGlobalPose();
-		transform.q = { Rotation.x, Rotation.y, Rotation.z, Rotation.w };
-		actor->setGlobalPose(transform);
+		return function.SetRotation(Rotation, actor);
 	}
 	const Utils::Math::Vector4 PhysXActor::GetRotation() const
 	{
-		auto transform = actor->getGlobalPose();
-		return Utils::Math::Vector4({ transform.q.x, transform.q.y, transform.q.z, transform.q.w });
+		return function.GetRotation(actor);
 	}
 
 	void PhysXActor::SetTransform(const Utils::Math::Transform& _transform)
 	{
-		const physx::PxTransform transform
-		{ 
-			{ _transform.position.x, _transform.position.y, _transform.position.z }
-			, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} 
-		};
-		actor->setGlobalPose(transform);
+		return function.SetTransform(_transform, actor);
 	}
 	const Utils::Math::Transform PhysXActor::GetTransform() const
 	{
-		auto transform = actor->getGlobalPose();
-		return Utils::Math::Transform({ transform.p.x, transform.p.y, transform.p.z }, { transform.q.x, transform.q.y, transform.q.z, transform.q.w });
+		return function.GetTransform(actor);
 	}
 
 	void PhysXActor::SetName(const char* name)
 	{
-		actor->setName(name);
+		return function.SetName(name, actor);
 	}
 
 	const char* PhysXActor::GetName() const
 	{
-		return actor->getName();
+		return function.GetName(actor);
 	}
 
 	void PhysXActor::SetUserData(ICollision* _userData)
 	{
-		actor->userData = _userData;
+		function.SetUserData(_userData, actor);
 	}
 
 	void PhysXActor::ClearUserData()
 	{
-		actor->userData = nullptr;
+		function.ClearUserData(actor);
 	}
 
 	const ICollision* PhysXActor::GetUserData() const
 	{
-		return static_cast<ICollision*>(actor->userData);
+		return function.GetUserData(actor);
 	}
 
 	bool PhysXActor::AttachShape(IShape* _shape)
 	{
-		PhysXShape* shape = dynamic_cast<PhysXShape*>(_shape);
-		if (nullptr == shape)
-			return false;
-
-		actor->attachShape(*(shape->shape));
-		return true;
+		return function.AttachShape(_shape, actor);
 	}
 	bool PhysXActor::DetachShape(IShape* _shape)
 	{
-		PhysXShape* shape = dynamic_cast<PhysXShape*>(_shape);
-		if (nullptr == shape)
-			return false;
-
-		actor->detachShape(*(shape->shape));
-		return true;
+		return function.DetachShape(_shape, actor);
 	}
 }

@@ -7,7 +7,7 @@ namespace PhysicsEngineAPI
 	class PhysXScene;
 
 	class PhysXSystem
-		: virtual public IPhysicsSystem
+		: public IPhysicsSystem
 	{
 		
 	public:

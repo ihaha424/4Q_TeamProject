@@ -47,4 +47,3 @@ const	DATA_TYPE& Get##NAME() const	override\
 #define VIRTUAL_SET_GET_FUNCTION_CREATOR(NAME, DATA_TYPE) \
 virtual void	Set##NAME(const DATA_TYPE& ##NAME)	= 0; \
 virtual const	DATA_TYPE& Get##NAME() const		= 0\
-

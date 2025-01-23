@@ -222,6 +222,9 @@
     <ClInclude Include="PhysXUtils.h">
       <Filter>Library\1. System\00. PhysX\999. Utils</Filter>
     </ClInclude>
+    <ClInclude Include="PhysXActorFunction.h">
+      <Filter>Library\1. System\00. PhysX\002. Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -307,6 +310,9 @@
     </ClCompile>
     <ClCompile Include="PhysXUtils.cpp">
       <Filter>Library\1. System\00. PhysX\999. Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXActorFunction.cpp">
+      <Filter>Library\1. System\00. PhysX\002. Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -277,6 +277,9 @@
     <Filter Include="Modules\Difinition\DSHContent\Manager">
       <UniqueIdentifier>{2f2f98e3-fc95-44e9-ab1f-85adc155f3c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Interfaces\Content\Factory">
+      <UniqueIdentifier>{4b6022f6-b7ee-432d-b41f-62462ac614c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -519,6 +522,9 @@
     <ClInclude Include="DSHContentManager.h">
       <Filter>Modules\Difinition\DSHContent\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="ContentFactory.h">
+      <Filter>Modules\Interfaces\Content\Factory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -718,6 +724,9 @@
     </ClCompile>
     <ClCompile Include="DSHContentManager.cpp">
       <Filter>Modules\Difinition\DSHContent\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentFactory.cpp">
+      <Filter>Modules\Interfaces\Content\Factory</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

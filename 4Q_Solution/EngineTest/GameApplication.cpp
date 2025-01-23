@@ -58,6 +58,14 @@ void GameApplication::DeclareInputActions(Engine::Input::IManager* inputManager)
 
 void GameApplication::Register(Engine::Load::IManager* loadManager, Engine::Content::IManager* contentManager)
 {
+	auto worldConfigData =	loadManager->GetWorldConfigData(L"TestWorld");
+	if (worldConfigData.has_value())
+	{
+		auto factory = contentManager->GetWorldFactory();
+		factory.Register<TestWorld>();
+		factory.Clone<TestWorld>();
+		// worldConfigData->GetProperty<>();
+	}
 	AddWorld(&_world);
 }
 

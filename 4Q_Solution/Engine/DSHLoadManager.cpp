@@ -20,3 +20,10 @@ Engine::Load::ConfigData Engine::DSHLoad::Manager::GetGameConfigData()
 {
 	return Load::ConfigData(&_gameConfigData);
 }
+
+std::optional<Engine::Load::ConfigData> Engine::DSHLoad::Manager::GetWorldConfigData(const std::wstring name)
+{
+	if (const auto configData = _worldConfigData.find(name); configData == _worldConfigData.end())
+		return std::nullopt;
+	else return Load::ConfigData(&configData->second);
+}

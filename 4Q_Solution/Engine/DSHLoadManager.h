@@ -13,7 +13,10 @@ namespace Engine::DSHLoad
 
 		Load::ConfigData GetGameConfigData() override;
 
+		std::optional<Load::ConfigData> GetWorldConfigData(std::wstring name) override;
+
 	private:
 		Load::ConfigData::Data _gameConfigData;
+		std::unordered_map<std::wstring, Load::ConfigData::Data> _worldConfigData;
 	};
 }

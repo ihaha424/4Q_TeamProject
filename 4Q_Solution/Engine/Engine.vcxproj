@@ -182,6 +182,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Components.h" />
     <ClInclude Include="ConfigData.h" />
     <ClInclude Include="Content.h" />
+    <ClInclude Include="ContentFactory.h" />
     <ClInclude Include="ContentManager.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="DotTween.h" />
@@ -262,6 +263,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ConfigData.cpp" />
+    <ClCompile Include="ContentFactory.cpp" />
     <ClCompile Include="ContentManager.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="DotTween.cpp" />

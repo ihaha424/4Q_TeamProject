@@ -11,22 +11,22 @@ namespace Engine::Physics
 		IObject& operator=(IObject&& other) noexcept = default;
 		virtual ~IObject() = default;
 
-		void		SetName(const char* Name);
-		const char*	GetName() const;
-
-		void	SetUserData(ICollision* UserData);
-		const	ICollision* GetUserData() const;
-		void	ClearUserData();
-
-		bool	AttachShape(IShape* shape);
-		bool	DetachShape(IShape* shape);
-
-		void	SetTranslate(const Math::Vector3& position);
-		const	Math::Vector3 GetTranslate() const;
-		void	SetRotation(const Math::Vector4& Rotation);
-		const	Math::Vector4 GetRotation() const;
-		void	SetTransform(const Math::Transform& transform);
-		const	Math::Transform GetTransform() const;
+		// virtual void		SetName(const char* Name) = 0;
+		// virtual const char*	GetName() const = 0;
+		//  
+		// virtual void	SetUserData(ICollision* UserData) = 0;
+		// virtual const	ICollision* GetUserData() const = 0;
+		// virtual void	ClearUserData() = 0;
+		// virtual 
+		// virtual bool	AttachShape(IShape* shape) = 0;
+		// virtual bool	DetachShape(IShape* shape) = 0;
+		//  
+		// virtual void	SetTranslate(const Math::Vector3& position) = 0;
+		// virtual const	Math::Vector3 GetTranslate() const = 0;
+		// virtual void	SetRotation(const Math::Vector4& Rotation) = 0;
+		// virtual const	Math::Vector4 GetRotation() const = 0;
+		// virtual void	SetTransform(const Math::Transform& transform) = 0;
+		// virtual const	Math::Transform GetTransform() const = 0;
 	};
 
 	struct Object : IObject

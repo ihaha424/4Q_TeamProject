@@ -277,15 +277,6 @@
     <Filter Include="Modules\Difinition\PhysicsEngine\Component\PHICollisionComponent">
       <UniqueIdentifier>{2d94887d-b763-4805-951b-7718d1f441e1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\Interfaces\Physics\Object\PhysicsStaticObject">
-      <UniqueIdentifier>{023846db-2551-4a5a-b00b-afb7b52fa9fe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Interfaces\Physics\Object\PhysicsDynamicObject">
-      <UniqueIdentifier>{2d747b1c-a158-474d-9251-e01a9399ebfd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Interfaces\Physics\Object\PhysicsKinematicObject">
-      <UniqueIdentifier>{e8dc0d04-bd51-4901-929f-c3dd674a30ef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Math\Vector4">
       <UniqueIdentifier>{79d5a801-384e-4b2b-8d93-dbdeedeb7f24}</UniqueIdentifier>
     </Filter>
@@ -297,6 +288,9 @@
     </Filter>
     <Filter Include="Modules\Difinition\PhysicsEngine\Object\PHIKinematicObject">
       <UniqueIdentifier>{cfdf6b0c-e796-4142-82f8-dedc1c3287d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\Collision">
+      <UniqueIdentifier>{89ab88bf-37d1-4e78-be93-1471177d67e4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -540,15 +534,6 @@
     <ClInclude Include="PHICollisionComponent.h">
       <Filter>Modules\Difinition\PhysicsEngine\Component\PHICollisionComponent</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsKinematicObject.h">
-      <Filter>Modules\Interfaces\Physics\Object\PhysicsKinematicObject</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsStaticObject.h">
-      <Filter>Modules\Interfaces\Physics\Object\PhysicsStaticObject</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsDynamicObject.h">
-      <Filter>Modules\Interfaces\Physics\Object\PhysicsDynamicObject</Filter>
-    </ClInclude>
     <ClInclude Include="Vector4.h">
       <Filter>Math\Vector4</Filter>
     </ClInclude>
@@ -763,15 +748,6 @@
     </ClCompile>
     <ClCompile Include="PHICollisionComponent.cpp">
       <Filter>Modules\Difinition\PhysicsEngine\Component\PHICollisionComponent</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsKinematicObject.cpp">
-      <Filter>Modules\Interfaces\Physics\Object\PhysicsKinematicObject</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsStaticObject.cpp">
-      <Filter>Modules\Interfaces\Physics\Object\PhysicsStaticObject</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsDynamicObject.cpp">
-      <Filter>Modules\Interfaces\Physics\Object\PhysicsDynamicObject</Filter>
     </ClCompile>
     <ClCompile Include="Vector4.cpp">
       <Filter>Math\Vector4</Filter>

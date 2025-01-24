@@ -11,6 +11,9 @@ namespace PhysicsEngineAPI
 		, public IBase
 	{
 	public:
+		virtual ~IShape() = default;
+
+
 		virtual void SetFlag(Utils::DataStructure::CollisionType flag, bool value) = 0;
 	
 

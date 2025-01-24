@@ -7,6 +7,9 @@ namespace PhysicsEngineAPI
 	class IFactory
 	{
 	public:
+		virtual ~IFactory() = default;
+
+
 		virtual bool CreateDynamic(
 			_OUT_ IDynamicObject** destObject,
 			const Utils::Math::Transform& transform,

@@ -2,14 +2,20 @@
 
 namespace Engine::Math
 {
-	struct Vector4 : DirectX::SimpleMath::Vector4
+	struct Vector4
 	{
-		using DirectX::SimpleMath::Vector4::Zero;
-		using DirectX::SimpleMath::Vector4::One;
+		Vector4(float x, float y, float z);
 
-		Vector4(float x, float y, float z) noexcept;
-		Vector4(DirectX::SimpleMath::Vector4 vector) noexcept;
+		Vector4& operator+= (const Vector4& rhs) noexcept;
+		Vector4 operator* (float scalar) const noexcept;
 
-		Vector4& operator=(const DirectX::SimpleMath::Vector4& vector) noexcept;
+		float x;
+		float y;
+		float z;
+
+		// Constants
+		static const Vector4 Zero;
+		static const Vector4 One;
+
 	};
 }

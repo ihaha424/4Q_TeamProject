@@ -14,7 +14,7 @@ namespace Engine::Physics
 
 	struct Scene : IScene
 	{
-		virtual void Initialize(const PhysicsEngineAPI::Utils::Description::SceneDesc& sceneDescription, const char* name = nullptr) = 0;
+		virtual void Initialize(const SceneDesc& sceneDescription, const char* name = nullptr) = 0;
 		virtual void Update(float deltaTime) const = 0;
 		virtual void Finalize() = 0;
 	};

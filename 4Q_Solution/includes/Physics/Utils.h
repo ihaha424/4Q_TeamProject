@@ -10,6 +10,7 @@ namespace PhysicsEngineAPI
 	class IBase
 	{
 	public:
+		virtual ~IBase();
 		virtual void Release() = 0;
 	};
 }

@@ -65,7 +65,6 @@ namespace PhysicsEngineAPI
 		physx::PxRigidDynamic* operator->() { return actor; }
 	private:
 		physx::PxRigidDynamic* actor;
-
 		PhysXDynamicActorFunction function;
 
 		friend class PhysXSystem;

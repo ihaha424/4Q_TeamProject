@@ -8,6 +8,9 @@ namespace PhysicsEngineAPI
 		: public IObject
 	{
 	public:
+		virtual ~IDynamicObject() = default;
+
+
 		// Transform 관련 함수
 		/**
 		 * @brief

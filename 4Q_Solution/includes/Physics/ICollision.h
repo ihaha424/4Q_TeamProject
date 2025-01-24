@@ -19,6 +19,9 @@ namespace PhysicsEngineAPI
 	EXTERN_C class PHYSICS_API ICollision
 	{
 	public:
+		virtual ~ICollision() = default;
+
+
 		// Refer. Unity Collosion
 		virtual void __CALLBACK__ OnTriggerEnter()		= 0;
 		virtual void __CALLBACK__ OnTrigger()			= 0;

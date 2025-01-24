@@ -30,18 +30,26 @@ void Player::PreInitialize()
 	const auto inputManager = Engine::Application::GetInputManager();
 	Engine::Input::IMappingContext* mappingContext = nullptr;
 	inputManager->GetMappingContext(L"Default", &mappingContext);
-	Engine::Input::IAction* action = nullptr;
-	mappingContext->GetAction(L"Move", &action);
-	action->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
+
+	Engine::Input::IAction* moveAction = nullptr;
+	mappingContext->GetAction(L"Move", &moveAction);
+	moveAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
 	{
 		_movement.SetDirection(value);		
 	});
-	action->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) { /*_animator.ChangeAnimation("Run");*/ });
-	action->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
-		{ 
-			//_animator.ChangeAnimation("Wait"); 
-			_movement.SetDirection(Engine::Math::Vector3::Zero);
-		});	
+	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) { /*_animator.ChangeAnimation("Run");*/ });
+	moveAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
+	{ 
+		//_animator.ChangeAnimation("Wait"); 
+		_movement.SetDirection(Engine::Math::Vector3::Zero);
+	});
+
+	Engine::Input::IAction* cameraAction = nullptr;
+	mappingContext->GetAction(L"Camera", &cameraAction);
+	cameraAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
+	{
+		_camera.Rotate(value);
+	});
 }
 
 void Player::PostInitialize()

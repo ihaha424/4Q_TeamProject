@@ -10,7 +10,6 @@ namespace Engine::DSHInput::Device
 
 		void Setup(DSH::Input::Device::IMouse* mouse);
 
-		void Initialize() override;
 		void Update() override;
 		void Reset() override;
 		void Finalize() override;
@@ -22,9 +21,18 @@ namespace Engine::DSHInput::Device
 		[[nodiscard]] bool IsButtonPressed(Button button) const override;
 		[[nodiscard]] bool IsButtonReleased(Button button) const override;
 
+		void GetComponent(Button button, Input::Component::IButtonComponent** buttonComponent) override;
+		void GetComponent(Axis axis, Input::Component::IAxisComponent** axisComponent) override;
+
 	private:
+		bool IsButtonState(Button button, std::function<bool(DSH::Input::Component::IButtonComponent*)> state) const;
+
 		DSH::Input::Device::IMouse* _mouse;
 
+		std::unordered_map<Button, Input::Component::IButtonComponent*> _buttons;
+		std::unordered_map<Axis, Input::Component::IAxisComponent*> _axes;
+
 		std::unordered_map<Button, DSH::Input::Device::IMouse::Button> _buttonMap;
+		std::unordered_map<Axis, DSH::Input::Device::IMouse::Axis> _axisMap;
 	};
 }

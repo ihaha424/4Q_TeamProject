@@ -5,6 +5,9 @@
 
 class TestWorld : public Engine::World
 {
+public:
+	TestWorld() = default;
+	TestWorld(std::wstring argument1, int argument2); // TODO: Temporary
 protected:
 	void Addition() override;
 

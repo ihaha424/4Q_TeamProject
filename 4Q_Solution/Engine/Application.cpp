@@ -15,8 +15,8 @@ Engine::Input::Manager* Engine::Application::_inputManager = nullptr;
 Engine::Load::Manager* Engine::Application::_loadManager = nullptr;
 Engine::Content::Manager* Engine::Application::_contentManager = nullptr;
 
-Engine::Application::Application(const HINSTANCE instanceHandle, std::wstring title, const Math::Size size) :
-	_instanceHandle(instanceHandle), _title(std::move(title)), _size(size)
+Engine::Application::Application(const HINSTANCE instanceHandle):
+	_instanceHandle(instanceHandle), _size(Math::Size::Zero)
 {
 }
 
@@ -24,8 +24,8 @@ void Engine::Application::Begin()
 {
 	// After
 	CreateManagers();
-	InitializeManagers();
 	LoadGameData();
+	InitializeManagers();
 	DeclareInputActions(_inputManager);
 	Register(_loadManager, _contentManager);
 
@@ -143,18 +143,16 @@ void Engine::Application::InitializeManagers() const
 	_windowManager->Initialize(_instanceHandle, _title.c_str(), _size);
 	_inputManager->Initialize(_windowManager->GetHandle());
 	_graphicsManager->Initialize(_windowManager->GetHandle(), L"../Shaders/", _size, false, 1);
-	_loadManager->Initialize();
+
 }
 
 void Engine::Application::LoadGameData()
 {
-	_loadManager->LoadGameData(_gameDataPath);
+	_loadManager->Initialize(_gameDataPath);
 
-	auto configData = _loadManager->GetGameConfigData();
-
-	// TODO: Get Data from ConfigData
-	//if (const auto opTitle = configData.GetProperty<std::wstring>(L"Title"); opTitle.has_value()) _title = *opTitle;
-	//if (const auto opSize = configData.GetProperty<Math::Size>(L"Size"); opSize.has_value()) _size = *opSize;
+	const auto configData = _loadManager->GetGameConfigData();
+	_title = configData.GetProperty<std::wstring>(L"Title").value_or("Game");
+	_size = configData.GetProperty<Math::Size>(L"Size").value_or(Math::Size{ 1920, 1080 });
 }
 
 void Engine::Application::FinalizeManagers()

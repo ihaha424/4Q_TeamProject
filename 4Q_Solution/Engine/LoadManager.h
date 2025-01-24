@@ -12,14 +12,14 @@ namespace Engine::Load
 		virtual ~IManager() = default;
 
 		virtual std::optional<ConfigData> GetWorldConfigData(std::wstring name) = 0;
+		virtual std::optional<ConfigData> GetObjectConfigData(std::wstring name) = 0;
+		virtual std::optional<ConfigData> GetComponentConfigData(std::wstring name) = 0;
 	};
 
 	struct Manager : IManager
 	{
-		virtual void Initialize() = 0;
+		virtual void Initialize(std::filesystem::path path) = 0;
 		virtual void Finalize() = 0;
-
-		virtual void LoadGameData(std::filesystem::path path) = 0;
 
 		virtual ConfigData GetGameConfigData() = 0;
 	};

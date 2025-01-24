@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Size.h"
 
+const Engine::Math::Size Engine::Math::Size::Zero{ 0, 0 };
+
 Engine::Math::Size::Size(const long cx, const long cy) noexcept :
 	SIZE{ cx, cy }
 {

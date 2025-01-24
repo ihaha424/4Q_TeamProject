@@ -4,7 +4,7 @@
 #include "TestWorld.h"
 
 GameApplication::GameApplication(const HINSTANCE instanceHandle) :
-	Application(instanceHandle, L"Test", Engine::Math::Size{ 1920, 1080 })
+	Application(instanceHandle)
 {
 }
 
@@ -23,15 +23,27 @@ void GameApplication::DeclareInputActions(Engine::Input::IManager* inputManager)
 
 void GameApplication::Register(Engine::Load::IManager* loadManager, Engine::Content::IManager* contentManager)
 {
-	auto worldConfigData =	loadManager->GetWorldConfigData(L"TestWorld");
-	if (worldConfigData.has_value())
+	if (const auto testWorldData =	loadManager->GetWorldConfigData(L"TestWorld"); testWorldData.has_value())
 	{
+		const auto argument1 = testWorldData->GetProperty<std::wstring>(L"Argument1");
+		const auto argument2 = testWorldData->GetProperty<int>(L"Argument2");
 		auto factory = contentManager->GetWorldFactory();
-		factory.Register<TestWorld>();
-		factory.Clone<TestWorld>();
-		// worldConfigData->GetProperty<>();
+		factory.Register<TestWorld>(argument1.value_or(L"Hi"), argument2.value_or(1));
 	}
-	AddWorld(&_world);
+
+	if (const auto playerData = loadManager->GetObjectConfigData(L"Player"); playerData.has_value())
+	{
+		const auto argument1 = playerData->GetProperty<int>(L"Argument1");
+		const auto argument2 = playerData->GetProperty<int>(L"Argument2");
+		auto factory = contentManager->GetObjectFactory();
+		factory.Register<Player>(argument1.value_or(1), argument2.value_or(2));
+	}
+
+	if (const auto movementComponentData = loadManager->GetComponentConfigData(L"MovementComponent"); movementComponentData.has_value())
+	{
+		auto factory = contentManager->GetComponentFactory();
+		factory.Register<Engine::Component::MovementComponent>();
+	}
 }
 
 void GameApplication::InitializeContents()

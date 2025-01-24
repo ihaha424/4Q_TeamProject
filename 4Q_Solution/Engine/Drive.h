@@ -5,7 +5,6 @@ namespace Engine
 	class World;
 	class HUD;
 
-	template<typename T>
 	class Drive
 	{
 	public:

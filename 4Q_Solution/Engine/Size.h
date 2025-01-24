@@ -10,5 +10,8 @@ namespace Engine::Math
 
 		Size(const SIZE& size) noexcept;
 		Size& operator=(const SIZE& size) noexcept;
+
+		// Constants
+		static const Size Zero;
 	};
 }

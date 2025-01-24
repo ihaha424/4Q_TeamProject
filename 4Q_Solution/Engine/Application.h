@@ -10,7 +10,7 @@ namespace Engine
 	class Application
 	{
 	public:
-		Application(HINSTANCE instanceHandle, std::wstring title, Math::Size size);
+		Application(HINSTANCE instanceHandle);
 		Application(const Application& other) = default;
 		Application(Application&& other) noexcept = default;
 		Application& operator=(const Application& other) = default;

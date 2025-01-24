@@ -10,7 +10,7 @@ namespace Engine::Load
 		explicit ConfigData(Data* data) : _data(data) {}
 
 		template<typename T>
-		std::optional<T> GetProperty(const std::wstring& propertyName)
+		std::optional<T> GetProperty(const std::wstring& propertyName) const
 		{
 			if (const auto data = _data->find(propertyName); data != _data->end())
 			{

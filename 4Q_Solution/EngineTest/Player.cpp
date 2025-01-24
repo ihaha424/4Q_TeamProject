@@ -10,6 +10,11 @@ Player::Player() :
 {
 }
 
+Player::Player(int argument1, int argument2) : Player()
+{
+	// Nothing to do
+}
+
 void Player::Addition()
 {
 	Object::Addition();

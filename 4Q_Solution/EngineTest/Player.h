@@ -4,6 +4,7 @@ class Player : public Engine::Object
 {
 public:
 	Player();
+	Player(int argument1, int argument2); // TODO: Temporary
 protected:
 	void Addition() override;
 	void PreInitialize() override;

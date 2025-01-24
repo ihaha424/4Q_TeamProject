@@ -250,9 +250,6 @@
     <Filter Include="Modules\Difinition\PhysicsEngine\Manager">
       <UniqueIdentifier>{8540ef46-3413-4a41-8394-85db345430f8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\Interfaces\Physics\Factory">
-      <UniqueIdentifier>{5b846e69-1819-4488-8e38-1911ccd4970a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Modules\Interfaces\Physics\Scene">
       <UniqueIdentifier>{5b1484ff-9f0f-44be-8f11-145c3ab39bdf}</UniqueIdentifier>
     </Filter>
@@ -267,9 +264,6 @@
     </Filter>
     <Filter Include="Modules\Interfaces\Physics\Component">
       <UniqueIdentifier>{47f465ea-7e07-451d-a3d4-38ca494749f3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Interfaces\Physics\Component\CollisionComponent">
-      <UniqueIdentifier>{ae21cec8-bb6b-4aff-9113-cc33f4545d28}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\Difinition\PhysicsEngine\Component">
       <UniqueIdentifier>{34f1cdd5-3150-4226-ae3c-a7dd9a60ba9d}</UniqueIdentifier>
@@ -291,6 +285,15 @@
     </Filter>
     <Filter Include="Modules\Interfaces\Physics\Collision">
       <UniqueIdentifier>{89ab88bf-37d1-4e78-be93-1471177d67e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\Discription">
+      <UniqueIdentifier>{1cfb4ba7-cb86-44b8-b8fe-0b6a1c7c8a3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\Component\RigidComponent">
+      <UniqueIdentifier>{97c2f33e-e045-4ad6-b580-5b52493bff90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\Shape">
+      <UniqueIdentifier>{421f1e90-bb95-436f-8a08-7179355a41b6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -528,9 +531,6 @@
     <ClInclude Include="PhysicsComponent.h">
       <Filter>Modules\Interfaces\Physics\Component</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsCollisionComponent.h">
-      <Filter>Modules\Interfaces\Physics\Component\CollisionComponent</Filter>
-    </ClInclude>
     <ClInclude Include="PHICollisionComponent.h">
       <Filter>Modules\Difinition\PhysicsEngine\Component\PHICollisionComponent</Filter>
     </ClInclude>
@@ -545,6 +545,15 @@
     </ClInclude>
     <ClInclude Include="PHIStaticObject.h">
       <Filter>Modules\Difinition\PhysicsEngine\Object\PHIStaticObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsDiscription.h">
+      <Filter>Modules\Interfaces\Physics\Discription</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsRigidComponent.h">
+      <Filter>Modules\Interfaces\Physics\Component\RigidComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsShape.h">
+      <Filter>Modules\Interfaces\Physics\Shape</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -743,9 +752,6 @@
     <ClCompile Include="PhysicsComponent.cpp">
       <Filter>Modules\Interfaces\Physics\Component</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsCollisionComponent.cpp">
-      <Filter>Modules\Interfaces\Physics\Component\CollisionComponent</Filter>
-    </ClCompile>
     <ClCompile Include="PHICollisionComponent.cpp">
       <Filter>Modules\Difinition\PhysicsEngine\Component\PHICollisionComponent</Filter>
     </ClCompile>
@@ -760,6 +766,15 @@
     </ClCompile>
     <ClCompile Include="PHIStaticObject.cpp">
       <Filter>Modules\Difinition\PhysicsEngine\Object\PHIStaticObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsDiscription.cpp">
+      <Filter>Modules\Interfaces\Physics\Discription</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsRigidComponent.cpp">
+      <Filter>Modules\Interfaces\Physics\Component\RigidComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsShape.cpp">
+      <Filter>Modules\Interfaces\Physics\Shape</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

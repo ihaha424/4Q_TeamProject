@@ -86,7 +86,7 @@ float4 main(PS_INPUT input) : SV_Target
     color.a = 1;
     
     float4 emissive = txEmissive.Sample(samLinear_wrap, input.uv);
-    color += emissive;
+    color += emissive;   
     
     return color;
 }

@@ -235,7 +235,7 @@ void DX11Renderer::DeferredPass(std::list<DrawData>& renderData, ID3D11RenderTar
 	_pDeviceContext->OMSetRenderTargets(1, &pRTV, nullptr);
 	_pDeviceContext->ClearRenderTargetView(pRTV, COLOR_ZERO);
 
-	_psDeferred->SetPixelShader();
+	_psDeferredLighting->SetPixelShader();
 	
 	_pDeviceContext->PSSetShaderResources(0, End, textures.data());
 	_pDeviceContext->PSSetShaderResources(5, 1, &_pDefaultSRV);
@@ -253,9 +253,9 @@ void DX11Renderer::ForwardPass(std::list<DrawData>& renderData, ID3D11RenderTarg
 	_pDeviceContext->OMSetRenderTargets(1, &pRTV, _pDefaultDSV);
 	_pDeviceContext->OMSetBlendState(_pForwardBlendState, blendFactor, 0xFFFFFFFF);
 
-	_psLighting->SetPixelShader();
+	_psForwardLighting->SetPixelShader();
 
-	RenderMesh(renderData, _psLighting);
+	RenderMesh(renderData, _psForwardLighting);
 }
 
 void DX11Renderer::SkyBoxPass(std::list<SkyBoxRenderer*>& skyBoxes)
@@ -293,12 +293,13 @@ void DX11Renderer::PostProcessing()
 
 	_pDeviceContext->OMSetBlendState(NULL, NULL, 0xFFFFFFF);
 
+	// ToneMapping
 	auto* pBackBuffer = g_pGraphicDevice->GetBackBuffer();
 
 	_pDeviceContext->OMSetRenderTargets(1, &pBackBuffer, nullptr);
 	_pDeviceContext->ClearRenderTargetView(pBackBuffer, COLOR_ZERO);
 	_pDeviceContext->PSSetShaderResources(0, 1, &SRVs[currentIndex]);
-	_psBlend->SetPixelShader();
+	_psToneMapping->SetPixelShader();
 	g_pQuad->Render();
 }
 
@@ -429,10 +430,11 @@ void DX11Renderer::InitShader()
 	_vsShadow[MeshType::Static] = g_pResourceMgr->LoadResource<VertexShader>(L"../Resources/Shaders/ShadowVS.cso");
 	_vsShadow[MeshType::Skeletal] = g_pResourceMgr->LoadResource<VertexShader>(L"../Resources/Shaders/ShadowVS_Skeletal.cso");	
 
-	_psDeferred = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/DeferredLightingPS.cso");
+	_psForwardLighting = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/ForwardLightingPS.cso");
+	_psDeferredLighting = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/DeferredLightingPS.cso");
 	_psGBuffer = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/GBufferPS.cso");
-	_psLighting = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/ForwardLightingPS.cso");
 	_psBlend = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/BlendPS.cso");
+	_psToneMapping = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/ToneMappingPS.cso");
 }
 
 void DX11Renderer::InitDepthStencil()

@@ -528,5 +528,8 @@
     <FxCompile Include="..\Shaders\BloomCurvePS.hlsl">
       <Filter>00. Common\HLSL\PostProcess</Filter>
     </FxCompile>
+    <FxCompile Include="..\Shaders\ToneMappingPS.hlsl">
+      <Filter>00. Common\HLSL\PostProcess</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

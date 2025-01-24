@@ -56,10 +56,11 @@ private:
 
 	// Shaders
 	std::shared_ptr<VertexShader>		_vsShadow[MeshType::End];
-	std::shared_ptr<PixelShader>		_psDeferred;
-	std::shared_ptr<PixelShader>		_psBlend;
 	std::shared_ptr<PixelShader>		_psGBuffer;
-	std::shared_ptr<PixelShader>		_psLighting;
+	std::shared_ptr<PixelShader>		_psDeferredLighting;
+	std::shared_ptr<PixelShader>		_psForwardLighting;
+	std::shared_ptr<PixelShader>		_psBlend;
+	std::shared_ptr<PixelShader>		_psToneMapping;
 
 	// Device
 	ID3D11DeviceContext*				_pDeviceContext{ nullptr };

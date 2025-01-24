@@ -46,6 +46,7 @@ void RenderSystem::Initialize(const GE::RENDERER_DESC* pDesc)
 
 void RenderSystem::Release()
 {
+	SafeRelease(g_pPostProcessSystem);
 	SafeRelease(g_pResourceMgr);
 	SafeRelease(_pRenderer);
 	SafeRelease(_pTextSystem);
@@ -96,14 +97,14 @@ void RenderSystem::CreateMeshRenderer(GE::IMeshRenderer** ppComponent, const GE:
 	(*ppComponent) = pMeshRenderer;
 }
 
-void RenderSystem::RegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* pComponent, GE::Matrix4x4* pMatrix)
+void RenderSystem::RegisterRenderQueue(GE::IMeshRenderer* pComponent, GE::Matrix4x4* pMatrix)
 {
-	g_pRenderGroup->RegisterRenderQueue(layer, pComponent, pMatrix);
+	g_pRenderGroup->RegisterRenderQueue(pComponent, pMatrix);
 }
 
-void RenderSystem::UnRegisterRenderQueue(const unsigned int layer, GE::IMeshRenderer* pComponent)
+void RenderSystem::UnRegisterRenderQueue(GE::IMeshRenderer* pComponent)
 {
-	g_pRenderGroup->UnRegisterRenderQueue(layer, pComponent);
+	g_pRenderGroup->UnRegisterRenderQueue(pComponent);
 }
 
 void RenderSystem::InitializeDX11(HWND hWnd, bool isFullScreen, const unsigned int maxLayer)
@@ -116,7 +117,6 @@ void RenderSystem::InitializeDX11(HWND hWnd, bool isFullScreen, const unsigned i
 	g_pConstantBuffer = new ConstantBuffer;
 	
 	g_pRenderGroup = new RenderGroup;
-	g_pRenderGroup->Initialize(maxLayer);
 
 	g_pSampler = new Sampler;
 	g_pSampler->Initialize();
@@ -131,7 +131,7 @@ void RenderSystem::InitializeDX11(HWND hWnd, bool isFullScreen, const unsigned i
 	_pTextSystem->Initialize();
 
 	g_pPostProcessSystem = new PostProcessSystem;
-	g_pPostProcessSystem->Initialize(maxLayer);
+	g_pPostProcessSystem->Initialize();
 }
 
 void RenderSystem::InitializeDX12()

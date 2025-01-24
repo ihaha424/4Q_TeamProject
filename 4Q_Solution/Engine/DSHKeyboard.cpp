@@ -17,10 +17,6 @@ void Engine::DSHInput::Device::Keyboard::Setup(DSH::Input::Device::IKeyboard* ke
 	_keyboard = keyboard;
 }
 
-void Engine::DSHInput::Device::Keyboard::Initialize()
-{
-}
-
 void Engine::DSHInput::Device::Keyboard::Update()
 {
 	_keyboard->Update();
@@ -37,44 +33,50 @@ void Engine::DSHInput::Device::Keyboard::Finalize()
 	Utility::SafeRelease()(&_keyboard, "Keyboard is still being referenced.");
 }
 
-bool Engine::DSHInput::Device::Keyboard::IsKeyDown(Key key) const
+bool Engine::DSHInput::Device::Keyboard::IsKeyDown(const Key key) const
 {
-	// TODO: Implement this function.
-	return false;
+	return IsButtonState(key, &DSH::Input::Component::IButtonComponent::IsDown);
 }
 
-bool Engine::DSHInput::Device::Keyboard::IsKeyUp(Key key) const
+bool Engine::DSHInput::Device::Keyboard::IsKeyUp(const Key key) const
 {
-	// TODO: Implement this function.
-	return false;
+	return IsButtonState(key, &DSH::Input::Component::IButtonComponent::IsUp);
 }
 
-bool Engine::DSHInput::Device::Keyboard::IsKeyPressed(Key key) const
+bool Engine::DSHInput::Device::Keyboard::IsKeyPressed(const Key key) const
 {
-	// TODO: Implement this function.
-	return false;
+	return IsButtonState(key, &DSH::Input::Component::IButtonComponent::IsPressed);
 }
 
-bool Engine::DSHInput::Device::Keyboard::IsKeyReleased(Key key) const
+bool Engine::DSHInput::Device::Keyboard::IsKeyReleased(const Key key) const
 {
-	// TODO: Implement this function.
-	return false;
+	return IsButtonState(key, &DSH::Input::Component::IButtonComponent::IsReleased);
 }
 
-void Engine::DSHInput::Device::Keyboard::GetComponent(const Key key, Input::Component::IButtonComponent** button)
+void Engine::DSHInput::Device::Keyboard::GetComponent(const Key key, Input::Component::IButtonComponent** buttonComponent)
 {
 	constexpr Utility::ThrowIfFailed thrower;
-	if (button == nullptr) thrower(E_INVALIDARG);
+	if (buttonComponent == nullptr) thrower(E_INVALIDARG);
 	else
 	{
 		if (_buttons.contains(key) == false)
 		{
 			Component::ButtonComponent* newButton = new Component::ButtonComponent();
 			DSH::Input::Component::IButtonComponent* dButton = nullptr;
-			thrower(_keyboard->GetComponent(_keyMap[key], &dButton));
+			thrower(_keyboard->GetComponent(_keyMap.at(key), &dButton));
 			newButton->Setup(dButton);
 			_buttons[key] = newButton;
 		}
-		*button = _buttons[key];
+		*buttonComponent = _buttons.at(key);
 	}
+}
+
+bool Engine::DSHInput::Device::Keyboard::IsButtonState(const Key key,
+	std::function<bool(DSH::Input::Component::IButtonComponent*)> state) const
+{
+	DSH::Input::Component::IButtonComponent* buttonComponent = nullptr;
+	Utility::ThrowIfFailed()(_keyboard->GetComponent(_keyMap.at(key), &buttonComponent));
+	const bool result = std::invoke(state, buttonComponent);
+	Utility::SafeRelease()(&buttonComponent);
+	return result;
 }

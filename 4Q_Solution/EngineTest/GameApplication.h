@@ -13,6 +13,9 @@ protected:
 	void InitializeContents() override;
 
 private:
+	void DeclareMoveAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext);
+	void DeclareCameraAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext);
+
 	TestWorld _world;
 };
 

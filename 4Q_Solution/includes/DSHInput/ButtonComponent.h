@@ -16,9 +16,15 @@ namespace DSH::Input::Component
 
 		void SetValue(bool value);
 
+		[[nodiscard]] bool IsDown() const override;
+		[[nodiscard]] bool IsUp() const override;
+		[[nodiscard]] bool IsPressed() const override;
+		[[nodiscard]] bool IsReleased() const override;
+
 	private:
 		ULONG _referenceCount;
 
 		bool _value;
+		bool _previousValue;
 	};
 }

@@ -1,0 +1,26 @@
+#pragma once
+#include "Filter.h"
+#include "includes/IBlur.h"
+
+class Blur : public Filter, public GE::IBlur
+{
+public:
+	explicit Blur() = default;
+	virtual ~Blur() = default;
+
+public:
+	// IBlur을(를) 통해 상속됨
+	void Release() override;
+	void GetDesc(GE::BLUR_DESC* pOutDesc) override;
+	void SetDesc(GE::BLUR_DESC* pInDesc) override;
+
+public:
+	// Filter을(를) 통해 상속됨
+	void Initialize() override;
+	void Render(ID3D11ShaderResourceView* pSourceSRV) override;
+
+private:
+	std::shared_ptr<PixelShader> _psSampling;
+	GE::BLUR_DESC _desc;
+
+};

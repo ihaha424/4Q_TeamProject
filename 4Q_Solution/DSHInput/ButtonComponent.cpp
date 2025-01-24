@@ -4,7 +4,7 @@
 #include "Value.h"
 
 DSH::Input::Component::ButtonComponent::ButtonComponent() :
-	_referenceCount(1), _value(false)
+	_referenceCount(1), _value(false), _previousValue(false)
 {
 }
 
@@ -39,10 +39,31 @@ DSH::Input::Value DSH::Input::Component::ButtonComponent::GetValue() const
 
 void DSH::Input::Component::ButtonComponent::Reset()
 {
+	_previousValue = _value;
 	_value = false;
 }
 
 void DSH::Input::Component::ButtonComponent::SetValue(const bool value)
 {
 	_value = value;
+}
+
+bool DSH::Input::Component::ButtonComponent::IsDown() const
+{
+	return _value;
+}
+
+bool DSH::Input::Component::ButtonComponent::IsUp() const
+{
+	return !_value;
+}
+
+bool DSH::Input::Component::ButtonComponent::IsPressed() const
+{
+	return _value && !_previousValue;
+}
+
+bool DSH::Input::Component::ButtonComponent::IsReleased() const
+{
+	return !_value && _previousValue;
 }

@@ -18,14 +18,13 @@ void Engine::DSHInput::Manager::Initialize(const HWND windowHandle)
 
 	DSH::Input::Device::IMouse* mouse = nullptr;
 	thrower(_system->CreateMouse(&mouse));
+	mouse->SetHandle(windowHandle);
 	_mouse.Setup(mouse);
-	_mouse.Initialize();
 	releaser(&mouse);
 
 	DSH::Input::Device::IKeyboard* keyboard = nullptr;
 	thrower(_system->CreateKeyboard(&keyboard));
 	_keyboard.Setup(keyboard);
-	_keyboard.Initialize();
 	releaser(&keyboard);
 
 	DSH::Input::Device::IController* controller = nullptr;

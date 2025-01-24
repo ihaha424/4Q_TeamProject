@@ -4,9 +4,9 @@
 
 Player::Player() :
 	_camera(L"MainCamera", 1.f, 1000.f, { 16,9 }, 3.141592f / 4) // TODO: Remove this.
-	, _staticMesh(L"../Resources/FBX/char.fbx", &_worldMatrix)
-	//, _skeltalMesh(L"../Resources/Player/Player.X", &_worldMatrix)
-	//, _animator(&_skeltalMesh)
+	//, _staticMesh(L"../Resources/FBX/char.fbx", &_worldMatrix)
+	, _skeltalMesh(L"../Resources/Player/Player.X", &_worldMatrix)
+	, _animator(&_skeltalMesh)
 	, _textRenderer(L"../Resources/Font/±Ã¼­12.sfont")
 {
 }
@@ -16,9 +16,9 @@ void Player::Addition()
 	Object::Addition();
 	AddComponent(&_movement);
 	AddComponent(&_camera);
-	AddComponent(&_staticMesh);
-	//AddComponent(&_skeltalMesh);
-	//AddComponent(&_animator);
+	//AddComponent(&_staticMesh);
+	AddComponent(&_skeltalMesh);
+	AddComponent(&_animator);
 	AddComponent(&_textRenderer);
 }
 
@@ -52,7 +52,7 @@ void Player::PreInitialize()
 		}
 		
 	});
-	action->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) { 
+	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) {
 		_animator.ChangeAnimation("Run"); 
 		NetworkTemp::GetInstance()->_stateChange.set_serialnumber(1);
 		NetworkTemp::GetInstance()->_stateChange.set_stateinfo(1);
@@ -62,7 +62,7 @@ void Player::PreInitialize()
 			(short)PacketID::StateChange,
 			NetworkTemp::GetInstance()->_stateChange.ByteSizeLong());
 		});
-	action->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
+	moveAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
 		{ 
 			_animator.ChangeAnimation("Wait"); 
 			_movement.SetDirection(Engine::Math::Vector3::Zero);

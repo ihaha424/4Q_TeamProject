@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "PHICollisionComponent.h"
+#include "PHIRigidComponent.h"
 
 namespace Engine::PHI
 {

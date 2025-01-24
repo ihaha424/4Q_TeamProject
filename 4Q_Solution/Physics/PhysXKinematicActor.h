@@ -18,7 +18,7 @@ namespace PhysicsEngineAPI
 		const	Utils::Math::Vector3 GetVelocity() const						override;
 
 		void	SetLinearVelocity(const Utils::Math::Vector3& velocity)			override;
-		const	Utils::Math::Vector3& GetLinearVelocity() const					override;
+		const	Utils::Math::Vector3 GetLinearVelocity() const					override;
 
 		void	SetMaxLinearVelocity(const float velocity)		override;
 		const	float GetMaxLinearVelocity() const				override;

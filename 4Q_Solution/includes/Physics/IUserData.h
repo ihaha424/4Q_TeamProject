@@ -4,7 +4,7 @@ namespace PhysicsEngineAPI
 {
 	class ICollision;
 	__INTERFACE__
-	class IUserData
+	EXTERN_C class PHYSICS_API IUserData
 	{
 	public:
 		virtual ~IUserData() = default;

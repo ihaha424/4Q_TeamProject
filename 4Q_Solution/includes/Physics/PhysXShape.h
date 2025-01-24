@@ -51,7 +51,7 @@ namespace PhysicsEngineAPI
 	private:
 		physx::PxShape* shape;
 
-		friend class PhysXActorFunction;
+		friend struct PhysXActorFunction;
 		friend class PhysXSystem;
 	};
 }

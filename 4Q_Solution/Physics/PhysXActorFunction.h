@@ -41,7 +41,7 @@ namespace PhysicsEngineAPI
 		const	Utils::Math::Vector3 GetVelocity(physx::PxRigidDynamic* actor) const;
 
 		void	SetLinearVelocity(const Utils::Math::Vector3& velocity, physx::PxRigidDynamic* actor);
-		const	Utils::Math::Vector3& GetLinearVelocity(physx::PxRigidDynamic* actor) const;
+		const	Utils::Math::Vector3 GetLinearVelocity(physx::PxRigidDynamic* actor) const;
 
 		void	SetMaxLinearVelocity(const float velocity, physx::PxRigidDynamic* actor);
 		const	float GetMaxLinearVelocity(physx::PxRigidDynamic* actor) const;

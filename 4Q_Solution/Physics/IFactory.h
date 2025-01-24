@@ -4,7 +4,7 @@
 namespace PhysicsEngineAPI
 {
 	__INTERFACE__
-	class IFactory
+	EXTERN_C class PHYSICS_API IFactory
 	{
 	public:
 		virtual ~IFactory() = default;

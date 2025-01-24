@@ -7,10 +7,10 @@
 
 namespace PhysicsEngineAPI
 {
-	class IBase
+	EXTERN_C class PHYSICS_API IBase
 	{
 	public:
-		virtual ~IBase();
+		virtual ~IBase() = default;
 		virtual void Release() = 0;
 	};
 }

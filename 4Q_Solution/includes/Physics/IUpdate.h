@@ -4,7 +4,7 @@
 namespace PhysicsEngineAPI
 {
 	__INTERFACE__
-	class IUpdate
+	EXTERN_C class PHYSICS_API IUpdate
 	{
 	public:
 		virtual ~IUpdate() = default;

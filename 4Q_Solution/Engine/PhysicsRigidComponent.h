@@ -4,16 +4,14 @@ namespace Engine::Physics
 {
 	struct IPhysicsRigidComponent : Component
 	{
-
 		/********************************
 					 Component
 		*********************************/
 		virtual void SetName(const char* Name) = 0;
 		virtual const char* GetName() const = 0;
 
-
 		/********************************
-					   Rigid
+					Rigid Object
 		*********************************/
 		virtual void	SetTranslate(const Engine::Math::Vector3& position) = 0;
 		virtual const	Engine::Math::Vector3 GetTranslate() const = 0;
@@ -21,28 +19,38 @@ namespace Engine::Physics
 		virtual void	SetRotation(const Engine::Math::Vector4& Rotation) = 0;
 		virtual const	Engine::Math::Vector4 GetRotation() const = 0;
 
-		virtual void	SetTransform(const Engine::Math::Transform& transform) = 0;
-		virtual const	Engine::Math::Transform GetTransform() const = 0;
+		virtual void	SetTransform(const Transform& transform) = 0;
+		virtual const	Transform GetTransform() const = 0;
 
 		/********************************
-				Collision CallBack
+					   Shape
 		*********************************/
-		// Refer. Unity Collosion
-		// 상속?>
-		virtual void OnTriggerEnter() = 0;
-		virtual void OnTrigger() = 0;
-		virtual void OnTriggerExit() = 0;
-		virtual void OnCollisionEnter() = 0;
-		virtual void OnCollision() = 0;
-		virtual void OnCollisionExit() = 0;
+		virtual void SetFlag(CollisionType flag, bool value) = 0;
 
-		// Refer. Unreal Collosion
-		// Binding?
-		virtual void OnHit() = 0;
-		virtual void OnOverlapBegin() = 0;
-		virtual void OnOverlapEnd() = 0;
+		virtual void SetLocalTranslate(const Engine::Math::Vector3& LocalTranslate) = 0;
+		virtual const Engine::Math::Vector3 GetLocalTranslate()const = 0;
+
+		virtual void SetLocalRotation(const Engine::Math::Vector4& LocalRotation) = 0;
+		virtual const Engine::Math::Vector4 GetLocalRotation() const = 0;
+
+		virtual void SetLocalTransform(const Engine::Transform& LocalTransform) = 0;
+		virtual const Engine::Transform GetLocalTransform() const = 0;
+
+		virtual void SetScale(const Engine::Math::Vector3& Scale) = 0;
+		virtual const Engine::Math::Vector3 GetScale() const = 0;
+
+		/********************************
+					Geometry
+		*********************************/
+		virtual GeometryShape SetType(GeometryShape type) = 0;
+		virtual void GetType(GeometryShape type) = 0;
 	};
 
+
+	/**
+	 * @brief	: Physics의 대부분의 기능을 가진 Component로 Client와의 통신의 대부분의 역활을 한다.
+				  Physics Object, Physcis Shape, Physics Geometry, Physics Material를 다 들고 있다.
+	 */
 	struct PhysicsRigidComponent : IPhysicsRigidComponent
 	{
 		virtual void Initialize() = 0;
@@ -52,7 +60,14 @@ namespace Engine::Physics
 		/********************************
 					   Rigid
 		*********************************/
-		virtual bool	AttachShape(IShape* shape) = 0;
-		virtual bool	DetachShape(IShape* shape) = 0;
+		virtual bool	AttachShape(Shape* shape) = 0;
+		virtual bool	DetachShape(Shape* shape) = 0;
+
+
+		/********************************
+					Collision
+		*********************************/
+		virtual void SetUserData(ICollision* UserData) = 0;
+		virtual const ICollision* GetUserData() const = 0;
 	};
 }

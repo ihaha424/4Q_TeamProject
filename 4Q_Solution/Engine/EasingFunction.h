@@ -3,7 +3,7 @@ namespace Engine::Math
 {
 	// 각각의 효과
 	// https://easings.net/ko
-	enum EasingEffect
+	enum class EasingEffect
 	{
 		// Linear
 		Linear,
@@ -113,7 +113,7 @@ namespace Engine::Math
 	float EaseOutBounce(float x);
 	float EaseInOutBounce(float x);
 
-	static std::function<float(float)> EasingFunction[EasingEffect::EasingEffectEnd] =
+	static std::function<float(float)> EasingFunction[static_cast<unsigned int>(EasingEffect::EasingEffectEnd)] =
 	{
 		// Linear
 		EaseLinear,

@@ -4,7 +4,7 @@
 namespace PhysicsEngineAPI
 {
 	__INTERFACE__
-	class ICreate
+	EXTERN_C class PHYSICS_API ICreate
 	{
 	public:
 		virtual ~ICreate() = default;

@@ -109,7 +109,7 @@ namespace PhysicsEngineAPI
 		actor->setLinearVelocity({ velocity.x,velocity.y,velocity.z });
 	}
 
-	const Utils::Math::Vector3& PhysXDynamicActorFunction::GetLinearVelocity(physx::PxRigidDynamic* actor) const
+	const Utils::Math::Vector3 PhysXDynamicActorFunction::GetLinearVelocity(physx::PxRigidDynamic* actor) const
 	{
 		auto velocity = actor->getLinearVelocity();
 		return Utils::Math::Vector3({ velocity.x, velocity.y, velocity.z });

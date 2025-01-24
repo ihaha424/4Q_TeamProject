@@ -25,7 +25,7 @@ namespace PhysicsEngineAPI
 	{
 		function.SetLinearVelocity(velocity, actor);
 	}
-	const Utils::Math::Vector3& PhysXKinematicActor::GetLinearVelocity() const
+	const Utils::Math::Vector3 PhysXKinematicActor::GetLinearVelocity() const
 	{
 		return function.GetLinearVelocity(actor);
 	}

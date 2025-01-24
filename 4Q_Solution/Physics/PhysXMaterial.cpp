@@ -16,9 +16,5 @@ namespace PhysicsEngineAPI
 		return material;
 	}
 
-	void PhysXMaterial::setRestitutionCombineMode()
-	{
-		material->setRestitutionCombineMode(physx::PxCombineMode::eMULTIPLY);
-	}
 }
 

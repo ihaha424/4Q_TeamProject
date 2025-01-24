@@ -4,13 +4,13 @@
 
 namespace PhysicsEngineAPI
 {
-	Utils::DataStructure::GeometryShape IGeometry::SetType(Utils::DataStructure::GeometryShape type)
-	{
-		return Utils::DataStructure::GeometryShape::End;
-	}
-	void IGeometry::GetType(Utils::DataStructure::GeometryShape _type)
+	void IGeometry::SetType(Utils::DataStructure::GeometryShape _type)
 	{
 		_type = type;
+	}
+	Utils::DataStructure::GeometryShape IGeometry::GetType(Utils::DataStructure::GeometryShape type)
+	{
+		return type;
 	}
 }
 

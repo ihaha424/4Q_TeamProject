@@ -181,7 +181,9 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Component.h" />
     <ClInclude Include="Components.h" />
     <ClInclude Include="Controller.h" />
-    <ClInclude Include="PhysicsDiscription.h" />
+    <ClInclude Include="PhysicsGeometry.h" />
+    <ClInclude Include="PhysicsMaterial.h" />
+    <ClInclude Include="PhysicsUtils.h" />
     <ClInclude Include="DotTween.h" />
     <ClInclude Include="Down.h" />
     <ClInclude Include="Drive.h" />
@@ -224,7 +226,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="Negative.h" />
     <ClInclude Include="Object.h" />
-    <ClInclude Include="PHICollisionComponent.h" />
+    <ClInclude Include="PHIRigidComponent.h" />
     <ClInclude Include="PHIDynamicObject.h" />
     <ClInclude Include="PHIKinematicObject.h" />
     <ClInclude Include="PHIObject.h" />
@@ -270,7 +272,9 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Controller.cpp" />
-    <ClCompile Include="PhysicsDiscription.cpp" />
+    <ClCompile Include="PhysicsGeometry.cpp" />
+    <ClCompile Include="PhysicsMaterial.cpp" />
+    <ClCompile Include="PhysicsUtils.cpp" />
     <ClCompile Include="DotTween.cpp" />
     <ClCompile Include="Down.cpp" />
     <ClCompile Include="Drive.cpp" />
@@ -307,7 +311,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="Negative.cpp" />
     <ClCompile Include="Object.cpp" />
-    <ClCompile Include="PHICollisionComponent.cpp" />
+    <ClCompile Include="PHIRigidComponent.cpp" />
     <ClCompile Include="PHIDynamicObject.cpp" />
     <ClCompile Include="PHIKinematicObject.cpp" />
     <ClCompile Include="PHIManager.cpp" />

@@ -136,7 +136,7 @@ namespace PhysicsEngineAPI
 			sweepInfo.num = HitBuffer.getNbAnyHits();
 			for (size_t i = 0; i < sweepInfo.num; ++i)
 			{
-				const PxSweepHit& hitInfo = HitBuffer.getAnyHit(i);
+				const PxSweepHit& hitInfo = HitBuffer.getAnyHit(static_cast<physx::PxU32>(i));
 				sweepInfo.UserDatas.push_back(hitInfo.actor->userData);
 				sweepInfo.normal = PxVec3ToVector3(hitInfo.normal);
 				sweepInfo.position = PxVec3ToVector3(hitInfo.position);

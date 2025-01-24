@@ -3,10 +3,7 @@
 
 namespace Engine::PHI
 {
-	void Scene::Initialize(const PhysicsEngineAPI::Utils::Description::SceneDesc& sceneDescription, const char* name)
-	{
-	}
-	void Scene::Load()
+	void Scene::Initialize(const Engine::Physics::SceneDesc& sceneDescription, const char* name)
 	{
 	}
 	void Scene::Update(float deltaTime) const

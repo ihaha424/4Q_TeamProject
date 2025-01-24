@@ -14,8 +14,8 @@ namespace PhysicsEngineAPI
 
 
 		//TODO: Type & Scale
-		virtual Utils::DataStructure::GeometryShape SetType(Utils::DataStructure::GeometryShape type);
-		virtual void GetType(Utils::DataStructure::GeometryShape type);
+		virtual void SetType(Utils::DataStructure::GeometryShape type);
+		virtual Utils::DataStructure::GeometryShape GetType(Utils::DataStructure::GeometryShape type);
 
 	protected:
 		Utils::DataStructure::GeometryShape type = Utils::DataStructure::GeometryShape::End;

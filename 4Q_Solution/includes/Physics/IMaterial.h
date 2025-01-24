@@ -8,9 +8,6 @@ namespace PhysicsEngineAPI
 	{
 	public:
 		virtual ~IMaterial() = default;
-
-
-		virtual void setRestitutionCombineMode() = 0;
 	};
 }
 

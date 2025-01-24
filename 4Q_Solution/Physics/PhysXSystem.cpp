@@ -192,7 +192,7 @@ namespace PhysicsEngineAPI
 			if (nullptr == verticesMeshDesc.vertices.data)
 				return false;
 			physx::PxConvexMeshDesc description;
-			description.points.count = verticesMeshDesc.vertices.count;
+			description.points.count = static_cast<physx::PxU32>(verticesMeshDesc.vertices.count);
 			description.points.stride = verticesMeshDesc.vertices.stride;
 			description.points.data = verticesMeshDesc.vertices.data;
 			description.flags = physx::PxConvexFlag::eCOMPUTE_CONVEX;
@@ -214,11 +214,11 @@ namespace PhysicsEngineAPI
 			if (nullptr == verticesMeshDesc.vertices.data || nullptr == verticesMeshDesc.indices.data)
 				return false;
 			physx::PxTriangleMeshDesc description;
-			description.points.count	= verticesMeshDesc.vertices.count;
+			description.points.count	= static_cast<physx::PxU32>(verticesMeshDesc.vertices.count);
 			description.points.stride	= verticesMeshDesc.vertices.stride;
 			description.points.data		= verticesMeshDesc.vertices.data;
 
-			description.triangles.count		= verticesMeshDesc.indices.count;
+			description.triangles.count		= static_cast<physx::PxU32>(verticesMeshDesc.indices.count);
 			description.triangles.stride	= verticesMeshDesc.indices.stride;
 			description.triangles.data		= verticesMeshDesc.indices.data;
 			
@@ -268,7 +268,7 @@ namespace PhysicsEngineAPI
 
 
 			physx::PxConvexMeshDesc description;
-			description.points.count	= vertices.size();
+			description.points.count	= static_cast<physx::PxU32>(vertices.size());
 			description.points.stride	= sizeof(physx::PxVec3);
 			description.points.data		= vertices.data();
 			description.flags = physx::PxConvexFlag::eCOMPUTE_CONVEX;// | physx::PxConvexFlag::eCHECK_ZERO_AREA_TRIANGLES;
@@ -666,6 +666,7 @@ namespace PhysicsEngineAPI
 		*destShape = new PhysXShape(cloneShape);
 		if (nullptr == *destShape)
 			return false;
+		return true;
 	}
 
 	bool PhysXSystem::CloneStatic(
@@ -686,6 +687,7 @@ namespace PhysicsEngineAPI
 		*destObject = new PhysXStaticActor(cloneStaticActor);
 		if (nullptr == *destObject)
 			return false;
+		return true;
 	}
 
 	bool PhysXSystem::CloneDynamic(
@@ -710,6 +712,7 @@ namespace PhysicsEngineAPI
 		*destObject = new PhysXDynamicActor(cloneStaticActor);
 		if (nullptr == *destObject)
 			return false;
+		return true;
 	}
 
 	bool PhysXSystem::CreatePlane(

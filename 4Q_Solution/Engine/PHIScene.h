@@ -9,7 +9,7 @@ namespace Engine::PHI
 		: public Physics::Scene
 	{
 	public:
-		void Initialize(const PhysicsEngineAPI::Utils::Description::SceneDesc& sceneDescription, const char* name) override;
+		void Initialize(const Engine::Physics::SceneDesc& sceneDescription, const char* name) override;
 		void Update(float deltaTime) const override;
 		void Finalize() override;
 

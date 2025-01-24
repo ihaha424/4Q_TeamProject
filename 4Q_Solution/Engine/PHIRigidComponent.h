@@ -1,13 +1,9 @@
 #pragma once
 
-#include "PhysicsCollisionComponent.h"
 
 namespace Engine::PHI
 {
-	class Object;
-
 	class PHICollisionComponent final
-		: public Physics::CollisionComponent
 	{
 	public:
 		void __CALLBACK__ OnTriggerEnter() override;

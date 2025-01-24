@@ -25,8 +25,6 @@ namespace PhysicsEngineAPI
 		physx::PxMaterial* material;
 
 		friend class PhysXSystem;
-		// IMaterial을(를) 통해 상속됨
-		void setRestitutionCombineMode() override;
 	};
 }
 

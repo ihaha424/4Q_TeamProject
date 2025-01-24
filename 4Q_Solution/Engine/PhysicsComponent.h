@@ -2,6 +2,7 @@
 
 namespace Engine::Physics
 {
+	// Engine Interface
 	struct Component
 	{
 		Component() = default;

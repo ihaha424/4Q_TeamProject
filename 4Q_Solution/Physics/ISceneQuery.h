@@ -4,7 +4,7 @@
 namespace PhysicsEngineAPI
 {
 	__INTERFACE__
-	class ISceneQuery
+	EXTERN_C class PHYSICS_API ISceneQuery
 	{
 	public:
 		virtual ~ISceneQuery() = default;
@@ -27,6 +27,7 @@ namespace PhysicsEngineAPI
 			const Utils::Math::Transform& transform,
 			const Utils::Math::Vector3& direction,
 			float distance) = 0;
+		//TODO:
 		virtual bool QueryFiltering() = 0;
 	};
 }

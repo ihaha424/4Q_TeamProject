@@ -2,6 +2,7 @@
 
 namespace Engine::Physics
 {
+	// Client Interface
 	struct IManager
 	{
 		IManager() = default;
@@ -12,6 +13,7 @@ namespace Engine::Physics
 		virtual ~IManager() = default;
 	};
 
+	// Engine Interface
 	struct Manager : IManager
 	{
 		virtual void Initialize(PhysicsType physicsType = PhysicsType::Physx) = 0;

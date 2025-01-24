@@ -244,26 +244,14 @@
     <Filter Include="Modules\Difinition\PhysicsEngine">
       <UniqueIdentifier>{f40f0b9d-9b13-46f7-bbcb-39476d238e5c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\Interfaces\Physics\Manager">
-      <UniqueIdentifier>{d7375d06-09bd-45e8-85a7-73fab5ebb018}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Modules\Difinition\PhysicsEngine\Manager">
       <UniqueIdentifier>{8540ef46-3413-4a41-8394-85db345430f8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Interfaces\Physics\Scene">
-      <UniqueIdentifier>{5b1484ff-9f0f-44be-8f11-145c3ab39bdf}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\Difinition\PhysicsEngine\Scene">
       <UniqueIdentifier>{4715709a-7d06-4e1c-8e8e-d536ace5d633}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\Interfaces\Physics\Object">
-      <UniqueIdentifier>{21957b80-503b-4ed4-b84c-cded2cdf4445}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Modules\Difinition\PhysicsEngine\Object">
       <UniqueIdentifier>{47579cd0-94ba-4edf-a755-1ea990e6eab4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Interfaces\Physics\Component">
-      <UniqueIdentifier>{47f465ea-7e07-451d-a3d4-38ca494749f3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\Difinition\PhysicsEngine\Component">
       <UniqueIdentifier>{34f1cdd5-3150-4226-ae3c-a7dd9a60ba9d}</UniqueIdentifier>
@@ -283,23 +271,50 @@
     <Filter Include="Modules\Difinition\PhysicsEngine\Object\PHIKinematicObject">
       <UniqueIdentifier>{cfdf6b0c-e796-4142-82f8-dedc1c3287d3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\Interfaces\Physics\Collision">
-      <UniqueIdentifier>{89ab88bf-37d1-4e78-be93-1471177d67e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Interfaces\Physics\Discription">
-      <UniqueIdentifier>{1cfb4ba7-cb86-44b8-b8fe-0b6a1c7c8a3b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Interfaces\Physics\Component\RigidComponent">
-      <UniqueIdentifier>{97c2f33e-e045-4ad6-b580-5b52493bff90}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Interfaces\Physics\Shape">
-      <UniqueIdentifier>{421f1e90-bb95-436f-8a08-7179355a41b6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Math\Matrix">
       <UniqueIdentifier>{63280bb6-83dd-4f40-8cc0-6086687df9b3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Components\TextRenderer">
       <UniqueIdentifier>{922e5f29-c1a8-42da-aadd-1b65620c25ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\00. Manager">
+      <UniqueIdentifier>{d7375d06-09bd-45e8-85a7-73fab5ebb018}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\01. Scene">
+      <UniqueIdentifier>{5b1484ff-9f0f-44be-8f11-145c3ab39bdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\02. Object">
+      <UniqueIdentifier>{21957b80-503b-4ed4-b84c-cded2cdf4445}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\03. Shape">
+      <UniqueIdentifier>{421f1e90-bb95-436f-8a08-7179355a41b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\04. Geometry">
+      <UniqueIdentifier>{7e1ee656-3c45-4caa-9099-aae75fa1b98f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\05. Material">
+      <UniqueIdentifier>{4745350e-6dd0-4b1f-a74a-791b887d8c15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\99. Utils">
+      <UniqueIdentifier>{1cfb4ba7-cb86-44b8-b8fe-0b6a1c7c8a3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\98. Collision">
+      <UniqueIdentifier>{89ab88bf-37d1-4e78-be93-1471177d67e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\97. Component">
+      <UniqueIdentifier>{47f465ea-7e07-451d-a3d4-38ca494749f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\97. Component\RigidComponent">
+      <UniqueIdentifier>{97c2f33e-e045-4ad6-b580-5b52493bff90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\97. Component\RigidComponent\PhysicsRigidStatic">
+      <UniqueIdentifier>{6bd833f9-b2b3-43d4-8a27-7db96a96dc5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\97. Component\RigidComponent\PhysicsRigidDynamic">
+      <UniqueIdentifier>{65af17d4-6aa6-47ae-926b-30d40e2ebb73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\97. Component\RigidComponent\PhysicsRigidSKinematic">
+      <UniqueIdentifier>{261d270f-d6c5-4624-b183-888b64e1bcb0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -513,54 +528,66 @@
     <ClInclude Include="DotTween.h">
       <Filter>Math\EasingFunction</Filter>
     </ClInclude>
-	  <ClInclude Include="Physics.h">
-		  <Filter>Modules\Interfaces\Physics</Filter>
-	  </ClInclude>
-	  <ClInclude Include="PhysicsManager.h">
-		  <Filter>Modules\Interfaces\Physics\Manager</Filter>
-	  </ClInclude>
-	  <ClInclude Include="PHIManager.h">
-		  <Filter>Modules\Difinition\PhysicsEngine\Manager</Filter>
-	  </ClInclude>
-	  <ClInclude Include="PhysicsScene.h">
-		  <Filter>Modules\Interfaces\Physics\Scene</Filter>
-	  </ClInclude>
-	  <ClInclude Include="PHIScene.h">
-		  <Filter>Modules\Difinition\PhysicsEngine\Scene</Filter>
-	  </ClInclude>
-	  <ClInclude Include="PhysicsObject.h">
-		  <Filter>Modules\Interfaces\Physics\Object</Filter>
-	  </ClInclude>
-	  <ClInclude Include="PHIObject.h">
-		  <Filter>Modules\Difinition\PhysicsEngine\Object</Filter>
-	  </ClInclude>
-	  <ClInclude Include="PhysicsComponent.h">
-		  <Filter>Modules\Interfaces\Physics\Component</Filter>
-	  </ClInclude>
-	  <ClInclude Include="PHICollisionComponent.h">
-		  <Filter>Modules\Difinition\PhysicsEngine\Component\PHICollisionComponent</Filter>
-	  </ClInclude>
-	  <ClInclude Include="Vector4.h">
-		  <Filter>Math\Vector4</Filter>
-	  </ClInclude>
-	  <ClInclude Include="PHIKinematicObject.h">
-		  <Filter>Modules\Difinition\PhysicsEngine\Object\PHIKinematicObject</Filter>
-	  </ClInclude>
-	  <ClInclude Include="PHIDynamicObject.h">
-		  <Filter>Modules\Difinition\PhysicsEngine\Object\PHIDynamicObject</Filter>
-	  </ClInclude>
-	  <ClInclude Include="PHIStaticObject.h">
-		  <Filter>Modules\Difinition\PhysicsEngine\Object\PHIStaticObject</Filter>
-	  </ClInclude>
-	  <ClInclude Include="PhysicsDiscription.h">
-		  <Filter>Modules\Interfaces\Physics\Discription</Filter>
-	  </ClInclude>
-	  <ClInclude Include="PhysicsRigidComponent.h">
-		  <Filter>Modules\Interfaces\Physics\Component\RigidComponent</Filter>
-	  </ClInclude>
-	  <ClInclude Include="PhysicsShape.h">
-		  <Filter>Modules\Interfaces\Physics\Shape</Filter>
-	  </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>Modules\Interfaces\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsManager.h">
+      <Filter>Modules\Interfaces\Physics\00. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="PHIManager.h">
+      <Filter>Modules\Difinition\PhysicsEngine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsScene.h">
+      <Filter>Modules\Interfaces\Physics\01. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="PHIScene.h">
+      <Filter>Modules\Difinition\PhysicsEngine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsObject.h">
+      <Filter>Modules\Interfaces\Physics\02. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PHIObject.h">
+      <Filter>Modules\Difinition\PhysicsEngine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsComponent.h">
+      <Filter>Modules\Interfaces\Physics\97. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="PHIRigidComponent.h">
+      <Filter>Modules\Difinition\PhysicsEngine\Component\PHICollisionComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4.h">
+      <Filter>Math\Vector4</Filter>
+    </ClInclude>
+    <ClInclude Include="PHIKinematicObject.h">
+      <Filter>Modules\Difinition\PhysicsEngine\Object\PHIKinematicObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PHIDynamicObject.h">
+      <Filter>Modules\Difinition\PhysicsEngine\Object\PHIDynamicObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PHIStaticObject.h">
+      <Filter>Modules\Difinition\PhysicsEngine\Object\PHIStaticObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsUtils.h">
+      <Filter>Modules\Interfaces\Physics\99. Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsRigidComponent.h">
+      <Filter>Modules\Interfaces\Physics\97. Component\RigidComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsShape.h">
+      <Filter>Modules\Interfaces\Physics\03. Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="TextRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsGeometry.h">
+      <Filter>Modules\Interfaces\Physics\04. Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsMaterial.h">
+      <Filter>Modules\Interfaces\Physics\05. Material</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -737,50 +764,62 @@
     <ClCompile Include="EasingFunction.cpp">
       <Filter>Math\EasingFunction</Filter>
     </ClCompile>
-	  <ClCompile Include="PhysicsManager.cpp">
-		  <Filter>Modules\Interfaces\Physics\Manager</Filter>
-	  </ClCompile>
-	  <ClCompile Include="PHIManager.cpp">
-		  <Filter>Modules\Difinition\PhysicsEngine\Manager</Filter>
-	  </ClCompile>
-	  <ClCompile Include="PhysicsScene.cpp">
-		  <Filter>Modules\Interfaces\Physics\Scene</Filter>
-	  </ClCompile>
-	  <ClCompile Include="PHIScene.cpp">
-		  <Filter>Modules\Difinition\PhysicsEngine\Scene</Filter>
-	  </ClCompile>
-	  <ClCompile Include="PhysicsObject.cpp">
-		  <Filter>Modules\Interfaces\Physics\Object</Filter>
-	  </ClCompile>
-	  <ClCompile Include="PHIObject.cpp">
-		  <Filter>Modules\Difinition\PhysicsEngine\Object</Filter>
-	  </ClCompile>
-	  <ClCompile Include="PhysicsComponent.cpp">
-		  <Filter>Modules\Interfaces\Physics\Component</Filter>
-	  </ClCompile>
-	  <ClCompile Include="PHICollisionComponent.cpp">
-		  <Filter>Modules\Difinition\PhysicsEngine\Component\PHICollisionComponent</Filter>
-	  </ClCompile>
-	  <ClCompile Include="Vector4.cpp">
-		  <Filter>Math\Vector4</Filter>
-	  </ClCompile>
-	  <ClCompile Include="PHIKinematicObject.cpp">
-		  <Filter>Modules\Difinition\PhysicsEngine\Object\PHIKinematicObject</Filter>
-	  </ClCompile>
-	  <ClCompile Include="PHIDynamicObject.cpp">
-		  <Filter>Modules\Difinition\PhysicsEngine\Object\PHIDynamicObject</Filter>
-	  </ClCompile>
-	  <ClCompile Include="PHIStaticObject.cpp">
-		  <Filter>Modules\Difinition\PhysicsEngine\Object\PHIStaticObject</Filter>
-	  </ClCompile>
-	  <ClCompile Include="PhysicsDiscription.cpp">
-		  <Filter>Modules\Interfaces\Physics\Discription</Filter>
-	  </ClCompile>
-	  <ClCompile Include="PhysicsRigidComponent.cpp">
-		  <Filter>Modules\Interfaces\Physics\Component\RigidComponent</Filter>
-	  </ClCompile>
-	  <ClCompile Include="PhysicsShape.cpp">
-		  <Filter>Modules\Interfaces\Physics\Shape</Filter>
-	  </ClCompile>
+    <ClCompile Include="PhysicsManager.cpp">
+      <Filter>Modules\Interfaces\Physics\00. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="PHIManager.cpp">
+      <Filter>Modules\Difinition\PhysicsEngine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsScene.cpp">
+      <Filter>Modules\Interfaces\Physics\01. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PHIScene.cpp">
+      <Filter>Modules\Difinition\PhysicsEngine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsObject.cpp">
+      <Filter>Modules\Interfaces\Physics\02. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="PHIObject.cpp">
+      <Filter>Modules\Difinition\PhysicsEngine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsComponent.cpp">
+      <Filter>Modules\Interfaces\Physics\97. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="PHIRigidComponent.cpp">
+      <Filter>Modules\Difinition\PhysicsEngine\Component\PHICollisionComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector4.cpp">
+      <Filter>Math\Vector4</Filter>
+    </ClCompile>
+    <ClCompile Include="PHIKinematicObject.cpp">
+      <Filter>Modules\Difinition\PhysicsEngine\Object\PHIKinematicObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PHIDynamicObject.cpp">
+      <Filter>Modules\Difinition\PhysicsEngine\Object\PHIDynamicObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PHIStaticObject.cpp">
+      <Filter>Modules\Difinition\PhysicsEngine\Object\PHIStaticObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsUtils.cpp">
+      <Filter>Modules\Interfaces\Physics\99. Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsRigidComponent.cpp">
+      <Filter>Modules\Interfaces\Physics\97. Component\RigidComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsShape.cpp">
+      <Filter>Modules\Interfaces\Physics\03. Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="TextRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix.cpp">
+      <Filter>Math\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsGeometry.cpp">
+      <Filter>Modules\Interfaces\Physics\04. Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsMaterial.cpp">
+      <Filter>Modules\Interfaces\Physics\05. Material</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

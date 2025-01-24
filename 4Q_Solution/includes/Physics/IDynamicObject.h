@@ -19,7 +19,7 @@ namespace PhysicsEngineAPI
 		virtual const	Utils::Math::Vector3 GetVelocity() const			= 0;
 
 		virtual void	SetLinearVelocity(const Utils::Math::Vector3& velocity) = 0;
-		virtual const	Utils::Math::Vector3& GetLinearVelocity() const			= 0;
+		virtual const	Utils::Math::Vector3 GetLinearVelocity() const			= 0;
 
 		virtual void	SetMaxLinearVelocity(const float velocity)	= 0;
 		virtual const	float GetMaxLinearVelocity() const			= 0;

@@ -5,6 +5,7 @@ namespace Engine
 	class World;
 	class HUD;
 
+	template<typename T>
 	class Drive
 	{
 	public:
@@ -15,8 +16,9 @@ namespace Engine
 
 		void AttachWorld(World* newWorld, World** oldWorld);
 		void AttachHUD(HUD* newHUD, HUD** oldHUD);
-
+		
 	private:
+		
 		World* _world;
 		HUD* _hud;
 	};

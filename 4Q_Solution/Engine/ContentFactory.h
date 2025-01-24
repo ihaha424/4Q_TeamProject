@@ -36,6 +36,7 @@ namespace Engine
 			template <typename U> requires std::derived_from<U, T>
 			U* Clone()
 			{
+				// TODO: Is this good?
 				U* clone = nullptr;
 				std::type_index type = typeid(U);
 				if (auto origin = _origins.find(type); 

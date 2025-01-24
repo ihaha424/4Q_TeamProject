@@ -253,6 +253,12 @@
     <Filter Include="Modules\Interfaces\Network\Terminal">
       <UniqueIdentifier>{dbae0954-afe9-43c2-9188-c134e36446bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Interfaces\Network\PacketFIlter">
+      <UniqueIdentifier>{24705df8-2c46-42e7-bee2-2c8f0a7883c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Synchronize">
+      <UniqueIdentifier>{92181e74-b441-49e9-9287-8a5e42a6ddfd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -477,6 +483,15 @@
     <ClInclude Include="Terminal.h">
       <Filter>Modules\Interfaces\Network\Terminal</Filter>
     </ClInclude>
+    <ClInclude Include="Network.h">
+      <Filter>Modules\Interfaces\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketFilter.h">
+      <Filter>Modules\Interfaces\Network\PacketFIlter</Filter>
+    </ClInclude>
+    <ClInclude Include="SynchronizeComponent.h">
+      <Filter>Components\Synchronize</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -664,6 +679,12 @@
     </ClCompile>
     <ClCompile Include="Terminal.cpp">
       <Filter>Modules\Interfaces\Network\Terminal</Filter>
+    </ClCompile>
+    <ClCompile Include="PacketFilter.cpp">
+      <Filter>Modules\Interfaces\Network\PacketFIlter</Filter>
+    </ClCompile>
+    <ClCompile Include="SynchronizeComponent.cpp">
+      <Filter>Components\Synchronize</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

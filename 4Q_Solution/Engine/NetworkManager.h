@@ -11,7 +11,8 @@ namespace Engine::Network
 		IManager& operator=(IManager&& other) noexcept = default;
 		virtual ~IManager() = default;
 
-		virtual void Register()
+		virtual void Register(Terminal* terminal) = 0;
+		virtual void Unregister(Terminal* terminal) = 0;
 	};
 
 	struct Manager : IManager

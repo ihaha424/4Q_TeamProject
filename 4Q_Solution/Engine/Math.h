@@ -6,3 +6,4 @@
 #include "Quaternion.h"
 #include "EasingFunction.h"
 #include "DotTween.h"
+#include "Matrix.h"

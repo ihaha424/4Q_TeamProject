@@ -39,7 +39,7 @@ void Engine::DSHInput::Device::Mouse::Finalize()
 Engine::Math::Point Engine::DSHInput::Device::Mouse::GetPosition() const
 {
 	const DSH::Input::Value value = _mouse->GetPosition();
-	return Math::Point{ static_cast<unsigned long>(value.x), static_cast<unsigned long>(value.y) };
+	return Math::Point{ static_cast<long>(value.x), static_cast<long>(value.y) };
 }
 
 bool Engine::DSHInput::Device::Mouse::IsButtonDown(Button button) const

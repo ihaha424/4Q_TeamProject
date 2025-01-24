@@ -1,3 +1,5 @@
+#include "PostProcess.hlsli"
+
 #define SAMPLING_COUNT 9
 
 cbuffer ScreenSize : register (b0)
@@ -18,11 +20,7 @@ static float weights[SAMPLING_COUNT] =
     0.013519569015984728
 };
 
-Texture2D txSource : register(t0);
-
-SamplerState samLinear_wrap : register(s0);
-
-float4 main(float2 uv : TEXCOORD0) : SV_Target
+float4 main(PS_INPUT input) : SV_Target
 {
     float indices[SAMPLING_COUNT] = { -4, -3, -2, -1, 0, +1, +2, +3, +4 };
     
@@ -38,7 +36,7 @@ float4 main(float2 uv : TEXCOORD0) : SV_Target
     [unroll]
     for (int i = 0; i < SAMPLING_COUNT; i++)
     {
-        result += txSource.Sample(samLinear_wrap, float2(uv + indices[i] * step)) * weights[i];
+        result += txSource.Sample(samLinear_wrap, float2(input.uv + indices[i] * step)) * weights[i];
     }
     
     return float4(result.rgb, 1);

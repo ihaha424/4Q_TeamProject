@@ -27,7 +27,7 @@ public:
 	void SetLayerDepth(const float depth) override;
 	void SetPivot(const float x, const float y) override;
 	void SetRotationFromDegree(const float degree) override;
-	void SetPosition(const float x, const float y) override;
+	void SetPosition(const float x, const float y, const float z) override;
 	void SetText(const wchar_t* text) override;
 
 public:
@@ -36,7 +36,7 @@ public:
 private:
 	std::wstring	_text;
 	Vector4			_color;
-	Vector2			_position;
+	Vector3			_position;
 	Vector2			_pivot;
 	Vector2			_scale{ 1, 1 };
 	TextSystem*		_pTextSystem{ nullptr };

@@ -187,6 +187,7 @@
     <ClInclude Include="AnimationSystem.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="Base.h" />
+    <ClInclude Include="Blur.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraSystem.h" />
     <ClInclude Include="Component.h" />
@@ -194,9 +195,11 @@
     <ClInclude Include="Enum.h" />
     <ClInclude Include="Extern.h" />
     <ClInclude Include="Bloom.h" />
+    <ClInclude Include="includes\IBlur.h" />
     <ClInclude Include="includes\IFilter.h" />
     <ClInclude Include="includes\IBloom.h" />
     <ClInclude Include="includes\IPostProcessSystem.h" />
+    <ClInclude Include="includes\Matrix4x4.h" />
     <ClInclude Include="PostProcessSystem.h" />
     <ClInclude Include="Quad.h" />
     <ClInclude Include="TextSystem.h" />
@@ -210,7 +213,6 @@
     <ClInclude Include="includes\IGraphicsSystem.h" />
     <ClInclude Include="includes\ILight.h" />
     <ClInclude Include="includes\ILightSystem.h" />
-    <ClInclude Include="includes\IMatrix.h" />
     <ClInclude Include="includes\IMeshRenderer.h" />
     <ClInclude Include="includes\IRenderSystem.h" />
     <ClInclude Include="includes\ISkyBoxRenderer.h" />
@@ -220,7 +222,6 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="LightSystem.h" />
     <ClInclude Include="Material.h" />
-    <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="DX11Renderer.h" />
@@ -254,6 +255,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationSystem.cpp" />
     <ClCompile Include="Animator.cpp" />
+    <ClCompile Include="Blur.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraSystem.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -267,7 +269,6 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="LightSystem.cpp" />
     <ClCompile Include="Material.cpp" />
-    <ClCompile Include="Matrix4x4.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="DX11Renderer.cpp" />
@@ -301,6 +302,7 @@
     <None Include="..\Shaders\LightData.hlsli" />
     <None Include="..\Shaders\Constants.hlsli" />
     <None Include="..\Shaders\Lighting.hlsli" />
+    <None Include="..\Shaders\PostProcess.hlsli" />
     <None Include="..\Shaders\ShaderUtilities.hlsli" />
     <None Include="Renderer.def" />
   </ItemGroup>

@@ -2,8 +2,13 @@
 
 namespace GE
 {
+    enum class FilterType { Bloom, Blur, End };
+    enum FILTER_FLAG
+    { 
+        Bloom   = 1 << 0,
+        Blur    = 1 << 1
+    };
     class IFilter;
-    class IBloom;
     class IPostProcessSystem
     {
     protected:
@@ -15,7 +20,6 @@ namespace GE
         IPostProcessSystem& operator=(IPostProcessSystem&&) = delete;
 
     public:
-        virtual void AddFilter(const unsigned int layer, IFilter* pFilter) = 0;
-        virtual void CreateBloom(IBloom** ppBloom) = 0;
+        virtual void GetFilter(IFilter** ppFilter, FilterType type) = 0;
     };
 }

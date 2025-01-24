@@ -25,6 +25,7 @@ namespace Engine::GEGraphics
 		GE::IAnimationSystem* GetAnimationSystem() const { return _animationSystem; }
 		GE::ILightSystem* GetLightSystem() const  { return _lightSystem; }
 		GE::ITextSystem* GetTextSystem() const  { return _textSystem; }
+		GE::IPostProcessSystem* GetPostProcessSystem() const { return _postprocessSystem; }
 
 	private:
 		HMODULE _dll;
@@ -37,7 +38,7 @@ namespace Engine::GEGraphics
 		GE::IAnimationSystem* _animationSystem;
 		GE::ILightSystem* _lightSystem;
 		GE::ITextSystem* _textSystem;
-
+		GE::IPostProcessSystem* _postprocessSystem;
 		
 	};
 }

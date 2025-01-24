@@ -295,6 +295,12 @@
     <Filter Include="Modules\Interfaces\Physics\Shape">
       <UniqueIdentifier>{421f1e90-bb95-436f-8a08-7179355a41b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math\Matrix">
+      <UniqueIdentifier>{63280bb6-83dd-4f40-8cc0-6086687df9b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\TextRenderer">
+      <UniqueIdentifier>{922e5f29-c1a8-42da-aadd-1b65620c25ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -507,54 +513,6 @@
     <ClInclude Include="DotTween.h">
       <Filter>Math\EasingFunction</Filter>
     </ClInclude>
-    <ClInclude Include="Physics.h">
-      <Filter>Modules\Interfaces\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsManager.h">
-      <Filter>Modules\Interfaces\Physics\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="PHIManager.h">
-      <Filter>Modules\Difinition\PhysicsEngine\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsScene.h">
-      <Filter>Modules\Interfaces\Physics\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="PHIScene.h">
-      <Filter>Modules\Difinition\PhysicsEngine\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsObject.h">
-      <Filter>Modules\Interfaces\Physics\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="PHIObject.h">
-      <Filter>Modules\Difinition\PhysicsEngine\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsComponent.h">
-      <Filter>Modules\Interfaces\Physics\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="PHICollisionComponent.h">
-      <Filter>Modules\Difinition\PhysicsEngine\Component\PHICollisionComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector4.h">
-      <Filter>Math\Vector4</Filter>
-    </ClInclude>
-    <ClInclude Include="PHIKinematicObject.h">
-      <Filter>Modules\Difinition\PhysicsEngine\Object\PHIKinematicObject</Filter>
-    </ClInclude>
-    <ClInclude Include="PHIDynamicObject.h">
-      <Filter>Modules\Difinition\PhysicsEngine\Object\PHIDynamicObject</Filter>
-    </ClInclude>
-    <ClInclude Include="PHIStaticObject.h">
-      <Filter>Modules\Difinition\PhysicsEngine\Object\PHIStaticObject</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsDiscription.h">
-      <Filter>Modules\Interfaces\Physics\Discription</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsRigidComponent.h">
-      <Filter>Modules\Interfaces\Physics\Component\RigidComponent</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsShape.h">
-      <Filter>Modules\Interfaces\Physics\Shape</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -730,51 +688,6 @@
     </ClCompile>
     <ClCompile Include="EasingFunction.cpp">
       <Filter>Math\EasingFunction</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsManager.cpp">
-      <Filter>Modules\Interfaces\Physics\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="PHIManager.cpp">
-      <Filter>Modules\Difinition\PhysicsEngine\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsScene.cpp">
-      <Filter>Modules\Interfaces\Physics\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="PHIScene.cpp">
-      <Filter>Modules\Difinition\PhysicsEngine\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsObject.cpp">
-      <Filter>Modules\Interfaces\Physics\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="PHIObject.cpp">
-      <Filter>Modules\Difinition\PhysicsEngine\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsComponent.cpp">
-      <Filter>Modules\Interfaces\Physics\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="PHICollisionComponent.cpp">
-      <Filter>Modules\Difinition\PhysicsEngine\Component\PHICollisionComponent</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector4.cpp">
-      <Filter>Math\Vector4</Filter>
-    </ClCompile>
-    <ClCompile Include="PHIKinematicObject.cpp">
-      <Filter>Modules\Difinition\PhysicsEngine\Object\PHIKinematicObject</Filter>
-    </ClCompile>
-    <ClCompile Include="PHIDynamicObject.cpp">
-      <Filter>Modules\Difinition\PhysicsEngine\Object\PHIDynamicObject</Filter>
-    </ClCompile>
-    <ClCompile Include="PHIStaticObject.cpp">
-      <Filter>Modules\Difinition\PhysicsEngine\Object\PHIStaticObject</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsDiscription.cpp">
-      <Filter>Modules\Interfaces\Physics\Discription</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsRigidComponent.cpp">
-      <Filter>Modules\Interfaces\Physics\Component\RigidComponent</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsShape.cpp">
-      <Filter>Modules\Interfaces\Physics\Shape</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -3,24 +3,34 @@
 
 // Filters
 #include "Bloom.h"
+#include "Blur.h"
 
-void PostProcessSystem::AddFilter(const unsigned int layer, GE::IFilter* pFilter)
+void PostProcessSystem::GetFilter(GE::IFilter** ppFilter, GE::FilterType type)
 {
-	ASSERT((layer >= g_pRenderGroup->GetMaxLayer()), L"레이어 범위를 초과했습니다.");
-	_filters[layer].push_back(reinterpret_cast<Filter*>(pFilter));
+	(*ppFilter) = reinterpret_cast<GE::IFilter*>(_filters[(int)type].second);
 }
 
-void PostProcessSystem::CreateBloom(GE::IBloom** ppBloom)
+void PostProcessSystem::Initialize()
 {
-	(*ppBloom) = new Bloom;
-}
+	_filters.resize((size_t)GE::FilterType::End);
 
-void PostProcessSystem::Initialize(const unsigned int layer)
-{
-	_filters = new std::vector<Filter*>[layer];
+	Bloom* pBloom = new Bloom;
+	pBloom->Initialize();
+	_filters[(int)GE::FilterType::Bloom] = { 1 << _ID++, pBloom };
+
+	//pBloom = new Bloom;
+	////pBloom->Initialize();
+	//_filters[(int)GE::FilterType::Blur] = { 1 << _ID++, pBloom };
+
+	Blur* pBlur = new Blur;
+	pBlur->Initialize();
+	_filters[(int)GE::FilterType::Blur] = { 1 << _ID++, pBlur };
 }
 
 void PostProcessSystem::Free()
 {
-	delete[] _filters;
+	for (auto& [ID, filter] : _filters)
+	{
+		delete filter;
+	}
 }

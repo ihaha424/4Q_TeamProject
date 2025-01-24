@@ -1,7 +1,5 @@
 #pragma once
 
-// #include <DirectXMath.h> // TODO: Requires Math library
-
 namespace Engine::Input
 {
 	union Value;
@@ -10,22 +8,16 @@ namespace Engine::Input
 
 namespace Engine::Math
 {
-	struct Vector3
+	struct Vector3 : DirectX::SimpleMath::Vector3
 	{
-		Vector3(float x, float y, float z);
+		using DirectX::SimpleMath::Vector3::Zero;
+		using DirectX::SimpleMath::Vector3::One;
 
-		Vector3& operator+= (const Vector3& rhs) noexcept;
-		Vector3 operator* (float scalar) const noexcept;
-
-		float x;
-		float y;
-		float z;
-
-		// Constants
-		static const Vector3 Zero;
-		static const Vector3 One;
-
-		// Convert
+		Vector3(float x, float y, float z) noexcept;
+		Vector3(DirectX::SimpleMath::Vector3 vector) noexcept;
 		Vector3(const Input::Value& value) noexcept;
+
+		Vector3& operator=(const DirectX::SimpleMath::Vector3& vector) noexcept;
+		Vector3& operator=(const Input::Value& value) noexcept;
 	};
 }

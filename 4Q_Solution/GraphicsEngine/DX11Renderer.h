@@ -9,8 +9,13 @@ class Mesh;
 class SkyBoxRenderer;
 class DX11Renderer : public IRenderer
 {
+	struct DrawData
+	{
+		unsigned int modelID;
+		unsigned int layerMask;
+		Mesh* mesh;
+	};
 	enum TextureType { Diffuse, Normal, Specular, Emissive, ShadowPosition, End };
-
 public:
 	explicit DX11Renderer() = default;
 	virtual ~DX11Renderer() = default;
@@ -23,12 +28,12 @@ private:
 	void SetViewport(float width, float height);
 
 	void ShadowPass();
-	void DeferredPass(std::list<Mesh*>& renderData, ID3D11RenderTargetView* pRTV);
-	void ForwardPass(std::list<Mesh*>& renderData, ID3D11RenderTargetView* pRTV);
+	void DeferredPass(std::list<DrawData>& renderData, ID3D11RenderTargetView* pRTV);
+	void ForwardPass(std::list<DrawData>& renderData, ID3D11RenderTargetView* pRTV);
 	void SkyBoxPass(std::list<SkyBoxRenderer*>& skyBoxes);
 	void PostProcessing();
-	void BlendPass();
-	void RenderMesh(std::list<Mesh*>& renderData, std::shared_ptr<PixelShader>& pixelShader);
+	void BlendPass(ID3D11RenderTargetView* pRTV, ID3D11ShaderResourceView* pSRV);
+	void RenderMesh(std::list<DrawData>& renderData, std::shared_ptr<PixelShader>& pixelShader);
 
 private:
 	void InitState();
@@ -66,9 +71,7 @@ private:
 	ID3D11ShaderResourceView*			_pShadowSRV{ nullptr };
 
 	// State
-	ID3D11BlendState*					_pBlendState{ nullptr };
+	ID3D11BlendState*					_pDeferredBlendState{ nullptr };
+	ID3D11BlendState*					_pForwardBlendState{ nullptr };
 	ID3D11RasterizerState*				_pRSSkyBoxState{ nullptr };
-
-	// Layer
-	std::vector<ID3D11ShaderResourceView*> _layerSRVs;
 };

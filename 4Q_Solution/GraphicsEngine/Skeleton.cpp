@@ -3,11 +3,13 @@
 
 void Skeleton::Initialize(const aiScene* paiScene, std::unordered_map<std::string, std::pair<unsigned int, Matrix>>& boneInfoTable)
 {
-	LoadSkeleton(_rootBone, paiScene->mRootNode, boneInfoTable);	
+	LoadSkeleton(_rootBone, paiScene->mRootNode, boneInfoTable);
+	_bones.push_back(&_rootBone);
 }
 
 void Skeleton::SetUpSplitBone(const unsigned int maxSplit)
 {
+	_bones.clear();
 	_bones.resize(maxSplit);
 }
 

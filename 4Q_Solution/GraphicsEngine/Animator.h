@@ -49,7 +49,7 @@ private:
 	void UpdateAnimationTransform(const Bone& skeletion, const XMMATRIX& parentTransform, Controller* controller);
 	XMVECTOR InterpolationVector3(const std::vector<std::pair<float, Vector3>>& v, const float t);
 	XMVECTOR InterpolationVector4(const std::vector<std::pair<float, Vector4>>& v, const float t);
-	XMMATRIX BlendAnimationMatrix(const XMMATRIX& matrix1, const XMMATRIX& matrix2, float t);
+	XMMATRIX BlendAnimation(const Matrix& m0, const Matrix& m1, const float t);
 
 	template<typename T>
 	unsigned int FindIndex(T& v, float animationTime)
@@ -71,6 +71,7 @@ private:
 	Matrix									_root;
 	BlendInfo								_blendInfo;
 	std::vector<Matrix>						_animationTransforms;
+	std::vector<Matrix>						_blendTransform;
 	std::vector<Controller>					_controllers;
 	std::vector<Controller>					_prevControllers;
 	std::shared_ptr<Animation>				_animation;

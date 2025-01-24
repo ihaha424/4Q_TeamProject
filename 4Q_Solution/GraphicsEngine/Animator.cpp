@@ -15,6 +15,8 @@ void Animator::Initialize(const wchar_t* filePath, Skeleton* pSkeleton)
 {
 	_animation = g_pResourceMgr->LoadResource<Animation>(filePath);
 	_animationTransforms.resize(MAX_BONE_MATRIX);
+	_blendTransform.resize(MAX_BONE_MATRIX);
+	_blendInfo.prevAnimation.resize(64);
 
 	_pSkeleton = pSkeleton;	
 
@@ -25,6 +27,8 @@ void Animator::Initialize(const wchar_t* filePath, Skeleton* pSkeleton)
 void Animator::Update(const float deltaTime)
 {
 	XMMATRIX identity = XMMatrixIdentity();
+
+	//std::ranges::for_each(_animationTransforms, [this](Matrix& matrix) { matrix = XMMatrixIdentity();});
 
 	for (unsigned int i = 0; i < _maxSplit; i++)
 	{
@@ -38,54 +42,51 @@ void Animator::Update(const float deltaTime)
 			_controllers[i].playTime = 0.f;
 			_root = XMMatrixIdentity();
 		}
-	}
 
-	/*XMMATRIX prevRoot = _root;*/
-	UpdateAnimationTransform(_pSkeleton->_rootBone, identity, _controllers.data());
+		/*XMMATRIX prevRoot = _root;*/
 
-	/*XMVECTOR deltaPosition = XMVectorSubtract(_root.Translation(), prevRoot.r[3]);
-	deltaPosition.m128_f32[1] = 0.f;*/
-	
+		UpdateAnimationTransform(*_pSkeleton->GetBone(i), identity, _controllers.data());
 
-	if (_blendInfo.isBlending)
-	{
-		/*Animation& prevAnimation = _animations[_blendInfo.prevAnimation];
-		_blendInfo.prevPlayTime += prevAnimation.ticksPerSecond * deltaTime;
-		_blendInfo.prevPlayTime = fmod(_blendInfo.prevPlayTime, prevAnimation.duration);
+		/*XMVECTOR deltaPosition = XMVectorSubtract(_root.Translation(), prevRoot.r[3]);
+		deltaPosition.m128_f32[1] = 0.f;*/
 
-		if (_blendInfo.prevPlayTime > prevAnimation.lastTime)
-			_blendInfo.prevPlayTime = 0.f;*/
-
-		if (1.f <= _blendInfo.blendTime)
+		if (_blendInfo.isBlending)
 		{
-			_blendInfo.blendTime = 0.f;
-			_blendInfo.isBlending = false;
-		}
-		else
-		{
-			std::vector<Matrix> currTransform(std::move(_animationTransforms));
-			_animationTransforms.resize(MAX_BONE_MATRIX);
+			/*Animation& prevAnimation = _animations[_blendInfo.prevAnimation];
+			_blendInfo.prevPlayTime += prevAnimation.ticksPerSecond * deltaTime;
+			_blendInfo.prevPlayTime = fmod(_blendInfo.prevPlayTime, prevAnimation.duration);
 
-			UpdateAnimationTransform(_pSkeleton->_rootBone, identity, _prevControllers.data());
+			if (_blendInfo.prevPlayTime > prevAnimation.lastTime)
+				_blendInfo.prevPlayTime = 0.f;*/
 
-			//float cubic = sqrt(1 - powf(_blendInfo.blendTime - 1.f, 2));
-			float easing = 1 - (1 - _blendInfo.blendTime) * (1 - _blendInfo.blendTime);
-
-			for (size_t i = 0; i < MAX_BONE_MATRIX; i++)
+			if (1.f <= _blendInfo.blendTime)
 			{
-				_animationTransforms[i] = BlendAnimationMatrix(XMMatrixTranspose(_animationTransforms[i]), 
-															   XMMatrixTranspose(currTransform[i]),
-															   easing);
+				_blendInfo.blendTime = 0.f;
+				_blendInfo.isBlending = false;
 			}
+			else
+			{
+				memcpy(_blendTransform.data(), _animationTransforms.data(), sizeof(Matrix) * MAX_BONE_MATRIX);
+				UpdateAnimationTransform(*_pSkeleton->GetBone(i), identity, _prevControllers.data());
+
+				//float cubic = sqrt(1 - powf(_blendInfo.blendTime - 1.f, 2));
+				float easing = 1 - (1 - _blendInfo.blendTime) * (1 - _blendInfo.blendTime);
+
+				for (size_t i = 0; i < MAX_BONE_MATRIX; i++)
+				{
+					//_animationTransforms[i] = Matrix::Lerp(_animationTransforms[i], _blendTransform[i], easing);
+					_animationTransforms[i] = BlendAnimation(_animationTransforms[i], _blendTransform[i], easing);
+				}
+			}
+
+			_blendInfo.blendTime += deltaTime * 5.f;
 		}
 
-		_blendInfo.blendTime += deltaTime * 5.f;
+		/*if (5.f >= XMVector3Length(deltaPosition).m128_f32[0])
+		{
+			_pTransform->_position += XMVector3TransformCoord(deltaPosition, XMMatrixRotationY(_pTransform->_rotation.y + XM_PIDIV2));
+		}*/
 	}
-
-	/*if (5.f >= XMVector3Length(deltaPosition).m128_f32[0])
-	{
-		_pTransform->_position += XMVector3TransformCoord(deltaPosition, XMMatrixRotationY(_pTransform->_rotation.y + XM_PIDIV2));
-	}*/
 }
 
 void Animator::Release()
@@ -101,7 +102,8 @@ void Animator::ChangeAnimation(const char* animation)
 	if (!strcmp(_controllers[0].animation, animation))
 		return;
 
-	_blendInfo.prevAnimation = _controllers[0].animation;
+	memcpy(_blendInfo.prevAnimation.data(), _controllers[0].animation, strlen(_controllers[0].animation));
+	//_blendInfo.prevAnimation = _controllers[0].animation;
 	_blendInfo.prevPlayTime = _controllers[0].playTime;
 	_blendInfo.blendTime = 0.f;
 	_blendInfo.isBlending = true;
@@ -122,11 +124,12 @@ void Animator::ChangeAnimation(const char* animation, const unsigned int ID)
 	if (!strcmp(_controllers[ID].animation, animation))
 		return;
 
-	_blendInfo.prevAnimation = _controllers[ID].animation;
+	memcpy(_blendInfo.prevAnimation.data(), _controllers[ID].animation, strlen(_controllers[ID].animation) + 1);
 	_blendInfo.prevPlayTime = _controllers[ID].playTime;
 	_blendInfo.blendTime = 0.f;
 	_blendInfo.isBlending = true;
-	memcpy(_prevControllers.data(), _controllers.data(), sizeof(Controller) * _controllers.size());
+	//memcpy(_prevControllers.data(), _controllers.data(), sizeof(Controller) * _controllers.size());
+	_prevControllers[ID] = _controllers[ID];
 	
 	_controllers[ID].animation = animation;
 	_controllers[ID].playTime = 0.f;
@@ -240,29 +243,22 @@ XMVECTOR Animator::InterpolationVector4(const std::vector<std::pair<float, Vecto
 	return XMQuaternionSlerp(v1, v2, factor);
 }
 
-XMMATRIX Animator::BlendAnimationMatrix(const XMMATRIX& matrix1, const XMMATRIX& matrix2, float t)
+XMMATRIX Animator::BlendAnimation(const Matrix& m0, const Matrix& m1, const float t)
 {
-	// 위치 벡터 추출
-	XMVECTOR pos1 = matrix1.r[3];
-	XMVECTOR pos2 = matrix2.r[3];
-	XMVECTOR interpolatedPos = XMVectorLerp(pos1, pos2, t);
+	XMVECTOR s0, r0, t0;
+	XMVECTOR s1, r1, t1;
 
-	// 스케일 추출 및 보간
-	XMVECTOR scale1, rot1, trans1;
-	XMVECTOR scale2, rot2, trans2;
-	XMMatrixDecompose(&scale1, &rot1, &trans1, matrix1);
-	XMMatrixDecompose(&scale2, &rot2, &trans2, matrix2);
-	XMVECTOR interpolatedScale = XMVectorLerp(scale1, scale2, t);
+	XMMatrixDecompose(&s0, &r0, &t0, XMMatrixTranspose(m0));
+	XMMatrixDecompose(&s1, &r1, &t1, XMMatrixTranspose(m1));
 
-	// 회전 쿼터니언 보간
-	XMVECTOR interpolatedRot = XMQuaternionSlerp(rot1, rot2, t);
+	XMVECTOR blendedScale = XMVectorLerp(s0, s1, t);
+	XMVECTOR blendedRot = XMQuaternionSlerp(r0, r1, t);
+	XMVECTOR blendedPos = XMVectorLerp(t0, t1, t);
 
-	// 보간된 요소들을 결합하여 최종 행렬 생성
-	XMMATRIX interpolatedMatrix = XMMatrixScalingFromVector(interpolatedScale) *
-								  XMMatrixRotationQuaternion(interpolatedRot) *
-								  XMMatrixTranslationFromVector(interpolatedPos);
-
-	return XMMatrixTranspose(interpolatedMatrix);
+	return XMMatrixTranspose(
+		   XMMatrixScalingFromVector(blendedScale) * 
+		   XMMatrixRotationQuaternion(blendedRot) *
+		   XMMatrixTranslationFromVector(blendedPos));
 }
 
 void Animator::BoneMasking(const Bone* bone, int mask)

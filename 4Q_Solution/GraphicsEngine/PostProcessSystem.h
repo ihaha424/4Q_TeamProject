@@ -11,20 +11,19 @@ public:
 
 public:
 	// IPostProcessSystem을(를) 통해 상속됨
-	void AddFilter(const unsigned int layer, GE::IFilter* pFilter) override;
-	void CreateBloom(GE::IBloom** ppBloom) override;
+	void GetFilter(GE::IFilter** ppFilter, GE::FilterType type) override;
 
 public:
-	std::vector<Filter*>& GetFilters(const unsigned layer) const { return _filters[layer]; }
+	std::vector<std::pair<unsigned int, Filter*>>& GetFilters() { return _filters; }
 
 public:
-	void Initialize(const unsigned int layer);
+	void Initialize();
 
 private:
 	// Base을(를) 통해 상속됨
 	void Free() override;
 
 private:
-	std::vector<Filter*>* _filters{ nullptr };
+	std::vector<std::pair<unsigned int, Filter*>> _filters;
+	unsigned int _ID;
 };
-

@@ -244,6 +244,15 @@
     <Filter Include="Components\TextRenderer">
       <UniqueIdentifier>{922e5f29-c1a8-42da-aadd-1b65620c25ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Interfaces\Network">
+      <UniqueIdentifier>{1870eafb-0981-477f-97b0-99f9edb92162}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Network\Manager">
+      <UniqueIdentifier>{3a5b575c-030a-4807-b939-eb652542c1b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Network\Terminal">
+      <UniqueIdentifier>{dbae0954-afe9-43c2-9188-c134e36446bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -462,6 +471,12 @@
     <ClInclude Include="TextRenderer.h">
       <Filter>Components\TextRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="NetworkManager.h">
+      <Filter>Modules\Interfaces\Network\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Terminal.h">
+      <Filter>Modules\Interfaces\Network\Terminal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -643,6 +658,12 @@
     </ClCompile>
     <ClCompile Include="TextRenderer.cpp">
       <Filter>Components\TextRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkManager.cpp">
+      <Filter>Modules\Interfaces\Network\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Terminal.cpp">
+      <Filter>Modules\Interfaces\Network\Terminal</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

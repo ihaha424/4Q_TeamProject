@@ -15,13 +15,14 @@ protected:
 
 	void SyncMove(const MoveMsg::MoveSync* msg);
 	void FirstInitialize(const ConnectMsg::SyncPlayer* msg);
+	void StateChange(const MoveMsg::StateChange* msg);
 
 private:
 	//Engine::Component::MovementComponent _movement;
 	//Engine::Component::CameraComponent _camera;
-	Engine::Component::StaticMesh _staticMesh;
-	//Engine::Component::SkeletalMesh _skeltalMesh;
-	//Engine::Component::Animator _animator;
+	//Engine::Component::StaticMesh _staticMesh;
+	Engine::Component::SkeletalMesh _skeltalMesh;
+	Engine::Component::Animator _animator;
 	Engine::Math::Matrix _worldMatrix;
 
 	RemoteMoveComponent _remoteMove;

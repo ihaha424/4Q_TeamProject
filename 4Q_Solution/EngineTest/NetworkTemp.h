@@ -43,6 +43,9 @@ public:
 		else if (packetId == (short)PacketID::Sync) {
 			playerSync.push_back(new Delegate<C, Msg>(receiver, fn));
 		}
+		else if (packetId == (short)PacketID::StateChange) {
+			stateChange = new Delegate<C, Msg>(receiver, fn);
+		}
 	}
 
 	void SendUpdate();
@@ -55,6 +58,7 @@ public:
 	IDelegate* moveSync;
 	IDelegate* acceptEnter;
 	std::vector<IDelegate*> playerSync;
+	IDelegate* stateChange;
 
 	static NetworkTemp* GetInstance() {
 		if (_instance == nullptr) {

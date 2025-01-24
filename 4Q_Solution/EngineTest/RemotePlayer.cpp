@@ -4,9 +4,9 @@
 
 RemotePlayer::RemotePlayer() :
 	//_camera(L"MainCamera", 1.f, 1000.f, { 16,9 }, 3.141592f / 4) // TODO: Remove this.
-	_staticMesh(L"../Resources/Player/Player.X", &_worldMatrix)
-	//_skeltalMesh(L"../Resources/Player/Player.X", &_worldMatrix)
-	//, _animator(&_skeltalMesh)
+	//_staticMesh(L"../Resources/Player/Player.X", &_worldMatrix)
+	_skeltalMesh(L"../Resources/Player/Player.X", &_worldMatrix)
+	, _animator(&_skeltalMesh)
 {
 
 }
@@ -16,9 +16,9 @@ void RemotePlayer::Addition()
 	Object::Addition();
 	//AddComponent(&_movement);
 	//AddComponent(&_camera);
-	AddComponent(&_staticMesh);
-	//AddComponent(&_skeltalMesh);
-	//AddComponent(&_animator);
+	//AddComponent(&_staticMesh);
+	AddComponent(&_skeltalMesh);
+	AddComponent(&_animator);
 	AddComponent(&_remoteMove);
 }
 
@@ -31,6 +31,7 @@ void RemotePlayer::PreInitialize()
 
 	NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &RemotePlayer::FirstInitialize, this);
 	NetworkTemp::GetInstance()->AddCallback((short)PacketID::MoveSync, &RemotePlayer::SyncMove, this);
+	NetworkTemp::GetInstance()->AddCallback((short)PacketID::StateChange, &RemotePlayer::StateChange, this);
 	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &RemotePlayer::SyncMove, this);
 
 	const auto inputManager = Engine::Application::GetInputManager();
@@ -38,6 +39,9 @@ void RemotePlayer::PreInitialize()
 	inputManager->GetMappingContext(L"Default", &mappingContext);
 	Engine::Input::IAction* action = nullptr;
 	mappingContext->GetAction(L"Move", &action);
+
+
+
 	action->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
 		{
 			//_movement.SetDirection(value);
@@ -56,7 +60,7 @@ void RemotePlayer::PreInitialize()
 void RemotePlayer::PostInitialize()
 {
 	//_movement.SetSpeed(100.f);
-
+	_animator.ChangeAnimation("Wait");
 	/*_animator.SetUpSplitBone(2);
 	_animator.SplitBone(0, "Dummy_root");
 	_animator.SplitBone(1, "Bip01-Spine1");*/
@@ -92,5 +96,16 @@ void RemotePlayer::FirstInitialize(const ConnectMsg::SyncPlayer* msg)
 {
 	Engine::Math::Vector3 location(msg->x(), msg->y(), msg->z());
 	_transform.position = location;
+}
+
+void RemotePlayer::StateChange(const MoveMsg::StateChange* msg)
+{
+	if (msg->serialnumber() == 2) return;
+	if (msg->stateinfo() == 1) {
+		_animator.ChangeAnimation("Run");
+	}
+	else if (msg->stateinfo() == 0) {
+		_animator.ChangeAnimation("Wait");
+	}
 }
 

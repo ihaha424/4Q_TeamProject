@@ -81,6 +81,14 @@ void NetworkTemp::Dispatch()
 
 			break;
 		}
+		case PacketID::StateChange:
+		{
+			_stateChange.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+
+			stateChange->Invoke(&_stateChange);
+
+			break;
+		}
 
 		default:
 			break;

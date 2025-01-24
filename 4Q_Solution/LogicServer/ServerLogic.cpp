@@ -177,6 +177,9 @@ void ServerLogic::MessageDispatch()
 
             _playerSlot[_stateChange.serialnumber() - 1]._state = _stateChange.stateinfo();
 
+            _stateChange.SerializeToString(&_msgBuffer);
+            Server::BroadCast(_msgBuffer, (short)PacketID::StateChange, _stateChange.ByteSizeLong());
+
             break;
         } // case end
 

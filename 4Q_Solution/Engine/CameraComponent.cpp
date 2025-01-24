@@ -47,12 +47,17 @@ void Engine::Component::CameraComponent::Activate() const
 	_graphicsManager->SetActiveCamera(_name);
 }
 
-void Engine::Component::CameraComponent::SetPosition(Engine::Math::Vector3 position)
+void Engine::Component::CameraComponent::SetPosition(Math::Vector3 position)
 {
 	_camera->SetPosition(position.x, position.y, position.z);
 }
 
-void Engine::Component::CameraComponent::SetRotation(Engine::Math::Vector3 rotation)
+void Engine::Component::CameraComponent::SetRotation(Math::Vector3 rotation)
 {
 	_camera->SetRotationFromAngle(rotation.x, rotation.y, rotation.z);
+}
+
+void Engine::Component::CameraComponent::Rotate(Math::Vector3 rotation)
+{
+	// TODO: Implement this function.
 }

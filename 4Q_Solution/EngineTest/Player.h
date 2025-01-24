@@ -15,9 +15,9 @@ protected:
 private:
 	Engine::Component::MovementComponent _movement;
 	Engine::Component::CameraComponent _camera;
-	//Engine::Component::StaticMesh _staticMesh;
-	Engine::Component::SkeletalMesh _skeltalMesh;
-	Engine::Component::Animator _animator;
+	Engine::Component::StaticMesh _staticMesh;
+	//Engine::Component::SkeletalMesh _skeltalMesh;
+	//Engine::Component::Animator _animator;
 	Engine::Math::Matrix _worldMatrix;
 	Engine::Component::TextRenderer _textRenderer;
 };

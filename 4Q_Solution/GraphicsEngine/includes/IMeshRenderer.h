@@ -11,6 +11,9 @@ namespace GE
 		IMeshRenderer(const IMeshRenderer&) = delete;
 		IMeshRenderer(IMeshRenderer&&) = delete;
 		IMeshRenderer& operator=(const IMeshRenderer&) = delete;
-		IMeshRenderer& operator=(IMeshRenderer&&) = delete;	
+		IMeshRenderer& operator=(IMeshRenderer&&) = delete;
+
+	public:
+		virtual void SetRenderLayer(const unsigned int layer) = 0;
 	};
 }

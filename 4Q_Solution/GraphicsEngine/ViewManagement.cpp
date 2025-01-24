@@ -36,7 +36,7 @@ void ViewManagement::AddRenderTargetGroup(const wchar_t* group, const wchar_t* n
 	textures.push_back(pSRV);
 }
 
-void ViewManagement::AddRenderTargetView(const wchar_t* name, const Vector2& size)
+void ViewManagement::AddRenderTargetView(const wchar_t* name, const Vector2& size, DXGI_FORMAT format)
 {
 	ID3D11Device* pDevice = g_pGraphicDevice->GetDevice();
 
@@ -47,7 +47,7 @@ void ViewManagement::AddRenderTargetView(const wchar_t* name, const Vector2& siz
 		.Height = (unsigned int)size.y,
 		.MipLevels = 1,
 		.ArraySize = 1,
-		.Format = DXGI_FORMAT_R32G32B32A32_FLOAT,
+		.Format = format,
 		.SampleDesc {.Count = 1 },
 		.Usage = D3D11_USAGE_DEFAULT,
 		.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE

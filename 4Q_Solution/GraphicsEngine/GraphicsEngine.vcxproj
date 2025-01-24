@@ -187,6 +187,7 @@
     <ClInclude Include="AnimationSystem.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="Base.h" />
+    <ClInclude Include="Blur.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraSystem.h" />
     <ClInclude Include="Component.h" />
@@ -194,6 +195,7 @@
     <ClInclude Include="Enum.h" />
     <ClInclude Include="Extern.h" />
     <ClInclude Include="Bloom.h" />
+    <ClInclude Include="includes\IBlur.h" />
     <ClInclude Include="includes\IFilter.h" />
     <ClInclude Include="includes\IBloom.h" />
     <ClInclude Include="includes\IPostProcessSystem.h" />
@@ -253,6 +255,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationSystem.cpp" />
     <ClCompile Include="Animator.cpp" />
+    <ClCompile Include="Blur.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraSystem.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -299,6 +302,7 @@
     <None Include="..\Shaders\LightData.hlsli" />
     <None Include="..\Shaders\Constants.hlsli" />
     <None Include="..\Shaders\Lighting.hlsli" />
+    <None Include="..\Shaders\PostProcess.hlsli" />
     <None Include="..\Shaders\ShaderUtilities.hlsli" />
     <None Include="Renderer.def" />
   </ItemGroup>

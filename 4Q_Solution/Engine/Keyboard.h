@@ -182,7 +182,6 @@ namespace Engine::Input::Device
 
 	struct Keyboard : IKeyboard
 	{
-		virtual void Initialize() = 0;
 		virtual void Update() = 0;
 		virtual void Reset() = 0;
 		virtual void Finalize() = 0;

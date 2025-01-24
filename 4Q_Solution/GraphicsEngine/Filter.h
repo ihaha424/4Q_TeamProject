@@ -1,13 +1,14 @@
 #pragma once
 
+class PixelShader;
 class Filter abstract
 {
-protected:
+public:
 	explicit Filter();
 	virtual ~Filter() = default;
 
 public:
-	virtual void InitializeOnce() = 0;
+	virtual void Initialize() = 0;
 	virtual void Render(ID3D11ShaderResourceView* pSourceSRV) = 0;
 
 protected:

@@ -2,7 +2,6 @@
 #include "Filter.h"
 #include "includes/IBloom.h"
 
-class PixelShader;
 class Bloom : public Filter, public GE::IBloom
 {
 public:
@@ -10,7 +9,7 @@ public:
 	virtual ~Bloom() = default;
 
 public:
-	void InitializeOnce() override;
+	void Initialize() override;
 
 public:
 	// IGaussianBlur을(를) 통해 상속됨
@@ -27,6 +26,7 @@ private:
 
 private:
 	std::shared_ptr<PixelShader> _psBloomCurve;
-	std::shared_ptr<PixelShader> _psSampling;
+	std::shared_ptr<PixelShader> _psDownSampling;
+	std::shared_ptr<PixelShader> _psUpSampling;
 	GE::BlOOM_DESC _desc;
 };

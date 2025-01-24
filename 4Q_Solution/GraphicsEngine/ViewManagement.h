@@ -28,7 +28,7 @@ public:
 	// RTV
 	RenderTargetGroup& GetRenderTargetGroup(const wchar_t* group);
 	void AddRenderTargetGroup(const wchar_t* group, const wchar_t* name);
-	void AddRenderTargetView(const wchar_t* name, const Vector2& size);
+	void AddRenderTargetView(const wchar_t* name, const Vector2& size, DXGI_FORMAT format = DXGI_FORMAT_R32G32B32A32_FLOAT);
 
 public:
 	// DSV

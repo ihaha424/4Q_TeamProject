@@ -222,13 +222,18 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="Negative.h" />
+    <ClInclude Include="Network.h" />
+    <ClInclude Include="NetworkManager.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="PacketFilter.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="SafeDelete.h" />
     <ClInclude Include="SkeletalMesh.h" />
     <ClInclude Include="StaticMesh.h" />
     <ClInclude Include="SwizzleAxis.h" />
+    <ClInclude Include="SynchronizeComponent.h" />
+    <ClInclude Include="Terminal.h" />
     <ClInclude Include="TextRenderer.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="pch.h" />
@@ -289,7 +294,9 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="Negative.cpp" />
+    <ClCompile Include="NetworkManager.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="PacketFilter.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="SafeDelete.cpp" />
@@ -303,6 +310,8 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SafeRelease.cpp" />
+    <ClCompile Include="SynchronizeComponent.cpp" />
+    <ClCompile Include="Terminal.cpp" />
     <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="ThrowIfFailed.cpp" />
     <ClCompile Include="TimeManager.cpp" />

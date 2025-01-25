@@ -4,6 +4,7 @@
 #include "Time.h"
 #include "Graphics.h"
 #include "Window.h"
+#include "Network.h"
 
 namespace Engine
 {

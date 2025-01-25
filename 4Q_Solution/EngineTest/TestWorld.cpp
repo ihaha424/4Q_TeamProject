@@ -16,15 +16,15 @@ void TestWorld::Addition()
 
 void TestWorld::PreInitialize()
 {
-	NetworkTemp::GetInstance()->AddCallback((short)PacketID::EnterAccept, &TestWorld::EnterAccept, this);
-	NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &TestWorld::SyncOtherPlayer, this);
+	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::EnterAccept, &TestWorld::EnterAccept, this);
+	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &TestWorld::SyncOtherPlayer, this);
 	
 }
 
 void TestWorld::PreUpdate(float deltaTime)
 {
-	NetworkTemp::GetInstance()->Dispatch();
-	NetworkTemp::GetInstance()->SendUpdate();
+	//NetworkTemp::GetInstance()->Dispatch();
+	//NetworkTemp::GetInstance()->SendUpdate();
 }
 
 void TestWorld::PostFixedUpdate()

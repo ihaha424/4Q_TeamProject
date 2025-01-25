@@ -5,6 +5,11 @@ namespace Engine::GEGraphics
 	class Manager;
 }
 
+namespace Engine::ServerNetwork 
+{
+	class Manager;
+}
+
 namespace Engine
 {
 	class Application
@@ -21,6 +26,7 @@ namespace Engine
 		static Time::IManager* GetTimeManager();
 		static Input::IManager* GetInputManager();
 		static Graphics::IManager* GetGraphicsManager();
+		static Network::IManager* GetNetworkManager();
 
 	protected:
 		void AddWorld(World* world); // TODO: Remove this.
@@ -41,11 +47,13 @@ namespace Engine
 		static void CreateWindowManager(Window::Manager** windowManager);
 		static void CreateInputManager(Input::Manager** inputManager);
 		static void CreateGraphicsManager(GEGraphics::Manager** graphicsManager);
+		static void CreateNetworkManager(ServerNetwork::Manager** networkManager);
 
 		static Time::Manager* _timeManager;
 		static Window::Manager* _windowManager;
 		static Input::Manager* _inputManager;
 		static GEGraphics::Manager* _graphicsManager;
+		static ServerNetwork::Manager* _networkManager;
 
 		std::wstring _title;
 		SIZE _size;

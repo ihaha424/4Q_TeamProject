@@ -259,6 +259,15 @@
     <Filter Include="Components\Synchronize">
       <UniqueIdentifier>{92181e74-b441-49e9-9287-8a5e42a6ddfd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Difinition\Network">
+      <UniqueIdentifier>{185d6b85-2f86-4769-a6c0-d92fc354793d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\Network\Manager">
+      <UniqueIdentifier>{224faf69-ea50-467d-a399-9529535723bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\Network\ProtoBuffer">
+      <UniqueIdentifier>{c7a1fc91-5493-4261-bbfb-b105f1a7c659}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -477,9 +486,6 @@
     <ClInclude Include="TextRenderer.h">
       <Filter>Components\TextRenderer</Filter>
     </ClInclude>
-    <ClInclude Include="NetworkManager.h">
-      <Filter>Modules\Interfaces\Network\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="Terminal.h">
       <Filter>Modules\Interfaces\Network\Terminal</Filter>
     </ClInclude>
@@ -491,6 +497,24 @@
     </ClInclude>
     <ClInclude Include="SynchronizeComponent.h">
       <Filter>Components\Synchronize</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerNetworkManager.h">
+      <Filter>Modules\Difinition\Network\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\Connect.pb.h">
+      <Filter>Modules\Difinition\Network\ProtoBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\Move.pb.h">
+      <Filter>Modules\Difinition\Network\ProtoBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\PacketID.h">
+      <Filter>Modules\Difinition\Network\ProtoBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\Play.pb.h">
+      <Filter>Modules\Difinition\Network\ProtoBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\ProtoInclude.h">
+      <Filter>Modules\Difinition\Network\ProtoBuffer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -674,9 +698,6 @@
     <ClCompile Include="TextRenderer.cpp">
       <Filter>Components\TextRenderer</Filter>
     </ClCompile>
-    <ClCompile Include="NetworkManager.cpp">
-      <Filter>Modules\Interfaces\Network\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Terminal.cpp">
       <Filter>Modules\Interfaces\Network\Terminal</Filter>
     </ClCompile>
@@ -685,6 +706,18 @@
     </ClCompile>
     <ClCompile Include="SynchronizeComponent.cpp">
       <Filter>Components\Synchronize</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerNetworkManager.cpp">
+      <Filter>Modules\Difinition\Network\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packet\Connect.pb.cc">
+      <Filter>Modules\Difinition\Network\ProtoBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packet\Move.pb.cc">
+      <Filter>Modules\Difinition\Network\ProtoBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packet\Play.pb.cc">
+      <Filter>Modules\Difinition\Network\ProtoBuffer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -5,11 +5,13 @@
 #include "DSHTimeManager.h"
 #include "DSHWindowManager.h"
 #include "GEGraphicsManager.h"
+#include "ServerNetworkManager.h"
 
 Engine::Time::Manager* Engine::Application::_timeManager = nullptr;
 Engine::Window::Manager* Engine::Application::_windowManager = nullptr;
 Engine::GEGraphics::Manager* Engine::Application::_graphicsManager = nullptr;
 Engine::Input::Manager* Engine::Application::_inputManager = nullptr;
+Engine::ServerNetwork::Manager* Engine::Application::_networkManager = nullptr;
 
 Engine::Application::Application(const HINSTANCE instanceHandle, std::wstring title, const SIZE size) :
 	_instanceHandle(instanceHandle),
@@ -40,6 +42,9 @@ void Engine::Application::InitializeManagers() const
 
 	CreateGraphicsManager(&_graphicsManager);
 	_graphicsManager->Initialize(_windowManager->GetHandle(), L"../Shaders/", _size, false, 1);
+
+	CreateNetworkManager(&_networkManager);
+	_networkManager->Initialize();
 }
 
 void Engine::Application::DeclareInputActions(Input::IManager* inputManager)
@@ -73,6 +78,8 @@ void Engine::Application::Run(const int showCommand)
 	{
 		if (PeekMessage(&message, nullptr, NULL, NULL, PM_REMOVE))
 		{
+			// TODO: check DestroyMessage and Send to Server
+			// TODO: if receive DestroyOk then end.
 			TranslateMessage(&message);
 			DispatchMessage(&message);
 		}
@@ -83,12 +90,14 @@ void Engine::Application::Run(const int showCommand)
 			_timeManager->Tick();
 			_inputManager->Update(metaTime);
 			_graphicsManager->Update(deltaTime);
+			_networkManager->DispatchPacket();
 
 			_drive.Update(deltaTime);
 			// TODO: Alarm Timer for Fixed Update
 
 			_graphicsManager->Render();
 			_inputManager->Reset();
+			_networkManager->Send();
 		}
 	}
 }
@@ -117,6 +126,8 @@ void Engine::Application::FinalizeManagers() const
 	deleter(&_windowManager);
 	_timeManager->Finalize();
 	deleter(&_timeManager);
+	_networkManager->Finalize();
+	deleter(&_networkManager);
 }
 
 Engine::Time::IManager* Engine::Application::GetTimeManager()
@@ -132,6 +143,11 @@ Engine::Input::IManager* Engine::Application::GetInputManager()
 Engine::Graphics::IManager* Engine::Application::GetGraphicsManager()
 {
 	return _graphicsManager;
+}
+
+Engine::Network::IManager* Engine::Application::GetNetworkManager()
+{
+	return _networkManager;
 }
 
 void Engine::Application::AddWorld(World* world)
@@ -189,5 +205,17 @@ void Engine::Application::CreateGraphicsManager(GEGraphics::Manager** graphicsMa
 		GEGraphics::Manager* manager = new GEGraphics::Manager();
 		if (manager == nullptr) thrower(E_OUTOFMEMORY);
 		*graphicsManager = manager;
+	}
+}
+
+void Engine::Application::CreateNetworkManager(ServerNetwork::Manager** networkManager)
+{
+	constexpr Utility::ThrowIfFailed thrower;
+	if (networkManager == nullptr) thrower(E_INVALIDARG);
+	else
+	{
+		ServerNetwork::Manager* manager = new ServerNetwork::Manager();
+		if (manager == nullptr) thrower(E_OUTOFMEMORY);
+		*networkManager = manager;
 	}
 }

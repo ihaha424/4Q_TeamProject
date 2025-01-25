@@ -10,3 +10,4 @@
 #include "Animator.h"
 #include "Light.h"
 #include "TextRenderer.h"
+#include "SynchronizeComponent.h"

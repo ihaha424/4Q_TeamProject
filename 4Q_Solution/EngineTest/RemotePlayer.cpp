@@ -6,7 +6,8 @@ RemotePlayer::RemotePlayer() :
 	//_camera(L"MainCamera", 1.f, 1000.f, { 16,9 }, 3.141592f / 4) // TODO: Remove this.
 	//_staticMesh(L"../Resources/Player/Player.X", &_worldMatrix)
 	_skeltalMesh(L"../Resources/Player/Player.X", &_worldMatrix)
-	, _animator(&_skeltalMesh)
+	, _animator(&_skeltalMesh),
+	_sync()
 {
 
 }
@@ -20,6 +21,7 @@ void RemotePlayer::Addition()
 	AddComponent(&_skeltalMesh);
 	AddComponent(&_animator);
 	AddComponent(&_remoteMove);
+	AddComponent(&_sync);
 }
 
 void RemotePlayer::PreInitialize()
@@ -29,10 +31,14 @@ void RemotePlayer::PreInitialize()
 	//_movement.SetTarget(&_transform);
 	_remoteMove.SetTarget(&_transform);
 
-	NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &RemotePlayer::FirstInitialize, this);
-	NetworkTemp::GetInstance()->AddCallback((short)PacketID::MoveSync, &RemotePlayer::SyncMove, this);
-	NetworkTemp::GetInstance()->AddCallback((short)PacketID::StateChange, &RemotePlayer::StateChange, this);
-	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &RemotePlayer::SyncMove, this);
+	_sync.SetSerialNumber(2);
+	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &RemotePlayer::FirstInitialize, this);
+	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::MoveSync, &RemotePlayer::SyncMove, this);
+	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::StateChange, &RemotePlayer::StateChange, this);
+	
+	_sync.AddCallback((short)PacketID::Sync, &RemotePlayer::FirstInitialize, this);
+	_sync.AddCallback((short)PacketID::MoveSync, &RemotePlayer::SyncMove, this);
+	_sync.AddCallback((short)PacketID::StateChange, &RemotePlayer::StateChange, this);
 
 	const auto inputManager = Engine::Application::GetInputManager();
 	Engine::Input::IMappingContext* mappingContext = nullptr;

@@ -20,6 +20,7 @@ private:
 	Engine::Component::Animator _animator;
 	Engine::Math::Matrix _worldMatrix;
 	Engine::Component::TextRenderer _textRenderer;
+	Engine::Component::SynchronizeComponent _sync;
 };
 
 //class RemotePlayer : public Engine::Object

@@ -28,6 +28,8 @@ void Player::PreInitialize()
 
 	_movement.SetTarget(&_transform);
 
+	_sync.SetSerialNumber(1);
+
 	const auto inputManager = Engine::Application::GetInputManager();
 	Engine::Input::IMappingContext* mappingContext = nullptr;
 	inputManager->GetMappingContext(L"Default", &mappingContext);
@@ -39,41 +41,77 @@ void Player::PreInitialize()
 		Engine::Math::Vector3 direction = _movement.GetDirection();
 		if (direction != Engine::Math::Vector3(value)) {
 			_movement.SetDirection(value);		
-			NetworkTemp::GetInstance()->_move.set_serialnumber(1);
-			NetworkTemp::GetInstance()->_move.set_x(value.x);
-			NetworkTemp::GetInstance()->_move.set_y(value.y);
-			NetworkTemp::GetInstance()->_move.set_z(value.z);
-			NetworkTemp::GetInstance()->_move.set_speed(_movement.GetSpeed());
+			
+			
+			_sync._move.set_serialnumber(1);
+			_sync._move.set_x(value.x);
+			_sync._move.set_y(value.y);
+			_sync._move.set_z(value.z);
+			_sync._move.set_speed(_movement.GetSpeed());
 
-			Client::SavePacketData(
-				NetworkTemp::GetInstance()->_move.SerializeAsString(),
+			_sync._move.SerializeToString(&_sync._msgBuffer);
+
+			Engine::Application::GetNetworkManager()->SaveSendData(
 				(short)PacketID::Move,
-				NetworkTemp::GetInstance()->_move.ByteSizeLong());
+				_sync._msgBuffer,
+				_sync._move.ByteSizeLong()
+			);
+
+
+			//NetworkTemp::GetInstance()->_move.set_serialnumber(1);
+			//NetworkTemp::GetInstance()->_move.set_x(value.x);
+			//NetworkTemp::GetInstance()->_move.set_y(value.y);
+			//NetworkTemp::GetInstance()->_move.set_z(value.z);
+			//NetworkTemp::GetInstance()->_move.set_speed(_movement.GetSpeed());
+
+			//Client::SavePacketData(
+			//	NetworkTemp::GetInstance()->_move.SerializeAsString(),
+			//	(short)PacketID::Move,
+			//	NetworkTemp::GetInstance()->_move.ByteSizeLong());
 		}
 		
 	});
 	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) {
 		_animator.ChangeAnimation("Run"); 
-		NetworkTemp::GetInstance()->_stateChange.set_serialnumber(1);
-		NetworkTemp::GetInstance()->_stateChange.set_stateinfo(1);
 
-		Client::SavePacketData(
-			NetworkTemp::GetInstance()->_stateChange.SerializeAsString(),
+		_sync._stateChange.set_serialnumber(1);
+		_sync._stateChange.set_stateinfo(1);
+		_sync._stateChange.SerializeToString(&_sync._msgBuffer);
+
+		Engine::Application::GetNetworkManager()->SaveSendData(
 			(short)PacketID::StateChange,
-			NetworkTemp::GetInstance()->_stateChange.ByteSizeLong());
+			_sync._msgBuffer,
+			_sync._stateChange.ByteSizeLong());
+
+		//NetworkTemp::GetInstance()->_stateChange.set_serialnumber(1);
+		//NetworkTemp::GetInstance()->_stateChange.set_stateinfo(1);
+
+		//Client::SavePacketData(
+		//	NetworkTemp::GetInstance()->_stateChange.SerializeAsString(),
+		//	(short)PacketID::StateChange,
+		//	NetworkTemp::GetInstance()->_stateChange.ByteSizeLong());
 		});
 	moveAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
 		{ 
 			_animator.ChangeAnimation("Wait"); 
 			_movement.SetDirection(Engine::Math::Vector3::Zero);
 
-			NetworkTemp::GetInstance()->_stateChange.set_serialnumber(1);
-			NetworkTemp::GetInstance()->_stateChange.set_stateinfo(0);
+			_sync._stateChange.set_serialnumber(1);
+			_sync._stateChange.set_stateinfo(0);
+			_sync._stateChange.SerializeToString(&_sync._msgBuffer);
 
-			Client::SavePacketData(
-				NetworkTemp::GetInstance()->_stateChange.SerializeAsString(),
+			Engine::Application::GetNetworkManager()->SaveSendData(
 				(short)PacketID::StateChange,
-				NetworkTemp::GetInstance()->_stateChange.ByteSizeLong());
+				_sync._msgBuffer,
+				_sync._stateChange.ByteSizeLong());
+
+			//NetworkTemp::GetInstance()->_stateChange.set_serialnumber(1);
+			//NetworkTemp::GetInstance()->_stateChange.set_stateinfo(0);
+
+			//Client::SavePacketData(
+			//	NetworkTemp::GetInstance()->_stateChange.SerializeAsString(),
+			//	(short)PacketID::StateChange,
+			//	NetworkTemp::GetInstance()->_stateChange.ByteSizeLong());
 
 		});
 	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) { /*_animator.ChangeAnimation("Run");*/ });

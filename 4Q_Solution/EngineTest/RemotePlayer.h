@@ -24,6 +24,7 @@ private:
 	Engine::Component::SkeletalMesh _skeltalMesh;
 	Engine::Component::Animator _animator;
 	Engine::Math::Matrix _worldMatrix;
+	Engine::Component::SynchronizeComponent _sync;
 
 	RemoteMoveComponent _remoteMove;
 };

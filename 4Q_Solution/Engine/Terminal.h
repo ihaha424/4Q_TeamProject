@@ -3,8 +3,9 @@
 namespace Engine::Network
 {
 	// TODO: NetworkComponent base class
-	struct Terminal
+	class Terminal
 	{
+	public:
 		Terminal() = default;
 		Terminal(const Terminal& other) = default;
 		Terminal(Terminal&& other) noexcept = default;

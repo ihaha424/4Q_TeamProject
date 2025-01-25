@@ -31,7 +31,7 @@ void GameApplication::Addition()
 
 void GameApplication::InitializeContents()
 {
-	NetworkTemp::GetInstance()->Initialize();
+	//NetworkTemp::GetInstance()->Initialize();
 
 	Application::InitializeContents();
 	Attach(&_world);

@@ -28,6 +28,11 @@
 #include "GraphicsEngine/IBloom.h"
 #include "GraphicsEngine/IBlur.h"
 
+#include "Server/ClientEntrance.h"
+#include "../Packet/ProtoInclude.h"
+#include "../Packet/PacketID.h"
+#include "PacketFilter.h"
+
 #include "Math.h"
 
 #include "Transform.h"

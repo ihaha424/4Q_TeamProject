@@ -112,14 +112,14 @@ void Player::PreInitialize()
 			//	NetworkTemp::GetInstance()->_stateChange.SerializeAsString(),
 			//	(short)PacketID::StateChange,
 			//	NetworkTemp::GetInstance()->_stateChange.ByteSizeLong());
-
+			_movement.SetDirection(Engine::Math::Vector3::Zero);
 		});
-	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) { /*_animator.ChangeAnimation("Run");*/ });
-	moveAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
-	{ 
-		//_animator.ChangeAnimation("Wait"); 
-		_movement.SetDirection(Engine::Math::Vector3::Zero);
-	});
+	//moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) { /*_animator.ChangeAnimation("Run");*/ });
+	//moveAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
+	//{ 
+	//	//_animator.ChangeAnimation("Wait"); 
+
+	//});
 
 	Engine::Input::IAction* cameraAction = nullptr;
 	mappingContext->GetAction(L"Camera", &cameraAction);

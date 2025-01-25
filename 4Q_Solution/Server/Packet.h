@@ -13,6 +13,7 @@
 struct PacketHeader {
 	static char _packetSeqNum;
 	short sessionId;
+	short _serialNumber;
 	short _packetId;
 	short _packetSize;
 	char _packetSeq = ++_packetSeqNum;

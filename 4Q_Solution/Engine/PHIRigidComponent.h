@@ -1,25 +1,48 @@
 #pragma once
-
+#include "PhysicsComponent.h"
 
 namespace Engine::PHI
 {
-	class PHICollisionComponent final
+	class RigidComponent final
+		: public Physics::RigidComponent
 	{
-	public:
-		void __CALLBACK__ OnTriggerEnter() override;
-		void __CALLBACK__ OnTrigger() override;
-		void __CALLBACK__ OnTriggerExit() override;
-		void __CALLBACK__ OnCollisionEnter() override;
-		void __CALLBACK__ OnCollision() override;
-		void __CALLBACK__ OnCollisionExit() override;
+		/********************************
+					Rigid Object
+		*********************************/
+		void SetTranslate(const Engine::Math::Vector3& position) override;
+		const Engine::Math::Vector3 GetTranslate() const override;
+		void SetRotation(const Engine::Math::Vector4& Rotation) override;
+		const Engine::Math::Vector4 GetRotation() const override;
+		void SetTransform(const Transform& transform) override;
+		const Transform GetTransform() const override;
 
-		void __CALLBACK__ OnHit() override;
-		void __CALLBACK__ OnOverlapBegin() override;
-		void __CALLBACK__ OnOverlapEnd() override;
 
-	private:
-		Object* owner;
+		/********************************
+					   Shape
+		*********************************/
+		bool AttachShape(Shape* shape) override;
+		bool DetachShape(Shape* shape) override;
+		void SetFlag(CollisionType flag, bool value) override;
+		void SetLocalTranslate(const Engine::Math::Vector3& LocalTranslate) override;
+		const Engine::Math::Vector3 GetLocalTranslate() const override;
+		void SetLocalRotation(const Engine::Math::Vector4& LocalRotation) override;
+		const Engine::Math::Vector4 GetLocalRotation() const override;
+		void SetLocalTransform(const Engine::Transform& LocalTransform) override;
+		const Engine::Transform GetLocalTransform() const override;
+		void SetScale(const Engine::Math::Vector3& Scale) override;
+		const Engine::Math::Vector3 GetScale() const override;
+		
+		/********************************
+					Geometry
+		*********************************/
+		GeometryShape SetType(GeometryShape type) override;
+		void GetType(GeometryShape type) override;
 
-		void SetOwner() override;
+		/********************************
+					Engine
+		*********************************/
+		void Initialize() override;
+		void Update(float deltaTime) const override;
+		void Finalize() override;
 	};
 }

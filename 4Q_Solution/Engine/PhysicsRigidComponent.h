@@ -2,7 +2,7 @@
 
 namespace Engine::Physics
 {
-	struct IPhysicsRigidComponent : Component
+	struct IRigidComponent : Component
 	{
 		/********************************
 					 Component
@@ -51,7 +51,7 @@ namespace Engine::Physics
 	 * @brief	: Physics의 대부분의 기능을 가진 Component로 Client와의 통신의 대부분의 역활을 한다.
 				  Physics Object, Physcis Shape, Physics Geometry, Physics Material를 다 들고 있다.
 	 */
-	struct PhysicsRigidComponent : IPhysicsRigidComponent
+	struct RigidComponent : IRigidComponent
 	{
 		virtual void Initialize() = 0;
 		virtual void Update(float deltaTime) const = 0;
@@ -64,10 +64,10 @@ namespace Engine::Physics
 		virtual bool	DetachShape(Shape* shape) = 0;
 
 
-		/********************************
-					Collision
-		*********************************/
-		virtual void SetUserData(ICollision* UserData) = 0;
-		virtual const ICollision* GetUserData() const = 0;
+		///********************************
+		//			Collision
+		//*********************************/
+		//virtual void SetUserData(ICollision* UserData) = 0;
+		//virtual const ICollision* GetUserData() const = 0;
 	};
 }

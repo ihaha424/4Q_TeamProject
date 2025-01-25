@@ -3,43 +3,87 @@
 
 namespace Engine::PHI
 {
-	void __CALLBACK__ PHICollisionComponent::OnTriggerEnter()
+	void RigidComponent::SetName(const char* Name)
 	{
-		return void __CALLBACK__();
 	}
-	void __CALLBACK__ PHICollisionComponent::OnTrigger()
+	const char* RigidComponent::GetName() const
 	{
-		return void __CALLBACK__();
+		return nullptr;
 	}
-	void __CALLBACK__ PHICollisionComponent::OnTriggerExit()
+	void RigidComponent::SetTranslate(const Engine::Math::Vector3& position)
 	{
-		return void __CALLBACK__();
 	}
-	void __CALLBACK__ PHICollisionComponent::OnCollisionEnter()
+	const Engine::Math::Vector3 RigidComponent::GetTranslate() const
 	{
-		return void __CALLBACK__();
+		return Engine::Math::Vector3();
 	}
-	void __CALLBACK__ PHICollisionComponent::OnCollision()
+	void RigidComponent::SetRotation(const Engine::Math::Vector4& Rotation)
 	{
-		return void __CALLBACK__();
 	}
-	void __CALLBACK__ PHICollisionComponent::OnCollisionExit()
+	const Engine::Math::Vector4 RigidComponent::GetRotation() const
 	{
-		return void __CALLBACK__();
+		return Engine::Math::Vector4();
 	}
-	void __CALLBACK__ PHICollisionComponent::OnHit()
+	void RigidComponent::SetTransform(const Transform& transform)
 	{
-		return void __CALLBACK__();
 	}
-	void __CALLBACK__ PHICollisionComponent::OnOverlapBegin()
+	const Transform RigidComponent::GetTransform() const
 	{
-		return void __CALLBACK__();
+		return Transform();
 	}
-	void __CALLBACK__ PHICollisionComponent::OnOverlapEnd()
+	void RigidComponent::SetFlag(CollisionType flag, bool value)
 	{
-		return void __CALLBACK__();
 	}
-	void PHICollisionComponent::SetOwner()
+	void RigidComponent::SetLocalTranslate(const Engine::Math::Vector3& LocalTranslate)
 	{
+	}
+	const Engine::Math::Vector3 RigidComponent::GetLocalTranslate() const
+	{
+		return Engine::Math::Vector3();
+	}
+	void RigidComponent::SetLocalRotation(const Engine::Math::Vector4& LocalRotation)
+	{
+	}
+	const Engine::Math::Vector4 RigidComponent::GetLocalRotation() const
+	{
+		return Engine::Math::Vector4();
+	}
+	void RigidComponent::SetLocalTransform(const Engine::Transform& LocalTransform)
+	{
+	}
+	const Engine::Transform RigidComponent::GetLocalTransform() const
+	{
+		return Engine::Transform();
+	}
+	void RigidComponent::SetScale(const Engine::Math::Vector3& Scale)
+	{
+	}
+	const Engine::Math::Vector3 RigidComponent::GetScale() const
+	{
+		return Engine::Math::Vector3();
+	}
+	GeometryShape RigidComponent::SetType(GeometryShape type)
+	{
+		return GeometryShape();
+	}
+	void RigidComponent::GetType(GeometryShape type)
+	{
+	}
+	void RigidComponent::Initialize()
+	{
+	}
+	void RigidComponent::Update(float deltaTime) const
+	{
+	}
+	void RigidComponent::Finalize()
+	{
+	}
+	bool RigidComponent::AttachShape(Shape* shape)
+	{
+		return false;
+	}
+	bool RigidComponent::DetachShape(Shape* shape)
+	{
+		return false;
 	}
 }

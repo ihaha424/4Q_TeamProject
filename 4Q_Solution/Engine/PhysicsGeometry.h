@@ -19,10 +19,4 @@ namespace Engine::Physics
 		virtual void GetType(GeometryShape type)			= 0;
 	};
 }
-함수 시그니쳐를 강제하는 코드 -> GPT물어보기
-using CreateInstanceFunction = HRESULT(__stdcall*)(void* ppv);
-using CreateInstanceFunction = HRESULT(__stdcall*)(void* ppv);
-using CreateInstanceFunction = HRESULT(__stdcall*)(void* ppv);
-using CreateInstanceFunction = HRESULT(__stdcall*)(void* ppv);
-using CreateInstanceFunction = HRESULT(__stdcall*)(void* ppv);
-using CreateInstanceFunction = HRESULT(__stdcall*)(void* ppv);
+

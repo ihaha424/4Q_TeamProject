@@ -9,14 +9,13 @@ namespace Engine::PHI
 	public:
 		Manager();
 
-		void Initialize(PhysicsEngineAPI::IPhysicsSystem::PhysicsType physicsType) override;
+		void Initialize(Physics::PhysicsType physicsType = Physics::PhysicsType::Physx) override;
 		void WorldInitialize() override;
 		void Update(float deltaTime) const override;
 		void Finalize() override;
 
 	private:
 		PhysicsEngineAPI::IPhysicsSystem* system;
-
 	};
 }
 

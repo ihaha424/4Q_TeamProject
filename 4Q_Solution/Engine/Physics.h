@@ -1,6 +1,8 @@
 #pragma once
 #include "PhysicsUtils.h"
 
+#include "PhysicsCollision.h"
+
 #include "PhysicsMaterial.h"
 #include "PhysicsGeometry.h"
 #include "PhysicsShape.h"

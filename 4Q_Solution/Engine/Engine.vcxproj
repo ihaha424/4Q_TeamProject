@@ -178,6 +178,10 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Animator.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="CameraComponent.h" />
+    <ClInclude Include="PHIGeometry.h" />
+    <ClInclude Include="PHIMaterial.h" />
+    <ClInclude Include="PHIShape.h" />
+    <ClInclude Include="PhysicsCollision.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Components.h" />
     <ClInclude Include="Controller.h" />
@@ -270,6 +274,10 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
+    <ClCompile Include="PHIGeometry.cpp" />
+    <ClCompile Include="PHIMaterial.cpp" />
+    <ClCompile Include="PHIShape.cpp" />
+    <ClCompile Include="PhysicsCollision.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="PhysicsGeometry.cpp" />

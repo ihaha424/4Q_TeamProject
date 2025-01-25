@@ -11,14 +11,13 @@ namespace Engine::PHI
 
 	Manager::Manager()
 		: system{ nullptr }
-		//, scene{ nullptr }
 	{}
 
-	void Manager::Initialize(PhysicsEngineAPI::IPhysicsSystem::PhysicsType physicsType)
+	void Manager::Initialize(Physics::PhysicsType physicsType)
 	{
 		constexpr Utility::ThrowIfFailed thrower;
 
-		thrower(BoolToHRESULT(PhysicsEngineAPI::CreateSystem(&system, physicsType)));
+		thrower(BoolToHRESULT(PhysicsEngineAPI::CreateSystem(&system, static_cast<PhysicsEngineAPI::IPhysicsSystem::PhysicsType>(physicsType))));
 		thrower(BoolToHRESULT(system->CreatePhysics()));
 
 

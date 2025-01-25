@@ -255,6 +255,7 @@ xcopy .\PhysXLibrary\$(Configuration)\*.dll $(OutDir) /Y</Command>
     <ClCompile Include="PhysXSystem.cpp" />
     <ClCompile Include="IUpdate.cpp" />
     <ClCompile Include="PhysXUtils.cpp" />
+    <ClCompile Include="소스.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="개발참고자료.txt" />

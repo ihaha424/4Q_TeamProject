@@ -12,6 +12,7 @@ namespace PhysicsEngineAPI
 	public:
 		explicit	PhysXGeometry(physx::PxGeometry* geometry);
 		virtual		~PhysXGeometry();
+		void Release() override;
 
 		void SetScale(const Utils::Math::Vector3& position) override;
 		const Utils::Math::Vector3 GetScale() const override;
@@ -19,11 +20,13 @@ namespace PhysicsEngineAPI
 		const physx::PxGeometry* GetGeometry() const;
 		physx::PxGeometry* operator->() { return geometry; }
 
-	public:
-		void Release() override;
+		Utils::DataStructure::GeometryShape GetType() override;
+	private:
+		void SetType(Utils::DataStructure::GeometryShape type) override;
 
 	private:
 		physx::PxGeometry* geometry;
+		Utils::DataStructure::GeometryShape type = Utils::DataStructure::GeometryShape::End;
 
 		friend class PhysXSystem;
 		friend class PhysXScene;

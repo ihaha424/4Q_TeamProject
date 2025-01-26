@@ -25,11 +25,11 @@ namespace Engine::Physics
 			float distance) = 0;
 		virtual bool Overlap(
 			QueryData& overlapInfo,
-			const IGeometry* geometry,
+			const IRigidComponent* component,
 			const Engine::Transform& transform) = 0;
 		virtual bool Sweep(
 			AdditionalQueryData& sweepInfo,
-			const IGeometry* geometry,
+			const IRigidComponent* component,
 			const Engine::Transform& transform,
 			const Engine::Math::Vector3& direction,
 			float distance) = 0;
@@ -38,11 +38,11 @@ namespace Engine::Physics
 	// Engine Interface
 	struct Scene : IScene
 	{
-		virtual void Initialize(const SceneDesc& sceneDescription, const char* name = nullptr) = 0;
+		virtual void Initialize() = 0;
 		virtual void Update(float deltaTime) const = 0;
 		virtual void Finalize() = 0;
 
 		virtual unsigned int GetSceneNumber() = 0;
-		virtual bool AddActor(IObject* object) = 0;
+		virtual bool AddActor(IRigidComponent* component) = 0;
 	};
 }

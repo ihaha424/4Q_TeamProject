@@ -72,13 +72,14 @@ namespace PhysicsEngineAPI
 				변경 후에는 Actor를 다시 "Wake up"시켜야 합니다:
 		*/
 		//TODO: Scale
+		// Geometry를 기본 도형은 다시 만들고
+		// Triangle/Convex는 스케일 조절 ㄱㄱ 
 		
 	}
 
 	const Utils::Math::Vector3 PhysXShape::GetScale() const
 	{
-		//TODO: Scale
-		return Utils::Math::Vector3();
+		return scale;
 	}
 
 	void PhysXShape::SetName(const char* name)

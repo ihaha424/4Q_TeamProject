@@ -30,11 +30,14 @@ namespace Engine::PHI
 
 	void Manager::WorldInitialize()
 	{
+
 	}
 
 	void Manager::Update(float deltaTime) const
 	{
+
 	}
+
 	void Manager::Finalize()
 	{
 		constexpr Utility::SafeRelease releaser;

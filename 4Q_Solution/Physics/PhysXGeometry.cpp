@@ -12,6 +12,16 @@ namespace PhysicsEngineAPI
 	PhysXGeometry::~PhysXGeometry() { Release(); }
 	void PhysXGeometry::Release() { SAFE_DELETE(geometry); }
 
+	void PhysXGeometry::SetType(Utils::DataStructure::GeometryShape _type)
+	{
+		type = _type;
+	}
+
+	Utils::DataStructure::GeometryShape PhysXGeometry::GetType()
+	{
+		return type;
+	}
+
 	const physx::PxGeometry* PhysXGeometry::GetGeometry() const
 	{
 		return geometry;

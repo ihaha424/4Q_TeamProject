@@ -16,6 +16,11 @@ Engine::Math::Vector3::Vector3(const Input::Value& value) noexcept :
 {
 }
 
+Engine::Math::Vector3::Vector3(const PhysicsEngineAPI::Utils::Math::Vector3& value) noexcept :
+	DirectX::SimpleMath::Vector3(value.value)
+{
+}
+
 Engine::Math::Vector3& Engine::Math::Vector3::operator=(const DirectX::SimpleMath::Vector3& vector) noexcept
 {
 	DirectX::SimpleMath::Vector3::operator=(vector);
@@ -23,6 +28,12 @@ Engine::Math::Vector3& Engine::Math::Vector3::operator=(const DirectX::SimpleMat
 }
 
 Engine::Math::Vector3& Engine::Math::Vector3::operator=(const Input::Value& value) noexcept
+{
+	DirectX::SimpleMath::Vector3::operator=(Vector3(value));
+	return *this;
+}
+
+Engine::Math::Vector3& Engine::Math::Vector3::operator=(const PhysicsEngineAPI::Utils::Math::Vector3& value) noexcept
 {
 	DirectX::SimpleMath::Vector3::operator=(Vector3(value));
 	return *this;

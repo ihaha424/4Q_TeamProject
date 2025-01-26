@@ -11,10 +11,22 @@ Engine::Math::Vector4::Vector4(const DirectX::SimpleMath::Vector4 vector) noexce
 {
 }
 
+Engine::Math::Vector4::Vector4(const PhysicsEngineAPI::Utils::Math::Vector4& value) noexcept :
+	DirectX::SimpleMath::Vector4(value.value)
+{
+}
+
 Engine::Math::Vector4& Engine::Math::Vector4::operator=(const DirectX::SimpleMath::Vector4& vector) noexcept
 {
 	DirectX::SimpleMath::Vector4::operator=(vector);
 	return *this;
 }
+
+Engine::Math::Vector4& Engine::Math::Vector4::operator=(const PhysicsEngineAPI::Utils::Math::Vector4& value) noexcept
+{
+	DirectX::SimpleMath::Vector4::operator=(Vector4(value));
+	return *this;
+}
+
 
 

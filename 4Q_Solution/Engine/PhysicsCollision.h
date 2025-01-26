@@ -30,7 +30,7 @@ namespace Engine::Physics
 
 
 
-	namespace Collision
+	namespace CollisionFunction
 	{
 		template <typename T>
 		concept HasOnTriggerEnter = requires(T obj) { { obj.OnTriggerEnter() } -> std::same_as<void>; };

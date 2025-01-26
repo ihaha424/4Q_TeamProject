@@ -325,6 +325,9 @@
     <Filter Include="Modules\Difinition\PhysicsEngine\06. Component\PHICollisionComponent">
       <UniqueIdentifier>{2d94887d-b763-4805-951b-7718d1f441e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Component\PhysicsComponent">
+      <UniqueIdentifier>{976cd7bb-25bd-4648-8c9f-f79de4c2b0c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -582,9 +585,6 @@
     <ClInclude Include="PhysicsShape.h">
       <Filter>Modules\Interfaces\Physics\03. Shape</Filter>
     </ClInclude>
-    <ClInclude Include="TextRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Matrix.h">
       <Filter>Math\Matrix</Filter>
     </ClInclude>
@@ -608,6 +608,9 @@
     </ClInclude>
     <ClInclude Include="PHIMaterial.h">
       <Filter>Modules\Difinition\PhysicsEngine\05. Material</Filter>
+    </ClInclude>
+    <ClInclude Include="TextRenderer.h">
+      <Filter>Components\TextRenderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -830,9 +833,6 @@
     <ClCompile Include="PhysicsShape.cpp">
       <Filter>Modules\Interfaces\Physics\03. Shape</Filter>
     </ClCompile>
-    <ClCompile Include="TextRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Matrix.cpp">
       <Filter>Math\Matrix</Filter>
     </ClCompile>
@@ -853,6 +853,9 @@
     </ClCompile>
     <ClCompile Include="PHIMaterial.cpp">
       <Filter>Modules\Difinition\PhysicsEngine\05. Material</Filter>
+    </ClCompile>
+    <ClCompile Include="TextRenderer.cpp">
+      <Filter>Components\TextRenderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

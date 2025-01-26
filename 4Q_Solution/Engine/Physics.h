@@ -13,6 +13,10 @@
 
 #include "PhysicsScene.h"
 
+
+#include "PhysicsFactory.h"
+#include "PhysicsUpdate.h"
+#include "PhysicsCreate.h"
 #include "PhysicsManager.h"
 
 

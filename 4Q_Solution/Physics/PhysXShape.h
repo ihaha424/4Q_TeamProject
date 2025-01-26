@@ -50,6 +50,7 @@ namespace PhysicsEngineAPI
 
 	private:
 		physx::PxShape* shape;
+		Utils::Math::Vector3 scale = {1, 1, 1};
 
 		friend struct PhysXActorFunction;
 		friend class PhysXSystem;

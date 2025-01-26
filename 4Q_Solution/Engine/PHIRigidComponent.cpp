@@ -3,87 +3,128 @@
 
 namespace Engine::PHI
 {
-	void RigidComponent::SetName(const char* Name)
+	/********************************
+				Rigid Object
+	*********************************/
+
+	void RigidComponent::SetTranslate(const Math::Vector3& position)
 	{
+		object->SetTranslate({ position.x, position.y, position.z });
 	}
-	const char* RigidComponent::GetName() const
+	const Math::Vector3 RigidComponent::GetTranslate() const
 	{
-		return nullptr;
+		return Math::Vector3(object->GetTranslate());
 	}
-	void RigidComponent::SetTranslate(const Engine::Math::Vector3& position)
+	void RigidComponent::SetRotation(const Math::Quaternion& Rotation)
 	{
+		object->SetRotation({ Rotation.x, Rotation.y, Rotation.z, Rotation.w });
 	}
-	const Engine::Math::Vector3 RigidComponent::GetTranslate() const
+	const Math::Quaternion RigidComponent::GetRotation() const
 	{
-		return Engine::Math::Vector3();
-	}
-	void RigidComponent::SetRotation(const Engine::Math::Vector4& Rotation)
-	{
-	}
-	const Engine::Math::Vector4 RigidComponent::GetRotation() const
-	{
-		return Engine::Math::Vector4();
+		return Math::Quaternion(object->GetRotation());
 	}
 	void RigidComponent::SetTransform(const Transform& transform)
 	{
+		object->SetTransform({ { transform.position.x, transform.position.y, transform.position.z },
+			{ transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w} });
 	}
 	const Transform RigidComponent::GetTransform() const
 	{
-		return Transform();
+		auto transform = object->GetTransform();
+		return Transform({ transform.position, transform.rotation, {1,1,1} });
 	}
-	void RigidComponent::SetFlag(CollisionType flag, bool value)
+	void* RigidComponent::GetPhysicsObject() const
 	{
+		return object;
 	}
-	void RigidComponent::SetLocalTranslate(const Engine::Math::Vector3& LocalTranslate)
+
+
+	/********************************
+				   Shape
+	*********************************/
+	void RigidComponent::SetFlag(Physics::CollisionType flag, bool value)
 	{
+		shape->SetFlag(static_cast<PhysicsEngineAPI::Utils::DataStructure::CollisionType>(flag), value);
 	}
-	const Engine::Math::Vector3 RigidComponent::GetLocalTranslate() const
+	void RigidComponent::SetLocalTranslate(const Math::Vector3& LocalTranslate)
 	{
-		return Engine::Math::Vector3();
+		shape->SetLocalTranslate({ LocalTranslate.x, LocalTranslate.y, LocalTranslate.z });
 	}
-	void RigidComponent::SetLocalRotation(const Engine::Math::Vector4& LocalRotation)
+	const Math::Vector3 RigidComponent::GetLocalTranslate() const
 	{
+		return Math::Vector3(shape->GetLocalTranslate());
 	}
-	const Engine::Math::Vector4 RigidComponent::GetLocalRotation() const
+	void RigidComponent::SetLocalRotation(const Math::Quaternion& LocalRotation)
 	{
-		return Engine::Math::Vector4();
+		shape->SetLocalRotation({ LocalRotation.x, LocalRotation.y, LocalRotation.z, LocalRotation.w });
 	}
-	void RigidComponent::SetLocalTransform(const Engine::Transform& LocalTransform)
+	const Math::Quaternion RigidComponent::GetLocalRotation() const
 	{
+		return Math::Quaternion(shape->GetLocalRotation());
 	}
-	const Engine::Transform RigidComponent::GetLocalTransform() const
+	void RigidComponent::SetLocalTransform(const Transform& LocalTransform)
 	{
-		return Engine::Transform();
+		shape->SetLocalTransform({ { LocalTransform.position.x, LocalTransform.position.y, LocalTransform.position.z },
+			{ LocalTransform.rotation.x, LocalTransform.rotation.y, LocalTransform.rotation.z, LocalTransform.rotation.w} });
 	}
-	void RigidComponent::SetScale(const Engine::Math::Vector3& Scale)
+	const Transform RigidComponent::GetLocalTransform() const
 	{
+		auto transform = shape->GetLocalTransform();
+		return Transform({ transform.position, transform.rotation, {1,1,1} });
 	}
-	const Engine::Math::Vector3 RigidComponent::GetScale() const
+	void RigidComponent::SetScale(const Math::Vector3& Scale)
 	{
-		return Engine::Math::Vector3();
+		shape->SetScale({ Scale.x, Scale.y, Scale.z });
 	}
-	GeometryShape RigidComponent::SetType(GeometryShape type)
+	const Math::Vector3 RigidComponent::GetScale() const
 	{
-		return GeometryShape();
+		return Math::Vector3(shape->GetScale());
 	}
-	void RigidComponent::GetType(GeometryShape type)
+
+	/********************************
+				Geometry
+	*********************************/
+	void RigidComponent::SetType(Physics::GeometryShape type)
 	{
+		geometry->SetType(static_cast<PhysicsEngineAPI::Utils::DataStructure::GeometryShape>(type));
 	}
+	Physics::GeometryShape RigidComponent::GetType()
+	{
+		return static_cast<Physics::GeometryShape>(geometry->GetType());
+	}
+	const void* RigidComponent::GetGeometry() const
+	{
+		return geometry;
+	}
+
+	/********************************
+			Engine Life Cycle
+	*********************************/
 	void RigidComponent::Initialize()
 	{
+		// TODO
+		// TODO
+		// TODO
+		// TODO
+		// TODO
+		// TODO
 	}
 	void RigidComponent::Update(float deltaTime) const
 	{
+		// TODO
+		// TODO
+		// TODO
+		// TODO
+		// TODO
+		// TODO
 	}
 	void RigidComponent::Finalize()
 	{
-	}
-	bool RigidComponent::AttachShape(Shape* shape)
-	{
-		return false;
-	}
-	bool RigidComponent::DetachShape(Shape* shape)
-	{
-		return false;
+		constexpr Utility::SafeRelease releaser;
+
+		releaser(&object);
+		releaser(&shape);
+		releaser(&geometry);
+		releaser(&material);
 	}
 }

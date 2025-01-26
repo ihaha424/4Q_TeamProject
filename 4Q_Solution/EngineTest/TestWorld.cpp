@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "TestWorld.h"
+#include "NetworkTemp.h"
+
+
 
 void TestWorld::Addition()
 {
@@ -8,4 +11,36 @@ void TestWorld::Addition()
 	AddObject(&_remote);
 	AddObject(&_light);
 	AddObject(&_terrain);
+
+}
+
+void TestWorld::PreInitialize()
+{
+	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::EnterAccept, &TestWorld::EnterAccept, this);
+	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &TestWorld::SyncOtherPlayer, this);
+	
+}
+
+void TestWorld::PreUpdate(float deltaTime)
+{
+	//NetworkTemp::GetInstance()->Dispatch();
+	//NetworkTemp::GetInstance()->SendUpdate();
+}
+
+void TestWorld::PostFixedUpdate()
+{
+
+}
+
+void TestWorld::EnterAccept(const ConnectMsg::EnterAccept* msg)
+{
+	playerSerialNum = msg->grantnumber();
+}
+
+void TestWorld::SyncOtherPlayer(const ConnectMsg::SyncPlayer* msg)
+{
+	if (playerSerialNum == msg->serialnumber()) return;
+
+	//AddObject(&_remote);
+	//_remote.Attach();
 }

@@ -22,4 +22,5 @@ message SyncPlayer {
 	optional float x = 2;
 	optional float y = 3;
 	optional float z = 4;
+	optional string resource = 5;
 }

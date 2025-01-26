@@ -39,6 +39,8 @@ bool Session::SendUpdate()
 		}
 	}
 
+	printf("Current ThreadID : %d\n", GetCurrentThreadId());
+
 	while (!(*msgs).empty()) {
 		Packet msg = (*msgs).front();
 		(*msgs).pop();

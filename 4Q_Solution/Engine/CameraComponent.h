@@ -15,8 +15,10 @@ namespace Engine::Component
 
 		void Activate() const;
 
-		void SetPosition(Engine::Math::Vector3 position);
-		void SetRotation(Engine::Math::Vector3 rotation);
+		void SetPosition(Math::Vector3 position);
+		void SetRotation(Math::Vector3 rotation);
+
+		void Rotate(Math::Vector3 rotation);
 
 	private:
 		std::wstring _name;

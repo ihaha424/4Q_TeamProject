@@ -35,6 +35,11 @@
 #endif
 #include "Physics/InterfaceAPI.h"
 
+#include "Server/ClientEntrance.h"
+#include "../Packet/ProtoInclude.h"
+#include "../Packet/PacketID.h"
+#include "PacketFilter.h"
+
 #include "Math.h"
 
 #include "Transform.h"

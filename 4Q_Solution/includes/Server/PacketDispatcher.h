@@ -22,7 +22,7 @@ public:
 
 	void SaveRecvPacket(StreamBuffer* recvData, SessionID sid) override;
 	bool SwapRecvPacketContainer() override;
-	void SaveSendPacket(std::string& data, SessionID sid, short packetId, long dataSize) override;
+	void SaveSendPacket(std::string& data, SessionID sid, short packetId, long dataSize, int serialNum) override;
 	bool SwapSendPacketContainer(SessionID sid) override;
 	// logic server에서 보낼 메시지 컨테이너를 가져갈 때 사용합니다.
 	PacketQueue* GetMessageContainer() override;
@@ -30,9 +30,9 @@ public:
 	SendQueue* GetSendMessageContainer(SessionID sid) override;
 	void SessionCreated(SessionID sid) override;
 
-	void SaveBroadCastPacket(std::string& data, short packetId, long dataSize) override;
+	void SaveBroadCastPacket(std::string& data, short packetId, long dataSize, int serialNum) override;
 
-	void MakePacket(Packet& packet, std::string& data, SessionID sid, short packetId, long dataSize) override;
+	void MakePacket(Packet& packet, std::string& data, SessionID sid, short packetId, long dataSize, int serialNum) override;
 private:
 	std::mutex _recvMtx;
 	std::mutex _sendMtx;

@@ -337,6 +337,30 @@
     <Filter Include="Components\RigidComponent">
       <UniqueIdentifier>{976cd7bb-25bd-4648-8c9f-f79de4c2b0c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Interfaces\Network">
+      <UniqueIdentifier>{1870eafb-0981-477f-97b0-99f9edb92162}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Network\Manager">
+      <UniqueIdentifier>{3a5b575c-030a-4807-b939-eb652542c1b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Network\Terminal">
+      <UniqueIdentifier>{dbae0954-afe9-43c2-9188-c134e36446bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Network\PacketFIlter">
+      <UniqueIdentifier>{24705df8-2c46-42e7-bee2-2c8f0a7883c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Synchronize">
+      <UniqueIdentifier>{92181e74-b441-49e9-9287-8a5e42a6ddfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\Network">
+      <UniqueIdentifier>{185d6b85-2f86-4769-a6c0-d92fc354793d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\Network\Manager">
+      <UniqueIdentifier>{224faf69-ea50-467d-a399-9529535723bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\Network\ProtoBuffer">
+      <UniqueIdentifier>{c7a1fc91-5493-4261-bbfb-b105f1a7c659}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -639,6 +663,39 @@
     <ClInclude Include="PHIRigidDynamicComponent.h">
       <Filter>Modules\Difinition\PhysicsEngine\03. Component\PHICollisionComponent\PHIRigidDynamicComponent</Filter>
     </ClInclude>
+    <ClInclude Include="Terminal.h">
+      <Filter>Modules\Interfaces\Network\Terminal</Filter>
+    </ClInclude>
+    <ClInclude Include="Network.h">
+      <Filter>Modules\Interfaces\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketFilter.h">
+      <Filter>Modules\Interfaces\Network\PacketFIlter</Filter>
+    </ClInclude>
+    <ClInclude Include="SynchronizeComponent.h">
+      <Filter>Components\Synchronize</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerNetworkManager.h">
+      <Filter>Modules\Difinition\Network\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\Connect.pb.h">
+      <Filter>Modules\Difinition\Network\ProtoBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\Move.pb.h">
+      <Filter>Modules\Difinition\Network\ProtoBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\PacketID.h">
+      <Filter>Modules\Difinition\Network\ProtoBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\Play.pb.h">
+      <Filter>Modules\Difinition\Network\ProtoBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\ProtoInclude.h">
+      <Filter>Modules\Difinition\Network\ProtoBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkManager.h">
+      <Filter>Modules\Interfaces\Network\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -892,6 +949,30 @@
     </ClCompile>
     <ClCompile Include="PHIRigidDynamicComponent.cpp">
       <Filter>Modules\Difinition\PhysicsEngine\03. Component\PHICollisionComponent\PHIRigidDynamicComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Terminal.cpp">
+      <Filter>Modules\Interfaces\Network\Terminal</Filter>
+    </ClCompile>
+    <ClCompile Include="PacketFilter.cpp">
+      <Filter>Modules\Interfaces\Network\PacketFIlter</Filter>
+    </ClCompile>
+    <ClCompile Include="SynchronizeComponent.cpp">
+      <Filter>Components\Synchronize</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerNetworkManager.cpp">
+      <Filter>Modules\Difinition\Network\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packet\Connect.pb.cc">
+      <Filter>Modules\Difinition\Network\ProtoBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packet\Move.pb.cc">
+      <Filter>Modules\Difinition\Network\ProtoBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packet\Play.pb.cc">
+      <Filter>Modules\Difinition\Network\ProtoBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkManager.cpp">
+      <Filter>Modules\Interfaces\Network\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

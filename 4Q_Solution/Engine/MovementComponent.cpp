@@ -26,6 +26,11 @@ void Engine::Component::MovementComponent::SetDirection(const Math::Vector3 dire
 	_direction = direction;
 }
 
+Engine::Math::Vector3 Engine::Component::MovementComponent::GetDirection() const
+{
+	return _direction;
+}
+
 void Engine::Component::MovementComponent::Update(const float deltaTime)
 {
 	Component::Update(deltaTime);

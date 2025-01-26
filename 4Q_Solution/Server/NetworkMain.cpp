@@ -109,9 +109,22 @@ void NetworkMain::SendUpdate()
 {
 	HANDLE cp = _cpContainer[0];
 	for (auto& [sid, session] : _sessionMap) {
-		PostQueuedCompletionStatus(cp, SEND, (ULONG_PTR)session, 0);
+		if (_sessionProcessCheck[sid] == false) {
+			_sessionProcessCheck[sid] = true;
+			PostQueuedCompletionStatus(cp, SEND, (ULONG_PTR)session, 0);
+			//printf("[SendUpdate] sessionProcess Check false SessionID : %llu\n", session->GetSessionID());
+		}
 	}
 
+	for (Session* session : _pendingDestroySessions) {
+		Socket* socket = session->Release();
+		printf("[IOWork] Session Released.\n");
+		socket->Close();
+		printf("[IOWork] Socket Closed.\n");
+		delete session;
+		delete socket;
+	} // for end
+	_pendingDestroySessions.clear();
 }
 
 void NetworkMain::Finalize()
@@ -138,61 +151,62 @@ void NetworkMain::IOWork(HANDLE completionPort)
 		if (res == false) {
 			if (byteTransferred == 0) {
 				Session* session = (Session*)completionKey;
-				Socket* socket = session->Release();
-				printf("[IOWork] Session Released.\n");
-				socket->Close();
-				printf("[IOWork] Socket Closed.\n");
 				SessionID sid = session->GetSessionID();
-				delete session;
-				delete socket;
-
-				_sessionMap.erase(sid);
-				printf("[IOWork] Session deleted.\n");
-				continue;
-			}
-		}
-
-		if (byteTransferred == DWMAX) {
-			printf("[IOWork] IOThread Terminated\n");
-			return;
-		}
-		else if (byteTransferred == SEND) {
-			Session* session = (Session*)completionKey;
-			session->SendUpdate();
-		}
-		else {
-			OverlappedType* overlappedType = (OverlappedType*)overlapped;
-			if (overlappedType->_overlappedType == OlType::Accept) {
-				printf("[IOWork] New Client Accepted\n");
-
-				AcceptOverlapped* acceptOverlapped = (AcceptOverlapped*)overlapped;
-
-				Session* newSession = acceptOverlapped->_session;
-				memcpy(newSession->_recvOl._buffer, acceptOverlapped->_buffer, acceptOverlapped->acceptBufferSize);
-				newSession->_recvOl.InternalHigh = acceptOverlapped->InternalHigh;
-				PacketDispatcher::GetInstance()->SessionCreated(newSession->GetSessionID());
-
-				CreateIoCompletionPort((HANDLE)acceptOverlapped->_client->GetSocket(), completionPort, (ULONG_PTR)newSession, 0);
-				printf("[IOWork] New Socket HANDLE connect to CompletionPort.\n");
-
-				newSession->RecvUpdate();
 
 				Lock lock(_sessionMtx);
-				_sessionMap.insert({ newSession->GetSessionID(), newSession });
-				
-				res = CreateWaitingSession();
+				_pendingDestroySessions.push_back(session);
+				_sessionMap.erase(sid);
+				printf("[IOWork] Session deleted.\n");
+			} // if end
+		} // if end
+		else {
+			if (byteTransferred == DWMAX) {
+				printf("[IOWork] IOThread Terminated\n");
+				return;
+			} // if end
+			else if (byteTransferred == SEND) {
+				Session* session = (Session*)completionKey;
+				session->SendUpdate();
 
-				delete acceptOverlapped;
+				_sessionProcessCheck[session->GetSessionID()] = false;
+				//printf("[IOWork] sessionProcess Check true SessionID : %llu\n", session->GetSessionID());
 
-				continue;
-			}
+			} // else if end
+			else {
+				OverlappedType* overlappedType = (OverlappedType*)overlapped;
+				if (overlappedType->_overlappedType == OlType::Accept) {
+					printf("[IOWork] New Client Accepted\n");
 
-			printf("[IOWork] Packet Received\n");
-			Session* session = (Session*)completionKey;
-			if (overlappedType->_overlappedType == OlType::Recv) {
-				session->RecvUpdate();
-			}
-		}
+					AcceptOverlapped* acceptOverlapped = (AcceptOverlapped*)overlapped;
+
+					Session* newSession = acceptOverlapped->_session;
+					memcpy(newSession->_recvOl._buffer, acceptOverlapped->_buffer, acceptOverlapped->acceptBufferSize);
+					newSession->_recvOl.InternalHigh = acceptOverlapped->InternalHigh;
+					PacketDispatcher::GetInstance()->SessionCreated(newSession->GetSessionID());
+
+					CreateIoCompletionPort((HANDLE)acceptOverlapped->_client->GetSocket(), completionPort, (ULONG_PTR)newSession, 0);
+					printf("[IOWork] New Socket HANDLE connect to CompletionPort.\n");
+
+					newSession->RecvUpdate();
+
+					Lock lock(_sessionMtx);
+					_sessionMap.insert({ newSession->GetSessionID(), newSession });
+					_sessionProcessCheck.insert({ newSession->GetSessionID(), false });
+
+					res = CreateWaitingSession();
+
+					delete acceptOverlapped;
+				}
+
+				printf("[IOWork] Packet Received\n");
+				Session* session = (Session*)completionKey;
+				if (overlappedType->_overlappedType == OlType::Recv) {
+					session->RecvUpdate();
+				} // if end
+			} // if end
+		} // else end
+		
+
 	}
 }
 

@@ -2,6 +2,7 @@
   "dependencies": [
     "assimp",
     "directxtk",
-    "directxtex"
+    "directxtex",
+    "protobuf"
   ]
 }

@@ -8,11 +8,13 @@ enum class PacketID : short {
 	Exit,
 	ExitOk,
 	Sync,
+	MoveSync,
 	Move,
 	Jump,
 	SelectPart,
 	DialogOpen,
 	DialogNext,
+	StateChange,
 
 
 };

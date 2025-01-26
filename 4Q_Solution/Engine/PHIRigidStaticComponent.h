@@ -2,8 +2,8 @@
 
 namespace Engine::PHI
 {
-	class RigidComponent final
-		: public Physics::RigidComponent
+	class RigidStaticComponent final
+		: public Physics::RigidStaticComponent
 	{
 		/********************************
 					Rigid Object
@@ -30,7 +30,7 @@ namespace Engine::PHI
 		const Transform GetLocalTransform() const override;
 		void SetScale(const Math::Vector3& Scale) override;
 		const Math::Vector3 GetScale() const override;
-		
+
 		/********************************
 					Geometry
 		*********************************/
@@ -46,9 +46,11 @@ namespace Engine::PHI
 		void Finalize() override;
 
 	protected:
-		PhysicsEngineAPI::IObject*		object;
-		PhysicsEngineAPI::IShape*		shape;
-		PhysicsEngineAPI::IGeometry*	geometry;
-		PhysicsEngineAPI::IMaterial*	material;
+		PhysicsEngineAPI::IObject* object;
+		PhysicsEngineAPI::IShape* shape;
+		PhysicsEngineAPI::IGeometry* geometry;
+		PhysicsEngineAPI::IMaterial* material;
 	};
 }
+
+

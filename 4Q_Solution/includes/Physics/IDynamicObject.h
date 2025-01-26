@@ -48,7 +48,7 @@ namespace PhysicsEngineAPI
 		// Force Related
 		virtual void	AddForce(const Utils::Math::Vector3& force)		= 0;
 		virtual void	AddTorque(const Utils::Math::Vector3& force)	= 0;
-		virtual void	ClearForce()										= 0;
-		virtual void	ClearTorque()										= 0;
+		virtual void	ClearForce()	= 0;
+		virtual void	ClearTorque()	= 0;
 	};
 }

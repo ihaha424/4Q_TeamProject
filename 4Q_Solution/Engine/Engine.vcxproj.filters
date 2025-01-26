@@ -298,15 +298,6 @@
     <Filter Include="Modules\Interfaces\Physics\06. Component\RigidComponent">
       <UniqueIdentifier>{97c2f33e-e045-4ad6-b580-5b52493bff90}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\Interfaces\Physics\06. Component\RigidComponent\PhysicsRigidStatic">
-      <UniqueIdentifier>{6bd833f9-b2b3-43d4-8a27-7db96a96dc5e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Interfaces\Physics\06. Component\RigidComponent\PhysicsRigidDynamic">
-      <UniqueIdentifier>{65af17d4-6aa6-47ae-926b-30d40e2ebb73}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Interfaces\Physics\06. Component\RigidComponent\PhysicsRigidSKinematic">
-      <UniqueIdentifier>{261d270f-d6c5-4624-b183-888b64e1bcb0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Modules\Difinition\PhysicsEngine\03. Shape">
       <UniqueIdentifier>{7ee429fb-7657-4a51-a8a2-acd388e3f5cd}</UniqueIdentifier>
     </Filter>
@@ -327,6 +318,33 @@
     </Filter>
     <Filter Include="Components\Component\PhysicsComponent">
       <UniqueIdentifier>{976cd7bb-25bd-4648-8c9f-f79de4c2b0c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\00. Manager\PhysicsCreate">
+      <UniqueIdentifier>{e3e9dc76-66ee-4a3e-8367-5a05eec77104}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\00. Manager\PhysicsUpdate">
+      <UniqueIdentifier>{b84b6e41-30dd-4ec6-a63c-b6f51c349c35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\00. Manager\PhysicsFactory">
+      <UniqueIdentifier>{eb019dab-d527-4ba8-adef-83b734ec9423}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\06. Component\RigidComponent\PhysicsRigidDynamicComponent">
+      <UniqueIdentifier>{65af17d4-6aa6-47ae-926b-30d40e2ebb73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\06. Component\RigidComponent\PhysicsRigidSKinematicComponent">
+      <UniqueIdentifier>{261d270f-d6c5-4624-b183-888b64e1bcb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Physics\06. Component\RigidComponent\PhysicsRigidStaticComponent">
+      <UniqueIdentifier>{6bd833f9-b2b3-43d4-8a27-7db96a96dc5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\PhysicsEngine\06. Component\PHICollisionComponent\PHIRigidStaticComponent">
+      <UniqueIdentifier>{493683e1-fb59-431a-a33a-68632fca2e09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\PhysicsEngine\06. Component\PHICollisionComponent\PHIRigidDynamicComponent">
+      <UniqueIdentifier>{5676c0cc-7bf0-4a2d-9002-a02abc316b58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\PhysicsEngine\06. Component\PHICollisionComponent\PHIRigidKinematicComponent">
+      <UniqueIdentifier>{52c9be27-1226-40c9-855d-6648adbcbb47}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -612,6 +630,33 @@
     <ClInclude Include="TextRenderer.h">
       <Filter>Components\TextRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsFactory.h">
+      <Filter>Modules\Interfaces\Physics\00. Manager\PhysicsFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsUpdate.h">
+      <Filter>Modules\Interfaces\Physics\00. Manager\PhysicsUpdate</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsCreate.h">
+      <Filter>Modules\Interfaces\Physics\00. Manager\PhysicsCreate</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsRigidStaticComponent.h">
+      <Filter>Modules\Interfaces\Physics\06. Component\RigidComponent\PhysicsRigidStaticComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsRigidDynamicComponent.h">
+      <Filter>Modules\Interfaces\Physics\06. Component\RigidComponent\PhysicsRigidDynamicComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsRigidKinematicComponent.h">
+      <Filter>Modules\Interfaces\Physics\06. Component\RigidComponent\PhysicsRigidSKinematicComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="PHIRigidStaticComponent.h">
+      <Filter>Modules\Difinition\PhysicsEngine\06. Component\PHICollisionComponent\PHIRigidStaticComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="PHIRigidKinematicComponent.h">
+      <Filter>Modules\Difinition\PhysicsEngine\06. Component\PHICollisionComponent\PHIRigidKinematicComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="PHIRigidDynamicComponent.h">
+      <Filter>Modules\Difinition\PhysicsEngine\06. Component\PHICollisionComponent\PHIRigidDynamicComponent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -856,6 +901,24 @@
     </ClCompile>
     <ClCompile Include="TextRenderer.cpp">
       <Filter>Components\TextRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsRigidStaticComponent.cpp">
+      <Filter>Modules\Interfaces\Physics\06. Component\RigidComponent\PhysicsRigidStaticComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsRigidKinematicComponent.cpp">
+      <Filter>Modules\Interfaces\Physics\06. Component\RigidComponent\PhysicsRigidSKinematicComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsRigidDynamicComponent.cpp">
+      <Filter>Modules\Interfaces\Physics\06. Component\RigidComponent\PhysicsRigidDynamicComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="PHIRigidStaticComponent.cpp">
+      <Filter>Modules\Difinition\PhysicsEngine\06. Component\PHICollisionComponent\PHIRigidStaticComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="PHIRigidKinematicComponent.cpp">
+      <Filter>Modules\Difinition\PhysicsEngine\06. Component\PHICollisionComponent\PHIRigidKinematicComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="PHIRigidDynamicComponent.cpp">
+      <Filter>Modules\Difinition\PhysicsEngine\06. Component\PHICollisionComponent\PHIRigidDynamicComponent</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

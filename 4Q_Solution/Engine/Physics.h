@@ -10,6 +10,9 @@
 
 #include "PhysicsComponent.h"
 #include "PhysicsRigidComponent.h"
+#include "PhysicsRigidStaticComponent.h"
+#include "PhysicsRigidDynamicComponent.h"
+#include "PhysicsRigidKinematicComponent.h"
 
 #include "PhysicsScene.h"
 

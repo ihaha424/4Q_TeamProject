@@ -5,6 +5,10 @@ namespace Engine::PHI
 	class RigidComponent final
 		: public Physics::RigidComponent
 	{
+	public:
+		RigidComponent();
+
+
 		/********************************
 					Rigid Object
 		*********************************/
@@ -53,7 +57,9 @@ namespace Engine::PHI
 		void Update(float deltaTime) const override;
 		void Finalize() override;
 
-	protected:
+		//TODO:
+	public:
+	//protected:
 		PhysicsEngineAPI::IObject*		object;
 		PhysicsEngineAPI::IShape*		shape;
 		PhysicsEngineAPI::IGeometry*	geometry;

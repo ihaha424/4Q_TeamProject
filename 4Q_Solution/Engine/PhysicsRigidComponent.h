@@ -71,7 +71,7 @@ namespace Engine::Physics
 		/********************************
 					Shape
 		*********************************/
-		virtual void* GetShape() const;
+		virtual void* GetShape() const = 0;
 
 
 		/********************************
@@ -84,6 +84,6 @@ namespace Engine::Physics
 		/********************************
 					Material
 		*********************************/
-		virtual void* GetMaterial() const;
+		virtual void* GetMaterial() const = 0;
 	};
 }

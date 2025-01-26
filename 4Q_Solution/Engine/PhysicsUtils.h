@@ -1,5 +1,4 @@
 #pragma once
-#include "Math.h"
 
 namespace Engine::Physics
 {

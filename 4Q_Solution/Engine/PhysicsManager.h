@@ -15,6 +15,9 @@ namespace Engine::Physics
 		IManager& operator=(IManager&& other) noexcept = default;
 		virtual ~IManager() = default;
 
+		virtual void AttachUpdateSecne(IScene* scene) = 0;
+		virtual void DetachUpdateSecne(IScene* scene) = 0;
+		virtual IScene* GetScene(unsigned int sceneNumber) = 0;
 	};
 
 	// Engine Interface
@@ -22,9 +25,10 @@ namespace Engine::Physics
 	{
 		virtual void Initialize(PhysicsType physicsType = PhysicsType::Physx) = 0;
 		virtual void WorldInitialize() = 0;
-		virtual void Update(float deltaTime) const = 0;
+		virtual void Update(float deltaTime) = 0;
+		virtual void FetchSecne(bool block = true) = 0;
 		virtual void Finalize() = 0;
 
-		virtual void* GetSystem() = 0;
+		virtual void* GetSystem() const = 0;
 	};
 }

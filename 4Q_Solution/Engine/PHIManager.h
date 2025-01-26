@@ -1,5 +1,4 @@
 #pragma once
-#include "PhysicsManager.h"
 
 namespace Engine::PHI
 {
@@ -12,11 +11,16 @@ namespace Engine::PHI
 		/********************************
 					  Manager
 		*********************************/
-		void Initialize(Physics::PhysicsType physicsType = Physics::PhysicsType::Physx) override;
+		void Initialize(Engine::Physics::PhysicsType physicsType) override;
 		void WorldInitialize() override;
-		void Update(float deltaTime) const override;
+		void Update(float deltaTime) override;
+		void FetchSecne(bool block) override;
 		void Finalize() override;
-		void* GetSystem() override;
+		void AttachUpdateSecne(Physics::IScene* scene) override;
+		void DetachUpdateSecne(Physics::IScene* scene) override;
+
+		void* GetSystem() const override;
+		Physics::IScene* GetScene(unsigned int sceneNumber) override;
 
 		/********************************
 					  Create
@@ -49,6 +53,8 @@ namespace Engine::PHI
 
 	private:
 		PhysicsEngineAPI::IPhysicsSystem* system;
+		std::map<unsigned int, Physics::IScene*> sceneList;
+
 	};
 }
 

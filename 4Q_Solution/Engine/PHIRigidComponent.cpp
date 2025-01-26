@@ -7,6 +7,14 @@ namespace Engine::PHI
 				Rigid Object
 	*********************************/
 
+	RigidComponent::RigidComponent()
+		: object{ nullptr }
+		, shape{ nullptr }
+		, geometry{ nullptr }
+		, material{ nullptr }
+	{
+	}
+
 	void RigidComponent::SetTranslate(const Math::Vector3& position)
 	{
 		object->SetTranslate({ position.x, position.y, position.z });

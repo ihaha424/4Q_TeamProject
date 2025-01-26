@@ -11,3 +11,4 @@
 #include "Light.h"
 #include "TextRenderer.h"
 #include "SynchronizeComponent.h"
+#include "RigidComponent.h"

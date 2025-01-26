@@ -27,6 +27,5 @@ namespace PhysicsEngineAPI
 	};
 
 	EXTERN_C  bool PHYSICS_API CreateSystem(_OUT_ IPhysicsSystem** physicsSystem, IPhysicsSystem::PhysicsType flag);
-
 }
 

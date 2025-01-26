@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "PHIManager.h"
-
+#include "PHIScene.h"
+#include "PHIRigidComponent.h"
 
 namespace Engine::PHI
 {
@@ -11,6 +12,7 @@ namespace Engine::PHI
 
 	Manager::Manager()
 		: system{ nullptr }
+		, sceneList{}
 	{}
 
 
@@ -18,11 +20,13 @@ namespace Engine::PHI
 	/********************************
 				  Manager
 	*********************************/
-	void Manager::Initialize(Physics::PhysicsType physicsType)
+	void Manager::Initialize(Engine::Physics::PhysicsType physicsType)
 	{
 		constexpr Utility::ThrowIfFailed thrower;
 
-		thrower(BoolToHRESULT(PhysicsEngineAPI::CreateSystem(&system, static_cast<PhysicsEngineAPI::IPhysicsSystem::PhysicsType>(physicsType))));
+		int typeIndex = static_cast<int>(physicsType);
+		PhysicsEngineAPI::IPhysicsSystem::PhysicsType type = static_cast<PhysicsEngineAPI::IPhysicsSystem::PhysicsType>(typeIndex);
+		thrower(BoolToHRESULT(PhysicsEngineAPI::CreateSystem(&system, PhysicsEngineAPI::IPhysicsSystem::Physx)));
 		thrower(BoolToHRESULT(system->CreatePhysics()));
 	}
 
@@ -31,23 +35,47 @@ namespace Engine::PHI
 
 	}
 
-	void Manager::Update(float deltaTime) const
+	void Manager::Update(float deltaTime)
 	{
+		for (auto scene : sceneList)
+		{
+			UpdateSecne(scene.second, deltaTime);
+		}
+	}
 
+	void Manager::FetchSecne(bool block)
+	{
+		for (auto scene : sceneList)
+		{
+			FetchSecne(scene.second, block);
+		}
 	}
 
 	void Manager::Finalize()
 	{
 		constexpr Utility::SafeRelease releaser;
 
-		//releaser(&scene);
 		releaser(&system);
 	}
 
-	void* Manager::GetSystem()
+	void Manager::AttachUpdateSecne(Physics::IScene* scene)
 	{
-		return nullptr;
+		auto EngineScene = static_cast<Physics::Scene*>(scene);
+		sceneList[EngineScene->GetSceneIndex()] = scene;
 	}
+
+	void Manager::DetachUpdateSecne(Physics::IScene* scene)
+	{
+		auto EngineScene = static_cast<Physics::Scene*>(scene);
+		sceneList[EngineScene->GetSceneIndex()] = nullptr;
+	}
+
+	void* Manager::GetSystem() const
+	{
+		return system;
+	}
+
+
 
 
 
@@ -59,14 +87,14 @@ namespace Engine::PHI
 	{
 		constexpr Utility::ThrowIfFailed thrower;
 
-		Physics::Scene* scene = static_cast<Physics::Scene*>(*_scene);
-		PhysicsEngineAPI::IScene* physicsScene = static_cast<PhysicsEngineAPI::IScene*>(scene->GetScene());
+		Scene* scene = new Scene();
 
 		PhysicsEngineAPI::Utils::Description::SceneDesc sceneDesc;
 		sceneDesc.gravity = { sceneDescription.gravity.x, sceneDescription.gravity.y, sceneDescription.gravity.z };
 		sceneDesc.CPUDispatcherCount = sceneDescription.CPUDispatcherCount;
 
-		thrower(BoolToHRESULT(system->CreateScene(&physicsScene, sceneDesc)));
+		thrower(BoolToHRESULT(system->CreateScene(&scene->scene, sceneDesc)));
+		*_scene = scene;
 	}
 
 	void Manager::CreateRigidComponent(
@@ -194,7 +222,7 @@ namespace Engine::PHI
 		PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
 		PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc;
 		geometryDesc.type = static_cast<PhysicsEngineAPI::Utils::DataStructure::GeometryShape>(rigidComponetDesc.shapeDesc.geometryDesc.type);
-		auto& initialGeometrData = rigidComponetDesc.shapeDesc.geometryDesc.data;
+		Engine::Math::Vector4 initialGeometrData = rigidComponetDesc.shapeDesc.geometryDesc.data;
 		geometryDesc.data = { initialGeometrData.x, initialGeometrData.y, initialGeometrData.z, initialGeometrData.w };
 		verticesMeshDesc.vertices.count = rigidComponetDesc.shapeDesc.verticesMeshDesc.vertices.count;
 		verticesMeshDesc.vertices.stride = rigidComponetDesc.shapeDesc.verticesMeshDesc.vertices.stride;
@@ -333,19 +361,20 @@ namespace Engine::PHI
 	{
 		constexpr Utility::ThrowIfFailed thrower;
 
-		Physics::RigidComponent* destComponment = static_cast<Physics::RigidComponent*>(*object);
-		PhysicsEngineAPI::IObject* destObject = static_cast<PhysicsEngineAPI::IObject*>(destComponment->GetPhysicsObject());
-
-		PhysicsEngineAPI::IMaterial* material = static_cast<PhysicsEngineAPI::IMaterial*>(destComponment->GetMaterial());
+		RigidComponent* destComponment = new RigidComponent();
+		// PhysicsEngineAPI::IObject* destObject; //= static_cast<PhysicsEngineAPI::IObject*>(destComponment->GetPhysicsObject());
+		// PhysicsEngineAPI::IMaterial* material; //= static_cast<PhysicsEngineAPI::IMaterial*>(destComponment->GetMaterial());
 
 		PhysicsEngineAPI::Utils::Math::Vector4 plane = { _plane.x, _plane.y, _plane.z, _plane.w};
 
 		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc;
 		auto& initialMeterialData = _material.data;
 		materialDesc.data = { initialMeterialData.x, initialMeterialData.y, initialMeterialData.z };
-		thrower(BoolToHRESULT(system->CreateMaterial(&material, materialDesc)));
+		thrower(BoolToHRESULT(system->CreateMaterial(&destComponment->material, materialDesc)));
 
-		thrower(BoolToHRESULT(system->CreatePlane(&destObject, plane, material)));
+		thrower(BoolToHRESULT(system->CreatePlane(&destComponment->object, plane, destComponment->material)));
+
+		*object = destComponment;
 	}
 
 	void Manager::CreatePlane(Physics::IRigidComponent** object, const Engine::Math::Vector3& _point, const Engine::Math::Vector3& _normal, const Physics::MaterialDesc& _material)
@@ -378,6 +407,10 @@ namespace Engine::PHI
 		PhysicsEngineAPI::Utils::Math::Vector3 boxExtents = { _boxExtents.x, _boxExtents.y, _boxExtents.z };
 
 		thrower(BoolToHRESULT(system->CreateStaticBoundBoxActor(&destObject, boxExtents)));
+	}
+	Physics::IScene* Manager::GetScene(unsigned int sceneNumber)
+	{
+		return sceneList[sceneNumber];
 	}
 }
 

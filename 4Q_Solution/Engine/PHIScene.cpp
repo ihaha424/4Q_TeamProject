@@ -3,6 +3,11 @@
 
 namespace Engine::PHI
 {
+	Scene::Scene()
+		: scene{ nullptr }
+		, sceneIndex{ 0 }
+	{
+	}
 	void Scene::Initialize()
 	{
 	}

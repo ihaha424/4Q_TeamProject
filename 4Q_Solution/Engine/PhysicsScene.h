@@ -33,6 +33,9 @@ namespace Engine::Physics
 			const Engine::Transform& transform,
 			const Engine::Math::Vector3& direction,
 			float distance) = 0;
+
+		//TODO : 나중에 컴포먼트에서 처리 하도록 엔진 Interface로 바꿀꺼임
+		virtual bool AddActor(IRigidComponent* component) = 0;
 	};
 
 	// Engine Interface
@@ -44,6 +47,5 @@ namespace Engine::Physics
 
 		virtual void* GetScene() = 0;
 		virtual unsigned int GetSceneIndex() = 0;
-		virtual bool AddActor(IRigidComponent* component) = 0;
 	};
 }

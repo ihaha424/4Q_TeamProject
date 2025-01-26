@@ -181,7 +181,7 @@ namespace Engine::Math
 	template<typename T>
 	T EasingInterpolation(T& a, T& b, float t, EasingEffect easingEffect = EasingEffect::Linear)
 	{
-		return a + (b - a) * EasingFunction[easingEffect](t);
+		return a + (b - a) * EasingFunction[static_cast<unsigned int>(easingEffect)](t);
 	}
 }
 

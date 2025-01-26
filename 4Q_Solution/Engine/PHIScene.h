@@ -1,14 +1,13 @@
 #pragma once
 
-#include "PhysicsScene.h"
-
-
 namespace Engine::PHI
 {
 	class Scene final
 		: public Physics::Scene
 	{
 	public:
+		Scene();
+
 		void Initialize() override;
 		void Update(float deltaTime) const override;
 		void Finalize() override;
@@ -24,7 +23,9 @@ namespace Engine::PHI
 		
 		bool AddActor(Engine::Physics::IRigidComponent* component) override;
 
-	private:
+		//TODO:
+	public:
+		//private:
 		PhysicsEngineAPI::IScene* scene;
 		unsigned int sceneIndex;
 

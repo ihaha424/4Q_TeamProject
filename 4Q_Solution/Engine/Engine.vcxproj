@@ -139,7 +139,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>DSHInput_d.lib;DSHTime_d.lib;DSHWindow_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>DSHInput_d.lib;DSHTime_d.lib;DSHWindow_d.lib;Physics_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PreBuildEvent>
       <Command>xcopy /y /d "..\dll\*.dll" "$(OutDir)"
@@ -166,7 +166,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>DSHInput.lib;DSHTime.lib;DSHWindow.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>DSHInput.lib;DSHTime.lib;DSHWindow.lib;Physics.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PreBuildEvent>
       <Command>
@@ -259,6 +259,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="PacketFilter.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Quaternion.h" />
+    <ClInclude Include="RigidComponent.h" />
     <ClInclude Include="SafeDelete.h" />
     <ClInclude Include="PhysicsScene.h" />
     <ClInclude Include="ServerNetworkManager.h" />
@@ -364,6 +365,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="PacketFilter.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Quaternion.cpp" />
+    <ClCompile Include="RigidComponent.cpp" />
     <ClCompile Include="SafeDelete.cpp" />
     <ClCompile Include="PhysicsScene.cpp" />
     <ClCompile Include="ServerNetworkManager.cpp" />

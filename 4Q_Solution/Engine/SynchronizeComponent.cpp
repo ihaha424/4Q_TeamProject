@@ -2,7 +2,6 @@
 #include "SynchronizeComponent.h"
 
 Engine::Component::SynchronizeComponent::SynchronizeComponent() :
-    _serialNumber(0),
 	_msgBuffer(std::string(256, '\0'))
 {
 }
@@ -15,16 +14,6 @@ void Engine::Component::SynchronizeComponent::Initialize()
 void Engine::Component::SynchronizeComponent::Finalize()
 {
     Engine::Application::GetNetworkManager()->Unregister(static_cast<Engine::Network::Terminal*>(this));
-}
-
-void Engine::Component::SynchronizeComponent::SetSerialNumber(int num)
-{
-    _serialNumber = num;
-}
-
-const int Engine::Component::SynchronizeComponent::GetSerialNumber() const
-{
-    return _serialNumber;
 }
 
 void Engine::Component::SynchronizeComponent::InvokeMessage(const Packet& packet)

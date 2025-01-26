@@ -35,9 +35,7 @@ namespace Engine::Component
 		void Initialize() override;
 		void Finalize() override;
 
-		void SetSerialNumber(int num);
-		const int GetSerialNumber() const;
-		void InvokeMessage(const Packet& packet);
+		void InvokeMessage(const Packet& packet) override;
 
 		template <class C, class MsgType>
 		void AddCallback(short packetId, void(C::* fn)(const MsgType*), C* receiver) {
@@ -49,7 +47,6 @@ namespace Engine::Component
 
 
 	private:
-		int _serialNumber;
 		CallbackMap _callbackMap;
 
 	public:

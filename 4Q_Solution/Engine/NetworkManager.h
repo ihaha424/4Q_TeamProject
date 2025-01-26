@@ -13,7 +13,7 @@ namespace Engine::Network
 
 		virtual void Register(Terminal* terminal) = 0;
 		virtual void Unregister(Terminal* terminal) = 0;
-		virtual void SaveSendData(short packetId, std::string& data, long dataSize) = 0;
+		virtual void SaveSendData(short packetId, std::string& data, long dataSize, int serialNum) = 0;
 	};
 
 	struct Manager : IManager

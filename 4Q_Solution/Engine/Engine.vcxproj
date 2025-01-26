@@ -228,6 +228,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="Negative.h" />
     <ClInclude Include="Network.h" />
+    <ClInclude Include="NetworkManager.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="PacketFilter.h" />
     <ClInclude Include="Point.h" />
@@ -308,6 +309,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="Negative.cpp" />
+    <ClCompile Include="NetworkManager.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="PacketFilter.cpp" />
     <ClCompile Include="Point.cpp" />

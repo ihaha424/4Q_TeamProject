@@ -516,6 +516,9 @@
     <ClInclude Include="..\Packet\ProtoInclude.h">
       <Filter>Modules\Difinition\Network\ProtoBuffer</Filter>
     </ClInclude>
+    <ClInclude Include="NetworkManager.h">
+      <Filter>Modules\Interfaces\Network\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -718,6 +721,9 @@
     </ClCompile>
     <ClCompile Include="..\Packet\Play.pb.cc">
       <Filter>Modules\Difinition\Network\ProtoBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkManager.cpp">
+      <Filter>Modules\Interfaces\Network\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

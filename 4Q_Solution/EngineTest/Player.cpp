@@ -7,7 +7,8 @@ Player::Player() :
 	//, _staticMesh(L"../Resources/FBX/char.fbx", &_worldMatrix)
 	, _skeltalMesh(L"../Resources/Player/Player.X", &_worldMatrix)
 	, _animator(&_skeltalMesh)
-	, _textRenderer(L"../Resources/Font/±Ã¼­12.sfont")
+	, _textRenderer(L"../Resources/Font/±Ã¼­12.sfont"),
+	_sync()
 {
 }
 
@@ -20,6 +21,7 @@ void Player::Addition()
 	AddComponent(&_skeltalMesh);
 	AddComponent(&_animator);
 	AddComponent(&_textRenderer);
+	AddComponent(&_sync);
 }
 
 void Player::PreInitialize()
@@ -54,7 +56,8 @@ void Player::PreInitialize()
 			Engine::Application::GetNetworkManager()->SaveSendData(
 				(short)PacketID::Move,
 				_sync._msgBuffer,
-				_sync._move.ByteSizeLong()
+				_sync._move.ByteSizeLong(),
+				_sync.GetSerialNumber()
 			);
 
 
@@ -81,7 +84,9 @@ void Player::PreInitialize()
 		Engine::Application::GetNetworkManager()->SaveSendData(
 			(short)PacketID::StateChange,
 			_sync._msgBuffer,
-			_sync._stateChange.ByteSizeLong());
+			_sync._stateChange.ByteSizeLong(),
+			_sync.GetSerialNumber()
+		);
 
 		//NetworkTemp::GetInstance()->_stateChange.set_serialnumber(1);
 		//NetworkTemp::GetInstance()->_stateChange.set_stateinfo(1);
@@ -103,7 +108,9 @@ void Player::PreInitialize()
 			Engine::Application::GetNetworkManager()->SaveSendData(
 				(short)PacketID::StateChange,
 				_sync._msgBuffer,
-				_sync._stateChange.ByteSizeLong());
+				_sync._stateChange.ByteSizeLong(),
+				_sync.GetSerialNumber()
+			);
 
 			//NetworkTemp::GetInstance()->_stateChange.set_serialnumber(1);
 			//NetworkTemp::GetInstance()->_stateChange.set_stateinfo(0);

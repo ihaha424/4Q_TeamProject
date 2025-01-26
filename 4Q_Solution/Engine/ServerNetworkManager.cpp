@@ -18,7 +18,7 @@ void Engine::ServerNetwork::Manager::Initialize()
 		return;
 	}
 	
-	Client::SavePacketData("", (short)PacketID::EnterRequest, 0);
+	Client::SavePacketData("", (short)PacketID::EnterRequest, 0, 0);
 	Client::SendUpdate();
 
 	_msgContainer = Client::GetPacketContainer();
@@ -73,7 +73,7 @@ void Engine::ServerNetwork::Manager::DispatchPacket()
 	}
 }
 
-void Engine::ServerNetwork::Manager::SaveSendData(short packetId, std::string& data, long dataSize)
+void Engine::ServerNetwork::Manager::SaveSendData(short packetId, std::string& data, long dataSize, int serialNum)
 {
-	Client::SavePacketData(data, packetId, dataSize);
+	Client::SavePacketData(data, packetId, dataSize, serialNum);
 }

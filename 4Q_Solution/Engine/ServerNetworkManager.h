@@ -23,7 +23,7 @@ namespace Engine::ServerNetwork {
 		void Unregister(Engine::Network::Terminal* terminal) override;
 
 		void DispatchPacket();
-		void SaveSendData(short packetId, std::string& data, long dataSize) override;
+		void SaveSendData(short packetId, std::string& data, long dataSize, int serialNum) override;
 	private:
 		TerminalList _terminalList;
 		PacketQueue* _msgContainer = nullptr;

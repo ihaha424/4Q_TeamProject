@@ -45,7 +45,7 @@ void ServerLogic::Update()
             _moveSync.set_z(_playerSlot[i]._position._z);
 
             _moveSync.SerializeToString(&_msgBuffer);
-            Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong());
+            Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), i + 1);
         }
 
     } // for end
@@ -81,12 +81,12 @@ void ServerLogic::MessageDispatch()
                 } // if end
             } // for end
             if (grantNum == 2) {
-                Server::SavePacketData("", packet.sessionId, (short)PacketID::EnterReject, 0);
+                Server::SavePacketData("", packet.sessionId, (short)PacketID::EnterReject, 0, 0);
             } // if end
             else {
                 _enterAccept.set_grantnumber(grantNum + 1);
                 _enterAccept.SerializeToString(&_msgBuffer);
-                Server::SavePacketData(_msgBuffer, packet.sessionId, (short)PacketID::EnterAccept, _enterAccept.ByteSizeLong());
+                Server::SavePacketData(_msgBuffer, packet.sessionId, (short)PacketID::EnterAccept, _enterAccept.ByteSizeLong(), 0);
 
                 _playerSlot[grantNum]._serialNumber = grantNum + 1;
                 _playerSlot[grantNum]._position = Vector3(0.0f, 0.0f, 0.0f);
@@ -105,7 +105,7 @@ void ServerLogic::MessageDispatch()
                     long byteSize = _syncPlayer.ByteSizeLong();
 
                     _syncPlayer.SerializeToString(&_msgBuffer);
-                    Server::BroadCast(_msgBuffer, (short)PacketID::Sync, _syncPlayer.ByteSizeLong());
+                    Server::BroadCast(_msgBuffer, (short)PacketID::Sync, _syncPlayer.ByteSizeLong(), _playerSlot[i]._serialNumber);
                 }  // for end
             } // else end
             break;
@@ -116,16 +116,15 @@ void ServerLogic::MessageDispatch()
 
             int exitNum = _exit.serialnumber();
 
-            _playerSlot[exitNum]._serialNumber = 0;
-            _playerSlot[exitNum]._position = Vector3(0.0f, 0.0f, 0.0f);
-            _playerSlot[exitNum]._state = 0;
-
             _exit.SerializeToString(&_msgBuffer);
 
             printf("[MessageDispatch] Player Exit. SerialNumber : %d\n", _exit.serialnumber());
 
-            Server::BroadCast(_msgBuffer, (short)PacketID::Exit, _exit.ByteSizeLong());
+            Server::BroadCast(_msgBuffer, (short)PacketID::Exit, _exit.ByteSizeLong(), _playerSlot[exitNum]._serialNumber);
 
+            _playerSlot[exitNum]._serialNumber = 0;
+            _playerSlot[exitNum]._position = Vector3(0.0f, 0.0f, 0.0f);
+            _playerSlot[exitNum]._state = 0;
             break;
         } // case end
         case PacketID::ExitOk:
@@ -155,7 +154,7 @@ void ServerLogic::MessageDispatch()
                 _moveSync.set_z(_playerSlot[serialNum]._position._z);
 
                 _moveSync.SerializeToString(&_msgBuffer);
-                Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong());
+                Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), _move.serialnumber());
             }
 
 
@@ -178,7 +177,7 @@ void ServerLogic::MessageDispatch()
             _playerSlot[_stateChange.serialnumber() - 1]._state = _stateChange.stateinfo();
 
             _stateChange.SerializeToString(&_msgBuffer);
-            Server::BroadCast(_msgBuffer, (short)PacketID::StateChange, _stateChange.ByteSizeLong());
+            Server::BroadCast(_msgBuffer, (short)PacketID::StateChange, _stateChange.ByteSizeLong(), _stateChange.serialnumber());
 
             break;
         } // case end

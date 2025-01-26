@@ -81,6 +81,11 @@ namespace Engine::PHI
 		return Math::Vector3(shape->GetScale());
 	}
 
+	void* RigidComponent::GetShape() const
+	{
+		return shape;
+	}
+
 	/********************************
 				Geometry
 	*********************************/
@@ -92,9 +97,18 @@ namespace Engine::PHI
 	{
 		return static_cast<Physics::GeometryShape>(geometry->GetType());
 	}
-	const void* RigidComponent::GetGeometry() const
+	void* RigidComponent::GetGeometry() const
 	{
 		return geometry;
+	}
+
+
+	/********************************
+				Material
+	*********************************/
+	void* RigidComponent::GetMaterial() const
+	{
+		return nullptr;
 	}
 
 	/********************************

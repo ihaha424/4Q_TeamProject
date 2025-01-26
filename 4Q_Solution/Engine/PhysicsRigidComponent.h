@@ -69,9 +69,21 @@ namespace Engine::Physics
 		//virtual const ICollision* GetUserData() const = 0;
 
 		/********************************
+					Shape
+		*********************************/
+		virtual void* GetShape() const;
+
+
+		/********************************
 					Geometry
 		*********************************/
 		virtual void SetType(GeometryShape type) = 0;
-		virtual const void* GetGeometry() const = 0;
+		virtual void* GetGeometry() const = 0;
+
+
+		/********************************
+					Material
+		*********************************/
+		virtual void* GetMaterial() const;
 	};
 }

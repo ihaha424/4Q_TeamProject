@@ -67,9 +67,9 @@ namespace Engine::PHI
 		return result;
 	}
 
-	unsigned int Scene::GetSceneNumber()
+	unsigned int Scene::GetSceneIndex()
 	{
-		return 0;
+		return sceneIndex;
 	}
 
 	bool Scene::AddActor(Engine::Physics::IRigidComponent* _component)
@@ -78,6 +78,11 @@ namespace Engine::PHI
 		PhysicsEngineAPI::IObject* object = static_cast<PhysicsEngineAPI::IObject*>(componet->GetPhysicsObject());
 		
 		return scene->AddActor(object);
+	}
+
+	void* Scene::GetScene()
+	{
+		return scene;
 	}
 
 }

@@ -42,7 +42,8 @@ namespace Engine::Physics
 		virtual void Update(float deltaTime) const = 0;
 		virtual void Finalize() = 0;
 
-		virtual unsigned int GetSceneNumber() = 0;
+		virtual void* GetScene() = 0;
+		virtual unsigned int GetSceneIndex() = 0;
 		virtual bool AddActor(IRigidComponent* component) = 0;
 	};
 }

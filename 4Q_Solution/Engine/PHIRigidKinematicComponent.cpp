@@ -198,6 +198,11 @@ namespace Engine::PHI
 		return Math::Vector3(shape->GetScale());
 	}
 
+	const void* RigidKinematicComponent::GetShape() const
+	{
+		return shape;
+	}
+
 	/********************************
 				Geometry
 	*********************************/

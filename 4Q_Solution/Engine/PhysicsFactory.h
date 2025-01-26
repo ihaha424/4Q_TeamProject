@@ -7,68 +7,46 @@ namespace Engine::Physics
 		/********************************
 					Factory
 		*********************************/
-		virtual bool CreateDynamic(
-			IDynamicObject** destObject,
-			const Utils::Math::Transform& transform,
-			const IGeometry* geometry,
-			IMaterial* material,
+		virtual void CreateDynamic(
+			IRigidDynamicComponent** destObject,
+			const RigidComponentDesc& rigidComponetDesc,
+			const Engine::Transform& transform,
 			float density,
-			const Utils::Math::Transform& shapeOffset = Utils::Math::Transform()
+			const Engine::Transform& shapeOffset = Engine::Transform()
 		) = 0;
 
-		virtual bool CreateDynamic(
-			IDynamicObject** destObject,
-			const Utils::Math::Transform& transform,
-			IShape* shape,
-			float density
-		) = 0;
-
-		virtual bool CreateKinematic(
-			IKinematicObject** destObject,
-			const Utils::Math::Transform& transform,
-			const IGeometry* geometry,
-			IMaterial* material,
+		virtual void CreateKinematic(
+			IRigidKinematicComponent** destObject,
+			const RigidComponentDesc& rigidComponetDesc,
+			const Engine::Transform& transform,
 			float density,
-			const Utils::Math::Transform& shapeOffset = Utils::Math::Transform()
+			const Engine::Transform& shapeOffset = Engine::Transform()
 		) = 0;
 
-		virtual bool CreateKinematic(
-			IKinematicObject** destObject,
-			const Utils::Math::Transform& transform,
-			IShape* shape,
-			float density
+		virtual void CreateStatic(
+			IRigidStaticComponent** destObject,
+			const RigidComponentDesc& rigidComponetDesc,
+			const Engine::Transform& transform,
+			const Engine::Transform& shapeOffset = Engine::Transform()
 		) = 0;
 
-		virtual bool CreateStatic(
-			IStaticObject** destObject,
-			const Utils::Math::Transform& transform,
-			const IGeometry* geometry,
-			IMaterial* material,
-			const Utils::Math::Transform& shapeOffset = Utils::Math::Transform()
-		) = 0;
 
-		virtual bool CreateStatic(
-			IStaticObject** destObject,
-			const Utils::Math::Transform& transform,
-			IShape* shape
-		) = 0;
-
-		virtual bool CloneShape(
-			IShape** destShape,
-			const IShape* shape,
+		virtual void CloneShape(
+			IRigidComponent** destShape,
+			const IRigidComponent* shape,
 			bool isExclusive = false
 		) = 0;
 
-		virtual bool CloneStatic(
-			IStaticObject** destObject,
-			const Utils::Math::Transform& transform,
-			const IObject* object
+		virtual void CloneStatic(
+			IRigidStaticComponent** destObject,
+			const Engine::Transform& transform,
+			const IRigidStaticComponent* object
 		) = 0;
 
-		virtual bool CloneDynamic(
-			IDynamicObject** destObject,
-			const Utils::Math::Transform& transform,
-			const IObject* object
+		virtual void CloneDynamic(
+			IRigidStaticComponent** destObject,
+			const Engine::Transform& transform,
+			const IRigidStaticComponent* object
 		) = 0;
 
 		/**
@@ -79,21 +57,21 @@ namespace Engine::Physics
 		 * @param material		: Object's Material
 		 * @return				: IObject(RigidBodyType::Static)
 		 */
-		virtual bool CreatePlane(
-			IObject** object,
-			const Utils::Math::Vector4& plane,
-			IMaterial* material
+		virtual void CreatePlane(
+			IRigidComponent** object,
+			const Engine::Math::Vector4& plane,
+			const MaterialDesc& material
 		) = 0;
 
 		/**
 		 * @param point		: plane's point
 		 * @param normal	: plane's normal
 		 */
-		virtual bool CreatePlane(
-			IObject** object,
-			const Utils::Math::Vector3& point,
-			const Utils::Math::Vector3& normal,
-			IMaterial* material
+		virtual void CreatePlane(
+			IRigidComponent** object,
+			const Engine::Math::Vector3& point,
+			const Engine::Math::Vector3& normal,
+			const MaterialDesc& material
 		) = 0;
 
 		//void ScaleRigidActor(PxRigidActor& actor, float scale, bool scaleMassProps = true);
@@ -102,8 +80,8 @@ namespace Engine::Physics
 		 * @brief			: Creating a static bounding box for AABB
 							  Usually used for actors who will make up the camera scene
 		 */
-		virtual bool CreateStaticBoundBoxActor(
-			IObject** object,
-			const Utils::Math::Vector3& boxExtents = Utils::Math::Vector3{ 1, 1, 1 }) = 0;
+		virtual void CreateStaticBoundBoxActor(
+			IRigidComponent** object,
+			const Engine::Math::Vector3& boxExtents = Engine::Math::Vector3{ 1, 1, 1 }) = 0;
 	};
 }

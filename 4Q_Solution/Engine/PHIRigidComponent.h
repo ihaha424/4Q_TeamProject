@@ -30,13 +30,21 @@ namespace Engine::PHI
 		const Transform GetLocalTransform() const override;
 		void SetScale(const Math::Vector3& Scale) override;
 		const Math::Vector3 GetScale() const override;
+
+		void* GetShape() const override;
 		
 		/********************************
 					Geometry
 		*********************************/
 		void SetType(Physics::GeometryShape type) override;
 		Physics::GeometryShape GetType() override;
-		const void* GetGeometry() const override;
+		
+		void* GetGeometry() const override;
+
+		/********************************
+					Material
+		*********************************/
+		void* GetMaterial() const override;
 
 		/********************************
 				Engine Life Cycle

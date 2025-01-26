@@ -28,6 +28,11 @@
 #include "GraphicsEngine/IBloom.h"
 #include "GraphicsEngine/IBlur.h"
 
+#ifdef NDEBUG
+	#define PhysicsDebuger false
+#else
+	#define PhysicsDebuger true
+#endif
 #include "Physics/InterfaceAPI.h"
 
 #include "Math.h"

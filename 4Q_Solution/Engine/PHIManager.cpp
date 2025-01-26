@@ -379,6 +379,5 @@ namespace Engine::PHI
 
 		thrower(BoolToHRESULT(system->CreateStaticBoundBoxActor(&destObject, boxExtents)));
 	}
-	
 }
 

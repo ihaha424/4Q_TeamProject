@@ -301,9 +301,6 @@
     <Filter Include="Modules\Interfaces\Physics\98. Collision">
       <UniqueIdentifier>{89ab88bf-37d1-4e78-be93-1471177d67e4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\Component\PhysicsComponent">
-      <UniqueIdentifier>{976cd7bb-25bd-4648-8c9f-f79de4c2b0c7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Modules\Interfaces\Physics\00. Manager\PhysicsCreate">
       <UniqueIdentifier>{e3e9dc76-66ee-4a3e-8367-5a05eec77104}</UniqueIdentifier>
     </Filter>
@@ -336,6 +333,9 @@
     </Filter>
     <Filter Include="Modules\Difinition\PhysicsEngine\03. Component\PHICollisionComponent\PHIRigidKinematicComponent">
       <UniqueIdentifier>{52c9be27-1226-40c9-855d-6648adbcbb47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\RigidComponent">
+      <UniqueIdentifier>{976cd7bb-25bd-4648-8c9f-f79de4c2b0c7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

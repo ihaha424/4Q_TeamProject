@@ -41,17 +41,14 @@ namespace Engine::PHI
 		void CreateDynamic(Physics::IRigidDynamicComponent** destObject, const Physics::RigidComponentDesc& rigidComponetDesc, const Engine::Transform& transform, float density, const Engine::Transform& shapeOffset) override;
 		void CreateKinematic(Physics::IRigidKinematicComponent** destObject, const Physics::RigidComponentDesc& rigidComponetDesc, const Engine::Transform& transform, float density, const Engine::Transform& shapeOffset) override;
 		void CreateStatic(Physics::IRigidStaticComponent** destObject, const Physics::RigidComponentDesc& rigidComponetDesc, const Engine::Transform& transform, const Engine::Transform& shapeOffset) override;
-		void CloneShape(Physics::IRigidComponent** destShape, const Physics::IRigidComponent* shape, bool isExclusive) override;
 		void CloneStatic(Physics::IRigidStaticComponent** destObject, const Engine::Transform& transform, const Physics::IRigidStaticComponent* object) override;
-		void CloneDynamic(Physics::IRigidStaticComponent** destObject, const Engine::Transform& transform, const Physics::IRigidStaticComponent* object) override;
+		void CloneDynamic(Physics::IRigidDynamicComponent** destObject, const Engine::Transform& transform, const Physics::IRigidDynamicComponent* object) override;
 		void CreatePlane(Physics::IRigidComponent** object, const Engine::Math::Vector4& plane, const Physics::MaterialDesc& material) override;
 		void CreatePlane(Physics::IRigidComponent** object, const Engine::Math::Vector3& point, const Engine::Math::Vector3& normal, const Physics::MaterialDesc& material) override;
 		void CreateStaticBoundBoxActor(Physics::IRigidComponent** object, const Engine::Math::Vector3& boxExtents) override;
 
 	private:
 		PhysicsEngineAPI::IPhysicsSystem* system;
-
-		
 	};
 }
 

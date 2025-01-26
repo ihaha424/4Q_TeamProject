@@ -227,6 +227,11 @@ namespace Engine::Physics
 		bool				isExclusive = true;
 	};
 
+	/**
+	 * @brief			: RigidComponentDesc
+	 * rigidType		: RigidBodyType
+	 * shapeDesc		: ShapeDesc
+	 */
 	struct RigidComponentDesc
 	{
 		RigidBodyType	rigidType;

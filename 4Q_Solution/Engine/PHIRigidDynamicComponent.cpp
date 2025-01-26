@@ -198,7 +198,7 @@ namespace Engine::PHI
 		return Math::Vector3(shape->GetScale());
 	}
 
-	const void* RigidDynamicComponent::GetShape() const
+	void* RigidDynamicComponent::GetShape() const
 	{
 		return shape;
 	}
@@ -214,7 +214,7 @@ namespace Engine::PHI
 	{
 		return static_cast<Physics::GeometryShape>(geometry->GetType());
 	}
-	const void* RigidDynamicComponent::GetGeometry() const
+	void* RigidDynamicComponent::GetGeometry() const
 	{
 		return geometry;
 	}

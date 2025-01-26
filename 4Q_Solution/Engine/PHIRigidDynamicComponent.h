@@ -72,14 +72,15 @@ namespace Engine::PHI
 		void SetScale(const Math::Vector3& Scale) override;
 		const Math::Vector3 GetScale() const override;
 
-		const void* GetShape() const override;
+		void* GetShape() const override;
 
 		/********************************
 					Geometry
 		*********************************/
 		void SetType(Physics::GeometryShape type) override;
 		Physics::GeometryShape GetType() override;
-		const void* GetGeometry() const override;
+
+		void* GetGeometry() const override;
 
 		/********************************
 				Engine Life Cycle

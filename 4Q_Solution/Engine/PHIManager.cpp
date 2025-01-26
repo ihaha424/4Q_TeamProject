@@ -162,7 +162,7 @@ namespace Engine::PHI
 
 	bool Manager::CheckResults(unsigned int sceneNumber, bool block)
 	{
-		system->CheckResults(sceneNumber, block);
+		return system->CheckResults(sceneNumber, block);
 	}
 
 	bool Manager::CheckResults(Physics::IScene* _scene, bool block)
@@ -170,7 +170,7 @@ namespace Engine::PHI
 		Physics::Scene* scene = static_cast<Physics::Scene*>(_scene);
 		PhysicsEngineAPI::IScene* physicsScene = static_cast<PhysicsEngineAPI::IScene*>(scene->GetScene());
 
-		system->CheckResults(physicsScene, block);
+		return system->CheckResults(physicsScene, block);
 	}
 
 
@@ -179,49 +179,205 @@ namespace Engine::PHI
 	/********************************
 				  Factory
 	*********************************/
-	void Manager::CreateDynamic(Physics::IRigidDynamicComponent** destObject, const Physics::RigidComponentDesc& rigidComponetDesc, const Engine::Transform& transform, float density, const Engine::Transform& shapeOffset)
+	void Manager::CreateDynamic(Physics::IRigidDynamicComponent** _destObject, const Physics::RigidComponentDesc& rigidComponetDesc, const Engine::Transform& _transform, float density, const Engine::Transform& shapeOffset)
 	{
-		system->CloneDynamic();
+		constexpr Utility::ThrowIfFailed thrower;
+
+		Physics::RigidDynamicComponent* destComponment = static_cast<Physics::RigidDynamicComponent*>(*_destObject);
+		PhysicsEngineAPI::IDynamicObject* destObject = static_cast<PhysicsEngineAPI::IDynamicObject*>(destComponment->GetPhysicsObject());
+		PhysicsEngineAPI::IShape* shape = static_cast<PhysicsEngineAPI::IShape*>(destComponment->GetShape());
+		PhysicsEngineAPI::IGeometry* geometry = static_cast<PhysicsEngineAPI::IGeometry*>(destComponment->GetGeometry());
+		PhysicsEngineAPI::IMaterial* material = static_cast<PhysicsEngineAPI::IMaterial*>(destComponment->GetMaterial());
+
+		PhysicsEngineAPI::Utils::Math::Transform transform = { {_transform.position.x, _transform.position.y, _transform.position.z}, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} };
+
+		PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
+		PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc;
+		geometryDesc.type = static_cast<PhysicsEngineAPI::Utils::DataStructure::GeometryShape>(rigidComponetDesc.shapeDesc.geometryDesc.type);
+		auto& initialGeometrData = rigidComponetDesc.shapeDesc.geometryDesc.data;
+		geometryDesc.data = { initialGeometrData.x, initialGeometrData.y, initialGeometrData.z, initialGeometrData.w };
+		verticesMeshDesc.vertices.count = rigidComponetDesc.shapeDesc.verticesMeshDesc.vertices.count;
+		verticesMeshDesc.vertices.stride = rigidComponetDesc.shapeDesc.verticesMeshDesc.vertices.stride;
+		verticesMeshDesc.vertices.data = rigidComponetDesc.shapeDesc.verticesMeshDesc.vertices.data;
+		verticesMeshDesc.indices.count = rigidComponetDesc.shapeDesc.verticesMeshDesc.indices.count;
+		verticesMeshDesc.indices.stride = rigidComponetDesc.shapeDesc.verticesMeshDesc.indices.stride;
+		verticesMeshDesc.indices.data = rigidComponetDesc.shapeDesc.verticesMeshDesc.indices.data;
+		thrower(BoolToHRESULT(system->CreateGeometry(&geometry, geometryDesc, verticesMeshDesc)));
+
+
+		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc;
+		auto& initialMeterialData = rigidComponetDesc.shapeDesc.materialDesc.data;
+		materialDesc.data = { initialMeterialData.x, initialMeterialData.y, initialMeterialData.z };
+		thrower(BoolToHRESULT(system->CreateMaterial(&material, materialDesc)));
+
+
+		auto& isExclusive = rigidComponetDesc.shapeDesc.isExclusive;
+		thrower(BoolToHRESULT(system->CreateShape(&shape, geometry, material, isExclusive)));
+
+		thrower(BoolToHRESULT(system->CreateDynamic(&destObject, transform, shape, density)));
+
+		destComponment->SetLocalTransform(shapeOffset);
 	}
 
-	void Manager::CreateKinematic(Physics::IRigidKinematicComponent** destObject, const Physics::RigidComponentDesc& rigidComponetDesc, const Engine::Transform& transform, float density, const Engine::Transform& shapeOffset)
+	void Manager::CreateKinematic(Physics::IRigidKinematicComponent** _destObject, const Physics::RigidComponentDesc& rigidComponetDesc, const Engine::Transform& _transform, float density, const Engine::Transform& shapeOffset)
 	{
-		return false;
+		constexpr Utility::ThrowIfFailed thrower;
+
+		Physics::RigidKinematicComponent* destComponment = static_cast<Physics::RigidKinematicComponent*>(*_destObject);
+		PhysicsEngineAPI::IKinematicObject* destObject = static_cast<PhysicsEngineAPI::IKinematicObject*>(destComponment->GetPhysicsObject());
+		PhysicsEngineAPI::IShape* shape = static_cast<PhysicsEngineAPI::IShape*>(destComponment->GetShape());
+		PhysicsEngineAPI::IGeometry* geometry = static_cast<PhysicsEngineAPI::IGeometry*>(destComponment->GetGeometry());
+		PhysicsEngineAPI::IMaterial* material = static_cast<PhysicsEngineAPI::IMaterial*>(destComponment->GetMaterial());
+
+		PhysicsEngineAPI::Utils::Math::Transform transform = { {_transform.position.x, _transform.position.y, _transform.position.z}, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} };
+
+		PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
+		PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc;
+		geometryDesc.type = static_cast<PhysicsEngineAPI::Utils::DataStructure::GeometryShape>(rigidComponetDesc.shapeDesc.geometryDesc.type);
+		auto& initialGeometrData = rigidComponetDesc.shapeDesc.geometryDesc.data;
+		geometryDesc.data = { initialGeometrData.x, initialGeometrData.y, initialGeometrData.z, initialGeometrData.w };
+		verticesMeshDesc.vertices.count = rigidComponetDesc.shapeDesc.verticesMeshDesc.vertices.count;
+		verticesMeshDesc.vertices.stride = rigidComponetDesc.shapeDesc.verticesMeshDesc.vertices.stride;
+		verticesMeshDesc.vertices.data = rigidComponetDesc.shapeDesc.verticesMeshDesc.vertices.data;
+		verticesMeshDesc.indices.count = rigidComponetDesc.shapeDesc.verticesMeshDesc.indices.count;
+		verticesMeshDesc.indices.stride = rigidComponetDesc.shapeDesc.verticesMeshDesc.indices.stride;
+		verticesMeshDesc.indices.data = rigidComponetDesc.shapeDesc.verticesMeshDesc.indices.data;
+		thrower(BoolToHRESULT(system->CreateGeometry(&geometry, geometryDesc, verticesMeshDesc)));
+
+
+		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc;
+		auto& initialMeterialData = rigidComponetDesc.shapeDesc.materialDesc.data;
+		materialDesc.data = { initialMeterialData.x, initialMeterialData.y, initialMeterialData.z };
+		thrower(BoolToHRESULT(system->CreateMaterial(&material, materialDesc)));
+
+
+		auto& isExclusive = rigidComponetDesc.shapeDesc.isExclusive;
+		thrower(BoolToHRESULT(system->CreateShape(&shape, geometry, material, isExclusive)));
+
+		thrower(BoolToHRESULT(system->CreateKinematic(&destObject, transform, shape, density)));
+
+		destComponment->SetLocalTransform(shapeOffset);
 	}
 
-	void Manager::CreateStatic(Physics::IRigidStaticComponent** destObject, const Physics::RigidComponentDesc& rigidComponetDesc, const Engine::Transform& transform, const Engine::Transform& shapeOffset)
+	void Manager::CreateStatic(Physics::IRigidStaticComponent** _destObject, const Physics::RigidComponentDesc& rigidComponetDesc, const Engine::Transform& _transform, const Engine::Transform& shapeOffset)
 	{
-		return false;
+		constexpr Utility::ThrowIfFailed thrower;
+
+		Physics::RigidStaticComponent* destComponment = static_cast<Physics::RigidStaticComponent*>(*_destObject);
+		PhysicsEngineAPI::IStaticObject* destObject = static_cast<PhysicsEngineAPI::IStaticObject*>(destComponment->GetPhysicsObject());
+		PhysicsEngineAPI::IShape* shape = static_cast<PhysicsEngineAPI::IShape*>(destComponment->GetShape());
+		PhysicsEngineAPI::IGeometry* geometry = static_cast<PhysicsEngineAPI::IGeometry*>(destComponment->GetGeometry());
+		PhysicsEngineAPI::IMaterial* material = static_cast<PhysicsEngineAPI::IMaterial*>(destComponment->GetMaterial());
+
+		PhysicsEngineAPI::Utils::Math::Transform transform = { {_transform.position.x, _transform.position.y, _transform.position.z}, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} };
+
+		PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
+		PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc;
+		geometryDesc.type = static_cast<PhysicsEngineAPI::Utils::DataStructure::GeometryShape>(rigidComponetDesc.shapeDesc.geometryDesc.type);
+		auto& initialGeometrData = rigidComponetDesc.shapeDesc.geometryDesc.data;
+		geometryDesc.data = { initialGeometrData.x, initialGeometrData.y, initialGeometrData.z, initialGeometrData.w };
+		verticesMeshDesc.vertices.count = rigidComponetDesc.shapeDesc.verticesMeshDesc.vertices.count;
+		verticesMeshDesc.vertices.stride = rigidComponetDesc.shapeDesc.verticesMeshDesc.vertices.stride;
+		verticesMeshDesc.vertices.data = rigidComponetDesc.shapeDesc.verticesMeshDesc.vertices.data;
+		verticesMeshDesc.indices.count = rigidComponetDesc.shapeDesc.verticesMeshDesc.indices.count;
+		verticesMeshDesc.indices.stride = rigidComponetDesc.shapeDesc.verticesMeshDesc.indices.stride;
+		verticesMeshDesc.indices.data = rigidComponetDesc.shapeDesc.verticesMeshDesc.indices.data;
+		thrower(BoolToHRESULT(system->CreateGeometry(&geometry, geometryDesc, verticesMeshDesc)));
+
+
+		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc;
+		auto& initialMeterialData = rigidComponetDesc.shapeDesc.materialDesc.data;
+		materialDesc.data = { initialMeterialData.x, initialMeterialData.y, initialMeterialData.z };
+		thrower(BoolToHRESULT(system->CreateMaterial(&material, materialDesc)));
+
+
+		auto& isExclusive = rigidComponetDesc.shapeDesc.isExclusive;
+		thrower(BoolToHRESULT(system->CreateShape(&shape, geometry, material, isExclusive)));
+
+		thrower(BoolToHRESULT(system->CreateStatic(&destObject, transform, shape)));
+
+		destComponment->SetLocalTransform(shapeOffset);
 	}
 
-	void Manager::CloneShape(Physics::IRigidComponent** destShape, const Physics::IRigidComponent* shape, bool isExclusive)
+	void Manager::CloneStatic(Physics::IRigidStaticComponent** _destObject, const Engine::Transform& _transform, const Physics::IRigidStaticComponent* _object)
 	{
-		return false;
+		constexpr Utility::ThrowIfFailed thrower;
+
+		Physics::RigidStaticComponent* destComponment = static_cast<Physics::RigidStaticComponent*>(*_destObject);
+		PhysicsEngineAPI::IStaticObject* destObject = static_cast<PhysicsEngineAPI::IStaticObject*>(destComponment->GetPhysicsObject());
+		
+		PhysicsEngineAPI::Utils::Math::Transform transform = { {_transform.position.x, _transform.position.y, _transform.position.z}, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} };
+		
+		const Physics::RigidStaticComponent* Componment = static_cast<const Physics::RigidStaticComponent*>(_object);
+		PhysicsEngineAPI::IStaticObject* Object = static_cast<PhysicsEngineAPI::IStaticObject*>(Componment->GetPhysicsObject());
+
+		thrower(BoolToHRESULT(system->CloneStatic(&destObject, transform, Object)));
 	}
 
-	void Manager::CloneStatic(Physics::IRigidStaticComponent** destObject, const Engine::Transform& transform, const Physics::IRigidStaticComponent* object)
+	void Manager::CloneDynamic(Physics::IRigidDynamicComponent** _destObject, const Engine::Transform& _transform, const Physics::IRigidDynamicComponent* _object)
 	{
-		return false;
+		constexpr Utility::ThrowIfFailed thrower;
+
+		Physics::RigidDynamicComponent* destComponment = static_cast<Physics::RigidDynamicComponent*>(*_destObject);
+		PhysicsEngineAPI::IDynamicObject* destObject = static_cast<PhysicsEngineAPI::IDynamicObject*>(destComponment->GetPhysicsObject());
+
+		PhysicsEngineAPI::Utils::Math::Transform transform = { {_transform.position.x, _transform.position.y, _transform.position.z}, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} };
+
+		const Physics::RigidDynamicComponent* Componment = static_cast<const Physics::RigidDynamicComponent*>(_object);
+		PhysicsEngineAPI::IDynamicObject* Object = static_cast<PhysicsEngineAPI::IDynamicObject*>(Componment->GetPhysicsObject());
+
+		thrower(BoolToHRESULT(system->CloneDynamic(&destObject, transform, Object)));
 	}
 
-	void Manager::CloneDynamic(Physics::IRigidStaticComponent** destObject, const Engine::Transform& transform, const Physics::IRigidStaticComponent* object)
+	void Manager::CreatePlane(Physics::IRigidComponent** object, const Engine::Math::Vector4& _plane, const Physics::MaterialDesc& _material)
 	{
-		return false;
+		constexpr Utility::ThrowIfFailed thrower;
+
+		Physics::RigidComponent* destComponment = static_cast<Physics::RigidComponent*>(*object);
+		PhysicsEngineAPI::IObject* destObject = static_cast<PhysicsEngineAPI::IObject*>(destComponment->GetPhysicsObject());
+
+		PhysicsEngineAPI::IMaterial* material = static_cast<PhysicsEngineAPI::IMaterial*>(destComponment->GetMaterial());
+
+		PhysicsEngineAPI::Utils::Math::Vector4 plane = { _plane.x, _plane.y, _plane.z, _plane.w};
+
+		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc;
+		auto& initialMeterialData = _material.data;
+		materialDesc.data = { initialMeterialData.x, initialMeterialData.y, initialMeterialData.z };
+		thrower(BoolToHRESULT(system->CreateMaterial(&material, materialDesc)));
+
+		thrower(BoolToHRESULT(system->CreatePlane(&destObject, plane, material)));
 	}
 
-	void Manager::CreatePlane(Physics::IRigidComponent** object, const Engine::Math::Vector4& plane, const Physics::MaterialDesc& material)
+	void Manager::CreatePlane(Physics::IRigidComponent** object, const Engine::Math::Vector3& _point, const Engine::Math::Vector3& _normal, const Physics::MaterialDesc& _material)
 	{
-		return false;
+		constexpr Utility::ThrowIfFailed thrower;
+
+		Physics::RigidComponent* destComponment = static_cast<Physics::RigidComponent*>(*object);
+		PhysicsEngineAPI::IObject* destObject = static_cast<PhysicsEngineAPI::IObject*>(destComponment->GetPhysicsObject());
+
+		PhysicsEngineAPI::IMaterial* material = static_cast<PhysicsEngineAPI::IMaterial*>(destComponment->GetMaterial());
+
+		PhysicsEngineAPI::Utils::Math::Vector3 point = { _point.x, _point.y, _point.z};
+		PhysicsEngineAPI::Utils::Math::Vector3 normal = { _normal.x, _normal.y, _normal.z};
+
+		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc;
+		auto& initialMeterialData = _material.data;
+		materialDesc.data = { initialMeterialData.x, initialMeterialData.y, initialMeterialData.z };
+		thrower(BoolToHRESULT(system->CreateMaterial(&material, materialDesc)));
+
+		thrower(BoolToHRESULT(system->CreatePlane(&destObject, point, normal, material)));
 	}
 
-	void Manager::CreatePlane(Physics::IRigidComponent** object, const Engine::Math::Vector3& point, const Engine::Math::Vector3& normal, const Physics::MaterialDesc& material)
+	void Manager::CreateStaticBoundBoxActor(Physics::IRigidComponent** object, const Engine::Math::Vector3& _boxExtents)
 	{
-		return false;
-	}
+		constexpr Utility::ThrowIfFailed thrower;
 
-	void Manager::CreateStaticBoundBoxActor(Physics::IRigidComponent** object, const Engine::Math::Vector3& boxExtents)
-	{
-		return false;
+		Physics::RigidComponent* destComponment = static_cast<Physics::RigidComponent*>(*object);
+		PhysicsEngineAPI::IObject* destObject = static_cast<PhysicsEngineAPI::IObject*>(destComponment->GetPhysicsObject());
+
+		PhysicsEngineAPI::Utils::Math::Vector3 boxExtents = { _boxExtents.x, _boxExtents.y, _boxExtents.z };
+
+		thrower(BoolToHRESULT(system->CreateStaticBoundBoxActor(&destObject, boxExtents)));
 	}
 	
 }

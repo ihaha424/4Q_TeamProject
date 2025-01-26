@@ -740,7 +740,8 @@ namespace PhysicsEngineAPI
 	bool PhysXSystem::CreatePlane(
 		_OUT_ IObject** object, 
 		const Utils::Math::Vector3& point, 
-		const Utils::Math::Vector3& normal, IMaterial* _material)
+		const Utils::Math::Vector3& normal, 
+		IMaterial* _material)
 	{
 		physx::PxMaterial* mMaterial = physics->createMaterial(0.5f, 0.5f, 0.6f);
 		physx::PxRigidActor* actor = nullptr;

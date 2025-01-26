@@ -82,7 +82,7 @@ namespace Engine::PHI
 		return Math::Vector3(shape->GetScale());
 	}
 
-	const void* RigidStaticComponent::GetShape() const
+	void* RigidStaticComponent::GetShape() const
 	{
 		return shape;
 	}
@@ -98,7 +98,7 @@ namespace Engine::PHI
 	{
 		return static_cast<Physics::GeometryShape>(geometry->GetType());
 	}
-	const void* RigidStaticComponent::GetGeometry() const
+	void* RigidStaticComponent::GetGeometry() const
 	{
 		return geometry;
 	}

@@ -30,13 +30,6 @@ namespace Engine::Physics
 			const Engine::Transform& shapeOffset = Engine::Transform()
 		) = 0;
 
-
-		virtual void CloneShape(
-			IRigidComponent** destShape,
-			const IRigidComponent* shape,
-			bool isExclusive = false
-		) = 0;
-
 		virtual void CloneStatic(
 			IRigidStaticComponent** destObject,
 			const Engine::Transform& transform,
@@ -44,9 +37,9 @@ namespace Engine::Physics
 		) = 0;
 
 		virtual void CloneDynamic(
-			IRigidStaticComponent** destObject,
+			IRigidDynamicComponent** destObject,
 			const Engine::Transform& transform,
-			const IRigidStaticComponent* object
+			const IRigidDynamicComponent* object
 		) = 0;
 
 		/**

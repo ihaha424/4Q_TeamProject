@@ -1,4 +1,6 @@
 #pragma once
+#include "RemoteMoveComponent.h"
+#include "../Packet/ProtoInclude.h"
 
 class Player : public Engine::Object
 {
@@ -12,6 +14,10 @@ protected:
 	void PostUpdate(float deltaTime) override;
 
 	void PostFixedUpdate() override;
+
+	void EnterSuccess(const ConnectMsg::EnterAccept* msg);
+	void SyncMove(const MoveMsg::MoveSync* msg);
+	void StateChange(const MoveMsg::StateChange* msg);
 private:
 	Engine::Component::MovementComponent _movement;
 	Engine::Component::CameraComponent _camera;
@@ -21,6 +27,7 @@ private:
 	Engine::Math::Matrix _worldMatrix;
 	Engine::Component::TextRenderer _textRenderer;
 	Engine::Component::SynchronizeComponent _sync;
+	RemoteMoveComponent _remote;
 };
 
 //class RemotePlayer : public Engine::Object

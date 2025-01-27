@@ -16,25 +16,17 @@ void TestWorld::Addition()
 
 void TestWorld::PreInitialize()
 {
-	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::EnterAccept, &TestWorld::EnterAccept, this);
-	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &TestWorld::SyncOtherPlayer, this);
 	
 }
 
 void TestWorld::PreUpdate(float deltaTime)
 {
-	//NetworkTemp::GetInstance()->Dispatch();
-	//NetworkTemp::GetInstance()->SendUpdate();
+
 }
 
 void TestWorld::PostFixedUpdate()
 {
 
-}
-
-void TestWorld::EnterAccept(const ConnectMsg::EnterAccept* msg)
-{
-	playerSerialNum = msg->grantnumber();
 }
 
 void TestWorld::SyncOtherPlayer(const ConnectMsg::SyncPlayer* msg)

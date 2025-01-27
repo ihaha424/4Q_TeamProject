@@ -22,6 +22,7 @@ void Player::Addition()
 	AddComponent(&_animator);
 	AddComponent(&_textRenderer);
 	AddComponent(&_sync);
+	AddComponent(&_remote);
 }
 
 void Player::PreInitialize()
@@ -29,8 +30,13 @@ void Player::PreInitialize()
 	Object::PreInitialize();
 
 	_movement.SetTarget(&_transform);
+	_remote.SetTarget(&_transform);
 
-	_sync.SetSerialNumber(1);
+	_sync.AddCallback((short)PacketID::EnterAccept, &Player::EnterSuccess, this);
+	_sync.AddCallback((short)PacketID::MoveSync, &Player::SyncMove, this);
+	_sync.AddCallback((short)PacketID::StateChange, &Player::StateChange, this);
+
+	//_sync.SetSerialNumber(1);
 
 	const auto inputManager = Engine::Application::GetInputManager();
 	Engine::Input::IMappingContext* mappingContext = nullptr;
@@ -42,7 +48,7 @@ void Player::PreInitialize()
 	{
 		Engine::Math::Vector3 direction = _movement.GetDirection();
 		if (direction != Engine::Math::Vector3(value)) {
-			_movement.SetDirection(value);		
+			//_movement.SetDirection(value);		
 			
 			
 			_sync._move.set_serialnumber(1);
@@ -168,6 +174,22 @@ void Player::PostUpdate(float deltaTime)
 }
 
 void Player::PostFixedUpdate()
+{
+
+}
+
+void Player::EnterSuccess(const ConnectMsg::EnterAccept* msg)
+{
+	_sync.SetSerialNumber(msg->grantnumber());
+}
+
+void Player::SyncMove(const MoveMsg::MoveSync* msg)
+{
+	Engine::Math::Vector3 nextLocation(msg->x(), msg->y(), msg->z());
+	_remote.SetNextLocation(nextLocation);
+}
+
+void Player::StateChange(const MoveMsg::StateChange* msg)
 {
 
 }

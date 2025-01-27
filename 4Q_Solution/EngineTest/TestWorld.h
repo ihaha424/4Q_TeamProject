@@ -9,7 +9,6 @@ class ConnectMsg::EnterAccept;
 class TestWorld : public Engine::World
 {
 public:
-	void EnterAccept(const ConnectMsg::EnterAccept* msg);
 	void SyncOtherPlayer(const ConnectMsg::SyncPlayer* msg);
 protected:
 	void Addition() override;

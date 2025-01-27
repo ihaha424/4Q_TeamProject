@@ -7,7 +7,7 @@ struct MeshVertex
 	Vector3 normal;
 	Vector3 tangent;
 	Vector3 biTangent;
-	Vector2 texCoord[2];
+	Vector2 texCoord;
 
 	unsigned int blendIndices[4]{};
 	float blendWeights[4]{};

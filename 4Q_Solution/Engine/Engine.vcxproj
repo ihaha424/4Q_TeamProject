@@ -139,7 +139,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>DSHInput_d.lib;DSHTime_d.lib;DSHWindow_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>DSHInput_d.lib;DSHTime_d.lib;DSHWindow_d.lib;Physics_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PreBuildEvent>
       <Command>xcopy /y /d "..\dll\*.dll" "$(OutDir)"
@@ -166,7 +166,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>DSHInput.lib;DSHTime.lib;DSHWindow.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>DSHInput.lib;DSHTime.lib;DSHWindow.lib;Physics.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PreBuildEvent>
       <Command>
@@ -183,9 +183,22 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Animator.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="CameraComponent.h" />
+    <ClInclude Include="PHIRigidDynamicComponent.h" />
+    <ClInclude Include="PHIRigidKinematicComponent.h" />
+    <ClInclude Include="PHIRigidStaticComponent.h" />
+    <ClInclude Include="PhysicsCollision.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Components.h" />
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="PhysicsCreate.h" />
+    <ClInclude Include="PhysicsFactory.h" />
+    <ClInclude Include="PhysicsGeometry.h" />
+    <ClInclude Include="PhysicsMaterial.h" />
+    <ClInclude Include="PhysicsRigidDynamicComponent.h" />
+    <ClInclude Include="PhysicsRigidKinematicComponent.h" />
+    <ClInclude Include="PhysicsRigidStaticComponent.h" />
+    <ClInclude Include="PhysicsUpdate.h" />
+    <ClInclude Include="PhysicsUtils.h" />
     <ClInclude Include="DotTween.h" />
     <ClInclude Include="Down.h" />
     <ClInclude Include="Drive.h" />
@@ -230,10 +243,28 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Network.h" />
     <ClInclude Include="NetworkManager.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="PHIRigidComponent.h" />
+    <ClInclude Include="PHIDynamicObject.h" />
+    <ClInclude Include="PHIKinematicObject.h" />
+    <ClInclude Include="PHIObject.h" />
+    <ClInclude Include="PHIStaticObject.h" />
+    <ClInclude Include="Physics.h" />
+    <ClInclude Include="PHIManager.h" />
+    <ClInclude Include="PHIScene.h" />
+    <ClInclude Include="PhysicsComponent.h" />
+    <ClInclude Include="PhysicsManager.h" />
+    <ClInclude Include="PhysicsObject.h" />
+    <ClInclude Include="PhysicsRigidComponent.h" />
+    <ClInclude Include="PhysicsShape.h" />
     <ClInclude Include="PacketFilter.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Quaternion.h" />
+    <ClInclude Include="RigidComponent.h" />
+    <ClInclude Include="RigidDynamicComponent.h" />
+    <ClInclude Include="RigidKinematicComponent.h" />
+    <ClInclude Include="RigidStaticComponent.h" />
     <ClInclude Include="SafeDelete.h" />
+    <ClInclude Include="PhysicsScene.h" />
     <ClInclude Include="ServerNetworkManager.h" />
     <ClInclude Include="SkeletalMesh.h" />
     <ClInclude Include="StaticMesh.h" />
@@ -254,6 +285,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Value.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />
+    <ClInclude Include="Vector4.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WindowManager.h" />
     <ClInclude Include="World.h" />
@@ -272,8 +304,18 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
+    <ClCompile Include="PHIRigidDynamicComponent.cpp" />
+    <ClCompile Include="PHIRigidKinematicComponent.cpp" />
+    <ClCompile Include="PHIRigidStaticComponent.cpp" />
+    <ClCompile Include="PhysicsCollision.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="PhysicsGeometry.cpp" />
+    <ClCompile Include="PhysicsMaterial.cpp" />
+    <ClCompile Include="PhysicsRigidDynamicComponent.cpp" />
+    <ClCompile Include="PhysicsRigidKinematicComponent.cpp" />
+    <ClCompile Include="PhysicsRigidStaticComponent.cpp" />
+    <ClCompile Include="PhysicsUtils.cpp" />
     <ClCompile Include="DotTween.cpp" />
     <ClCompile Include="Down.cpp" />
     <ClCompile Include="Drive.cpp" />
@@ -311,10 +353,27 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Negative.cpp" />
     <ClCompile Include="NetworkManager.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="PHIRigidComponent.cpp" />
+    <ClCompile Include="PHIDynamicObject.cpp" />
+    <ClCompile Include="PHIKinematicObject.cpp" />
+    <ClCompile Include="PHIManager.cpp" />
+    <ClCompile Include="PHIObject.cpp" />
+    <ClCompile Include="PHIScene.cpp" />
+    <ClCompile Include="PHIStaticObject.cpp" />
+    <ClCompile Include="PhysicsComponent.cpp" />
+    <ClCompile Include="PhysicsManager.cpp" />
+    <ClCompile Include="PhysicsObject.cpp" />
+    <ClCompile Include="PhysicsRigidComponent.cpp" />
+    <ClCompile Include="PhysicsShape.cpp" />
     <ClCompile Include="PacketFilter.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Quaternion.cpp" />
+    <ClCompile Include="RigidComponent.cpp" />
+    <ClCompile Include="RigidDynamicComponent.cpp" />
+    <ClCompile Include="RigidKinematicComponent.cpp" />
+    <ClCompile Include="RigidStaticComponent.cpp" />
     <ClCompile Include="SafeDelete.cpp" />
+    <ClCompile Include="PhysicsScene.cpp" />
     <ClCompile Include="ServerNetworkManager.cpp" />
     <ClCompile Include="SkeletalMesh.cpp" />
     <ClCompile Include="StaticMesh.cpp" />
@@ -336,6 +395,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Value.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector3.cpp" />
+    <ClCompile Include="Vector4.cpp" />
     <ClCompile Include="WindowManager.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>

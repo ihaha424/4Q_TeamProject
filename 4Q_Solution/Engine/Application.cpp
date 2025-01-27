@@ -6,12 +6,14 @@
 #include "DSHWindowManager.h"
 #include "GEGraphicsManager.h"
 #include "ServerNetworkManager.h"
+#include "PHIManager.h"
 
 Engine::Time::Manager* Engine::Application::_timeManager = nullptr;
 Engine::Window::Manager* Engine::Application::_windowManager = nullptr;
 Engine::GEGraphics::Manager* Engine::Application::_graphicsManager = nullptr;
 Engine::Input::Manager* Engine::Application::_inputManager = nullptr;
 Engine::ServerNetwork::Manager* Engine::Application::_networkManager = nullptr;
+Engine::Physics::Manager* Engine::Application::_physicsManager = nullptr;
 
 Engine::Application::Application(const HINSTANCE instanceHandle, std::wstring title, const SIZE size) :
 	_instanceHandle(instanceHandle),
@@ -25,7 +27,7 @@ void Engine::Application::Begin()
 	InitializeManagers();
 	DeclareInputActions(_inputManager);
 	Addition(); // TODO: Refactor this.
-	Setup({ _graphicsManager });
+	Setup({ _graphicsManager, _physicsManager });
 	InitializeContents();
 }
 
@@ -45,6 +47,9 @@ void Engine::Application::InitializeManagers() const
 
 	CreateNetworkManager(&_networkManager);
 	_networkManager->Initialize();
+
+	CreatePhysicsManager(&_physicsManager);
+	_physicsManager->Initialize();
 }
 
 void Engine::Application::DeclareInputActions(Input::IManager* inputManager)
@@ -90,8 +95,9 @@ void Engine::Application::Run(const int showCommand)
 			_timeManager->Tick();
 			_inputManager->Update(metaTime);
 			_graphicsManager->Update(deltaTime);
-			_networkManager->DispatchPacket();
-
+			// _networkManager->DispatchPacket();
+			_physicsManager->Update(deltaTime);
+			_physicsManager->FetchSecne(true);
 			_drive.Update(deltaTime);
 			// TODO: Alarm Timer for Fixed Update
 
@@ -126,8 +132,10 @@ void Engine::Application::FinalizeManagers() const
 	deleter(&_windowManager);
 	_timeManager->Finalize();
 	deleter(&_timeManager);
-	_networkManager->Finalize();
-	deleter(&_networkManager);
+	//_networkManager->Finalize();
+	//deleter(&_networkManager);
+	_physicsManager->Finalize();
+	deleter(&_physicsManager);
 }
 
 Engine::Time::IManager* Engine::Application::GetTimeManager()
@@ -148,6 +156,11 @@ Engine::Graphics::IManager* Engine::Application::GetGraphicsManager()
 Engine::Network::IManager* Engine::Application::GetNetworkManager()
 {
 	return _networkManager;
+}
+
+Engine::Physics::IManager* Engine::Application::GetPhysicsManager()
+{
+	return _physicsManager;
 }
 
 void Engine::Application::AddWorld(World* world)
@@ -217,5 +230,17 @@ void Engine::Application::CreateNetworkManager(ServerNetwork::Manager** networkM
 		ServerNetwork::Manager* manager = new ServerNetwork::Manager();
 		if (manager == nullptr) thrower(E_OUTOFMEMORY);
 		*networkManager = manager;
+	}
+}
+
+void Engine::Application::CreatePhysicsManager(Physics::Manager** physicsManager)
+{
+	constexpr Utility::ThrowIfFailed thrower;
+	if (physicsManager == nullptr) thrower(E_INVALIDARG);
+	else
+	{
+		Physics::Manager* manager = new PHI::Manager();
+		if (manager == nullptr) thrower(E_OUTOFMEMORY);
+		*physicsManager = manager;
 	}
 }

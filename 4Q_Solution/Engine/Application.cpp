@@ -27,7 +27,7 @@ void Engine::Application::Begin()
 	InitializeManagers();
 	DeclareInputActions(_inputManager);
 	Addition(); // TODO: Refactor this.
-	Setup({ _graphicsManager });
+	Setup({ _graphicsManager, _physicsManager });
 	InitializeContents();
 }
 

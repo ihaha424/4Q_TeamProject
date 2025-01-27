@@ -1,5 +1,9 @@
 #include "pch.h"
 #include "PHIScene.h"
+#include "PHIRigidComponent.h"
+#include "PHIRigidStaticComponent.h"
+#include "PHIRigidDynamicComponent.h"
+#include "PHIRigidKinematicComponent.h"
 
 namespace Engine::PHI
 {
@@ -39,11 +43,10 @@ namespace Engine::PHI
 
 	bool Scene::Overlap(Engine::Physics::QueryData& overlapInfo, const Engine::Physics::IRigidComponent* _component, const Engine::Transform& transform)
 	{
-		const Engine::Physics::RigidComponent* componet = static_cast<const Engine::Physics::RigidComponent*>(_component);
-		const PhysicsEngineAPI::IGeometry* geometry = static_cast<const PhysicsEngineAPI::IGeometry*>(componet->GetGeometry());
+		const RigidComponent* componet = static_cast<const RigidComponent*>(_component);
 		PhysicsEngineAPI::Utils::DataStructure::AdditionalQueryData data;
 		bool result = scene->Overlap(data,
-			geometry,
+			componet->geometry,
 			{ { transform.position.x, transform.position.y, transform.position.z }, { transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w} });
 		overlapInfo.flag = static_cast<Physics::QueryData::QueryFlag>(data.flag);
 		overlapInfo.num = data.num;
@@ -54,11 +57,10 @@ namespace Engine::PHI
 
 	bool Scene::Sweep(Engine::Physics::AdditionalQueryData& sweepInfo, const Engine::Physics::IRigidComponent* _component, const Engine::Transform& transform, const Engine::Math::Vector3& direction, float distance)
 	{
-		const Engine::Physics::RigidComponent* componet= static_cast<const Engine::Physics::RigidComponent*>(_component);
-		const PhysicsEngineAPI::IGeometry* geometry = static_cast<const PhysicsEngineAPI::IGeometry*>(componet->GetGeometry());
+		const RigidComponent* componet= static_cast<const RigidComponent*>(_component);
 		PhysicsEngineAPI::Utils::DataStructure::AdditionalQueryData data;
 		bool result = scene->Sweep(data,
-			geometry,
+			componet->geometry,
 			{ { transform.position.x, transform.position.y, transform.position.z }, { transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w} },
 			{ direction.x, direction.y, direction.z }, 
 			distance);
@@ -79,10 +81,26 @@ namespace Engine::PHI
 
 	bool Scene::AddActor(Engine::Physics::IRigidComponent* _component)
 	{
-		const Engine::Physics::RigidComponent* componet = static_cast<const Engine::Physics::RigidComponent*>(_component);
-		PhysicsEngineAPI::IObject* object = static_cast<PhysicsEngineAPI::IObject*>(componet->GetPhysicsObject());
-		
-		return scene->AddActor(object);
+		const RigidComponent* componet = static_cast<const RigidComponent*>(_component);
+		return scene->AddActor(componet->object);
+	}
+
+	bool Scene::AddActor(Engine::Physics::IRigidStaticComponent* _component)
+	{
+		const RigidStaticComponent* componet = static_cast<const RigidStaticComponent*>(_component);
+		return scene->AddActor(componet->object);
+	}
+
+	bool Scene::AddActor(Engine::Physics::IRigidDynamicComponent* _component)
+	{
+		const RigidDynamicComponent* componet = static_cast<const RigidDynamicComponent*>(_component);
+		return scene->AddActor(componet->object);
+	}
+
+	bool Scene::AddActor(Engine::Physics::IRigidKinematicComponent* _component)
+	{
+		const RigidKinematicComponent* componet = static_cast<const RigidKinematicComponent*>(_component);
+		return scene->AddActor(componet->object);
 	}
 
 	void* Scene::GetScene()

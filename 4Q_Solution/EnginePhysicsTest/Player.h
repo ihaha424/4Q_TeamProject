@@ -22,7 +22,7 @@ private:
 	Engine::Component::TextRenderer _textRenderer;
 	Engine::Component::SynchronizeComponent _sync;
 
-	Engine::Component::RigidComponent _rigid;
+	Engine::Component::RigidDynamicComponent _rigid;
 };
 
 //class RemotePlayer : public Engine::Object

@@ -59,7 +59,6 @@ namespace Engine::Physics
 		*********************************/
 		//virtual bool	AttachShape(Shape* shape) = 0;
 		//virtual bool	DetachShape(Shape* shape) = 0;
-		virtual void* GetPhysicsObject() const = 0;
 
 
 		///********************************
@@ -71,19 +70,16 @@ namespace Engine::Physics
 		/********************************
 					Shape
 		*********************************/
-		virtual void* GetShape() const = 0;
 
 
 		/********************************
 					Geometry
 		*********************************/
 		virtual void SetType(GeometryShape type) = 0;
-		virtual void* GetGeometry() const = 0;
 
 
 		/********************************
 					Material
 		*********************************/
-		virtual void* GetMaterial() const = 0;
 	};
 }

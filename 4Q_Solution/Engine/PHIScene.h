@@ -22,13 +22,16 @@ namespace Engine::PHI
 		unsigned int GetSceneIndex() override;
 		
 		bool AddActor(Engine::Physics::IRigidComponent* component) override;
+		bool AddActor(Engine::Physics::IRigidStaticComponent* component) override;
+		bool AddActor(Engine::Physics::IRigidDynamicComponent* component) override;
+		bool AddActor(Engine::Physics::IRigidKinematicComponent* component) override;
 
-		//TODO:
-	public:
-		//private:
+	private:
 		PhysicsEngineAPI::IScene* scene;
 		unsigned int sceneIndex;
 
+	private:
+		friend class Manager;
 	};
 }
 

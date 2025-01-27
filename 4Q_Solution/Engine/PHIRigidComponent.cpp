@@ -3,10 +3,6 @@
 
 namespace Engine::PHI
 {
-	/********************************
-				Rigid Object
-	*********************************/
-
 	RigidComponent::RigidComponent()
 		: object{ nullptr }
 		, shape{ nullptr }
@@ -14,6 +10,10 @@ namespace Engine::PHI
 		, material{ nullptr }
 	{
 	}
+
+	/********************************
+				Rigid Object
+	*********************************/
 
 	void RigidComponent::SetTranslate(const Math::Vector3& position)
 	{
@@ -41,10 +41,7 @@ namespace Engine::PHI
 		auto transform = object->GetTransform();
 		return Transform({ transform.position, transform.rotation, {1,1,1} });
 	}
-	void* RigidComponent::GetPhysicsObject() const
-	{
-		return object;
-	}
+
 
 
 	/********************************
@@ -89,10 +86,7 @@ namespace Engine::PHI
 		return Math::Vector3(shape->GetScale());
 	}
 
-	void* RigidComponent::GetShape() const
-	{
-		return shape;
-	}
+
 
 	/********************************
 				Geometry
@@ -105,19 +99,13 @@ namespace Engine::PHI
 	{
 		return static_cast<Physics::GeometryShape>(geometry->GetType());
 	}
-	void* RigidComponent::GetGeometry() const
-	{
-		return geometry;
-	}
+
 
 
 	/********************************
 				Material
 	*********************************/
-	void* RigidComponent::GetMaterial() const
-	{
-		return nullptr;
-	}
+
 
 	/********************************
 			Engine Life Cycle

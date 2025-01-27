@@ -13,8 +13,13 @@ namespace Engine
 	{
 		class Manager;
 	}
+	namespace Physics
+	{
+		class Manager;
+	}
 	struct Modules
 	{
 		GEGraphics::Manager* graphicsManager;
+		Physics::Manager* physicsManager;
 	};
 }

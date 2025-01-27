@@ -34,8 +34,10 @@ namespace Engine::Physics
 			const Engine::Math::Vector3& direction,
 			float distance) = 0;
 
-		//TODO : 나중에 컴포먼트에서 처리 하도록 엔진 Interface로 바꿀꺼임
-		virtual bool AddActor(IRigidComponent* component) = 0;
+		virtual bool AddActor(IRigidComponent* component)			= 0;
+		virtual bool AddActor(IRigidStaticComponent* component)		= 0;
+		virtual bool AddActor(IRigidDynamicComponent* component)	= 0;
+		virtual bool AddActor(IRigidKinematicComponent* component)	= 0;
 	};
 
 	// Engine Interface

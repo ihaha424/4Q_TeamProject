@@ -2,10 +2,10 @@
 
 namespace Engine::Component
 {
-	class RigidComponent : public Component
+	class RigidStaticComponent : public Component
 	{
 	public:
-		RigidComponent();
+		RigidStaticComponent();
 
 		void Setup(Modules modules) override;
 
@@ -17,7 +17,7 @@ namespace Engine::Component
 		void Finalize() override;
 
 	public:
-		Engine::Physics::IRigidComponent* _rigidComponent;
+		Engine::Physics::IRigidStaticComponent* _rigidComponent;
 		Engine::Physics::Manager* _physicsManager;
 	};
 }

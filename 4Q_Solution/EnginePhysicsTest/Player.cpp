@@ -151,9 +151,17 @@ void Player::PostInitialize()
 	_animator.SplitBone(1, "Bip01-Spine1");
 	_animator.ChangeAnimation("Wait");*/
 
-	Engine::Physics::IRigidComponent* temp = _rigid.rigidComponent;
-	Engine::Application::GetPhysicsManager()->CreatePlane(&temp, Engine::Math::Vector4{ 0,1,0,0 }, Engine::Physics::MaterialDesc{ {0.5f, 0.5f, 0.f} });
-	Engine::Application::GetPhysicsManager()->GetScene(0)->AddActor(temp);
+
+	Engine::Physics::RigidComponentDesc desc;
+	desc.rigidType = Engine::Physics::RigidBodyType::Dynamic;
+	desc.shapeDesc.geometryDesc.type = Engine::Physics::GeometryShape::Capsule;
+	desc.shapeDesc.geometryDesc.data = { 100.f, 100.f };
+	desc.shapeDesc.isExclusive = true;
+	desc.shapeDesc.materialDesc.data = { 0.5f,0.5f,0.f };
+
+	_rigid._physicsManager->CreateDynamic(&_rigid._rigidComponent, desc, Engine::Transform{}, 1.f, Engine::Transform{});
+	_rigid._physicsManager->GetScene(0)->AddActor(_rigid._rigidComponent);
+	_rigid._rigidComponent->SetTranslate({ 0.f, 500.f, 0.f });
 }
 
 void Player::PostAttach()

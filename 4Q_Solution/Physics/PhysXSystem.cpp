@@ -236,9 +236,6 @@ namespace PhysicsEngineAPI
 			
 			const physx::PxMeshScale MeshScale = physx::PxVec3{ geometryDesc.data.x, geometryDesc.data.y, geometryDesc.data.z };
 			geometry = new physx::PxTriangleMeshGeometry(triangleMesh, MeshScale);
-
-			// TODO: leak
-			// triangleMesh->release();
 		}
 		else if (geometryDesc.type == GeometryShape::Frustum)
 		{
@@ -271,27 +268,7 @@ namespace PhysicsEngineAPI
 			description.points.count	= static_cast<physx::PxU32>(vertices.size());
 			description.points.stride	= sizeof(physx::PxVec3);
 			description.points.data		= vertices.data();
-			description.flags = physx::PxConvexFlag::eCOMPUTE_CONVEX;// | physx::PxConvexFlag::eCHECK_ZERO_AREA_TRIANGLES;
-
-
-			// TODO Delete triangle Mesh
-			//description.flags = physx::PxConvexFlag::e16_BIT_INDICES;
-			//std::vector<uint16_t> indices = {
-			//	0, 1, 2,  0, 2, 3,
-
-			//	4, 5, 6,  4, 6, 7,
-
-			//	0, 3, 7,  0, 7, 4,
-
-			//	1, 2, 6,  1, 6, 5,
-
-			//	0, 1, 5,  0, 5, 4,
-
-			//	3, 2, 6,  3, 6, 7
-			//};
-			//description.indices.count = indices.size();
-			//description.indices.stride = sizeof(uint16_t) * 3;
-			//description.indices.data	= indices.data();
+			description.flags = physx::PxConvexFlag::eCOMPUTE_CONVEX;
 
 			physx::PxTolerancesScale scale;
 			physx::PxCookingParams params(scale);

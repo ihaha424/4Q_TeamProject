@@ -12,7 +12,7 @@ namespace Engine::Math
 		using DirectX::SimpleMath::Vector4::Zero;
 		using DirectX::SimpleMath::Vector4::One;
 
-		Vector4(float x, float y, float z, float w) noexcept;
+		Vector4(float x = 0.f, float y = 0.f, float z = 0.f, float w = 0.f) noexcept;
 		Vector4(DirectX::SimpleMath::Vector4 vector) noexcept;
 		Vector4(const PhysicsEngineAPI::Utils::Math::Vector4& value) noexcept;
 

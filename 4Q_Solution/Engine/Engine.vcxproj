@@ -260,6 +260,9 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Point.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="RigidComponent.h" />
+    <ClInclude Include="RigidDynamicComponent.h" />
+    <ClInclude Include="RigidKinematicComponent.h" />
+    <ClInclude Include="RigidStaticComponent.h" />
     <ClInclude Include="SafeDelete.h" />
     <ClInclude Include="PhysicsScene.h" />
     <ClInclude Include="ServerNetworkManager.h" />
@@ -366,6 +369,9 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="RigidComponent.cpp" />
+    <ClCompile Include="RigidDynamicComponent.cpp" />
+    <ClCompile Include="RigidKinematicComponent.cpp" />
+    <ClCompile Include="RigidStaticComponent.cpp" />
     <ClCompile Include="SafeDelete.cpp" />
     <ClCompile Include="PhysicsScene.cpp" />
     <ClCompile Include="ServerNetworkManager.cpp" />

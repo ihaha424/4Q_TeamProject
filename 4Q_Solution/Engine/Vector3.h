@@ -18,7 +18,7 @@ namespace Engine::Math
 		using DirectX::SimpleMath::Vector3::Zero;
 		using DirectX::SimpleMath::Vector3::One;
 
-		Vector3(float x, float y, float z) noexcept;
+		Vector3(float x = 0.f, float y = 0.f, float z = 0.f) noexcept;
 		Vector3(DirectX::SimpleMath::Vector3 vector) noexcept;
 		Vector3(const Input::Value& value) noexcept;
 		Vector3(const PhysicsEngineAPI::Utils::Math::Vector3& value) noexcept;

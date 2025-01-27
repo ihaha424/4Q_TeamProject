@@ -3,6 +3,14 @@
 
 namespace Engine::PHI
 {
+	RigidDynamicComponent::RigidDynamicComponent()
+		: object{ nullptr }
+		, shape{ nullptr }
+		, geometry{ nullptr }
+		, material{ nullptr }
+	{
+	}
+
 	/********************************
 				Rigid Object
 	*********************************/
@@ -32,10 +40,6 @@ namespace Engine::PHI
 	{
 		auto transform = object->GetTransform();
 		return Transform({ transform.position, transform.rotation, {1,1,1} });
-	}
-	void* RigidDynamicComponent::GetPhysicsObject() const
-	{
-		return object;
 	}
 
 
@@ -198,10 +202,6 @@ namespace Engine::PHI
 		return Math::Vector3(shape->GetScale());
 	}
 
-	void* RigidDynamicComponent::GetShape() const
-	{
-		return shape;
-	}
 
 	/********************************
 				Geometry
@@ -213,10 +213,6 @@ namespace Engine::PHI
 	Physics::GeometryShape RigidDynamicComponent::GetType()
 	{
 		return static_cast<Physics::GeometryShape>(geometry->GetType());
-	}
-	void* RigidDynamicComponent::GetGeometry() const
-	{
-		return geometry;
 	}
 
 	/********************************

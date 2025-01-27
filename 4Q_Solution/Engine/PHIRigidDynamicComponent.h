@@ -5,6 +5,9 @@ namespace Engine::PHI
 	class RigidDynamicComponent final
 		: public Physics::RigidDynamicComponent
 	{
+	public:
+		RigidDynamicComponent();
+
 		/********************************
 					Rigid Object
 		*********************************/
@@ -14,8 +17,6 @@ namespace Engine::PHI
 		const Math::Quaternion GetRotation() const override;
 		void SetTransform(const Transform& transform) override;
 		const Transform GetTransform() const override;
-
-		void* GetPhysicsObject() const override;
 
 		/********************************
 				Rigid Dynamic
@@ -72,7 +73,6 @@ namespace Engine::PHI
 		void SetScale(const Math::Vector3& Scale) override;
 		const Math::Vector3 GetScale() const override;
 
-		void* GetShape() const override;
 
 		/********************************
 					Geometry
@@ -80,7 +80,6 @@ namespace Engine::PHI
 		void SetType(Physics::GeometryShape type) override;
 		Physics::GeometryShape GetType() override;
 
-		void* GetGeometry() const override;
 
 		/********************************
 				Engine Life Cycle
@@ -94,6 +93,10 @@ namespace Engine::PHI
 		PhysicsEngineAPI::IShape* shape;
 		PhysicsEngineAPI::IGeometry* geometry;
 		PhysicsEngineAPI::IMaterial* material;
+
+	private:
+		friend class Manager;
+		friend class Scene;
 	};
 
 }

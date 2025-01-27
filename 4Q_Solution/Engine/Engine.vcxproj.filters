@@ -361,6 +361,15 @@
     <Filter Include="Modules\Difinition\Network\ProtoBuffer">
       <UniqueIdentifier>{c7a1fc91-5493-4261-bbfb-b105f1a7c659}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\RigidComponent\RigidStaticComponent">
+      <UniqueIdentifier>{277940a1-80d3-45fb-aa00-c04c3c2e54cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\RigidComponent\RigidDynamicComponent">
+      <UniqueIdentifier>{3fa7a2d6-17e9-4722-8303-276e3960edb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\RigidComponent\RigidKinematicComponent">
+      <UniqueIdentifier>{9395e9fa-d972-472b-9454-204651077c93}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -699,6 +708,15 @@
     <ClInclude Include="RigidComponent.h">
       <Filter>Components\RigidComponent</Filter>
     </ClInclude>
+    <ClInclude Include="RigidStaticComponent.h">
+      <Filter>Components\RigidComponent\RigidStaticComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidDynamicComponent.h">
+      <Filter>Components\RigidComponent\RigidDynamicComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidKinematicComponent.h">
+      <Filter>Components\RigidComponent\RigidKinematicComponent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -979,6 +997,15 @@
     </ClCompile>
     <ClCompile Include="RigidComponent.cpp">
       <Filter>Components\RigidComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidStaticComponent.cpp">
+      <Filter>Components\RigidComponent\RigidStaticComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidDynamicComponent.cpp">
+      <Filter>Components\RigidComponent\RigidDynamicComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidKinematicComponent.cpp">
+      <Filter>Components\RigidComponent\RigidKinematicComponent</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

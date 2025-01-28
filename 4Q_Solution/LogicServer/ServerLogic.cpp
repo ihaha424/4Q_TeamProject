@@ -13,6 +13,18 @@ bool ServerLogic::Initialize()
     DSH::Time::CreateSystem()(&_system);
     _system->CreateTickTimer(&_timer);
     delete _system;
+    
+    _objs[0]._position = { 10.f, 10.f, 10.f };
+    _objs[1]._position = { 50.f, 50.f, 30.f };
+    _objs[2]._position = { -100.f, 10.f, 50.f };
+
+    _objs[0]._resourceId = "../Resources/TestObject/cube.fbx";
+    _objs[1]._resourceId = "../Resources/TestObject/sphere.fbx";
+    _objs[2]._resourceId = "../Resources/TestObject/cube.fbx";
+
+    _objs[0]._serialNumber = 100;
+    _objs[1]._serialNumber = 101;
+    _objs[2]._serialNumber = 102;
 
     return true;
 }
@@ -105,6 +117,16 @@ void ServerLogic::MessageDispatch()
                     _syncPlayer.SerializeToString(&_msgBuffer);
                     Server::BroadCast(_msgBuffer, (short)PacketID::Sync, _syncPlayer.ByteSizeLong(), _playerSlot[i]._serialNumber);
                 }  // for end
+                for (int i = 0; i < 3; i++) {
+                    _syncObject.set_resource(_objs[i]._resourceId);
+                    _syncObject.set_x(_objs[i]._position._x);
+                    _syncObject.set_y(_objs[i]._position._y);
+                    _syncObject.set_z(_objs[i]._position._z);
+                    
+                    _syncObject.SerializeToString(&_msgBuffer);
+                    Server::BroadCast(_msgBuffer, (short)PacketID::ObjectSync, _syncObject.ByteSizeLong(), _objs[i]._serialNumber);
+                }
+
             } // else end
             break;
         } // case end

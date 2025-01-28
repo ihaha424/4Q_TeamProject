@@ -21,11 +21,15 @@ class ServerLogic
 		}
 	};
 
-	struct Player {
+	struct Object {
 		int _serialNumber;
-		int _state;
 		Vector3 _position;
+		std::string _resourceId;
+	};
+
+	struct Player : public Object {
 		Vector3 _direction;
+		int _state;
 		float _speed;
 	};
 
@@ -46,11 +50,13 @@ private:
 
 	Player _playerSlot[2]{};
 	Vector3 _lastSendPosition[2]{};
+	Object _objs[3]{};
 	
 	ConnectMsg::EnterAccept _enterAccept;
 	ConnectMsg::Exit _exit;
 	ConnectMsg::SetRoomMaster _setRoomMaster;
 	ConnectMsg::SyncPlayer _syncPlayer;
+	ConnectMsg::SyncObject _syncObject;
 	
 	MoveMsg::Move _move;
 	MoveMsg::Jump _jump;

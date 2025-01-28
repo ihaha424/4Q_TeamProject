@@ -14,12 +14,12 @@ bool ServerLogic::Initialize()
     _system->CreateTickTimer(&_timer);
     delete _system;
     
-    _objs[0]._position = { 10.f, 10.f, 10.f };
-    _objs[1]._position = { 50.f, 50.f, 30.f };
-    _objs[2]._position = { -100.f, 10.f, 50.f };
+    _objs[0]._position = { 100.f, 0.f, 100.f };
+    _objs[1]._position = { 500.f, 0.f, 300.f };
+    _objs[2]._position = { -100.f, 0.f, 500.f };
 
     _objs[0]._resourceId = "../Resources/TestObject/cube.fbx";
-    _objs[1]._resourceId = "../Resources/TestObject/sphere.fbx";
+    _objs[1]._resourceId = "../Resources/TestObject/cube.fbx";
     _objs[2]._resourceId = "../Resources/TestObject/cube.fbx";
 
     _objs[0]._serialNumber = 100;
@@ -108,39 +108,20 @@ void ServerLogic::MessageDispatch()
                     if (_playerSlot[i]._serialNumber == 0) {
                         continue;
                     } // if end
-                    _syncPlayer.set_x(_playerSlot[i]._position._x);
-                    _syncPlayer.set_y(_playerSlot[i]._position._y);
-                    _syncPlayer.set_z(_playerSlot[i]._position._z);
-
-                    long byteSize = _syncPlayer.ByteSizeLong();
-
-                    _syncPlayer.SerializeToString(&_msgBuffer);
-                    Server::BroadCast(_msgBuffer, (short)PacketID::Sync, _syncPlayer.ByteSizeLong(), _playerSlot[i]._serialNumber);
+                    Server::BroadCast("", (short)PacketID::Sync, 0, _playerSlot[i]._serialNumber);
                 }  // for end
                 for (int i = 0; i < 3; i++) {
-                    _syncObject.set_resource(_objs[i]._resourceId);
-                    _syncObject.set_x(_objs[i]._position._x);
-                    _syncObject.set_y(_objs[i]._position._y);
-                    _syncObject.set_z(_objs[i]._position._z);
-                    
-                    _syncObject.SerializeToString(&_msgBuffer);
-                    Server::BroadCast(_msgBuffer, (short)PacketID::ObjectSync, _syncObject.ByteSizeLong(), _objs[i]._serialNumber);
+                    Server::BroadCast("", (short)PacketID::ObjectSync, 0, _objs[i]._serialNumber);
                 }
-
+                Server::BroadCast("", (short)PacketID::DataSendComplete, 0, 0);
             } // else end
             break;
         } // case end
         case PacketID::Exit:
         {
-            _exit.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
-
             int exitNum = packet._serialNumber - 1;
 
-            _exit.SerializeToString(&_msgBuffer);
-
-            printf("[MessageDispatch] Player Exit. SerialNumber : %d\n", packet._serialNumber);
-
-            Server::BroadCast(_msgBuffer, (short)PacketID::Exit, _exit.ByteSizeLong(), _playerSlot[exitNum]._serialNumber);
+            Server::BroadCast("", (short)PacketID::Exit, 0, _playerSlot[exitNum]._serialNumber);
 
             _playerSlot[exitNum]._serialNumber = 0;
             _playerSlot[exitNum]._position = Vector3(0.0f, 0.0f, 0.0f);
@@ -176,17 +157,6 @@ void ServerLogic::MessageDispatch()
                 Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), packet._serialNumber);
             }
 
-
-            //_syncPlayer.set_serialnumber(_playerSlot[serialNum]._serialNumber);
-            //_syncPlayer.set_x(_playerSlot[serialNum]._position._x);
-            //_syncPlayer.set_y(_playerSlot[serialNum]._position._y);
-            //_syncPlayer.set_z(_playerSlot[serialNum]._position._z);
-
-            //long byteSize = _syncPlayer.ByteSizeLong();
-
-            //_syncPlayer.SerializeToString(&_msgBuffer);
-            //Server::BroadCast(_msgBuffer, (short)PacketID::Sync, _syncPlayer.ByteSizeLong());
-
             break;
         } // case end
         case PacketID::StateChange:
@@ -200,7 +170,32 @@ void ServerLogic::MessageDispatch()
 
             break;
         } // case end
+        case PacketID::DataRequest:
+        {
+            for (int i = 0; i < 2; i++) {
+                if (_playerSlot[i]._serialNumber == 0) {
+                     continue;
+                } // if end
 
+                _syncPlayer.set_x(_playerSlot[i]._position._x);
+                _syncPlayer.set_y(_playerSlot[i]._position._y);
+                _syncPlayer.set_z(_playerSlot[i]._position._z);
+                _syncPlayer.SerializeToString(&_msgBuffer);
+
+                Server::BroadCast(_msgBuffer, (short)PacketID::DataRemote, _syncPlayer.ByteSizeLong(), _playerSlot[i]._serialNumber);
+            }  // for end
+            for (int i = 0; i < 3; i++) {
+                _syncObject.set_x(_objs[i]._position._x);
+                _syncObject.set_y(_objs[i]._position._y);
+                _syncObject.set_z(_objs[i]._position._z);
+                _syncObject.SerializeToString(&_msgBuffer);
+
+                Server::BroadCast(_msgBuffer, (short)PacketID::DataObject, _syncObject.ByteSizeLong(), _objs[i]._serialNumber);
+            }
+            Server::BroadCast("", (short)PacketID::DataSendComplete, 0, 0);
+
+            break;
+        }
         default:
             break;
         } // switch end

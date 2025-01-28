@@ -163,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Cube.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameApplication.h" />
     <ClInclude Include="GlobalLight.h" />
@@ -172,11 +173,13 @@
     <ClInclude Include="RemoteMoveComponent.h" />
     <ClInclude Include="RemotePlayer.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Sphere.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TestWorld.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Cube.cpp" />
     <ClCompile Include="GameApplication.cpp" />
     <ClCompile Include="GlobalLight.cpp" />
     <ClCompile Include="main.cpp" />
@@ -190,6 +193,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RemoteMoveComponent.cpp" />
     <ClCompile Include="RemotePlayer.cpp" />
+    <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TestWorld.cpp" />
   </ItemGroup>

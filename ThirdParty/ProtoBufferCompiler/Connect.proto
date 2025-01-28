@@ -2,19 +2,10 @@ syntax = "proto3";
 
 package ConnectMsg;
 
-// 서버에서 연결을 수락했을 때 
-// 연결을 요청한 클라이언트에게 보내는 메시지.
 message EnterAccept {
 	optional int32 grantnumber = 1;
 }
 
-message SetRoomMaster {
-}
-
-message Exit {
-}
-
-// 연결을 수락했을 때 현재 룸에 들어와 있는 모든 플레이어의 정보를 전달하는 메시지.
 message SyncPlayer {
 	optional float x = 1;
 	optional float y = 2;

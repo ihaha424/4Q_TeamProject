@@ -12,10 +12,10 @@ enum class PacketID : short {
 	MoveSync,
 	Move,
 	Jump,
-	SelectPart,
-	DialogOpen,
-	DialogNext,
 	StateChange,
-
+	DataSendComplete,
+	DataRequest,
+	DataRemote,
+	DataObject,
 
 };

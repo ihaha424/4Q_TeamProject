@@ -85,42 +85,6 @@ struct SyncObjectDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SyncObjectDefaultTypeInternal _SyncObject_default_instance_;
-              template <typename>
-PROTOBUF_CONSTEXPR SetRoomMaster::SetRoomMaster(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::internal::ZeroFieldsBase(_class_data_.base()){}
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::internal::ZeroFieldsBase() {
-}
-#endif  // PROTOBUF_CUSTOM_VTABLE
-struct SetRoomMasterDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR SetRoomMasterDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~SetRoomMasterDefaultTypeInternal() {}
-  union {
-    SetRoomMaster _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SetRoomMasterDefaultTypeInternal _SetRoomMaster_default_instance_;
-              template <typename>
-PROTOBUF_CONSTEXPR Exit::Exit(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::internal::ZeroFieldsBase(_class_data_.base()){}
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::internal::ZeroFieldsBase() {
-}
-#endif  // PROTOBUF_CUSTOM_VTABLE
-struct ExitDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR ExitDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~ExitDefaultTypeInternal() {}
-  union {
-    Exit _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ExitDefaultTypeInternal _Exit_default_instance_;
 
 inline constexpr EnterAccept::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -146,6 +110,56 @@ struct EnterAcceptDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 EnterAcceptDefaultTypeInternal _EnterAccept_default_instance_;
+
+inline constexpr AddRemote::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        grantnumber_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR AddRemote::AddRemote(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct AddRemoteDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR AddRemoteDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~AddRemoteDefaultTypeInternal() {}
+  union {
+    AddRemote _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AddRemoteDefaultTypeInternal _AddRemote_default_instance_;
+
+inline constexpr AddObject::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        grantnumber_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR AddObject::AddObject(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct AddObjectDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR AddObjectDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~AddObjectDefaultTypeInternal() {}
+  union {
+    AddObject _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AddObjectDefaultTypeInternal _AddObject_default_instance_;
 }  // namespace ConnectMsg
 static constexpr const ::_pb::EnumDescriptor**
     file_level_enum_descriptors_Connect_2eproto = nullptr;
@@ -164,22 +178,6 @@ const ::uint32_t
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::ConnectMsg::EnterAccept, _impl_.grantnumber_),
         0,
-        ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SetRoomMaster, _internal_metadata_),
-        ~0u,  // no _extensions_
-        ~0u,  // no _oneof_case_
-        ~0u,  // no _weak_field_map_
-        ~0u,  // no _inlined_string_donated_
-        ~0u,  // no _split_
-        ~0u,  // no sizeof(Split)
-        ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::Exit, _internal_metadata_),
-        ~0u,  // no _extensions_
-        ~0u,  // no _oneof_case_
-        ~0u,  // no _weak_field_map_
-        ~0u,  // no _inlined_string_donated_
-        ~0u,  // no _split_
-        ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncPlayer, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncPlayer, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -212,40 +210,62 @@ const ::uint32_t
         2,
         3,
         0,
+        PROTOBUF_FIELD_OFFSET(::ConnectMsg::AddRemote, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::ConnectMsg::AddRemote, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::ConnectMsg::AddRemote, _impl_.grantnumber_),
+        0,
+        PROTOBUF_FIELD_OFFSET(::ConnectMsg::AddObject, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::ConnectMsg::AddObject, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::ConnectMsg::AddObject, _impl_.grantnumber_),
+        0,
 };
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, 9, -1, sizeof(::ConnectMsg::EnterAccept)},
-        {10, -1, -1, sizeof(::ConnectMsg::SetRoomMaster)},
-        {18, -1, -1, sizeof(::ConnectMsg::Exit)},
-        {26, 38, -1, sizeof(::ConnectMsg::SyncPlayer)},
-        {42, 54, -1, sizeof(::ConnectMsg::SyncObject)},
+        {10, 22, -1, sizeof(::ConnectMsg::SyncPlayer)},
+        {26, 38, -1, sizeof(::ConnectMsg::SyncObject)},
+        {42, 51, -1, sizeof(::ConnectMsg::AddRemote)},
+        {52, 61, -1, sizeof(::ConnectMsg::AddObject)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::ConnectMsg::_EnterAccept_default_instance_._instance,
-    &::ConnectMsg::_SetRoomMaster_default_instance_._instance,
-    &::ConnectMsg::_Exit_default_instance_._instance,
     &::ConnectMsg::_SyncPlayer_default_instance_._instance,
     &::ConnectMsg::_SyncObject_default_instance_._instance,
+    &::ConnectMsg::_AddRemote_default_instance_._instance,
+    &::ConnectMsg::_AddObject_default_instance_._instance,
 };
 const char descriptor_table_protodef_Connect_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\rConnect.proto\022\nConnectMsg\"7\n\013EnterAcce"
     "pt\022\030\n\013grantnumber\030\001 \001(\005H\000\210\001\001B\016\n\014_grantnu"
-    "mber\"\017\n\rSetRoomMaster\"\006\n\004Exit\"r\n\nSyncPla"
-    "yer\022\016\n\001x\030\001 \001(\002H\000\210\001\001\022\016\n\001y\030\002 \001(\002H\001\210\001\001\022\016\n\001z"
-    "\030\003 \001(\002H\002\210\001\001\022\025\n\010resource\030\004 \001(\tH\003\210\001\001B\004\n\002_x"
-    "B\004\n\002_yB\004\n\002_zB\013\n\t_resource\"r\n\nSyncObject\022"
-    "\016\n\001x\030\001 \001(\002H\000\210\001\001\022\016\n\001y\030\002 \001(\002H\001\210\001\001\022\016\n\001z\030\003 \001"
-    "(\002H\002\210\001\001\022\025\n\010resource\030\004 \001(\tH\003\210\001\001B\004\n\002_xB\004\n\002"
-    "_yB\004\n\002_zB\013\n\t_resourceb\006proto3"
+    "mber\"r\n\nSyncPlayer\022\016\n\001x\030\001 \001(\002H\000\210\001\001\022\016\n\001y\030"
+    "\002 \001(\002H\001\210\001\001\022\016\n\001z\030\003 \001(\002H\002\210\001\001\022\025\n\010resource\030\004"
+    " \001(\tH\003\210\001\001B\004\n\002_xB\004\n\002_yB\004\n\002_zB\013\n\t_resource"
+    "\"r\n\nSyncObject\022\016\n\001x\030\001 \001(\002H\000\210\001\001\022\016\n\001y\030\002 \001("
+    "\002H\001\210\001\001\022\016\n\001z\030\003 \001(\002H\002\210\001\001\022\025\n\010resource\030\004 \001(\t"
+    "H\003\210\001\001B\004\n\002_xB\004\n\002_yB\004\n\002_zB\013\n\t_resource\"5\n\t"
+    "AddRemote\022\030\n\013grantnumber\030\001 \001(\005H\000\210\001\001B\016\n\014_"
+    "grantnumber\"5\n\tAddObject\022\030\n\013grantnumber\030"
+    "\001 \001(\005H\000\210\001\001B\016\n\014_grantnumberb\006proto3"
 };
 static ::absl::once_flag descriptor_table_Connect_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_Connect_2eproto = {
     false,
     false,
-    349,
+    434,
     descriptor_table_protodef_Connect_2eproto,
     "Connect.proto",
     &descriptor_table_Connect_2eproto_once,
@@ -475,212 +495,6 @@ void EnterAccept::InternalSwap(EnterAccept* PROTOBUF_RESTRICT other) {
 
 ::google::protobuf::Metadata EnterAccept::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
-}
-// ===================================================================
-
-class SetRoomMaster::_Internal {
- public:
-};
-
-SetRoomMaster::SetRoomMaster(::google::protobuf::Arena* arena)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  // @@protoc_insertion_point(arena_constructor:ConnectMsg.SetRoomMaster)
-}
-SetRoomMaster::SetRoomMaster(
-    ::google::protobuf::Arena* arena,
-    const SetRoomMaster& from)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  SetRoomMaster* const _this = this;
-  (void)_this;
-  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
-      from._internal_metadata_);
-
-  // @@protoc_insertion_point(copy_constructor:ConnectMsg.SetRoomMaster)
-}
-
-inline void* SetRoomMaster::PlacementNew_(const void*, void* mem,
-                                        ::google::protobuf::Arena* arena) {
-  return ::new (mem) SetRoomMaster(arena);
-}
-constexpr auto SetRoomMaster::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(SetRoomMaster),
-                                            alignof(SetRoomMaster));
-}
-PROTOBUF_CONSTINIT
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull SetRoomMaster::_class_data_ = {
-    ::google::protobuf::internal::ClassData{
-        &_SetRoomMaster_default_instance_._instance,
-        &_table_.header,
-        nullptr,  // OnDemandRegisterArenaDtor
-        nullptr,  // IsInitialized
-        &SetRoomMaster::MergeImpl,
-        ::google::protobuf::internal::ZeroFieldsBase::GetNewImpl<SetRoomMaster>(),
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        &SetRoomMaster::SharedDtor,
-        ::google::protobuf::internal::ZeroFieldsBase::GetClearImpl<SetRoomMaster>(), &SetRoomMaster::ByteSizeLong,
-            &SetRoomMaster::_InternalSerialize,
-#endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(SetRoomMaster, _impl_._cached_size_),
-        false,
-    },
-    &SetRoomMaster::kDescriptorMethods,
-    &descriptor_table_Connect_2eproto,
-    nullptr,  // tracker
-};
-const ::google::protobuf::internal::ClassData* SetRoomMaster::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
-  return _class_data_.base();
-}
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 0, 0, 0, 2> SetRoomMaster::_table_ = {
-  {
-    0,  // no _has_bits_
-    0, // no _extensions_
-    0, 0,  // max_field_number, fast_idx_mask
-    offsetof(decltype(_table_), field_lookup_table),
-    4294967295,  // skipmap
-    offsetof(decltype(_table_), field_names),  // no field_entries
-    0,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
-    _class_data_.base(),
-    nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
-    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::ConnectMsg::SetRoomMaster>(),  // to_prefetch
-    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
-  }, {{
-    {::_pbi::TcParser::MiniParse, {}},
-  }}, {{
-    65535, 65535
-  }},
-  // no field_entries, or aux_entries
-  {{
-  }},
-};
-
-
-
-
-
-
-
-
-::google::protobuf::Metadata SetRoomMaster::GetMetadata() const {
-  return ::google::protobuf::internal::ZeroFieldsBase::GetMetadataImpl(GetClassData()->full());
-}
-// ===================================================================
-
-class Exit::_Internal {
- public:
-};
-
-Exit::Exit(::google::protobuf::Arena* arena)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  // @@protoc_insertion_point(arena_constructor:ConnectMsg.Exit)
-}
-Exit::Exit(
-    ::google::protobuf::Arena* arena,
-    const Exit& from)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  Exit* const _this = this;
-  (void)_this;
-  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
-      from._internal_metadata_);
-
-  // @@protoc_insertion_point(copy_constructor:ConnectMsg.Exit)
-}
-
-inline void* Exit::PlacementNew_(const void*, void* mem,
-                                        ::google::protobuf::Arena* arena) {
-  return ::new (mem) Exit(arena);
-}
-constexpr auto Exit::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(Exit),
-                                            alignof(Exit));
-}
-PROTOBUF_CONSTINIT
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull Exit::_class_data_ = {
-    ::google::protobuf::internal::ClassData{
-        &_Exit_default_instance_._instance,
-        &_table_.header,
-        nullptr,  // OnDemandRegisterArenaDtor
-        nullptr,  // IsInitialized
-        &Exit::MergeImpl,
-        ::google::protobuf::internal::ZeroFieldsBase::GetNewImpl<Exit>(),
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        &Exit::SharedDtor,
-        ::google::protobuf::internal::ZeroFieldsBase::GetClearImpl<Exit>(), &Exit::ByteSizeLong,
-            &Exit::_InternalSerialize,
-#endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(Exit, _impl_._cached_size_),
-        false,
-    },
-    &Exit::kDescriptorMethods,
-    &descriptor_table_Connect_2eproto,
-    nullptr,  // tracker
-};
-const ::google::protobuf::internal::ClassData* Exit::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
-  return _class_data_.base();
-}
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 0, 0, 0, 2> Exit::_table_ = {
-  {
-    0,  // no _has_bits_
-    0, // no _extensions_
-    0, 0,  // max_field_number, fast_idx_mask
-    offsetof(decltype(_table_), field_lookup_table),
-    4294967295,  // skipmap
-    offsetof(decltype(_table_), field_names),  // no field_entries
-    0,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
-    _class_data_.base(),
-    nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
-    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::ConnectMsg::Exit>(),  // to_prefetch
-    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
-  }, {{
-    {::_pbi::TcParser::MiniParse, {}},
-  }}, {{
-    65535, 65535
-  }},
-  // no field_entries, or aux_entries
-  {{
-  }},
-};
-
-
-
-
-
-
-
-
-::google::protobuf::Metadata Exit::GetMetadata() const {
-  return ::google::protobuf::internal::ZeroFieldsBase::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
 
@@ -1344,6 +1158,440 @@ void SyncObject::InternalSwap(SyncObject* PROTOBUF_RESTRICT other) {
 }
 
 ::google::protobuf::Metadata SyncObject::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class AddRemote::_Internal {
+ public:
+  using HasBits =
+      decltype(std::declval<AddRemote>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(AddRemote, _impl_._has_bits_);
+};
+
+AddRemote::AddRemote(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:ConnectMsg.AddRemote)
+}
+AddRemote::AddRemote(
+    ::google::protobuf::Arena* arena, const AddRemote& from)
+    : AddRemote(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE AddRemote::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void AddRemote::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.grantnumber_ = {};
+}
+AddRemote::~AddRemote() {
+  // @@protoc_insertion_point(destructor:ConnectMsg.AddRemote)
+  SharedDtor(*this);
+}
+inline void AddRemote::SharedDtor(MessageLite& self) {
+  AddRemote& this_ = static_cast<AddRemote&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* AddRemote::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) AddRemote(arena);
+}
+constexpr auto AddRemote::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(AddRemote),
+                                            alignof(AddRemote));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull AddRemote::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_AddRemote_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &AddRemote::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<AddRemote>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &AddRemote::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<AddRemote>(), &AddRemote::ByteSizeLong,
+            &AddRemote::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(AddRemote, _impl_._cached_size_),
+        false,
+    },
+    &AddRemote::kDescriptorMethods,
+    &descriptor_table_Connect_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* AddRemote::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> AddRemote::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(AddRemote, _impl_._has_bits_),
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::ConnectMsg::AddRemote>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // optional int32 grantnumber = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(AddRemote, _impl_.grantnumber_), 0>(),
+     {8, 0, 0, PROTOBUF_FIELD_OFFSET(AddRemote, _impl_.grantnumber_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // optional int32 grantnumber = 1;
+    {PROTOBUF_FIELD_OFFSET(AddRemote, _impl_.grantnumber_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void AddRemote::Clear() {
+// @@protoc_insertion_point(message_clear_start:ConnectMsg.AddRemote)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.grantnumber_ = 0;
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* AddRemote::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const AddRemote& this_ = static_cast<const AddRemote&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* AddRemote::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const AddRemote& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:ConnectMsg.AddRemote)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // optional int32 grantnumber = 1;
+          if (cached_has_bits & 0x00000001u) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_grantnumber(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:ConnectMsg.AddRemote)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t AddRemote::ByteSizeLong(const MessageLite& base) {
+          const AddRemote& this_ = static_cast<const AddRemote&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t AddRemote::ByteSizeLong() const {
+          const AddRemote& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:ConnectMsg.AddRemote)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // optional int32 grantnumber = 1;
+            cached_has_bits = this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_grantnumber());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void AddRemote::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<AddRemote*>(&to_msg);
+  auto& from = static_cast<const AddRemote&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:ConnectMsg.AddRemote)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    _this->_impl_.grantnumber_ = from._impl_.grantnumber_;
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void AddRemote::CopyFrom(const AddRemote& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:ConnectMsg.AddRemote)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void AddRemote::InternalSwap(AddRemote* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+        swap(_impl_.grantnumber_, other->_impl_.grantnumber_);
+}
+
+::google::protobuf::Metadata AddRemote::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class AddObject::_Internal {
+ public:
+  using HasBits =
+      decltype(std::declval<AddObject>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(AddObject, _impl_._has_bits_);
+};
+
+AddObject::AddObject(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:ConnectMsg.AddObject)
+}
+AddObject::AddObject(
+    ::google::protobuf::Arena* arena, const AddObject& from)
+    : AddObject(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE AddObject::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void AddObject::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.grantnumber_ = {};
+}
+AddObject::~AddObject() {
+  // @@protoc_insertion_point(destructor:ConnectMsg.AddObject)
+  SharedDtor(*this);
+}
+inline void AddObject::SharedDtor(MessageLite& self) {
+  AddObject& this_ = static_cast<AddObject&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* AddObject::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) AddObject(arena);
+}
+constexpr auto AddObject::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(AddObject),
+                                            alignof(AddObject));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull AddObject::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_AddObject_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &AddObject::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<AddObject>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &AddObject::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<AddObject>(), &AddObject::ByteSizeLong,
+            &AddObject::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(AddObject, _impl_._cached_size_),
+        false,
+    },
+    &AddObject::kDescriptorMethods,
+    &descriptor_table_Connect_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* AddObject::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> AddObject::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(AddObject, _impl_._has_bits_),
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::ConnectMsg::AddObject>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // optional int32 grantnumber = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(AddObject, _impl_.grantnumber_), 0>(),
+     {8, 0, 0, PROTOBUF_FIELD_OFFSET(AddObject, _impl_.grantnumber_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // optional int32 grantnumber = 1;
+    {PROTOBUF_FIELD_OFFSET(AddObject, _impl_.grantnumber_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void AddObject::Clear() {
+// @@protoc_insertion_point(message_clear_start:ConnectMsg.AddObject)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.grantnumber_ = 0;
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* AddObject::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const AddObject& this_ = static_cast<const AddObject&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* AddObject::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const AddObject& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:ConnectMsg.AddObject)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // optional int32 grantnumber = 1;
+          if (cached_has_bits & 0x00000001u) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_grantnumber(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:ConnectMsg.AddObject)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t AddObject::ByteSizeLong(const MessageLite& base) {
+          const AddObject& this_ = static_cast<const AddObject&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t AddObject::ByteSizeLong() const {
+          const AddObject& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:ConnectMsg.AddObject)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // optional int32 grantnumber = 1;
+            cached_has_bits = this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_grantnumber());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void AddObject::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<AddObject*>(&to_msg);
+  auto& from = static_cast<const AddObject&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:ConnectMsg.AddObject)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    _this->_impl_.grantnumber_ = from._impl_.grantnumber_;
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void AddObject::CopyFrom(const AddObject& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:ConnectMsg.AddObject)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void AddObject::InternalSwap(AddObject* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+        swap(_impl_.grantnumber_, other->_impl_.grantnumber_);
+}
+
+::google::protobuf::Metadata AddObject::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)

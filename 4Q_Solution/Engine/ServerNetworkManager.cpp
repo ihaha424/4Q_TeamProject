@@ -66,6 +66,11 @@ void Engine::ServerNetwork::Manager::DispatchPacket()
 		while (!_msgContainer->empty()) {
 			Packet packet = _msgContainer->front();
 			_msgContainer->pop();
+
+			if (_worldCallback.find(packet._packetId) != _worldCallback.end()) {
+				_worldCallback[packet._packetId](packet._serialNumber);
+			}
+
 			for (auto& terminal : _terminalList) {
 				_filter(terminal, packet);
 			}
@@ -76,4 +81,9 @@ void Engine::ServerNetwork::Manager::DispatchPacket()
 void Engine::ServerNetwork::Manager::SaveSendData(short packetId, std::string& data, long dataSize, int serialNum)
 {
 	Client::SavePacketData(data, packetId, dataSize, serialNum);
+}
+
+void Engine::ServerNetwork::Manager::RegistWorldEvent(short packetId, std::function<void(int)> callback)
+{
+	_worldCallback.insert({ packetId, callback });
 }

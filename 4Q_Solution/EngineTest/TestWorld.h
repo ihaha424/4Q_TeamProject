@@ -3,8 +3,8 @@
 #include "GlobalLight.h"
 #include "Terrain.h"
 #include "RemotePlayer.h"
-
-class ConnectMsg::EnterAccept;
+#include "Cube.h"
+#include "Sphere.h"
 
 class TestWorld : public Engine::World
 {
@@ -12,8 +12,10 @@ public:
 	TestWorld() = default;
 
 	void Prepare(Engine::Content::Factory::Object* objectFactory) override;
-	void EnterAccept(const ConnectMsg::EnterAccept* msg);
-	void SyncOtherPlayer(const ConnectMsg::SyncPlayer* msg);
+	void EnterAccept(int num);
+	void SyncOtherPlayer(int num);
+	void CreateStaticObject(int num);
+	void RequestData(int num);
     
 protected:
 	void PreInitialize(const Engine::Modules& moduels) override;
@@ -26,6 +28,9 @@ private:
 	GlobalLight* _light;
 	Terrain* _terrain;
 
-	int playerSerialNum = 0;
+	
+	std::vector<Cube*> _cubes;
+
+	bool _loadComplete = false;
 };
 

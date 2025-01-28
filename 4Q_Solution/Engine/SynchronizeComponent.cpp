@@ -6,9 +6,10 @@ Engine::Component::SynchronizeComponent::SynchronizeComponent() :
 {
 }
 
-void Engine::Component::SynchronizeComponent::Initialize()
+void Engine::Component::SynchronizeComponent::Initialize(const Modules& modules)
 {
-    Engine::Application::GetNetworkManager()->Register(static_cast<Engine::Network::Terminal*>(this));
+	Component::Initialize(modules);
+	Engine::Application::GetNetworkManager()->Register(static_cast<Engine::Network::Terminal*>(this));
 }
 
 void Engine::Component::SynchronizeComponent::Finalize()

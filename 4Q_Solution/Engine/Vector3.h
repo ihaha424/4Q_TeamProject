@@ -23,11 +23,9 @@ namespace Engine::Math
 		Vector3(DirectX::SimpleMath::Vector3 vector) noexcept;
 		Vector3(const Input::Value& value) noexcept;
 		Vector3(const PhysicsEngineAPI::Utils::Math::Vector3& value) noexcept;
-        Vector3(const PhysicsEngineAPI::Utils::Math::Vector3& value) noexcept;
 		
 		Vector3& operator=(const DirectX::SimpleMath::Vector3& vector) noexcept;
 		Vector3& operator=(const Input::Value& value) noexcept;
 		Vector3& operator=(const PhysicsEngineAPI::Utils::Math::Vector3& value) noexcept;
-        Vector3& operator=(const PhysicsEngineAPI::Utils::Math::Vector3& value) noexcept;
 	};
 }

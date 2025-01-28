@@ -26,10 +26,12 @@ void GameApplication::Register(Engine::Content::IManager* contentManager)
 	const auto worldFactory = contentManager->GetWorldFactory();
 	worldFactory->Register<TestWorld>();
 	const auto objectFactory = contentManager->GetObjectFactory();
-	objectFactory->Register<Player>(L"../Resources/FBX/char.fbx", L"../Resources/Font/�ü�12.sfont");
+	objectFactory->Register<Player>(L"../Resources/FBX/char.fbx", L"../Resources/Font/Gungseo12.sfont");
 	objectFactory->Register<RemotePlayer>(L"../Resources/Player/Player.X");
 	objectFactory->Register<GlobalLight>();
 	objectFactory->Register<Terrain>(L"../Resources/Level/Level.fbx");
+	const auto componentFactory = contentManager->GetComponentFactory();
+	componentFactory->Register<RemoteMoveComponent>();
 }
 
 void GameApplication::PrepareInitialWorld(Engine::Content::Factory::World* worldFactory)

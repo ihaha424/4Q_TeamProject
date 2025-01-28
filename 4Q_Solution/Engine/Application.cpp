@@ -16,7 +16,7 @@ Engine::GEGraphics::Manager* Engine::Application::_graphicsManager = nullptr;
 Engine::Input::Manager* Engine::Application::_inputManager = nullptr;
 Engine::Load::Manager* Engine::Application::_loadManager = nullptr;
 Engine::Content::Manager* Engine::Application::_contentManager = nullptr;
-Engine::ServerNetwork::Manager* Engine::Application::_networkManager = nullptr;
+Engine::Network::Manager* Engine::Application::_networkManager = nullptr;
 Engine::Physics::Manager* Engine::Application::_physicsManager = nullptr;
 
 Engine::Application::Application(const HINSTANCE instanceHandle):
@@ -137,6 +137,11 @@ void Engine::Application::Register(Content::IManager* contentManager)
 	componentFactory->Register<Component::TextRenderer>();
 	componentFactory->Register<Component::SkeletalMesh>();
 	componentFactory->Register<Component::Animator>();
+	componentFactory->Register<Component::RigidStaticComponent>();
+	componentFactory->Register<Component::RigidDynamicComponent>();
+	componentFactory->Register<Component::RigidKinematicComponent>();
+	componentFactory->Register<Component::RigidComponent>();
+	componentFactory->Register<Component::SynchronizeComponent>();
 	// TODO: Register other components.
 }
 
@@ -245,7 +250,7 @@ void Engine::Application::CreateGraphicsManager(GEGraphics::Manager** graphicsMa
 	}
 }
 
-void Engine::Application::CreateNetworkManager(ServerNetwork::Manager** networkManager)
+void Engine::Application::CreateNetworkManager(Network::Manager** networkManager)
 {
     constexpr Utility::ThrowIfFailed thrower;
     if (networkManager == nullptr) thrower(E_INVALIDARG);

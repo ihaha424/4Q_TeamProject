@@ -5,16 +5,6 @@ namespace Engine::GEGraphics
 	class Manager;
 }
 
-namespace Engine::ServerNetwork 
-{
-	class Manager;
-}
-
-namespace Engine::Physics
-{
-	class Manager;
-}
-
 namespace Engine
 {
 	class Application
@@ -67,7 +57,7 @@ namespace Engine
 		static void CreateWindowManager(Window::Manager** windowManager);
 		static void CreateInputManager(Input::Manager** inputManager);
 		static void CreateGraphicsManager(GEGraphics::Manager** graphicsManager);
-	    static void CreateNetworkManager(ServerNetwork::Manager** networkManager);
+	    static void CreateNetworkManager(Network::Manager** networkManager);
 	    static void CreatePhysicsManager(Physics::Manager** physicsManager);
 	    static void CreateLoadManager(Load::Manager** loadManager);
 		static void CreateContentManager(Content::Manager** contentManager);
@@ -76,7 +66,7 @@ namespace Engine
 		static Window::Manager* _windowManager;
 		static Input::Manager* _inputManager;
 		static GEGraphics::Manager* _graphicsManager;
-	    static ServerNetwork::Manager* _networkManager;
+	    static Network::Manager* _networkManager;
 	    static Physics::Manager* _physicsManager;
 	    static Load::Manager* _loadManager;
 		static Content::Manager* _contentManager;

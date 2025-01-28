@@ -48,7 +48,7 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	mappingContext->GetAction(L"Move", &moveAction);
 	moveAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
 	{
-		Engine::Math::Vector3 direction = _movement.GetDirection();
+		Engine::Math::Vector3 direction = _movement->GetDirection();
 		if (direction != Engine::Math::Vector3(value)) {
 			_movement->SetDirection(value);		
 			
@@ -57,9 +57,9 @@ void Player::PreInitialize(const Engine::Modules& modules)
 			_sync->_move.set_x(value.x);
 			_sync->_move.set_y(value.y);
 			_sync->_move.set_z(value.z);
-			_sync->_move.set_speed(_movement.GetSpeed());
+			_sync->_move.set_speed(_movement->GetSpeed());
 
-			_sync->_move.SerializeToString(&_sync._msgBuffer);
+			_sync->_move.SerializeToString(&_sync->_msgBuffer);
 
 			Engine::Application::GetNetworkManager()->SaveSendData(
 				(short)PacketID::Move,
@@ -87,7 +87,7 @@ void Player::PreInitialize(const Engine::Modules& modules)
 
 		_sync->_stateChange.set_serialnumber(1);
 		_sync->_stateChange.set_stateinfo(1);
-		_sync->_stateChange.SerializeToString(&_sync._msgBuffer);
+		_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
 
 		Engine::Application::GetNetworkManager()->SaveSendData(
 			(short)PacketID::StateChange,
@@ -111,7 +111,7 @@ void Player::PreInitialize(const Engine::Modules& modules)
 
 			_sync->_stateChange.set_serialnumber(1);
 			_sync->_stateChange.set_stateinfo(0);
-			_sync->_stateChange.SerializeToString(&_sync._msgBuffer);
+			_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
 
 			Engine::Application::GetNetworkManager()->SaveSendData(
 				(short)PacketID::StateChange,
@@ -181,25 +181,3 @@ void Player::PostFixedUpdate()
 {
 
 }
-
-/*
-RemotePlayer::RemotePlayer(std::filesystem::path&& meshPath):
-	_meshPath(std::forward<std::filesystem::path>(meshPath)), _skeletalMesh(nullptr), _animator(nullptr)
-	, _worldMatrix(Engine::Math::Matrix::Identity)
-{
-}
-
-void RemotePlayer::Prepare(Engine::Content::Factory::Component* componentFactory)
-{
-	_skeletalMesh = componentFactory->Clone<Engine::Component::SkeletalMesh>();
-	_animator = componentFactory->Clone<Engine::Component::Animator>();
-}
-
-void RemotePlayer::PreInitialize(const Engine::Modules& modules)
-{
-	Object::PreInitialize(modules);
-	_skeletalMesh->SetFilePath(_meshPath);
-	_skeletalMesh->SetMatrix(&_worldMatrix);
-	_animator->SetSkeletalMesh(_skeletalMesh);
-}
-*/

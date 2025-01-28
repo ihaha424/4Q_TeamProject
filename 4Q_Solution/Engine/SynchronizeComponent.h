@@ -32,7 +32,7 @@ namespace Engine::Component
 	public:
 		SynchronizeComponent();
 
-		void Initialize() override;
+		void Initialize(const Modules& modules) override;
 		void Finalize() override;
 
 		void InvokeMessage(const Packet& packet) override;

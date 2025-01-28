@@ -28,32 +28,3 @@ private:
 	Engine::Component::TextRenderer* _textRenderer;
 	Engine::Component::SynchronizeComponent* _sync;
 };
-
-/*
-class RemotePlayer : public Engine::Object
-{
-public:
-	explicit RemotePlayer(std::filesystem::path&& meshPath);
-
-	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
-
-protected:
-	void DisposeComponents() override;
-
-	void PreInitialize(const Engine::Modules& modules) override;
-
-private:
-	std::filesystem::path _meshPath;
-
-	Engine::Component::SkeletalMesh* _skeletalMesh;
-	Engine::Component::Animator* _animator;
-	Engine::Math::Matrix _worldMatrix;
-	
-};
-
-inline void RemotePlayer::DisposeComponents()
-{
-	_skeletalMesh->Dispose();
-	_animator->Dispose();
-}
-*/

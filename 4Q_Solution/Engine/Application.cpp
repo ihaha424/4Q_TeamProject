@@ -27,26 +27,11 @@ void Engine::Application::Begin()
 	LoadGameData();
 	InitializeManagers();
 	DeclareInputActions(_inputManager);
-	Register(_loadManager, _contentManager);
-
-	//Before
-	Setup({ _graphicsManager });
-	InitializeContents();
+	Register(_contentManager);
+	PrepareInitialWorld(_contentManager->GetWorldFactory());
 }
 
-void Engine::Application::Setup(Modules modules)
-{
-	std::ranges::for_each(_worlds, [modules](World* world) { world->Setup(modules); });
-}
-
-
-void Engine::Application::InitializeContents()
-{
-	// TODO: WOC Manager Initialize;
-	std::ranges::for_each(_worlds, [](World* world) { world->Initialize(); });
-}
-
-void Engine::Application::Run(const int showCommand) const
+void Engine::Application::Run(const int showCommand)
 {
 	_windowManager->Show(showCommand);
 	_windowManager->Update();
@@ -66,11 +51,23 @@ void Engine::Application::Run(const int showCommand) const
 			const float deltaTime = _timeManager->GetDeltaTime();
 			_timeManager->Tick();
 			_inputManager->Update(metaTime);
-			_graphicsManager->Update(deltaTime);
+			_graphicsManager->PreUpdate(deltaTime);
 
-			_drive.Update(deltaTime);
-			// TODO: Alarm Timer for Fixed Update
+			_contentManager->Contraction(Modules{ 
+				.graphicsManager = _graphicsManager,
+				.loadManager = _loadManager
+			});
 
+			_contentManager->Update(deltaTime);
+
+			while (_timeManager->IsFixedUpdate())
+			{
+				_contentManager->FixedUpdate();
+			}
+
+			_contentManager->Relaxation();
+
+			_graphicsManager->PostUpdate(deltaTime);
 			_graphicsManager->Render();
 			_inputManager->Reset();
 		}
@@ -79,15 +76,8 @@ void Engine::Application::Run(const int showCommand) const
 
 void Engine::Application::End()
 {
-	FinalizeContents();
 	FinalizeManagers();
 	DeleteManagers();
-}
-
-void Engine::Application::FinalizeContents()
-{
-	// TODO: WOC Manager Finalize;
-	std::ranges::for_each(_worlds, [](World* world) { world->Finalize(); });
 }
 
 Engine::Time::IManager* Engine::Application::GetTimeManager()
@@ -117,14 +107,17 @@ Engine::Content::IManager* Engine::Application::GetContentManager()
 	return contentManager;
 }
 
-void Engine::Application::AddWorld(World* world)
+void Engine::Application::Register(Content::IManager* contentManager)
 {
-	_worlds.push_back(world);
-}
-
-void Engine::Application::Attach(World* world)
-{
-	_drive.AttachWorld(world, nullptr);
+	const auto componentFactory = contentManager->GetComponentFactory();
+	componentFactory->Register<Component::MovementComponent>();
+	componentFactory->Register<Component::Light>();
+	componentFactory->Register<Component::StaticMesh>();
+	componentFactory->Register<Component::CameraComponent>(1.f, 1000.f, _size, std::numbers::pi_v<float> / 4);
+	componentFactory->Register<Component::TextRenderer>();
+	componentFactory->Register<Component::SkeletalMesh>();
+	componentFactory->Register<Component::Animator>();
+	// TODO: Register other components.
 }
 
 void Engine::Application::CreateManagers()
@@ -139,11 +132,11 @@ void Engine::Application::CreateManagers()
 
 void Engine::Application::InitializeManagers() const
 {
-	_timeManager->Initialize();
+	_timeManager->Initialize(0.2f);
 	_windowManager->Initialize(_instanceHandle, _title.c_str(), _size);
 	_inputManager->Initialize(_windowManager->GetHandle());
 	_graphicsManager->Initialize(_windowManager->GetHandle(), L"../Shaders/", _size, false, 1);
-
+	_contentManager->Initialize();
 }
 
 void Engine::Application::LoadGameData()
@@ -151,18 +144,18 @@ void Engine::Application::LoadGameData()
 	_loadManager->Initialize(_gameDataPath);
 
 	const auto configData = _loadManager->GetGameConfigData();
-	_title = configData.GetProperty<std::wstring>(L"Title").value_or("Game");
+	_title = configData.GetProperty<std::wstring>(L"Title").value_or(L"Game");
 	_size = configData.GetProperty<Math::Size>(L"Size").value_or(Math::Size{ 1920, 1080 });
 }
 
 void Engine::Application::FinalizeManagers()
 {
-	_timeManager->Finalize();
-	_windowManager->Finalize();
-	_inputManager->Finalize();
-	_graphicsManager->Finalize();
-	_loadManager->Finalize();
 	_contentManager->Finalize();
+	_loadManager->Finalize();
+	_graphicsManager->Finalize();
+	_inputManager->Finalize();
+	_windowManager->Finalize();
+	_timeManager->Finalize();
 }
 
 void Engine::Application::DeleteManagers()

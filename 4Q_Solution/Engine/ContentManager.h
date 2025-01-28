@@ -4,6 +4,7 @@ namespace Engine
 {
 	class World;
 	class Object;
+	struct Modules;
 
 	namespace Component
 	{
@@ -20,14 +21,20 @@ namespace Engine
 			IManager& operator=(IManager&& other) noexcept = default;
 			virtual ~IManager() = default;
 
-			virtual Factory<World>& GetWorldFactory() = 0;
-			virtual Factory<Object>& GetObjectFactory() = 0;
-			virtual Factory<Component::Component>& GetComponentFactory() = 0;
+			virtual Factory::World* GetWorldFactory() = 0;
+			virtual Factory::Object* GetObjectFactory() = 0;
+			virtual Factory::Component* GetComponentFactory() = 0;
 		};
 
 		struct Manager : IManager
 		{
+			virtual void Initialize() = 0;
 			virtual void Finalize() = 0;
+
+			virtual void Contraction(const Modules& modules) = 0;
+			virtual void Update(float deltaTime) = 0;
+			virtual void FixedUpdate() = 0;
+			virtual void Relaxation() = 0;
 		};
 	}
 

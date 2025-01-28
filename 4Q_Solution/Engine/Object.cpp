@@ -1,63 +1,22 @@
 #include "pch.h"
 #include "Object.h"
 
-void Engine::Object::Setup(Modules modules)
+void Engine::Object::Dispose()
 {
-	Addition();
-	std::ranges::for_each(_components, [modules](Component::Component* component) { component->Setup(modules); });
+	DisposeComponents();
+	_isDispose = true;
 }
 
-void Engine::Object::Initialize()
+bool Engine::Object::IsDisposed() const
 {
-	PreInitialize();
-	std::ranges::for_each(_components, [](Component::Component* component) { component->Initialize(); });
-	PostInitialize();
+	return _isDispose;
 }
 
-void Engine::Object::Attach()
-{
-	PreAttach();
-	std::ranges::for_each(_components, [](Component::Component* component) { component->Attach(); });
-	PostAttach();
-}
-
-void Engine::Object::Update(float deltaTime)
-{
-	PreUpdate(deltaTime);
-	std::ranges::for_each(_components, [deltaTime](Component::Component* component) { component->Update(deltaTime); });
-	PostUpdate(deltaTime);
-}
-
-void Engine::Object::FixedUpdate()
-{
-	PreFixedUpdate();
-	std::ranges::for_each(_components, [](Component::Component* component) { component->FixedUpdate(); });
-	PostFixedUpdate();
-}
-
-void Engine::Object::Detach()
-{
-	PreDetach();
-	std::ranges::for_each(_components, [](Component::Component* component) { component->Detach(); });
-	PostDetach();
-}
-
-void Engine::Object::Finalize()
-{
-	PreFinalize();
-	std::ranges::for_each(_components, [](Component::Component* component) { component->Finalize(); });
-	PostFinalize();
-}
-
-void Engine::Object::Addition()
+void Engine::Object::PreInitialize(const Modules& modules)
 {
 }
 
-void Engine::Object::PreInitialize()
-{
-}
-
-void Engine::Object::PostInitialize()
+void Engine::Object::PostInitialize(const Modules& modules)
 {
 }
 
@@ -99,9 +58,4 @@ void Engine::Object::PreFinalize()
 
 void Engine::Object::PostFinalize()
 {
-}
-
-void Engine::Object::AddComponent(Component::Component* component)
-{
-	_components.push_back(component);
 }

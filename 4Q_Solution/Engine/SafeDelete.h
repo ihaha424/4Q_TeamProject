@@ -8,7 +8,7 @@ namespace Engine::Utility
 		void operator()(T** instance) const;
 
 		template <typename T>
-		void operator()(T* instance) const;
+		void operator()(T*& instance) const;
 	};
 
 	template <typename T>
@@ -21,10 +21,11 @@ namespace Engine::Utility
 	}
 
 	template <typename T>
-	void SafeDelete::operator()(T* instance) const
+	void SafeDelete::operator()(T*& instance) const
 	{
 		if (instance == nullptr) return;
 		delete instance;
+		instance = nullptr;
 	}
 }
 

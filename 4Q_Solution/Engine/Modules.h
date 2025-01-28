@@ -9,6 +9,11 @@
 
 namespace Engine
 {
+	namespace Load
+	{
+		struct IManager;
+	}
+
 	namespace GEGraphics
 	{
 		class Manager;
@@ -16,5 +21,6 @@ namespace Engine
 	struct Modules
 	{
 		GEGraphics::Manager* graphicsManager;
+		Load::IManager* loadManager;
 	};
 }

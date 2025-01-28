@@ -25,9 +25,6 @@
     <Filter Include="Utilities\SafeRelease">
       <UniqueIdentifier>{96f21709-eb70-4c66-a1b3-5407a8d2c999}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Drive">
-      <UniqueIdentifier>{a59af320-cec3-4a8b-99de-639155a7dba7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Components">
       <UniqueIdentifier>{33eaf238-cd64-4fab-9f84-f1d33c3e4383}</UniqueIdentifier>
     </Filter>
@@ -277,11 +274,23 @@
     <Filter Include="Modules\Difinition\DSHContent\Manager">
       <UniqueIdentifier>{2f2f98e3-fc95-44e9-ab1f-85adc155f3c8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\Interfaces\Content\Factory">
-      <UniqueIdentifier>{4b6022f6-b7ee-432d-b41f-62462ac614c9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Utilities\SafeFinalize">
       <UniqueIdentifier>{9e58cd4e-35b4-47c0-90f3-51c8f7b003d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Content\Factories">
+      <UniqueIdentifier>{4b6022f6-b7ee-432d-b41f-62462ac614c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Content\Factories\Content">
+      <UniqueIdentifier>{941f4ec6-f871-4b39-aa64-e9d509d65b65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Content\Factories\WorldFactory">
+      <UniqueIdentifier>{3fbb5265-560c-45b3-a905-ca2a98c9e63a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Content\Factories\ObjectFactory">
+      <UniqueIdentifier>{ec8b69f6-9c23-4b7b-bd07-85aac9abe8d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Content\Factories\ComponentFactory">
+      <UniqueIdentifier>{49f4dd88-1368-4002-83d1-9f6aab228935}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -302,9 +311,6 @@
     </ClInclude>
     <ClInclude Include="SafeRelease.h">
       <Filter>Utilities\SafeRelease</Filter>
-    </ClInclude>
-    <ClInclude Include="Drive.h">
-      <Filter>Drive</Filter>
     </ClInclude>
     <ClInclude Include="Components.h">
       <Filter>Components</Filter>
@@ -525,11 +531,23 @@
     <ClInclude Include="DSHContentManager.h">
       <Filter>Modules\Difinition\DSHContent\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="ContentFactory.h">
-      <Filter>Modules\Interfaces\Content\Factory</Filter>
-    </ClInclude>
     <ClInclude Include="SafeFinalize.h">
       <Filter>Utilities\SafeFinalize</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentFactory.h">
+      <Filter>Modules\Interfaces\Content\Factories\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldFactory.h">
+      <Filter>Modules\Interfaces\Content\Factories\WorldFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentFactory.h">
+      <Filter>Modules\Interfaces\Content\Factories\ComponentFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFactory.h">
+      <Filter>Modules\Interfaces\Content\Factories\ObjectFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="Factories.h">
+      <Filter>Modules\Interfaces\Content\Factories</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -544,9 +562,6 @@
     </ClCompile>
     <ClCompile Include="SafeRelease.cpp">
       <Filter>Utilities\SafeRelease</Filter>
-    </ClCompile>
-    <ClCompile Include="Drive.cpp">
-      <Filter>Drive</Filter>
     </ClCompile>
     <ClCompile Include="CameraComponent.cpp">
       <Filter>Components\Camera</Filter>
@@ -731,11 +746,20 @@
     <ClCompile Include="DSHContentManager.cpp">
       <Filter>Modules\Difinition\DSHContent\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="ContentFactory.cpp">
-      <Filter>Modules\Interfaces\Content\Factory</Filter>
-    </ClCompile>
     <ClCompile Include="SafeFinalize.cpp">
       <Filter>Utilities\SafeFinalize</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentFactory.cpp">
+      <Filter>Modules\Interfaces\Content\Factories\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldFactory.cpp">
+      <Filter>Modules\Interfaces\Content\Factories\WorldFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentFactory.cpp">
+      <Filter>Modules\Interfaces\Content\Factories\ComponentFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFactory.cpp">
+      <Filter>Modules\Interfaces\Content\Factories\ObjectFactory</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

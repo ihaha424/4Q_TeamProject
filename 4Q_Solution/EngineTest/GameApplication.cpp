@@ -10,8 +10,6 @@ GameApplication::GameApplication(const HINSTANCE instanceHandle) :
 
 void GameApplication::DeclareInputActions(Engine::Input::IManager* inputManager)
 {
-    Application::DeclareInputActions(inputManager);
-
     Engine::Input::IMappingContext* mappingContext = nullptr;
     inputManager->GetMappingContext(L"Default", &mappingContext);
 
@@ -21,35 +19,21 @@ void GameApplication::DeclareInputActions(Engine::Input::IManager* inputManager)
     inputManager->SetActiveMappingContext(mappingContext);
 }
 
-void GameApplication::Register(Engine::Load::IManager* loadManager, Engine::Content::IManager* contentManager)
+void GameApplication::Register(Engine::Content::IManager* contentManager)
 {
-	if (const auto testWorldData =	loadManager->GetWorldConfigData(L"TestWorld"); testWorldData.has_value())
-	{
-		const auto argument1 = testWorldData->GetProperty<std::wstring>(L"Argument1");
-		const auto argument2 = testWorldData->GetProperty<int>(L"Argument2");
-		auto factory = contentManager->GetWorldFactory();
-		factory.Register<TestWorld>(argument1.value_or(L"Hi"), argument2.value_or(1));
-	}
-
-	if (const auto playerData = loadManager->GetObjectConfigData(L"Player"); playerData.has_value())
-	{
-		const auto argument1 = playerData->GetProperty<int>(L"Argument1");
-		const auto argument2 = playerData->GetProperty<int>(L"Argument2");
-		auto factory = contentManager->GetObjectFactory();
-		factory.Register<Player>(argument1.value_or(1), argument2.value_or(2));
-	}
-
-	if (const auto movementComponentData = loadManager->GetComponentConfigData(L"MovementComponent"); movementComponentData.has_value())
-	{
-		auto factory = contentManager->GetComponentFactory();
-		factory.Register<Engine::Component::MovementComponent>();
-	}
+	Application::Register(contentManager);
+	const auto worldFactory = contentManager->GetWorldFactory();
+	worldFactory->Register<TestWorld>();
+	const auto objectFactory = contentManager->GetObjectFactory();
+	objectFactory->Register<Player>(L"../Resources/FBX/char.fbx", L"../Resources/Font/±Ã¼­12.sfont");
+	objectFactory->Register<RemotePlayer>(L"../Resources/Player/Player.X");
+	objectFactory->Register<GlobalLight>();
+	objectFactory->Register<Terrain>(L"../Resources/Level/Level.fbx");
 }
 
-void GameApplication::InitializeContents()
+void GameApplication::PrepareInitialWorld(Engine::Content::Factory::World* worldFactory)
 {
-	Application::InitializeContents();
-	Attach(&_world);
+	worldFactory->Clone<TestWorld>();
 }
 
 void GameApplication::DeclareMoveAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext)

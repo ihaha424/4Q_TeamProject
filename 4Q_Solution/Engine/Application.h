@@ -10,7 +10,7 @@ namespace Engine
 	class Application
 	{
 	public:
-		Application(HINSTANCE instanceHandle);
+		explicit Application(HINSTANCE instanceHandle);
 		Application(const Application& other) = default;
 		Application(Application&& other) noexcept = default;
 		Application& operator=(const Application& other) = default;
@@ -19,19 +19,13 @@ namespace Engine
 
 
 		void Begin();
-		void Run(int showCommand) const;
+		void Run(int showCommand);
 		void End();
 
 	protected:
-		void AddWorld(World* world); // TODO: Remove this.
-		void Attach(World* world);
-
 		virtual void DeclareInputActions(Input::IManager* inputManager) = 0;
-		virtual void Register(Load::IManager* loadManager, Content::IManager* contentManager) = 0;
-
-		void Setup(Modules modules);
-		virtual void InitializeContents();
-		virtual void FinalizeContents();
+		virtual void Register(Content::IManager* contentManager);
+		virtual void PrepareInitialWorld(Content::Factory::World* worldFactory) = 0;
 
 	private:
 		static void CreateManagers();
@@ -43,14 +37,11 @@ namespace Engine
 
 		HINSTANCE _instanceHandle;
 
-		std::filesystem::path _gameDataPath; // TODO: Setup from constructor.
+		std::filesystem::path _gameDataPath;
 
 		// TODO: Setup from file.
 		std::wstring _title;
 		Math::Size _size;
-
-		Drive _drive;
-		std::vector<World*> _worlds; // TODO: Remove this.
 
 	public:
 		static Time::IManager* GetTimeManager();

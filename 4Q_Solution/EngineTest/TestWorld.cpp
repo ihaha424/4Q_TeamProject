@@ -1,16 +1,10 @@
 #include "pch.h"
 #include "TestWorld.h"
 
-TestWorld::TestWorld(std::wstring argument1, int argument2)
+void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 {
-	// Nothing to do
-}
-
-void TestWorld::Addition()
-{
-	World::Addition();
-	AddObject(&_player);
-	AddObject(&_remote);
-	AddObject(&_light);
-	AddObject(&_terrain);
+	_player = objectFactory->Clone<Player>();
+	_remote = objectFactory->Clone<RemotePlayer>();
+	_light = objectFactory->Clone<GlobalLight>();
+	_terrain = objectFactory->Clone<Terrain>();
 }

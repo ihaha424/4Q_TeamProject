@@ -2,6 +2,8 @@
 
 namespace Engine
 {
+	struct Modules;
+
 	namespace Component
 	{
 		class Component;
@@ -17,18 +19,12 @@ namespace Engine
 		Object& operator=(Object&& other) noexcept = default;
 		virtual ~Object() = default;
 
-		void Setup(Modules modules); // Refactor this.
-		void Initialize();
-		void Attach();
-		void Update(float deltaTime);
-		void FixedUpdate();
-		void Detach();
-		void Finalize();
+		virtual void Prepare(Content::Factory::Component* componentFactory) = 0;
+		void Dispose();
+		[[nodiscard]] bool IsDisposed() const;
 
-	protected:
-		virtual void Addition(); // TODO: Remove this.
-		virtual void PreInitialize();
-		virtual void PostInitialize();
+		virtual void PreInitialize(const Modules& modules);
+		virtual void PostInitialize(const Modules& modules);
 		virtual void PreAttach();
 		virtual void PostAttach();
 		virtual void PreUpdate(float deltaTime);
@@ -40,12 +36,12 @@ namespace Engine
 		virtual void PreFinalize();
 		virtual void PostFinalize();
 
-		void AddComponent(Component::Component* component); // TODO: Refactor
+	protected:
+		virtual void DisposeComponents() = 0;
 
 		Transform _transform;
+		bool _isDispose;
 
 		// TODO: Owner
-	private:
-		std::vector<Component::Component*> _components;
 	};
 }

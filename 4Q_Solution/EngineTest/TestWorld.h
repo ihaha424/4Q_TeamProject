@@ -7,14 +7,13 @@ class TestWorld : public Engine::World
 {
 public:
 	TestWorld() = default;
-	TestWorld(std::wstring argument1, int argument2); // TODO: Temporary
-protected:
-	void Addition() override;
+
+	void Prepare(Engine::Content::Factory::Object* objectFactory) override;
 
 private:
-	Player _player;
-	RemotePlayer _remote;
-	GlobalLight _light;
-	Terrain _terrain;
+	Player* _player;
+	RemotePlayer* _remote;
+	GlobalLight* _light;
+	Terrain* _terrain;
 };
 

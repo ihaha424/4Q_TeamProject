@@ -10,7 +10,8 @@ namespace Engine::GEGraphics
 
 		void Initialize(HWND windowHandle, const std::filesystem::path& shaderRootPath, SIZE screenSize,
 			bool isFullScreen, UINT animationThreadCount) override;
-		void Update(float deltaTime) const override;
+		void PreUpdate(float deltaTime) const override;
+		void PostUpdate(float deltaTime) const override;
 		void Render() const override;
 		void Finalize() override;
 

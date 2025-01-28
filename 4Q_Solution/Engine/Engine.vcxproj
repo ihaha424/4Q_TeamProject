@@ -179,6 +179,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Application.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="ComponentFactory.h" />
     <ClInclude Include="Components.h" />
     <ClInclude Include="ConfigData.h" />
     <ClInclude Include="Content.h" />
@@ -187,7 +188,6 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Controller.h" />
     <ClInclude Include="DotTween.h" />
     <ClInclude Include="Down.h" />
-    <ClInclude Include="Drive.h" />
     <ClInclude Include="DSHAction.h" />
     <ClInclude Include="DSHContentManager.h" />
     <ClInclude Include="DSHController.h" />
@@ -205,6 +205,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="DSHWindowManager.h" />
     <ClInclude Include="EasingFunction.h" />
     <ClInclude Include="Engine.h" />
+    <ClInclude Include="Factories.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GEGraphicsCamera.h" />
     <ClInclude Include="GEGraphicsManager.h" />
@@ -231,6 +232,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="Negative.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="SafeDelete.h" />
@@ -256,6 +258,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Window.h" />
     <ClInclude Include="WindowManager.h" />
     <ClInclude Include="World.h" />
+    <ClInclude Include="WorldFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
@@ -263,13 +266,13 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="ComponentFactory.cpp" />
     <ClCompile Include="ConfigData.cpp" />
     <ClCompile Include="ContentFactory.cpp" />
     <ClCompile Include="ContentManager.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="DotTween.cpp" />
     <ClCompile Include="Down.cpp" />
-    <ClCompile Include="Drive.cpp" />
     <ClCompile Include="DSHAction.cpp" />
     <ClCompile Include="DSHContentManager.cpp" />
     <ClCompile Include="DSHController.cpp" />
@@ -306,6 +309,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="Negative.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="SafeDelete.cpp" />
@@ -331,6 +335,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Vector3.cpp" />
     <ClCompile Include="WindowManager.cpp" />
     <ClCompile Include="World.cpp" />
+    <ClCompile Include="WorldFactory.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

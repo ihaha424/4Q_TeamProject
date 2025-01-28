@@ -10,12 +10,9 @@ namespace Engine
 		class Component;
 	}
 
-	namespace Content
+	namespace Content::Factory
 	{
 		template <typename T>
-		concept is_content = std::derived_from<T, World> || std::derived_from<T, Object> || std::derived_from<T, Component::Component>;
-
-		template <is_content T>
 		class Factory
 		{
 		public:
@@ -26,20 +23,19 @@ namespace Engine
 			}
 
 			template <typename U, typename... Args> requires std::derived_from<U, T>&& std::constructible_from<U, Args...>
-			void Register(Args... arguments)
+			void Register(Args&&... arguments)
 			{
 				std::type_index type = typeid(U);
 				if (_origins.contains(type)) return;
-				_origins[type] = new U(arguments...);
+				_origins[type] = new U(std::forward<Args>(arguments)...);
 			}
 
 			template <typename U> requires std::derived_from<U, T>
-			U* Clone()
+			U* Copy()
 			{
-				// TODO: Is this good?
 				U* clone = nullptr;
 				std::type_index type = typeid(U);
-				if (auto origin = _origins.find(type); 
+				if (auto origin = _origins.find(type);
 					origin != _origins.end())
 				{
 					if (const U* casted = dynamic_cast<U*>(origin->second))

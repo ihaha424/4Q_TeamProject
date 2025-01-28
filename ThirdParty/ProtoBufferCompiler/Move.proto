@@ -3,26 +3,22 @@ syntax = "proto3";
 package MoveMsg;
 
 message Move {
-	optional int32 serialnumber = 1;
-	optional float x = 2;
-	optional float y = 3;
-	optional float z = 4;
-	optional float speed = 5;
+	optional float x = 1;
+	optional float y = 2;
+	optional float z = 3;
+	optional float speed = 4;
 }
 
 message Jump {
-	optional int32 serialnumber = 1;
-	optional float power = 2;
+	optional float power = 1;
 }
 
 message StateChange {
-	optional int32 serialnumber = 1;
-	optional int32 stateinfo = 2;
+	optional int32 stateinfo = 1;
 }
 
 message MoveSync {
-	optional int32 serialnumber = 1;
-	optional float x = 2;
-	optional float y = 3;
-	optional float z = 4;
+	optional float x = 1;
+	optional float y = 2;
+	optional float z = 3;
 }

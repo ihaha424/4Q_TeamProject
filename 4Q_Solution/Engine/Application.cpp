@@ -95,7 +95,7 @@ void Engine::Application::Run(const int showCommand)
 			_timeManager->Tick();
 			_inputManager->Update(metaTime);
 			_graphicsManager->Update(deltaTime);
-			// _networkManager->DispatchPacket();
+			_networkManager->DispatchPacket();
 			_physicsManager->Update(deltaTime);
 			_physicsManager->FetchSecne(true);
 			_drive.Update(deltaTime);
@@ -132,8 +132,8 @@ void Engine::Application::FinalizeManagers() const
 	deleter(&_windowManager);
 	_timeManager->Finalize();
 	deleter(&_timeManager);
-	//_networkManager->Finalize();
-	//deleter(&_networkManager);
+	_networkManager->Finalize();
+	deleter(&_networkManager);
 	_physicsManager->Finalize();
 	deleter(&_physicsManager);
 }

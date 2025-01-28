@@ -29,7 +29,6 @@ namespace PlayMsg {
 inline constexpr SelectPart::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
-        serialnumber_{0},
         selectpart_{0} {}
 
 template <typename>
@@ -118,10 +117,8 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::PlayMsg::SelectPart, _impl_.serialnumber_),
         PROTOBUF_FIELD_OFFSET(::PlayMsg::SelectPart, _impl_.selectpart_),
         0,
-        1,
         PROTOBUF_FIELD_OFFSET(::PlayMsg::InteractDialog, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::PlayMsg::InteractDialog, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -148,9 +145,9 @@ const ::uint32_t
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-        {0, 10, -1, sizeof(::PlayMsg::SelectPart)},
-        {12, 22, -1, sizeof(::PlayMsg::InteractDialog)},
-        {24, 33, -1, sizeof(::PlayMsg::DialogProgress)},
+        {0, 9, -1, sizeof(::PlayMsg::SelectPart)},
+        {10, 20, -1, sizeof(::PlayMsg::InteractDialog)},
+        {22, 31, -1, sizeof(::PlayMsg::DialogProgress)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::PlayMsg::_SelectPart_default_instance_._instance,
@@ -159,19 +156,18 @@ static const ::_pb::Message* const file_default_instances[] = {
 };
 const char descriptor_table_protodef_Play_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\nPlay.proto\022\007PlayMsg\"`\n\nSelectPart\022\031\n\014s"
-    "erialnumber\030\001 \001(\005H\000\210\001\001\022\027\n\nselectpart\030\002 \001"
-    "(\005H\001\210\001\001B\017\n\r_serialnumberB\r\n\013_selectpart\""
-    "X\n\016InteractDialog\022\025\n\010dialogid\030\001 \001(\005H\000\210\001\001"
-    "\022\025\n\010buttonid\030\002 \001(\005H\001\210\001\001B\013\n\t_dialogidB\013\n\t"
-    "_buttonid\"<\n\016DialogProgress\022\031\n\014nextdialo"
-    "gid\030\001 \001(\005H\000\210\001\001B\017\n\r_nextdialogidb\006proto3"
+    "\n\nPlay.proto\022\007PlayMsg\"4\n\nSelectPart\022\027\n\ns"
+    "electpart\030\001 \001(\005H\000\210\001\001B\r\n\013_selectpart\"X\n\016I"
+    "nteractDialog\022\025\n\010dialogid\030\001 \001(\005H\000\210\001\001\022\025\n\010"
+    "buttonid\030\002 \001(\005H\001\210\001\001B\013\n\t_dialogidB\013\n\t_but"
+    "tonid\"<\n\016DialogProgress\022\031\n\014nextdialogid\030"
+    "\001 \001(\005H\000\210\001\001B\017\n\r_nextdialogidb\006proto3"
 };
 static ::absl::once_flag descriptor_table_Play_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_Play_2eproto = {
     false,
     false,
-    279,
+    235,
     descriptor_table_protodef_Play_2eproto,
     "Play.proto",
     &descriptor_table_Play_2eproto_once,
@@ -216,12 +212,7 @@ inline PROTOBUF_NDEBUG_INLINE SelectPart::Impl_::Impl_(
 
 inline void SelectPart::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  ::memset(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, serialnumber_),
-           0,
-           offsetof(Impl_, selectpart_) -
-               offsetof(Impl_, serialnumber_) +
-               sizeof(Impl_::selectpart_));
+  _impl_.selectpart_ = {};
 }
 SelectPart::~SelectPart() {
   // @@protoc_insertion_point(destructor:PlayMsg.SelectPart)
@@ -270,15 +261,15 @@ const ::google::protobuf::internal::ClassData* SelectPart::GetClassData() const 
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<1, 2, 0, 0, 2> SelectPart::_table_ = {
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> SelectPart::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(SelectPart, _impl_._has_bits_),
     0, // no _extensions_
-    2, 8,  // max_field_number, fast_idx_mask
+    1, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967292,  // skipmap
+    4294967294,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    2,  // num_field_entries
+    1,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
@@ -288,20 +279,14 @@ const ::_pbi::TcParseTable<1, 2, 0, 0, 2> SelectPart::_table_ = {
     ::_pbi::TcParser::GetTable<::PlayMsg::SelectPart>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // optional int32 selectpart = 2;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SelectPart, _impl_.selectpart_), 1>(),
-     {16, 1, 0, PROTOBUF_FIELD_OFFSET(SelectPart, _impl_.selectpart_)}},
-    // optional int32 serialnumber = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SelectPart, _impl_.serialnumber_), 0>(),
-     {8, 0, 0, PROTOBUF_FIELD_OFFSET(SelectPart, _impl_.serialnumber_)}},
+    // optional int32 selectpart = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SelectPart, _impl_.selectpart_), 0>(),
+     {8, 0, 0, PROTOBUF_FIELD_OFFSET(SelectPart, _impl_.selectpart_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // optional int32 serialnumber = 1;
-    {PROTOBUF_FIELD_OFFSET(SelectPart, _impl_.serialnumber_), _Internal::kHasBitsOffset + 0, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
-    // optional int32 selectpart = 2;
-    {PROTOBUF_FIELD_OFFSET(SelectPart, _impl_.selectpart_), _Internal::kHasBitsOffset + 1, 0,
+    // optional int32 selectpart = 1;
+    {PROTOBUF_FIELD_OFFSET(SelectPart, _impl_.selectpart_), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
   }},
   // no aux_entries
@@ -316,12 +301,7 @@ PROTOBUF_NOINLINE void SelectPart::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000003u) {
-    ::memset(&_impl_.serialnumber_, 0, static_cast<::size_t>(
-        reinterpret_cast<char*>(&_impl_.selectpart_) -
-        reinterpret_cast<char*>(&_impl_.serialnumber_)) + sizeof(_impl_.selectpart_));
-  }
+  _impl_.selectpart_ = 0;
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
@@ -342,17 +322,10 @@ PROTOBUF_NOINLINE void SelectPart::Clear() {
           (void)cached_has_bits;
 
           cached_has_bits = this_._impl_._has_bits_[0];
-          // optional int32 serialnumber = 1;
+          // optional int32 selectpart = 1;
           if (cached_has_bits & 0x00000001u) {
             target = ::google::protobuf::internal::WireFormatLite::
                 WriteInt32ToArrayWithField<1>(
-                    stream, this_._internal_serialnumber(), target);
-          }
-
-          // optional int32 selectpart = 2;
-          if (cached_has_bits & 0x00000002u) {
-            target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt32ToArrayWithField<2>(
                     stream, this_._internal_selectpart(), target);
           }
 
@@ -379,16 +352,10 @@ PROTOBUF_NOINLINE void SelectPart::Clear() {
           // Prevent compiler warnings about cached_has_bits being unused
           (void)cached_has_bits;
 
-          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
-          cached_has_bits = this_._impl_._has_bits_[0];
-          if (cached_has_bits & 0x00000003u) {
-            // optional int32 serialnumber = 1;
+           {
+            // optional int32 selectpart = 1;
+            cached_has_bits = this_._impl_._has_bits_[0];
             if (cached_has_bits & 0x00000001u) {
-              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-                  this_._internal_serialnumber());
-            }
-            // optional int32 selectpart = 2;
-            if (cached_has_bits & 0x00000002u) {
               total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
                   this_._internal_selectpart());
             }
@@ -406,13 +373,8 @@ void SelectPart::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::goog
   (void) cached_has_bits;
 
   cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000003u) {
-    if (cached_has_bits & 0x00000001u) {
-      _this->_impl_.serialnumber_ = from._impl_.serialnumber_;
-    }
-    if (cached_has_bits & 0x00000002u) {
-      _this->_impl_.selectpart_ = from._impl_.selectpart_;
-    }
+  if (cached_has_bits & 0x00000001u) {
+    _this->_impl_.selectpart_ = from._impl_.selectpart_;
   }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
@@ -430,12 +392,7 @@ void SelectPart::InternalSwap(SelectPart* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(SelectPart, _impl_.selectpart_)
-      + sizeof(SelectPart::_impl_.selectpart_)
-      - PROTOBUF_FIELD_OFFSET(SelectPart, _impl_.serialnumber_)>(
-          reinterpret_cast<char*>(&_impl_.serialnumber_),
-          reinterpret_cast<char*>(&other->_impl_.serialnumber_));
+        swap(_impl_.selectpart_, other->_impl_.selectpart_);
 }
 
 ::google::protobuf::Metadata SelectPart::GetMetadata() const {

@@ -20,6 +20,7 @@
 #include "google/protobuf/io/coded_stream.h"
 #include "google/protobuf/arena.h"
 #include "google/protobuf/arenastring.h"
+#include "google/protobuf/generated_message_bases.h"
 #include "google/protobuf/generated_message_tctable_decl.h"
 #include "google/protobuf/generated_message_util.h"
 #include "google/protobuf/metadata_lite.h"
@@ -61,6 +62,9 @@ extern ExitDefaultTypeInternal _Exit_default_instance_;
 class SetRoomMaster;
 struct SetRoomMasterDefaultTypeInternal;
 extern SetRoomMasterDefaultTypeInternal _SetRoomMaster_default_instance_;
+class SyncObject;
+struct SyncObjectDefaultTypeInternal;
+extern SyncObjectDefaultTypeInternal _SyncObject_default_instance_;
 class SyncPlayer;
 struct SyncPlayerDefaultTypeInternal;
 extern SyncPlayerDefaultTypeInternal _SyncPlayer_default_instance_;
@@ -223,13 +227,12 @@ class SyncPlayer final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kResourceFieldNumber = 5,
-    kSerialnumberFieldNumber = 1,
-    kXFieldNumber = 2,
-    kYFieldNumber = 3,
-    kZFieldNumber = 4,
+    kResourceFieldNumber = 4,
+    kXFieldNumber = 1,
+    kYFieldNumber = 2,
+    kZFieldNumber = 3,
   };
-  // optional string resource = 5;
+  // optional string resource = 4;
   bool has_resource() const;
   void clear_resource() ;
   const std::string& resource() const;
@@ -246,18 +249,7 @@ class SyncPlayer final : public ::google::protobuf::Message
   std::string* _internal_mutable_resource();
 
   public:
-  // optional int32 serialnumber = 1;
-  bool has_serialnumber() const;
-  void clear_serialnumber() ;
-  ::int32_t serialnumber() const;
-  void set_serialnumber(::int32_t value);
-
-  private:
-  ::int32_t _internal_serialnumber() const;
-  void _internal_set_serialnumber(::int32_t value);
-
-  public:
-  // optional float x = 2;
+  // optional float x = 1;
   bool has_x() const;
   void clear_x() ;
   float x() const;
@@ -268,7 +260,7 @@ class SyncPlayer final : public ::google::protobuf::Message
   void _internal_set_x(float value);
 
   public:
-  // optional float y = 3;
+  // optional float y = 2;
   bool has_y() const;
   void clear_y() ;
   float y() const;
@@ -279,7 +271,7 @@ class SyncPlayer final : public ::google::protobuf::Message
   void _internal_set_y(float value);
 
   public:
-  // optional float z = 4;
+  // optional float z = 3;
   bool has_z() const;
   void clear_z() ;
   float z() const;
@@ -295,7 +287,7 @@ class SyncPlayer final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      3, 5, 0,
+      2, 4, 0,
       38, 2>
       _table_;
 
@@ -316,7 +308,6 @@ class SyncPlayer final : public ::google::protobuf::Message
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::google::protobuf::internal::ArenaStringPtr resource_;
-    ::int32_t serialnumber_;
     float x_;
     float y_;
     float z_;
@@ -327,11 +318,247 @@ class SyncPlayer final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
-class SetRoomMaster final : public ::google::protobuf::Message
+class SyncObject final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:ConnectMsg.SyncObject) */ {
+ public:
+  inline SyncObject() : SyncObject(nullptr) {}
+  ~SyncObject() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(SyncObject* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(SyncObject));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR SyncObject(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline SyncObject(const SyncObject& from) : SyncObject(nullptr, from) {}
+  inline SyncObject(SyncObject&& from) noexcept
+      : SyncObject(nullptr, std::move(from)) {}
+  inline SyncObject& operator=(const SyncObject& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline SyncObject& operator=(SyncObject&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const SyncObject& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const SyncObject* internal_default_instance() {
+    return reinterpret_cast<const SyncObject*>(
+        &_SyncObject_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 4;
+  friend void swap(SyncObject& a, SyncObject& b) { a.Swap(&b); }
+  inline void Swap(SyncObject* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(SyncObject* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  SyncObject* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<SyncObject>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const SyncObject& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const SyncObject& from) { SyncObject::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(SyncObject* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "ConnectMsg.SyncObject"; }
+
+ protected:
+  explicit SyncObject(::google::protobuf::Arena* arena);
+  SyncObject(::google::protobuf::Arena* arena, const SyncObject& from);
+  SyncObject(::google::protobuf::Arena* arena, SyncObject&& from) noexcept
+      : SyncObject(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kResourceFieldNumber = 4,
+    kXFieldNumber = 1,
+    kYFieldNumber = 2,
+    kZFieldNumber = 3,
+  };
+  // optional string resource = 4;
+  bool has_resource() const;
+  void clear_resource() ;
+  const std::string& resource() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_resource(Arg_&& arg, Args_... args);
+  std::string* mutable_resource();
+  PROTOBUF_NODISCARD std::string* release_resource();
+  void set_allocated_resource(std::string* value);
+
+  private:
+  const std::string& _internal_resource() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_resource(
+      const std::string& value);
+  std::string* _internal_mutable_resource();
+
+  public:
+  // optional float x = 1;
+  bool has_x() const;
+  void clear_x() ;
+  float x() const;
+  void set_x(float value);
+
+  private:
+  float _internal_x() const;
+  void _internal_set_x(float value);
+
+  public:
+  // optional float y = 2;
+  bool has_y() const;
+  void clear_y() ;
+  float y() const;
+  void set_y(float value);
+
+  private:
+  float _internal_y() const;
+  void _internal_set_y(float value);
+
+  public:
+  // optional float z = 3;
+  bool has_z() const;
+  void clear_z() ;
+  float z() const;
+  void set_z(float value);
+
+  private:
+  float _internal_z() const;
+  void _internal_set_z(float value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:ConnectMsg.SyncObject)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      2, 4, 0,
+      38, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const SyncObject& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::internal::ArenaStringPtr resource_;
+    float x_;
+    float y_;
+    float z_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Connect_2eproto;
+};
+// -------------------------------------------------------------------
+
+class SetRoomMaster final : public ::google::protobuf::internal::ZeroFieldsBase
 /* @@protoc_insertion_point(class_definition:ConnectMsg.SetRoomMaster) */ {
  public:
   inline SetRoomMaster() : SetRoomMaster(nullptr) {}
-  ~SetRoomMaster() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
   void operator delete(SetRoomMaster* msg, std::destroying_delete_t) {
@@ -405,49 +632,21 @@ class SetRoomMaster final : public ::google::protobuf::Message
   // implements Message ----------------------------------------------
 
   SetRoomMaster* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<SetRoomMaster>(arena);
+    return ::google::protobuf::internal::ZeroFieldsBase::DefaultConstruct<SetRoomMaster>(arena);
   }
-  using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const SetRoomMaster& from);
-  using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const SetRoomMaster& from) { SetRoomMaster::MergeImpl(*this, from); }
-
-  private:
-  static void MergeImpl(
-      ::google::protobuf::MessageLite& to_msg,
-      const ::google::protobuf::MessageLite& from_msg);
+  using ::google::protobuf::internal::ZeroFieldsBase::CopyFrom;
+  inline void CopyFrom(const SetRoomMaster& from) {
+    ::google::protobuf::internal::ZeroFieldsBase::CopyImpl(*this, from);
+  }
+  using ::google::protobuf::internal::ZeroFieldsBase::MergeFrom;
+  void MergeFrom(const SetRoomMaster& from) {
+    ::google::protobuf::internal::ZeroFieldsBase::MergeImpl(*this, from);
+  }
 
   public:
   bool IsInitialized() const {
     return true;
   }
-  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* _InternalSerialize(
-      const MessageLite& msg, ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream);
-
-  public:
-  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-    return _InternalSerialize(*this, target, stream);
-  }
-  #else   // PROTOBUF_CUSTOM_VTABLE
-  ::size_t ByteSizeLong() const final;
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
-  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::google::protobuf::Arena* arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(SetRoomMaster* other);
  private:
   template <typename T>
   friend ::absl::string_view(
@@ -472,26 +671,12 @@ class SetRoomMaster final : public ::google::protobuf::Message
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
-  enum : int {
-    kSerialnumberFieldNumber = 1,
-  };
-  // optional int32 serialnumber = 1;
-  bool has_serialnumber() const;
-  void clear_serialnumber() ;
-  ::int32_t serialnumber() const;
-  void set_serialnumber(::int32_t value);
-
-  private:
-  ::int32_t _internal_serialnumber() const;
-  void _internal_set_serialnumber(::int32_t value);
-
-  public:
   // @@protoc_insertion_point(class_scope:ConnectMsg.SetRoomMaster)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 0,
+      0, 0, 0,
       0, 2>
       _table_;
 
@@ -509,21 +694,16 @@ class SetRoomMaster final : public ::google::protobuf::Message
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const SetRoomMaster& from_msg);
-    ::google::protobuf::internal::HasBits<1> _has_bits_;
-    ::google::protobuf::internal::CachedSize _cached_size_;
-    ::int32_t serialnumber_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
-  union { Impl_ _impl_; };
   friend struct ::TableStruct_Connect_2eproto;
 };
 // -------------------------------------------------------------------
 
-class Exit final : public ::google::protobuf::Message
+class Exit final : public ::google::protobuf::internal::ZeroFieldsBase
 /* @@protoc_insertion_point(class_definition:ConnectMsg.Exit) */ {
  public:
   inline Exit() : Exit(nullptr) {}
-  ~Exit() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
   void operator delete(Exit* msg, std::destroying_delete_t) {
@@ -597,49 +777,21 @@ class Exit final : public ::google::protobuf::Message
   // implements Message ----------------------------------------------
 
   Exit* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<Exit>(arena);
+    return ::google::protobuf::internal::ZeroFieldsBase::DefaultConstruct<Exit>(arena);
   }
-  using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const Exit& from);
-  using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const Exit& from) { Exit::MergeImpl(*this, from); }
-
-  private:
-  static void MergeImpl(
-      ::google::protobuf::MessageLite& to_msg,
-      const ::google::protobuf::MessageLite& from_msg);
+  using ::google::protobuf::internal::ZeroFieldsBase::CopyFrom;
+  inline void CopyFrom(const Exit& from) {
+    ::google::protobuf::internal::ZeroFieldsBase::CopyImpl(*this, from);
+  }
+  using ::google::protobuf::internal::ZeroFieldsBase::MergeFrom;
+  void MergeFrom(const Exit& from) {
+    ::google::protobuf::internal::ZeroFieldsBase::MergeImpl(*this, from);
+  }
 
   public:
   bool IsInitialized() const {
     return true;
   }
-  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* _InternalSerialize(
-      const MessageLite& msg, ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream);
-
-  public:
-  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-    return _InternalSerialize(*this, target, stream);
-  }
-  #else   // PROTOBUF_CUSTOM_VTABLE
-  ::size_t ByteSizeLong() const final;
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
-  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::google::protobuf::Arena* arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(Exit* other);
  private:
   template <typename T>
   friend ::absl::string_view(
@@ -664,26 +816,12 @@ class Exit final : public ::google::protobuf::Message
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
-  enum : int {
-    kSerialnumberFieldNumber = 1,
-  };
-  // optional int32 serialnumber = 1;
-  bool has_serialnumber() const;
-  void clear_serialnumber() ;
-  ::int32_t serialnumber() const;
-  void set_serialnumber(::int32_t value);
-
-  private:
-  ::int32_t _internal_serialnumber() const;
-  void _internal_set_serialnumber(::int32_t value);
-
-  public:
   // @@protoc_insertion_point(class_scope:ConnectMsg.Exit)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 0,
+      0, 0, 0,
       0, 2>
       _table_;
 
@@ -701,12 +839,8 @@ class Exit final : public ::google::protobuf::Message
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const Exit& from_msg);
-    ::google::protobuf::internal::HasBits<1> _has_bits_;
-    ::google::protobuf::internal::CachedSize _cached_size_;
-    ::int32_t serialnumber_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
-  union { Impl_ _impl_; };
   friend struct ::TableStruct_Connect_2eproto;
 };
 // -------------------------------------------------------------------
@@ -950,107 +1084,23 @@ inline void EnterAccept::_internal_set_grantnumber(::int32_t value) {
 
 // SetRoomMaster
 
-// optional int32 serialnumber = 1;
-inline bool SetRoomMaster::has_serialnumber() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline void SetRoomMaster::clear_serialnumber() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.serialnumber_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000001u;
-}
-inline ::int32_t SetRoomMaster::serialnumber() const {
-  // @@protoc_insertion_point(field_get:ConnectMsg.SetRoomMaster.serialnumber)
-  return _internal_serialnumber();
-}
-inline void SetRoomMaster::set_serialnumber(::int32_t value) {
-  _internal_set_serialnumber(value);
-  _impl_._has_bits_[0] |= 0x00000001u;
-  // @@protoc_insertion_point(field_set:ConnectMsg.SetRoomMaster.serialnumber)
-}
-inline ::int32_t SetRoomMaster::_internal_serialnumber() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.serialnumber_;
-}
-inline void SetRoomMaster::_internal_set_serialnumber(::int32_t value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.serialnumber_ = value;
-}
-
 // -------------------------------------------------------------------
 
 // Exit
-
-// optional int32 serialnumber = 1;
-inline bool Exit::has_serialnumber() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline void Exit::clear_serialnumber() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.serialnumber_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000001u;
-}
-inline ::int32_t Exit::serialnumber() const {
-  // @@protoc_insertion_point(field_get:ConnectMsg.Exit.serialnumber)
-  return _internal_serialnumber();
-}
-inline void Exit::set_serialnumber(::int32_t value) {
-  _internal_set_serialnumber(value);
-  _impl_._has_bits_[0] |= 0x00000001u;
-  // @@protoc_insertion_point(field_set:ConnectMsg.Exit.serialnumber)
-}
-inline ::int32_t Exit::_internal_serialnumber() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.serialnumber_;
-}
-inline void Exit::_internal_set_serialnumber(::int32_t value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.serialnumber_ = value;
-}
 
 // -------------------------------------------------------------------
 
 // SyncPlayer
 
-// optional int32 serialnumber = 1;
-inline bool SyncPlayer::has_serialnumber() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline void SyncPlayer::clear_serialnumber() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.serialnumber_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000002u;
-}
-inline ::int32_t SyncPlayer::serialnumber() const {
-  // @@protoc_insertion_point(field_get:ConnectMsg.SyncPlayer.serialnumber)
-  return _internal_serialnumber();
-}
-inline void SyncPlayer::set_serialnumber(::int32_t value) {
-  _internal_set_serialnumber(value);
-  _impl_._has_bits_[0] |= 0x00000002u;
-  // @@protoc_insertion_point(field_set:ConnectMsg.SyncPlayer.serialnumber)
-}
-inline ::int32_t SyncPlayer::_internal_serialnumber() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.serialnumber_;
-}
-inline void SyncPlayer::_internal_set_serialnumber(::int32_t value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.serialnumber_ = value;
-}
-
-// optional float x = 2;
+// optional float x = 1;
 inline bool SyncPlayer::has_x() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   return value;
 }
 inline void SyncPlayer::clear_x() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.x_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000004u;
+  _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline float SyncPlayer::x() const {
   // @@protoc_insertion_point(field_get:ConnectMsg.SyncPlayer.x)
@@ -1058,7 +1108,7 @@ inline float SyncPlayer::x() const {
 }
 inline void SyncPlayer::set_x(float value) {
   _internal_set_x(value);
-  _impl_._has_bits_[0] |= 0x00000004u;
+  _impl_._has_bits_[0] |= 0x00000002u;
   // @@protoc_insertion_point(field_set:ConnectMsg.SyncPlayer.x)
 }
 inline float SyncPlayer::_internal_x() const {
@@ -1070,15 +1120,15 @@ inline void SyncPlayer::_internal_set_x(float value) {
   _impl_.x_ = value;
 }
 
-// optional float y = 3;
+// optional float y = 2;
 inline bool SyncPlayer::has_y() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
   return value;
 }
 inline void SyncPlayer::clear_y() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.y_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000008u;
+  _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline float SyncPlayer::y() const {
   // @@protoc_insertion_point(field_get:ConnectMsg.SyncPlayer.y)
@@ -1086,7 +1136,7 @@ inline float SyncPlayer::y() const {
 }
 inline void SyncPlayer::set_y(float value) {
   _internal_set_y(value);
-  _impl_._has_bits_[0] |= 0x00000008u;
+  _impl_._has_bits_[0] |= 0x00000004u;
   // @@protoc_insertion_point(field_set:ConnectMsg.SyncPlayer.y)
 }
 inline float SyncPlayer::_internal_y() const {
@@ -1098,15 +1148,15 @@ inline void SyncPlayer::_internal_set_y(float value) {
   _impl_.y_ = value;
 }
 
-// optional float z = 4;
+// optional float z = 3;
 inline bool SyncPlayer::has_z() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
   return value;
 }
 inline void SyncPlayer::clear_z() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.z_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000010u;
+  _impl_._has_bits_[0] &= ~0x00000008u;
 }
 inline float SyncPlayer::z() const {
   // @@protoc_insertion_point(field_get:ConnectMsg.SyncPlayer.z)
@@ -1114,7 +1164,7 @@ inline float SyncPlayer::z() const {
 }
 inline void SyncPlayer::set_z(float value) {
   _internal_set_z(value);
-  _impl_._has_bits_[0] |= 0x00000010u;
+  _impl_._has_bits_[0] |= 0x00000008u;
   // @@protoc_insertion_point(field_set:ConnectMsg.SyncPlayer.z)
 }
 inline float SyncPlayer::_internal_z() const {
@@ -1126,7 +1176,7 @@ inline void SyncPlayer::_internal_set_z(float value) {
   _impl_.z_ = value;
 }
 
-// optional string resource = 5;
+// optional string resource = 4;
 inline bool SyncPlayer::has_resource() const {
   bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   return value;
@@ -1193,6 +1243,163 @@ inline void SyncPlayer::set_allocated_resource(std::string* value) {
     _impl_.resource_.Set("", GetArena());
   }
   // @@protoc_insertion_point(field_set_allocated:ConnectMsg.SyncPlayer.resource)
+}
+
+// -------------------------------------------------------------------
+
+// SyncObject
+
+// optional float x = 1;
+inline bool SyncObject::has_x() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline void SyncObject::clear_x() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.x_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline float SyncObject::x() const {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObject.x)
+  return _internal_x();
+}
+inline void SyncObject::set_x(float value) {
+  _internal_set_x(value);
+  _impl_._has_bits_[0] |= 0x00000002u;
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObject.x)
+}
+inline float SyncObject::_internal_x() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.x_;
+}
+inline void SyncObject::_internal_set_x(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.x_ = value;
+}
+
+// optional float y = 2;
+inline bool SyncObject::has_y() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  return value;
+}
+inline void SyncObject::clear_y() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.y_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000004u;
+}
+inline float SyncObject::y() const {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObject.y)
+  return _internal_y();
+}
+inline void SyncObject::set_y(float value) {
+  _internal_set_y(value);
+  _impl_._has_bits_[0] |= 0x00000004u;
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObject.y)
+}
+inline float SyncObject::_internal_y() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.y_;
+}
+inline void SyncObject::_internal_set_y(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.y_ = value;
+}
+
+// optional float z = 3;
+inline bool SyncObject::has_z() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
+  return value;
+}
+inline void SyncObject::clear_z() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.z_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000008u;
+}
+inline float SyncObject::z() const {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObject.z)
+  return _internal_z();
+}
+inline void SyncObject::set_z(float value) {
+  _internal_set_z(value);
+  _impl_._has_bits_[0] |= 0x00000008u;
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObject.z)
+}
+inline float SyncObject::_internal_z() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.z_;
+}
+inline void SyncObject::_internal_set_z(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.z_ = value;
+}
+
+// optional string resource = 4;
+inline bool SyncObject::has_resource() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline void SyncObject::clear_resource() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.resource_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline const std::string& SyncObject::resource() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObject.resource)
+  return _internal_resource();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void SyncObject::set_resource(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.resource_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObject.resource)
+}
+inline std::string* SyncObject::mutable_resource() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_resource();
+  // @@protoc_insertion_point(field_mutable:ConnectMsg.SyncObject.resource)
+  return _s;
+}
+inline const std::string& SyncObject::_internal_resource() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.resource_.Get();
+}
+inline void SyncObject::_internal_set_resource(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.resource_.Set(value, GetArena());
+}
+inline std::string* SyncObject::_internal_mutable_resource() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  return _impl_.resource_.Mutable( GetArena());
+}
+inline std::string* SyncObject::release_resource() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:ConnectMsg.SyncObject.resource)
+  if ((_impl_._has_bits_[0] & 0x00000001u) == 0) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* released = _impl_.resource_.Release();
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
+    _impl_.resource_.Set("", GetArena());
+  }
+  return released;
+}
+inline void SyncObject::set_allocated_resource(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  _impl_.resource_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.resource_.IsDefault()) {
+    _impl_.resource_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:ConnectMsg.SyncObject.resource)
 }
 
 #ifdef __GNUC__

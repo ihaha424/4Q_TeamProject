@@ -31,7 +31,6 @@ void TestWorld::PostFixedUpdate()
 
 void TestWorld::SyncOtherPlayer(const ConnectMsg::SyncPlayer* msg)
 {
-	if (playerSerialNum == msg->serialnumber()) return;
 
 	//AddObject(&_remote);
 	//_remote.Attach();

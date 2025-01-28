@@ -39,7 +39,6 @@ void ServerLogic::Update()
         if (_playerSlot[i]._serialNumber == 0) continue;
         if (elapsedTime >= 0.02f) {
             elapsedTime -= 0.02f;
-            _moveSync.set_serialnumber(i + 1);
             _moveSync.set_x(_playerSlot[i]._position._x);
             _moveSync.set_y(_playerSlot[i]._position._y);
             _moveSync.set_z(_playerSlot[i]._position._z);
@@ -97,7 +96,6 @@ void ServerLogic::MessageDispatch()
                     if (_playerSlot[i]._serialNumber == 0) {
                         continue;
                     } // if end
-                    _syncPlayer.set_serialnumber(_playerSlot[i]._serialNumber);
                     _syncPlayer.set_x(_playerSlot[i]._position._x);
                     _syncPlayer.set_y(_playerSlot[i]._position._y);
                     _syncPlayer.set_z(_playerSlot[i]._position._z);
@@ -114,11 +112,11 @@ void ServerLogic::MessageDispatch()
         {
             _exit.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
 
-            int exitNum = _exit.serialnumber();
+            int exitNum = packet._serialNumber - 1;
 
             _exit.SerializeToString(&_msgBuffer);
 
-            printf("[MessageDispatch] Player Exit. SerialNumber : %d\n", _exit.serialnumber());
+            printf("[MessageDispatch] Player Exit. SerialNumber : %d\n", packet._serialNumber);
 
             Server::BroadCast(_msgBuffer, (short)PacketID::Exit, _exit.ByteSizeLong(), _playerSlot[exitNum]._serialNumber);
 
@@ -137,7 +135,7 @@ void ServerLogic::MessageDispatch()
         {
             _move.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
             
-            int serialNum = _move.serialnumber() - 1;
+            int serialNum = packet._serialNumber - 1;
 
             Vector3 direction;
             direction._x = _move.x();
@@ -148,13 +146,12 @@ void ServerLogic::MessageDispatch()
             if (direction != _playerSlot[serialNum]._direction) {
                 _playerSlot[serialNum]._direction = direction;
 
-                _moveSync.set_serialnumber(serialNum);
                 _moveSync.set_x(_playerSlot[serialNum]._position._x);
                 _moveSync.set_y(_playerSlot[serialNum]._position._y);
                 _moveSync.set_z(_playerSlot[serialNum]._position._z);
 
                 _moveSync.SerializeToString(&_msgBuffer);
-                Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), _move.serialnumber());
+                Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), packet._serialNumber);
             }
 
 
@@ -174,10 +171,10 @@ void ServerLogic::MessageDispatch()
         {
             _stateChange.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
 
-            _playerSlot[_stateChange.serialnumber() - 1]._state = _stateChange.stateinfo();
+            _playerSlot[packet._serialNumber - 1]._state = _stateChange.stateinfo();
 
             _stateChange.SerializeToString(&_msgBuffer);
-            Server::BroadCast(_msgBuffer, (short)PacketID::StateChange, _stateChange.ByteSizeLong(), _stateChange.serialnumber());
+            Server::BroadCast(_msgBuffer, (short)PacketID::StateChange, _stateChange.ByteSizeLong(), packet._serialNumber);
 
             break;
         } // case end

@@ -9,18 +9,22 @@ message EnterAccept {
 }
 
 message SetRoomMaster {
-	optional int32 serialnumber = 1;
 }
 
 message Exit {
-	optional int32 serialnumber = 1;
 }
 
 // 연결을 수락했을 때 현재 룸에 들어와 있는 모든 플레이어의 정보를 전달하는 메시지.
 message SyncPlayer {
-	optional int32 serialnumber = 1;
-	optional float x = 2;
-	optional float y = 3;
-	optional float z = 4;
-	optional string resource = 5;
+	optional float x = 1;
+	optional float y = 2;
+	optional float z = 3;
+	optional string resource = 4;
+}
+
+message SyncObject {
+	optional float x = 1;
+	optional float y = 2;
+	optional float z = 3;
+	optional string resource = 4;
 }

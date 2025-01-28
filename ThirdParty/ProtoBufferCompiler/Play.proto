@@ -3,8 +3,7 @@ syntax = "proto3";
 package PlayMsg;
 
 message SelectPart {
-	optional int32 serialnumber = 1;
-	optional int32 selectpart = 2;
+	optional int32 selectpart = 1;
 }
 
 message InteractDialog {

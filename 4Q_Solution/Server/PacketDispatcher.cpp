@@ -42,10 +42,10 @@ bool PacketDispatcher::SwapRecvPacketContainer()
 	return true;
 }
 
-void PacketDispatcher::SaveSendPacket(std::string& data, SessionID sid, short packetId, long dataSize)
+void PacketDispatcher::SaveSendPacket(std::string& data, SessionID sid, short packetId, long dataSize, int serialNum)
 {
 	Packet packet;
-	MakePacket(packet, data, sid, packetId, dataSize);
+	MakePacket(packet, data, sid, packetId, dataSize, serialNum);
 
 	Lock lock(_sendMtx);
 	_saveSendContainer[sid].push(packet);
@@ -80,21 +80,22 @@ void PacketDispatcher::SessionCreated(SessionID sid)
 	_saveSendContainer.insert({ sid, SendQueue() });
 }
 
-void PacketDispatcher::SaveBroadCastPacket(std::string& data, short packetId, long dataSize)
+void PacketDispatcher::SaveBroadCastPacket(std::string& data, short packetId, long dataSize, int serialNum)
 {
 	for (auto& [sid, packetContainer] : _saveSendContainer) {
 		Packet packet;
-		MakePacket(packet, data, sid, packetId, dataSize);
+		MakePacket(packet, data, sid, packetId, dataSize, serialNum);
 
 		Lock lock(_sendMtx);
 		packetContainer.push(packet);
 	}
 }
 
-void PacketDispatcher::MakePacket(Packet& packet, std::string& data, SessionID sid, short packetId, long dataSize)
+void PacketDispatcher::MakePacket(Packet& packet, std::string& data, SessionID sid, short packetId, long dataSize, int serialNum)
 {
 	packet.sessionId = sid;
 	packet._packetId = packetId;
+	packet._serialNumber = serialNum;
 
 	memcpy(packet._data, data.c_str(), dataSize);
 	packet._packetSize = sizeof(PacketHeader) + dataSize;

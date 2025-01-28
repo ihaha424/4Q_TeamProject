@@ -7,6 +7,8 @@
 #include "DSHTimeManager.h"
 #include "DSHWindowManager.h"
 #include "GEGraphicsManager.h"
+#include "ServerNetworkManager.h"
+#include "PHIManager.h"
 
 Engine::Time::Manager* Engine::Application::_timeManager = nullptr;
 Engine::Window::Manager* Engine::Application::_windowManager = nullptr;
@@ -14,6 +16,8 @@ Engine::GEGraphics::Manager* Engine::Application::_graphicsManager = nullptr;
 Engine::Input::Manager* Engine::Application::_inputManager = nullptr;
 Engine::Load::Manager* Engine::Application::_loadManager = nullptr;
 Engine::Content::Manager* Engine::Application::_contentManager = nullptr;
+Engine::ServerNetwork::Manager* Engine::Application::_networkManager = nullptr;
+Engine::Physics::Manager* Engine::Application::_physicsManager = nullptr;
 
 Engine::Application::Application(const HINSTANCE instanceHandle):
 	_instanceHandle(instanceHandle), _size(Math::Size::Zero)
@@ -42,6 +46,8 @@ void Engine::Application::Run(const int showCommand)
 	{
 		if (PeekMessage(&message, nullptr, NULL, NULL, PM_REMOVE))
 		{
+			// TODO: check DestroyMessage and Send to Server
+			// TODO: if receive DestroyOk then end.
 			TranslateMessage(&message);
 			DispatchMessage(&message);
 		}
@@ -52,12 +58,17 @@ void Engine::Application::Run(const int showCommand)
 			_timeManager->Tick();
 			_inputManager->Update(metaTime);
 			_graphicsManager->PreUpdate(deltaTime);
-
+		    // _networkManager->DispatchPacket();
+			
 			_contentManager->Contraction(Modules{ 
 				.graphicsManager = _graphicsManager,
-				.loadManager = _loadManager
+				.physicsManager = _physicsManager,
+                .loadManager = _loadManager
 			});
 
+		    _physicsManager->Update(deltaTime);
+		    _physicsManager->FetchSecne(true);
+		
 			_contentManager->Update(deltaTime);
 
 			while (_timeManager->IsFixedUpdate())
@@ -70,6 +81,7 @@ void Engine::Application::Run(const int showCommand)
 			_graphicsManager->PostUpdate(deltaTime);
 			_graphicsManager->Render();
 			_inputManager->Reset();
+			_networkManager->Send();
 		}
 	}
 }
@@ -95,6 +107,16 @@ Engine::Graphics::IManager* Engine::Application::GetGraphicsManager()
 	return _graphicsManager;
 }
 
+Engine::Network::IManager* Engine::Application::GetNetworkManager()
+{
+    return _networkManager;
+}
+
+Engine::Physics::IManager* Engine::Application::GetPhysicsManager()
+{
+    return _physicsManager;
+}
+
 Engine::Load::IManager* Engine::Application::GetLoadManager()
 {
 	return _loadManager;
@@ -102,9 +124,7 @@ Engine::Load::IManager* Engine::Application::GetLoadManager()
 
 Engine::Content::IManager* Engine::Application::GetContentManager()
 {
-	static Content::Manager* contentManager = nullptr;
-	CreateContentManager(&contentManager);
-	return contentManager;
+	return _contentManager;
 }
 
 void Engine::Application::Register(Content::IManager* contentManager)
@@ -127,7 +147,9 @@ void Engine::Application::CreateManagers()
 	CreateInputManager(&_inputManager);
 	CreateGraphicsManager(&_graphicsManager);
 	CreateLoadManager(&_loadManager);
-	CreateContentManager(&_contentManager);
+    CreateContentManager(&_contentManager);	
+    CreateNetworkManager(&_networkManager);
+    CreatePhysicsManager(&_physicsManager);
 }
 
 void Engine::Application::InitializeManagers() const
@@ -137,6 +159,8 @@ void Engine::Application::InitializeManagers() const
 	_inputManager->Initialize(_windowManager->GetHandle());
 	_graphicsManager->Initialize(_windowManager->GetHandle(), L"../Shaders/", _size, false, 1);
 	_contentManager->Initialize();
+    _networkManager->Initialize();
+    _physicsManager->Initialize();
 }
 
 void Engine::Application::LoadGameData()
@@ -155,7 +179,9 @@ void Engine::Application::FinalizeManagers()
 	_graphicsManager->Finalize();
 	_inputManager->Finalize();
 	_windowManager->Finalize();
-	_timeManager->Finalize();
+    _timeManager->Finalize();
+    _networkManager->Finalize();
+    _physicsManager->Finalize();
 }
 
 void Engine::Application::DeleteManagers()
@@ -167,6 +193,8 @@ void Engine::Application::DeleteManagers()
 	deleter(&_graphicsManager);
 	deleter(&_loadManager);
 	deleter(&_contentManager);
+    deleter(&_networkManager);
+    deleter(&_physicsManager);
 }
 
 void Engine::Application::CreateTimeManager(Time::Manager** timeManager)
@@ -215,6 +243,30 @@ void Engine::Application::CreateGraphicsManager(GEGraphics::Manager** graphicsMa
 		if (manager == nullptr) thrower(E_OUTOFMEMORY);
 		*graphicsManager = manager;
 	}
+}
+
+void Engine::Application::CreateNetworkManager(ServerNetwork::Manager** networkManager)
+{
+    constexpr Utility::ThrowIfFailed thrower;
+    if (networkManager == nullptr) thrower(E_INVALIDARG);
+    else
+    {
+        ServerNetwork::Manager* manager = new ServerNetwork::Manager();
+        if (manager == nullptr) thrower(E_OUTOFMEMORY);
+        *networkManager = manager;
+    }
+}
+
+void Engine::Application::CreatePhysicsManager(Physics::Manager** physicsManager)
+{
+    constexpr Utility::ThrowIfFailed thrower;
+    if (physicsManager == nullptr) thrower(E_INVALIDARG);
+    else
+    {
+        Physics::Manager* manager = new PHI::Manager();
+        if (manager == nullptr) thrower(E_OUTOFMEMORY);
+        *physicsManager = manager;
+    }
 }
 
 void Engine::Application::CreateLoadManager(Load::Manager** loadManager)

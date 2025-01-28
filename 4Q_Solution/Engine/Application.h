@@ -5,6 +5,16 @@ namespace Engine::GEGraphics
 	class Manager;
 }
 
+namespace Engine::ServerNetwork 
+{
+	class Manager;
+}
+
+namespace Engine::Physics
+{
+	class Manager;
+}
+
 namespace Engine
 {
 	class Application
@@ -47,7 +57,9 @@ namespace Engine
 		static Time::IManager* GetTimeManager();
 		static Input::IManager* GetInputManager();
 		static Graphics::IManager* GetGraphicsManager();
-		static Load::IManager* GetLoadManager();
+	    static Network::IManager* GetNetworkManager();
+	    static Physics::IManager* GetPhysicsManager();
+	    static Load::IManager* GetLoadManager();
 		static Content::IManager* GetContentManager();
 
 	private:
@@ -55,14 +67,18 @@ namespace Engine
 		static void CreateWindowManager(Window::Manager** windowManager);
 		static void CreateInputManager(Input::Manager** inputManager);
 		static void CreateGraphicsManager(GEGraphics::Manager** graphicsManager);
-		static void CreateLoadManager(Load::Manager** loadManager);
+	    static void CreateNetworkManager(ServerNetwork::Manager** networkManager);
+	    static void CreatePhysicsManager(Physics::Manager** physicsManager);
+	    static void CreateLoadManager(Load::Manager** loadManager);
 		static void CreateContentManager(Content::Manager** contentManager);
 
 		static Time::Manager* _timeManager;
 		static Window::Manager* _windowManager;
 		static Input::Manager* _inputManager;
 		static GEGraphics::Manager* _graphicsManager;
-		static Load::Manager* _loadManager;
+	    static ServerNetwork::Manager* _networkManager;
+	    static Physics::Manager* _physicsManager;
+	    static Load::Manager* _loadManager;
 		static Content::Manager* _contentManager;
 	};
 }

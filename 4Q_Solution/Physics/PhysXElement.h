@@ -1,0 +1,10 @@
+#pragma once
+#include "PhysXUtils.h"
+#include "PhysXScene.h"
+#include "PhysXActor.h"
+#include "PhysXStaticActor.h"
+#include "PhysXDynamicActor.h"
+#include "PhysXKinematicActor.h"
+#include "PhysXGeometry.h"
+#include "PhysXShape.h"
+#include "PhysXMaterial.h"

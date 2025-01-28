@@ -2,6 +2,7 @@
 #include "GameApplication.h"
 
 #include "TestWorld.h"
+#include "NetworkTemp.h"
 
 GameApplication::GameApplication(const HINSTANCE instanceHandle) :
 	Application(instanceHandle)
@@ -25,7 +26,7 @@ void GameApplication::Register(Engine::Content::IManager* contentManager)
 	const auto worldFactory = contentManager->GetWorldFactory();
 	worldFactory->Register<TestWorld>();
 	const auto objectFactory = contentManager->GetObjectFactory();
-	objectFactory->Register<Player>(L"../Resources/FBX/char.fbx", L"../Resources/Font/±Ã¼­12.sfont");
+	objectFactory->Register<Player>(L"../Resources/FBX/char.fbx", L"../Resources/Font/ï¿½Ã¼ï¿½12.sfont");
 	objectFactory->Register<RemotePlayer>(L"../Resources/Player/Player.X");
 	objectFactory->Register<GlobalLight>();
 	objectFactory->Register<Terrain>(L"../Resources/Level/Level.fbx");

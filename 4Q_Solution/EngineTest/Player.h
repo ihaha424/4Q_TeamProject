@@ -14,6 +14,7 @@ protected:
 	void PostAttach() override;
 	void PostUpdate(float deltaTime) override;
 
+	void PostFixedUpdate() override;
 private:
 	std::filesystem::path _meshPath;
 	std::filesystem::path _fontPath;
@@ -25,8 +26,10 @@ private:
 	//Engine::Component::Animator _animator;
 	Engine::Math::Matrix _worldMatrix;
 	Engine::Component::TextRenderer* _textRenderer;
+	Engine::Component::SynchronizeComponent* _sync;
 };
 
+/*
 class RemotePlayer : public Engine::Object
 {
 public:
@@ -53,3 +56,4 @@ inline void RemotePlayer::DisposeComponents()
 	_skeletalMesh->Dispose();
 	_animator->Dispose();
 }
+*/

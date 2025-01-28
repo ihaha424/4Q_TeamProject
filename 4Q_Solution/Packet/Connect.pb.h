@@ -223,11 +223,29 @@ class SyncPlayer final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
+    kResourceFieldNumber = 5,
     kSerialnumberFieldNumber = 1,
     kXFieldNumber = 2,
     kYFieldNumber = 3,
     kZFieldNumber = 4,
   };
+  // optional string resource = 5;
+  bool has_resource() const;
+  void clear_resource() ;
+  const std::string& resource() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_resource(Arg_&& arg, Args_... args);
+  std::string* mutable_resource();
+  PROTOBUF_NODISCARD std::string* release_resource();
+  void set_allocated_resource(std::string* value);
+
+  private:
+  const std::string& _internal_resource() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_resource(
+      const std::string& value);
+  std::string* _internal_mutable_resource();
+
+  public:
   // optional int32 serialnumber = 1;
   bool has_serialnumber() const;
   void clear_serialnumber() ;
@@ -277,8 +295,8 @@ class SyncPlayer final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      2, 4, 0,
-      0, 2>
+      3, 5, 0,
+      38, 2>
       _table_;
 
   friend class ::google::protobuf::MessageLite;
@@ -297,6 +315,7 @@ class SyncPlayer final : public ::google::protobuf::Message
                           const SyncPlayer& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::internal::ArenaStringPtr resource_;
     ::int32_t serialnumber_;
     float x_;
     float y_;
@@ -997,13 +1016,13 @@ inline void Exit::_internal_set_serialnumber(::int32_t value) {
 
 // optional int32 serialnumber = 1;
 inline bool SyncPlayer::has_serialnumber() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   return value;
 }
 inline void SyncPlayer::clear_serialnumber() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.serialnumber_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000001u;
+  _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline ::int32_t SyncPlayer::serialnumber() const {
   // @@protoc_insertion_point(field_get:ConnectMsg.SyncPlayer.serialnumber)
@@ -1011,7 +1030,7 @@ inline ::int32_t SyncPlayer::serialnumber() const {
 }
 inline void SyncPlayer::set_serialnumber(::int32_t value) {
   _internal_set_serialnumber(value);
-  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_._has_bits_[0] |= 0x00000002u;
   // @@protoc_insertion_point(field_set:ConnectMsg.SyncPlayer.serialnumber)
 }
 inline ::int32_t SyncPlayer::_internal_serialnumber() const {
@@ -1025,13 +1044,13 @@ inline void SyncPlayer::_internal_set_serialnumber(::int32_t value) {
 
 // optional float x = 2;
 inline bool SyncPlayer::has_x() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
   return value;
 }
 inline void SyncPlayer::clear_x() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.x_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000002u;
+  _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline float SyncPlayer::x() const {
   // @@protoc_insertion_point(field_get:ConnectMsg.SyncPlayer.x)
@@ -1039,7 +1058,7 @@ inline float SyncPlayer::x() const {
 }
 inline void SyncPlayer::set_x(float value) {
   _internal_set_x(value);
-  _impl_._has_bits_[0] |= 0x00000002u;
+  _impl_._has_bits_[0] |= 0x00000004u;
   // @@protoc_insertion_point(field_set:ConnectMsg.SyncPlayer.x)
 }
 inline float SyncPlayer::_internal_x() const {
@@ -1053,13 +1072,13 @@ inline void SyncPlayer::_internal_set_x(float value) {
 
 // optional float y = 3;
 inline bool SyncPlayer::has_y() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
   return value;
 }
 inline void SyncPlayer::clear_y() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.y_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000004u;
+  _impl_._has_bits_[0] &= ~0x00000008u;
 }
 inline float SyncPlayer::y() const {
   // @@protoc_insertion_point(field_get:ConnectMsg.SyncPlayer.y)
@@ -1067,7 +1086,7 @@ inline float SyncPlayer::y() const {
 }
 inline void SyncPlayer::set_y(float value) {
   _internal_set_y(value);
-  _impl_._has_bits_[0] |= 0x00000004u;
+  _impl_._has_bits_[0] |= 0x00000008u;
   // @@protoc_insertion_point(field_set:ConnectMsg.SyncPlayer.y)
 }
 inline float SyncPlayer::_internal_y() const {
@@ -1081,13 +1100,13 @@ inline void SyncPlayer::_internal_set_y(float value) {
 
 // optional float z = 4;
 inline bool SyncPlayer::has_z() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
   return value;
 }
 inline void SyncPlayer::clear_z() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.z_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000008u;
+  _impl_._has_bits_[0] &= ~0x00000010u;
 }
 inline float SyncPlayer::z() const {
   // @@protoc_insertion_point(field_get:ConnectMsg.SyncPlayer.z)
@@ -1095,7 +1114,7 @@ inline float SyncPlayer::z() const {
 }
 inline void SyncPlayer::set_z(float value) {
   _internal_set_z(value);
-  _impl_._has_bits_[0] |= 0x00000008u;
+  _impl_._has_bits_[0] |= 0x00000010u;
   // @@protoc_insertion_point(field_set:ConnectMsg.SyncPlayer.z)
 }
 inline float SyncPlayer::_internal_z() const {
@@ -1105,6 +1124,75 @@ inline float SyncPlayer::_internal_z() const {
 inline void SyncPlayer::_internal_set_z(float value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.z_ = value;
+}
+
+// optional string resource = 5;
+inline bool SyncPlayer::has_resource() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline void SyncPlayer::clear_resource() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.resource_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline const std::string& SyncPlayer::resource() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncPlayer.resource)
+  return _internal_resource();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void SyncPlayer::set_resource(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.resource_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncPlayer.resource)
+}
+inline std::string* SyncPlayer::mutable_resource() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_resource();
+  // @@protoc_insertion_point(field_mutable:ConnectMsg.SyncPlayer.resource)
+  return _s;
+}
+inline const std::string& SyncPlayer::_internal_resource() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.resource_.Get();
+}
+inline void SyncPlayer::_internal_set_resource(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.resource_.Set(value, GetArena());
+}
+inline std::string* SyncPlayer::_internal_mutable_resource() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  return _impl_.resource_.Mutable( GetArena());
+}
+inline std::string* SyncPlayer::release_resource() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:ConnectMsg.SyncPlayer.resource)
+  if ((_impl_._has_bits_[0] & 0x00000001u) == 0) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* released = _impl_.resource_.Release();
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
+    _impl_.resource_.Set("", GetArena());
+  }
+  return released;
+}
+inline void SyncPlayer::set_allocated_resource(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  _impl_.resource_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.resource_.IsDefault()) {
+    _impl_.resource_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:ConnectMsg.SyncPlayer.resource)
 }
 
 #ifdef __GNUC__

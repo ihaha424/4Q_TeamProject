@@ -32,6 +32,18 @@
 #include "GraphicsEngine/IBloom.h"
 #include "GraphicsEngine/IBlur.h"
 
+#ifdef NDEBUG
+	#define PhysicsDebuger false
+#else
+	#define PhysicsDebuger true
+#endif
+#include "Physics/InterfaceAPI.h"
+
+#include "Server/ClientEntrance.h"
+#include "../Packet/ProtoInclude.h"
+#include "../Packet/PacketID.h"
+#include "PacketFilter.h"
+
 #include "Math.h"
 
 #include "Transform.h"

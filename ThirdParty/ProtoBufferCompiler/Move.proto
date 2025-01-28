@@ -15,3 +15,14 @@ message Jump {
 	optional float power = 2;
 }
 
+message StateChange {
+	optional int32 serialnumber = 1;
+	optional int32 stateinfo = 2;
+}
+
+message MoveSync {
+	optional int32 serialnumber = 1;
+	optional float x = 2;
+	optional float y = 3;
+	optional float z = 4;
+}

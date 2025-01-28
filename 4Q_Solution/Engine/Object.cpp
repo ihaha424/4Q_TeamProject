@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Object.h"
+#include "PHIObject.h"
 
 void Engine::Object::Dispose()
 {

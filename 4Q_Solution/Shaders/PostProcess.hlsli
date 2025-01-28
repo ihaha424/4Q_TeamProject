@@ -20,8 +20,7 @@ cbuffer LayerMask : register(b0)
 inline float LayerMasking(float2 uv)
 {
     uint mask = txLayerMask.Load(int3(uv * float2(1920, 1080), 0));
-    //uint mask = txLayerMask.Sample(samLinear_wrap, uv).r;
-    return (layerMask & mask) > 0 ? 1 : 0;
+    return min((layerMask & mask), 1);
 }
 
 #endif

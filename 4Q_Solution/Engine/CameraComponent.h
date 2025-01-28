@@ -5,27 +5,28 @@ namespace Engine::Component
 	class CameraComponent :	public Component
 	{
 	public:
-		explicit CameraComponent(std::wstring name, float nearZ, float farZ, SIZE size, float fov);
+		explicit CameraComponent(float nearZ, float farZ, Math::Size size, float fov);
 
-		void Setup(Modules modules) override;
-		void Initialize() override;
+		void SetName(std::wstring&& name);
+
+		void Initialize(const Modules& modules) override;
 		void Attach() override;
 		void Detach() override;
 		void Finalize() override;
 
 		void Activate() const;
 
-		void SetPosition(Math::Vector3 position);
-		void SetRotation(Math::Vector3 rotation);
+		void SetPosition(Math::Vector3 position) const;
+		void SetRotation(Math::Vector3 rotation) const;
 
 		void Rotate(Math::Vector3 rotation);
 
 	private:
-		std::wstring _name;
+		std::wstring _name = L"";
 
 		float _nearZ;
 		float _farZ;
-		SIZE _size;
+		Math::Size _size;
 		float _fov;
 
 		GEGraphics::Manager* _graphicsManager;

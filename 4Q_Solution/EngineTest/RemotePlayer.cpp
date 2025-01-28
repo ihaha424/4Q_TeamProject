@@ -2,43 +2,47 @@
 #include "RemotePlayer.h"
 #include "NetworkTemp.h"
 
-RemotePlayer::RemotePlayer() :
-	//_camera(L"MainCamera", 1.f, 1000.f, { 16,9 }, 3.141592f / 4) // TODO: Remove this.
-	//_staticMesh(L"../Resources/Player/Player.X", &_worldMatrix)
-	_skeltalMesh(L"../Resources/Player/Player.X", &_worldMatrix)
-	, _animator(&_skeltalMesh),
-	_sync()
-{
 
+RemotePlayer::RemotePlayer(std::filesystem::path&& meshPath) :
+	_meshPath(std::forward<std::filesystem::path>(meshPath)), _skeletalMesh(nullptr), _animator(nullptr)
+	, _worldMatrix(Engine::Math::Matrix::Identity)
+{
 }
 
-void RemotePlayer::Addition()
+void RemotePlayer::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
-	Object::Addition();
-	//AddComponent(&_movement);
-	//AddComponent(&_camera);
-	//AddComponent(&_staticMesh);
-	AddComponent(&_skeltalMesh);
-	AddComponent(&_animator);
-	AddComponent(&_remoteMove);
-	AddComponent(&_sync);
+	_skeletalMesh = componentFactory->Clone<Engine::Component::SkeletalMesh>();
+	_animator = componentFactory->Clone<Engine::Component::Animator>();
+	_sync = componentFactory->Clone<Engine::Component::SynchronizeComponent>();
+	_remoteMove = componentFactory->Clone<RemoteMoveComponent>();
 }
 
-void RemotePlayer::PreInitialize()
+void RemotePlayer::DisposeComponents()
 {
-	Object::PreInitialize();
+	_skeletalMesh->Dispose();
+	_animator->Dispose();
+	_sync->Dispose();
+	_remoteMove->Dispose();
+}
+
+void RemotePlayer::PreInitialize(const Engine::Modules& modules)
+{
+	Object::PreInitialize(modules);
 
 	//_movement.SetTarget(&_transform);
-	_remoteMove.SetTarget(&_transform);
+	_remoteMove->SetTarget(&_transform);
+	_skeletalMesh->SetFilePath(_meshPath);
+	_skeletalMesh->SetMatrix(&_worldMatrix);
+	_animator->SetSkeletalMesh(_skeletalMesh);
 
-	_sync.SetSerialNumber(2);
+	_sync->SetSerialNumber(2);
 	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &RemotePlayer::FirstInitialize, this);
 	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::MoveSync, &RemotePlayer::SyncMove, this);
 	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::StateChange, &RemotePlayer::StateChange, this);
-	
-	_sync.AddCallback((short)PacketID::Sync, &RemotePlayer::FirstInitialize, this);
-	_sync.AddCallback((short)PacketID::MoveSync, &RemotePlayer::SyncMove, this);
-	_sync.AddCallback((short)PacketID::StateChange, &RemotePlayer::StateChange, this);
+
+	_sync->AddCallback((short)PacketID::Sync, &RemotePlayer::FirstInitialize, this);
+	_sync->AddCallback((short)PacketID::MoveSync, &RemotePlayer::SyncMove, this);
+	_sync->AddCallback((short)PacketID::StateChange, &RemotePlayer::StateChange, this);
 
 	const auto inputManager = Engine::Application::GetInputManager();
 	Engine::Input::IMappingContext* mappingContext = nullptr;
@@ -52,8 +56,8 @@ void RemotePlayer::PreInitialize()
 		{
 			//_movement.SetDirection(value);
 		});
-	action->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) 
-		{ 
+	action->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
+		{
 			//_animator.ChangeAnimation("Run"); 
 		});
 	action->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
@@ -63,10 +67,11 @@ void RemotePlayer::PreInitialize()
 		});
 }
 
-void RemotePlayer::PostInitialize()
+void RemotePlayer::PostInitialize(const Engine::Modules& modules)
 {
+	Object::PostInitialize(modules);
 	//_movement.SetSpeed(100.f);
-	_animator.ChangeAnimation("Wait");
+	_animator->ChangeAnimation("Wait");
 	/*_animator.SetUpSplitBone(2);
 	_animator.SplitBone(0, "Dummy_root");
 	_animator.SplitBone(1, "Bip01-Spine1");*/
@@ -95,7 +100,7 @@ void RemotePlayer::PostUpdate(float deltaTime)
 void RemotePlayer::SyncMove(const MoveMsg::MoveSync* msg)
 {
 	Engine::Math::Vector3 nextLocation(msg->x(), msg->y(), msg->z());
-	_remoteMove.SetNextLocation(nextLocation);
+	_remoteMove->SetNextLocation(nextLocation);
 }
 
 void RemotePlayer::FirstInitialize(const ConnectMsg::SyncPlayer* msg)
@@ -107,10 +112,10 @@ void RemotePlayer::FirstInitialize(const ConnectMsg::SyncPlayer* msg)
 void RemotePlayer::StateChange(const MoveMsg::StateChange* msg)
 {
 	if (msg->stateinfo() == 1) {
-		_animator.ChangeAnimation("Run");
+		_animator->ChangeAnimation("Run");
 	}
 	else if (msg->stateinfo() == 0) {
-		_animator.ChangeAnimation("Wait");
+		_animator->ChangeAnimation("Wait");
 	}
 }
 

@@ -12,10 +12,8 @@ namespace Engine::Component
 	protected:
 		GraphicsComponent();
 
-	public:
-		void Setup(Modules modules) override;
+		void Initialize(const Modules& modules) override;
 
-	protected:
-		Engine::GEGraphics::Manager* _graphicsManager;
+		GEGraphics::Manager* _graphicsManager;
 	};
 }

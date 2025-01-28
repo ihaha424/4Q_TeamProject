@@ -1,4 +1,4 @@
- #pragma once
+#pragma once
 #include "Player.h"
 #include "GlobalLight.h"
 #include "Terrain.h"
@@ -9,19 +9,22 @@ class ConnectMsg::EnterAccept;
 class TestWorld : public Engine::World
 {
 public:
-	void SyncOtherPlayer(const ConnectMsg::SyncPlayer* msg);
-protected:
-	void Addition() override;
+	TestWorld() = default;
 
-	void PreInitialize() override;
+	void Prepare(Engine::Content::Factory::Object* objectFactory) override;
+	void EnterAccept(const ConnectMsg::EnterAccept* msg);
+	void SyncOtherPlayer(const ConnectMsg::SyncPlayer* msg);
+    
+protected:
+	void PreInitialize(const Engine::Modules& moduels) override;
 	void PreUpdate(float deltaTime) override;
 	void PostFixedUpdate() override;
 
 private:
-	Player _player;
-	RemotePlayer _remote;
-	GlobalLight _light;
-	Terrain _terrain;
+	Player* _player;
+	RemotePlayer* _remote;
+	GlobalLight* _light;
+	Terrain* _terrain;
 
 	int playerSerialNum = 0;
 };

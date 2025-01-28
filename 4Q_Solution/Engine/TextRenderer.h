@@ -5,22 +5,24 @@ namespace Engine::Component
 	class TextRenderer : public GraphicsComponent
 	{
 	public:
-		TextRenderer(std::filesystem::path font);
+		TextRenderer() = default;
 
 	public:
-		void Initialize() override;
+		void SetFontPath(const std::filesystem::path& fontPath);
+
+		void Initialize(const Modules& modules) override;
 		void Attach() override;
 		void Detach() override;
 		void Finalize() override;
 
-		void SetFont(const wchar_t* font);
-		void SetFontScale(const float x, const float y);
-		void SetFontColor(const float r, const float g, const float b, const float a);
-		void SetLayerDepth(const float depth);
-		void SetPivot(const float x, const float y);
-		void SetRotationFromDegree(const float degree);
-		void SetPosition(const float x, const float y, const float z = 0.f);
-		void SetText(const wchar_t* text);
+		void SetFont(const wchar_t* font) const;
+		void SetFontScale(const float x, const float y) const;
+		void SetFontColor(const float r, const float g, const float b, const float a) const;
+		void SetLayerDepth(const float depth) const;
+		void SetPivot(const float x, const float y) const;
+		void SetRotationFromDegree(const float degree) const;
+		void SetPosition(const float x, const float y, const float z = 0.f) const;
+		void SetText(const wchar_t* text) const;
 
 	private:
 		GE::ITextRenderer* _geTextRenderer;

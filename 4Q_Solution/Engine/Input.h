@@ -9,7 +9,7 @@
 #include "InputButtonComponent.h"
 #include "InputAxisComponent.h"
 
-#include "Trigger.h"
+#include "ITrigger.h"
 #include "Down.h"
 
 #include "Mouse.h"

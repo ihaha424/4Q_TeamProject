@@ -5,7 +5,7 @@ namespace Engine::Component
     class Mesh : public GraphicsComponent
     {
     protected:
-        Mesh(std::filesystem::path filePath, Engine::Math::Matrix* matrix);
+        Mesh();
 
     public:
         void Attach() override;
@@ -13,7 +13,9 @@ namespace Engine::Component
         void Finalize() override;
 
     public:
-        void SetRenderLayer(const unsigned int layer);
+        void SetRenderLayer(unsigned int layer) const;
+		void SetMatrix(Math::Matrix* matrix);
+		void SetFilePath(const std::filesystem::path& filePath);
 
     protected:
         std::filesystem::path   _filePath;

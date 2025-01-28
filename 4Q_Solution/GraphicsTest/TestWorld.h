@@ -14,6 +14,7 @@ protected:
 
 private:
 	Player _player;
+	TestPlayer _testPlayer;
 	GlobalLight _light;
 	Terrain _terrain;
 

@@ -53,7 +53,7 @@ void DX11Renderer::Render()
 {
 	Camera* pCamera = g_pCameraSystem->GetCurrentCamera();
 
-	XMVECTOR direction = XMVector3Normalize(-Vector3(1.f, 0.f, 1.f));
+	XMVECTOR direction = XMVector3Normalize(-Vector3(0.f, 0.f, 1.f));
 	XMVECTOR lightPosition = direction * 5000.f + XMVectorSet(0.f, 5000.f, 0.f, 0.f);
 	XMVECTOR lightTarget = direction;
 	XMVECTOR lightUp = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
@@ -146,25 +146,25 @@ void DX11Renderer::Render()
 		}
 	}
 
+	// Lights
 	g_pConstantBuffer->UpdateConstantBuffer(L"DirectionalLights", _directionalLights.data());
 	g_pConstantBuffer->UpdateConstantBuffer(L"PointLights", _pointLights.data());
 	g_pConstantBuffer->UpdateConstantBuffer(L"NumLight", numLight);
 
+	// Matrices
 	g_pStructuredBuffer->UpdateStructuredBuffer(L"WorldMatrices", _matrices.data());
 	g_pStructuredBuffer->UpdateStructuredBuffer(L"BoneMatrices", _boneMatrices.data());
 	g_pStructuredBuffer->SetStructuredBuffer(L"WorldMatrices", ShaderType::Vertex, 0, 1);
 	g_pStructuredBuffer->SetStructuredBuffer(L"BoneMatrices", ShaderType::Vertex, 1, 1);
 
+	// ResetState
 	_pDeviceContext->OMSetDepthStencilState(nullptr, 0XFF);
 
 	ShadowPass();
 	
-	_pDeviceContext->PSSetShaderResources(10, 1, &_pShadowSRV);
-	
-	ID3D11RenderTargetView* pRTV = g_pViewManagement->GetRenderTargetView(L"Base");
-
-	DeferredPass(noneAlphaMeshs, pRTV);
-	ForwardPass(alphaMeshes, pRTV);
+	_pDeviceContext->PSSetShaderResources(10, 1, &_pShadowSRV);	
+	DeferredPass(noneAlphaMeshs);
+	ForwardPass(alphaMeshes);
 	
 	ID3D11ShaderResourceView* nullSRV = nullptr;
 	_pDeviceContext->PSSetShaderResources(10, 1, &nullSRV);
@@ -215,47 +215,48 @@ void DX11Renderer::ShadowPass()
 	_pDeviceContext->OMSetRenderTargets(0, nullptr, nullptr);
 }
 
-void DX11Renderer::DeferredPass(std::list<DrawData>& renderData, ID3D11RenderTargetView* pRTV)
+void DX11Renderer::DeferredPass(std::list<DrawData>& renderData)
 {
 	SetViewport(g_width, g_height);
 
-	auto& [renderTargets, textures] = g_pViewManagement->GetRenderTargetGroup(L"Deferred");
+	auto& [RTVs, SRVs] = g_pViewManagement->GetRenderTargetGroup(L"Deferred");
+	unsigned int numTargets = (unsigned int)RTVs.size();
 
-	_pDeviceContext->OMSetRenderTargets((unsigned int)renderTargets.size(), renderTargets.data(), _pDefaultDSV);
+	_pDeviceContext->OMSetRenderTargets(numTargets, RTVs.data(), _pDefaultDSV);
 	_pDeviceContext->OMSetBlendState(_pDeferredBlendState, NULL, 0xFFFFFFFF);
 	_pDeviceContext->ClearDepthStencilView(_pDefaultDSV, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
+	for (unsigned int i = 0; i < numTargets; i++) _pDeviceContext->ClearRenderTargetView(RTVs[i], COLOR_ZERO);
 
-	for (int i = 0; i < End; i++)
-		_pDeviceContext->ClearRenderTargetView(renderTargets[i], COLOR_ZERO);
+	RenderMesh(renderData, _psGBuffer);
+	SSAOPass();
 
-	_psGBuffer->SetPixelShader();
-
-	RenderMesh(renderData, _psGBuffer);	
+	auto* pRTV = g_pViewManagement->GetRenderTargetView(L"Base");
 
 	_pDeviceContext->OMSetRenderTargets(1, &pRTV, nullptr);
 	_pDeviceContext->ClearRenderTargetView(pRTV, COLOR_ZERO);
 
-	_psDeferredLighting->SetPixelShader();
-	
-	_pDeviceContext->PSSetShaderResources(0, End, textures.data());
+	// Diffuse, Normal, Specular, Emissive, ShadowPosition, Depth
+	_pDeviceContext->PSSetShaderResources(0, End, SRVs.data());
 	_pDeviceContext->PSSetShaderResources(5, 1, &_pDefaultSRV);
 
+	_psDeferredLighting->SetPixelShader();
 	g_pQuad->Render();
 
 	ID3D11ShaderResourceView* nullSRV[End + 1]{ nullptr, };
 	_pDeviceContext->PSSetShaderResources(0, End + 1, nullSRV);
 }
 
-void DX11Renderer::ForwardPass(std::list<DrawData>& renderData, ID3D11RenderTargetView* pRTV)
+void DX11Renderer::ForwardPass(std::list<DrawData>& renderData)
 {
 	float blendFactor[4]{ 0.f, 0.f, 0.f, 0.f };
 
-	_pDeviceContext->OMSetRenderTargets(1, &pRTV, _pDefaultDSV);
-	_pDeviceContext->OMSetBlendState(_pForwardBlendState, blendFactor, 0xFFFFFFFF);
+	auto& [RTVs, SRVs] = g_pViewManagement->GetRenderTargetGroup(L"Forward");
 
-	_psForwardLighting->SetPixelShader();
-
+	_pDeviceContext->OMSetRenderTargets((unsigned int)RTVs.size(), RTVs.data(), _pDefaultDSV);
+	_pDeviceContext->OMSetBlendState(_pForwardBlendState, blendFactor, 0xFFFFFFFF);	
 	RenderMesh(renderData, _psForwardLighting);
+
+	_pDeviceContext->OMSetRenderTargets(0, nullptr, nullptr);
 }
 
 void DX11Renderer::SkyBoxPass(std::list<SkyBoxRenderer*>& skyBoxes)
@@ -270,20 +271,29 @@ void DX11Renderer::SkyBoxPass(std::list<SkyBoxRenderer*>& skyBoxes)
 	_pDeviceContext->RSSetState(nullptr);
 }
 
+void DX11Renderer::SSAOPass()
+{
+
+}
+
 void DX11Renderer::PostProcessing()
 {	
 	auto& [RTVs, SRVs] = g_pViewManagement->GetRenderTargetGroup(L"Blend");
 	auto* pBaseSRV = g_pViewManagement->GetShaderResourceView(L"Base");
+	auto* pLayerMaskSRV = g_pViewManagement->GetShaderResourceView(L"LayerMask");
 	auto* pPostProcessRTV = g_pViewManagement->GetRenderTargetView(L"PostProcess");
-	unsigned int currentIndex = 0;	
+	unsigned int currentIndex = 0;		
+
+	ID3D11ShaderResourceView* pSRV = nullptr;
+	_pDeviceContext->PSSetShaderResources(0, 1, &pBaseSRV);
+	_pDeviceContext->PSSetShaderResources(1, 1, &pLayerMaskSRV);
 
 	auto& filters = g_pPostProcessSystem->GetFilters();
-	ID3D11ShaderResourceView* pSRV = pBaseSRV;
-
 	for (auto& [mask, filter] : filters)
 	{
 		g_pConstantBuffer->UpdateConstantBuffer(L"LayerMask", &mask);
-		filter->Render(pBaseSRV);
+
+		filter->Render();
 		BlendPass(RTVs[currentIndex], pSRV);
 		pSRV = SRVs[currentIndex];
 		currentIndex = (currentIndex + 1) % 2;
@@ -298,9 +308,13 @@ void DX11Renderer::PostProcessing()
 
 	_pDeviceContext->OMSetRenderTargets(1, &pBackBuffer, nullptr);
 	_pDeviceContext->ClearRenderTargetView(pBackBuffer, COLOR_ZERO);
-	_pDeviceContext->PSSetShaderResources(0, 1, &SRVs[currentIndex]);
+	_pDeviceContext->PSSetShaderResources(2, 1, &SRVs[currentIndex]);
 	_psToneMapping->SetPixelShader();
 	g_pQuad->Render();
+
+	// Reset
+	ID3D11ShaderResourceView* nullSRVs[2]{ nullptr, };
+	_pDeviceContext->PSSetShaderResources(0, 2, nullSRVs);
 }
 
 void DX11Renderer::BlendPass(ID3D11RenderTargetView* pRTV, ID3D11ShaderResourceView* pSRV)
@@ -308,16 +322,18 @@ void DX11Renderer::BlendPass(ID3D11RenderTargetView* pRTV, ID3D11ShaderResourceV
 	auto* pPostSRV = g_pViewManagement->GetShaderResourceView(L"PostProcess");
 	ID3D11ShaderResourceView* nullSRV = nullptr;
 
-	_pDeviceContext->PSSetShaderResources(0, 1, &nullSRV);
+	_pDeviceContext->PSSetShaderResources(2, 1, &nullSRV);
 	_pDeviceContext->OMSetRenderTargets(1, &pRTV, nullptr);
-	_pDeviceContext->PSSetShaderResources(0, 1, &pSRV);
-	_pDeviceContext->PSSetShaderResources(1, 1, &pPostSRV);
+	_pDeviceContext->PSSetShaderResources(2, 1, &pSRV);
+	_pDeviceContext->PSSetShaderResources(3, 1, &pPostSRV);
 	_psBlend->SetPixelShader();
 	g_pQuad->Render();
 }
 
 void DX11Renderer::RenderMesh(std::list<DrawData>& renderData, std::shared_ptr<PixelShader>& pixelShader)
 {
+	pixelShader->SetPixelShader();
+
 	unsigned int offset[2]{ 0, MAX_BONE_MATRIX };
 	unsigned int layerMask = 0;
 	for (auto& [ID, mask, mesh] : renderData)
@@ -398,12 +414,16 @@ void DX11Renderer::InitMRT()
 {
 	// Diffuse, Normal, Specular, Emissive, ShadowPosition;
 
+	g_pViewManagement->AddRenderTargetView(L"Base", Vector2(g_width, g_height));
+
 	g_pViewManagement->AddRenderTargetView(L"Diffuse", Vector2(g_width, g_height));
 	g_pViewManagement->AddRenderTargetView(L"Normal", Vector2(g_width, g_height));
 	g_pViewManagement->AddRenderTargetView(L"Specular", Vector2(g_width, g_height));
 	g_pViewManagement->AddRenderTargetView(L"Emissive", Vector2(g_width, g_height));
 	g_pViewManagement->AddRenderTargetView(L"ShadowPosition", Vector2(g_width, g_height));
+
 	g_pViewManagement->AddRenderTargetView(L"LayerMask", Vector2(g_width, g_height), DXGI_FORMAT_R32_UINT);
+	g_pViewManagement->AddRenderTargetView(L"PostProcess", Vector2(g_width, g_height));
 
 	g_pViewManagement->AddRenderTargetGroup(L"Deferred", L"Diffuse");
 	g_pViewManagement->AddRenderTargetGroup(L"Deferred", L"Normal");
@@ -412,11 +432,8 @@ void DX11Renderer::InitMRT()
 	g_pViewManagement->AddRenderTargetGroup(L"Deferred", L"ShadowPosition");
 	g_pViewManagement->AddRenderTargetGroup(L"Deferred", L"LayerMask");
 
-	/*g_pViewManagement->AddRenderTargetGroup(L"Forward", L"");
-	g_pViewManagement->AddRenderTargetGroup(L"Forward", L"LayerMask");*/
-
-	g_pViewManagement->AddRenderTargetView(L"Base", Vector2(g_width, g_height));
-	g_pViewManagement->AddRenderTargetView(L"PostProcess", Vector2(g_width, g_height));
+	g_pViewManagement->AddRenderTargetGroup(L"Forward", L"Base");
+	g_pViewManagement->AddRenderTargetGroup(L"Forward", L"LayerMask");
 
 	g_pViewManagement->AddRenderTargetView(L"Blend0", Vector2(g_width, g_height));
 	g_pViewManagement->AddRenderTargetView(L"Blend1", Vector2(g_width, g_height));

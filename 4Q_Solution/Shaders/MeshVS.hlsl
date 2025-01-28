@@ -24,7 +24,7 @@ struct VS_OUTPUT
 };
 
 cbuffer ViewProjection : register(b0)
-{    
+{
     matrix vp;
     matrix shadowVP;
 }
@@ -45,9 +45,9 @@ VS_OUTPUT main(VS_INPUT input)
       
 #ifdef Skeletal
     matrix boneTransform = mul(input.blendWeights.x, BoneMatrices[index * offset + input.blendIndices.x]);
-    boneTransform += mul(input.blendWeights.y, BoneMatrices[index * offset + input.blendIndices.y]);
-    boneTransform += mul(input.blendWeights.z, BoneMatrices[index * offset + input.blendIndices.z]);
-    boneTransform += mul(input.blendWeights.w, BoneMatrices[index * offset + input.blendIndices.w]);
+    boneTransform +=       mul(input.blendWeights.y, BoneMatrices[index * offset + input.blendIndices.y]);
+    boneTransform +=       mul(input.blendWeights.z, BoneMatrices[index * offset + input.blendIndices.z]);
+    boneTransform +=       mul(input.blendWeights.w, BoneMatrices[index * offset + input.blendIndices.w]);
     worldTransform = mul(boneTransform, WorldMatrices[index]);
 #else    
     worldTransform = WorldMatrices[index];

@@ -28,9 +28,10 @@ private:
 	void SetViewport(float width, float height);
 
 	void ShadowPass();
-	void DeferredPass(std::list<DrawData>& renderData, ID3D11RenderTargetView* pRTV);
-	void ForwardPass(std::list<DrawData>& renderData, ID3D11RenderTargetView* pRTV);
+	void DeferredPass(std::list<DrawData>& renderData);
+	void ForwardPass(std::list<DrawData>& renderData);
 	void SkyBoxPass(std::list<SkyBoxRenderer*>& skyBoxes);
+	void SSAOPass();
 	void PostProcessing();
 	void BlendPass(ID3D11RenderTargetView* pRTV, ID3D11ShaderResourceView* pSRV);
 	void RenderMesh(std::list<DrawData>& renderData, std::shared_ptr<PixelShader>& pixelShader);

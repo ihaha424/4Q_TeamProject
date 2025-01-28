@@ -20,7 +20,7 @@ void Engine::Component::CameraComponent::Initialize()
 {
 	Component::Initialize();
 	_camera->SetPerspective(_nearZ, _farZ, static_cast<float>(_size.cx) / static_cast<float>(_size.cy), _fov);
-	_camera->SetPosition(0.f, 50.f, -300.f); // TODO: Get position from object.
+	_camera->SetPosition(0.f, 50.f, -150.f); // TODO: Get position from object.
 	_camera->SetRotationFromAngle(0.f, 0.f, 0.f);
 }
 

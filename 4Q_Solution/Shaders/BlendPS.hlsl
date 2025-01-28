@@ -6,8 +6,8 @@ struct PS_INPUT
     float2 uv               : TEXCOORD;
 };
 
-Texture2D txSource0         : register(t0);
-Texture2D txSource1         : register(t1);
+Texture2D txSource0         : register(t2);
+Texture2D txSource1         : register(t3);
 
 SamplerState samLinear_wrap : register(s0);
 

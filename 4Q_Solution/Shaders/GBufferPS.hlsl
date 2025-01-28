@@ -29,9 +29,9 @@ Texture2D txNormal           : register(t1);
 Texture2D txSpecular         : register(t2);
 Texture2D txEmissive         : register(t3);
 Texture2D txOpacity          : register(t4);
-Texture2D txLight            : register(t5);
-Texture2D txMetalness        : register(t6);
-Texture2D txRoughness        : register(t7);
+Texture2D txMetalness        : register(t5);
+Texture2D txRoughness        : register(t6);
+Texture2D txAO               : register(t7);
 
 SamplerState samLinear_wrap : register(s0);
 
@@ -59,7 +59,7 @@ PS_OUTPUT main(PS_INPUT input)
     //output.depth.g = input.clipPosition.z / input.clipPosition.w;
     
     // shadow
-    output.shadowPosition = input.shadowPosition;    
+    output.shadowPosition = input.shadowPosition;
     
     // layerMask
     output.layerMask = layerMask;

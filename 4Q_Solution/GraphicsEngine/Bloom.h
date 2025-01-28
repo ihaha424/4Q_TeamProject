@@ -19,7 +19,7 @@ public:
 
 public:
 	// PostProcess을(를) 통해 상속됨
-	void Render(ID3D11ShaderResourceView* pSourceSRV) override;
+	void Render() override;
 
 private:
 	void Sampling(float width, float height, ID3D11RenderTargetView* pRTV);

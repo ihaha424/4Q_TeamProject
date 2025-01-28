@@ -4,6 +4,10 @@
 #include <string>
 #include <filesystem>
 #include <ranges>
+#include <any>
+#include <optional>
+#include <typeinfo>
+#include <typeindex>
 
 #include "directxtk/SimpleMath.h"
 
@@ -28,6 +32,18 @@
 #include "GraphicsEngine/IBloom.h"
 #include "GraphicsEngine/IBlur.h"
 
+#ifdef NDEBUG
+	#define PhysicsDebuger false
+#else
+	#define PhysicsDebuger true
+#endif
+#include "Physics/InterfaceAPI.h"
+
+#include "Server/ClientEntrance.h"
+#include "../Packet/ProtoInclude.h"
+#include "../Packet/PacketID.h"
+#include "PacketFilter.h"
+
 #include "Math.h"
 
 #include "Transform.h"
@@ -37,5 +53,5 @@
 #include "Components.h"
 #include "Object.h"
 #include "World.h"
-#include "Drive.h"
+
 #include "Application.h"

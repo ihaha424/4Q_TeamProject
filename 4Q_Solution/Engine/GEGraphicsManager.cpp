@@ -54,9 +54,13 @@ void Engine::GEGraphics::Manager::Initialize(HWND windowHandle, const std::files
 	_renderSystem->GetPostProcessSystem(&_postprocessSystem);
 }
 
-void Engine::GEGraphics::Manager::Update(const float deltaTime) const
+void Engine::GEGraphics::Manager::PreUpdate(const float deltaTime) const
 {
 	_animationSystem->Update(deltaTime);
+}
+
+void Engine::GEGraphics::Manager::PostUpdate(float deltaTime) const
+{
 	_cameraSystem->Update();
 }
 

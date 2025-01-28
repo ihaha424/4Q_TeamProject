@@ -2,13 +2,12 @@
 
 namespace Engine::Input::Trigger
 {
-	struct IDown : Trigger
+	struct IDown : ITrigger
 	{
 		
 	};
 
 	struct Down : IDown
 	{
-		virtual void Finalize() = 0;
 	};
 }

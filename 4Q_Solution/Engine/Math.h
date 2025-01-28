@@ -1,4 +1,5 @@
 #pragma once
+#include "Vector4.h"
 #include "Vector3.h"
 #include "Vector2.h"
 #include "Point.h"
@@ -6,3 +7,4 @@
 #include "EasingFunction.h"
 #include "DotTween.h"
 #include "Matrix.h"
+#include "Size.h"

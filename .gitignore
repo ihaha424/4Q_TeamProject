@@ -646,3 +646,6 @@ FodyWeavers.xsd
 
 # vcpkg
 vcpkg_installed
+
+#Third Party
+ThirdParty

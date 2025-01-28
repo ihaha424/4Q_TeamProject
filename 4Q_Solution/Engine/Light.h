@@ -10,24 +10,24 @@ namespace Engine::Component
         Light();
 
     public:
-        void Initialize() override;
+        void Initialize(const Modules& modules) override;
         void Attach() override;
         void Detach() override;
 		void Finalize() override;
 
     public:
-		void SetType(Type type);
-		void SetIntensity(float intensity);
-		void SetPosition(float x, float y, float z);
-		void SetRange(float range);
-		void SetDirection(float x, float y, float z);
-		void SetDiffuse(float r, float g, float b, float a);
-		void SetSpecular(float r, float g, float b, float a);
-		void SetAmbient(float r, float g, float b, float a);
-		void SetAttenuation(float constant, float linear, float quadratic);
-		void SetPositionFromArray(float* pArray);
-		void SetDirectionFromArray(float* pArray);
-		void SetDiffsueFromArray(float* pArray);
+		void SetType(Type type) const;
+		void SetIntensity(float intensity) const;
+		void SetPosition(float x, float y, float z) const;
+		void SetRange(float range) const;
+		void SetDirection(float x, float y, float z) const;
+		void SetDiffuse(float r, float g, float b, float a) const;
+		void SetSpecular(float r, float g, float b, float a) const;
+		void SetAmbient(float r, float g, float b, float a) const;
+		void SetAttenuation(float constant, float linear, float quadratic) const;
+		void SetPositionFromArray(float* pArray) const;
+		void SetDirectionFromArray(float* pArray) const;
+		void SetDiffuseFromArray(float* pArray) const;
 		void SetSpecularFromArray(float* pArray);
 		void SetAmbientFromArray(float* pArray);
 

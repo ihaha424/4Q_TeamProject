@@ -1,0 +1,176 @@
+Shape
+	: PxRigidActor::attachShape()를 사용하여 부탁
+	PxRigidActor::detachShape()를 사용하여 액터에서 셰이프를 분리합니다.
+	분리할 셰이프가 PxActor::createShape()로 생성된 경우, 액터는 유일하게 계산된 레퍼런스를 보유합니다,
+	따라서 셰이프가 분리되면 그 참조도 소멸됩니다. 
+
+================================================================================
+Joint (관절체)
+	PxD6Joint
+	PxRevoluteJoint
+	PxSphericalJoint
+	PxDistanceJoint	
+	PxPrismaticJoint
+	PxFixedJoint
+================================================================================
+PxAggregate 
+	PxAggregate에 포함된 객체들은 내부적으로 최적화된 구조로 처리되며, 같은 그룹 내 객체 간의 충돌 계산을 선택적으로 무시할 수 있습니다.
+	그룹 간 충돌 계산이 더 빠르게 이루어집니다.
+	언제 사용하나요?
+		많은 객체를 포함하는 씬(Scene):
+			예를 들어, 게임에서 여러 적 캐릭터, 파괴 가능한 물체, 고정된 장애물을 포함하는 경우.
+		성능 최적화가 중요한 경우:
+			객체 수가 많고 복잡한 충돌 계산이 필요한 상황에서 Aggregate를 사용하면 충돌 처리 속도가 크게 향상됩니다.
+		특정 그룹으로 관리가 필요한 경우:
+			특정 객체 그룹을 한 번에 추가하거나 제거하려는 경우 편리합니다.
+================================================================================
+PxTriangleMesh
+	PxTriangleMesh는 정적 삼각형 메쉬를 정의하는 클래스입니다. 복잡한 비구형 객체(예: 건물, 바위, 지형 등)를 물리적으로 시뮬레이션할 때 사용됩니다.
+	주요 사용처
+		:건물, 지형, 바위처럼 움직이지 않는 복잡한 정적 모델의 충돌 처리.
+		정적 객체
+
+PxHeightField
+	PxHeightField는 높이 맵 기반의 지형을 정의하는 클래스입니다. 지형을 효율적으로 표현하고 충돌 처리를 최적화합니다.
+	특징:
+		높이 맵 데이터(2D 배열 형태의 높이 값)를 사용해 3D 지형을 정의.
+		주로 지형이나 게임 월드의 바닥을 표현하는 데 사용.
+		삼각형 메쉬보다 메모리와 계산 효율이 높음.
+	주요 사용처:
+		오픈 월드 게임의 지형 충돌 처리.
+		고도 기반의 맵 생성.
+		대규모 지형
+
+PxConvexMesh
+	PxConvexMesh는 **볼록 다면체(Convex Hull)**를 정의하는 클래스입니다. 이는 동적 객체(Dynamic Object)의 충돌 처리를 위해 사용됩니다.
+	특징:
+		물리적으로 볼록한 형태의 객체만 표현 가능(비볼록한 형태는 분해 필요).
+		삼각형 메쉬와 달리 동적 객체로 사용할 수 있습니다.
+		충돌 계산이 효율적이며, 동적 시뮬레이션에서 자주 사용.
+	주요 사용처:
+		차량, 상자, 캐릭터와 같은 동적 객체.
+		단순화된 충돌 모델로 효율적인 물리 계산.
+		동적 객체
+
+PxMaterial
+	PxMaterial은 물리 객체의 마찰 계수와 반발 계수를 정의하는 클래스입니다.
+	이는 객체의 표면 물리 특성을 설정하는 데 사용됩니다.
+	특징:
+		각 객체 또는 PxShape에 적용.
+		두 객체가 충돌할 때 PhysX는 각각의 재질(Material)을 참고하여 충돌 효과를 계산.
+	속성:
+		마찰 계수(staticFriction, dynamicFriction): 정지 및 움직임 마찰 계수.
+		반발 계수(restitution): 충돌 후 반발 정도.
+	주요 사용처:
+		서로 다른 물리적 표면(예: 얼음, 나무, 금속)의 물리 특성을 표현.
+		충돌 시의 상호작용 및 운동 효과를 세밀하게 조정.
+		표면의 물리적 특성 (마찰, 반발)
+
+
+
+physx::PxGeometry;
+		// Geometry
+		{
+			PxSphereGeometry;
+			PxCapsuleGeometry;
+			PxBoxGeometry;
+			PxPlaneGeometry;
+
+			//IsCooking /  Vertex and Face Data
+			PxConvexMeshGeometry;
+			PxTriangleMeshGeometry;	// 이게 원하는 메쉬 모양의 데이터네
+			PxHeightFieldGeometry;
+
+			-> 특정 Geometry(예: PxConvexMeshGeometry 또는 PxTriangleMeshGeometry)에는 스케일 조정을 위한 PxMeshScale이 포함되어 있습니다.
+
+			//Additional
+			PxCustomGeometry;
+			PxHairSystemGeometry;
+			PxParticleSystemGeometry;
+			PxTetrahedronMeshGeometry;
+		}
+
+================================================================================
+	// 자신의 타입으로 변환
+		충돌 생각할때 상대방의 정보를 보내 주어야하는데 어떻게 보낼까?
+
+		자신의 어느 shape이랑 상대의 어느 shape하고 충돌이 났는지 서로의 오브젝트한테 보낸다.
+		(일단 충격량같은 충돌 정보는 이후...)
+
+		static_cast<ICollision>(userdata)->Collision& Triier(ContactData);
+		-> userdata == ColliderComponet : public ICompoennt / 
+		-> ColliderComponet는 ContactData에 따라서 충돌 정보를 파악하여 클라이언트의 코드를 실행 시킴
+			-> 이러면 피직스와 엔진의 결합 / 엔진과 클라의 결합이 있지만,
+				피직스와 클라 / 피직스X와 엔진의 결합도는 없음.
+
+================================================================================
+		// physx::PxDefaultSimulationFilterShader; is Default Filter
+
+
+기본 충돌 및 접촉 처리
+eSOLVE_CONTACT (1 << 0)
+충돌 쌍에 대해 동적 시뮬레이션(물리 계산)에서 접촉 처리를 수행합니다.
+Rigid body(강체) 간 충돌에만 영향을 미칩니다.
+접촉 수정 및 사용자 정의 콜백
+eMODIFY_CONTACTS (1 << 1)
+접촉 수정 콜백을 호출하도록 설정합니다.
+접촉 데이터를 사용자 정의로 수정할 수 있습니다.
+접촉 이벤트 통지(콜백)
+eNOTIFY_TOUCH_FOUND (1 << 2)
+
+두 객체가 접촉을 시작했을 때 콜백을 호출합니다.
+트리거(trigger)와의 충돌 또는 강체 간 접촉에서 사용됩니다.
+eNOTIFY_TOUCH_PERSISTS (1 << 3)
+
+접촉이 지속되는 동안 콜백을 호출합니다.
+트리거에는 적용되지 않습니다.
+eNOTIFY_TOUCH_LOST (1 << 4)
+
+접촉이 종료될 때(충돌이 멈출 때) 콜백을 호출합니다.
+트리거에서 객체가 나갈 때에도 호출됩니다.
+eNOTIFY_TOUCH_CCD (1 << 5)
+
+CCD(Continuous Collision Detection) 과정 중 접촉이 발생할 때마다 콜백을 호출합니다.
+트리거는 지원되지 않습니다.
+힘(Force) 임계값 이벤트 통지
+eNOTIFY_THRESHOLD_FORCE_FOUND (1 << 6)
+
+두 객체 사이의 접촉력이 임계값을 초과할 때 콜백을 호출합니다.
+eNOTIFY_THRESHOLD_FORCE_PERSISTS (1 << 7)
+
+임계값을 초과하는 접촉력이 계속 유지될 때 콜백을 호출합니다.
+eNOTIFY_THRESHOLD_FORCE_LOST (1 << 8)
+
+접촉력이 임계값 아래로 떨어질 때(또는 접촉이 끝날 때) 콜백을 호출합니다.
+추가 정보 제공 옵션
+eNOTIFY_CONTACT_POINTS (1 << 9)
+
+접촉 보고서에서 접촉 지점 정보를 제공합니다.
+ePRE_SOLVER_VELOCITY (1 << 12)
+
+접촉 해결 전 강체의 속도를 보고서에 포함합니다.
+ePOST_SOLVER_VELOCITY (1 << 13)
+
+접촉 해결 후 강체의 속도를 보고서에 포함합니다.
+eCONTACT_EVENT_POSE (1 << 14)
+
+접촉 이벤트 발생 시 강체의 자세(포즈)를 보고서에 포함합니다.
+충돌 감지 설정
+eDETECT_DISCRETE_CONTACT (1 << 10)
+
+이 쌍에서 불연속적(Discrete) 충돌 감지를 수행합니다.
+eSOLVE_CONTACT가 활성화된 경우에만 동작합니다.
+eDETECT_CCD_CONTACT (1 << 11)
+
+이 쌍에서 연속적(CCD) 충돌 감지를 수행합니다.
+CCD가 활성화된 씬(Scene)에서만 동작하며, 트리거는 지원되지 않습니다.
+사전 정의된 기본 플래그
+eCONTACT_DEFAULT
+
+간단한 접촉 처리를 위한 기본값입니다.
+포함: eSOLVE_CONTACT | eDETECT_DISCRETE_CONTACT
+eTRIGGER_DEFAULT
+
+일반적으로 사용되는 트리거 동작의 기본값입니다.
+포함: eNOTIFY_TOUCH_FOUND | eNOTIFY_TOUCH_LOST | eDETECT_DISCRETE_CONTACT
+================================================================================

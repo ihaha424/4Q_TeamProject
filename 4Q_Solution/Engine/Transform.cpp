@@ -8,6 +8,13 @@ Engine::Transform::Transform() :
 {
 }
 
+Engine::Transform::Transform(Math::Vector3 _position, Math::Quaternion _rotation, Math::Vector3 _scale) :
+	position(_position),
+	rotation(_rotation),
+	scale(_scale)
+{
+}
+
 void Engine::Transform::Translate(const Math::Vector3 translation)
 {
 	position += translation;

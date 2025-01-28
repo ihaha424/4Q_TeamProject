@@ -10,15 +10,15 @@ Engine::DSHInput::Trigger::Down::Down() :
 {
 }
 
+Engine::DSHInput::Trigger::Down::~Down()
+{
+	Utility::SafeRelease()(&_down);
+}
+
 void Engine::DSHInput::Trigger::Down::Setup(DSH::Input::Trigger::IDown* down)
 {
 	down->AddRef();
 	_down = down;
-}
-
-void Engine::DSHInput::Trigger::Down::Finalize()
-{
-	Utility::SafeRelease()(&_down);
 }
 
 void Engine::DSHInput::Trigger::Down::SetComponent(Input::Component::IButtonComponent* component)

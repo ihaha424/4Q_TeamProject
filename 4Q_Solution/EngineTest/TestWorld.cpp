@@ -4,27 +4,25 @@
 
 
 
-void TestWorld::Addition()
+void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 {
-	World::Addition();
-	AddObject(&_player);
-	AddObject(&_remote);
-	AddObject(&_light);
-	AddObject(&_terrain);
-
+	_player = objectFactory->Clone<Player>();
+	_remote = objectFactory->Clone<RemotePlayer>();
+	_light = objectFactory->Clone<GlobalLight>();
+	_terrain = objectFactory->Clone<Terrain>();
 }
 
-void TestWorld::PreInitialize()
+void TestWorld::PreInitialize(const Engine::Modules& modules)
 {
-	NetworkTemp::GetInstance()->AddCallback((short)PacketID::EnterAccept, &TestWorld::EnterAccept, this);
-	NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &TestWorld::SyncOtherPlayer, this);
+    //NetworkTemp::GetInstance()->AddCallback((short)PacketID::EnterAccept, &TestWorld::EnterAccept, this);
+    //NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &TestWorld::SyncOtherPlayer, this);
 	
 }
 
 void TestWorld::PreUpdate(float deltaTime)
 {
-	NetworkTemp::GetInstance()->Dispatch();
-	NetworkTemp::GetInstance()->SendUpdate();
+	//NetworkTemp::GetInstance()->Dispatch();
+	//NetworkTemp::GetInstance()->SendUpdate();
 }
 
 void TestWorld::PostFixedUpdate()

@@ -15,7 +15,8 @@ namespace Engine::Graphics
 	struct Manager : IManager
 	{
 		virtual void Initialize(HWND windowHandle, const std::filesystem::path& shaderRootPath, SIZE screenSize, bool isFullScreen, UINT animationThreadCount) = 0;
-		virtual void Update(float deltaTime) const = 0;
+		virtual void PreUpdate(float deltaTime) const = 0;
+		virtual void PostUpdate(float deltaTime) const = 0;
 		virtual void Render() const = 0;
 		virtual void Finalize() = 0;
 

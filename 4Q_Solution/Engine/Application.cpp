@@ -92,11 +92,12 @@ void Engine::Application::Run(const int showCommand)
 		{
 			const float metaTime = _timeManager->GetDeltaMetaTime();
 			const float deltaTime = _timeManager->GetDeltaTime();
+
 			_timeManager->Tick();
 			_inputManager->Update(metaTime);
 			_graphicsManager->Update(deltaTime);
 			// _networkManager->DispatchPacket();
-			_physicsManager->Update(deltaTime);
+			_physicsManager->Update(metaTime);
 			_physicsManager->FetchSecne(true);
 			_drive.Update(deltaTime);
 			// TODO: Alarm Timer for Fixed Update

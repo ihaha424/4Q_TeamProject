@@ -12,6 +12,8 @@ protected:
 	void PostUpdate(float deltaTime) override;
 
 	void PostFixedUpdate() override;
+
+	void OnHit(Engine::Physics::ContactEvent info);
 private:
 	Engine::Component::MovementComponent _movement;
 	Engine::Component::CameraComponent _camera;
@@ -23,6 +25,8 @@ private:
 	Engine::Component::SynchronizeComponent _sync;
 
 	Engine::Component::RigidDynamicComponent _rigid;
+
+	Engine::Component::RigidDynamicComponent _tempOtherRigid;
 };
 
 //class RemotePlayer : public Engine::Object

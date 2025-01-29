@@ -16,6 +16,7 @@ namespace Engine::Component
 	void RigidStaticComponent::Initialize()
 	{
 		Component::Initialize();
+		static_cast<Physics::RigidStaticComponent*>(_rigidComponent)->Initialize();
 	}
 	void RigidStaticComponent::Attach()
 	{

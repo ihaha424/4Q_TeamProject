@@ -2,31 +2,29 @@
 
 namespace Engine::Physics
 {
-	// Engine Interface
-	struct Collision
+	// Client Interface
+	struct ICollision
 	{
-		Collision() = default;
-		Collision(const Collision& other) = default;
-		Collision(Collision&& other) noexcept = default;
-		Collision& operator=(const Collision& other) = default;
-		Collision& operator=(Collision&& other) noexcept = default;
-		virtual ~Collision() = default;
-
-		// Refer. Unity Collosion
-		virtual void __CALLBACK__ OnTriggerEnter() = 0;
-		virtual void __CALLBACK__ OnTrigger() = 0;
-		virtual void __CALLBACK__ OnTriggerExit() = 0;
-		virtual void __CALLBACK__ OnCollisionEnter() = 0;
-		virtual void __CALLBACK__ OnCollision() = 0;
-		virtual void __CALLBACK__ OnCollisionExit() = 0;
-
-		// Refer. Unreal Collosion
-		virtual void __CALLBACK__ OnHit() = 0;
-		virtual void __CALLBACK__ OnOverlapBegin() = 0;
-		virtual void __CALLBACK__ OnOverlapEnd() = 0;
+		ICollision() = default;
+		ICollision(const ICollision& other) = default;
+		ICollision(ICollision&& other) noexcept = default;
+		ICollision& operator=(const ICollision& other) = default;
+		ICollision& operator=(ICollision&& other) noexcept = default;
+		virtual ~ICollision() = default;
 	};
 
+	// Engine Interface
+	struct Collision : ICollision
+	{
+		virtual void FixedUpdate() = 0;
+		virtual void Finalize() = 0;
 
+		/********************************
+					Collision
+		*********************************/
+		virtual void BindCollision(const Physics::CallBackTrigger& callback, Physics::TriggerType type) = 0;
+		virtual void BindCollision(const Physics::CallBackContact& callback, Physics::ContactType type) = 0;
+	};
 
 
 

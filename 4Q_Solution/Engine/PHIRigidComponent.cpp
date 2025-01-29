@@ -8,7 +8,9 @@ namespace Engine::PHI
 		, shape{ nullptr }
 		, geometry{ nullptr }
 		, material{ nullptr }
+		, collision{ nullptr }
 	{
+		collision = new Collision<RigidComponent>{ this };
 	}
 
 	/********************************
@@ -112,17 +114,18 @@ namespace Engine::PHI
 	*********************************/
 	void RigidComponent::Initialize()
 	{
-		// TODO
-		// TODO
-		// TODO
-		// TODO
-		// TODO
-		// TODO
+		object->SetUserData(collision);
+		shape->SetUserData(collision);
 	}
 	void RigidComponent::Update(float deltaTime) const
 	{
-		// TODO
-		// TODO
+		// TODO CollisionUpdate 임시로 여기서 적용 원래는 FixedUpdate로 가는 것이 맞음 아님 Scene으로 모아서 할 수도 있음
+		collision->FixedUpdate();
+
+
+		// TODO Transform Update(Respone)
+		// TODO 로직 후 적용
+		// TODO Transform Update(Request)
 		// TODO
 		// TODO
 		// TODO
@@ -136,5 +139,16 @@ namespace Engine::PHI
 		releaser(&shape);
 		releaser(&geometry);
 		releaser(&material);
+		collision->Finalize();
+		delete collision;
+	}
+
+	void RigidComponent::BindCollision(const Physics::CallBackTrigger& callback, Physics::TriggerType type)
+	{
+		collision->BindCollision(callback, type);
+	}
+	void RigidComponent::BindCollision(const Physics::CallBackContact& callback, Physics::ContactType type)
+	{
+		collision->BindCollision(callback, type);
 	}
 }

@@ -322,18 +322,6 @@
     <Filter Include="Modules\Difinition\PhysicsEngine\03. Component">
       <UniqueIdentifier>{1a09dd96-b383-4dbd-9bf2-9d5d13e0c55d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\Difinition\PhysicsEngine\03. Component\PHICollisionComponent">
-      <UniqueIdentifier>{2d94887d-b763-4805-951b-7718d1f441e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Difinition\PhysicsEngine\03. Component\PHICollisionComponent\PHIRigidStaticComponent">
-      <UniqueIdentifier>{493683e1-fb59-431a-a33a-68632fca2e09}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Difinition\PhysicsEngine\03. Component\PHICollisionComponent\PHIRigidDynamicComponent">
-      <UniqueIdentifier>{5676c0cc-7bf0-4a2d-9002-a02abc316b58}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Difinition\PhysicsEngine\03. Component\PHICollisionComponent\PHIRigidKinematicComponent">
-      <UniqueIdentifier>{52c9be27-1226-40c9-855d-6648adbcbb47}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Components\RigidComponent">
       <UniqueIdentifier>{976cd7bb-25bd-4648-8c9f-f79de4c2b0c7}</UniqueIdentifier>
     </Filter>
@@ -369,6 +357,21 @@
     </Filter>
     <Filter Include="Components\RigidComponent\RigidKinematicComponent">
       <UniqueIdentifier>{9395e9fa-d972-472b-9454-204651077c93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\PhysicsEngine\04. Collision">
+      <UniqueIdentifier>{59f80416-22d6-4bb1-a41b-a73186979455}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\PhysicsEngine\03. Component\PHIRigidComponent">
+      <UniqueIdentifier>{2d94887d-b763-4805-951b-7718d1f441e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\PhysicsEngine\03. Component\PHIRigidComponent\PHIRigidStaticComponent">
+      <UniqueIdentifier>{493683e1-fb59-431a-a33a-68632fca2e09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\PhysicsEngine\03. Component\PHIRigidComponent\PHIRigidDynamicComponent">
+      <UniqueIdentifier>{5676c0cc-7bf0-4a2d-9002-a02abc316b58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\PhysicsEngine\03. Component\PHIRigidComponent\PHIRigidKinematicComponent">
+      <UniqueIdentifier>{52c9be27-1226-40c9-855d-6648adbcbb47}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -604,7 +607,7 @@
       <Filter>Modules\Interfaces\Physics\06. Component</Filter>
     </ClInclude>
     <ClInclude Include="PHIRigidComponent.h">
-      <Filter>Modules\Difinition\PhysicsEngine\03. Component\PHICollisionComponent</Filter>
+      <Filter>Modules\Difinition\PhysicsEngine\03. Component\PHIRigidComponent</Filter>
     </ClInclude>
     <ClInclude Include="Vector4.h">
       <Filter>Math\Vector4</Filter>
@@ -664,13 +667,13 @@
       <Filter>Modules\Interfaces\Physics\06. Component\RigidComponent\PhysicsRigidSKinematicComponent</Filter>
     </ClInclude>
     <ClInclude Include="PHIRigidStaticComponent.h">
-      <Filter>Modules\Difinition\PhysicsEngine\03. Component\PHICollisionComponent\PHIRigidStaticComponent</Filter>
+      <Filter>Modules\Difinition\PhysicsEngine\03. Component\PHIRigidComponent\PHIRigidStaticComponent</Filter>
     </ClInclude>
     <ClInclude Include="PHIRigidKinematicComponent.h">
-      <Filter>Modules\Difinition\PhysicsEngine\03. Component\PHICollisionComponent\PHIRigidKinematicComponent</Filter>
+      <Filter>Modules\Difinition\PhysicsEngine\03. Component\PHIRigidComponent\PHIRigidKinematicComponent</Filter>
     </ClInclude>
     <ClInclude Include="PHIRigidDynamicComponent.h">
-      <Filter>Modules\Difinition\PhysicsEngine\03. Component\PHICollisionComponent\PHIRigidDynamicComponent</Filter>
+      <Filter>Modules\Difinition\PhysicsEngine\03. Component\PHIRigidComponent\PHIRigidDynamicComponent</Filter>
     </ClInclude>
     <ClInclude Include="Terminal.h">
       <Filter>Modules\Interfaces\Network\Terminal</Filter>
@@ -716,6 +719,9 @@
     </ClInclude>
     <ClInclude Include="RigidKinematicComponent.h">
       <Filter>Components\RigidComponent\RigidKinematicComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="PHICollision.h">
+      <Filter>Modules\Difinition\PhysicsEngine\04. Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -915,7 +921,7 @@
       <Filter>Modules\Interfaces\Physics\06. Component</Filter>
     </ClCompile>
     <ClCompile Include="PHIRigidComponent.cpp">
-      <Filter>Modules\Difinition\PhysicsEngine\03. Component\PHICollisionComponent</Filter>
+      <Filter>Modules\Difinition\PhysicsEngine\03. Component\PHIRigidComponent</Filter>
     </ClCompile>
     <ClCompile Include="Vector4.cpp">
       <Filter>Math\Vector4</Filter>
@@ -963,13 +969,13 @@
       <Filter>Modules\Interfaces\Physics\06. Component\RigidComponent\PhysicsRigidDynamicComponent</Filter>
     </ClCompile>
     <ClCompile Include="PHIRigidStaticComponent.cpp">
-      <Filter>Modules\Difinition\PhysicsEngine\03. Component\PHICollisionComponent\PHIRigidStaticComponent</Filter>
+      <Filter>Modules\Difinition\PhysicsEngine\03. Component\PHIRigidComponent\PHIRigidStaticComponent</Filter>
     </ClCompile>
     <ClCompile Include="PHIRigidKinematicComponent.cpp">
-      <Filter>Modules\Difinition\PhysicsEngine\03. Component\PHICollisionComponent\PHIRigidKinematicComponent</Filter>
+      <Filter>Modules\Difinition\PhysicsEngine\03. Component\PHIRigidComponent\PHIRigidKinematicComponent</Filter>
     </ClCompile>
     <ClCompile Include="PHIRigidDynamicComponent.cpp">
-      <Filter>Modules\Difinition\PhysicsEngine\03. Component\PHICollisionComponent\PHIRigidDynamicComponent</Filter>
+      <Filter>Modules\Difinition\PhysicsEngine\03. Component\PHIRigidComponent\PHIRigidDynamicComponent</Filter>
     </ClCompile>
     <ClCompile Include="Terminal.cpp">
       <Filter>Modules\Interfaces\Network\Terminal</Filter>
@@ -1006,6 +1012,9 @@
     </ClCompile>
     <ClCompile Include="RigidKinematicComponent.cpp">
       <Filter>Components\RigidComponent\RigidKinematicComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="PHICollision.cpp">
+      <Filter>Modules\Difinition\PhysicsEngine\04. Collision</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

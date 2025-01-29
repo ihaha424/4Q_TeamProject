@@ -9,15 +9,34 @@ namespace Engine::PHI
 		Scene();
 
 		void Initialize() override;
-		void Update(float deltaTime) const override;
+		void CollisionEvent() const override;
 		void Finalize() override;
 
 		void* GetScene() override;
 		void SetSecneFilter() override;
 		
-		bool Raycast(Engine::Physics::AdditionalQueryData& raycastInfo, const Engine::Math::Vector3& startPosition, const Engine::Math::Vector3& direction, float distance) override;
-		bool Overlap(Engine::Physics::QueryData& overlapInfo, const Engine::Physics::IRigidComponent* component, const Engine::Transform& transform) override;
-		bool Sweep(Engine::Physics::AdditionalQueryData& sweepInfo, const Engine::Physics::IRigidComponent* component, const Engine::Transform& transform, const Engine::Math::Vector3& direction, float distance) override;
+		bool Raycast(
+			Engine::Physics::AdditionalQueryData&	raycastInfo, 
+			const Engine::Math::Vector3&			startPosition, 
+			const Engine::Math::Vector3&			direction, 
+			float									distance
+		) override;
+		bool Overlap(
+			Engine::Physics::QueryData&					overlapInfo, 
+			const std::string&							name,
+			const Engine::Physics::GeometryDesc&		geometryDesc,
+			const Engine::Physics::VerticesMeshDesc&	verticesMeshDesc,
+			const Engine::Transform&					transform
+		) override;
+		bool Sweep(
+			Engine::Physics::AdditionalQueryData&			sweepInfo, 
+			const std::string&								name,
+			const Engine::Physics::GeometryDesc&			geometryDesc,
+			const Engine::Physics::VerticesMeshDesc&		verticesMeshDesc,
+			const Engine::Transform&						transform, 
+			const Engine::Math::Vector3&					direction, 
+			float distance
+		) override;
 		
 		unsigned int GetSceneIndex() override;
 		
@@ -27,8 +46,19 @@ namespace Engine::PHI
 		bool AddActor(Engine::Physics::IRigidKinematicComponent* component) override;
 
 	private:
+		PhysicsEngineAPI::IGeometry* FindGeometry(
+			const std::string& name,
+			const Engine::Physics::GeometryDesc&			geometryDesc,
+			const Engine::Physics::VerticesMeshDesc&		verticesMeshDesc
+		);
+
+	private:
+		PhysicsEngineAPI::IPhysicsSystem* system;
 		PhysicsEngineAPI::IScene* scene;
 		unsigned int sceneIndex;
+
+		std::map<std::string, PhysicsEngineAPI::IGeometry*> geometryMap;
+		PhysicsEngineAPI::Utils::DataStructure::AdditionalQueryData data;
 
 	private:
 		friend class Manager;

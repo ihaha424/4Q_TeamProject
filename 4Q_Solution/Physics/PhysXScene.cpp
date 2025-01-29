@@ -17,6 +17,12 @@ namespace PhysicsEngineAPI
 
 	void PhysXScene::Release() { SAFE_RELEASE(scene); }
 
+	void PhysXScene::ReleaseAdditionalQueryData(Utils::DataStructure::AdditionalQueryData& sweepInfo)
+	{
+		sweepInfo.UserDatas.clear();
+		sweepInfo.UserDatas.shrink_to_fit();
+	}
+
 	bool PhysXScene::AddActor(IObject* object)
 	{
 		physx::PxActor* actor = static_cast<physx::PxActor*>(object->GetPhysicsObject());
@@ -32,7 +38,12 @@ namespace PhysicsEngineAPI
 		//TODO:
 	}
 
-	bool PhysXScene::Raycast(Utils::DataStructure::AdditionalQueryData& raycastInfo, const Utils::Math::Vector3& startPosition, const Utils::Math::Vector3& direction, float distance)
+	bool PhysXScene::Raycast(
+		Utils::DataStructure::AdditionalQueryData& raycastInfo, 
+		const Utils::Math::Vector3& startPosition, 
+		const Utils::Math::Vector3& direction, 
+		float distance, 
+		size_t maxObject)
 	{
 		PxRaycastBuffer HitBuffer;
 		physx::PxVec3 pos = Vector3ToPxVec3(startPosition);
@@ -46,7 +57,11 @@ namespace PhysicsEngineAPI
 		{
 			raycastInfo.num = 1;
 			physx::PxRaycastHit hitInfo = HitBuffer.block;
-			raycastInfo.UserDatas.push_back(hitInfo.actor->userData);
+			raycastInfo.UserDatas.reserve(raycastInfo.num);
+			if (raycastInfo.num < raycastInfo.UserDatas.size())
+				raycastInfo.UserDatas[0] = hitInfo.actor->userData;
+			else
+				raycastInfo.UserDatas.push_back(hitInfo.actor->userData);
 			raycastInfo.normal = PxVec3ToVector3(hitInfo.normal);
 			raycastInfo.position = PxVec3ToVector3(hitInfo.position);
 			raycastInfo.distance = hitInfo.distance;
@@ -54,61 +69,41 @@ namespace PhysicsEngineAPI
 		else
 		{
 			raycastInfo.num = 0;
-			return true;
 		}
 		return true;
 	}
 
-	bool PhysXScene::Overlap(Utils::DataStructure::QueryData& overlapInfo, const IGeometry* _geometry, const Utils::Math::Transform& _transform)
+	bool PhysXScene::Overlap(
+		Utils::DataStructure::QueryData& overlapInfo, 
+		const IGeometry* _geometry, 
+		const Utils::Math::Transform& _transform, 
+		size_t maxObject)
 	{
-		PxOverlapBuffer HitBuffer;
 		physx::PxTransform transform = TransformToPxTransform(_transform);
-
-		// temp
-		PxU32 nbActors = scene->getNbActors(PxActorTypeFlag::eRIGID_STATIC | PxActorTypeFlag::eRIGID_DYNAMIC);
-		PxActor** actors = new PxActor * [nbActors];
-		scene->getActors(PxActorTypeFlag::eRIGID_STATIC | PxActorTypeFlag::eRIGID_DYNAMIC, actors, nbActors);
-		PxSphereGeometry sphere(1000.0f);
-		PxTransform queryPose(PxVec3(0.0f, 0.0f, 0.0f)); // 박스 위치
-		for (PxU32 i = 0; i < nbActors; ++i) {
-			PxRigidActor* actor = static_cast<PxRigidActor*>(actors[i]);
-			PxTransform actorPose = actor->getGlobalPose();
-			PxShape* shapes[10];
-			PxU32 shapeCount = actor->getShapes(shapes, 10);
-			for (PxU32 i = 0; i < shapeCount; ++i) {
-				const PxGeometry& a = shapes[i]->getGeometry();
-				auto b = a.getType();
-				auto c = shapes[i]->getFlags();
-			}
-		}
-		delete[] actors;
-		PxQueryFilterData filterData;
-		filterData.flags = PxQueryFlag::eANY_HIT; // 모든 객체 허용
-		//
-
 
 		overlapInfo.flag = QueryData::Overlap;
 		const PhysXGeometry* geometry = dynamic_cast<const PhysXGeometry*>(_geometry);
 		if (nullptr == geometry)
 			return false;
 
-		bool status = scene->overlap(/**geometry->geometry*/sphere, /*transform*/queryPose, HitBuffer, filterData);
-		if (status)
+		physx::PxOverlapHit* hitOv = new PxOverlapHit[maxObject];
+		int howMany = PxSceneQueryExt::overlapMultiple(*scene, *geometry->geometry, transform, hitOv, 4096);
+		if (howMany)
 		{
-			overlapInfo.num = HitBuffer.nbTouches;
-			overlapInfo.UserDatas.resize(overlapInfo.num);
-			for (size_t i = 0; i < HitBuffer.nbTouches; i++)
+			overlapInfo.num = howMany;
+			overlapInfo.UserDatas.reserve(overlapInfo.num);
+			for (size_t i = 0; i < howMany; i++)
 			{
-				const PxOverlapHit& hit = HitBuffer.getTouches()[i];
-				overlapInfo.UserDatas[i] = hit.actor;
+				const PxOverlapHit& hitInfo = hitOv[i];
+				if(i < overlapInfo.UserDatas.size())
+					overlapInfo.UserDatas[i] = hitInfo.actor->userData;
+				else
+					overlapInfo.UserDatas.push_back(hitInfo.actor->userData);
 			}
 		}
 		else
-		{
 			overlapInfo.num = 0;
-			return true;
-		}
-
+		delete[] hitOv;
 		return true;
 	}
 
@@ -117,9 +112,9 @@ namespace PhysicsEngineAPI
 		const IGeometry* _geometry, 
 		const Utils::Math::Transform& _transform, 
 		const Utils::Math::Vector3& direction, 
-		float distance)
+		float distance,
+		size_t maxObject)
 	{
-		PxSweepBuffer HitBuffer;
 		physx::PxTransform transform = TransformToPxTransform(_transform);
 		physx::PxVec3 dir = Vector3ToPxVec3(direction);
 		dir.normalize();
@@ -130,24 +125,31 @@ namespace PhysicsEngineAPI
 		if (nullptr == geometry)
 			return false;
 
-		bool status = scene->sweep(*geometry->geometry, transform, dir, maxDistance, HitBuffer);
-		if (status)
+		physx::PxSweepHit* hitOv = new physx::PxSweepHit[maxObject];
+		physx::PxSceneQueryFlags outputFlags;
+		bool blockingHit;
+		outputFlags.isSet(PxSceneQueryFlag::Enum::eDEFAULT);
+		int howMany = PxSceneQueryExt::sweepMultiple(*scene, *geometry->geometry, transform, dir, distance, outputFlags, hitOv, 4096, blockingHit);
+		if (howMany)
 		{
-			sweepInfo.num = HitBuffer.getNbAnyHits();
+			sweepInfo.num = howMany;
+			sweepInfo.UserDatas.reserve(howMany);
 			for (size_t i = 0; i < sweepInfo.num; ++i)
 			{
-				const PxSweepHit& hitInfo = HitBuffer.getAnyHit(static_cast<physx::PxU32>(i));
-				sweepInfo.UserDatas.push_back(hitInfo.actor->userData);
+				const PxSweepHit& hitInfo = hitOv[i];
+				
+				if (i < sweepInfo.UserDatas.size())
+					sweepInfo.UserDatas[i] = hitInfo.actor->userData;
+				else
+					sweepInfo.UserDatas.push_back(hitInfo.actor->userData);
 				sweepInfo.normal = PxVec3ToVector3(hitInfo.normal);
 				sweepInfo.position = PxVec3ToVector3(hitInfo.position);
 				sweepInfo.distance = hitInfo.distance;
 			}
 		}
 		else
-		{
 			sweepInfo.num = 0;
-			return true;
-		}
+		delete[] hitOv;
 		return true;
 	}
 

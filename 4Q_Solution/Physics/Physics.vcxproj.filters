@@ -109,6 +109,9 @@
     <Filter Include="Library\1. System\00. PhysX\999. Utils">
       <UniqueIdentifier>{f76fd226-1ea8-49aa-9189-7064dde3de09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Library\1. System\00. PhysX\998. Collision\CollisionEvent">
+      <UniqueIdentifier>{97d001f6-850e-4354-8ce8-597ddede6ff3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -192,9 +195,6 @@
     <ClInclude Include="ICollision.h">
       <Filter>Library\0. Interface\99. ICollision</Filter>
     </ClInclude>
-    <ClInclude Include="PhysxCollision.h">
-      <Filter>Library\1. System\00. PhysX\998. Collision</Filter>
-    </ClInclude>
     <ClInclude Include="IUserData.h">
       <Filter>Library\0. Interface\98. IUserData</Filter>
     </ClInclude>
@@ -224,6 +224,12 @@
     </ClInclude>
     <ClInclude Include="PhysXActorFunction.h">
       <Filter>Library\1. System\00. PhysX\002. Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysxCollisionEvent.h">
+      <Filter>Library\1. System\00. PhysX\998. Collision\CollisionEvent</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysXCollision.h">
+      <Filter>Library\1. System\00. PhysX\998. Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -275,9 +281,6 @@
     <ClCompile Include="ICollision.cpp">
       <Filter>Library\0. Interface\99. ICollision</Filter>
     </ClCompile>
-    <ClCompile Include="PhysxCollision.cpp">
-      <Filter>Library\1. System\00. PhysX\998. Collision</Filter>
-    </ClCompile>
     <ClCompile Include="IUserData.cpp">
       <Filter>Library\0. Interface\98. IUserData</Filter>
     </ClCompile>
@@ -313,6 +316,12 @@
     </ClCompile>
     <ClCompile Include="PhysXActorFunction.cpp">
       <Filter>Library\1. System\00. PhysX\002. Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysxCollisionEvent.cpp">
+      <Filter>Library\1. System\00. PhysX\998. Collision\CollisionEvent</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXCollision.cpp">
+      <Filter>Library\1. System\00. PhysX\998. Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

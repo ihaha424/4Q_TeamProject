@@ -91,6 +91,7 @@ namespace Engine::Physics
 		};
 		QueryFlag			flag;
 		unsigned int		num;
+		// void* UserDatas;
 		std::vector<void*>	UserDatas{};
 	};
 
@@ -235,5 +236,49 @@ namespace Engine::Physics
 	{
 		RigidBodyType	rigidType;
 		ShapeDesc		shapeDesc;
+	};
+
+
+	/**
+	 * @brief CollisionEventData
+	 */
+	class IRigidComponent;
+	struct TriggerEvent
+	{
+		IRigidComponent* myCollision;
+		IRigidComponent* otherCollision;
+	};
+
+	struct ContactEvent : TriggerEvent
+	{
+		//Engine::Math::Vector3	location;
+		//Engine::Math::Vector3	normal;
+		float					impulse;
+	};
+
+	using CallBackTrigger = std::function<void(TriggerEvent)>;
+	using CallBackContact = std::function<void(ContactEvent)>;
+
+	enum class TriggerType
+	{
+		OnOverlapBegin,
+		OnOverlapEnd,
+
+		OnTriggerEnter,
+		OnTrigger,
+		OnTriggerExit,
+
+		End
+	};
+
+	enum class ContactType
+	{
+		OnHit,
+
+		OnCollisionEnter,
+		OnCollision,
+		OnCollisionExit,
+
+		End
 	};
 }

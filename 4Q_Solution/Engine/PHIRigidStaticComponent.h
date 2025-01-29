@@ -1,5 +1,7 @@
 #pragma once
 
+#include "PHICollision.h"
+
 namespace Engine::PHI
 {
 	class RigidStaticComponent final
@@ -41,6 +43,14 @@ namespace Engine::PHI
 
 
 		/********************************
+					Collision
+		*********************************/
+		void BindCollision(const Physics::CallBackTrigger& callback, Physics::TriggerType type) override;
+		void BindCollision(const Physics::CallBackContact& callback, Physics::ContactType type) override;
+
+
+
+		/********************************
 				Engine Life Cycle
 		*********************************/
 		void Initialize() override;
@@ -54,8 +64,12 @@ namespace Engine::PHI
 		PhysicsEngineAPI::IMaterial* material;
 
 	private:
+		Collision<RigidStaticComponent>* collision;
+
+	private:
 		friend class Manager;
 		friend class Scene;
+
 	};
 }
 

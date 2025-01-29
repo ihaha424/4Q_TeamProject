@@ -10,6 +10,7 @@ Player::Player() :
 	, _textRenderer(L"../Resources/Font/±Ã¼­12.sfont"),
 	_sync()
 	, _rigid{}
+	, _tempOtherRigid{}
 {
 }
 
@@ -24,6 +25,7 @@ void Player::Addition()
 	AddComponent(&_textRenderer);
 	AddComponent(&_sync);
 	AddComponent(&_rigid);
+	AddComponent(&_tempOtherRigid);
 }
 
 void Player::PreInitialize()
@@ -136,6 +138,28 @@ void Player::PreInitialize()
 	{
 		_camera.Rotate(value);
 	});
+
+
+	Engine::Physics::RigidComponentDesc desc;
+	desc.rigidType = Engine::Physics::RigidBodyType::Dynamic;
+	desc.shapeDesc.geometryDesc.type = Engine::Physics::GeometryShape::Capsule;
+	desc.shapeDesc.geometryDesc.data = { 100.f, 100.f, 100.f };
+	desc.shapeDesc.isExclusive = true;
+	desc.shapeDesc.materialDesc.data = { 0.5f,0.5f,0.f };
+	auto PhysicsManager = Engine::Application::GetPhysicsManager();
+
+
+	PhysicsManager->CreateDynamic(&_rigid._rigidComponent, desc, Engine::Transform{}, 1.f, Engine::Transform{});
+	PhysicsManager->GetScene(0)->AddActor(_rigid._rigidComponent);
+	_rigid._rigidComponent->SetTranslate({ 0.f, 500.f, 0.f });
+
+	_rigid._rigidComponent->BindCollision(std::bind(&Player::OnHit, this, std::placeholders::_1), Engine::Physics::ContactType::OnHit);
+
+	desc.shapeDesc.geometryDesc.type = Engine::Physics::GeometryShape::Box;
+	Engine::Transform tempTransform{};
+	tempTransform.position.y = 500.f;
+	PhysicsManager->CreateDynamic(&_tempOtherRigid._rigidComponent, desc, tempTransform, 1.f, Engine::Transform{});
+	PhysicsManager->GetScene(0)->AddActor(_tempOtherRigid._rigidComponent);
 }
 
 void Player::PostInitialize()
@@ -151,17 +175,6 @@ void Player::PostInitialize()
 	_animator.SplitBone(1, "Bip01-Spine1");
 	_animator.ChangeAnimation("Wait");*/
 
-
-	Engine::Physics::RigidComponentDesc desc;
-	desc.rigidType = Engine::Physics::RigidBodyType::Dynamic;
-	desc.shapeDesc.geometryDesc.type = Engine::Physics::GeometryShape::Capsule;
-	desc.shapeDesc.geometryDesc.data = { 100.f, 100.f };
-	desc.shapeDesc.isExclusive = true;
-	desc.shapeDesc.materialDesc.data = { 0.5f,0.5f,0.f };
-
-	_rigid._physicsManager->CreateDynamic(&_rigid._rigidComponent, desc, Engine::Transform{}, 1.f, Engine::Transform{});
-	_rigid._physicsManager->GetScene(0)->AddActor(_rigid._rigidComponent);
-	_rigid._rigidComponent->SetTranslate({ 0.f, 500.f, 0.f });
 }
 
 void Player::PostAttach()
@@ -179,11 +192,27 @@ void Player::PostUpdate(float deltaTime)
 	tempPostion.y += 300.f;
 	_camera.SetPosition(tempPostion);
 	_camera.SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));*/
+
+	auto PhysicsManager = Engine::Application::GetPhysicsManager();
+
+	Engine::Physics::AdditionalQueryData raycastInfo;
+	PhysicsManager->GetScene(0)->Raycast(raycastInfo, { 0,1000,0 }, { 0,-1,0 }, 5000.f);
+	Engine::Physics::AdditionalQueryData OverlapInfo;
+	Engine::Physics::GeometryDesc geometryDesc;
+	geometryDesc.type = Engine::Physics::GeometryShape::Frustum;
+	Engine::Physics::VerticesMeshDesc verticesMeshDesc;
+	Engine::Transform transform;
+	PhysicsManager->GetScene(0)->Overlap(OverlapInfo, "camera", geometryDesc, verticesMeshDesc, transform);
 }
 
 void Player::PostFixedUpdate()
 {
 
+}
+
+void Player::OnHit(Engine::Physics::ContactEvent info)
+{
+	info.myCollision;
 }
 
 //RemotePlayer::RemotePlayer()

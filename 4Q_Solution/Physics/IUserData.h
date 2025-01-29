@@ -2,7 +2,6 @@
 
 namespace PhysicsEngineAPI
 {
-	class ICollision;
 	__INTERFACE__
 	EXTERN_C class PHYSICS_API IUserData
 	{

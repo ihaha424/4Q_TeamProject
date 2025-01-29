@@ -7,10 +7,9 @@ namespace Engine::DSHInput::Trigger
 	{
 	public:
 		Down();
-
+		~Down() override;
+		
 		void Setup(DSH::Input::Trigger::IDown* down);
-
-		void Finalize() override;
 
 		void SetComponent(Input::Component::IButtonComponent* component) override;
 		void SetComponent(Input::Component::IAxisComponent* component) override;

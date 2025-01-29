@@ -5,36 +5,38 @@
 #include "NetworkTemp.h"
 
 GameApplication::GameApplication(const HINSTANCE instanceHandle) :
-	Application(instanceHandle, L"Test", SIZE{ 1920, 1080 })
+	Application(instanceHandle)
 {
-
 }
 
 void GameApplication::DeclareInputActions(Engine::Input::IManager* inputManager)
 {
-	Application::DeclareInputActions(inputManager);
+    Engine::Input::IMappingContext* mappingContext = nullptr;
+    inputManager->GetMappingContext(L"Default", &mappingContext);
 
-	Engine::Input::IMappingContext* mappingContext = nullptr;
-	inputManager->GetMappingContext(L"Default", &mappingContext);
+    DeclareMoveAction(inputManager, mappingContext);
+    DeclareCameraAction(inputManager, mappingContext);
 
-	DeclareMoveAction(inputManager, mappingContext);
-	DeclareCameraAction(inputManager, mappingContext);
-
-	inputManager->SetActiveMappingContext(mappingContext);
+    inputManager->SetActiveMappingContext(mappingContext);
 }
 
-void GameApplication::Addition()
+void GameApplication::Register(Engine::Content::IManager* contentManager)
 {
-	Application::Addition();
-	AddWorld(&_world);
+	Application::Register(contentManager);
+	const auto worldFactory = contentManager->GetWorldFactory();
+	worldFactory->Register<TestWorld>();
+	const auto objectFactory = contentManager->GetObjectFactory();
+	objectFactory->Register<Player>(L"../Resources/FBX/char.fbx", L"../Resources/Font/Gungseo12.sfont");
+	objectFactory->Register<RemotePlayer>(L"../Resources/Player/Player.X");
+	objectFactory->Register<GlobalLight>();
+	objectFactory->Register<Terrain>(L"../Resources/Level/Level.fbx");
+	const auto componentFactory = contentManager->GetComponentFactory();
+	componentFactory->Register<RemoteMoveComponent>();
 }
 
-void GameApplication::InitializeContents()
+void GameApplication::PrepareInitialWorld(Engine::Content::Factory::World* worldFactory)
 {
-	//NetworkTemp::GetInstance()->Initialize();
-
-	Application::InitializeContents();
-	Attach(&_world);
+	worldFactory->Clone<TestWorld>();
 }
 
 void GameApplication::DeclareMoveAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext)

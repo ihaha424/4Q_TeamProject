@@ -6,9 +6,16 @@
 #include "Window.h"
 #include "Physics.h"
 #include "Network.h"
+#include "Load.h"
+#include "Content.h"
 
 namespace Engine
 {
+	namespace Load
+	{
+		struct IManager;
+	}
+
 	namespace GEGraphics
 	{
 		class Manager;
@@ -21,5 +28,6 @@ namespace Engine
 	{
 		GEGraphics::Manager* graphicsManager;
 		Physics::Manager* physicsManager;
+		Load::IManager* loadManager;
 	};
 }

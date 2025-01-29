@@ -21,6 +21,6 @@ namespace Engine::DSHInput
 
 		DSH::Input::IAction* _action;
 
-		std::vector<Input::Trigger::Trigger*> _triggers;
+		std::vector<Input::Trigger::ITrigger*> _triggers;
 	};
 }

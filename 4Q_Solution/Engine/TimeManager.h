@@ -17,8 +17,9 @@ namespace Engine::Time
 
 	struct Manager : IManager
 	{
-		virtual void Initialize() = 0;
-		virtual void Tick() const = 0;
+		virtual void Initialize(float fixedUpdateInterval) = 0;
+		virtual void Tick() = 0;
+		virtual bool IsFixedUpdate() = 0;
 		virtual void Finalize() = 0;
 	};
 }

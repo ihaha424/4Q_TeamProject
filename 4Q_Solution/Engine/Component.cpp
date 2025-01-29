@@ -1,12 +1,17 @@
 #include "pch.h"
 #include "Component.h"
 
-void Engine::Component::Component::Setup(Modules modules)
+void Engine::Component::Component::Dispose()
 {
-
+	_isDispose = true;
 }
 
-void Engine::Component::Component::Initialize()
+bool Engine::Component::Component::IsDisposed() const
+{
+	return _isDispose;
+}
+
+void Engine::Component::Component::Initialize(const Modules& modules)
 {
 }
 

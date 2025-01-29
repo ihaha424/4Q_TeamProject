@@ -8,17 +8,13 @@ namespace Engine::Component
 		, _physicsManager{ nullptr }
 	{
 	}
-	void RigidKinematicComponent::Setup(Modules modules)
-	{
-		Component::Setup(modules);
-		_physicsManager = modules.physicsManager;
-	}
-	void RigidKinematicComponent::Initialize()
-	{
-		Component::Initialize();
-		static_cast<Physics::RigidKinematicComponent*>(_rigidComponent)->Initialize();
 
+	void RigidKinematicComponent::Initialize(const Modules& modules)
+	{
+		Component::Initialize(modules);
+		static_cast<Physics::RigidKinematicComponent*>(_rigidComponent)->Initialize();
 	}
+
 	void RigidKinematicComponent::Attach()
 	{
 		Component::Attach();

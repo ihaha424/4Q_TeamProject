@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "Application.h"
 
+#include "DSHContentManager.h"
 #include "DSHInputManager.h"
+#include "DSHLoadManager.h"
 #include "DSHTimeManager.h"
 #include "DSHWindowManager.h"
 #include "GEGraphicsManager.h"
@@ -12,64 +14,25 @@ Engine::Time::Manager* Engine::Application::_timeManager = nullptr;
 Engine::Window::Manager* Engine::Application::_windowManager = nullptr;
 Engine::GEGraphics::Manager* Engine::Application::_graphicsManager = nullptr;
 Engine::Input::Manager* Engine::Application::_inputManager = nullptr;
-Engine::ServerNetwork::Manager* Engine::Application::_networkManager = nullptr;
+Engine::Load::Manager* Engine::Application::_loadManager = nullptr;
+Engine::Content::Manager* Engine::Application::_contentManager = nullptr;
+Engine::Network::Manager* Engine::Application::_networkManager = nullptr;
 Engine::Physics::Manager* Engine::Application::_physicsManager = nullptr;
 
-Engine::Application::Application(const HINSTANCE instanceHandle, std::wstring title, const SIZE size) :
-	_instanceHandle(instanceHandle),
-	_title(std::move(title)),
-	_size(size)
+Engine::Application::Application(const HINSTANCE instanceHandle):
+	_instanceHandle(instanceHandle), _size(Math::Size::Zero)
 {
 }
 
 void Engine::Application::Begin()
 {
+	// After
+	CreateManagers();
+	LoadGameData();
 	InitializeManagers();
 	DeclareInputActions(_inputManager);
-	Addition(); // TODO: Refactor this.
-	Setup({ _graphicsManager, _physicsManager });
-	InitializeContents();
-}
-
-void Engine::Application::InitializeManagers() const
-{
-	CreateTimeManager(&_timeManager);
-	_timeManager->Initialize();
-
-	CreateWindowManager(&_windowManager);
-	_windowManager->Initialize(_instanceHandle, _title.c_str(), _size);
-
-	CreateInputManager(&_inputManager);
-	_inputManager->Initialize(_windowManager->GetHandle());
-
-	CreateGraphicsManager(&_graphicsManager);
-	_graphicsManager->Initialize(_windowManager->GetHandle(), L"../Shaders/", _size, false, 1);
-
-	CreateNetworkManager(&_networkManager);
-	_networkManager->Initialize();
-
-	CreatePhysicsManager(&_physicsManager);
-	_physicsManager->Initialize();
-}
-
-void Engine::Application::DeclareInputActions(Input::IManager* inputManager)
-{
-}
-
-void Engine::Application::Addition()
-{
-}
-
-void Engine::Application::Setup(Modules modules)
-{
-	std::ranges::for_each(_worlds, [modules](World* world) { world->Setup(modules); });
-}
-
-
-void Engine::Application::InitializeContents()
-{
-	// TODO: WOC Manager Initialize;
-	std::ranges::for_each(_worlds, [](World* world) { world->Initialize(); });
+	Register(_contentManager);
+	PrepareInitialWorld(_contentManager->GetWorldFactory());
 }
 
 void Engine::Application::Run(const int showCommand)
@@ -95,13 +58,28 @@ void Engine::Application::Run(const int showCommand)
 
 			_timeManager->Tick();
 			_inputManager->Update(metaTime);
-			_graphicsManager->Update(deltaTime);
-			// _networkManager->DispatchPacket();
-			_physicsManager->Update(metaTime);
-			_physicsManager->FetchSecne(true);
-			_drive.Update(deltaTime);
-			// TODO: Alarm Timer for Fixed Update
+			_graphicsManager->PreUpdate(deltaTime);
+		    // _networkManager->DispatchPacket();
+			
+			_contentManager->Contraction(Modules{ 
+				.graphicsManager = _graphicsManager,
+				.physicsManager = _physicsManager,
+                .loadManager = _loadManager
+			});
 
+		    _physicsManager->Update(deltaTime);
+		    _physicsManager->FetchSecne(true);
+		
+			_contentManager->Update(deltaTime);
+
+			while (_timeManager->IsFixedUpdate())
+			{
+				_contentManager->FixedUpdate();
+			}
+
+			_contentManager->Relaxation();
+
+			_graphicsManager->PostUpdate(deltaTime);
 			_graphicsManager->Render();
 			_inputManager->Reset();
 			_networkManager->Send();
@@ -111,32 +89,8 @@ void Engine::Application::Run(const int showCommand)
 
 void Engine::Application::End()
 {
-	FinalizeContents();
 	FinalizeManagers();
-}
-
-void Engine::Application::FinalizeContents()
-{
-	// TODO: WOC Manager Finalize;
-	std::ranges::for_each(_worlds, [](World* world) { world->Finalize(); });
-}
-
-void Engine::Application::FinalizeManagers() const
-{
-	constexpr Utility::SafeDelete deleter;
-
-	_graphicsManager->Finalize();
-	deleter(&_graphicsManager);
-	_inputManager->Finalize();
-	deleter(&_inputManager);
-	_windowManager->Finalize();
-	deleter(&_windowManager);
-	_timeManager->Finalize();
-	deleter(&_timeManager);
-	//_networkManager->Finalize();
-	//deleter(&_networkManager);
-	_physicsManager->Finalize();
-	deleter(&_physicsManager);
+	DeleteManagers();
 }
 
 Engine::Time::IManager* Engine::Application::GetTimeManager()
@@ -156,22 +110,97 @@ Engine::Graphics::IManager* Engine::Application::GetGraphicsManager()
 
 Engine::Network::IManager* Engine::Application::GetNetworkManager()
 {
-	return _networkManager;
+    return _networkManager;
 }
 
 Engine::Physics::IManager* Engine::Application::GetPhysicsManager()
 {
-	return _physicsManager;
+    return _physicsManager;
 }
 
-void Engine::Application::AddWorld(World* world)
+Engine::Load::IManager* Engine::Application::GetLoadManager()
 {
-	_worlds.push_back(world);
+	return _loadManager;
 }
 
-void Engine::Application::Attach(World* world)
+Engine::Content::IManager* Engine::Application::GetContentManager()
 {
-	_drive.AttachWorld(world, nullptr);
+	return _contentManager;
+}
+
+void Engine::Application::Register(Content::IManager* contentManager)
+{
+	const auto componentFactory = contentManager->GetComponentFactory();
+	componentFactory->Register<Component::MovementComponent>();
+	componentFactory->Register<Component::Light>();
+	componentFactory->Register<Component::StaticMesh>();
+	componentFactory->Register<Component::CameraComponent>(1.f, 1000.f, _size, std::numbers::pi_v<float> / 4);
+	componentFactory->Register<Component::TextRenderer>();
+	componentFactory->Register<Component::SkeletalMesh>();
+	componentFactory->Register<Component::Animator>();
+	componentFactory->Register<Component::RigidStaticComponent>();
+	componentFactory->Register<Component::RigidDynamicComponent>();
+	componentFactory->Register<Component::RigidKinematicComponent>();
+	componentFactory->Register<Component::RigidComponent>();
+	componentFactory->Register<Component::SynchronizeComponent>();
+	// TODO: Register other components.
+}
+
+void Engine::Application::CreateManagers()
+{
+	CreateTimeManager(&_timeManager);
+	CreateWindowManager(&_windowManager);
+	CreateInputManager(&_inputManager);
+	CreateGraphicsManager(&_graphicsManager);
+	CreateLoadManager(&_loadManager);
+    CreateContentManager(&_contentManager);	
+    CreateNetworkManager(&_networkManager);
+    CreatePhysicsManager(&_physicsManager);
+}
+
+void Engine::Application::InitializeManagers() const
+{
+	_timeManager->Initialize(0.2f);
+	_windowManager->Initialize(_instanceHandle, _title.c_str(), _size);
+	_inputManager->Initialize(_windowManager->GetHandle());
+	_graphicsManager->Initialize(_windowManager->GetHandle(), L"../Shaders/", _size, false, 1);
+	_contentManager->Initialize();
+    _networkManager->Initialize();
+    _physicsManager->Initialize();
+}
+
+void Engine::Application::LoadGameData()
+{
+	_loadManager->Initialize(_gameDataPath);
+
+	const auto configData = _loadManager->GetGameConfigData();
+	_title = configData.GetProperty<std::wstring>(L"Title").value_or(L"Game");
+	_size = configData.GetProperty<Math::Size>(L"Size").value_or(Math::Size{ 1920, 1080 });
+}
+
+void Engine::Application::FinalizeManagers()
+{
+	_contentManager->Finalize();
+	_loadManager->Finalize();
+	_graphicsManager->Finalize();
+	_inputManager->Finalize();
+	_windowManager->Finalize();
+    _timeManager->Finalize();
+    _networkManager->Finalize();
+    _physicsManager->Finalize();
+}
+
+void Engine::Application::DeleteManagers()
+{
+	constexpr Utility::SafeDelete deleter;
+	deleter(&_timeManager);
+	deleter(&_windowManager);
+	deleter(&_inputManager);
+	deleter(&_graphicsManager);
+	deleter(&_loadManager);
+	deleter(&_contentManager);
+    deleter(&_networkManager);
+    deleter(&_physicsManager);
 }
 
 void Engine::Application::CreateTimeManager(Time::Manager** timeManager)
@@ -222,26 +251,50 @@ void Engine::Application::CreateGraphicsManager(GEGraphics::Manager** graphicsMa
 	}
 }
 
-void Engine::Application::CreateNetworkManager(ServerNetwork::Manager** networkManager)
+void Engine::Application::CreateNetworkManager(Network::Manager** networkManager)
 {
-	constexpr Utility::ThrowIfFailed thrower;
-	if (networkManager == nullptr) thrower(E_INVALIDARG);
-	else
-	{
-		ServerNetwork::Manager* manager = new ServerNetwork::Manager();
-		if (manager == nullptr) thrower(E_OUTOFMEMORY);
-		*networkManager = manager;
-	}
+    constexpr Utility::ThrowIfFailed thrower;
+    if (networkManager == nullptr) thrower(E_INVALIDARG);
+    else
+    {
+        ServerNetwork::Manager* manager = new ServerNetwork::Manager();
+        if (manager == nullptr) thrower(E_OUTOFMEMORY);
+        *networkManager = manager;
+    }
 }
 
 void Engine::Application::CreatePhysicsManager(Physics::Manager** physicsManager)
 {
+    constexpr Utility::ThrowIfFailed thrower;
+    if (physicsManager == nullptr) thrower(E_INVALIDARG);
+    else
+    {
+        Physics::Manager* manager = new PHI::Manager();
+        if (manager == nullptr) thrower(E_OUTOFMEMORY);
+        *physicsManager = manager;
+    }
+}
+
+void Engine::Application::CreateLoadManager(Load::Manager** loadManager)
+{
 	constexpr Utility::ThrowIfFailed thrower;
-	if (physicsManager == nullptr) thrower(E_INVALIDARG);
+	if (loadManager == nullptr) thrower(E_INVALIDARG);
 	else
 	{
-		Physics::Manager* manager = new PHI::Manager();
+		Load::Manager* manager = new DSHLoad::Manager();
 		if (manager == nullptr) thrower(E_OUTOFMEMORY);
-		*physicsManager = manager;
+		*loadManager = manager;
+	}
+}
+
+void Engine::Application::CreateContentManager(Content::Manager** contentManager)
+{
+	constexpr Utility::ThrowIfFailed thrower;
+	if (contentManager == nullptr) thrower(E_INVALIDARG);
+	else
+	{
+		Content::Manager* manager = new DSHContent::Manager();
+		if (manager == nullptr) thrower(E_OUTOFMEMORY);
+		*contentManager = manager;
 	}
 }

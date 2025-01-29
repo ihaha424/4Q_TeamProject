@@ -25,9 +25,6 @@
     <Filter Include="Utilities\SafeRelease">
       <UniqueIdentifier>{96f21709-eb70-4c66-a1b3-5407a8d2c999}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Drive">
-      <UniqueIdentifier>{a59af320-cec3-4a8b-99de-639155a7dba7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Components">
       <UniqueIdentifier>{33eaf238-cd64-4fab-9f84-f1d33c3e4383}</UniqueIdentifier>
     </Filter>
@@ -373,6 +370,57 @@
     <Filter Include="Modules\Difinition\PhysicsEngine\03. Component\PHIRigidComponent\PHIRigidKinematicComponent">
       <UniqueIdentifier>{52c9be27-1226-40c9-855d-6648adbcbb47}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math\Size">
+      <UniqueIdentifier>{9bf72f7e-898f-4994-8f41-ee04332dd5c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Load">
+      <UniqueIdentifier>{257337ba-2371-418b-bc4b-f9d961a2f1c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Load\Manager">
+      <UniqueIdentifier>{90eb4cc0-c801-4e9f-ad51-1c9679a8f4b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHLoad">
+      <UniqueIdentifier>{d933e9f9-bba1-416e-8e03-0d0a62633d7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHLoad\Manager">
+      <UniqueIdentifier>{534f1a42-69dd-4dfd-8e59-3282919a4319}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Load\ConfigData">
+      <UniqueIdentifier>{f74c565d-123a-4109-a6ed-626bb5cef0d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Load\ConfigData\ConfigData">
+      <UniqueIdentifier>{5b6ba07e-4e73-42ea-8e96-bb15fe3d7345}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Content">
+      <UniqueIdentifier>{54b49015-980b-41b9-862a-607cecabed97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Content\Manager">
+      <UniqueIdentifier>{95adcba6-eb5c-4ff6-90b3-296c2687bbb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHContent">
+      <UniqueIdentifier>{3dd284cd-d16b-4890-a057-23f807fd66f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHContent\Manager">
+      <UniqueIdentifier>{2f2f98e3-fc95-44e9-ab1f-85adc155f3c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities\SafeFinalize">
+      <UniqueIdentifier>{9e58cd4e-35b4-47c0-90f3-51c8f7b003d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Content\Factories">
+      <UniqueIdentifier>{4b6022f6-b7ee-432d-b41f-62462ac614c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Content\Factories\Content">
+      <UniqueIdentifier>{941f4ec6-f871-4b39-aa64-e9d509d65b65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Content\Factories\WorldFactory">
+      <UniqueIdentifier>{3fbb5265-560c-45b3-a905-ca2a98c9e63a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Content\Factories\ObjectFactory">
+      <UniqueIdentifier>{ec8b69f6-9c23-4b7b-bd07-85aac9abe8d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Content\Factories\ComponentFactory">
+      <UniqueIdentifier>{49f4dd88-1368-4002-83d1-9f6aab228935}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -393,8 +441,8 @@
     <ClInclude Include="SafeRelease.h">
       <Filter>Utilities\SafeRelease</Filter>
     </ClInclude>
-    <ClInclude Include="Drive.h">
-      <Filter>Drive</Filter>
+    <ClInclude Include="Components.h">
+      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Requires.h">
       <Filter>Header Files</Filter>
@@ -486,7 +534,7 @@
     <ClInclude Include="DSHSwizzleAxis.h">
       <Filter>Modules\Difinition\DSHInput\Modifiers\SwizzleAxis</Filter>
     </ClInclude>
-    <ClInclude Include="Trigger.h">
+    <ClInclude Include="ITrigger.h">
       <Filter>Modules\Interfaces\Input\Triggers\Trigger</Filter>
     </ClInclude>
     <ClInclude Include="Modifier.h">
@@ -720,6 +768,48 @@
     <ClInclude Include="RigidKinematicComponent.h">
       <Filter>Components\RigidComponent\RigidKinematicComponent</Filter>
     </ClInclude>
+    <ClInclude Include="Size.h">
+      <Filter>Math\Size</Filter>
+    </ClInclude>
+    <ClInclude Include="Load.h">
+      <Filter>Modules\Interfaces\Load</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadManager.h">
+      <Filter>Modules\Interfaces\Load\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHLoadManager.h">
+      <Filter>Modules\Difinition\DSHLoad\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigData.h">
+      <Filter>Modules\Interfaces\Load\ConfigData\ConfigData</Filter>
+    </ClInclude>
+    <ClInclude Include="Content.h">
+      <Filter>Modules\Interfaces\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentManager.h">
+      <Filter>Modules\Interfaces\Content\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHContentManager.h">
+      <Filter>Modules\Difinition\DSHContent\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SafeFinalize.h">
+      <Filter>Utilities\SafeFinalize</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentFactory.h">
+      <Filter>Modules\Interfaces\Content\Factories\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldFactory.h">
+      <Filter>Modules\Interfaces\Content\Factories\WorldFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentFactory.h">
+      <Filter>Modules\Interfaces\Content\Factories\ComponentFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFactory.h">
+      <Filter>Modules\Interfaces\Content\Factories\ObjectFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="Factories.h">
+      <Filter>Modules\Interfaces\Content\Factories</Filter>
+    </ClInclude>
     <ClInclude Include="PHICollision.h">
       <Filter>Modules\Difinition\PhysicsEngine\04. Collision</Filter>
     </ClInclude>
@@ -736,9 +826,6 @@
     </ClCompile>
     <ClCompile Include="SafeRelease.cpp">
       <Filter>Utilities\SafeRelease</Filter>
-    </ClCompile>
-    <ClCompile Include="Drive.cpp">
-      <Filter>Drive</Filter>
     </ClCompile>
     <ClCompile Include="CameraComponent.cpp">
       <Filter>Components\Camera</Filter>
@@ -815,7 +902,7 @@
     <ClCompile Include="DSHSwizzleAxis.cpp">
       <Filter>Modules\Difinition\DSHInput\Modifiers\SwizzleAxis</Filter>
     </ClCompile>
-    <ClCompile Include="Trigger.cpp">
+    <ClCompile Include="ITrigger.cpp">
       <Filter>Modules\Interfaces\Input\Triggers\Trigger</Filter>
     </ClCompile>
     <ClCompile Include="Modifier.cpp">
@@ -1012,6 +1099,39 @@
     </ClCompile>
     <ClCompile Include="RigidKinematicComponent.cpp">
       <Filter>Components\RigidComponent\RigidKinematicComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Size.cpp">
+      <Filter>Math\Size</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadManager.cpp">
+      <Filter>Modules\Interfaces\Load\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHLoadManager.cpp">
+      <Filter>Modules\Difinition\DSHLoad\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigData.cpp">
+      <Filter>Modules\Interfaces\Load\ConfigData\ConfigData</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentManager.cpp">
+      <Filter>Modules\Interfaces\Content\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHContentManager.cpp">
+      <Filter>Modules\Difinition\DSHContent\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SafeFinalize.cpp">
+      <Filter>Utilities\SafeFinalize</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentFactory.cpp">
+      <Filter>Modules\Interfaces\Content\Factories\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldFactory.cpp">
+      <Filter>Modules\Interfaces\Content\Factories\WorldFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentFactory.cpp">
+      <Filter>Modules\Interfaces\Content\Factories\ComponentFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFactory.cpp">
+      <Filter>Modules\Interfaces\Content\Factories\ObjectFactory</Filter>
     </ClCompile>
     <ClCompile Include="PHICollision.cpp">
       <Filter>Modules\Difinition\PhysicsEngine\04. Collision</Filter>

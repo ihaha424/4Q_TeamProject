@@ -5,10 +5,11 @@ namespace Engine::DSHTime
 	class Manager final: public Time::Manager
 	{
 	public:
-		Manager() = default;
+		Manager();
 
-		void Initialize() override;
-		void Tick() const override;
+		void Initialize(float fixedUpdateInterval) override;
+		void Tick() override;
+		bool IsFixedUpdate() override;
 		void Finalize() override;
 
 		[[nodiscard]] float GetDeltaTime() const override;
@@ -17,5 +18,8 @@ namespace Engine::DSHTime
 	private:
 		DSH::Time::ISystem* _system;
 		DSH::Time::ITickTimer* _tickTimer;
+
+		float _elapsedTime;
+		float _fixedUpdateInterval;
 	};
 }

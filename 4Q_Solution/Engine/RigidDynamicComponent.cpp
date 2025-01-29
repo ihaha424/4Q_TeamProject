@@ -7,15 +7,13 @@ namespace Engine::Component
 		: _rigidComponent{ nullptr }
 	{
 	}
-	void RigidDynamicComponent::Setup(Modules modules)
+
+	void RigidDynamicComponent::Initialize(const Modules& modules)
 	{
-		Component::Setup(modules);
-	}
-	void RigidDynamicComponent::Initialize()
-	{
-		Component::Initialize();
+		Component::Initialize(modules);
 		static_cast<Physics::RigidDynamicComponent*>(_rigidComponent)->Initialize();
 	}
+	
 	void RigidDynamicComponent::Attach()
 	{
 		Component::Attach();

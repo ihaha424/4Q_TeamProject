@@ -7,9 +7,7 @@ namespace Engine::Component
 	public:
 		RigidDynamicComponent();
 
-		void Setup(Modules modules) override;
-
-		void Initialize() override;
+		void Initialize(const Modules& modules) override;
 		void Attach() override;
 		void Update(float deltaTime) override;
 		void FixedUpdate() override;

@@ -2,10 +2,8 @@
 #include "Mesh.h"
 #include "GEGraphicsManager.h"
 
-Engine::Component::Mesh::Mesh(std::filesystem::path filePath, Engine::Math::Matrix* matrix)
-	: _filePath(std::move(filePath))
-	, _geMatrix(matrix)
-	, _geMeshRenderer(nullptr)
+Engine::Component::Mesh::Mesh() :
+	_geMatrix(nullptr), _geMeshRenderer(nullptr)
 {
 }
 
@@ -26,7 +24,17 @@ void Engine::Component::Mesh::Finalize()
 	_geMeshRenderer->Release();
 }
 
-void Engine::Component::Mesh::SetRenderLayer(const unsigned int layer)
+void Engine::Component::Mesh::SetRenderLayer(const unsigned int layer) const
 {
 	_geMeshRenderer->SetRenderLayer(layer);
+}
+
+void Engine::Component::Mesh::SetMatrix(Math::Matrix* matrix)
+{
+	_geMatrix = matrix;
+}
+
+void Engine::Component::Mesh::SetFilePath(const std::filesystem::path& filePath)
+{
+	_filePath = filePath;
 }

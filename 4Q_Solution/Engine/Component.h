@@ -12,9 +12,10 @@ namespace Engine::Component
 		Component& operator=(Component&& other) noexcept = default;
 		virtual ~Component() = default;
 
-		virtual void Setup(Modules modules);
+		void Dispose();
+		[[nodiscard]] bool IsDisposed() const;
 
-		virtual void Initialize();
+		virtual void Initialize(const Modules& modules);
 		virtual void Attach();
 		virtual void Update(float deltaTime);
 		virtual void FixedUpdate();
@@ -22,6 +23,7 @@ namespace Engine::Component
 		virtual void Finalize();
 
 	protected:
+		bool _isDispose;
 		// TODO: Owner
 	};
 }

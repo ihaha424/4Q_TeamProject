@@ -2,29 +2,23 @@
 #include "Animator.h"
 #include "GEGraphicsManager.h"
 
-Engine::Component::Animator::Animator(SkeletalMesh* skeletalMesh)
-	: _geAnimator(nullptr)
-	, _skeletalMesh(skeletalMesh)
+void Engine::Component::Animator::Initialize(const Modules& modules)
 {
-}
-
-void Engine::Component::Animator::Initialize()
-{
-	Component::Initialize();
+	GraphicsComponent::Initialize(modules);
 	auto animationSystem = _graphicsManager->GetAnimationSystem();
 	animationSystem->CreateAnimator(_skeletalMesh->_geMeshRenderer, &_geAnimator);
 }
 
 void Engine::Component::Animator::Attach()
 {
-	Component::Attach();
+	GraphicsComponent::Attach();
 	auto animationSystem = _graphicsManager->GetAnimationSystem();
 	animationSystem->RegisterAnimator(_geAnimator);
 }
 
 void Engine::Component::Animator::Detach()
 {
-	Component::Detach();
+	GraphicsComponent::Detach();
 	auto animationSystem = _graphicsManager->GetAnimationSystem();
 	animationSystem->UnRegisterAnimator(_geAnimator);
 }
@@ -34,17 +28,22 @@ void Engine::Component::Animator::Finalize()
 	_geAnimator->Release();
 }
 
+void Engine::Component::Animator::SetSkeletalMesh(SkeletalMesh* skeletalMesh)
+{
+	_skeletalMesh = skeletalMesh;
+}
+
 void Engine::Component::Animator::ChangeAnimation(const char* animation) const
 {
 	_geAnimator->ChangeAnimation(animation);
 }
 
-void Engine::Component::Animator::ChangeAnimation(const char* animation, const unsigned int ID) const
+void Engine::Component::Animator::ChangeAnimation(const char* animation, const unsigned int id) const
 {
-	_geAnimator->ChangeAnimation(animation, ID);
+	_geAnimator->ChangeAnimation(animation, id);
 }
 
-bool Engine::Component::Animator::IsLastFrame(float interval) const
+bool Engine::Component::Animator::IsLastFrame(const float interval) const
 {
 	return _geAnimator->IsLastFrame(interval);
 }
@@ -54,7 +53,7 @@ void Engine::Component::Animator::SetUpSplitBone(const unsigned int maxSplit) co
 	_geAnimator->SetUpSplitBone(maxSplit);
 }
 
-void Engine::Component::Animator::SplitBone(const unsigned int ID, const char* boneName) const
+void Engine::Component::Animator::SplitBone(const unsigned int id, const char* boneName) const
 {
-	_geAnimator->SplitBone(ID, boneName);
+	_geAnimator->SplitBone(id, boneName);
 }

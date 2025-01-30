@@ -158,4 +158,13 @@ namespace Engine::PHI
 
 		return geometry;
 	}
+	void Scene::SetGravity(const Math::Vector3& gravity)
+	{
+		scene->SetGravity({ gravity.x, gravity.y, gravity.z});
+	}
+	const Math::Vector3& Scene::GetGravity() const
+	{
+		auto& gravity = scene->GetGravity();
+		return { gravity.x, gravity.y, gravity.z };
+	}
 }

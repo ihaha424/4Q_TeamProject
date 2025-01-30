@@ -18,6 +18,9 @@ namespace PhysicsEngineAPI
 		void SetSecneFilter() override;
 		void SetScene(physx::PxScene* _scene) { scene = _scene; }
 
+		void SetGravity(const Utils::Math::Vector3& gravity) override;
+		const Utils::Math::Vector3& GetGravity() const override;
+
 		// Scene Query
 		bool Raycast(
 			Utils::DataStructure::AdditionalQueryData& raycastInfo,

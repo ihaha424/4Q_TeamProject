@@ -16,6 +16,5 @@ namespace Engine::Component
 
 	public:
 		Engine::Physics::IRigidStaticComponent* _rigidComponent;
-		Engine::Physics::Manager* _physicsManager;
 	};
 }

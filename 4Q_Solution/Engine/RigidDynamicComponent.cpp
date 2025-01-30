@@ -3,37 +3,38 @@
 
 namespace Engine::Component
 {
-	RigidDynamicComponent::RigidDynamicComponent()
-		: _rigidComponent{ nullptr }
+	RigidDynamic::RigidDynamic()
+		: _rigidbody{ nullptr }
 	{
 	}
 
-	void RigidDynamicComponent::Initialize(const Modules& modules)
+	void RigidDynamic::Initialize(const Modules& modules)
 	{
 		Component::Initialize(modules);
-		static_cast<Physics::RigidDynamicComponent*>(_rigidComponent)->Initialize();
+		static_cast<Physics::RigidDynamicComponent*>(_rigidbody)->Initialize();
+		static_cast<Physics::RigidComponent*>(_boundBox)->Initialize();
 	}
-	
-	void RigidDynamicComponent::Attach()
+
+	void RigidDynamic::Attach()
 	{
 		Component::Attach();
 	}
-	void RigidDynamicComponent::Update(float deltaTime)
+	void RigidDynamic::Update(float deltaTime)
 	{
 		Component::Update(deltaTime);
 		//TODO:: Component를 어떻게 할지 몰라서 임시로
-		static_cast<Engine::Physics::RigidDynamicComponent*>(_rigidComponent)->Update(deltaTime);
+		static_cast<Engine::Physics::RigidDynamicComponent*>(_rigidbody)->Update(deltaTime);
 		// -> Owner's Transform Update
 	}
-	void RigidDynamicComponent::FixedUpdate()
+	void RigidDynamic::FixedUpdate()
 	{
 		Component::FixedUpdate();
 	}
-	void RigidDynamicComponent::Detach()
+	void RigidDynamic::Detach()
 	{
 		Component::Detach();
 	}
-	void RigidDynamicComponent::Finalize()
+	void RigidDynamic::Finalize()
 	{
 		Component::Finalize();
 	}

@@ -24,9 +24,9 @@ private:
 	Engine::Component::TextRenderer _textRenderer;
 	Engine::Component::SynchronizeComponent _sync;
 
-	Engine::Component::RigidDynamicComponent _rigid;
+	Engine::Component::RigidDynamic _rigid;
 
-	Engine::Component::RigidDynamicComponent _tempOtherRigid;
+	Engine::Component::RigidDynamic _tempOtherRigid;
 };
 
 //class RemotePlayer : public Engine::Object

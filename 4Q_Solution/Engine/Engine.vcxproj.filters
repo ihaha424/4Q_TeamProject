@@ -421,6 +421,9 @@
     <Filter Include="Modules\Interfaces\Content\Factories\ComponentFactory">
       <UniqueIdentifier>{49f4dd88-1368-4002-83d1-9f6aab228935}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Example">
+      <UniqueIdentifier>{5cf6fbed-e698-4044-ad1a-22d26695275c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -813,6 +816,12 @@
     <ClInclude Include="PHICollision.h">
       <Filter>Modules\Difinition\PhysicsEngine\04. Collision</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsObjectExample.h">
+      <Filter>Object\Example</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSceneExample.h">
+      <Filter>Object\Example</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1135,6 +1144,12 @@
     </ClCompile>
     <ClCompile Include="PHICollision.cpp">
       <Filter>Modules\Difinition\PhysicsEngine\04. Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsObjectExample.cpp">
+      <Filter>Object\Example</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsSceneExample.cpp">
+      <Filter>Object\Example</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -151,7 +151,7 @@ namespace Engine::PHI
 		Scene* scene = new Scene();
 
 		PhysicsEngineAPI::Utils::Description::SceneDesc sceneDesc;
-		sceneDesc.gravity = {0,0,0 };
+		sceneDesc.gravity = {0,0,0};
 		sceneDesc.CPUDispatcherCount = sceneDescription.CPUDispatcherCount;
 
 		thrower(BoolToHRESULT(system->CreateCameraScene(&scene->scene, sceneDesc)));

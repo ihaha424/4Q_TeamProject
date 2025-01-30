@@ -45,7 +45,6 @@ void TestWorld::EnterAccept(const ConnectMsg::EnterAccept* msg)
 
 void TestWorld::SyncOtherPlayer(const ConnectMsg::SyncPlayer* msg)
 {
-	if (playerSerialNum == msg->serialnumber()) return;
 
 	//AddObject(&_remote);
 	//_remote.Attach();

@@ -53,9 +53,10 @@ namespace Engine::Component
 		std::string _msgBuffer;
 
 		ConnectMsg::EnterAccept _enterAccept;
-		ConnectMsg::Exit Exit;
-		ConnectMsg::SetRoomMaster _setRoomMaster;
 		ConnectMsg::SyncPlayer _syncPlayer;
+		ConnectMsg::SyncObject _syncObject;
+		ConnectMsg::AddObject _addObject;
+		ConnectMsg::AddRemote _addRemote;
 
 		MoveMsg::Move _move;
 		MoveMsg::Jump _jump;

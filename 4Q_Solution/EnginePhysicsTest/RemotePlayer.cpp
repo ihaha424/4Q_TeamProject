@@ -106,7 +106,6 @@ void RemotePlayer::FirstInitialize(const ConnectMsg::SyncPlayer* msg)
 
 void RemotePlayer::StateChange(const MoveMsg::StateChange* msg)
 {
-	if (msg->serialnumber() == 2) return;
 	if (msg->stateinfo() == 1) {
 		_animator.ChangeAnimation("Run");
 	}

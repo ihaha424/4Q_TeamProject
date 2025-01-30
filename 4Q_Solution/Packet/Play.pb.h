@@ -220,21 +220,9 @@ class SelectPart final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kSerialnumberFieldNumber = 1,
-    kSelectpartFieldNumber = 2,
+    kSelectpartFieldNumber = 1,
   };
-  // optional int32 serialnumber = 1;
-  bool has_serialnumber() const;
-  void clear_serialnumber() ;
-  ::int32_t serialnumber() const;
-  void set_serialnumber(::int32_t value);
-
-  private:
-  ::int32_t _internal_serialnumber() const;
-  void _internal_set_serialnumber(::int32_t value);
-
-  public:
-  // optional int32 selectpart = 2;
+  // optional int32 selectpart = 1;
   bool has_selectpart() const;
   void clear_selectpart() ;
   ::int32_t selectpart() const;
@@ -250,7 +238,7 @@ class SelectPart final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      1, 2, 0,
+      0, 1, 0,
       0, 2>
       _table_;
 
@@ -270,7 +258,6 @@ class SelectPart final : public ::google::protobuf::Message
                           const SelectPart& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::int32_t serialnumber_;
     ::int32_t selectpart_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -691,43 +678,15 @@ class DialogProgress final : public ::google::protobuf::Message
 
 // SelectPart
 
-// optional int32 serialnumber = 1;
-inline bool SelectPart::has_serialnumber() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline void SelectPart::clear_serialnumber() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.serialnumber_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000001u;
-}
-inline ::int32_t SelectPart::serialnumber() const {
-  // @@protoc_insertion_point(field_get:PlayMsg.SelectPart.serialnumber)
-  return _internal_serialnumber();
-}
-inline void SelectPart::set_serialnumber(::int32_t value) {
-  _internal_set_serialnumber(value);
-  _impl_._has_bits_[0] |= 0x00000001u;
-  // @@protoc_insertion_point(field_set:PlayMsg.SelectPart.serialnumber)
-}
-inline ::int32_t SelectPart::_internal_serialnumber() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.serialnumber_;
-}
-inline void SelectPart::_internal_set_serialnumber(::int32_t value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.serialnumber_ = value;
-}
-
-// optional int32 selectpart = 2;
+// optional int32 selectpart = 1;
 inline bool SelectPart::has_selectpart() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
 inline void SelectPart::clear_selectpart() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.selectpart_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000002u;
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline ::int32_t SelectPart::selectpart() const {
   // @@protoc_insertion_point(field_get:PlayMsg.SelectPart.selectpart)
@@ -735,7 +694,7 @@ inline ::int32_t SelectPart::selectpart() const {
 }
 inline void SelectPart::set_selectpart(::int32_t value) {
   _internal_set_selectpart(value);
-  _impl_._has_bits_[0] |= 0x00000002u;
+  _impl_._has_bits_[0] |= 0x00000001u;
   // @@protoc_insertion_point(field_set:PlayMsg.SelectPart.selectpart)
 }
 inline ::int32_t SelectPart::_internal_selectpart() const {

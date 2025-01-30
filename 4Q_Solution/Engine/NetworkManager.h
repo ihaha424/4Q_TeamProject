@@ -11,9 +11,11 @@ namespace Engine::Network
 		IManager& operator=(IManager&& other) noexcept = default;
 		virtual ~IManager() = default;
 
+		virtual void DispatchPacket() = 0;
 		virtual void Register(Terminal* terminal) = 0;
 		virtual void Unregister(Terminal* terminal) = 0;
 		virtual void SaveSendData(short packetId, std::string& data, long dataSize, int serialNum) = 0;
+		virtual void RegistWorldEvent(short packetId, std::function<void(int)> callback) = 0;
 	};
 
 	struct Manager : IManager

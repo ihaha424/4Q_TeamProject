@@ -49,7 +49,6 @@ void Player::PreInitialize()
 			_movement.SetDirection(value);		
 			
 			
-			_sync._move.set_serialnumber(1);
 			_sync._move.set_x(value.x);
 			_sync._move.set_y(value.y);
 			_sync._move.set_z(value.z);
@@ -81,7 +80,6 @@ void Player::PreInitialize()
 	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) {
 		_animator.ChangeAnimation("Run"); 
 
-		_sync._stateChange.set_serialnumber(1);
 		_sync._stateChange.set_stateinfo(1);
 		_sync._stateChange.SerializeToString(&_sync._msgBuffer);
 
@@ -105,7 +103,6 @@ void Player::PreInitialize()
 			_animator.ChangeAnimation("Wait"); 
 			_movement.SetDirection(Engine::Math::Vector3::Zero);
 
-			_sync._stateChange.set_serialnumber(1);
 			_sync._stateChange.set_stateinfo(0);
 			_sync._stateChange.SerializeToString(&_sync._msgBuffer);
 

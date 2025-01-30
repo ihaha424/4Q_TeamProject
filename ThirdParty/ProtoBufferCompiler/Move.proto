@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package MoveMsg;
+
+message Move {
+	optional float x = 1;
+	optional float y = 2;
+	optional float z = 3;
+	optional float speed = 4;
+}
+
+message Jump {
+	optional float power = 1;
+}
+
+message StateChange {
+	optional int32 stateinfo = 1;
+}
+
+message MoveSync {
+	optional float x = 1;
+	optional float y = 2;
+	optional float z = 3;
+}

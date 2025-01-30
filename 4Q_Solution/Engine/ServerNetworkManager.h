@@ -24,7 +24,7 @@ namespace Engine::ServerNetwork {
 		void Unregister(Engine::Network::Terminal* terminal) override;
 
 		void DispatchPacket() override;
-		void SaveSendData(short packetId, std::string& data, long dataSize, int serialNum) override;
+		void SaveSendData(short packetId, std::string&& data, long dataSize, int serialNum) override;
 		void RegistWorldEvent(short packetId, std::function<void(int)> callback) override;
 	private:
 		TerminalList _terminalList;

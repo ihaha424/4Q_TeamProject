@@ -18,7 +18,7 @@ namespace Client {
 
 	bool SERVER_API SwapPacketContainer();
 	SERVER_API PacketQueue* GetPacketContainer();
-	void SERVER_API SavePacketData(std::string msg, short packetId, long dataSize, int serialNum);
+	void SERVER_API SavePacketData(std::string&& msg, short packetId, long dataSize, int serialNum);
 
 	void SERVER_API SendUpdate();
 	void SERVER_API Finalize();

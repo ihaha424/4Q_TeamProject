@@ -38,15 +38,15 @@ public:
 	// 저장하는 방식을 어떤식으로 진행할지는 아직 고민중입니다.
 	virtual void SaveRecvPacket(StreamBuffer* recvData, SessionID sid) = 0;
 	virtual bool SwapRecvPacketContainer() = 0;
-	virtual void SaveSendPacket(std::string& data, SessionID sid, short packetId, long dataSize, int serialNum) = 0;
+	virtual void SaveSendPacket(std::string&& data, SessionID sid, short packetId, long dataSize, int serialNum) = 0;
 	virtual bool SwapSendPacketContainer(SessionID sid) = 0;
 	virtual PacketQueue* GetMessageContainer() = 0;
 	virtual SendQueue* GetSendMessageContainer(SessionID sid) = 0;
-	virtual void SaveBroadCastPacket(std::string& data, short packetId, long dataSize, int serialNum) = 0;
+	virtual void SaveBroadCastPacket(std::string&& data, short packetId, long dataSize, int serialNum) = 0;
 
 	virtual void SessionCreated(SessionID sid) = 0;
 
-	virtual void MakePacket(Packet& packet, std::string& data, SessionID sid, short packetId, long dataSize, int serialNum) = 0;
+	virtual void MakePacket(Packet& packet, std::string&& data, SessionID sid, short packetId, long dataSize, int serialNum) = 0;
 protected:
 	// session에서 받아온 데이터를 저장할 때 사용합니다.
 	PacketQueue _saveRecvContainer;

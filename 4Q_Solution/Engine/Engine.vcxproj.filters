@@ -421,6 +421,9 @@
     <Filter Include="Modules\Interfaces\Content\Factories\ComponentFactory">
       <UniqueIdentifier>{49f4dd88-1368-4002-83d1-9f6aab228935}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\FiniteStateMachine">
+      <UniqueIdentifier>{30bc3f08-3f30-46b5-985a-2465b38ff14f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -813,6 +816,12 @@
     <ClInclude Include="PHICollision.h">
       <Filter>Modules\Difinition\PhysicsEngine\04. Collision</Filter>
     </ClInclude>
+    <ClInclude Include="FiniteStateMachine.h">
+      <Filter>Components\FiniteStateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Components\FiniteStateMachine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1135,6 +1144,12 @@
     </ClCompile>
     <ClCompile Include="PHICollision.cpp">
       <Filter>Modules\Difinition\PhysicsEngine\04. Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="FiniteStateMachine.cpp">
+      <Filter>Components\FiniteStateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Components\FiniteStateMachine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -2,7 +2,7 @@
 
 #include "PhysXSystem.h"
 #include "PhysXElement.h"
-#include "PhysxCollision.h"
+#include "PhysxCollisionEvent.h"
 
 namespace PhysicsEngineAPI
 {

@@ -51,6 +51,7 @@ namespace Engine::PHI
 		for (auto scene : sceneList)
 		{
 			FetchSecne(scene.second, block);
+			scene.second->CollisionEvent();
 		}
 	}
 
@@ -97,7 +98,9 @@ namespace Engine::PHI
 		sceneDesc.CPUDispatcherCount = sceneDescription.CPUDispatcherCount;
 
 		thrower(BoolToHRESULT(system->CreateScene(&scene->scene, sceneDesc)));
+		scene->system = system;
 		*_scene = scene;
+		
 	}
 
 	void Manager::CreateRigidComponent(
@@ -152,7 +155,8 @@ namespace Engine::PHI
 		sceneDesc.CPUDispatcherCount = sceneDescription.CPUDispatcherCount;
 
 		thrower(BoolToHRESULT(system->CreateCameraScene(&scene->scene, sceneDesc)));
-
+		
+		scene->system = system;
 		*_scene = scene;
 	}
 

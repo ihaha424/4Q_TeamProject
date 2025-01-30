@@ -55,16 +55,17 @@ void Engine::Application::Run(const int showCommand)
 		{
 			const float metaTime = _timeManager->GetDeltaMetaTime();
 			const float deltaTime = _timeManager->GetDeltaTime();
+
 			_timeManager->Tick();
 			_inputManager->Update(metaTime);
 			_graphicsManager->PreUpdate(deltaTime);
-		    // _networkManager->DispatchPacket();
 			
 			_contentManager->Contraction(Modules{ 
 				.graphicsManager = _graphicsManager,
 				.physicsManager = _physicsManager,
                 .loadManager = _loadManager
 			});
+			_networkManager->DispatchPacket();
 
 		    _physicsManager->Update(deltaTime);
 		    _physicsManager->FetchSecne(true);

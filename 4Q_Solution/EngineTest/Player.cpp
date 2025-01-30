@@ -5,9 +5,11 @@
 Player::Player(std::filesystem::path&& meshPath, std::filesystem::path&& fontPath) :
 	_meshPath(std::forward<std::filesystem::path>(meshPath)),
 	_fontPath(std::forward<std::filesystem::path>(fontPath)), _movement(nullptr),
-	_camera(nullptr), _staticMesh(nullptr), _textRenderer(nullptr)
-	//, _skeltalMesh(L"../Resources/Player/Player.X", &_worldMatrix)
-	//, _animator(&_skeltalMesh)
+	_camera(nullptr)
+	//_staticMesh(nullptr), 
+	//_textRenderer(nullptr),
+	//_skeltalMesh(L"../Resources/Player/Player.X", &_worldMatrix),
+	//_animator(&_skeltalMesh)
 {
 }
 
@@ -15,31 +17,47 @@ void Player::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
 	_movement = componentFactory->Clone<Engine::Component::MovementComponent>();
 	_camera = componentFactory->Clone<Engine::Component::CameraComponent>();
-	_staticMesh = componentFactory->Clone<Engine::Component::StaticMesh>();
+	//_staticMesh = componentFactory->Clone<Engine::Component::StaticMesh>();
+	_skeltalMesh = componentFactory->Clone<Engine::Component::SkeletalMesh>();
+	_animator = componentFactory->Clone<Engine::Component::Animator>();
 	_textRenderer = componentFactory->Clone<Engine::Component::TextRenderer>();
     _sync = componentFactory->Clone<Engine::Component::SynchronizeComponent>();
+	_remote = componentFactory->Clone<RemoteMoveComponent>();
 }
 
 void Player::DisposeComponents()
 {
     _textRenderer->Dispose();
-    _staticMesh->Dispose();
+    //_staticMesh->Dispose();
+	_skeltalMesh->Dispose();
+	_animator->Dispose();
     _camera->Dispose();
     _movement->Dispose();
+	_sync->Dispose();
+	_remote->Dispose();
 }
 
 void Player::PreInitialize(const Engine::Modules& modules)
 {
 	Object::PreInitialize(modules);
+	_movement->SetTarget(&_transform);
+	_remote->SetTarget(&_transform);
 
     _camera->SetName(L"MainCamera");
     _movement->SetTarget(&_transform);
-    _staticMesh->SetFilePath(_meshPath);
-    _staticMesh->SetMatrix(&_worldMatrix);
+    //_staticMesh->SetFilePath(_meshPath);
+    //_staticMesh->SetMatrix(&_worldMatrix);
+	_skeltalMesh->SetFilePath(_meshPath);
+	_skeltalMesh->SetMatrix(&_worldMatrix);
+	_animator->SetSkeletalMesh(_skeltalMesh);
     _textRenderer->SetFontPath(_fontPath);
 
-    _sync->SetSerialNumber(1);
-    
+	_sync->AddCallback((short)PacketID::EnterAccept, &Player::EnterSuccess, this);
+	_sync->AddCallback((short)PacketID::MoveSync, &Player::SyncMove, this);
+	_sync->AddCallback((short)PacketID::DataRemote, &Player::SetLocation, this);
+
+	//_sync.SetSerialNumber(1);
+
 	const auto inputManager = Engine::Application::GetInputManager();
 	Engine::Input::IMappingContext* mappingContext = nullptr;
 	inputManager->GetMappingContext(L"Default", &mappingContext);
@@ -50,10 +68,9 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	{
 		Engine::Math::Vector3 direction = _movement->GetDirection();
 		if (direction != Engine::Math::Vector3(value)) {
-			_movement->SetDirection(value);		
+			//_movement.SetDirection(value);		
 			
 			
-			_sync->_move.set_serialnumber(1);
 			_sync->_move.set_x(value.x);
 			_sync->_move.set_y(value.y);
 			_sync->_move.set_z(value.z);
@@ -83,9 +100,8 @@ void Player::PreInitialize(const Engine::Modules& modules)
 		
 	});
 	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) {
-		//_animator.ChangeAnimation("Run"); 
+		_animator->ChangeAnimation("Run"); 
 
-		_sync->_stateChange.set_serialnumber(1);
 		_sync->_stateChange.set_stateinfo(1);
 		_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
 
@@ -106,10 +122,9 @@ void Player::PreInitialize(const Engine::Modules& modules)
 		});
 	moveAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
 		{ 
-			//_animator.ChangeAnimation("Wait"); 
+			_animator->ChangeAnimation("Wait"); 
 			_movement->SetDirection(Engine::Math::Vector3::Zero);
 
-			_sync->_stateChange.set_serialnumber(1);
 			_sync->_stateChange.set_stateinfo(0);
 			_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
 
@@ -149,7 +164,7 @@ void Player::PostInitialize(const Engine::Modules& modules)
 	Object::PostInitialize(modules);
 	_movement->SetSpeed(100.f);	
 	_textRenderer->SetPosition(100, 100.f);
-	_textRenderer->SetText(L"������ �ü�ü\nHello World!");
+	_textRenderer->SetText(L"Hello World!");
 	_textRenderer->SetFontColor(1.f, 0.f, 0.f, 1.f);
 
 	//_skeltalMesh.SetRenderLayer(0);
@@ -170,14 +185,30 @@ void Player::PostUpdate(const float deltaTime)
 	Object::PostUpdate(deltaTime);
 	_worldMatrix = Engine::Math::Matrix::CreateScale(1.f) * Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
 
-	/*Engine::Math::Vector3 tempPostion = _transform.position;
+	Engine::Math::Vector3 tempPostion = _transform.position;
 	tempPostion.z -= 300.f;
 	tempPostion.y += 300.f;
-	_camera.SetPosition(tempPostion);
-	_camera.SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));*/
+	_camera->SetPosition(tempPostion);
+	_camera->SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
 }
 
 void Player::PostFixedUpdate()
 {
 
+}
+
+void Player::EnterSuccess(const ConnectMsg::EnterAccept* msg)
+{
+	_sync->SetSerialNumber(msg->grantnumber());
+}
+
+void Player::SyncMove(const MoveMsg::MoveSync* msg)
+{
+	Engine::Math::Vector3 nextLocation(msg->x(), msg->y(), msg->z());
+	_remote->SetNextLocation(nextLocation);
+}
+
+void Player::SetLocation(const MoveMsg::MoveSync* msg)
+{
+	_transform.position = Engine::Math::Vector3(msg->x(), msg->y(), msg->z());
 }

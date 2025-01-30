@@ -223,21 +223,9 @@ class StateChange final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kSerialnumberFieldNumber = 1,
-    kStateinfoFieldNumber = 2,
+    kStateinfoFieldNumber = 1,
   };
-  // optional int32 serialnumber = 1;
-  bool has_serialnumber() const;
-  void clear_serialnumber() ;
-  ::int32_t serialnumber() const;
-  void set_serialnumber(::int32_t value);
-
-  private:
-  ::int32_t _internal_serialnumber() const;
-  void _internal_set_serialnumber(::int32_t value);
-
-  public:
-  // optional int32 stateinfo = 2;
+  // optional int32 stateinfo = 1;
   bool has_stateinfo() const;
   void clear_stateinfo() ;
   ::int32_t stateinfo() const;
@@ -253,7 +241,7 @@ class StateChange final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      1, 2, 0,
+      0, 1, 0,
       0, 2>
       _table_;
 
@@ -273,7 +261,6 @@ class StateChange final : public ::google::protobuf::Message
                           const StateChange& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::int32_t serialnumber_;
     ::int32_t stateinfo_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -428,23 +415,11 @@ class MoveSync final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kSerialnumberFieldNumber = 1,
-    kXFieldNumber = 2,
-    kYFieldNumber = 3,
-    kZFieldNumber = 4,
+    kXFieldNumber = 1,
+    kYFieldNumber = 2,
+    kZFieldNumber = 3,
   };
-  // optional int32 serialnumber = 1;
-  bool has_serialnumber() const;
-  void clear_serialnumber() ;
-  ::int32_t serialnumber() const;
-  void set_serialnumber(::int32_t value);
-
-  private:
-  ::int32_t _internal_serialnumber() const;
-  void _internal_set_serialnumber(::int32_t value);
-
-  public:
-  // optional float x = 2;
+  // optional float x = 1;
   bool has_x() const;
   void clear_x() ;
   float x() const;
@@ -455,7 +430,7 @@ class MoveSync final : public ::google::protobuf::Message
   void _internal_set_x(float value);
 
   public:
-  // optional float y = 3;
+  // optional float y = 2;
   bool has_y() const;
   void clear_y() ;
   float y() const;
@@ -466,7 +441,7 @@ class MoveSync final : public ::google::protobuf::Message
   void _internal_set_y(float value);
 
   public:
-  // optional float z = 4;
+  // optional float z = 3;
   bool has_z() const;
   void clear_z() ;
   float z() const;
@@ -482,7 +457,7 @@ class MoveSync final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      2, 4, 0,
+      2, 3, 0,
       0, 2>
       _table_;
 
@@ -502,7 +477,6 @@ class MoveSync final : public ::google::protobuf::Message
                           const MoveSync& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::int32_t serialnumber_;
     float x_;
     float y_;
     float z_;
@@ -659,24 +633,12 @@ class Move final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kSerialnumberFieldNumber = 1,
-    kXFieldNumber = 2,
-    kYFieldNumber = 3,
-    kZFieldNumber = 4,
-    kSpeedFieldNumber = 5,
+    kXFieldNumber = 1,
+    kYFieldNumber = 2,
+    kZFieldNumber = 3,
+    kSpeedFieldNumber = 4,
   };
-  // optional int32 serialnumber = 1;
-  bool has_serialnumber() const;
-  void clear_serialnumber() ;
-  ::int32_t serialnumber() const;
-  void set_serialnumber(::int32_t value);
-
-  private:
-  ::int32_t _internal_serialnumber() const;
-  void _internal_set_serialnumber(::int32_t value);
-
-  public:
-  // optional float x = 2;
+  // optional float x = 1;
   bool has_x() const;
   void clear_x() ;
   float x() const;
@@ -687,7 +649,7 @@ class Move final : public ::google::protobuf::Message
   void _internal_set_x(float value);
 
   public:
-  // optional float y = 3;
+  // optional float y = 2;
   bool has_y() const;
   void clear_y() ;
   float y() const;
@@ -698,7 +660,7 @@ class Move final : public ::google::protobuf::Message
   void _internal_set_y(float value);
 
   public:
-  // optional float z = 4;
+  // optional float z = 3;
   bool has_z() const;
   void clear_z() ;
   float z() const;
@@ -709,7 +671,7 @@ class Move final : public ::google::protobuf::Message
   void _internal_set_z(float value);
 
   public:
-  // optional float speed = 5;
+  // optional float speed = 4;
   bool has_speed() const;
   void clear_speed() ;
   float speed() const;
@@ -725,7 +687,7 @@ class Move final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      3, 5, 0,
+      2, 4, 0,
       0, 2>
       _table_;
 
@@ -745,7 +707,6 @@ class Move final : public ::google::protobuf::Message
                           const Move& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::int32_t serialnumber_;
     float x_;
     float y_;
     float z_;
@@ -903,21 +864,9 @@ class Jump final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kSerialnumberFieldNumber = 1,
-    kPowerFieldNumber = 2,
+    kPowerFieldNumber = 1,
   };
-  // optional int32 serialnumber = 1;
-  bool has_serialnumber() const;
-  void clear_serialnumber() ;
-  ::int32_t serialnumber() const;
-  void set_serialnumber(::int32_t value);
-
-  private:
-  ::int32_t _internal_serialnumber() const;
-  void _internal_set_serialnumber(::int32_t value);
-
-  public:
-  // optional float power = 2;
+  // optional float power = 1;
   bool has_power() const;
   void clear_power() ;
   float power() const;
@@ -933,7 +882,7 @@ class Jump final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      1, 2, 0,
+      0, 1, 0,
       0, 2>
       _table_;
 
@@ -953,7 +902,6 @@ class Jump final : public ::google::protobuf::Message
                           const Jump& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::int32_t serialnumber_;
     float power_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -977,43 +925,15 @@ class Jump final : public ::google::protobuf::Message
 
 // Move
 
-// optional int32 serialnumber = 1;
-inline bool Move::has_serialnumber() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline void Move::clear_serialnumber() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.serialnumber_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000001u;
-}
-inline ::int32_t Move::serialnumber() const {
-  // @@protoc_insertion_point(field_get:MoveMsg.Move.serialnumber)
-  return _internal_serialnumber();
-}
-inline void Move::set_serialnumber(::int32_t value) {
-  _internal_set_serialnumber(value);
-  _impl_._has_bits_[0] |= 0x00000001u;
-  // @@protoc_insertion_point(field_set:MoveMsg.Move.serialnumber)
-}
-inline ::int32_t Move::_internal_serialnumber() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.serialnumber_;
-}
-inline void Move::_internal_set_serialnumber(::int32_t value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.serialnumber_ = value;
-}
-
-// optional float x = 2;
+// optional float x = 1;
 inline bool Move::has_x() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
 inline void Move::clear_x() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.x_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000002u;
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline float Move::x() const {
   // @@protoc_insertion_point(field_get:MoveMsg.Move.x)
@@ -1021,7 +941,7 @@ inline float Move::x() const {
 }
 inline void Move::set_x(float value) {
   _internal_set_x(value);
-  _impl_._has_bits_[0] |= 0x00000002u;
+  _impl_._has_bits_[0] |= 0x00000001u;
   // @@protoc_insertion_point(field_set:MoveMsg.Move.x)
 }
 inline float Move::_internal_x() const {
@@ -1033,15 +953,15 @@ inline void Move::_internal_set_x(float value) {
   _impl_.x_ = value;
 }
 
-// optional float y = 3;
+// optional float y = 2;
 inline bool Move::has_y() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   return value;
 }
 inline void Move::clear_y() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.y_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000004u;
+  _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline float Move::y() const {
   // @@protoc_insertion_point(field_get:MoveMsg.Move.y)
@@ -1049,7 +969,7 @@ inline float Move::y() const {
 }
 inline void Move::set_y(float value) {
   _internal_set_y(value);
-  _impl_._has_bits_[0] |= 0x00000004u;
+  _impl_._has_bits_[0] |= 0x00000002u;
   // @@protoc_insertion_point(field_set:MoveMsg.Move.y)
 }
 inline float Move::_internal_y() const {
@@ -1061,15 +981,15 @@ inline void Move::_internal_set_y(float value) {
   _impl_.y_ = value;
 }
 
-// optional float z = 4;
+// optional float z = 3;
 inline bool Move::has_z() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
   return value;
 }
 inline void Move::clear_z() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.z_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000008u;
+  _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline float Move::z() const {
   // @@protoc_insertion_point(field_get:MoveMsg.Move.z)
@@ -1077,7 +997,7 @@ inline float Move::z() const {
 }
 inline void Move::set_z(float value) {
   _internal_set_z(value);
-  _impl_._has_bits_[0] |= 0x00000008u;
+  _impl_._has_bits_[0] |= 0x00000004u;
   // @@protoc_insertion_point(field_set:MoveMsg.Move.z)
 }
 inline float Move::_internal_z() const {
@@ -1089,15 +1009,15 @@ inline void Move::_internal_set_z(float value) {
   _impl_.z_ = value;
 }
 
-// optional float speed = 5;
+// optional float speed = 4;
 inline bool Move::has_speed() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
   return value;
 }
 inline void Move::clear_speed() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.speed_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000010u;
+  _impl_._has_bits_[0] &= ~0x00000008u;
 }
 inline float Move::speed() const {
   // @@protoc_insertion_point(field_get:MoveMsg.Move.speed)
@@ -1105,7 +1025,7 @@ inline float Move::speed() const {
 }
 inline void Move::set_speed(float value) {
   _internal_set_speed(value);
-  _impl_._has_bits_[0] |= 0x00000010u;
+  _impl_._has_bits_[0] |= 0x00000008u;
   // @@protoc_insertion_point(field_set:MoveMsg.Move.speed)
 }
 inline float Move::_internal_speed() const {
@@ -1121,43 +1041,15 @@ inline void Move::_internal_set_speed(float value) {
 
 // Jump
 
-// optional int32 serialnumber = 1;
-inline bool Jump::has_serialnumber() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline void Jump::clear_serialnumber() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.serialnumber_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000001u;
-}
-inline ::int32_t Jump::serialnumber() const {
-  // @@protoc_insertion_point(field_get:MoveMsg.Jump.serialnumber)
-  return _internal_serialnumber();
-}
-inline void Jump::set_serialnumber(::int32_t value) {
-  _internal_set_serialnumber(value);
-  _impl_._has_bits_[0] |= 0x00000001u;
-  // @@protoc_insertion_point(field_set:MoveMsg.Jump.serialnumber)
-}
-inline ::int32_t Jump::_internal_serialnumber() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.serialnumber_;
-}
-inline void Jump::_internal_set_serialnumber(::int32_t value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.serialnumber_ = value;
-}
-
-// optional float power = 2;
+// optional float power = 1;
 inline bool Jump::has_power() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
 inline void Jump::clear_power() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.power_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000002u;
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline float Jump::power() const {
   // @@protoc_insertion_point(field_get:MoveMsg.Jump.power)
@@ -1165,7 +1057,7 @@ inline float Jump::power() const {
 }
 inline void Jump::set_power(float value) {
   _internal_set_power(value);
-  _impl_._has_bits_[0] |= 0x00000002u;
+  _impl_._has_bits_[0] |= 0x00000001u;
   // @@protoc_insertion_point(field_set:MoveMsg.Jump.power)
 }
 inline float Jump::_internal_power() const {
@@ -1181,43 +1073,15 @@ inline void Jump::_internal_set_power(float value) {
 
 // StateChange
 
-// optional int32 serialnumber = 1;
-inline bool StateChange::has_serialnumber() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline void StateChange::clear_serialnumber() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.serialnumber_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000001u;
-}
-inline ::int32_t StateChange::serialnumber() const {
-  // @@protoc_insertion_point(field_get:MoveMsg.StateChange.serialnumber)
-  return _internal_serialnumber();
-}
-inline void StateChange::set_serialnumber(::int32_t value) {
-  _internal_set_serialnumber(value);
-  _impl_._has_bits_[0] |= 0x00000001u;
-  // @@protoc_insertion_point(field_set:MoveMsg.StateChange.serialnumber)
-}
-inline ::int32_t StateChange::_internal_serialnumber() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.serialnumber_;
-}
-inline void StateChange::_internal_set_serialnumber(::int32_t value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.serialnumber_ = value;
-}
-
-// optional int32 stateinfo = 2;
+// optional int32 stateinfo = 1;
 inline bool StateChange::has_stateinfo() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
 inline void StateChange::clear_stateinfo() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.stateinfo_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000002u;
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline ::int32_t StateChange::stateinfo() const {
   // @@protoc_insertion_point(field_get:MoveMsg.StateChange.stateinfo)
@@ -1225,7 +1089,7 @@ inline ::int32_t StateChange::stateinfo() const {
 }
 inline void StateChange::set_stateinfo(::int32_t value) {
   _internal_set_stateinfo(value);
-  _impl_._has_bits_[0] |= 0x00000002u;
+  _impl_._has_bits_[0] |= 0x00000001u;
   // @@protoc_insertion_point(field_set:MoveMsg.StateChange.stateinfo)
 }
 inline ::int32_t StateChange::_internal_stateinfo() const {
@@ -1241,43 +1105,15 @@ inline void StateChange::_internal_set_stateinfo(::int32_t value) {
 
 // MoveSync
 
-// optional int32 serialnumber = 1;
-inline bool MoveSync::has_serialnumber() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline void MoveSync::clear_serialnumber() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.serialnumber_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000001u;
-}
-inline ::int32_t MoveSync::serialnumber() const {
-  // @@protoc_insertion_point(field_get:MoveMsg.MoveSync.serialnumber)
-  return _internal_serialnumber();
-}
-inline void MoveSync::set_serialnumber(::int32_t value) {
-  _internal_set_serialnumber(value);
-  _impl_._has_bits_[0] |= 0x00000001u;
-  // @@protoc_insertion_point(field_set:MoveMsg.MoveSync.serialnumber)
-}
-inline ::int32_t MoveSync::_internal_serialnumber() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.serialnumber_;
-}
-inline void MoveSync::_internal_set_serialnumber(::int32_t value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.serialnumber_ = value;
-}
-
-// optional float x = 2;
+// optional float x = 1;
 inline bool MoveSync::has_x() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
 inline void MoveSync::clear_x() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.x_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000002u;
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline float MoveSync::x() const {
   // @@protoc_insertion_point(field_get:MoveMsg.MoveSync.x)
@@ -1285,7 +1121,7 @@ inline float MoveSync::x() const {
 }
 inline void MoveSync::set_x(float value) {
   _internal_set_x(value);
-  _impl_._has_bits_[0] |= 0x00000002u;
+  _impl_._has_bits_[0] |= 0x00000001u;
   // @@protoc_insertion_point(field_set:MoveMsg.MoveSync.x)
 }
 inline float MoveSync::_internal_x() const {
@@ -1297,15 +1133,15 @@ inline void MoveSync::_internal_set_x(float value) {
   _impl_.x_ = value;
 }
 
-// optional float y = 3;
+// optional float y = 2;
 inline bool MoveSync::has_y() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   return value;
 }
 inline void MoveSync::clear_y() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.y_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000004u;
+  _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline float MoveSync::y() const {
   // @@protoc_insertion_point(field_get:MoveMsg.MoveSync.y)
@@ -1313,7 +1149,7 @@ inline float MoveSync::y() const {
 }
 inline void MoveSync::set_y(float value) {
   _internal_set_y(value);
-  _impl_._has_bits_[0] |= 0x00000004u;
+  _impl_._has_bits_[0] |= 0x00000002u;
   // @@protoc_insertion_point(field_set:MoveMsg.MoveSync.y)
 }
 inline float MoveSync::_internal_y() const {
@@ -1325,15 +1161,15 @@ inline void MoveSync::_internal_set_y(float value) {
   _impl_.y_ = value;
 }
 
-// optional float z = 4;
+// optional float z = 3;
 inline bool MoveSync::has_z() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
   return value;
 }
 inline void MoveSync::clear_z() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.z_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000008u;
+  _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline float MoveSync::z() const {
   // @@protoc_insertion_point(field_get:MoveMsg.MoveSync.z)
@@ -1341,7 +1177,7 @@ inline float MoveSync::z() const {
 }
 inline void MoveSync::set_z(float value) {
   _internal_set_z(value);
-  _impl_._has_bits_[0] |= 0x00000008u;
+  _impl_._has_bits_[0] |= 0x00000004u;
   // @@protoc_insertion_point(field_set:MoveMsg.MoveSync.z)
 }
 inline float MoveSync::_internal_z() const {

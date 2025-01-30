@@ -35,12 +35,7 @@ void RemotePlayer::PreInitialize(const Engine::Modules& modules)
 	_skeletalMesh->SetMatrix(&_worldMatrix);
 	_animator->SetSkeletalMesh(_skeletalMesh);
 
-	_sync->SetSerialNumber(2);
-	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &RemotePlayer::FirstInitialize, this);
-	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::MoveSync, &RemotePlayer::SyncMove, this);
-	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::StateChange, &RemotePlayer::StateChange, this);
-
-	_sync->AddCallback((short)PacketID::Sync, &RemotePlayer::FirstInitialize, this);
+	_sync->AddCallback((short)PacketID::DataRemote, &RemotePlayer::FirstInitialize, this);
 	_sync->AddCallback((short)PacketID::MoveSync, &RemotePlayer::SyncMove, this);
 	_sync->AddCallback((short)PacketID::StateChange, &RemotePlayer::StateChange, this);
 
@@ -111,7 +106,6 @@ void RemotePlayer::FirstInitialize(const ConnectMsg::SyncPlayer* msg)
 
 void RemotePlayer::StateChange(const MoveMsg::StateChange* msg)
 {
-	if (msg->serialnumber() == 2) return;
 	if (msg->stateinfo() == 1) {
 		_animator->ChangeAnimation("Run");
 	}

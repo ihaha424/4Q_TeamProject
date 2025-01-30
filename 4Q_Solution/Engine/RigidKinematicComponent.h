@@ -15,7 +15,7 @@ namespace Engine::Component
 		void Finalize() override;
 
 	public:
-		Engine::Physics::RigidKinematicComponent* _rigidComponent;
+		Engine::Physics::IRigidKinematicComponent* _rigidComponent;
 		Engine::Physics::Manager* _physicsManager;
 	};
 }

@@ -40,6 +40,12 @@
     <Filter Include="NetworkTemp">
       <UniqueIdentifier>{b5913cd3-6dde-4b26-bdaf-193656eb9409}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objects\Cube">
+      <UniqueIdentifier>{482b5580-c3ae-4828-9bdd-480918946ba7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Sphere">
+      <UniqueIdentifier>{98f71cb1-b4c7-4756-aa2c-e863abdafee0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -78,6 +84,12 @@
     <ClInclude Include="NetworkTemp.h">
       <Filter>NetworkTemp</Filter>
     </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Objects\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Objects\Sphere</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -109,6 +121,12 @@
     </ClCompile>
     <ClCompile Include="NetworkTemp.cpp">
       <Filter>NetworkTemp</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Objects\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Objects\Sphere</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,7 @@
 namespace PhysicsEngineAPI
 {
 	class IObject;
+	class ICollision;
 	namespace Utils
 	{
 		using namespace Utils::Math;
@@ -111,20 +112,21 @@ namespace PhysicsEngineAPI
 				End
 			};
 
-			//TODO: Collition 정보 강화
-			struct ContactEvent
-			{
-				IObject* object[2];
-
-			};
-
 			struct TriggerEvent
 			{
+				ICollision* myCollision;
+				ICollision* otherCollision;
+			};
 
+			struct ContactEvent : TriggerEvent
+			{
+				//TODO....
+				// Vector3	position;
+				// Vector3	normal;
+				float	impulse;
 			};
 
 
-			//TODO: 일단 actor에 대한 데이터만 처리해놨음
 			/**
 			 * @brief		: QueryData
 			 * @UserDatas	: Actor's UserData

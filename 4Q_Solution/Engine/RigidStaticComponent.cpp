@@ -12,7 +12,7 @@ namespace Engine::Component
 	void RigidStaticComponent::Initialize(const Modules& modules)
 	{
 		Component::Initialize(modules);
-		_physicsManager = modules.physicsManager;
+		static_cast<Physics::RigidStaticComponent*>(_rigidComponent)->Initialize();
 	}
 
 	void RigidStaticComponent::Attach()

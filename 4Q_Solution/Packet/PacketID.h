@@ -8,13 +8,14 @@ enum class PacketID : short {
 	Exit,
 	ExitOk,
 	Sync,
+	ObjectSync,
 	MoveSync,
 	Move,
 	Jump,
-	SelectPart,
-	DialogOpen,
-	DialogNext,
 	StateChange,
-
+	DataSendComplete,
+	DataRequest,
+	DataRemote,
+	DataObject,
 
 };

@@ -1,21 +1,37 @@
 #pragma once
-
 #include "ICollision.h"
-#include "PhysXUtils.h"
 
 namespace PhysicsEngineAPI
 {
-	class PhysxCollisionEvent
-		: public physx::PxSimulationEventCallback
+	class PhysXCollision
+		: public ICollision
 	{
+		union CollisionID;
 	public:
-		// PxSimulationEventCallback을(를) 통해 상속됨
-		void onContact(const physx::PxContactPairHeader& pairHeader, const physx::PxContactPair* pairs, physx::PxU32 nbPairs) override;
-		void onTrigger(physx::PxTriggerPair* pairs, physx::PxU32 count) override;
-		void onWake(physx::PxActor** actors, physx::PxU32 count) override;
-		void onSleep(physx::PxActor** actors, physx::PxU32 count) override;
-		void onConstraintBreak(physx::PxConstraintInfo* constraints, physx::PxU32 count) override;
-		void onAdvance(const physx::PxRigidBody* const* bodyBuffer, const physx::PxTransform* poseBuffer, const physx::PxU32 count) override;
+		PhysXCollision();
+		virtual ~PhysXCollision();
+
+		void OnTriggerEnter(Utils::DataStructure::TriggerEvent info) override;
+		void OnTrigger(Utils::DataStructure::TriggerEvent info) override;
+		void OnTriggerExit(Utils::DataStructure::TriggerEvent info) override;
+		void OnCollisionEnter(Utils::DataStructure::ContactEvent info) override;
+		void OnCollision(Utils::DataStructure::ContactEvent info) override;
+		void OnCollisionExit(Utils::DataStructure::ContactEvent info) override;
+
+
+		void OnHit(Utils::DataStructure::ContactEvent info) override;
+		void OnOverlapBegin(Utils::DataStructure::TriggerEvent info) override;
+		void OnOverlapEnd(Utils::DataStructure::TriggerEvent info) override;
+	private:
+		union CollisionID
+		{
+			uint64_t id;
+			struct
+			{
+				ICollision* thisId;
+				ICollision* otherId;
+			};
+		};
+		std::map<CollisionID, bool> collisionMap;
 	};
 }
-

@@ -12,7 +12,7 @@ namespace Engine::Physics
 		IScene& operator=(IScene&& other) noexcept = default;
 		virtual ~IScene() = default;
 
-
+		virtual void CollisionEvent() const = 0;
 		virtual void SetSecneFilter() = 0;
 
 		/**
@@ -25,11 +25,15 @@ namespace Engine::Physics
 			float distance) = 0;
 		virtual bool Overlap(
 			QueryData& overlapInfo,
-			const IRigidComponent* component,
+			const std::string& name,
+			const GeometryDesc&	geometryDesc,
+			const VerticesMeshDesc&	verticesMeshDesc,
 			const Engine::Transform& transform) = 0;
 		virtual bool Sweep(
 			AdditionalQueryData& sweepInfo,
-			const IRigidComponent* component,
+			const std::string& name,
+			const GeometryDesc& geometryDesc,
+			const VerticesMeshDesc& verticesMeshDesc,
 			const Engine::Transform& transform,
 			const Engine::Math::Vector3& direction,
 			float distance) = 0;
@@ -44,7 +48,6 @@ namespace Engine::Physics
 	struct Scene : IScene
 	{
 		virtual void Initialize() = 0;
-		virtual void Update(float deltaTime) const = 0;
 		virtual void Finalize() = 0;
 
 		virtual void* GetScene() = 0;

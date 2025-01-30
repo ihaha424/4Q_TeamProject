@@ -8,7 +8,9 @@ namespace Engine::PHI
 		, shape{ nullptr }
 		, geometry{ nullptr }
 		, material{ nullptr }
+		, collision{ nullptr }
 	{
+		collision = new Collision<RigidDynamicComponent>{ this };
 	}
 
 	/********************************
@@ -220,15 +222,12 @@ namespace Engine::PHI
 	*********************************/
 	void RigidDynamicComponent::Initialize()
 	{
-		// TODO
-		// TODO
-		// TODO
-		// TODO
-		// TODO
-		// TODO
+		object->SetUserData(collision);
+		shape->SetUserData(collision);
 	}
 	void RigidDynamicComponent::Update(float deltaTime) const
 	{
+		collision->FixedUpdate();
 		// TODO
 		// TODO
 		// TODO
@@ -244,6 +243,16 @@ namespace Engine::PHI
 		releaser(&shape);
 		releaser(&geometry);
 		releaser(&material);
+		collision->Finalize();
+		delete collision;
 	}
-	
+
+	void RigidDynamicComponent::BindCollision(const Physics::CallBackTrigger& callback, Physics::TriggerType type)
+	{
+		collision->BindCollision(callback, type);
+	}
+	void RigidDynamicComponent::BindCollision(const Physics::CallBackContact& callback, Physics::ContactType type)
+	{
+		collision->BindCollision(callback, type);
+	}
 }

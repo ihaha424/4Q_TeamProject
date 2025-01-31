@@ -202,6 +202,7 @@
     <ClInclude Include="includes\Matrix4x4.h" />
     <ClInclude Include="PostProcessSystem.h" />
     <ClInclude Include="Quad.h" />
+    <ClInclude Include="SSAO.h" />
     <ClInclude Include="TextSystem.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GraphicDevice.h" />
@@ -264,6 +265,7 @@
     <ClCompile Include="Bloom.cpp" />
     <ClCompile Include="PostProcessSystem.cpp" />
     <ClCompile Include="Quad.cpp" />
+    <ClCompile Include="SSAO.cpp" />
     <ClCompile Include="TextSystem.cpp" />
     <ClCompile Include="GraphicDevice.cpp" />
     <ClCompile Include="Light.cpp" />
@@ -378,6 +380,13 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\SSAOPS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\ToneMappingPS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

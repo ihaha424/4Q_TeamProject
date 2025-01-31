@@ -18,7 +18,7 @@ void Blur::Initialize()
 {
 }
 
-void Blur::Render(ID3D11ShaderResourceView* pSourceSRV)
+void Blur::Render()
 {
 	auto* pRTV = g_pViewManagement->GetRenderTargetView(L"PostProcess");
 	auto* pSRV = g_pViewManagement->GetShaderResourceView(L"PostProcess");

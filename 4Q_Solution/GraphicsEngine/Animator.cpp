@@ -28,8 +28,6 @@ void Animator::Update(const float deltaTime)
 {
 	XMMATRIX identity = XMMatrixIdentity();
 
-	//std::ranges::for_each(_animationTransforms, [this](Matrix& matrix) { matrix = XMMatrixIdentity();});
-
 	for (unsigned int i = 0; i < _maxSplit; i++)
 	{
 		const Animation::Channel& animation = _animation->_animations[_controllers[i].animation];
@@ -37,10 +35,10 @@ void Animator::Update(const float deltaTime)
 		_controllers[i].playTime += animation.ticksPerSecond * deltaTime;
 		_controllers[i].playTime = fmod(_controllers[i].playTime, animation.duration);
 	
-		if (_controllers[i].playTime > animation.lastTime)
+		if (_controllers[i].playTime >= animation.lastTime)
 		{
 			_controllers[i].playTime = 0.f;
-			_root = XMMatrixIdentity();
+			//_root = XMMatrixIdentity();
 		}
 
 		/*XMMATRIX prevRoot = _root;*/
@@ -52,7 +50,7 @@ void Animator::Update(const float deltaTime)
 
 		if (_blendInfo.isBlending)
 		{
-			/*Animation& prevAnimation = _animations[_blendInfo.prevAnimation];
+			/*const Animation::Channel& prevAnimation = _animation->_animations[_blendInfo.prevAnimation];
 			_blendInfo.prevPlayTime += prevAnimation.ticksPerSecond * deltaTime;
 			_blendInfo.prevPlayTime = fmod(_blendInfo.prevPlayTime, prevAnimation.duration);
 

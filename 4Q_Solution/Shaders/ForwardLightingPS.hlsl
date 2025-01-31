@@ -12,21 +12,34 @@ struct PS_INPUT
     float2 uv               : TEXCOORD;
 };
 
+struct PS_OUTPUT
+{
+    float4 color     : SV_Target0;
+    uint   layerMask : SV_target1;
+};
+
+cbuffer LayerMask : register(b5)
+{
+    uint layerMask;
+}
+
 Texture2D txDiffuse          : register(t0);
 Texture2D txNormal           : register(t1);
 Texture2D txSpecular         : register(t2);
 Texture2D txEmissive         : register(t3);
 Texture2D txOpacity          : register(t4);
-Texture2D txLight            : register(t5);
-Texture2D txMetalness        : register(t6);
-Texture2D txRoughness        : register(t7);
+Texture2D txMetalness        : register(t5);
+Texture2D txRoughness        : register(t6);
+Texture2D txAO               : register(t7);
 
 #define PBR
 #define IBL
 #define Shadow
 
-float4 main(PS_INPUT input) : SV_Target
+PS_OUTPUT main(PS_INPUT input)
 {
+    PS_OUTPUT output = (PS_OUTPUT)0;
+    
     float3 normalTex = txNormal.Sample(samLinear_wrap, input.uv).xyz;
     float3x3 TBN = float3x3(input.tangent, input.biTangent, input.normal);
     float3 N = normalize(mul(normalTex * 2.0f - 1.0f, TBN));
@@ -113,5 +126,8 @@ float4 main(PS_INPUT input) : SV_Target
     float4 emissive = txEmissive.Sample(samLinear_wrap, input.uv);
     color += emissive;
     
-    return color;
+    output.color = color;
+    output.layerMask = layerMask;
+    
+    return output;
 }

@@ -424,6 +424,9 @@
     <Filter Include="Object\Example">
       <UniqueIdentifier>{5cf6fbed-e698-4044-ad1a-22d26695275c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\FiniteStateMachine">
+      <UniqueIdentifier>{30bc3f08-3f30-46b5-985a-2465b38ff14f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -822,6 +825,12 @@
     <ClInclude Include="PhysicsSceneExample.h">
       <Filter>Object\Example</Filter>
     </ClInclude>
+    <ClInclude Include="FiniteStateMachine.h">
+      <Filter>Components\FiniteStateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Components\FiniteStateMachine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1150,6 +1159,12 @@
     </ClCompile>
     <ClCompile Include="PhysicsSceneExample.cpp">
       <Filter>Object\Example</Filter>
+    </ClCompile>
+    <ClCompile Include="FiniteStateMachine.cpp">
+      <Filter>Components\FiniteStateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Components\FiniteStateMachine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

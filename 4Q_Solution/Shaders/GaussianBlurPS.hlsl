@@ -2,7 +2,7 @@
 
 #define SAMPLING_COUNT 9
 
-cbuffer ScreenSize : register (b0)
+cbuffer ScreenSize : register (b1)
 {
     float4 screenSize;
 };

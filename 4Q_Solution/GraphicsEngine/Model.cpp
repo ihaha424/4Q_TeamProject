@@ -117,14 +117,9 @@ void Model::LoadMesh(aiNode* paiNode,
         }
         
         if (paiMesh->mTextureCoords[0])
-            vertex.texCoord[0] = XMVectorSet(paiMesh->mTextureCoords[0][i].x, paiMesh->mTextureCoords[0][i].y, 0.f, 0.f);
+            vertex.texCoord = XMVectorSet(paiMesh->mTextureCoords[0][i].x, paiMesh->mTextureCoords[0][i].y, 0.f, 0.f);
         else
-            vertex.texCoord[0] = Vector2::Zero;
-
-        if (paiMesh->mTextureCoords[1])
-            vertex.texCoord[1] = XMVectorSet(paiMesh->mTextureCoords[1][i].x, paiMesh->mTextureCoords[1][i].y, 0.f, 0.f);
-        else
-            vertex.texCoord[1] = Vector2::Zero;
+            vertex.texCoord = Vector2::Zero;
 
         vertices.emplace_back(vertex);
     }
@@ -178,6 +173,7 @@ void Model::LoadMesh(aiNode* paiNode,
     for (auto& vertex : vertices)
     {
         float totalWeight = 0.f;
+        float test = 0.f;
         for (int i = 0; i < 4; i++)
             totalWeight += vertex.blendWeights[i];
 
@@ -186,6 +182,12 @@ void Model::LoadMesh(aiNode* paiNode,
             for (int i = 0; i < 4; i++)
             {
                 vertex.blendWeights[i] /= totalWeight;
+                test += vertex.blendWeights[i];
+            }
+
+            if (1.f - 0.00001 > test)
+            {
+                int a = 0;
             }
         }
     }
@@ -216,9 +218,9 @@ void Model::LoadMaterials(const aiScene* paiScene,
         textures[i].push_back(LoadTexture(filePath, paiScene, texturePath, pMaterial, aiTextureType_SPECULAR, L""));
         textures[i].push_back(LoadTexture(filePath, paiScene, texturePath, pMaterial, aiTextureType_EMISSIVE, L""));
         textures[i].push_back(LoadTexture(filePath, paiScene, texturePath, pMaterial, aiTextureType_OPACITY, L""));
-        textures[i].push_back(LoadTexture(filePath, paiScene, texturePath, pMaterial, aiTextureType_LIGHTMAP, L""));
         textures[i].push_back(LoadTexture(filePath, paiScene, texturePath, pMaterial, aiTextureType_METALNESS, L""));
         textures[i].push_back(LoadTexture(filePath, paiScene, texturePath, pMaterial, aiTextureType_SHININESS, L""));
+        textures[i].push_back(LoadTexture(filePath, paiScene, texturePath, pMaterial, aiTextureType_AMBIENT_OCCLUSION, L""));
     }
 }
 
@@ -253,28 +255,6 @@ std::shared_ptr<Texture> Model::LoadTexture(const std::filesystem::path& rootPat
 
         return g_pResourceMgr->LoadResource<Texture>(newPath.c_str());
     }
-    //else
-    //{
-    //    if (type == aiTextureType_LIGHTMAP)
-    //    {
-    //        std::wstring replace = newPath.c_str();
-    //        replace.replace(replace.find(L"_", 0) + 1, lstrlen(format) - 2, format);
-    //     
-    //        fileName = replace;
-    //        newPath = rootPath.parent_path().wstring() + L"/" + fileName.filename().wstring();
-    //        pTexture = g_pResourceMgr->GetResource<Texture>(newPath.c_str());
-
-    //        if (pTexture)
-    //            return pTexture->Get();
-
-    //        // const aiTexture* paiTexture = paiScene->GetEmbeddedTexture(filePath.C_Str());
-
-    //        g_pResourceMgr->LoadResource<Texture>(newPath.c_str());
-    //        pTexture = g_pResourceMgr->GetResource<Texture>(newPath.c_str());
-
-    //        return pTexture->Get();
-    //    }
-    //}
 
     return nullptr;
 }

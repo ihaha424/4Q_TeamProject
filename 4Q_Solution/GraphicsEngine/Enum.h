@@ -1,7 +1,7 @@
 #pragma once
 
 enum class ShaderType { Vertex, Pixel };
-enum class TextureType { Diffuse, Normal, Specular, Emission, Opacity, LightMap, Metalness, Roughness, End };
+enum class TextureType { Diffuse, Normal, Specular, Emission, Opacity, Metalness, Roughness, AmbientOcclusion, End };
 
 namespace MeshType
 {

@@ -100,9 +100,9 @@ HRESULT PixelShader::LoadResource(const std::filesystem::path& filePath)
 			{
 				_inputBindSlot[(int)TextureType::Opacity] = { inputBindDesc.BindPoint, inputBindDesc.BindCount };
 			}
-			else if (resourceName.find("light") != std::string::npos)
+			else if (resourceName.find("ao") != std::string::npos)
 			{
-				_inputBindSlot[(int)TextureType::LightMap] = { inputBindDesc.BindPoint, inputBindDesc.BindCount };
+				_inputBindSlot[(int)TextureType::AmbientOcclusion] = { inputBindDesc.BindPoint, inputBindDesc.BindCount };
 			}
 			else if (resourceName.find("metal") != std::string::npos)
 			{

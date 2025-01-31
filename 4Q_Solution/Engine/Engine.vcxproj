@@ -142,7 +142,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>DSHInput_d.lib;DSHTime_d.lib;DSHWindow_d.lib;Physics_d.lib;Server_d.lib;libprotobufd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>DSHInput_d.lib;DSHTime_d.lib;DSHWindow_d.lib;DSHLogger_d.lib;Physics_d.lib;Server_d.lib;libprotobufd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PreBuildEvent>
       <Command>xcopy /y /d "..\dll\*.dll" "$(OutDir)"
@@ -168,7 +168,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>DSHInput.lib;DSHTime.lib;DSHWindow.lib;Physics.lib;Server.lib;libprotobuf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>DSHInput.lib;DSHTime.lib;DSHWindow.lib;DSHLogger.lib;Physics.lib;Server.lib;libprotobuf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PreBuildEvent>
       <Command>

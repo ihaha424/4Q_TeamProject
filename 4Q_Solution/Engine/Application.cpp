@@ -57,9 +57,7 @@ void Engine::Application::Run(const int showCommand)
 			const float deltaTime = _timeManager->GetDeltaTime();
 
 			_timeManager->Tick();
-#ifdef CLIENT
 			_inputManager->Update(metaTime);
-#endif
 			_graphicsManager->PreUpdate(deltaTime);
 			
 			_contentManager->Contraction(Modules{ 
@@ -82,10 +80,8 @@ void Engine::Application::Run(const int showCommand)
 			_contentManager->Relaxation();
 
 			_graphicsManager->PostUpdate(deltaTime);
-#ifdef CLIENT
 			_graphicsManager->Render();
 			_inputManager->Reset();
-#endif
 			_networkManager->Send();
 		}
 	}

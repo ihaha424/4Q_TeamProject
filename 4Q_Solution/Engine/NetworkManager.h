@@ -14,12 +14,7 @@ namespace Engine::Network
 		virtual void DispatchPacket() = 0;
 		virtual void Register(Terminal* terminal) = 0;
 		virtual void Unregister(Terminal* terminal) = 0;
-#ifdef CLIENT
 		virtual void SaveSendData(short packetId, std::string data, long dataSize, int serialNum) = 0;
-#else
-		virtual void SaveSendData(unsigned long long sessionId, short packetId, std::string data, long dataSize, int serialNum) = 0;
-		virtual void BroadCast(short packetId, std::string data, long dataSize, int serialNum) = 0;
-#endif
 		virtual void RegistWorldEvent(short packetId, std::function<void(int)> callback) = 0;
 	};
 

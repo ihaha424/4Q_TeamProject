@@ -39,11 +39,8 @@
 #endif
 #include "Physics/InterfaceAPI.h"
 
-#ifdef CLIENT
+
 #include "Server/ClientEntrance.h"
-#else
-#include "Server/ServerEntrance.h"
-#endif
 #include "../Packet/ProtoInclude.h"
 #include "../Packet/PacketID.h"
 #include "PacketFilter.h"

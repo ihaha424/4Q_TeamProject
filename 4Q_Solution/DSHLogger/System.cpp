@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "System.h"
 
+#include "ConsoleTarget.h"
+
 namespace DSH::Time
 {
 	class TickTimer;
@@ -18,11 +20,6 @@ DSH::Logger::System::System()
 		std::pair<const LogLevel, bool>{LogLevel::Fatal, true}
 	}
 {
-}
-
-DSH::Logger::System::~System()
-{
-	//std::ranges::for_each(_targets, [](const Target* target) { delete target; });
 }
 
 HRESULT DSH::Logger::System::QueryInterface(const IID& riid, void** ppvObject)
@@ -57,7 +54,7 @@ HRESULT DSH::Logger::System::CreateStream(IStream** ppStream)
 
 void DSH::Logger::System::EnableConsole()
 {
-	// TODO: Implement
+	_targets.push_back(std::make_unique<Target::ConsoleTarget>());
 }
 
 void DSH::Logger::System::EnableFile(std::filesystem::path path)

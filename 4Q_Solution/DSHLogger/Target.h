@@ -1,6 +1,6 @@
 #pragma once
 
-namespace DSH::Logger
+namespace DSH::Logger::Target
 {
 	struct Target
 	{

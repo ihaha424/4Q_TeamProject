@@ -2,17 +2,15 @@
 
 namespace DSH::Logger
 {
-	struct Target;
+	namespace Target
+	{
+		struct Target;
+	}
 
 	class System final : public ISystem
 	{
 	public:
 		System();
-		System(const System& other) = default;
-		System(System&& other) noexcept = default;
-		System& operator=(const System& other) = default;
-		System& operator=(System&& other) noexcept = default;
-		~System() override;
 
 		HRESULT QueryInterface(const IID& riid, void** ppvObject) override;
 		ULONG AddRef() override;
@@ -29,7 +27,7 @@ namespace DSH::Logger
 	private:
 		ULONG _referenceCount;
 
-		std::vector<Target*> _targets;
+		std::vector<std::unique_ptr<Target::Target>> _targets;
 
 		LogLevel _leastLogLevel;
 		std::unordered_map<LogLevel, bool> _loggableMap;

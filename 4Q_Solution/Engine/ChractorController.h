@@ -9,8 +9,9 @@ namespace Engine::Component
 
 		void Initialize(const Modules& modules) override;
 		void FixedUpdate() override;
+		void Finalize() override;
 
-	private:
+	public:
 		Engine::Physics::IController* _controller;
 	};
 }

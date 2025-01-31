@@ -34,5 +34,7 @@ namespace Engine::Component
 	void Rigid::Finalize()
 	{
 		Component::Finalize();
+		static_cast<Engine::Physics::RigidComponent*>(_rigidbody)->Finalize();
+		static_cast<Engine::Physics::RigidComponent*>(_boundBox)->Finalize();
 	}
 }

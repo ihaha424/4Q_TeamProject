@@ -777,8 +777,8 @@ namespace PhysicsEngineAPI
 		desc.registerDeletionListener = true;
 		desc.clientID = physx::PX_DEFAULT_CLIENT;
 		desc.userData = nullptr;
-		desc.radius;
-		desc.height;
+		desc.radius = _desc.radius;
+		desc.height = _desc.height;
 		desc.climbingMode = static_cast<physx::PxCapsuleClimbingMode::Enum>(_desc.climbinMode);;
 		// TODO
 		desc.reportCallback;
@@ -787,7 +787,7 @@ namespace PhysicsEngineAPI
 
 		physx::PxController* character = Scene->controllerManager->createController(desc);
 		PhysXController* controller = new PhysXController();
-		if (nullptr == *object)
+		if (nullptr == controller)
 			return false;
 		controller->controller = static_cast<physx::PxCapsuleController*>(character);
 		controller->gravity = Vector3ToPxVec3(_desc.gravity);

@@ -32,5 +32,7 @@ private:
 	std::vector<Cube*> _cubes;
 
 	bool _loadComplete = false;
+private:
+	Engine::Physics::IScene* testPhysicsScene;
 };
 

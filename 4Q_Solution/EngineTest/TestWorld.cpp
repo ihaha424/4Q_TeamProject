@@ -38,6 +38,12 @@ void TestWorld::PreInitialize(const Engine::Modules& modules)
 			RequestData(num);
 		}
 	);
+
+	auto PhysicsManager = Engine::Application::GetPhysicsManager();
+	Engine::Physics::SceneDesc testSceneDesc{ {0.f,-9.8f,0.f},10 };
+	PhysicsManager->CreateScene(&testPhysicsScene, testSceneDesc);
+	PhysicsManager->AttachUpdateScene(testPhysicsScene);
+	PhysicsManager->CreateControllerManager(testPhysicsScene);
 }
 
 void TestWorld::PreUpdate(float deltaTime)

@@ -62,22 +62,26 @@
     <Import Project="..\Properties\Debug Target Name.props" />
     <Import Project="..\Properties\Dll Library.props" />
     <Import Project="..\Properties\Pre Build All Header Copy Event.props" />
+    <Import Project="..\Properties\CPP Version.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\Properties\Dll Library.props" />
     <Import Project="..\Properties\Pre Build All Header Copy Event.props" />
+    <Import Project="..\Properties\CPP Version.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\Properties\Debug Target Name.props" />
     <Import Project="..\Properties\Dll Library.props" />
     <Import Project="..\Properties\Pre Build All Header Copy Event.props" />
+    <Import Project="..\Properties\CPP Version.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\Properties\Dll Library.props" />
     <Import Project="..\Properties\Pre Build All Header Copy Event.props" />
+    <Import Project="..\Properties\CPP Version.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
@@ -124,7 +128,6 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)PhysXLibrary\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -142,8 +145,8 @@
     <PreBuildEvent />
     <PostBuildEvent />
     <PreLinkEvent>
-      <Command>xcopy .\PhysXLibrary\$(Configuration)\*.lib $(OutDir) /Y
-xcopy .\PhysXLibrary\$(Configuration)\*.dll $(OutDir) /Y</Command>
+      <Command>xcopy ".\PhysXLibrary\$(Configuration)\*.lib" "$(OutDir)" /Y
+xcopy ".\PhysXLibrary\$(Configuration)\*.dll" "$(OutDir)" /Y</Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -158,7 +161,6 @@ xcopy .\PhysXLibrary\$(Configuration)\*.dll $(OutDir) /Y</Command>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(ProjectDir)PhysXLibrary\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -176,8 +178,8 @@ xcopy .\PhysXLibrary\$(Configuration)\*.dll $(OutDir) /Y</Command>
     <PreBuildEvent />
     <PostBuildEvent />
     <PreLinkEvent>
-      <Command>xcopy .\PhysXLibrary\$(Configuration)\*.lib $(OutDir) /Y
-xcopy .\PhysXLibrary\$(Configuration)\*.dll $(OutDir) /Y</Command>
+      <Command>xcopy ".\PhysXLibrary\$(Configuration)\*.lib" "$(OutDir)" /Y
+xcopy ".\PhysXLibrary\$(Configuration)\*.dll" "$(OutDir)" /Y</Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

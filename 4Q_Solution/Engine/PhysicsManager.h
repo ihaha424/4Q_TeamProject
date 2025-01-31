@@ -38,6 +38,14 @@ namespace Engine::Physics
 			const char* name,
 			const char* filePath
 		) = 0;
+		virtual void CreateStatic(
+			IRigidStaticComponent** destObject,
+			const char* geomtryName,
+			const MaterialDesc& materialDesc,
+			const Engine::Transform& transform,
+			const Engine::Transform& shapeOffset = Engine::Transform(),
+			bool isExclusive = true
+		) = 0;
 	};
 
 	// Engine Interface

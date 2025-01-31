@@ -142,11 +142,7 @@ void Engine::Application::Register(Content::IManager* contentManager)
 	componentFactory->Register<Component::RigidDynamic>();
 	componentFactory->Register<Component::RigidKinematic>();
 	componentFactory->Register<Component::Rigid>();
-	componentFactory->Register<Component::SynchronizeComponent>();
-	componentFactory->Register<Component::RigidStatic>();
-	componentFactory->Register<Component::RigidDynamic>();
-	componentFactory->Register<Component::RigidKinematic>();
-	componentFactory->Register<Component::Rigid>();
+	componentFactory->Register<Component::ChractorController>();
 	componentFactory->Register<Component::Synchronize>();
 	// TODO: Register other components.
 }

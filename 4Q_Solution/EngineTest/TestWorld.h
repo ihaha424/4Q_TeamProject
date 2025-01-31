@@ -33,6 +33,7 @@ private:
 
 	bool _loadComplete = false;
 private:
-	Engine::Physics::IScene* testPhysicsScene;
+	Engine::Physics::IScene* mainScene;
+	Engine::Physics::IScene* cameraScene;
 };
 

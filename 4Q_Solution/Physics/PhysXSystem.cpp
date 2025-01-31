@@ -800,7 +800,7 @@ namespace PhysicsEngineAPI
 		Utils::Description::VerticesMeshDesc verticesMeshDesc;
 		std::vector<physx::PxVec3> point;
 		std::vector<physx::PxU32> indices;
-		if (MeshLoader()(verticesMeshDesc, filePath, point, indices))
+		if (!MeshLoader()(verticesMeshDesc, filePath, point, indices))
 			return false;
 
 		verticesMeshDesc.vertices.count = point.size();
@@ -849,7 +849,7 @@ namespace PhysicsEngineAPI
 
 	bool PhysXSystem::CreateStaticBoundBoxActor(_OUT_ IObject** object, const Utils::Math::Vector3& boxExtents)
 	{
-		physx::PxTransform transform = {};
+		physx::PxTransform transform = {0,0,0};
 		physx::PxMaterial* material = physics->createMaterial(0,0,0);
 		if (nullptr == material)
 			return false;

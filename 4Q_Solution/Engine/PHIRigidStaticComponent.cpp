@@ -109,7 +109,7 @@ namespace Engine::PHI
 	void RigidStaticComponent::Initialize()
 	{
 		object->SetUserData(collision);
-		shape->SetUserData(collision);
+		if (nullptr != shape) shape->SetUserData(collision);
 	}
 	void RigidStaticComponent::Update(float deltaTime) const
 	{

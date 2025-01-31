@@ -223,7 +223,7 @@ namespace Engine::PHI
 	void RigidDynamicComponent::Initialize()
 	{
 		object->SetUserData(collision);
-		shape->SetUserData(collision);
+		if (nullptr != shape) shape->SetUserData(collision);
 	}
 	void RigidDynamicComponent::Update(float deltaTime) const
 	{

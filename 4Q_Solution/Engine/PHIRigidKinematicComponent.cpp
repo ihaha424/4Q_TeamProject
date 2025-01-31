@@ -225,7 +225,7 @@ namespace Engine::PHI
 	void RigidKinematicComponent::Initialize()
 	{
 		object->SetUserData(collision);
-		shape->SetUserData(collision);
+		if (nullptr != shape) shape->SetUserData(collision);
 	}
 	void RigidKinematicComponent::Update(float deltaTime) const
 	{

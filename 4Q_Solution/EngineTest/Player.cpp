@@ -198,6 +198,8 @@ void Player::PostUpdate(const float deltaTime)
 	tempPostion.y += 300.f;
 	_camera->SetPosition(tempPostion);
 	_camera->SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
+
+	_chractorController->_controller->Move({0,1,0}, 0.1, deltaTime);
 }
 
 void Player::PostFixedUpdate()

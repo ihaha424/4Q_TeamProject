@@ -68,6 +68,16 @@ namespace Engine::PHI
 			const char* filePath
 		) override;
 
+		void CreateStatic(
+			Engine::Physics::IRigidStaticComponent** destObject, 
+			const char* geomtryName, 
+			const Engine::Physics::MaterialDesc& materialDesc, 
+			const Engine::Transform& transform, 
+			const Engine::Transform& shapeOffset,
+			bool isExclusive
+		) override;
+
+	public:
 		PhysicsEngineAPI::IGeometry* FindGeometry(
 			const std::string& name,
 			const Engine::Physics::GeometryDesc& geometryDesc,

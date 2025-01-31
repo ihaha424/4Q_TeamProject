@@ -100,6 +100,7 @@ namespace Engine::PHI
 
 		thrower(BoolToHRESULT(system->CreateScene(&scene->scene, sceneDesc)));
 		scene->system = this;
+		scene->sceneIndex = scene->scene->GetSceneNumber();
 		*_scene = scene;
 		
 	}
@@ -158,6 +159,7 @@ namespace Engine::PHI
 		thrower(BoolToHRESULT(system->CreateCameraScene(&scene->scene, sceneDesc)));
 		
 		scene->system = this;
+		scene->sceneIndex = scene->scene->GetSceneNumber();
 		*_scene = scene;
 	}
 
@@ -481,6 +483,8 @@ namespace Engine::PHI
 			geometryDesc.data = { initialGeometrData.x, initialGeometrData.y, initialGeometrData.z, initialGeometrData.w };
 
 			result = system->LoadTriangleMesh(&geometry, geometryDesc, filePath);
+			if (!result)
+				return result;
 			geometryMap[name] = geometry;
 		}
 
@@ -515,6 +519,37 @@ namespace Engine::PHI
 			geometry = iter->second;
 
 		return geometry;
+	}
+	void Manager::CreateStatic(
+		Engine::Physics::IRigidStaticComponent** _destObject, 
+		const char* geomtryName, 
+		const  Engine::Physics::MaterialDesc& _materialDesc, 
+		const Engine::Transform& _transform, 
+		const Engine::Transform& shapeOffset,
+		bool isExclusive
+	)
+	{
+		constexpr Utility::ThrowIfFailed thrower;
+
+		auto iter = geometryMap.find(geomtryName);
+		if (iter == geometryMap.end())
+			thrower(S_FALSE);
+		RigidStaticComponent* destComponment = new RigidStaticComponent();
+		destComponment->geometry = iter->second;
+
+		PhysicsEngineAPI::Utils::Math::Transform transform = { {_transform.position.x, _transform.position.y, _transform.position.z}, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} };
+
+		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc;
+		auto& initialMeterialData = _materialDesc.data;
+		materialDesc.data = { initialMeterialData.x, initialMeterialData.y, initialMeterialData.z };
+		thrower(BoolToHRESULT(system->CreateMaterial(&destComponment->material, materialDesc)));
+
+		thrower(BoolToHRESULT(system->CreateShape(&destComponment->shape, destComponment->geometry, destComponment->material, isExclusive)));
+
+		thrower(BoolToHRESULT(system->CreateStatic(&destComponment->object, transform, destComponment->shape)));
+
+		destComponment->SetLocalTransform(shapeOffset);
+		*_destObject = destComponment;
 	}
 }
 

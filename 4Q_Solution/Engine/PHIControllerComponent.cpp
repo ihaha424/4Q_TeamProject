@@ -8,6 +8,7 @@ namespace Engine::PHI
 		, collision{ nullptr }
 		, controllerCollisionFlag{ 0 }
 	{
+		collision = new Collision<Controller>{ this };
 	}
 
 	void Controller::SetName(const char* Name)

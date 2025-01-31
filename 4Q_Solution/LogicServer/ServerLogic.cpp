@@ -104,6 +104,7 @@ void ServerLogic::MessageDispatch()
 
                 _playerSlot[grantNum]._serialNumber = grantNum + 1;
                 _playerSlot[grantNum]._position = Vector3(0.0f, 0.0f, 0.0f);
+                _playerSlot[grantNum]._sessionId = packet.sessionId;
 
                 printf("[MessageDispatch] Player Enter Accepted. Grant Num : %d\n", grantNum + 1);
 

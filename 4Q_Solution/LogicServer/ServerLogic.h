@@ -31,6 +31,7 @@ class ServerLogic
 		Vector3 _direction;
 		int _state;
 		float _speed;
+		unsigned long long _sessionId;
 	};
 
 public:

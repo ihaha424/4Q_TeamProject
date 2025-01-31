@@ -26,9 +26,9 @@ void GameApplication::Register(Engine::Content::IManager* contentManager)
 	worldFactory->Register<TestWorld>();
 
 	const auto objectFactory = contentManager->GetObjectFactory();
-	objectFactory->Register<Player>(L"../Resources/Test/ray.fbx", L"../Resources/Font/Gungseo12.sfont");	
+	objectFactory->Register<Player>(L"../Resources/Test/live_test.fbx", L"../Resources/Font/Gungseo12.sfont");	
 	objectFactory->Register<GlobalLight>();
-	objectFactory->Register<Terrain>(L"../Resources/Level/Level.fbx");	
+	objectFactory->Register<Terrain>(L"../Resources/Level/Level.fbx");
 }
 
 void GameApplication::PrepareInitialWorld(Engine::Content::Factory::World* worldFactory)

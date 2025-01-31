@@ -7,6 +7,7 @@ namespace GE
     {
         float mask;
         float threshold;
+        unsigned int level;
     };
 
     class IBloom : public IFilter

@@ -161,7 +161,7 @@ void DX11Renderer::ShadowPass()
 	Camera* pCamera = g_pCameraSystem->GetCurrentCamera();
 	Light* pMainLight = g_pLightSystem->GetMainLight();
 
-	float dist = 7000.f;
+	float dist = 500.f;
 	XMVECTOR direction = XMVector3Normalize(-pMainLight->_lightData.data);
 	XMVECTOR lightPosition = direction * dist + XMVectorSet(0.f, dist, 0.f, 0.f);
 	XMVECTOR lightTarget = direction;
@@ -439,8 +439,7 @@ void DX11Renderer::InitMRT()
 	g_pViewManagement->AddRenderTargetView(L"Emissive", Vector2(g_width, g_height));
 	g_pViewManagement->AddRenderTargetView(L"ShadowPosition", Vector2(g_width, g_height));
 
-	g_pViewManagement->AddRenderTargetView(L"LayerMask", Vector2(g_width, g_height), DXGI_FORMAT_R32_UINT);
-	g_pViewManagement->AddRenderTargetView(L"PostProcess", Vector2(g_width, g_height));
+	g_pViewManagement->AddRenderTargetView(L"LayerMask", Vector2(g_width, g_height), DXGI_FORMAT_R32_UINT);	
 
 	g_pViewManagement->AddRenderTargetGroup(L"Deferred", L"Diffuse");
 	g_pViewManagement->AddRenderTargetGroup(L"Deferred", L"Normal");

@@ -27,7 +27,7 @@ float4 main(PS_INPUT input) : SV_Target
     float3 blend = (source0 + source1).rgb;
     
     float3 texColor = GammaToLinearSpace(blend);
-    texColor *= 16; // Hardcoded Exposure Adjustment
+    texColor *= 4; // Hardcoded Exposure Adjustment
 
     float ExposureBias = 2.0f;
     float3 curr = Uncharted2Tonemap(ExposureBias * texColor);

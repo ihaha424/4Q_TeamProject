@@ -13,7 +13,7 @@ float GetBloomCurve(float intensity, float threshold)
 float4 main(PS_INPUT input) : SV_Target
 {
     float3 source = GammaToLinearSpace(txSource.Sample(samLinear_wrap, input.uv).rgb);
-    float3 factor = 0.1;
+    float3 factor = 0.95;
     float intensity = dot(source, factor);
     float bloom_intensity = GetBloomCurve(intensity, 1);
     float3 bloom_color = source * bloom_intensity / intensity;

@@ -5,7 +5,7 @@
 class Bloom : public Filter, public GE::IBloom
 {
 public:
-	explicit Bloom();
+	explicit Bloom() = default;
 	virtual ~Bloom() = default;
 
 public:
@@ -22,11 +22,7 @@ public:
 	void Render() override;
 
 private:
-	void Sampling(float width, float height, ID3D11RenderTargetView* pRTV);
-
-private:
 	std::shared_ptr<PixelShader> _psBloomCurve;
-	std::shared_ptr<PixelShader> _psDownSampling;
-	std::shared_ptr<PixelShader> _psUpSampling;
+	std::shared_ptr<PixelShader> _psSampling;
 	GE::BlOOM_DESC _desc;
 };

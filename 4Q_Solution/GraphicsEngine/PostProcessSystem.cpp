@@ -12,6 +12,9 @@ void PostProcessSystem::GetFilter(GE::IFilter** ppFilter, GE::FilterType type)
 
 void PostProcessSystem::Initialize()
 {
+	g_pViewManagement->AddMipMapRenderTargetView(L"MipMap", Vector2(g_width, g_height));
+	g_pViewManagement->AddRenderTargetView(L"PostProcess", Vector2(g_width, g_height));
+
 	_filters.resize((size_t)GE::FilterType::End);
 
 	Bloom* pBloom = new Bloom;

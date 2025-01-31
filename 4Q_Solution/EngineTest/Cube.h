@@ -22,6 +22,6 @@ private:
 	std::filesystem::path _meshPath;
 	Engine::Component::StaticMesh* _staticMesh;
 	Engine::Math::Matrix _worldMatrix;
-	Engine::Component::SynchronizeComponent* _sync;
+	Engine::Component::Synchronize* _sync;
 };
 

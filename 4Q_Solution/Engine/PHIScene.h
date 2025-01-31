@@ -13,7 +13,7 @@ namespace Engine::PHI
 		void Finalize() override;
 
 		void* GetScene() override;
-		void SetSecneFilter() override;
+		void SetSceneFilter() override;
 
 		void SetGravity(const Math::Vector3& gravity) override;
 		const Math::Vector3& GetGravity() const override;

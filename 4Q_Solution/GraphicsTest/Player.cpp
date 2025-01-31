@@ -14,8 +14,8 @@ Player::Player(std::filesystem::path&& meshPath, std::filesystem::path&& fontPat
 
 void Player::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
-	_movement = componentFactory->Clone<Engine::Component::MovementComponent>();
-	_camera = componentFactory->Clone<Engine::Component::CameraComponent>();
+	_movement = componentFactory->Clone<Engine::Component::Movement>();
+	_camera = componentFactory->Clone<Engine::Component::Camera>();
 	_skeletalMesh = componentFactory->Clone<Engine::Component::SkeletalMesh>();
 	_animator = componentFactory->Clone<Engine::Component::Animator>();
 	_textRenderer = componentFactory->Clone<Engine::Component::TextRenderer>();

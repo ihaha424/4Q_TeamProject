@@ -20,10 +20,12 @@ namespace Engine
 	{
 		class Manager;
 	}
+
 	namespace Physics
 	{
-		class Manager;
+		struct Manager;
 	}
+
 	struct Modules
 	{
 		GEGraphics::Manager* graphicsManager;

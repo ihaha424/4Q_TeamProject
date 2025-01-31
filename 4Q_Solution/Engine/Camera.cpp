@@ -1,18 +1,18 @@
 #include "pch.h"
-#include "CameraComponent.h"
+#include "Camera.h"
 #include "GEGraphicsManager.h"
 
-Engine::Component::CameraComponent::CameraComponent(const float nearZ, const float farZ, const Math::Size size, const float fov) :
+Engine::Component::Camera::Camera(const float nearZ, const float farZ, const Math::Size size, const float fov) :
 	_nearZ(nearZ), _farZ(farZ),	_size(size), _fov(fov), _graphicsManager(nullptr), _camera(nullptr)
 {
 }
 
-void Engine::Component::CameraComponent::SetName(std::wstring&& name)
+void Engine::Component::Camera::SetName(std::wstring&& name)
 {
 	_name = std::move(name);
 }
 
-void Engine::Component::CameraComponent::Initialize(const Modules& modules)
+void Engine::Component::Camera::Initialize(const Modules& modules)
 {
 	Component::Initialize(modules);
 	_graphicsManager = modules.graphicsManager;
@@ -22,40 +22,40 @@ void Engine::Component::CameraComponent::Initialize(const Modules& modules)
 	_camera->SetRotationFromAngle(0.f, 0.f, 0.f);
 }
 
-void Engine::Component::CameraComponent::Attach()
+void Engine::Component::Camera::Attach()
 {
 	Component::Attach();
 	_graphicsManager->RegisterCamera(_name, _camera);
 }
 
-void Engine::Component::CameraComponent::Detach()
+void Engine::Component::Camera::Detach()
 {
 	Component::Detach();
 	_graphicsManager->UnregisterCamera(_name);
 }
 
-void Engine::Component::CameraComponent::Finalize()
+void Engine::Component::Camera::Finalize()
 {
 	Component::Finalize();
 	_camera->Finalize();
 }
 
-void Engine::Component::CameraComponent::Activate() const
+void Engine::Component::Camera::Activate() const
 {
 	_graphicsManager->SetActiveCamera(_name);
 }
 
-void Engine::Component::CameraComponent::SetPosition(const Math::Vector3 position) const
+void Engine::Component::Camera::SetPosition(const Math::Vector3 position) const
 {
 	_camera->SetPosition(position.x, position.y, position.z);
 }
 
-void Engine::Component::CameraComponent::SetRotation(const Math::Vector3 rotation) const
+void Engine::Component::Camera::SetRotation(const Math::Vector3 rotation) const
 {
 	_camera->SetRotationFromAngle(rotation.x, rotation.y, rotation.z);
 }
 
-void Engine::Component::CameraComponent::Rotate(Math::Vector3 rotation)
+void Engine::Component::Camera::Rotate(Math::Vector3 rotation)
 {
 	// TODO: Implement this function.
 }

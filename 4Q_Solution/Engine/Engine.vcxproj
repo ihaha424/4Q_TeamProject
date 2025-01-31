@@ -63,12 +63,14 @@
     <Import Project="..\Properties\Additional Include Directories.props" />
     <Import Project="..\Properties\Debug Target Name.props" />
     <Import Project="..\Properties\Additional Library Directories.props" />
+    <Import Project="..\Properties\CPP Version.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\Properties\Output Directory.props" />
     <Import Project="..\Properties\Additional Include Directories.props" />
     <Import Project="..\Properties\Additional Library Directories.props" />
+    <Import Project="..\Properties\CPP Version.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -76,12 +78,14 @@
     <Import Project="..\Properties\Output Directory.props" />
     <Import Project="..\Properties\Debug Target Name.props" />
     <Import Project="..\Properties\Additional Library Directories.props" />
+    <Import Project="..\Properties\CPP Version.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\Properties\Additional Include Directories.props" />
     <Import Project="..\Properties\Output Directory.props" />
     <Import Project="..\Properties\Additional Library Directories.props" />
+    <Import Project="..\Properties\CPP Version.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
@@ -131,7 +135,6 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -139,7 +142,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>DSHInput_d.lib;DSHTime_d.lib;DSHWindow_d.lib;Physics_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>DSHInput_d.lib;DSHTime_d.lib;DSHWindow_d.lib;Physics_d.lib;Server_d.lib;libprotobufd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PreBuildEvent>
       <Command>xcopy /y /d "..\dll\*.dll" "$(OutDir)"
@@ -156,7 +159,6 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -166,7 +168,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>DSHInput.lib;DSHTime.lib;DSHWindow.lib;Physics.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>DSHInput.lib;DSHTime.lib;DSHWindow.lib;Physics.lib;Server.lib;libprotobuf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PreBuildEvent>
       <Command>
@@ -182,7 +184,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Action.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="Application.h" />
-    <ClInclude Include="CameraComponent.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="FiniteStateMachine.h" />
     <ClInclude Include="PHICollision.h" />
     <ClInclude Include="PHIRigidDynamicComponent.h" />
@@ -251,7 +253,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Modifier.h" />
     <ClInclude Include="Modules.h" />
     <ClInclude Include="Mouse.h" />
-    <ClInclude Include="MovementComponent.h" />
+    <ClInclude Include="Movement.h" />
     <ClInclude Include="Negative.h" />
     <ClInclude Include="Network.h" />
     <ClInclude Include="NetworkManager.h" />
@@ -286,7 +288,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="State.h" />
     <ClInclude Include="StaticMesh.h" />
     <ClInclude Include="SwizzleAxis.h" />
-    <ClInclude Include="SynchronizeComponent.h" />
+    <ClInclude Include="Synchronize.h" />
     <ClInclude Include="Terminal.h" />
     <ClInclude Include="TextRenderer.h" />
     <ClInclude Include="Time.h" />
@@ -321,7 +323,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="CameraComponent.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="FiniteStateMachine.cpp" />
     <ClCompile Include="PHICollision.cpp" />
     <ClCompile Include="PHIRigidDynamicComponent.cpp" />
@@ -377,7 +379,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Modifier.cpp" />
     <ClCompile Include="Mouse.cpp" />
-    <ClCompile Include="MovementComponent.cpp" />
+    <ClCompile Include="Movement.cpp" />
     <ClCompile Include="Negative.cpp" />
     <ClCompile Include="NetworkManager.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -417,7 +419,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SafeRelease.cpp" />
-    <ClCompile Include="SynchronizeComponent.cpp" />
+    <ClCompile Include="Synchronize.cpp" />
     <ClCompile Include="Terminal.cpp" />
     <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="ThrowIfFailed.cpp" />

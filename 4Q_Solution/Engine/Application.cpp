@@ -70,7 +70,7 @@ void Engine::Application::Run(const int showCommand)
 			_networkManager->DispatchPacket();
 
 		    _physicsManager->Update(deltaTime);
-		    _physicsManager->FetchSecne(true);
+		    _physicsManager->FetchScene(true);
 		
 			_contentManager->Update(deltaTime);
 
@@ -135,10 +135,10 @@ Engine::Content::IManager* Engine::Application::GetContentManager()
 void Engine::Application::Register(Content::IManager* contentManager)
 {
 	const auto componentFactory = contentManager->GetComponentFactory();
-	componentFactory->Register<Component::MovementComponent>();
+	componentFactory->Register<Component::Movement>();
 	componentFactory->Register<Component::Light>();
 	componentFactory->Register<Component::StaticMesh>();
-	componentFactory->Register<Component::CameraComponent>(1.f, 1000.f, _size, std::numbers::pi_v<float> / 4);
+	componentFactory->Register<Component::Camera>(1.f, 1000.f, _size, std::numbers::pi_v<float> / 4);
 	componentFactory->Register<Component::TextRenderer>();
 	componentFactory->Register<Component::SkeletalMesh>();
 	componentFactory->Register<Component::Animator>();
@@ -146,7 +146,7 @@ void Engine::Application::Register(Content::IManager* contentManager)
 	componentFactory->Register<Component::RigidDynamic>();
 	componentFactory->Register<Component::RigidKinematic>();
 	componentFactory->Register<Component::Rigid>();
-	componentFactory->Register<Component::SynchronizeComponent>();
+	componentFactory->Register<Component::Synchronize>();
 	// TODO: Register other components.
 }
 

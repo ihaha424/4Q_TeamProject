@@ -2,7 +2,7 @@
 
 namespace Engine::Component
 {
-	class SynchronizeComponent : public Component, public Network::Terminal
+	class Synchronize : public Component, public Network::Terminal
 	{
 		// TODO: Implement synchronization component
 		class IDelegate {
@@ -30,7 +30,7 @@ namespace Engine::Component
 		using CallbackMap = std::unordered_map<short, IDelegate*>;
 
 	public:
-		SynchronizeComponent();
+		Synchronize();
 
 		void Initialize(const Modules& modules) override;
 		void Finalize() override;

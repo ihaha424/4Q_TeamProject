@@ -453,7 +453,7 @@
     <ClInclude Include="Requires.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CameraComponent.h">
+    <ClInclude Include="Camera.h">
       <Filter>Components\Camera</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
@@ -474,7 +474,7 @@
     <ClInclude Include="Object.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="MovementComponent.h">
+    <ClInclude Include="Movement.h">
       <Filter>Components\Movement</Filter>
     </ClInclude>
     <ClInclude Include="Math.h">
@@ -738,7 +738,7 @@
     <ClInclude Include="PacketFilter.h">
       <Filter>Modules\Interfaces\Network\PacketFIlter</Filter>
     </ClInclude>
-    <ClInclude Include="SynchronizeComponent.h">
+    <ClInclude Include="Synchronize.h">
       <Filter>Components\Synchronize</Filter>
     </ClInclude>
     <ClInclude Include="ServerNetworkManager.h">
@@ -845,7 +845,7 @@
     <ClCompile Include="SafeRelease.cpp">
       <Filter>Utilities\SafeRelease</Filter>
     </ClCompile>
-    <ClCompile Include="CameraComponent.cpp">
+    <ClCompile Include="Camera.cpp">
       <Filter>Components\Camera</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
@@ -860,7 +860,7 @@
     <ClCompile Include="Object.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="MovementComponent.cpp">
+    <ClCompile Include="Movement.cpp">
       <Filter>Components\Movement</Filter>
     </ClCompile>
     <ClCompile Include="Vector3.cpp">
@@ -1088,7 +1088,7 @@
     <ClCompile Include="PacketFilter.cpp">
       <Filter>Modules\Interfaces\Network\PacketFIlter</Filter>
     </ClCompile>
-    <ClCompile Include="SynchronizeComponent.cpp">
+    <ClCompile Include="Synchronize.cpp">
       <Filter>Components\Synchronize</Filter>
     </ClCompile>
     <ClCompile Include="ServerNetworkManager.cpp">

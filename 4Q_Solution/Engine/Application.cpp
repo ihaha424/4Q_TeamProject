@@ -57,7 +57,9 @@ void Engine::Application::Run(const int showCommand)
 			const float deltaTime = _timeManager->GetDeltaTime();
 
 			_timeManager->Tick();
+#ifdef CLIENT
 			_inputManager->Update(metaTime);
+#endif
 			_graphicsManager->PreUpdate(deltaTime);
 			
 			_contentManager->Contraction(Modules{ 
@@ -80,8 +82,10 @@ void Engine::Application::Run(const int showCommand)
 			_contentManager->Relaxation();
 
 			_graphicsManager->PostUpdate(deltaTime);
+#ifdef CLIENT
 			_graphicsManager->Render();
 			_inputManager->Reset();
+#endif
 			_networkManager->Send();
 		}
 	}
@@ -138,10 +142,10 @@ void Engine::Application::Register(Content::IManager* contentManager)
 	componentFactory->Register<Component::TextRenderer>();
 	componentFactory->Register<Component::SkeletalMesh>();
 	componentFactory->Register<Component::Animator>();
-	componentFactory->Register<Component::RigidStaticComponent>();
-	componentFactory->Register<Component::RigidDynamicComponent>();
-	componentFactory->Register<Component::RigidKinematicComponent>();
-	componentFactory->Register<Component::RigidComponent>();
+	componentFactory->Register<Component::RigidStatic>();
+	componentFactory->Register<Component::RigidDynamic>();
+	componentFactory->Register<Component::RigidKinematic>();
+	componentFactory->Register<Component::Rigid>();
 	componentFactory->Register<Component::SynchronizeComponent>();
 	// TODO: Register other components.
 }

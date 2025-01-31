@@ -18,8 +18,8 @@ namespace Engine::Physics
 		virtual void AttachUpdateSecne(IScene* scene) = 0;
 		virtual void DetachUpdateSecne(IScene* scene) = 0;
 		virtual IScene* GetScene(unsigned int sceneNumber) = 0;
-		virtual void UpdataCameraSecne() = 0;
-		virtual void 
+		//virtual void UpdataCameraSecne() = 0;
+
 	};
 
 	// Engine Interface

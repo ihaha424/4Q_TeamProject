@@ -20,5 +20,13 @@ namespace Engine::Network
 		virtual void InvokeMessage(const Packet& packet) = 0;
 	protected:
 		int _serialNumber;
+
+#ifndef CLIENT
+	public:
+		const unsigned long long GetSessionId() const;
+		void SetSessionId(unsigned long long sid);
+	protected :
+		unsigned long long _sessionId;
+#endif
 	};
 }

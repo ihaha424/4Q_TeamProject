@@ -9,6 +9,7 @@ Engine::ServerNetwork::Manager::Manager() :
 
 void Engine::ServerNetwork::Manager::Initialize() 
 {
+#ifdef CLIENT
 	bool res = Client::Initialize();
 	if (res == false) {
 		return;
@@ -22,11 +23,22 @@ void Engine::ServerNetwork::Manager::Initialize()
 	Client::SendUpdate();
 
 	_msgContainer = Client::GetPacketContainer();
+#else 
+	bool res = Server::Initialize();
+	if (res == false) {
+		printf("[main] Server Initialize Failed. code : %d\n", GetLastError());
+		return;
+	}
+#endif
 }
 
 void Engine::ServerNetwork::Manager::Send() 
 {
+#ifdef CLIENT
 	Client::SendUpdate();
+#else
+	Server::SendUpdate();
+#endif
 }
 
 void Engine::ServerNetwork::Manager::Receive() 
@@ -36,7 +48,11 @@ void Engine::ServerNetwork::Manager::Receive()
 
 void Engine::ServerNetwork::Manager::Finalize() 
 {
+#ifdef CLIENT
 	Client::Finalize();
+#else
+	Server::Finalize();
+#endif
 }
 
 void Engine::ServerNetwork::Manager::Register(Engine::Network::Terminal* terminal)
@@ -58,7 +74,11 @@ void Engine::ServerNetwork::Manager::Unregister(Engine::Network::Terminal* termi
 void Engine::ServerNetwork::Manager::DispatchPacket()
 {
 	if (_msgContainer->empty()) {
+#ifdef CLIENT
 		bool res = Client::SwapPacketContainer();
+#else
+		bool res = Server::SwapPacketContainer();
+#endif
 		if (res == false) {
 			return;
 		}
@@ -77,12 +97,21 @@ void Engine::ServerNetwork::Manager::DispatchPacket()
 		}
 	}
 }
-
+#ifdef CLIENT
 void Engine::ServerNetwork::Manager::SaveSendData(short packetId, std::string data, long dataSize, int serialNum)
 {
 	Client::SavePacketData(std::forward<std::string>(data), packetId, dataSize, serialNum);
 }
-
+#else
+void Engine::ServerNetwork::Manager::SaveSendData(unsigned long long sessionId, short packetId, std::string data, long dataSize, int serialNum)
+{
+	Server::SavePacketData(data, sessionId, packetId, dataSize, serialNum);
+}
+void Engine::ServerNetwork::Manager::BroadCast(short packetId, std::string data, long dataSize, int serialNum)
+{
+	Server::BroadCast(data, packetId, dataSize, serialNum);
+}
+#endif
 void Engine::ServerNetwork::Manager::RegistWorldEvent(short packetId, std::function<void(int)> callback)
 {
 	_worldCallback.insert({ packetId, callback });

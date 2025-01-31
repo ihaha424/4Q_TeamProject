@@ -760,5 +760,7 @@ namespace PhysicsEngineAPI
 
 		physx::PxCapsuleController* capsuleController;
 		capsuleController->move();
+		physx::PxCapsuleControllerDesc capsuleDesc;
+		physx::PxGpuParticleSystem* particle;
 	}
 }

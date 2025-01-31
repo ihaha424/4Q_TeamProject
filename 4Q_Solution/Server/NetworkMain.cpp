@@ -198,7 +198,7 @@ void NetworkMain::IOWork(HANDLE completionPort)
 					delete acceptOverlapped;
 				}
 
-				printf("[IOWork] Packet Received\n");
+				//printf("[IOWork] Packet Received\n");
 				Session* session = (Session*)completionKey;
 				if (overlappedType->_overlappedType == OlType::Recv) {
 					session->RecvUpdate();

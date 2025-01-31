@@ -39,7 +39,7 @@ bool Session::SendUpdate()
 		}
 	}
 
-	printf("Current ThreadID : %d\n", GetCurrentThreadId());
+	//printf("Current ThreadID : %d\n", GetCurrentThreadId());
 
 	while (!(*msgs).empty()) {
 		Packet msg = (*msgs).front();
@@ -62,9 +62,9 @@ bool Session::SendUpdate()
 bool Session::RecvUpdate()
 {
 	// TODO: Session에 있는 StreamBuffer에 데이터를 저장하고, 완성된 패킷을 dispatcher에 넘겨줘야 합니다.
-	printf("Data Received. Recv byte : %d\n", (int)_recvOl.InternalHigh);
+	//printf("Data Received. Recv byte : %d\n", (int)_recvOl.InternalHigh);
 	int savelen = _saveRecvData->Write(_recvOl._buffer, (int)_recvOl.InternalHigh);
-	printf("Data Saved. Save byte : %d\n", savelen);
+	//printf("Data Saved. Save byte : %d\n", savelen);
 
 	_packetDispatcherInstance->SaveRecvPacket(_saveRecvData, _sessionId);
 

@@ -2,7 +2,7 @@
 
 namespace DSH::Logger
 {
-	class Target;
+	struct Target;
 
 	class System final : public ISystem
 	{

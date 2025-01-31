@@ -31,6 +31,12 @@
     <Filter Include="interfaces\IStream">
       <UniqueIdentifier>{38b217ce-db99-4818-baf9-1b5572ca0967}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Targets">
+      <UniqueIdentifier>{6ce19e01-1e4d-4ac7-94c4-3cd71d3d2dce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Targets\Target">
+      <UniqueIdentifier>{f711fad4-1b2c-494b-bab8-c5905e6545e0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -69,6 +75,9 @@
     <ClInclude Include="System.h">
       <Filter>System</Filter>
     </ClInclude>
+    <ClInclude Include="Target.h">
+      <Filter>Targets\Target</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -88,6 +97,9 @@
     </ClCompile>
     <ClCompile Include="System.cpp">
       <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Target.cpp">
+      <Filter>Targets\Target</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

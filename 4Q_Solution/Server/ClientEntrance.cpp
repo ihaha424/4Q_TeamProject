@@ -30,7 +30,7 @@ void SERVER_API Client::Finalize()
 	_mainEntrance = nullptr;
 }
 
-void SERVER_API Client::SavePacketData(std::string&& msg, short packetId, long dataSize, int serialNum)
+void SERVER_API Client::SavePacketData(std::string msg, short packetId, long dataSize, int serialNum)
 {
 	_packetDispatcherInstance->SaveBroadCastPacket(std::forward<std::string>(msg), packetId, dataSize, serialNum);
 }

@@ -78,9 +78,9 @@ void Engine::ServerNetwork::Manager::DispatchPacket()
 	}
 }
 
-void Engine::ServerNetwork::Manager::SaveSendData(short packetId, std::string& data, long dataSize, int serialNum)
+void Engine::ServerNetwork::Manager::SaveSendData(short packetId, std::string data, long dataSize, int serialNum)
 {
-	Client::SavePacketData(data, packetId, dataSize, serialNum);
+	Client::SavePacketData(std::forward<std::string>(data), packetId, dataSize, serialNum);
 }
 
 void Engine::ServerNetwork::Manager::RegistWorldEvent(short packetId, std::function<void(int)> callback)

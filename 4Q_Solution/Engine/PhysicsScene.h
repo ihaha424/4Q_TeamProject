@@ -15,6 +15,9 @@ namespace Engine::Physics
 		virtual void CollisionEvent() const = 0;
 		virtual void SetSecneFilter() = 0;
 
+		virtual void SetGravity(const Math::Vector3& gravity) = 0;
+		virtual const Math::Vector3& GetGravity() const = 0;
+
 		/**
 		 * @brief : SceneQuery
 		 */
@@ -42,6 +45,16 @@ namespace Engine::Physics
 		virtual bool AddActor(IRigidStaticComponent* component)		= 0;
 		virtual bool AddActor(IRigidDynamicComponent* component)	= 0;
 		virtual bool AddActor(IRigidKinematicComponent* component)	= 0;
+
+		/**
+		 * @brief	만드는데 성공하면 true,
+					실패 또는 이미 있는 이름의 도형이면 false
+		 */
+		virtual bool AddGeomtry(
+			const std::string& name,
+			const Engine::Physics::GeometryDesc& _geometryDesc,
+			const Engine::Physics::VerticesMeshDesc& _verticesMeshDesc
+		) = 0;
 	};
 
 	// Engine Interface

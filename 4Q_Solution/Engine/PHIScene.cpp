@@ -123,6 +123,31 @@ namespace Engine::PHI
 		return scene->AddActor(componet->object);
 	}
 
+	bool Scene::AddGeomtry(const std::string& name, const Engine::Physics::GeometryDesc& _geometryDesc, const Engine::Physics::VerticesMeshDesc& _verticesMeshDesc)
+	{
+		PhysicsEngineAPI::IGeometry* geometry = nullptr;
+		bool result = false;
+		auto iter = geometryMap.find(name);
+		if (iter == geometryMap.end())
+		{
+			PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
+			PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc;
+			geometryDesc.type = static_cast<PhysicsEngineAPI::Utils::DataStructure::GeometryShape>(_geometryDesc.type);
+			auto& initialGeometrData = _geometryDesc.data;
+			geometryDesc.data = { initialGeometrData.x, initialGeometrData.y, initialGeometrData.z, initialGeometrData.w };
+			verticesMeshDesc.vertices.count = _verticesMeshDesc.vertices.count;
+			verticesMeshDesc.vertices.stride = _verticesMeshDesc.vertices.stride;
+			verticesMeshDesc.vertices.data = _verticesMeshDesc.vertices.data;
+			verticesMeshDesc.indices.count = _verticesMeshDesc.indices.count;
+			verticesMeshDesc.indices.stride = _verticesMeshDesc.indices.stride;
+			verticesMeshDesc.indices.data = _verticesMeshDesc.indices.data;
+			result = system->CreateGeometry(&geometry, geometryDesc, verticesMeshDesc);
+			geometryMap[name] = geometry;
+		}
+
+		return result;
+	}
+
 
 	void* Scene::GetScene()
 	{
@@ -157,5 +182,14 @@ namespace Engine::PHI
 			geometry = iter->second;
 
 		return geometry;
+	}
+	void Scene::SetGravity(const Math::Vector3& gravity)
+	{
+		scene->SetGravity({ gravity.x, gravity.y, gravity.z});
+	}
+	const Math::Vector3& Scene::GetGravity() const
+	{
+		auto& gravity = scene->GetGravity();
+		return { gravity.x, gravity.y, gravity.z };
 	}
 }

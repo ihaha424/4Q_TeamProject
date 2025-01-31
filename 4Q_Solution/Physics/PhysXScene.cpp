@@ -38,6 +38,16 @@ namespace PhysicsEngineAPI
 		//TODO:
 	}
 
+	void PhysXScene::SetGravity(const Utils::Math::Vector3& gravity)
+	{
+		scene->setGravity(Vector3ToPxVec3(gravity));
+	}
+
+	const Utils::Math::Vector3& PhysXScene::GetGravity() const
+	{
+		return PxVec3ToVector3(scene->getGravity());
+	}
+
 	bool PhysXScene::Raycast(
 		Utils::DataStructure::AdditionalQueryData& raycastInfo, 
 		const Utils::Math::Vector3& startPosition, 

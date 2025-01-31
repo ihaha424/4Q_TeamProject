@@ -203,9 +203,11 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="PhysicsFactory.h" />
     <ClInclude Include="PhysicsGeometry.h" />
     <ClInclude Include="PhysicsMaterial.h" />
+    <ClInclude Include="PhysicsObjectExample.h" />
     <ClInclude Include="PhysicsRigidDynamicComponent.h" />
     <ClInclude Include="PhysicsRigidKinematicComponent.h" />
     <ClInclude Include="PhysicsRigidStaticComponent.h" />
+    <ClInclude Include="PhysicsSceneExample.h" />
     <ClInclude Include="PhysicsUpdate.h" />
     <ClInclude Include="PhysicsUtils.h" />
     <ClInclude Include="DotTween.h" />
@@ -336,9 +338,11 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="PhysicsGeometry.cpp" />
     <ClCompile Include="PhysicsMaterial.cpp" />
+    <ClCompile Include="PhysicsObjectExample.cpp" />
     <ClCompile Include="PhysicsRigidDynamicComponent.cpp" />
     <ClCompile Include="PhysicsRigidKinematicComponent.cpp" />
     <ClCompile Include="PhysicsRigidStaticComponent.cpp" />
+    <ClCompile Include="PhysicsSceneExample.cpp" />
     <ClCompile Include="PhysicsUtils.cpp" />
     <ClCompile Include="DotTween.cpp" />
     <ClCompile Include="Down.cpp" />

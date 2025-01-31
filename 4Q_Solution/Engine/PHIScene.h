@@ -14,6 +14,9 @@ namespace Engine::PHI
 
 		void* GetScene() override;
 		void SetSecneFilter() override;
+
+		void SetGravity(const Math::Vector3& gravity) override;
+		const Math::Vector3& GetGravity() const override;
 		
 		bool Raycast(
 			Engine::Physics::AdditionalQueryData&	raycastInfo, 
@@ -44,6 +47,11 @@ namespace Engine::PHI
 		bool AddActor(Engine::Physics::IRigidStaticComponent* component) override;
 		bool AddActor(Engine::Physics::IRigidDynamicComponent* component) override;
 		bool AddActor(Engine::Physics::IRigidKinematicComponent* component) override;
+		bool AddGeomtry(
+			const std::string& name,
+			const Engine::Physics::GeometryDesc& _geometryDesc,
+			const Engine::Physics::VerticesMeshDesc& _verticesMeshDesc
+		) override;
 
 	private:
 		PhysicsEngineAPI::IGeometry* FindGeometry(

@@ -85,6 +85,7 @@ void Engine::Application::Run(const int showCommand)
 			_networkManager->Send();
 		}
 	}
+	_networkManager->Disconnect();
 }
 
 void Engine::Application::End()

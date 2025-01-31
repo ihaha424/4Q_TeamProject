@@ -19,6 +19,7 @@ namespace Engine::ServerNetwork {
 		void Send() override;
 		void Receive() override;
 		void Finalize() override;
+		void Disconnect() override;
 
 		void Register(Engine::Network::Terminal* terminal) override;
 		void Unregister(Engine::Network::Terminal* terminal) override;

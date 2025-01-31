@@ -54,3 +54,8 @@ void SERVER_API Server::BroadCast(std::string msg, short packetId, long dataSize
 {
 	_packetDispatcherInstance->SaveBroadCastPacket(std::forward<std::string>(msg), packetId, dataSize, serialNum);
 }
+
+void SERVER_API Server::DeleteSession(SessionID sid)
+{
+	_mainEntrance->Disconnect(sid);
+}

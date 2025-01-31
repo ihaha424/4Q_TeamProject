@@ -13,7 +13,7 @@ namespace Engine::Physics
 		virtual ~IScene() = default;
 
 		virtual void CollisionEvent() const = 0;
-		virtual void SetSecneFilter() = 0;
+		virtual void SetSceneFilter() = 0;
 
 		virtual void SetGravity(const Math::Vector3& gravity) = 0;
 		virtual const Math::Vector3& GetGravity() const = 0;

@@ -11,4 +11,5 @@ namespace PhysicsEngineAPI
 	class IGeometry;
 	class IShape;
 	class IMaterial;
+	class IController;
 }

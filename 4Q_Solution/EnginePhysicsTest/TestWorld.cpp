@@ -19,12 +19,12 @@ void TestWorld::PreInitialize()
 	// NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &TestWorld::SyncOtherPlayer, this);
 
 	Engine::Physics::SceneDesc testSceneDesc{ {0.f,-9.8f,0.f},10 };
-	Engine::Application::GetPhysicsManager()->CreateScene(&testPhysicsSecne, testSceneDesc);
-	Engine::Application::GetPhysicsManager()->AttachUpdateSecne(testPhysicsSecne);
+	Engine::Application::GetPhysicsManager()->CreateScene(&testPhysicsScene, testSceneDesc);
+	Engine::Application::GetPhysicsManager()->AttachUpdateScene(testPhysicsScene);
 
 	Engine::Physics::IRigidComponent* obj;
 	Engine::Application::GetPhysicsManager()->CreatePlane(&obj, Engine::Math::Vector4{ 0, 1, 0, 0 }, Engine::Physics::MaterialDesc{ {0.5f, 0.5f, 0.f} });
-	testPhysicsSecne->AddActor(obj);
+	testPhysicsScene->AddActor(obj);
 }
 
 void TestWorld::PreUpdate(float deltaTime)

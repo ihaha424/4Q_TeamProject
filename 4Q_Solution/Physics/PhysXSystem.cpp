@@ -153,7 +153,7 @@ namespace PhysicsEngineAPI
 		if (nullptr == newScene)
 			return false;
 		*scene = newScene;
-		SetSecneNumber(*scene, sceneCount);
+		SetSceneNumber(*scene, sceneCount);
 		sceneList.push_back(newScene);
 		sceneCount++;
 		return true;
@@ -383,7 +383,7 @@ namespace PhysicsEngineAPI
 		if (nullptr == newScene)
 			return false;
 		*scene = newScene;
-		SetSecneNumber(*scene, sceneCount);
+		SetSceneNumber(*scene, sceneCount);
 		sceneList.push_back(newScene);
 		sceneCount++;
 		return true;
@@ -404,7 +404,7 @@ namespace PhysicsEngineAPI
 		Update Physics System (Frame Per Physics System)
 	*************************************/
 
-	void PhysXSystem::UpdateSecne(unsigned int sceneNumber, const float deltaTime)
+	void PhysXSystem::UpdateScene(unsigned int sceneNumber, const float deltaTime)
 	{
 		if (sceneNumber > sceneCount)
 		{
@@ -415,7 +415,7 @@ namespace PhysicsEngineAPI
 
 	}
 
-	void PhysXSystem::UpdateSecne(IScene* scene, const float deltaTime)
+	void PhysXSystem::UpdateScene(IScene* scene, const float deltaTime)
 	{
 		unsigned int sceneNumber = scene->GetSceneNumber();
 		if (sceneNumber > sceneCount)
@@ -426,7 +426,7 @@ namespace PhysicsEngineAPI
 		(*sceneList[sceneNumber])->simulate(deltaTime);
 	}
 
-	void PhysXSystem::FetchSecne(unsigned int sceneNumber, bool block)
+	void PhysXSystem::FetchScene(unsigned int sceneNumber, bool block)
 	{
 		if (sceneNumber > sceneCount)
 		{
@@ -435,7 +435,7 @@ namespace PhysicsEngineAPI
 		}
 		(*sceneList[sceneNumber])->fetchResults(block);
 	}
-	void PhysXSystem::FetchSecne(IScene* scene, bool block)
+	void PhysXSystem::FetchScene(IScene* scene, bool block)
 	{
 		unsigned int sceneNumber = scene->GetSceneNumber();
 		if (sceneNumber > sceneCount)
@@ -740,6 +740,59 @@ namespace PhysicsEngineAPI
 		return true;
 	}
 
+	bool PhysXSystem::CreateControllerManager(_OUT_ IScene* _Scene)
+	{
+		if (nullptr == _Scene)
+			return false;
+		PhysXScene* Scene = static_cast<PhysXScene*>(_Scene);
+		if (nullptr == Scene->scene)
+			return false;
+		Scene->controllerManager = PxCreateControllerManager(*Scene->scene);
+		return true;
+	}
+
+	bool PhysXSystem::CreatePlayerController(_OUT_ IController** object, IScene* _Scene, const Utils::Description::ControllerDesc& _desc)
+	{
+		if (nullptr == _Scene)
+			return false;
+		PhysXScene* Scene = static_cast<PhysXScene*>(_Scene);
+		if (nullptr == Scene->scene)
+			return false;
+		physx::PxCapsuleControllerDesc desc;
+		desc.position = Vector3ToPxExtendedVec3(_desc.position);
+		desc.upDirection = Vector3ToPxVec3(_desc.upDirection);
+		desc.slopeLimit = _desc.slopeLimit;
+		desc.invisibleWallHeight = _desc.invisibleWallHeight;
+		desc.maxJumpHeight = _desc.maxJumpHeight;
+		desc.contactOffset = _desc.contactOffset;
+		desc.stepOffset = _desc.stepOffset;
+		desc.density = 10.f;
+		desc.scaleCoeff = 0.8f;
+		desc.volumeGrowth = 1.5f;
+		desc.reportCallback = NULL;
+		desc.behaviorCallback = NULL;
+		desc.nonWalkableMode = static_cast<physx::PxControllerNonWalkableMode::Enum>(_desc.slopeMode);
+		desc.material = physics->createMaterial(_desc.material.value[0], _desc.material.value[1], _desc.material.value[2]);
+		desc.registerDeletionListener = true;
+		desc.clientID = physx::PX_DEFAULT_CLIENT;
+		desc.userData = nullptr;
+		desc.radius;
+		desc.height;
+		desc.climbingMode = static_cast<physx::PxCapsuleClimbingMode::Enum>(_desc.climbinMode);;
+		// TODO
+		desc.reportCallback;
+		desc.behaviorCallback;
+
+
+		physx::PxController* character = Scene->controllerManager->createController(desc);
+		PhysXController* controller = new PhysXController();
+		if (nullptr == *object)
+			return false;
+		controller->controller = static_cast<physx::PxCapsuleController*>(character);
+		controller->gravity = Vector3ToPxVec3(_desc.gravity);
+		*object = controller;
+	}
+
 	bool PhysXSystem::CreateStaticBoundBoxActor(_OUT_ IObject** object, const Utils::Math::Vector3& boxExtents)
 	{
 		physx::PxTransform transform = {};
@@ -757,10 +810,5 @@ namespace PhysicsEngineAPI
 		if (nullptr == *object)
 			return false;
 		return true;
-
-		physx::PxCapsuleController* capsuleController;
-		capsuleController->move();
-		physx::PxCapsuleControllerDesc capsuleDesc;
-		physx::PxGpuParticleSystem* particle;
 	}
 }

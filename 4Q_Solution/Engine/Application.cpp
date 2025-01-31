@@ -68,7 +68,7 @@ void Engine::Application::Run(const int showCommand)
 			_networkManager->DispatchPacket();
 
 		    _physicsManager->Update(deltaTime);
-		    _physicsManager->FetchSecne(true);
+		    _physicsManager->FetchScene(true);
 		
 			_contentManager->Update(deltaTime);
 
@@ -138,10 +138,10 @@ void Engine::Application::Register(Content::IManager* contentManager)
 	componentFactory->Register<Component::TextRenderer>();
 	componentFactory->Register<Component::SkeletalMesh>();
 	componentFactory->Register<Component::Animator>();
-	componentFactory->Register<Component::RigidStaticComponent>();
-	componentFactory->Register<Component::RigidDynamicComponent>();
-	componentFactory->Register<Component::RigidKinematicComponent>();
-	componentFactory->Register<Component::RigidComponent>();
+	componentFactory->Register<Component::RigidStatic>();
+	componentFactory->Register<Component::RigidDynamic>();
+	componentFactory->Register<Component::RigidKinematic>();
+	componentFactory->Register<Component::Rigid>();
 	componentFactory->Register<Component::SynchronizeComponent>();
 	// TODO: Register other components.
 }

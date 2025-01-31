@@ -139,8 +139,8 @@
 
 2. Update & Fetch
 		// physicsSystem을 통해 원하는 씬의 번호나 씬을 넣어서 업데이트를 시키고 Fetch를 받는다.
-		physics->UpdateSecne(m_physicsScene, deltatime);
-		physics->FetchSecne(m_physicsScene, block = ture);
+		physics->UpdateScene(m_physicsScene, deltatime);
+		physics->FetchScene(m_physicsScene, block = ture);
 
 		:	block의 경우 Update가 끝날떄까지 기다리는 것이다.
 			만얀 false일경우 Update의 종료 여뷰와 관계없이 넘어간다.
@@ -152,9 +152,32 @@
 
 	3.1 Factory
 			:	인터페이스 참조, 정형화된 Create나, Clone등을 제공
-	3.2 Secne Query
+	3.2 Scene Query
 			:	Fetch가 끝난 정지된 Scene에게 무엇인가 작업을 요청하는 것.
 				현재는 3가지가 제공
 					Raycast
 					Overlap	(미완)
 					Sweep
+
+
+**********************************************************************************************************
+==========================================================================================================
+**********************************************************************************************************
+
+종속성
+LowLevel_static_64.lib
+LowLevelAABB_static_64.lib
+LowLevelDynamics_static_64.lib
+PhysX_64.lib
+PhysXCharacterKinematic_static_64.lib
+PhysXCommon_64.lib
+PhysXCooking_64.lib
+PhysXExtensions_static_64.lib
+PhysXFoundation_64.lib
+PhysXPvdSDK_static_64.lib
+PhysXTask_static_64.lib
+PhysXVehicle_static_64.lib
+PhysXVehicle2_static_64.lib
+PVDRuntime_64.lib
+SceneQuery_static_64.lib
+SimulationController_static_64.lib

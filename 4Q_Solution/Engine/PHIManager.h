@@ -14,10 +14,10 @@ namespace Engine::PHI
 		void Initialize(Engine::Physics::PhysicsType physicsType) override;
 		void WorldInitialize() override;
 		void Update(float deltaTime) override;
-		void FetchSecne(bool block) override;
+		void FetchScene(bool block) override;
 		void Finalize() override;
-		void AttachUpdateSecne(Physics::IScene* scene) override;
-		void DetachUpdateSecne(Physics::IScene* scene) override;
+		void AttachUpdateScene(Physics::IScene* scene) override;
+		void DetachUpdateScene(Physics::IScene* scene) override;
 
 		void* GetSystem() const override;
 		Physics::IScene* GetScene(unsigned int sceneNumber) override;
@@ -32,10 +32,10 @@ namespace Engine::PHI
 		/********************************
 					  Update
 		*********************************/
-		void UpdateSecne(unsigned int sceneNumber, const float deltaTime) override;
-		void UpdateSecne(Physics::IScene* scene, const float deltaTime) override;
-		void FetchSecne(unsigned int sceneNumber, bool block) override;
-		void FetchSecne(Physics::IScene* scene, bool block) override;
+		void UpdateScene(unsigned int sceneNumber, const float deltaTime) override;
+		void UpdateScene(Physics::IScene* scene, const float deltaTime) override;
+		void FetchScene(unsigned int sceneNumber, bool block) override;
+		void FetchScene(Physics::IScene* scene, bool block) override;
 		bool CheckResults(unsigned int sceneNumber, bool block) override;
 		bool CheckResults(Physics::IScene* scene, bool block) override;
 

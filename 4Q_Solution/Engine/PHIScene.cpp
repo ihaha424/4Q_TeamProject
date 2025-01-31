@@ -24,9 +24,9 @@ namespace Engine::PHI
 		scene->ReleaseAdditionalQueryData(data);
 	}
 
-	void Scene::SetSecneFilter()
+	void Scene::SetSceneFilter()
 	{
-		scene->SetSecneFilter();
+		scene->SetSceneFilter();
 	}
 
 	bool Scene::Raycast(Engine::Physics::AdditionalQueryData& raycastInfo, const Engine::Math::Vector3& startPosition, const Engine::Math::Vector3& direction, float distance)

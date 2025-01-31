@@ -33,7 +33,7 @@ namespace PhysicsEngineAPI
 		return true;
 	}
 
-	void PhysXScene::SetSecneFilter()
+	void PhysXScene::SetSceneFilter()
 	{
 		//TODO:
 	}

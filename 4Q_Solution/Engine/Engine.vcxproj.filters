@@ -427,6 +427,9 @@
     <Filter Include="Components\FiniteStateMachine">
       <UniqueIdentifier>{30bc3f08-3f30-46b5-985a-2465b38ff14f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Interfaces\Physics\07. Controller">
+      <UniqueIdentifier>{ce39da12-e12a-43ae-90af-dbf005b70f2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -831,6 +834,9 @@
     <ClInclude Include="State.h">
       <Filter>Components\FiniteStateMachine</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsController.h">
+      <Filter>Modules\Interfaces\Physics\07. Controller</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1163,8 +1169,8 @@
     <ClCompile Include="FiniteStateMachine.cpp">
       <Filter>Components\FiniteStateMachine</Filter>
     </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>Components\FiniteStateMachine</Filter>
+    <ClCompile Include="PhysicsController.cpp">
+      <Filter>Modules\Interfaces\Physics\07. Controller</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

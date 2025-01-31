@@ -27,10 +27,10 @@ namespace PhysicsEngineAPI
 		bool CreateStaticBoundBoxActor(_OUT_ IObject** object, const Utils::Math::Vector3& boxExtents) override;
 
 		// Frame Per Physics System
-		void UpdateSecne(unsigned int sceneNumber, const float deltaTime) override;
-		void UpdateSecne(IScene* scene, const float deltaTime) override;
-		void FetchSecne(unsigned int sceneNumber, bool block) override;
-		void FetchSecne(IScene* scene, bool block) override;
+		void UpdateScene(unsigned int sceneNumber, const float deltaTime) override;
+		void UpdateScene(IScene* scene, const float deltaTime) override;
+		void FetchScene(unsigned int sceneNumber, bool block) override;
+		void FetchScene(IScene* scene, bool block) override;
 		bool CheckResults(unsigned int sceneNumber, bool block);
 		bool CheckResults(IScene* scene, bool block);
 
@@ -112,6 +112,16 @@ namespace PhysicsEngineAPI
 			IMaterial* material
 		) override;
 
+
+		bool CreateControllerManager(
+			_OUT_ IScene* Scene
+		) override;
+
+		bool CreatePlayerController(
+			_OUT_ IController** object,
+			IScene* Scene,
+			const Utils::Description::ControllerDesc& desc
+		) override;
 
 
 	public:

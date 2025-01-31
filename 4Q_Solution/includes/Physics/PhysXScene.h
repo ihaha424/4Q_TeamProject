@@ -15,7 +15,7 @@ namespace PhysicsEngineAPI
 		bool AddActor(IObject* object) override;
 
 		// Setting Physics System
-		void SetSecneFilter() override;
+		void SetSceneFilter() override;
 		void SetScene(physx::PxScene* _scene) { scene = _scene; }
 
 		void SetGravity(const Utils::Math::Vector3& gravity) override;
@@ -56,6 +56,9 @@ namespace PhysicsEngineAPI
 		void Release() override;
 	private:
 		physx::PxScene* scene;
+		physx::PxControllerManager* controllerManager;
+
+		friend class PhysXSystem;
 	};
 }
 

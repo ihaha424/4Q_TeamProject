@@ -15,14 +15,14 @@ protected:
 
 	void OnHit(Engine::Physics::ContactEvent info);
 private:
-	Engine::Component::MovementComponent _movement;
-	Engine::Component::CameraComponent _camera;
+	Engine::Component::Movement _movement;
+	Engine::Component::Camera _camera;
 	//Engine::Component::StaticMesh _staticMesh;
 	Engine::Component::SkeletalMesh _skeltalMesh;
 	Engine::Component::Animator _animator;
 	Engine::Math::Matrix _worldMatrix;
 	Engine::Component::TextRenderer _textRenderer;
-	Engine::Component::SynchronizeComponent _sync;
+	Engine::Component::Synchronize _sync;
 
 	Engine::Component::RigidDynamic _rigid;
 

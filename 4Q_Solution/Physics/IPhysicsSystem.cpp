@@ -16,7 +16,7 @@ namespace PhysicsEngineAPI
 
         return false;
     }
-    void IPhysicsSystem::SetSecneNumber(IScene* scene, unsigned int _sceneNumber)
+    void IPhysicsSystem::SetSceneNumber(IScene* scene, unsigned int _sceneNumber)
     {
         scene->sceneNumber = _sceneNumber;
     }

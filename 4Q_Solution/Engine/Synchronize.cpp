@@ -1,23 +1,23 @@
 #include "pch.h"
-#include "SynchronizeComponent.h"
+#include "Synchronize.h"
 
-Engine::Component::SynchronizeComponent::SynchronizeComponent() :
+Engine::Component::Synchronize::Synchronize() :
 	_msgBuffer(std::string(256, '\0'))
 {
 }
 
-void Engine::Component::SynchronizeComponent::Initialize(const Modules& modules)
+void Engine::Component::Synchronize::Initialize(const Modules& modules)
 {
 	Component::Initialize(modules);
 	Engine::Application::GetNetworkManager()->Register(static_cast<Engine::Network::Terminal*>(this));
 }
 
-void Engine::Component::SynchronizeComponent::Finalize()
+void Engine::Component::Synchronize::Finalize()
 {
     Engine::Application::GetNetworkManager()->Unregister(static_cast<Engine::Network::Terminal*>(this));
 }
 
-void Engine::Component::SynchronizeComponent::InvokeMessage(const Packet& packet)
+void Engine::Component::Synchronize::InvokeMessage(const Packet& packet)
 {
 	if (_callbackMap.find(packet._packetId) == _callbackMap.end()) {
 		return;
@@ -76,7 +76,7 @@ void Engine::Component::SynchronizeComponent::InvokeMessage(const Packet& packet
     }
 }
 
-void Engine::Component::SynchronizeComponent::RemoveCallback(short packetId)
+void Engine::Component::Synchronize::RemoveCallback(short packetId)
 {
     delete _callbackMap[packetId];
     _callbackMap.erase(packetId);

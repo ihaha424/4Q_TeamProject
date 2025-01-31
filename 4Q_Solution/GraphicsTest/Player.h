@@ -20,8 +20,8 @@ private:
 	std::filesystem::path _meshPath;
 	std::filesystem::path _fontPath;
 
-	Engine::Component::MovementComponent* _movement;
-	Engine::Component::CameraComponent* _camera;
+	Engine::Component::Movement* _movement;
+	Engine::Component::Camera* _camera;
 	Engine::Component::SkeletalMesh* _skeletalMesh;
 	Engine::Component::Animator* _animator;
 	Engine::Math::Matrix _worldMatrix;

@@ -2,10 +2,10 @@
 
 namespace Engine::Component
 {
-	class MovementComponent : public Component
+	class Movement : public Component
 	{
 	public:
-		MovementComponent();
+		Movement();
 
 		void SetTarget(Transform* target);
 

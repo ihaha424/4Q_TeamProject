@@ -23,7 +23,7 @@ private:
 	RemotePlayer _remote;
 	GlobalLight _light;
 	Terrain _terrain;
-	Engine::Physics::IScene* testPhysicsSecne;
+	Engine::Physics::IScene* testPhysicsScene;
 
 	int playerSerialNum = 0;
 };

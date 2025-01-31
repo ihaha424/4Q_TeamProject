@@ -42,15 +42,15 @@ namespace Engine::PHI
 	{
 		for (auto scene : sceneList)
 		{
-			UpdateSecne(scene.second, deltaTime);
+			UpdateScene(scene.second, deltaTime);
 		}
 	}
 
-	void Manager::FetchSecne(bool block)
+	void Manager::FetchScene(bool block)
 	{
 		for (auto scene : sceneList)
 		{
-			FetchSecne(scene.second, block);
+			FetchScene(scene.second, block);
 			scene.second->CollisionEvent();
 		}
 	}
@@ -62,13 +62,13 @@ namespace Engine::PHI
 		releaser(&system);
 	}
 
-	void Manager::AttachUpdateSecne(Physics::IScene* scene)
+	void Manager::AttachUpdateScene(Physics::IScene* scene)
 	{
 		auto EngineScene = static_cast<Physics::Scene*>(scene);
 		sceneList[EngineScene->GetSceneIndex()] = scene;
 	}
 
-	void Manager::DetachUpdateSecne(Physics::IScene* scene)
+	void Manager::DetachUpdateScene(Physics::IScene* scene)
 	{
 		auto EngineScene = static_cast<Physics::Scene*>(scene);
 		sceneList[EngineScene->GetSceneIndex()] = nullptr;
@@ -166,28 +166,28 @@ namespace Engine::PHI
 	/********************************
 				  Update
 	*********************************/
-	void Manager::UpdateSecne(unsigned int sceneNumber, const float deltaTime)
+	void Manager::UpdateScene(unsigned int sceneNumber, const float deltaTime)
 	{
-		system->UpdateSecne(sceneNumber, deltaTime);
+		system->UpdateScene(sceneNumber, deltaTime);
 	}
 
-	void Manager::UpdateSecne(Physics::IScene* _scene, const float deltaTime)
+	void Manager::UpdateScene(Physics::IScene* _scene, const float deltaTime)
 	{
 		Scene* scene = static_cast<Scene*>(_scene);
 
-		system->UpdateSecne(scene->scene, deltaTime);
+		system->UpdateScene(scene->scene, deltaTime);
 	}
 
-	void Manager::FetchSecne(unsigned int sceneNumber, bool block)
+	void Manager::FetchScene(unsigned int sceneNumber, bool block)
 	{
-		system->FetchSecne(sceneNumber, block);
+		system->FetchScene(sceneNumber, block);
 	}
 
-	void Manager::FetchSecne(Physics::IScene* _scene, bool block)
+	void Manager::FetchScene(Physics::IScene* _scene, bool block)
 	{
 		Scene* scene = static_cast<Scene*>(_scene);
 
-		system->FetchSecne(scene->scene, block);
+		system->FetchScene(scene->scene, block);
 	}
 
 	bool Manager::CheckResults(unsigned int sceneNumber, bool block)

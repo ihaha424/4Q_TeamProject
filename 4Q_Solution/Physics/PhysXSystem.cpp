@@ -153,7 +153,7 @@ namespace PhysicsEngineAPI
 		if (nullptr == newScene)
 			return false;
 		*scene = newScene;
-		SetSecneNumber(*scene, sceneCount);
+		SetSceneNumber(*scene, sceneCount);
 		sceneList.push_back(newScene);
 		sceneCount++;
 		return true;
@@ -383,7 +383,7 @@ namespace PhysicsEngineAPI
 		if (nullptr == newScene)
 			return false;
 		*scene = newScene;
-		SetSecneNumber(*scene, sceneCount);
+		SetSceneNumber(*scene, sceneCount);
 		sceneList.push_back(newScene);
 		sceneCount++;
 		return true;
@@ -404,7 +404,7 @@ namespace PhysicsEngineAPI
 		Update Physics System (Frame Per Physics System)
 	*************************************/
 
-	void PhysXSystem::UpdateSecne(unsigned int sceneNumber, const float deltaTime)
+	void PhysXSystem::UpdateScene(unsigned int sceneNumber, const float deltaTime)
 	{
 		if (sceneNumber > sceneCount)
 		{
@@ -415,7 +415,7 @@ namespace PhysicsEngineAPI
 
 	}
 
-	void PhysXSystem::UpdateSecne(IScene* scene, const float deltaTime)
+	void PhysXSystem::UpdateScene(IScene* scene, const float deltaTime)
 	{
 		unsigned int sceneNumber = scene->GetSceneNumber();
 		if (sceneNumber > sceneCount)
@@ -426,7 +426,7 @@ namespace PhysicsEngineAPI
 		(*sceneList[sceneNumber])->simulate(deltaTime);
 	}
 
-	void PhysXSystem::FetchSecne(unsigned int sceneNumber, bool block)
+	void PhysXSystem::FetchScene(unsigned int sceneNumber, bool block)
 	{
 		if (sceneNumber > sceneCount)
 		{
@@ -435,7 +435,7 @@ namespace PhysicsEngineAPI
 		}
 		(*sceneList[sceneNumber])->fetchResults(block);
 	}
-	void PhysXSystem::FetchSecne(IScene* scene, bool block)
+	void PhysXSystem::FetchScene(IScene* scene, bool block)
 	{
 		unsigned int sceneNumber = scene->GetSceneNumber();
 		if (sceneNumber > sceneCount)

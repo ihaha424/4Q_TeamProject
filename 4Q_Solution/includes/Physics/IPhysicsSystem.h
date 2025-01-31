@@ -23,7 +23,7 @@ namespace PhysicsEngineAPI
 		virtual ~IPhysicsSystem() = default;
 
 	protected:
-		void SetSecneNumber(IScene* scene, unsigned int _sceneNumber);
+		void SetSceneNumber(IScene* scene, unsigned int _sceneNumber);
 	};
 
 	EXTERN_C  bool PHYSICS_API CreateSystem(_OUT_ IPhysicsSystem** physicsSystem, IPhysicsSystem::PhysicsType flag);

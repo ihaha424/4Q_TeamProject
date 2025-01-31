@@ -63,6 +63,7 @@ void TestWorld::EnterAccept(int num) {
 void TestWorld::SyncOtherPlayer(int num)
 {
 	_remote = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<RemotePlayer>();
+	_remote->SetSerialNumber(num);
 }
 
 void TestWorld::CreateStaticObject(int num)

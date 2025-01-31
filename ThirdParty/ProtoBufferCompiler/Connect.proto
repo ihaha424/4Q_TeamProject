@@ -19,3 +19,11 @@ message SyncObject {
 	optional float z = 3;
 	optional string resource = 4;
 }
+
+message AddRemote {
+	optional int32 grantnumber = 1;
+}
+
+message AddObject {
+	optional int32 grantnumber = 1;
+}

@@ -32,7 +32,7 @@ void SERVER_API Server::Finalize()
 
 void SERVER_API Server::SavePacketData(std::string msg, SessionID sid, short packetId, long dataSize, int serialNum)
 {
-	_packetDispatcherInstance->SaveSendPacket(msg, sid, packetId, dataSize, serialNum);
+	_packetDispatcherInstance->SaveSendPacket(std::forward<std::string>(msg), sid, packetId, dataSize, serialNum);
 }
 
 SERVER_API PacketQueue* Server::GetPacketContainer()
@@ -52,5 +52,5 @@ void SERVER_API Server::SendUpdate()
 
 void SERVER_API Server::BroadCast(std::string msg, short packetId, long dataSize, int serialNum)
 {
-	_packetDispatcherInstance->SaveBroadCastPacket(msg, packetId, dataSize, serialNum);
+	_packetDispatcherInstance->SaveBroadCastPacket(std::forward<std::string>(msg), packetId, dataSize, serialNum);
 }

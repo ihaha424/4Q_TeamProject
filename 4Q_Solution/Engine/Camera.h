@@ -2,10 +2,10 @@
 
 namespace Engine::Component
 {
-	class CameraComponent :	public Component
+	class Camera :	public Component
 	{
 	public:
-		explicit CameraComponent(float nearZ, float farZ, Math::Size size, float fov);
+		explicit Camera(float nearZ, float farZ, Math::Size size, float fov);
 
 		void SetName(std::wstring&& name);
 

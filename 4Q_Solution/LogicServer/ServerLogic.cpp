@@ -47,19 +47,22 @@ void ServerLogic::Update()
 
         Vector3 velocity = _playerSlot[i]._direction * _playerSlot[i]._speed * _timer->GetDeltaTime();
         _playerSlot[i]._position = _playerSlot[i]._position + velocity;
+    } // for end
+    if (elapsedTime >= 0.02f) {
+        elapsedTime -= 0.02f;
+        for (int i = 0; i < 2; i++) {
+            if (_playerSlot[i]._state == 0) {
+                continue;
+            } // if end
 
-        if (_playerSlot[i]._serialNumber == 0) continue;
-        if (elapsedTime >= 0.02f) {
-            elapsedTime -= 0.02f;
             _moveSync.set_x(_playerSlot[i]._position._x);
             _moveSync.set_y(_playerSlot[i]._position._y);
             _moveSync.set_z(_playerSlot[i]._position._z);
 
             _moveSync.SerializeToString(&_msgBuffer);
-            Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), i + 1);
-        }
-
-    } // for end
+            Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), _playerSlot[i]._serialNumber);
+        } // for end
+    } // if end
 
     Server::SendUpdate();
 }
@@ -164,7 +167,7 @@ void ServerLogic::MessageDispatch()
             _stateChange.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
 
             _playerSlot[packet._serialNumber - 1]._state = _stateChange.stateinfo();
-
+            printf("Player%d State Changed. CurrentState : %d\n", packet._serialNumber - 1, _stateChange.stateinfo());
             _stateChange.SerializeToString(&_msgBuffer);
             Server::BroadCast(_msgBuffer, (short)PacketID::StateChange, _stateChange.ByteSizeLong(), packet._serialNumber);
 

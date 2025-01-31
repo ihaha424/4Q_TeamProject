@@ -13,7 +13,7 @@ void RemotePlayer::Prepare(Engine::Content::Factory::Component* componentFactory
 {
 	_skeletalMesh = componentFactory->Clone<Engine::Component::SkeletalMesh>();
 	_animator = componentFactory->Clone<Engine::Component::Animator>();
-	_sync = componentFactory->Clone<Engine::Component::SynchronizeComponent>();
+	_sync = componentFactory->Clone<Engine::Component::Synchronize>();
 	_remoteMove = componentFactory->Clone<RemoteMoveComponent>();
 }
 
@@ -112,5 +112,10 @@ void RemotePlayer::StateChange(const MoveMsg::StateChange* msg)
 	else if (msg->stateinfo() == 0) {
 		_animator->ChangeAnimation("Wait");
 	}
+}
+
+void RemotePlayer::SetSerialNumber(int num)
+{
+	_sync->SetSerialNumber(num);
 }
 

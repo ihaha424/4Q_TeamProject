@@ -8,7 +8,7 @@ public:
 	explicit RemotePlayer(std::filesystem::path&& meshPath);
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
 	void DisposeComponents() override;
-
+	void SetSerialNumber(int num);
 protected:
 	void PreInitialize(const Engine::Modules& modules) override;
 	void PostInitialize(const Engine::Modules& modules) override;
@@ -22,14 +22,16 @@ protected:
 private:
 	std::filesystem::path _meshPath;
 
-	//Engine::Component::MovementComponent _movement;
-	//Engine::Component::CameraComponent _camera;
+	//Engine::Component::Movement _movement;
+	//Engine::Component::Camera _camera;
 	//Engine::Component::StaticMesh _staticMesh;
 	Engine::Component::SkeletalMesh* _skeletalMesh;
 	Engine::Component::Animator* _animator;
 	Engine::Math::Matrix _worldMatrix;
-	Engine::Component::SynchronizeComponent* _sync;
+	Engine::Component::Synchronize* _sync;
 
 	RemoteMoveComponent* _remoteMove;
+
+public:
 };
 

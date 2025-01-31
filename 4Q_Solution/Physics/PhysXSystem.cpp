@@ -757,10 +757,5 @@ namespace PhysicsEngineAPI
 		if (nullptr == *object)
 			return false;
 		return true;
-
-		physx::PxCapsuleController* capsuleController;
-		capsuleController->move();
-		physx::PxCapsuleControllerDesc capsuleDesc;
-		physx::PxGpuParticleSystem* particle;
 	}
 }

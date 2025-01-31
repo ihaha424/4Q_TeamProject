@@ -54,7 +54,7 @@ void Bloom::SetDesc(GE::BlOOM_DESC* pInDesc)
 	_desc = (*pInDesc);
 }
 
-void Bloom::Render(ID3D11ShaderResourceView* pSourceSRV)
+void Bloom::Render()
 {
 	float downScale = 1.f;
 	
@@ -64,13 +64,11 @@ void Bloom::Render(ID3D11ShaderResourceView* pSourceSRV)
 
 	_pDeviceContext->OMSetRenderTargets(1, &pRTV, nullptr);
 	_pDeviceContext->ClearRenderTargetView(pRTV, COLOR_ZERO);
-	_pDeviceContext->PSSetShaderResources(0, 1, &pSourceSRV);
 	_psBloomCurve->SetPixelShader();
 	g_pQuad->Render();
 
-	ID3D11RenderTargetView* nullRTV = nullptr;
-	_pDeviceContext->OMSetRenderTargets(1, &nullRTV, nullptr);
-	_pDeviceContext->PSSetShaderResources(0, 1, &pSRV);
+	_pDeviceContext->OMSetRenderTargets(0, nullptr, nullptr);
+	_pDeviceContext->PSSetShaderResources(2, 1, &pSRV);
 
 	auto& [RTVs, SRVs] = g_pViewManagement->GetRenderTargetGroup(L"DownScale");
 	int count = (int)RTVs.size();
@@ -80,11 +78,11 @@ void Bloom::Render(ID3D11ShaderResourceView* pSourceSRV)
 	{
 		downScale *= 0.5f;
 		Sampling(g_width * downScale, g_height * downScale, RTVs[i]);
-		_pDeviceContext->PSSetShaderResources(0, 1, &SRVs[i]);
+		_pDeviceContext->PSSetShaderResources(2, 1, &SRVs[i]);
 	}
 
-	ID3D11ShaderResourceView* nullSRV = nullptr;
-	_pDeviceContext->PSSetShaderResources(0, 1, &nullSRV);
+	/*ID3D11ShaderResourceView* nullSRV = nullptr;
+	_pDeviceContext->PSSetShaderResources(0, 1, &nullSRV);*/
 
 	// UpScale
 	D3D11_VIEWPORT viewport
@@ -97,7 +95,7 @@ void Bloom::Render(ID3D11ShaderResourceView* pSourceSRV)
 	_pDeviceContext->RSSetViewports(1, &viewport);
 
 	_pDeviceContext->OMSetRenderTargets(1, &pRTV, nullptr);
-	_pDeviceContext->PSSetShaderResources(1, SRVs.size(), SRVs.data());
+	_pDeviceContext->PSSetShaderResources(2, (unsigned int)SRVs.size(), SRVs.data());
 	_psUpSampling->SetPixelShader();
 	g_pQuad->Render();
 }
@@ -117,6 +115,5 @@ void Bloom::Sampling(float width, float height, ID3D11RenderTargetView* pRTV)
 	_psDownSampling->SetPixelShader();
 	g_pQuad->Render();
 
-	ID3D11RenderTargetView* nullRTV{ nullptr };
-	_pDeviceContext->OMSetRenderTargets(1, &nullRTV, nullptr);
+	_pDeviceContext->OMSetRenderTargets(0, nullptr, nullptr);
 }

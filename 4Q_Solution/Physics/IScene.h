@@ -24,6 +24,8 @@ namespace PhysicsEngineAPI
 		// Setting Physics System
 		// TODO: 
 		virtual void SetSecneFilter() = 0;
+		virtual void SetGravity(const Utils::Math::Vector3& gravity) = 0;
+		virtual const Utils::Math::Vector3& GetGravity() const = 0;
 
 		unsigned int GetSceneNumber();
 

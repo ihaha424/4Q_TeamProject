@@ -145,6 +145,9 @@
     <Filter Include="08. DX11\PostProcess\Blur">
       <UniqueIdentifier>{78b43ac8-c765-4a4f-9e00-94ddcd535e15}</UniqueIdentifier>
     </Filter>
+    <Filter Include="08. DX11\PostProcess\SSAO">
+      <UniqueIdentifier>{94a2fc78-d00d-401f-ae87-2b2b1c3ff935}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -348,6 +351,9 @@
     <ClInclude Include="includes\IBlur.h">
       <Filter>97. Include\PostProcess</Filter>
     </ClInclude>
+    <ClInclude Include="SSAO.h">
+      <Filter>08. DX11\PostProcess\SSAO</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp">
@@ -470,6 +476,9 @@
     <ClCompile Include="Blur.cpp">
       <Filter>08. DX11\PostProcess\Blur</Filter>
     </ClCompile>
+    <ClCompile Include="SSAO.cpp">
+      <Filter>08. DX11\PostProcess\SSAO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Renderer.def">
@@ -526,6 +535,12 @@
       <Filter>00. Common\HLSL\PostProcess</Filter>
     </FxCompile>
     <FxCompile Include="..\Shaders\BloomCurvePS.hlsl">
+      <Filter>00. Common\HLSL\PostProcess</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\ToneMappingPS.hlsl">
+      <Filter>00. Common\HLSL\PostProcess</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\SSAOPS.hlsl">
       <Filter>00. Common\HLSL\PostProcess</Filter>
     </FxCompile>
   </ItemGroup>

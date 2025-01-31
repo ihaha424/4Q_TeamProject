@@ -3,34 +3,35 @@
 
 namespace Engine::Component
 {
-	RigidComponent::RigidComponent()
-		: _rigidComponent{ nullptr }
-		, _physicsManager{ nullptr }
+	Rigid::Rigid()
+		: _rigidbody{ nullptr }
 	{}
 
-	void RigidComponent::Initialize(const Modules& modules)
+	void Rigid::Initialize(const Modules& modules)
 	{
 		Component::Initialize(modules);
-		_physicsManager = modules.physicsManager;
+		static_cast<Physics::RigidComponent*>(_rigidbody)->Initialize();
+		static_cast<Physics::RigidComponent*>(_boundBox)->Initialize();
 	}
 
-	void RigidComponent::Attach()
+	void Rigid::Attach()
 	{
 		Component::Attach();
 	}
-	void RigidComponent::Update(float deltaTime)
+	void Rigid::Update(float deltaTime)
 	{
 		Component::Update(deltaTime);
+		static_cast<Engine::Physics::RigidComponent*>(_rigidbody)->Update(deltaTime);
 	}
-	void RigidComponent::FixedUpdate()
+	void Rigid::FixedUpdate()
 	{
 		Component::FixedUpdate();
 	}
-	void RigidComponent::Detach()
+	void Rigid::Detach()
 	{
 		Component::Detach();
 	}
-	void RigidComponent::Finalize()
+	void Rigid::Finalize()
 	{
 		Component::Finalize();
 	}

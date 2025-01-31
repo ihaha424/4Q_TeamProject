@@ -61,7 +61,11 @@ inline float3 DirectionalLightPBR(float3 worldPosition, float3 N, float3 V, floa
     
         float3 diffusePBR = albedo * kd / PI;
         float3 specularPBR = (F * D * G) / max(0.00001, 4.0 * NdotL * NdotV);
-        directLighting += (diffusePBR + specularPBR) * NdotL * light.intensity;
+        
+        float intensity = 1.0;
+        //float toonStep = 3;
+        //intensity = floor(NdotL * toonStep) / toonStep;
+        directLighting += (diffusePBR + specularPBR) * intensity * light.intensity;
     }
     
     return directLighting;

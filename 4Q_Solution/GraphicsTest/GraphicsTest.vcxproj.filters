@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="GameApplication">
+      <UniqueIdentifier>{7154a479-4ff4-4bd9-954b-042e48bada27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{bcdac439-a44a-41fb-94c3-ed7226e9e018}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Player">
+      <UniqueIdentifier>{32321839-a337-459d-aa09-ba082abe2f43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Worlds">
+      <UniqueIdentifier>{4f44e75b-0a55-44cf-85b5-6fbd4511d2a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Worlds\TestWorld">
+      <UniqueIdentifier>{b2a7572b-ba62-4fbf-aabe-91ebac1ec88e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Light">
+      <UniqueIdentifier>{c6d46fd6-271d-49c1-a779-2a4e017e5871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Terrain">
+      <UniqueIdentifier>{ddef3b3c-4fd2-4006-b66a-8dbe813d27c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameApplication.h">
+      <Filter>GameApplication</Filter>
+    </ClInclude>
+    <ClInclude Include="TestWorld.h">
+      <Filter>Worlds\TestWorld</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Objects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalLight.h">
+      <Filter>Objects\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>Objects\Terrain</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameApplication.cpp">
+      <Filter>GameApplication</Filter>
+    </ClCompile>
+    <ClCompile Include="TestWorld.cpp">
+      <Filter>Worlds\TestWorld</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Objects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalLight.cpp">
+      <Filter>Objects\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>Objects\Terrain</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

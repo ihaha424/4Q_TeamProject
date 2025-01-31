@@ -2,7 +2,8 @@
 
 #include "PhysXSystem.h"
 #include "PhysXElement.h"
-#include "PhysxCollision.h"
+#include "PhysxCollisionEvent.h"
+#include <thread>
 
 namespace PhysicsEngineAPI
 {
@@ -113,7 +114,10 @@ namespace PhysicsEngineAPI
 	{	
 		physx::PxSceneDesc pxSeceneDesc(physics->getTolerancesScale());
 		pxSeceneDesc.gravity = physx::PxVec3(sceneDescription.gravity.x, sceneDescription.gravity.y, sceneDescription.gravity.z);
-		dispatcher = physx::PxDefaultCpuDispatcherCreate(sceneDescription.CPUDispatcherCount);
+		unsigned int CPUDispatcherCount = sceneDescription.CPUDispatcherCount;
+		if (CPUDispatcherCount == 0)
+			CPUDispatcherCount = std::thread::hardware_concurrency();
+		dispatcher = physx::PxDefaultCpuDispatcherCreate(CPUDispatcherCount);
 		pxSeceneDesc.cpuDispatcher = dispatcher;
 		pxSeceneDesc.filterShader = []
 		(
@@ -748,10 +752,15 @@ namespace PhysicsEngineAPI
 		actor = PxCreateStatic(*physics, transform, geometry, *material);
 		if (nullptr == actor)
 			return false;
-		physx::PxOverlapBuffer overlapBuffer;
+
 		*object = new PhysXStaticActor(actor);
 		if (nullptr == *object)
 			return false;
 		return true;
+
+		physx::PxCapsuleController* capsuleController;
+		capsuleController->move();
+		physx::PxCapsuleControllerDesc capsuleDesc;
+		physx::PxGpuParticleSystem* particle;
 	}
 }

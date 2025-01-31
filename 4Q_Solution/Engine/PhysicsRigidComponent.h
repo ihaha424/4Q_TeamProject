@@ -41,6 +41,12 @@ namespace Engine::Physics
 					Geometry
 		*********************************/
 		virtual GeometryShape GetType() = 0;
+	
+		/********************************
+					Collision
+		*********************************/
+		virtual void BindCollision(const CallBackTrigger& callback, TriggerType type) = 0;
+		virtual void BindCollision(const CallBackContact& callback, ContactType type) = 0;
 	};
 
 

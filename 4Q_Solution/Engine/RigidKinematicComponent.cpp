@@ -3,36 +3,37 @@
 
 namespace Engine::Component
 {
-	RigidKinematicComponent::RigidKinematicComponent()
-		: _rigidComponent{ nullptr }
-		, _physicsManager{ nullptr }
+	RigidKinematic::RigidKinematic()
+		: _rigidbody{ nullptr }
 	{
 	}
 
-	void RigidKinematicComponent::Initialize(const Modules& modules)
+	void RigidKinematic::Initialize(const Modules& modules)
 	{
 		Component::Initialize(modules);
-		_physicsManager = modules.physicsManager;
+		static_cast<Physics::RigidKinematicComponent*>(_rigidbody)->Initialize();
+		static_cast<Physics::RigidComponent*>(_boundBox)->Initialize();
 	}
 
-	void RigidKinematicComponent::Attach()
+	void RigidKinematic::Attach()
 	{
 		Component::Attach();
 	}
-	void RigidKinematicComponent::Update(float deltaTime)
+	void RigidKinematic::Update(float deltaTime)
 	{
 		Component::Update(deltaTime);
+		static_cast<Engine::Physics::RigidKinematicComponent*>(_rigidbody)->Update(deltaTime);
 		// -> Owner's Transform Update
 	}
-	void RigidKinematicComponent::FixedUpdate()
+	void RigidKinematic::FixedUpdate()
 	{
 		Component::FixedUpdate();
 	}
-	void RigidKinematicComponent::Detach()
+	void RigidKinematic::Detach()
 	{
 		Component::Detach();
 	}
-	void RigidKinematicComponent::Finalize()
+	void RigidKinematic::Finalize()
 	{
 		Component::Finalize();
 	}

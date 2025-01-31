@@ -1,6 +1,5 @@
 #pragma once
 
-#include "ICollision.h"
 #include "IUserData.h"
 
 namespace PhysicsEngineAPI

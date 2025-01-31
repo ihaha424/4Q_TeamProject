@@ -17,7 +17,7 @@ public:
 public:
 	// Filter을(를) 통해 상속됨
 	void Initialize() override;
-	void Render(ID3D11ShaderResourceView* pSourceSRV) override;
+	void Render() override;
 
 private:
 	std::shared_ptr<PixelShader> _psSampling;

@@ -163,6 +163,7 @@
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Declare.h" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="pch.cpp">

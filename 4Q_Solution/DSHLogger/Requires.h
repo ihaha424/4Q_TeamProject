@@ -1,7 +1,17 @@
 #pragma once
 
 #include <ole2.h>
-#include <chrono>
+#include <string>
+#include <sstream>
+#include <iostream>
+#include <fstream>
+#include <filesystem>
+#include <future>
+#include <format>
+#include <vector>
+#include <unordered_map>
+#include <array>
 
 #include "Exports.h"
+#include "Declare.h"
 #include "Interfaces.h"

@@ -13,7 +13,9 @@ protected:
 public:
 	std::shared_ptr<Model>& GetModel() { return _model; }
 	MeshType::Type GetType() const { return _type; }
-	const unsigned int GetLayer() const { return _layer; }
+	const unsigned int GetPostEffectFlag() const { return _description.postEffectFlag; }
+	bool IsActiveDraw() const { return _description.activeDraw; }
+	bool IsActiveShadow() const { return _description.activeShadow; }
 
 public:
 	virtual void Initialize(const wchar_t* filePath) = 0;
@@ -22,11 +24,12 @@ public:
 public:
 	// IMeshRenderer을(를) 통해 상속됨
 	void Release() override;
-	void SetRenderLayer(const unsigned int layer) override;
+	void SetDesc(const GE::MeshDescription* in) override;
+	void GetDesc(GE::MeshDescription* out) override;
 
 protected:
 	std::shared_ptr<Model>			_model;
 	std::shared_ptr<VertexShader>	_vertexShader;
 	MeshType::Type					_type{ MeshType::End };
-	unsigned int					_layer{ 0 };
+	GE::MeshDescription				_description;
 };

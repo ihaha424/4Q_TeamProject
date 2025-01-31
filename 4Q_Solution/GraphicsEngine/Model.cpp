@@ -38,7 +38,7 @@ HRESULT Model::LoadFBX(const std::filesystem::path& filePath, bool isStaticMesh)
 
     if (!paiScene || paiScene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !paiScene->mRootNode)
     {
-        ASSERT(false, L"해당 경로에 모델이 없습니다.");
+        ASSERT(false, L"The model could not be found by that path.");
         return E_FAIL;
     }
 

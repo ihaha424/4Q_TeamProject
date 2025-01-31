@@ -2,7 +2,14 @@
 #include "IBash.h"
 
 namespace GE
-{	
+{
+	struct MeshDescription
+	{
+		unsigned int postEffectFlag;
+		bool activeShadow;
+		bool activeDraw;
+	};
+
 	class IMeshRenderer : public IBase
 	{
 	protected:
@@ -14,6 +21,7 @@ namespace GE
 		IMeshRenderer& operator=(IMeshRenderer&&) = delete;
 
 	public:
-		virtual void SetRenderLayer(const unsigned int layer) = 0;
+		virtual void GetDesc(MeshDescription* out) = 0;
+		virtual void SetDesc(const MeshDescription* in) = 0;
 	};
 }

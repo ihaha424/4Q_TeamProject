@@ -24,8 +24,8 @@ void DX11Renderer::Initialize()
 
 	_matrices.resize(MAX_DRAW_OBJECT);
 	_boneMatrices.resize(MAX_DRAW_OBJECT * MAX_BONE_MATRIX);
-	_directionalLights.resize(4);
-	_pointLights.resize(64);
+	_directionalLights.resize(MAX_DIRECTIONAL_LIGHT);
+	_pointLights.resize(MAX_POINT_LIGHT);
 
 	// Viewport
 	_viewport.MaxDepth = 1.f;
@@ -50,40 +50,7 @@ void DX11Renderer::Initialize()
 }
 
 void DX11Renderer::Render()
-{
-	Camera* pCamera = g_pCameraSystem->GetCurrentCamera();
-
-	XMVECTOR direction = XMVector3Normalize(-Vector3(0.f, 0.f, 1.f));
-	XMVECTOR lightPosition = direction * 5000.f + XMVectorSet(0.f, 5000.f, 0.f, 0.f);
-	XMVECTOR lightTarget = direction;
-	XMVECTOR lightUp = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-
-	XMMATRIX view = XMMatrixLookAtLH(lightPosition, lightTarget, lightUp);
-
-	float viewWidth = SHADOW_WIDTH;
-	float viewHeight = SHADOW_HEIGHT;
-	float nearPlane = 1.f;
-	float farPlane = 10000.0f;
-
-	XMMATRIX proj = XMMatrixOrthographicLH(viewWidth, viewHeight, nearPlane, farPlane);
-	
-	ViewProjection vp
-	{
-		.vp = pCamera->GetViewMatrix() * pCamera->GetProjectionMatrix(),
-		.shadowVP = XMMatrixTranspose(view * proj)
-	};
-
-	CameraDesc cameraDesc
-	{
-		.vpInvers = XMMatrixTranspose(XMMatrixInverse(nullptr, vp.vp)),
-		.cameraPosition = pCamera->GetPosition(),
-	};
-
-	vp.vp = XMMatrixTranspose(vp.vp);
-
-	g_pConstantBuffer->UpdateConstantBuffer(L"ViewProjection", &vp);
-	g_pConstantBuffer->UpdateConstantBuffer(L"CameraDesc", &cameraDesc);
-
+{	
 	const auto& renderData = g_pRenderGroup->GetRenderDatas();
 	
 	std::list<DrawData> alphaMeshes, noneAlphaMeshs;
@@ -92,6 +59,9 @@ void DX11Renderer::Render()
 	unsigned int ID = 0;
 	for (const auto& [component, matrix] : renderData)
 	{
+		if (!component->IsActiveDraw())
+			continue;
+
 		auto& model = component->GetModel();
 		_matrices[ID] = XMMatrixTranspose(*matrix);
 
@@ -108,10 +78,10 @@ void DX11Renderer::Render()
 			continue;
 		}
 
-		const unsigned int mask = component->GetLayer();
+		const unsigned int mask = component->GetPostEffectFlag();
 
 		for (auto& mesh : model->_meshs)
-		{
+		{			
 			if (mesh->_pMaterial->IsAlpha())
 			{
 				alphaMeshes.emplace_back(ID, mask, mesh);
@@ -131,17 +101,23 @@ void DX11Renderer::Render()
 	// meshes[RenderType::NoneAlpha].sort();
 
 	auto& lights = g_pLightSystem->GetLights();
-	unsigned int numLight[2]{};
+	unsigned int numLight[GE::ILight::End]{};
 	
 	for (auto& light : lights)
 	{
 		switch (light->GetType())
 		{
-		case GE::ILight::Type::Directional:
-			_directionalLights[numLight[0]++] = light->_lightData;
+		case GE::ILight::Directional:
+			if (numLight[GE::ILight::Directional] >= MAX_DIRECTIONAL_LIGHT)
+				continue;
+			_directionalLights[numLight[GE::ILight::Directional]++] = light->_lightData;
 			break;
-		case GE::ILight::Type::Point:
-			_pointLights[numLight[1]++] = light->_lightData;
+		case GE::ILight::Point:
+			if (numLight[GE::ILight::Point] >= MAX_POINT_LIGHT)
+				continue;
+			_pointLights[numLight[GE::ILight::Point]++] = light->_lightData;
+			break;
+		case GE::ILight::Spot:
 			break;
 		}
 	}
@@ -169,8 +145,8 @@ void DX11Renderer::Render()
 	ID3D11ShaderResourceView* nullSRV = nullptr;
 	_pDeviceContext->PSSetShaderResources(10, 1, &nullSRV);
 	
-	PostProcessing();
 	SkyBoxPass(skyBoxes);
+	PostProcessing();
 }
 
 void DX11Renderer::SetViewport(float width, float height)
@@ -182,6 +158,41 @@ void DX11Renderer::SetViewport(float width, float height)
 
 void DX11Renderer::ShadowPass()
 {
+	Camera* pCamera = g_pCameraSystem->GetCurrentCamera();
+	Light* pMainLight = g_pLightSystem->GetMainLight();
+
+	float dist = 7000.f;
+	XMVECTOR direction = XMVector3Normalize(-pMainLight->_lightData.data);
+	XMVECTOR lightPosition = direction * dist + XMVectorSet(0.f, dist, 0.f, 0.f);
+	XMVECTOR lightTarget = direction;
+	XMVECTOR lightUp = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+
+	XMMATRIX view = XMMatrixLookAtLH(lightPosition, lightTarget, lightUp);
+
+	float viewWidth = SHADOW_WIDTH;
+	float viewHeight = SHADOW_HEIGHT;
+	float nearPlane = dist;
+	float farPlane = 10000.0f;
+
+	XMMATRIX proj = XMMatrixPerspectiveFovLH(XM_PIDIV4, 1, nearPlane, farPlane);
+	
+	ViewProjection vp
+	{
+		.vp = pCamera->GetViewMatrix() * pCamera->GetProjectionMatrix(),
+		.shadowVP = XMMatrixTranspose(view * proj)
+	};
+
+	CameraDesc cameraDesc
+	{
+		.vpInvers = XMMatrixTranspose(XMMatrixInverse(nullptr, vp.vp)),
+		.cameraPosition = pCamera->GetPosition(),
+	};
+
+	vp.vp = XMMatrixTranspose(vp.vp);
+
+	g_pConstantBuffer->UpdateConstantBuffer(L"ViewProjection", &vp);
+	g_pConstantBuffer->UpdateConstantBuffer(L"CameraDesc", &cameraDesc);
+
 	SetViewport(SHADOW_WIDTH, SHADOW_HEIGHT);
 	_pDeviceContext->OMSetRenderTargets(0, nullptr, _pShadowDSV);
 	_pDeviceContext->ClearDepthStencilView(_pShadowDSV, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
@@ -194,6 +205,9 @@ void DX11Renderer::ShadowPass()
 	unsigned int ID = 0;
 	for (auto& [component, matrix] : renderDatas)
 	{
+		if (!component->IsActiveShadow())
+			continue;
+
 		auto type = component->GetType();
 		if (prevType != type)
 		{
@@ -212,6 +226,9 @@ void DX11Renderer::ShadowPass()
 		}
 	}
 
+	// Directional Pass
+	// Point Pass
+	// Spot Pass
 	_pDeviceContext->OMSetRenderTargets(0, nullptr, nullptr);
 }
 
@@ -494,9 +511,6 @@ void DX11Renderer::InitStructuredBuffer()
 {
 	g_pStructuredBuffer->AddStructuredBuffer(L"WorldMatrices", sizeof(XMMATRIX) * MAX_DRAW_OBJECT, MAX_DRAW_OBJECT);
 	g_pStructuredBuffer->AddStructuredBuffer(L"BoneMatrices", sizeof(XMMATRIX) * MAX_DRAW_OBJECT * MAX_BONE_MATRIX, MAX_DRAW_OBJECT * MAX_BONE_MATRIX);
-
-	//const unsigned int maxLayer = g_pRenderGroup->GetMaxLayer();
-	//g_pStructuredBuffer->AddStructuredBuffer(L"Layers", unsigned int(g_width * g_height * sizeof(float) * maxLayer), maxLayer);
 }
 
 void DX11Renderer::Free()

@@ -83,6 +83,8 @@ void Player::PostInitialize(const Engine::Modules& modules)
 	_animator.SplitBone(0, "Dummy_root");
 	_animator.SplitBone(1, "Bip01-Spine1");
 	_animator.ChangeAnimation("Wait");*/
+
+	//_skeletalMesh->SetActiveShadow(false);
 }
 
 void Player::PostAttach()
@@ -96,9 +98,9 @@ void Player::PostUpdate(const float deltaTime)
 	Object::PostUpdate(deltaTime);
 	_worldMatrix = Engine::Math::Matrix::CreateScale(0.5f) * Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
 
-	/*Engine::Math::Vector3 tempPostion = _transform.position;
-	tempPostion.z -= 300.f;
-	tempPostion.y += 300.f;
-	_camera.SetPosition(tempPostion);
-	_camera.SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));*/
+	Engine::Math::Vector3 tempPostion = _transform.position;
+	tempPostion.z -= 150.f;
+	tempPostion.y += 50.f;
+	_camera->SetPosition(tempPostion);
+	/*_camera->SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));*/
 }

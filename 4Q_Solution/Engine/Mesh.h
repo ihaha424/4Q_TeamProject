@@ -13,13 +13,16 @@ namespace Engine::Component
         void Finalize() override;
 
     public:
-        void SetRenderLayer(unsigned int layer) const;
+        void SetPostEffectFlag(unsigned int flag);
 		void SetMatrix(Math::Matrix* matrix);
 		void SetFilePath(const std::filesystem::path& filePath);
+        void SetActiveDraw(bool isActive);
+        void SetActiveShadow(bool isActive);
 
     protected:
         std::filesystem::path   _filePath;
         GE::Matrix4x4*          _geMatrix;
         GE::IMeshRenderer*      _geMeshRenderer;
+        GE::MeshDescription     _meshDescription;
     };
 }

@@ -76,5 +76,16 @@ namespace Engine::Physics
 		virtual void CreateStaticBoundBoxActor(
 			IRigidComponent** object,
 			const Engine::Math::Vector3& boxExtents = Engine::Math::Vector3{ 1, 1, 1 }) = 0;
+	
+
+		virtual void CreateControllerManager(
+			IScene* Scene
+		) = 0;
+
+		virtual void CreatePlayerController(
+			IController** object,
+			IScene* Scene,
+			const Engine::Physics::ControllerDesc& desc
+		) = 0;
 	};
 }

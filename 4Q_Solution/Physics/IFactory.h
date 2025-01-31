@@ -122,6 +122,11 @@ namespace PhysicsEngineAPI
 			const Utils::Description::ControllerDesc& desc
 		) = 0;
 
+		virtual bool LoadTriangleMesh(
+			_OUT_ IGeometry** geometry, 
+			const Utils::Description::GeometryDesc& geometryDesc, 
+			const char* filePath
+		) = 0;
 
 	};
 

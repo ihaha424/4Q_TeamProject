@@ -3,6 +3,7 @@
 #include "PhysXSystem.h"
 #include "PhysXElement.h"
 #include "PhysxCollisionEvent.h"
+#include "MeshLoader.h"
 #include <thread>
 
 namespace PhysicsEngineAPI
@@ -791,6 +792,59 @@ namespace PhysicsEngineAPI
 		controller->controller = static_cast<physx::PxCapsuleController*>(character);
 		controller->gravity = Vector3ToPxVec3(_desc.gravity);
 		*object = controller;
+	}
+
+	bool PhysXSystem::LoadTriangleMesh(_OUT_ IGeometry** _geometry, const Utils::Description::GeometryDesc& geometryDesc, const char* filePath)
+	{
+		physx::PxGeometry* geometry = nullptr;
+		Utils::Description::VerticesMeshDesc verticesMeshDesc;
+		std::vector<physx::PxVec3> point;
+		std::vector<physx::PxU32> indices;
+		if (MeshLoader()(verticesMeshDesc, filePath, point, indices))
+			return false;
+
+		verticesMeshDesc.vertices.count = point.size();
+		verticesMeshDesc.vertices.stride = sizeof(physx::PxVec3);
+		verticesMeshDesc.vertices.data = point.data();
+
+		verticesMeshDesc.indices.count = indices.size() / 3;
+		verticesMeshDesc.indices.stride = sizeof(physx::PxU32) * 3;
+		verticesMeshDesc.indices.data = indices.data();
+
+		if (nullptr == verticesMeshDesc.vertices.data || nullptr == verticesMeshDesc.indices.data)
+			return false;
+		physx::PxTriangleMeshDesc description;
+		description.points.count = static_cast<physx::PxU32>(verticesMeshDesc.vertices.count);
+		description.points.stride = verticesMeshDesc.vertices.stride;
+		description.points.data = verticesMeshDesc.vertices.data;
+
+		description.triangles.count = static_cast<physx::PxU32>(verticesMeshDesc.indices.count);
+		description.triangles.stride = verticesMeshDesc.indices.stride;
+		description.triangles.data = verticesMeshDesc.indices.data;
+
+		if (!description.isValid())
+			return false;
+
+		physx::PxTolerancesScale scale;
+		physx::PxCookingParams params(scale);
+		physx::PxDefaultMemoryOutputStream writeBuffer;
+		physx::PxTriangleMeshCookingResult::Enum result;
+		bool status = PxCookTriangleMesh(params, description, writeBuffer, &result);
+
+		physx::PxDefaultMemoryInputData readBuffer(writeBuffer.getData(), writeBuffer.getSize());
+		physx::PxTriangleMesh* triangleMesh = physics->createTriangleMesh(readBuffer);;
+
+		const physx::PxMeshScale MeshScale = physx::PxVec3{ geometryDesc.data.x, geometryDesc.data.y, geometryDesc.data.z };
+		geometry = new physx::PxTriangleMeshGeometry(triangleMesh, MeshScale);
+	
+		if (nullptr == geometry)
+			return false;
+
+		*_geometry = new PhysXGeometry(geometry);
+		if (nullptr == *_geometry)
+			return false;
+		(*_geometry)->SetType(geometryDesc.type);
+		return true;
 	}
 
 	bool PhysXSystem::CreateStaticBoundBoxActor(_OUT_ IObject** object, const Utils::Math::Vector3& boxExtents)

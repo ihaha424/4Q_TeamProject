@@ -194,6 +194,7 @@ xcopy .\PhysXLibrary\$(Configuration)\*.dll $(OutDir) /Y</Command>
     <ClInclude Include="IStaticObject.h" />
     <ClInclude Include="IUpdate.h" />
     <ClInclude Include="IUserData.h" />
+    <ClInclude Include="MeshLoader.h" />
     <ClInclude Include="PhysXActor.h" />
     <ClInclude Include="DataStructure.h" />
     <ClInclude Include="DLLExport.h" />
@@ -235,6 +236,7 @@ xcopy .\PhysXLibrary\$(Configuration)\*.dll $(OutDir) /Y</Command>
     <ClCompile Include="IShape.cpp" />
     <ClCompile Include="IStaticObject.cpp" />
     <ClCompile Include="IUserData.cpp" />
+    <ClCompile Include="MeshLoader.cpp" />
     <ClCompile Include="PhysXActor.cpp" />
     <ClCompile Include="IGeometry.cpp" />
     <ClCompile Include="InterfaceAPI.cpp" />

@@ -121,6 +121,12 @@ namespace Engine::PHI
 		// TODO
 		// TODO
 	}
+
+	void RigidStaticComponent::FixedUpdate() const
+	{
+		collision->FixedUpdate();
+	}
+
 	void RigidStaticComponent::Finalize()
 	{
 		constexpr Utility::SafeRelease releaser;
@@ -129,8 +135,7 @@ namespace Engine::PHI
 		releaser(&shape);
 		releaser(&geometry);
 		releaser(&material);
-		collision->Finalize();
-		delete collision;
+		releaser(&collision);
 	}
 
 	void RigidStaticComponent::BindCollision(const Physics::CallBackTrigger& callback, Physics::TriggerType type)

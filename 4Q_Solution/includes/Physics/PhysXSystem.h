@@ -123,6 +123,12 @@ namespace PhysicsEngineAPI
 			const Utils::Description::ControllerDesc& desc
 		) override;
 
+		bool LoadTriangleMesh(
+			_OUT_ IGeometry** geometry,
+			const Utils::Description::GeometryDesc& geometryDesc,
+			const char* filePath
+		) override;
+
 
 	public:
 		void Release() override;

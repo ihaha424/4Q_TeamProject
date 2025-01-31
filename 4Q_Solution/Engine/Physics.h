@@ -14,6 +14,8 @@
 #include "PhysicsRigidDynamicComponent.h"
 #include "PhysicsRigidKinematicComponent.h"
 
+#include "PhysicsControllerComponent.h"
+
 #include "PhysicsScene.h"
 
 #include "PhysicsFactory.h"

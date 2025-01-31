@@ -15,7 +15,7 @@ namespace PhysicsEngineAPI
 
 	PhysXScene::~PhysXScene() { Release(); }
 
-	void PhysXScene::Release() { SAFE_RELEASE(scene); }
+	void PhysXScene::Release() { SAFE_RELEASE(scene); SAFE_RELEASE(controllerManager); }
 
 	void PhysXScene::ReleaseAdditionalQueryData(Utils::DataStructure::AdditionalQueryData& sweepInfo)
 	{

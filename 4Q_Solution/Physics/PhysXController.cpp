@@ -31,7 +31,7 @@ namespace PhysicsEngineAPI
 	/***********************************
 				Controller
 	************************************/
-	unsigned short PhysXController::Move(Utils::Math::Vector3 _displacement, float minDistance, float deltaTime)
+	unsigned short PhysXController::Move(const Utils::Math::Vector3 _displacement, float minDistance, float deltaTime)
 	{
 		const physx::PxVec3 displacement = Vector3ToPxVec3(_displacement) + gravity;
 
@@ -41,7 +41,7 @@ namespace PhysicsEngineAPI
 		physx::PxU8 flags = controller->move(displacement, minDistance, deltaTime, filters);
 		return flags;
 	}
-	void PhysXController::SetGravity(Utils::Math::Vector3& _gravity)
+	void PhysXController::SetGravity(const Utils::Math::Vector3& _gravity)
 	{
 		gravity = Vector3ToPxVec3(_gravity);
 	}
@@ -49,7 +49,7 @@ namespace PhysicsEngineAPI
 	{
 		return PxVec3ToVector3(gravity);
 	}
-	void PhysXController::SetPosition(Utils::Math::Vector3& position)
+	void PhysXController::SetPosition(const Utils::Math::Vector3& position)
 	{
 		controller->setPosition(Vector3ToPxExtendedVec3(position));
 	}
@@ -57,7 +57,7 @@ namespace PhysicsEngineAPI
 	{
 		return PxExtendedVec3ToVector3(controller->getPosition());
 	}
-	void PhysXController::SetBottomPosition(Utils::Math::Vector3& position)
+	void PhysXController::SetBottomPosition(const Utils::Math::Vector3& position)
 	{
 		controller->setFootPosition(Vector3ToPxExtendedVec3(position));
 	}
@@ -73,7 +73,7 @@ namespace PhysicsEngineAPI
 	{
 		return controller->getStepOffset();
 	}
-	void PhysXController::SetNonWalkSlide(Utils::DataStructure::ControllerSlope mode)
+	void PhysXController::SetNonWalkSlide(const Utils::DataStructure::ControllerSlope mode)
 	{
 		physx::PxControllerNonWalkableMode::Enum flag = static_cast<physx::PxControllerNonWalkableMode::Enum>(mode);
 		controller->setNonWalkableMode(flag);
@@ -91,7 +91,7 @@ namespace PhysicsEngineAPI
 	{
 		return controller->getContactOffset();
 	}
-	void PhysXController::SetUpDirection(Utils::Math::Vector3& direction)
+	void PhysXController::SetUpDirection(const Utils::Math::Vector3& direction)
 	{
 		controller->setUpDirection(Vector3ToPxVec3(direction));
 	}
@@ -146,7 +146,7 @@ namespace PhysicsEngineAPI
 	{
 		return controller->getHeight();
 	}
-	void PhysXController::SetClimbingMode(Utils::DataStructure::CapsuleClimbingMode mode)
+	void PhysXController::SetClimbingMode(const Utils::DataStructure::CapsuleClimbingMode mode)
 	{
 		physx::PxCapsuleClimbingMode::Enum flag = static_cast<physx::PxCapsuleClimbingMode::Enum>(mode);
 		controller->setClimbingMode(flag);

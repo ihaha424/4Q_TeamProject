@@ -24,27 +24,27 @@ namespace PhysicsEngineAPI
 		************************************/
 		// IDynamicObject* GetActor() const override;
 		
-		unsigned short Move(Utils::Math::Vector3 displacement, float minDistance, float deltaTime) override;
+		unsigned short Move(const Utils::Math::Vector3 displacement, float minDistance, float deltaTime) override;
 		
-		void SetGravity(Utils::Math::Vector3& gravity) override;
+		void SetGravity(const Utils::Math::Vector3& gravity) override;
 		const Utils::Math::Vector3& GetGravity() const override;
 
-		void SetPosition(Utils::Math::Vector3& position) override;
+		void SetPosition(const Utils::Math::Vector3& position) override;
 		const Utils::Math::Vector3& GetPosition() const override;
 
-		void SetBottomPosition(Utils::Math::Vector3& position) override;
+		void SetBottomPosition(const Utils::Math::Vector3& position) override;
 		const Utils::Math::Vector3& GetBottomPosition() const override;
 
 		void SetStepOffset(float offset) override;
 		float GetStepOffset() const override;
 
-		void SetNonWalkSlide(Utils::DataStructure::ControllerSlope mode) override;
+		void SetNonWalkSlide(const Utils::DataStructure::ControllerSlope mode) override;
 		Utils::DataStructure::ControllerSlope GetNonWalkSlide() const override;
 
 		void SetContactOffset(float offset) override;
 		float GetContactOffset() const override;
 
-		void SetUpDirection(Utils::Math::Vector3& direction) override;
+		void SetUpDirection(const Utils::Math::Vector3& direction) override;
 		const Utils::Math::Vector3& GetUpdirection() const override;
 
 		void SetSlopeLimit(float limit) override;
@@ -61,7 +61,7 @@ namespace PhysicsEngineAPI
 		float GetRadius() const override;
 		void SetHeight(float offset) override;
 		float GetHeight() const override;
-		void SetClimbingMode(Utils::DataStructure::CapsuleClimbingMode mode) override;
+		void SetClimbingMode(const const Utils::DataStructure::CapsuleClimbingMode mode) override;
 		Utils::DataStructure::CapsuleClimbingMode GetClimbingMode() const override;
 
 	private:

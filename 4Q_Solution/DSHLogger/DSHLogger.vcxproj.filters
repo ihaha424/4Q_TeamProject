@@ -25,6 +25,12 @@
     <Filter Include="System">
       <UniqueIdentifier>{37edb949-4df6-44b8-9cd9-860abc7d5c3a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="interfaces\ISystem">
+      <UniqueIdentifier>{712776a4-b934-483d-969b-902382be846a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interfaces\IStream">
+      <UniqueIdentifier>{38b217ce-db99-4818-baf9-1b5572ca0967}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -51,6 +57,15 @@
     <ClInclude Include="Interfaces.h">
       <Filter>interfaces</Filter>
     </ClInclude>
+    <ClInclude Include="IStream.h">
+      <Filter>interfaces\IStream</Filter>
+    </ClInclude>
+    <ClInclude Include="ISystem.h">
+      <Filter>interfaces\ISystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Declare.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -61,6 +76,12 @@
     </ClCompile>
     <ClCompile Include="Functions.cpp">
       <Filter>Utilities\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="IStream.cpp">
+      <Filter>interfaces\IStream</Filter>
+    </ClCompile>
+    <ClCompile Include="ISystem.cpp">
+      <Filter>interfaces\ISystem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

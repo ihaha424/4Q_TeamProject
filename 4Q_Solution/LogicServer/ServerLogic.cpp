@@ -57,17 +57,17 @@ void ServerLogic::Update()
             continue;
         } // if end
 
-        //Vector3 velocity = _playerSlot[i]._direction * _playerSlot[i]._speed * _timer->GetDeltaTime();
+        //Engine::Math::Vector3 velocity = _playerSlot[i]._direction * _playerSlot[i]._speed * _timer->GetDeltaTime();
         //_playerSlot[i]._position = _playerSlot[i]._position + velocity;
         _playerSlot[i]._controller->Move(
-            _playerSlot[i]._direction * _playerSlot[i]._speed / 5000,
-            0.001f,
+            _playerSlot[i]._direction * _playerSlot[i]._speed / 50000,
+            0.0001f,
             _timer->GetDeltaTime()
         );
 
     } // for end
-    _physicsManager->Update(_timer->GetDeltaTime());
-    _physicsManager->FetchScene();
+    //_physicsManager->Update(_timer->GetDeltaTime());
+    //_physicsManager->FetchScene();
 
     if (elapsedTime >= 0.02f) {
         elapsedTime -= 0.02f;

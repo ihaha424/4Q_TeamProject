@@ -113,6 +113,22 @@ namespace PhysicsEngineAPI
 		) override;
 
 
+		bool CreateControllerManager(
+			_OUT_ IScene* Scene
+		) override;
+
+		bool CreatePlayerController(
+			_OUT_ IController** object,
+			IScene* Scene,
+			const Utils::Description::ControllerDesc& desc
+		) override;
+
+		bool LoadTriangleMesh(
+			_OUT_ IGeometry** geometry,
+			const Utils::Description::GeometryDesc& geometryDesc,
+			const char* filePath
+		) override;
+
 
 	public:
 		void Release() override;

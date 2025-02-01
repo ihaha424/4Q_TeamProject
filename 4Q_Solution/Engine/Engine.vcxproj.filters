@@ -427,6 +427,15 @@
     <Filter Include="Components\FiniteStateMachine">
       <UniqueIdentifier>{30bc3f08-3f30-46b5-985a-2465b38ff14f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Interfaces\Physics\07. Controller">
+      <UniqueIdentifier>{ce39da12-e12a-43ae-90af-dbf005b70f2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\PhysicsEngine\05. Controller">
+      <UniqueIdentifier>{22014c1d-08dd-40f6-a491-6c927e35f6c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\ChractorController">
+      <UniqueIdentifier>{849a9523-2967-4398-97f8-24e524fb9589}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -831,6 +840,18 @@
     <ClInclude Include="State.h">
       <Filter>Components\FiniteStateMachine</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsControllerComponent.h">
+      <Filter>Modules\Interfaces\Physics\07. Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="PHIControllerComponent.h">
+      <Filter>Modules\Difinition\PhysicsEngine\05. Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsChractorControllerExample.h">
+      <Filter>Object\Example</Filter>
+    </ClInclude>
+    <ClInclude Include="ChractorController.h">
+      <Filter>Components\ChractorController</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1163,8 +1184,17 @@
     <ClCompile Include="FiniteStateMachine.cpp">
       <Filter>Components\FiniteStateMachine</Filter>
     </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>Components\FiniteStateMachine</Filter>
+    <ClCompile Include="PhysicsControllerComponent.cpp">
+      <Filter>Modules\Interfaces\Physics\07. Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="PHIControllerComponent.cpp">
+      <Filter>Modules\Difinition\PhysicsEngine\05. Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsChractorControllerExample.cpp">
+      <Filter>Object\Example</Filter>
+    </ClCompile>
+    <ClCompile Include="ChractorController.cpp">
+      <Filter>Components\ChractorController</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

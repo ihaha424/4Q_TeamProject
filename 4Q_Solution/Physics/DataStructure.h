@@ -153,6 +153,54 @@ namespace PhysicsEngineAPI
 				Vector3 position;
 				float	distance;
 			};
+
+			/**
+			 * @brief Where the character hit on a character basis
+			 */
+			enum class ControllerCollisionFlag
+			{
+				None = 0,
+				Sides = (1 << 0),
+				Up = (1 << 1),
+				Down = (1 << 2),
+			};
+
+			/**
+			 * @brief Behaviour when the character meets a slope that can't go up any further
+			 */
+			enum class ControllerSlope
+			{
+				Stop,
+				Slide,
+
+				End
+			};
+
+			/**
+			 * @brief : Controller State
+				
+				Vector3 position						: position
+				unsigned int controllerCollisionFlag	: flag(ControllerCollisionFlag)
+				bool isStandingCCT						: Determine if you are standing on a different CCT
+				bool isStandingObstacle					: Determine if you are standing on a different Obstacle
+				bool isMovingUp							: Is the character moving up
+			 */
+			struct ControllerState
+			{
+				Vector3 position;
+				unsigned int controllerCollisionFlag;
+				bool isStandingCCT;
+				bool isStandingObstacle;
+				bool isMovingUp;
+			};
+
+			enum class CapsuleClimbingMode
+			{
+				Easy,			//!< Standard mode, let the capsule climb over surfaces according to impact normal
+				Constrained,	//!< Constrained mode, try to limit climbing according to the step offset
+			
+				End
+			};
 		}
 	}
 }

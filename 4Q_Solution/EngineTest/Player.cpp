@@ -23,6 +23,7 @@ void Player::Prepare(Engine::Content::Factory::Component* componentFactory)
 	_textRenderer = componentFactory->Clone<Engine::Component::TextRenderer>();
     _sync = componentFactory->Clone<Engine::Component::Synchronize>();
 	_remote = componentFactory->Clone<RemoteMoveComponent>();
+	_chractorController = componentFactory->Clone<Engine::Component::ChractorController>();
 }
 
 void Player::DisposeComponents()
@@ -35,6 +36,7 @@ void Player::DisposeComponents()
     _movement->Dispose();
 	_sync->Dispose();
 	_remote->Dispose();
+	_chractorController->Dispose();
 }
 
 void Player::PreInitialize(const Engine::Modules& modules)
@@ -157,6 +159,12 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	{
 		_camera->Rotate(value);
 	});
+
+	Engine::Physics::ControllerDesc desc;
+	desc.height = 100.f;
+	desc.radius = 20.f;
+	auto PhysicsManager = Engine::Application::GetPhysicsManager();
+	PhysicsManager->CreatePlayerController(&_chractorController->_controller, PhysicsManager->GetScene(0), desc);
 }
 
 void Player::PostInitialize(const Engine::Modules& modules)
@@ -190,6 +198,8 @@ void Player::PostUpdate(const float deltaTime)
 	tempPostion.y += 300.f;
 	_camera->SetPosition(tempPostion);
 	_camera->SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
+
+	_chractorController->_controller->Move({0,1,0}, 0.1, deltaTime);
 }
 
 void Player::PostFixedUpdate()

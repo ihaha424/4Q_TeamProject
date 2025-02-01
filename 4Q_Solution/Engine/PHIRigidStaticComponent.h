@@ -55,6 +55,7 @@ namespace Engine::PHI
 		*********************************/
 		void Initialize() override;
 		void Update(float deltaTime) const override;
+		void FixedUpdate() const override;
 		void Finalize() override;
 
 	protected:

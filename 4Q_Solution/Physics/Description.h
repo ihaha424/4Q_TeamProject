@@ -7,7 +7,7 @@ namespace PhysicsEngineAPI
 		using namespace Utils::DataStructure;
 		namespace Description
 		{
-			EXTERN_C struct PHYSICS_API SceneDesc
+			struct SceneDesc
 			{
 				/**
 				 * @brief	: gravity
@@ -19,13 +19,13 @@ namespace PhysicsEngineAPI
 				unsigned int	CPUDispatcherCount;
 			};
 
-			EXTERN_C struct PHYSICS_API	ObjectDesc
+			struct ObjectDesc
 			{
 
 				
 			};
 
-			EXTERN_C struct PHYSICS_API	GeometryDesc
+			struct GeometryDesc
 			{
 				/**
 				 * @brief	: Geometry's Shape
@@ -37,7 +37,7 @@ namespace PhysicsEngineAPI
 				Vector4	data;
 			};
 
-			EXTERN_C struct PHYSICS_API	MaterialDesc
+			struct MaterialDesc
 			{
 				/**
 				 * @brief	:
@@ -68,7 +68,7 @@ namespace PhysicsEngineAPI
 							verticesMeshDesc.indices.data	= indices.data();
 
 			 */
-			EXTERN_C struct PHYSICS_API	VerticesMeshDesc
+			struct VerticesMeshDesc
 			{
 				struct VerticesDesc
 				{
@@ -84,6 +84,35 @@ namespace PhysicsEngineAPI
 				};
 				VerticesDesc	vertices;
 				IndicesDesc		indices;
+			};
+
+			struct ControllerDesc
+			{
+				Vector3				gravity;
+				Vector3				position;
+				Vector3				upDirection{ 0.f, 1.f,0.f };
+				float				slopeLimit{ 0.707f };
+				float				invisibleWallHeight;
+				float				maxJumpHeight;
+				float				contactOffset{0.1f};
+				float				stepOffset{0.5f};
+				ControllerSlope		slopeMode{ ControllerSlope::Slide };
+				Vector3				material;
+				float				radius;
+				float				height;
+				CapsuleClimbingMode	climbinMode{ CapsuleClimbingMode::Constrained };
+				
+				//	직접 정의
+				//	reportCallback;			
+				//	behaviorCallback;		
+				//	mType;					
+
+				//	기본값
+				//	density;		
+				//	scaleCoeff;				
+				//	volumeGrowth;			
+				//	registerDeletionListener;
+				//	clientID;				
 			};
 		}
 	}

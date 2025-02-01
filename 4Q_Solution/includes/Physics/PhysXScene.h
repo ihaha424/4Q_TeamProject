@@ -56,6 +56,9 @@ namespace PhysicsEngineAPI
 		void Release() override;
 	private:
 		physx::PxScene* scene;
+		physx::PxControllerManager* controllerManager;
+
+		friend class PhysXSystem;
 	};
 }
 

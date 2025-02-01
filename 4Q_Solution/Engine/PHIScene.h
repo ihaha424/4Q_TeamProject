@@ -2,6 +2,10 @@
 
 namespace Engine::PHI
 {
+	class Manager;
+}
+namespace Engine::PHI
+{
 	class Scene final
 		: public Physics::Scene
 	{
@@ -47,27 +51,12 @@ namespace Engine::PHI
 		bool AddActor(Engine::Physics::IRigidStaticComponent* component) override;
 		bool AddActor(Engine::Physics::IRigidDynamicComponent* component) override;
 		bool AddActor(Engine::Physics::IRigidKinematicComponent* component) override;
-		bool AddGeomtry(
-			const std::string& name,
-			const Engine::Physics::GeometryDesc& _geometryDesc,
-			const Engine::Physics::VerticesMeshDesc& _verticesMeshDesc
-		) override;
-
 	private:
-		PhysicsEngineAPI::IGeometry* FindGeometry(
-			const std::string& name,
-			const Engine::Physics::GeometryDesc&			geometryDesc,
-			const Engine::Physics::VerticesMeshDesc&		verticesMeshDesc
-		);
-
-	private:
-		PhysicsEngineAPI::IPhysicsSystem* system;
+		Manager* system;
 		PhysicsEngineAPI::IScene* scene;
 		unsigned int sceneIndex;
 
-		std::map<std::string, PhysicsEngineAPI::IGeometry*> geometryMap;
 		PhysicsEngineAPI::Utils::DataStructure::AdditionalQueryData data;
-
 	private:
 		friend class Manager;
 	};

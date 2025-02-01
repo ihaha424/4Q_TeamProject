@@ -21,11 +21,11 @@ namespace Engine::Component
 	void Rigid::Update(float deltaTime)
 	{
 		Component::Update(deltaTime);
-		static_cast<Engine::Physics::RigidComponent*>(_rigidbody)->Update(deltaTime);
 	}
 	void Rigid::FixedUpdate()
 	{
 		Component::FixedUpdate();
+		static_cast<Engine::Physics::RigidComponent*>(_rigidbody)->FixedUpdate();
 	}
 	void Rigid::Detach()
 	{
@@ -34,5 +34,7 @@ namespace Engine::Component
 	void Rigid::Finalize()
 	{
 		Component::Finalize();
+		static_cast<Engine::Physics::RigidComponent*>(_rigidbody)->Finalize();
+		static_cast<Engine::Physics::RigidComponent*>(_boundBox)->Finalize();
 	}
 }

@@ -75,5 +75,6 @@ namespace PhysicsEngineAPI
 	bool PhysXActor::DetachShape(IShape* _shape)
 	{
 		return function.DetachShape(_shape, actor);
+
 	}
 }

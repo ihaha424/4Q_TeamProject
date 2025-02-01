@@ -32,9 +32,11 @@ void Terrain::PreInitialize(const Engine::Modules& modules)
 	Engine::Transform transform{};
 	PhysicsManager->CreateStatic(&_terrainMesh->_rigidbody, "terrain", { {0.f,0.f,0.f } }, transform);
 	PhysicsManager->GetScene(0)->AddActor(_terrainMesh->_rigidbody);
+	_terrainMesh->_rigidbody->SetTranslate({-100,-100,-100});
 
 	PhysicsManager->CreateStaticBoundBoxActor(&_terrainMesh->_boundBox);
 	PhysicsManager->GetScene(1)->AddActor(_terrainMesh->_boundBox);
+	_terrainMesh->_boundBox->SetTranslate({ -100,-100,-100 });
 }
 
 void Terrain::PostInitialize(const Engine::Modules& modules)

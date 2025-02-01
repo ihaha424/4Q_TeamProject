@@ -50,6 +50,11 @@ void SERVER_API Client::SendUpdate()
 	_mainEntrance->SendUpdate();
 }
 
+void SERVER_API Client::DisconnectWait()
+{
+	_mainEntrance->WaitDisconnect();
+}
+
 bool SERVER_API Client::ConnectToServer()
 {
 	return _mainEntrance->ConnectToServer();

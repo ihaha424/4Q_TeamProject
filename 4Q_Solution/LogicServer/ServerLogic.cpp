@@ -104,6 +104,7 @@ void ServerLogic::MessageDispatch()
 
                 _playerSlot[grantNum]._serialNumber = grantNum + 1;
                 _playerSlot[grantNum]._position = Vector3(0.0f, 0.0f, 0.0f);
+                _playerSlot[grantNum]._sessionId = packet.sessionId;
 
                 printf("[MessageDispatch] Player Enter Accepted. Grant Num : %d\n", grantNum + 1);
 
@@ -122,13 +123,22 @@ void ServerLogic::MessageDispatch()
         } // case end
         case PacketID::Exit:
         {
-            int exitNum = packet._serialNumber - 1;
+            unsigned long long exitSessionId = packet.sessionId;
+            
+            if (exitSessionId == _playerSlot[0]._sessionId) {
+                Server::BroadCast("", (short)PacketID::Exit, 0, _playerSlot[0]._serialNumber);
+                _playerSlot[0]._serialNumber = 0;
+                _playerSlot[0]._position = Vector3(0.0f, 0.0f, 0.0f);
+                _playerSlot[0]._state = 0;
+            }
+            else {
+                Server::BroadCast("", (short)PacketID::Exit, 0, _playerSlot[1]._serialNumber);
+                _playerSlot[1]._serialNumber = 0;
+                _playerSlot[1]._position = Vector3(0.0f, 0.0f, 0.0f);
+                _playerSlot[1]._state = 0;
+            }
+            Server::DeleteSession(packet.sessionId);
 
-            Server::BroadCast("", (short)PacketID::Exit, 0, _playerSlot[exitNum]._serialNumber);
-
-            _playerSlot[exitNum]._serialNumber = 0;
-            _playerSlot[exitNum]._position = Vector3(0.0f, 0.0f, 0.0f);
-            _playerSlot[exitNum]._state = 0;
             break;
         } // case end
         case PacketID::ExitOk:

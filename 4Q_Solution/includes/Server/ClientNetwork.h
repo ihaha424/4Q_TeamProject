@@ -16,7 +16,7 @@ public:
 	bool ConnectToServer();
 	int RecvUpdate();
 	int SendUpdate();
-
+	void WaitDisconnect();
 	// 서버에게서 종료 패킷이 날아오면 호출 해야 합니다.
 	void Finalize();
 

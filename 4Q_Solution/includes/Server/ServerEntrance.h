@@ -20,5 +20,6 @@ namespace Server {
 	bool SERVER_API SwapPacketContainer();
 	void SERVER_API SendUpdate();
 	void SERVER_API BroadCast(std::string msg, short packetId, long dataSize, int serialNum);
+	void SERVER_API DeleteSession(SessionID sid);
 
 }

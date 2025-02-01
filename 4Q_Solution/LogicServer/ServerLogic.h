@@ -1,37 +1,37 @@
 #pragma once
 #include "Server/ServerEntrance.h"
+#include "directxtk/SimpleMath.h"
 #include "DSHTime/Time.h"
+#include "Physics/InterfaceAPI.h"
+#include "../Engine/Math.h"
+#include "../Engine/PhysicsUtils.h"
+#include "../Engine/Physics.h"
+#include "../Engine/Transform.h"
+#include "../Engine/PHIManager.h"
 #include "../Packet/PacketID.h"
 #include "../Packet/ProtoInclude.h"
 
+namespace Engine::Physics {
+	class Manager;
+}
+
 class ServerLogic
 {
-	struct Vector3 {
-		float _x;
-		float _y;
-		float _z;
-		Vector3 operator*(float f) {
-			return Vector3(_x * f, _y * f, _z * f);
-		}
-		Vector3 operator+(Vector3& v) {
-			return Vector3(_x + v._x, _y + v._y, _z + v._z);
-		}
-		bool operator!=(Vector3& v) {
-			return (_x != v._x) || (_y != v._y) || (_z != v._z);
-		}
-	};
-
 	struct Object {
 		int _serialNumber;
-		Vector3 _position;
+		Engine::Math::Vector3 _position;
 		std::string _resourceId;
+
+		Engine::Physics::IRigidDynamicComponent* _rigidBody = nullptr;
+		
 	};
 
 	struct Player : public Object {
-		Vector3 _direction;
+		Engine::Math::Vector3 _direction;
 		int _state;
 		float _speed;
 		unsigned long long _sessionId;
+		Engine::Physics::IController* _controller = nullptr;
 	};
 
 public:
@@ -50,7 +50,7 @@ private:
 	PacketQueue* _messageContainer = nullptr;
 
 	Player _playerSlot[2]{};
-	Vector3 _lastSendPosition[2]{};
+	Engine::Math::Vector3 _lastSendPosition[2]{};
 	Object _objs[3]{};
 	
 	ConnectMsg::EnterAccept _enterAccept;
@@ -71,5 +71,15 @@ private:
 	std::string _msgBuffer = std::string(256, '\0');
 
 	void MessageDispatch();
+
+private:
+	// =============================
+	// Physics Method, Variable Area
+	// =============================
+	Engine::Physics::Manager* _physicsManager = nullptr;
+	Engine::Physics::IScene* _mainScene = nullptr;
+
+	void RegistPhysics(Object& obj);
+	void RegistPlayer(Player& player);
 };
 

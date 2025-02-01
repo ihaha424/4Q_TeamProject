@@ -70,7 +70,7 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	{
 		Engine::Math::Vector3 direction = _movement->GetDirection();
 		if (direction != Engine::Math::Vector3(value)) {
-			//_movement.SetDirection(value);		
+			_movement->SetDirection(value);		
 			
 			
 			_sync->_move.set_x(value.x);
@@ -161,9 +161,10 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	});
 
 	Engine::Physics::ControllerDesc desc;
-	desc.gravity = { 0.f,-9.8f, 0.f };
-	desc.height = 100.f;
-	desc.radius = 20.f;
+	desc.stepOffset = 10;
+	desc.height = 10.f;
+	desc.radius = 2.f;
+	desc.climbinMode = Engine::Physics::CapsuleClimbingMode::Easy;
 	auto PhysicsManager = Engine::Application::GetPhysicsManager();
 	PhysicsManager->CreatePlayerController(&_chractorController->_controller, PhysicsManager->GetScene(0), desc);
 }
@@ -200,7 +201,13 @@ void Player::PostUpdate(const float deltaTime)
 	_camera->SetPosition(tempPostion);
 	_camera->SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
 
-	_chractorController->_controller->Move({0,0,0}, 0.1, deltaTime);
+	auto speed = _movement->GetSpeed();
+	auto dir = _movement->GetDirection();
+	auto translate = speed * dir / 1000.f;
+	if (!(gravityFlag & static_cast<unsigned short>(Engine::Physics::ControllerCollisionFlag::Down)))
+		translate += {0, -0.098f, 0};
+	gravityFlag = _chractorController->_controller->Move(translate, 0.001, 0.02);
+
 }
 
 void Player::PostFixedUpdate()

@@ -38,7 +38,7 @@ namespace Engine::Physics
 			const char* name,
 			const char* filePath
 		) = 0;
-		virtual void CreateStatic(
+		virtual void CreateTriangleStatic(
 			IRigidStaticComponent** destObject,
 			const char* geomtryName,
 			const MaterialDesc& materialDesc,
@@ -51,7 +51,7 @@ namespace Engine::Physics
 	// Engine Interface
 	struct Manager : IManager
 	{
-		virtual void Initialize(PhysicsType physicsType = PhysicsType::Physx) = 0;
+		virtual void Initialize(PhysicsType physicsType = PhysicsType::Physx, float length = 1.f, float speed = 10.f) = 0;
 		virtual void WorldInitialize() = 0;
 		virtual void Update(float deltaTime) = 0;
 		virtual void FetchScene(bool block = true) = 0;

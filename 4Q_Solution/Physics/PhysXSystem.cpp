@@ -85,7 +85,7 @@ namespace PhysicsEngineAPI
 	/**************************************
 		Create Physics System
 	*************************************/
-	bool PhysXSystem::CreatePhysics(bool isVisualDebuger)
+	bool PhysXSystem::CreatePhysics(bool isVisualDebuger, float length, float speed)
 	{
 		if (!CreateFoundation())
 			return false;
@@ -97,14 +97,14 @@ namespace PhysicsEngineAPI
 			DEBUG_MODE
 			(
 				if(isVisualDebuger)
-					physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(), true, pvd);
+					physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(length, speed), true, pvd);
 				else
-					physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(), true);
+					physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(length, speed), true);
 			foundation->setErrorLevel(physx::PxErrorCode::eMASK_ALL);
 			)
 		}
 		else
-			physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(), true);
+			physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(length, speed), true);
 		
 		if (nullptr == physics)
 			return false;

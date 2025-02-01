@@ -15,7 +15,7 @@ namespace PhysicsEngineAPI
 		virtual ~PhysXSystem();
 
 		// Create Physics System
-		bool CreatePhysics(bool isVisualDebuger) override;
+		bool CreatePhysics(bool isVisualDebuger, float length, float speed) override;
 		bool CreateScene(_OUT_ IScene** scene, const Utils::Description::SceneDesc& sceneDescription, const char* name) override;
 		bool CreateObject(_OUT_ IObject** object, const Utils::DataStructure::RigidBodyType& type) override;
 		bool CreateGeometry(_OUT_ IGeometry** geometry, const Utils::Description::GeometryDesc& geometryDesc, const Utils::Description::VerticesMeshDesc verticesMeshDesc) override;

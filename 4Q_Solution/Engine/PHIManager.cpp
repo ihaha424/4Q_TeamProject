@@ -24,14 +24,14 @@ namespace Engine::PHI
 	/********************************
 				  Manager
 	*********************************/
-	void Manager::Initialize(Engine::Physics::PhysicsType physicsType)
+	void Manager::Initialize(Engine::Physics::PhysicsType physicsType, float length, float speed)
 	{
 		constexpr Utility::ThrowIfFailed thrower;
 
 		int typeIndex = static_cast<int>(physicsType);
 		PhysicsEngineAPI::IPhysicsSystem::PhysicsType type = static_cast<PhysicsEngineAPI::IPhysicsSystem::PhysicsType>(typeIndex);
 		thrower(BoolToHRESULT(PhysicsEngineAPI::CreateSystem(&system, PhysicsEngineAPI::IPhysicsSystem::Physx)));
-		thrower(BoolToHRESULT(system->CreatePhysics()));
+		thrower(BoolToHRESULT(system->CreatePhysics(true, length, speed)));
 	}
 
 	void Manager::WorldInitialize()
@@ -520,7 +520,7 @@ namespace Engine::PHI
 
 		return geometry;
 	}
-	void Manager::CreateStatic(
+	void Manager::CreateTriangleStatic(
 		Engine::Physics::IRigidStaticComponent** _destObject, 
 		const char* geomtryName, 
 		const  Engine::Physics::MaterialDesc& _materialDesc, 

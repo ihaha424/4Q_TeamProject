@@ -9,6 +9,7 @@ namespace PhysicsEngineAPI
 		: public IController
 	{
 	public:
+		PhysXController();
 		void SetName(const char* Name) override;
 		const char* GetName() const override;
 
@@ -74,6 +75,8 @@ namespace PhysicsEngineAPI
 				Controller
 		************************************/
 		physx::PxVec3 gravity;
+		physx::PxU8 flags;
+		
 
 		friend class PhysXSystem;
 	};

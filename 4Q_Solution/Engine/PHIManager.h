@@ -11,7 +11,7 @@ namespace Engine::PHI
 		/********************************
 					  Manager
 		*********************************/
-		void Initialize(Engine::Physics::PhysicsType physicsType) override;
+		void Initialize(Engine::Physics::PhysicsType physicsType, float length, float speed) override;
 		void WorldInitialize() override;
 		void Update(float deltaTime) override;
 		void FetchScene(bool block) override;
@@ -68,7 +68,7 @@ namespace Engine::PHI
 			const char* filePath
 		) override;
 
-		void CreateStatic(
+		void CreateTriangleStatic(
 			Engine::Physics::IRigidStaticComponent** destObject, 
 			const char* geomtryName, 
 			const Engine::Physics::MaterialDesc& materialDesc, 

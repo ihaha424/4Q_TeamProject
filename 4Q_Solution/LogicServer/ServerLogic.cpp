@@ -60,7 +60,7 @@ void ServerLogic::Update()
         //Vector3 velocity = _playerSlot[i]._direction * _playerSlot[i]._speed * _timer->GetDeltaTime();
         //_playerSlot[i]._position = _playerSlot[i]._position + velocity;
         _playerSlot[i]._controller->Move(
-            _playerSlot[i]._direction * _playerSlot[i]._speed,
+            _playerSlot[i]._direction * _playerSlot[i]._speed / 5000,
             0.001f,
             _timer->GetDeltaTime()
         );
@@ -155,12 +155,16 @@ void ServerLogic::MessageDispatch()
                 _playerSlot[0]._serialNumber = 0;
                 _playerSlot[0]._position = Engine::Math::Vector3(0.0f, 0.0f, 0.0f);
                 _playerSlot[0]._state = 0;
+                _playerSlot[0]._controller->Finalize();
+                _playerSlot[0]._controller = nullptr;
             }
             else {
                 Server::BroadCast("", (short)PacketID::Exit, 0, _playerSlot[1]._serialNumber);
                 _playerSlot[1]._serialNumber = 0;
                 _playerSlot[1]._position = Engine::Math::Vector3(0.0f, 0.0f, 0.0f);
                 _playerSlot[1]._state = 0;
+                _playerSlot[1]._controller->Finalize();
+                _playerSlot[1]._controller = nullptr;
             }
             Server::DeleteSession(packet.sessionId);
 
@@ -266,5 +270,7 @@ void ServerLogic::RegistPlayer(Player& player)
     Engine::Physics::ControllerDesc cd;
     cd.height = 100.f;
     cd.radius = 20.f;
-    _physicsManager->CreatePlayerController(&player._controller, _mainScene, cd);
+    Engine::Physics::IController* controller = player._controller;
+    _physicsManager->CreatePlayerController(&controller, _mainScene, cd);
+    player._controller = static_cast<Engine::Physics::Controller*>(controller);
 }

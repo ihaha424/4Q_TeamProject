@@ -4,9 +4,9 @@
 #include "DSHTime/Time.h"
 #include "Physics/InterfaceAPI.h"
 #include "../Engine/Math.h"
+#include "../Engine/Transform.h"
 #include "../Engine/PhysicsUtils.h"
 #include "../Engine/Physics.h"
-#include "../Engine/Transform.h"
 #include "../Engine/PHIManager.h"
 #include "../Packet/PacketID.h"
 #include "../Packet/ProtoInclude.h"
@@ -31,7 +31,7 @@ class ServerLogic
 		int _state;
 		float _speed;
 		unsigned long long _sessionId;
-		Engine::Physics::IController* _controller = nullptr;
+		Engine::Physics::Controller* _controller = nullptr;
 	};
 
 public:

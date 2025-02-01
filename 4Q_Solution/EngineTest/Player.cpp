@@ -161,6 +161,7 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	});
 
 	Engine::Physics::ControllerDesc desc;
+	desc.gravity = { 0.f,-9.8f, 0.f };
 	desc.height = 100.f;
 	desc.radius = 20.f;
 	auto PhysicsManager = Engine::Application::GetPhysicsManager();
@@ -199,7 +200,7 @@ void Player::PostUpdate(const float deltaTime)
 	_camera->SetPosition(tempPostion);
 	_camera->SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
 
-	_chractorController->_controller->Move({0,1,0}, 0.1, deltaTime);
+	_chractorController->_controller->Move({0,0,0}, 0.1, deltaTime);
 }
 
 void Player::PostFixedUpdate()

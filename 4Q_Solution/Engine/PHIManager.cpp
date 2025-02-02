@@ -6,6 +6,7 @@
 #include "PHIRigidDynamicComponent.h"
 #include "PHIRigidKinematicComponent.h"
 #include "PHIControllerComponent.h"
+#include "PHICoordinateConvert.h"
 
 namespace Engine::PHI
 {
@@ -95,7 +96,7 @@ namespace Engine::PHI
 		Scene* scene = new Scene();
 
 		PhysicsEngineAPI::Utils::Description::SceneDesc sceneDesc;
-		sceneDesc.gravity = { sceneDescription.gravity.x, sceneDescription.gravity.y, sceneDescription.gravity.z };
+		sceneDesc.gravity = Vector3ToPhysicsVector3(sceneDescription.gravity);
 		sceneDesc.CPUDispatcherCount = sceneDescription.CPUDispatcherCount;
 
 		thrower(BoolToHRESULT(system->CreateScene(&scene->scene, sceneDesc)));
@@ -217,7 +218,7 @@ namespace Engine::PHI
 
 		RigidDynamicComponent* destComponment = new RigidDynamicComponent();
 
-		PhysicsEngineAPI::Utils::Math::Transform transform = { {_transform.position.x, _transform.position.y, _transform.position.z}, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} };
+		PhysicsEngineAPI::Utils::Math::Transform transform = TransformToPhysicsTransform(_transform);
 
 		PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
 		PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc;
@@ -254,7 +255,7 @@ namespace Engine::PHI
 
 		RigidKinematicComponent* destComponment = new RigidKinematicComponent();
 
-		PhysicsEngineAPI::Utils::Math::Transform transform = { {_transform.position.x, _transform.position.y, _transform.position.z}, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} };
+		PhysicsEngineAPI::Utils::Math::Transform transform = TransformToPhysicsTransform(_transform);
 
 		PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
 		PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc;
@@ -291,7 +292,7 @@ namespace Engine::PHI
 
 		RigidStaticComponent* destComponment = new RigidStaticComponent();
 
-		PhysicsEngineAPI::Utils::Math::Transform transform = { {_transform.position.x, _transform.position.y, _transform.position.z}, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} };
+		PhysicsEngineAPI::Utils::Math::Transform transform = TransformToPhysicsTransform(_transform);
 
 		PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
 		PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc;
@@ -328,7 +329,7 @@ namespace Engine::PHI
 
 		RigidStaticComponent* destComponment = new RigidStaticComponent();
 		
-		PhysicsEngineAPI::Utils::Math::Transform transform = { {_transform.position.x, _transform.position.y, _transform.position.z}, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} };
+		PhysicsEngineAPI::Utils::Math::Transform transform = TransformToPhysicsTransform(_transform);
 		
 		const RigidStaticComponent* Componment = static_cast<const RigidStaticComponent*>(_object);
 
@@ -341,7 +342,7 @@ namespace Engine::PHI
 
 		RigidDynamicComponent* destComponment = new RigidDynamicComponent();
 
-		PhysicsEngineAPI::Utils::Math::Transform transform = { {_transform.position.x, _transform.position.y, _transform.position.z}, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} };
+		PhysicsEngineAPI::Utils::Math::Transform transform = TransformToPhysicsTransform(_transform);
 
 		const RigidDynamicComponent* Componment = static_cast<const RigidDynamicComponent*>(_object);
 
@@ -355,7 +356,7 @@ namespace Engine::PHI
 
 		RigidComponent* destComponment = new RigidComponent();
 		
-		PhysicsEngineAPI::Utils::Math::Vector4 plane = { _plane.x, _plane.y, _plane.z, _plane.w};
+		PhysicsEngineAPI::Utils::Math::Vector4 plane = Vector4ToPhysicsVector4(_plane);
 
 		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc;
 		auto& initialMeterialData = _material.data;
@@ -374,8 +375,8 @@ namespace Engine::PHI
 			
 		PhysicsEngineAPI::IMaterial* material = static_cast<PhysicsEngineAPI::IMaterial*>(destComponment->material);
 
-		PhysicsEngineAPI::Utils::Math::Vector3 point = { _point.x, _point.y, _point.z};
-		PhysicsEngineAPI::Utils::Math::Vector3 normal = { _normal.x, _normal.y, _normal.z};
+		PhysicsEngineAPI::Utils::Math::Vector3 point = Vector3ToPhysicsVector3(_point);
+		PhysicsEngineAPI::Utils::Math::Vector3 normal = Vector3ToPhysicsVector3(_normal);
 
 		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc;
 		auto& initialMeterialData = _material.data;
@@ -393,7 +394,7 @@ namespace Engine::PHI
 		RigidComponent* destComponment = new RigidComponent();
 		
 		PhysicsEngineAPI::Utils::Math::Vector3 boxExtents = { _boxExtents.x, _boxExtents.y, _boxExtents.z };
-		PhysicsEngineAPI::Utils::Transform transform = { { _transform.position.x, _transform.position.y, _transform.position.z }, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} };
+		PhysicsEngineAPI::Utils::Transform transform = TransformToPhysicsTransform(_transform);
 		thrower(BoolToHRESULT(system->CreateStaticBoundBoxActor(&destComponment->object, boxExtents, transform)));
 		*object = destComponment;
 	}
@@ -412,9 +413,9 @@ namespace Engine::PHI
 
 		Scene* scene = static_cast<Scene*>(_scene);
 		PhysicsEngineAPI::Utils::Description::ControllerDesc desc;
-		desc.gravity = { _desc.gravity.x,_desc.gravity.y, _desc.gravity.z };
-		desc.position = { _desc.position.x, _desc.position.y, _desc.position.z };
-		desc.upDirection = { _desc.upDirection.x,_desc.upDirection.y, _desc.upDirection.z };
+		desc.gravity = Vector3ToPhysicsVector3(_desc.gravity);
+		desc.position = Vector3ToPhysicsVector3(_desc.position);
+		desc.upDirection = Vector3ToPhysicsVector3(_desc.upDirection);
 		desc.slopeLimit	= _desc.slopeLimit;
 		desc.invisibleWallHeight = _desc.invisibleWallHeight;
 		desc.maxJumpHeight = _desc.maxJumpHeight;
@@ -537,7 +538,7 @@ namespace Engine::PHI
 		RigidStaticComponent* destComponment = new RigidStaticComponent();
 		destComponment->geometry = iter->second;
 
-		PhysicsEngineAPI::Utils::Math::Transform transform = { {_transform.position.x, _transform.position.y, _transform.position.z}, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} };
+		PhysicsEngineAPI::Utils::Math::Transform transform = TransformToPhysicsTransform(_transform);
 
 		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc;
 		auto& initialMeterialData = _materialDesc.data;

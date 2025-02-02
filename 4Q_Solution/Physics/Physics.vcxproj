@@ -209,6 +209,7 @@ xcopy ".\PhysXLibrary\$(Configuration)\*.dll" "$(OutDir)" /Y</Command>
     <ClInclude Include="pch.h" />
     <ClInclude Include="IPhysicsSystem.h" />
     <ClInclude Include="PhysXActorFunction.h" />
+    <ClInclude Include="PhysXBehaviorCallback.h" />
     <ClInclude Include="PhysXCollision.h" />
     <ClInclude Include="PhysxCollisionEvent.h" />
     <ClInclude Include="PhysXController.h" />
@@ -217,6 +218,7 @@ xcopy ".\PhysXLibrary\$(Configuration)\*.dll" "$(OutDir)" /Y</Command>
     <ClInclude Include="PhysXGeometry.h" />
     <ClInclude Include="PhysXKinematicActor.h" />
     <ClInclude Include="PhysXMaterial.h" />
+    <ClInclude Include="PhysXReportCallback.h" />
     <ClInclude Include="PhysXScene.h" />
     <ClInclude Include="PhysXShape.h" />
     <ClInclude Include="PhysXStaticActor.h" />
@@ -251,6 +253,7 @@ xcopy ".\PhysXLibrary\$(Configuration)\*.dll" "$(OutDir)" /Y</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="PhysXActorFunction.cpp" />
+    <ClCompile Include="PhysXBehaviorCallback.cpp" />
     <ClCompile Include="PhysXCollision.cpp" />
     <ClCompile Include="PhysxCollisionEvent.cpp" />
     <ClCompile Include="PhysXController.cpp" />
@@ -258,6 +261,7 @@ xcopy ".\PhysXLibrary\$(Configuration)\*.dll" "$(OutDir)" /Y</Command>
     <ClCompile Include="PhysXGeometry.cpp" />
     <ClCompile Include="PhysXKinematicActor.cpp" />
     <ClCompile Include="PhysXMaterial.cpp" />
+    <ClCompile Include="PhysXReportCallback.cpp" />
     <ClCompile Include="PhysXScene.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="PhysXShape.cpp" />

@@ -186,6 +186,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Application.h" />
     <ClInclude Include="ChractorController.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="PHICoordinateConvert.h" />
     <ClInclude Include="FiniteStateMachine.h" />
     <ClInclude Include="PHICollision.h" />
     <ClInclude Include="PHIControllerComponent.h" />
@@ -329,6 +330,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="ChractorController.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="PHICoordinateConvert.cpp" />
     <ClCompile Include="FiniteStateMachine.cpp" />
     <ClCompile Include="PHICollision.cpp" />
     <ClCompile Include="PHIControllerComponent.cpp" />

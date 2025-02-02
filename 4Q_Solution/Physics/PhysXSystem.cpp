@@ -1,8 +1,6 @@
 #include "pch.h"
-
 #include "PhysXSystem.h"
 #include "PhysXElement.h"
-#include "PhysxCollisionEvent.h"
 #include "MeshLoader.h"
 #include <thread>
 
@@ -759,6 +757,11 @@ namespace PhysicsEngineAPI
 		PhysXScene* Scene = static_cast<PhysXScene*>(_Scene);
 		if (nullptr == Scene->scene)
 			return false;
+
+		std::unique_ptr<PhysXReportCallback> hitReport = std::make_unique<PhysXReportCallback>();
+		std::unique_ptr<PhysXBehaviorCallback> behaviorCallback = std::make_unique<PhysXBehaviorCallback>();
+
+
 		physx::PxCapsuleControllerDesc desc;
 		desc.position = Vector3ToPxExtendedVec3(_desc.position);
 		desc.upDirection = Vector3ToPxVec3(_desc.upDirection);
@@ -770,8 +773,8 @@ namespace PhysicsEngineAPI
 		desc.density = 10.f;
 		desc.scaleCoeff = 0.8f;
 		desc.volumeGrowth = 1.5f;
-		desc.reportCallback = NULL;
-		desc.behaviorCallback = NULL;
+		desc.reportCallback = hitReport.get();
+		desc.behaviorCallback = behaviorCallback.get();
 		desc.nonWalkableMode = static_cast<physx::PxControllerNonWalkableMode::Enum>(_desc.slopeMode);
 		desc.material = physics->createMaterial(_desc.material.value[0], _desc.material.value[1], _desc.material.value[2]);
 		desc.registerDeletionListener = true;
@@ -791,7 +794,10 @@ namespace PhysicsEngineAPI
 			return false;
 		controller->controller = static_cast<physx::PxCapsuleController*>(character);
 		controller->gravity = Vector3ToPxVec3(_desc.gravity);
+		desc.reportCallback->SetUserData();
+		desc.behaviorCallback->SetUserData(); 
 		*object = controller;
+
 	}
 
 	bool PhysXSystem::LoadTriangleMesh(_OUT_ IGeometry** _geometry, const Utils::Description::GeometryDesc& geometryDesc, const char* filePath)

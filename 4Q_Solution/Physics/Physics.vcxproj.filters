@@ -121,6 +121,9 @@
     <Filter Include="Library\2. Utils">
       <UniqueIdentifier>{3d3cc417-2a37-45c5-acac-526896c59d8c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Library\1. System\00. PhysX\006. Controller\CallbackFunction">
+      <UniqueIdentifier>{7cd74ea3-4889-4ea1-b65d-75f242cc3282}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -249,6 +252,12 @@
     <ClInclude Include="MeshLoader.h">
       <Filter>Library\9. MeshLoader</Filter>
     </ClInclude>
+    <ClInclude Include="PhysXBehaviorCallback.h">
+      <Filter>Library\1. System\00. PhysX\006. Controller\CallbackFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysXReportCallback.h">
+      <Filter>Library\1. System\00. PhysX\006. Controller\CallbackFunction</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -349,6 +358,12 @@
     </ClCompile>
     <ClCompile Include="MeshLoader.cpp">
       <Filter>Library\9. MeshLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXBehaviorCallback.cpp">
+      <Filter>Library\1. System\00. PhysX\006. Controller\CallbackFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXReportCallback.cpp">
+      <Filter>Library\1. System\00. PhysX\006. Controller\CallbackFunction</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

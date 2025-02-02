@@ -37,6 +37,16 @@
 #else
 	#define PhysicsDebuger true
 #endif
+
+#define LEFT_HANDED_COORDINATE_SYSTEM
+
+// If you want to left haned coirdinate system, Define This Flag.
+#ifdef LEFT_HANDED_COORDINATE_SYSTEM
+#define AXIS -1
+#else
+#define AXIS 1
+#endif
+
 #include "Physics/InterfaceAPI.h"
 
 

@@ -126,7 +126,8 @@ void Player::PreInitialize(const Engine::Modules& modules)
 		{ 
 			_animator->ChangeAnimation("Wait"); 
 			_movement->SetDirection(Engine::Math::Vector3::Zero);
-
+			desc.reportCallback = NULL;
+			desc.behaviorCallback = NULL;
 			_sync->_stateChange.set_stateinfo(0);
 			_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
 

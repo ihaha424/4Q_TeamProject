@@ -847,9 +847,9 @@ namespace PhysicsEngineAPI
 		return true;
 	}
 
-	bool PhysXSystem::CreateStaticBoundBoxActor(_OUT_ IObject** object, const Utils::Math::Vector3& boxExtents)
+	bool PhysXSystem::CreateStaticBoundBoxActor(_OUT_ IObject** object, const Utils::Math::Vector3& boxExtents, const Utils::Math::Transform& _transform)
 	{
-		physx::PxTransform transform = {0,0,0};
+		physx::PxTransform transform = TransformToPxTransform(_transform);
 		physx::PxMaterial* material = physics->createMaterial(0,0,0);
 		if (nullptr == material)
 			return false;

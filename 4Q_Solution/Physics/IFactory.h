@@ -107,7 +107,9 @@ namespace PhysicsEngineAPI
 		 */
 		virtual bool CreateStaticBoundBoxActor(
 			_OUT_ IObject** object,
-			const Utils::Math::Vector3& boxExtents = Utils::Math::Vector3{1, 1, 1}) = 0;
+			const Utils::Math::Vector3& boxExtents = Utils::Math::Vector3{1, 1, 1},
+			const Utils::Math::Transform& transform = Utils::Math::Transform{}
+		) = 0;
 
 
 

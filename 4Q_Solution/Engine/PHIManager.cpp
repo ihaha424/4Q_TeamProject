@@ -386,15 +386,15 @@ namespace Engine::PHI
 		*object = destComponment;
 	}
 
-	void Manager::CreateStaticBoundBoxActor(Physics::IRigidComponent** object, const Engine::Math::Vector3& _boxExtents)
+	void Manager::CreateStaticBoundBoxActor(Physics::IRigidComponent** object, const Engine::Math::Vector3& _boxExtents, const Engine::Transform& _transform)
 	{
 		constexpr Utility::ThrowIfFailed thrower;
 
 		RigidComponent* destComponment = new RigidComponent();
-
+		
 		PhysicsEngineAPI::Utils::Math::Vector3 boxExtents = { _boxExtents.x, _boxExtents.y, _boxExtents.z };
-
-		thrower(BoolToHRESULT(system->CreateStaticBoundBoxActor(&destComponment->object, boxExtents)));
+		PhysicsEngineAPI::Utils::Transform transform = { { _transform.position.x, _transform.position.y, _transform.position.z }, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} };
+		thrower(BoolToHRESULT(system->CreateStaticBoundBoxActor(&destComponment->object, boxExtents, transform)));
 		*object = destComponment;
 	}
 

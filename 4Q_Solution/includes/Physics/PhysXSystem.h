@@ -24,7 +24,7 @@ namespace PhysicsEngineAPI
 
 		// Camera Scene
 		bool CreateCameraScene(_OUT_ IScene** scene, const Utils::Description::SceneDesc& sceneDescription) override;
-		bool CreateStaticBoundBoxActor(_OUT_ IObject** object, const Utils::Math::Vector3& boxExtents) override;
+		bool CreateStaticBoundBoxActor(_OUT_ IObject** object, const Utils::Math::Vector3& boxExtents, const Utils::Math::Transform& transform) override;
 
 		// Frame Per Physics System
 		void UpdateScene(unsigned int sceneNumber, const float deltaTime) override;

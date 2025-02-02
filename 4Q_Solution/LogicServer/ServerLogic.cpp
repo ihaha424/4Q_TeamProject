@@ -24,6 +24,7 @@ bool ServerLogic::Initialize()
     _physicsManager->CreateScene(&_mainScene, sceneDesc);
     _physicsManager->AttachUpdateScene(_mainScene);
     _physicsManager->CreateControllerManager(_mainScene);
+    RegistGround(_ground);
     //============================
 
     _objs[0]._position = { 100.f, 0.f, 100.f };
@@ -287,6 +288,6 @@ void ServerLogic::RegistGround(Ground& ground)
     Engine::Transform transform{};
     _physicsManager->CreateStatic(&ground._staticRigid, "terrain", { {0.f,0.f,0.f } }, transform);
     _mainScene->AddActor(ground._staticRigid);
-    ground._staticRigid->SetTranslate({ -1000.f, -500.f, 500.f });
+    ground._staticRigid->SetTranslate({ -1000.f, -200.f, -1000.f });
 
 }

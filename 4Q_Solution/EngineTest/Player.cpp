@@ -211,12 +211,13 @@ void Player::PostUpdate(const float deltaTime)
 	_worldMatrix = Engine::Math::Matrix::CreateScale(1.f) * Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
 
 	Engine::Math::Vector3 tempPostion = _transform.position;
+	_chractorController->_controller->SetPosition(_transform.position);
 	tempPostion.z -= 300.f;
 	tempPostion.y += 300.f;
 	_camera->SetPosition(tempPostion);
 	_camera->SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
 
-	_chractorController->_controller->Move({0,0,0}, 0.1, deltaTime);
+	//_chractorController->_controller->Move({0,0,0}, 0.1, deltaTime);
 }
 
 void Player::PostFixedUpdate()

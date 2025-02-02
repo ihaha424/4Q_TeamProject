@@ -57,17 +57,15 @@ void ServerLogic::Update()
             continue;
         } // if end
 
-        //Engine::Math::Vector3 velocity = _playerSlot[i]._direction * _playerSlot[i]._speed * _timer->GetDeltaTime();
-        //_playerSlot[i]._position = _playerSlot[i]._position + velocity;
         _playerSlot[i]._controller->Move(
-            _playerSlot[i]._direction * _playerSlot[i]._speed / 50000,
+            _playerSlot[i]._direction * _playerSlot[i]._speed / 5000,
             0.0001f,
             _timer->GetDeltaTime()
         );
 
     } // for end
-    //_physicsManager->Update(_timer->GetDeltaTime());
-    //_physicsManager->FetchScene();
+    _physicsManager->Update(_timer->GetDeltaTime());
+    _physicsManager->FetchScene();
 
     if (elapsedTime >= 0.02f) {
         elapsedTime -= 0.02f;
@@ -76,12 +74,14 @@ void ServerLogic::Update()
                 continue;
             } // if end
             Engine::Math::Vector3 position = _playerSlot[i]._controller->GetPosition();
+            printf("Player%d Position : (%f, %f, %f)\n", i + 1, position.x, position.y, position.z);
             _moveSync.set_x(position.x);
             _moveSync.set_y(position.y);
             _moveSync.set_z(position.z);
 
             _moveSync.SerializeToString(&_msgBuffer);
             Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), _playerSlot[i]._serialNumber);
+            printf("Player%d ByteSend : %ld\n", i + 1, _moveSync.ByteSizeLong());
         } // for end
     } // if end
 
@@ -191,9 +191,11 @@ void ServerLogic::MessageDispatch()
             if (direction != _playerSlot[serialNum]._direction) {
                 _playerSlot[serialNum]._direction = direction;
 
-                _moveSync.set_x(_playerSlot[serialNum]._position.x);
-                _moveSync.set_y(_playerSlot[serialNum]._position.y);
-                _moveSync.set_z(_playerSlot[serialNum]._position.z);
+                Engine::Math::Vector3 position = _playerSlot[serialNum]._controller->GetPosition();
+                printf("Player%d Position : (%f, %f, %f)\n", serialNum + 1, position.x, position.y, position.z);
+                _moveSync.set_x(position.x);
+                _moveSync.set_y(position.y);
+                _moveSync.set_z(position.z);
 
 
 
@@ -270,7 +272,21 @@ void ServerLogic::RegistPlayer(Player& player)
     Engine::Physics::ControllerDesc cd;
     cd.height = 100.f;
     cd.radius = 20.f;
+    cd.gravity = { 0.f, -0.98f / 1000, 0.f };
     Engine::Physics::IController* controller = player._controller;
     _physicsManager->CreatePlayerController(&controller, _mainScene, cd);
     player._controller = static_cast<Engine::Physics::Controller*>(controller);
+}
+
+void ServerLogic::RegistGround(Ground& ground)
+{
+    Engine::Physics::GeometryDesc geometryDesc;
+    geometryDesc.data = { 1, 1, 1 };
+    _physicsManager->LoadTriangleMesh(geometryDesc, "terrain", "../Resources/Level/Level.fbx");
+
+    Engine::Transform transform{};
+    _physicsManager->CreateStatic(&ground._staticRigid, "terrain", { {0.f,0.f,0.f } }, transform);
+    _mainScene->AddActor(ground._staticRigid);
+    ground._staticRigid->SetTranslate({ -1000.f, -500.f, 500.f });
+
 }

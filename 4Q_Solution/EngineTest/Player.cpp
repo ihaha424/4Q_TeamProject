@@ -127,6 +127,22 @@ void Player::PreInitialize(const Engine::Modules& modules)
 			_animator->ChangeAnimation("Wait"); 
 			_movement->SetDirection(Engine::Math::Vector3::Zero);
 
+			_sync->_move.set_x(0);
+			_sync->_move.set_y(0);
+			_sync->_move.set_z(0);
+			_sync->_move.set_speed(0);
+
+			_sync->_move.SerializeToString(&_sync->_msgBuffer);
+
+			Engine::Application::GetNetworkManager()->SaveSendData(
+				(short)PacketID::Move,
+				_sync->_msgBuffer,
+				_sync->_move.ByteSizeLong(),
+				_sync->GetSerialNumber()
+			);
+
+			_sync->_move.SerializeToString(&_sync->_msgBuffer);
+
 			_sync->_stateChange.set_stateinfo(0);
 			_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
 

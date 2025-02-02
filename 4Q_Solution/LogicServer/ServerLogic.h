@@ -17,6 +17,8 @@ namespace Engine::Physics {
 
 class ServerLogic
 {
+
+
 	struct Object {
 		int _serialNumber;
 		Engine::Math::Vector3 _position;
@@ -24,6 +26,10 @@ class ServerLogic
 
 		Engine::Physics::IRigidDynamicComponent* _rigidBody = nullptr;
 		
+	};
+
+	struct Ground : public Object {
+		Engine::Physics::IRigidStaticComponent* _staticRigid = nullptr;
 	};
 
 	struct Player : public Object {
@@ -52,6 +58,7 @@ private:
 	Player _playerSlot[2]{};
 	Engine::Math::Vector3 _lastSendPosition[2]{};
 	Object _objs[3]{};
+	Ground _ground{};
 	
 	ConnectMsg::EnterAccept _enterAccept;
 	ConnectMsg::SyncPlayer _syncPlayer;
@@ -81,5 +88,6 @@ private:
 
 	void RegistPhysics(Object& obj);
 	void RegistPlayer(Player& player);
+	void RegistGround(Ground& ground);
 };
 

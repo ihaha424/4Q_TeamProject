@@ -28,19 +28,19 @@ void Terrain::PreInitialize(const Engine::Modules& modules)
 	auto PhysicsManager = Engine::Application::GetPhysicsManager();
 	Engine::Physics::GeometryDesc geometryDesc;
 	geometryDesc.data = {1, 1, 1};
-	PhysicsManager->LoadTriangleMesh(geometryDesc, "terrain", "../Resources/Terrain/landscapelowpoly.fbx");
+	PhysicsManager->LoadTriangleMesh(geometryDesc, "terrain", "../Resources/Level/Level.fbx");
 	Engine::Transform transform{};
 	PhysicsManager->CreateStatic(&_terrainMesh->_rigidbody, "terrain", { {0.f,0.f,0.f } }, transform);
 	PhysicsManager->GetScene(0)->AddActor(_terrainMesh->_rigidbody);
-	_terrainMesh->_rigidbody->SetTranslate({-100,-100,-100});
+	_terrainMesh->_rigidbody->SetTranslate({ -1000.f, -500.f, 500.f });
 
 	PhysicsManager->CreateStaticBoundBoxActor(&_terrainMesh->_boundBox);
 	PhysicsManager->GetScene(1)->AddActor(_terrainMesh->_boundBox);
-	_terrainMesh->_boundBox->SetTranslate({ -100,-100,-100 });
+	_terrainMesh->_boundBox->SetTranslate({ -1000.f, -500.f, 500.f });
 }
 
 void Terrain::PostInitialize(const Engine::Modules& modules)
 {
 	Object::PostInitialize(modules);
-	_matrix = Engine::Math::Matrix::CreateTranslation(0.f, 0.f, 100.f);
+	_matrix = Engine::Math::Matrix::CreateTranslation( -1000.f, -500.f, 500.f );
 }

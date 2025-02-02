@@ -126,8 +126,23 @@ void Player::PreInitialize(const Engine::Modules& modules)
 		{ 
 			_animator->ChangeAnimation("Wait"); 
 			_movement->SetDirection(Engine::Math::Vector3::Zero);
-			desc.reportCallback = NULL;
-			desc.behaviorCallback = NULL;
+
+			_sync->_move.set_x(0);
+			_sync->_move.set_y(0);
+			_sync->_move.set_z(0);
+			_sync->_move.set_speed(0);
+
+			_sync->_move.SerializeToString(&_sync->_msgBuffer);
+
+			Engine::Application::GetNetworkManager()->SaveSendData(
+				(short)PacketID::Move,
+				_sync->_msgBuffer,
+				_sync->_move.ByteSizeLong(),
+				_sync->GetSerialNumber()
+			);
+
+			_sync->_move.SerializeToString(&_sync->_msgBuffer);
+
 			_sync->_stateChange.set_stateinfo(0);
 			_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
 
@@ -177,7 +192,7 @@ void Player::PostInitialize(const Engine::Modules& modules)
 	_textRenderer->SetPosition(100, 100.f);
 	_textRenderer->SetText(L"Hello World!");
 	_textRenderer->SetFontColor(1.f, 0.f, 0.f, 1.f);
-
+	_animator->ChangeAnimation("Wait");
 	//_skeltalMesh.SetRenderLayer(0);
 	/*_animator.SetUpSplitBone(2);
 	_animator.SplitBone(0, "Dummy_root");
@@ -197,17 +212,18 @@ void Player::PostUpdate(const float deltaTime)
 	_worldMatrix = Engine::Math::Matrix::CreateScale(1.f) * Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
 
 	Engine::Math::Vector3 tempPostion = _transform.position;
+	_chractorController->_controller->SetPosition(_transform.position);
 	tempPostion.z -= 300.f;
 	tempPostion.y += 300.f;
 	_camera->SetPosition(tempPostion);
 	_camera->SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
 
-	auto speed = _movement->GetSpeed();
-	auto dir = _movement->GetDirection();
-	auto translate = speed * dir / 1000.f;
-	if (!(gravityFlag & static_cast<unsigned short>(Engine::Physics::ControllerCollisionFlag::Down)))
-		translate += {0, -0.098f, 0};
-	gravityFlag = _chractorController->_controller->Move(translate, 0.001, 0.02);
+	// auto speed = _movement->GetSpeed();
+	// auto dir = _movement->GetDirection();
+	// auto translate = speed * dir / 1000.f;
+	// if (!(gravityFlag & static_cast<unsigned short>(Engine::Physics::ControllerCollisionFlag::Down)))
+	// 	translate += {0, -0.098f, 0};
+	// gravityFlag = _chractorController->_controller->Move(translate, 0.001, 0.02);
 
 }
 

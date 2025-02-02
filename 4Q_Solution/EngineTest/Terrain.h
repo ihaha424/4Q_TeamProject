@@ -19,6 +19,6 @@ private:
 	Engine::Math::Matrix _matrix;
 
 	Engine::Component::RigidStatic* _terrainMesh;
-	Engine::Component::RigidStatic* _tempMesh;
+
 };
 

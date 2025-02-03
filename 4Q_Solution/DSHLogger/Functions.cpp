@@ -49,3 +49,24 @@ DSH::Logger::String DSH::Logger::LogLevelToString::operator()(const LogLevel log
 	}
 	return string;
 }
+
+DSH::Logger::RecordDump::RecordDump(std::filesystem::path path, const MINIDUMP_TYPE type) : path(std::move(path)), type(type)
+{
+}
+
+LONG DSH::Logger::RecordDump::operator()(EXCEPTION_POINTERS* exceptionPointers) const
+{
+	const HANDLE fileHandle = CreateFile(path.c_str(), GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+
+	if (fileHandle == INVALID_HANDLE_VALUE) return HRESULT_FROM_WIN32(GetLastError());
+
+	MINIDUMP_EXCEPTION_INFORMATION exceptInfo;
+	exceptInfo.ThreadId = GetCurrentThreadId();
+	exceptInfo.ClientPointers = FALSE;
+	exceptInfo.ExceptionPointers = exceptionPointers;
+
+	const BOOL result = MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), fileHandle, type, exceptionPointers ? &exceptInfo : nullptr, nullptr, nullptr);
+	CloseHandle(fileHandle);
+
+	return result ? EXCEPTION_EXECUTE_HANDLER : HRESULT_FROM_WIN32(GetLastError());
+}

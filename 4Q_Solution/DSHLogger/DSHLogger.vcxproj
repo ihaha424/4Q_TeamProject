@@ -156,6 +156,7 @@
     <ClInclude Include="ConsoleTarget.h" />
     <ClInclude Include="Declare.h" />
     <ClInclude Include="Exports.h" />
+    <ClInclude Include="FileTarget.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Functions.h" />
     <ClInclude Include="Interfaces.h" />
@@ -171,6 +172,7 @@
   <ItemGroup>
     <ClCompile Include="ConsoleTarget.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="FileTarget.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="IStream.cpp" />
     <ClCompile Include="ISystem.cpp" />

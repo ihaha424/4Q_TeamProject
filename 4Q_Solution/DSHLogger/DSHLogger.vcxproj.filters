@@ -40,6 +40,9 @@
     <Filter Include="Targets\Console">
       <UniqueIdentifier>{7689b8d7-f57f-43e4-834b-af90a5551f3f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Targets\FileTarget">
+      <UniqueIdentifier>{6d2e5d25-d335-4578-933c-297e35a5f39e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -84,6 +87,9 @@
     <ClInclude Include="ConsoleTarget.h">
       <Filter>Targets\Console</Filter>
     </ClInclude>
+    <ClInclude Include="FileTarget.h">
+      <Filter>Targets\FileTarget</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -109,6 +115,9 @@
     </ClCompile>
     <ClCompile Include="ConsoleTarget.cpp">
       <Filter>Targets\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="FileTarget.cpp">
+      <Filter>Targets\FileTarget</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

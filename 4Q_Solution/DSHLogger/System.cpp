@@ -2,6 +2,7 @@
 #include "System.h"
 
 #include "ConsoleTarget.h"
+#include "FileTarget.h"
 
 namespace DSH::Time
 {
@@ -59,7 +60,7 @@ void DSH::Logger::System::EnableConsole()
 
 void DSH::Logger::System::EnableFile(std::filesystem::path path)
 {
-	// TODO: Implement
+	_targets.push_back(std::make_unique<Target::FileTarget>(path));
 }
 
 void DSH::Logger::System::SetLeastLogLevel(const LogLevel logLevel)

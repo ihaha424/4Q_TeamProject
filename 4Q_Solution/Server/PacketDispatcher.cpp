@@ -44,6 +44,7 @@ bool PacketDispatcher::SwapRecvPacketContainer()
 
 void PacketDispatcher::SaveSendPacket(std::string data, SessionID sid, short packetId, long dataSize, int serialNum)
 {
+	assert(_saveSendContainer.find(sid) != _saveSendContainer.end());
 	Packet packet;
 	MakePacket(packet, std::forward<std::string>(data), sid, packetId, dataSize, serialNum);
 
@@ -54,6 +55,8 @@ void PacketDispatcher::SaveSendPacket(std::string data, SessionID sid, short pac
 bool PacketDispatcher::SwapSendPacketContainer(SessionID sid)
 {
 	Lock lock(_sendMtx);
+	assert(_sessionSendContainer.find(sid) != _sessionSendContainer.end());
+	assert(_saveSendContainer.find(sid) != _saveSendContainer.end());
 	if (_saveSendContainer[sid].empty()) {
 		return false;
 	}
@@ -70,6 +73,7 @@ PacketQueue* PacketDispatcher::GetMessageContainer()
 
 SendQueue* PacketDispatcher::GetSendMessageContainer(SessionID sid)
 {
+	assert(_sessionSendContainer.find(sid) != _sessionSendContainer.end());
 	return &(_sessionSendContainer[sid]);
 }
 
@@ -78,6 +82,13 @@ void PacketDispatcher::SessionCreated(SessionID sid)
 	Lock lock(_sendMtx);
 	_sessionSendContainer.insert({ sid, SendQueue() });
 	_saveSendContainer.insert({ sid, SendQueue() });
+}
+
+void PacketDispatcher::SessionDeleted(SessionID sid)
+{
+	Lock lock(_sendMtx);
+	_sessionSendContainer.erase(sid);
+	_saveSendContainer.erase(sid);
 }
 
 void PacketDispatcher::SaveBroadCastPacket(std::string data, short packetId, long dataSize, int serialNum)

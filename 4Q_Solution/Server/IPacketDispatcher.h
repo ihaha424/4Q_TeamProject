@@ -45,6 +45,7 @@ public:
 	virtual void SaveBroadCastPacket(std::string data, short packetId, long dataSize, int serialNum) = 0;
 
 	virtual void SessionCreated(SessionID sid) = 0;
+	virtual void SessionDeleted(SessionID sid) = 0;
 
 	virtual void MakePacket(Packet& packet, std::string data, SessionID sid, short packetId, long dataSize, int serialNum) = 0;
 protected:

@@ -6,7 +6,7 @@
 #include "Value.h"
 
 DSH::Input::Device::Mouse::Mouse() :
-	_referenceCount(1), _handle(nullptr)
+	_referenceCount(1), _handle(nullptr), _isCursorLock(false), _screenCenter{}
 {
 }
 
@@ -48,8 +48,9 @@ void DSH::Input::Device::Mouse::Update()
 
 void DSH::Input::Device::Mouse::Reset()
 {
-	std::ranges::for_each(_axes | std::views::values, [](Component::AxisComponent* axis) { axis->Reset(); });
-	std::ranges::for_each(_buttons | std::views::values, [](Component::ButtonComponent* button) { button->Reset(); });
+	if (_isCursorLock) SetCursorToCenter();
+	ResetAxes();
+	ResetButtons();
 }
 
 void DSH::Input::Device::Mouse::SetHandle(const HWND handle)
@@ -100,6 +101,38 @@ DSH::Input::Value DSH::Input::Device::Mouse::GetPosition() const
 	return value;
 }
 
+void DSH::Input::Device::Mouse::ShowCursor()
+{
+	CURSORINFO cursorInfo;
+	::GetCursorInfo(&cursorInfo);
+	if (cursorInfo.flags == NULL) ::ShowCursor(TRUE);
+	
+}
+
+void DSH::Input::Device::Mouse::HideCursor()
+{
+	CURSORINFO cursorInfo;
+	::GetCursorInfo(&cursorInfo);
+	if (cursorInfo.flags == CURSOR_SHOWING)	::ShowCursor(FALSE);
+	
+}
+
+void DSH::Input::Device::Mouse::LockCursor()
+{
+	RECT rect;
+	::GetClientRect(_handle, &rect);
+	_screenCenter.x = (rect.right - rect.left) / 2;
+	_screenCenter.y = (rect.bottom - rect.top) / 2;
+	::ClientToScreen(_handle, &_screenCenter);
+
+	_isCursorLock = true;
+}
+
+void DSH::Input::Device::Mouse::UnlockCursor()
+{
+	_isCursorLock = false;
+}
+
 void DSH::Input::Device::Mouse::UpdateAxes()
 {
 	if (_handle == nullptr) return;
@@ -122,5 +155,20 @@ void DSH::Input::Device::Mouse::UpdateAxes()
 void DSH::Input::Device::Mouse::UpdateButtons()
 {
 	std::ranges::for_each(_buttons, [](const std::pair<const Button, Component::ButtonComponent*>& buttonPair) { buttonPair.second->SetValue(GetAsyncKeyState(static_cast<unsigned char>(buttonPair.first)) & 0x8000); });
+}
+
+void DSH::Input::Device::Mouse::SetCursorToCenter() const
+{
+	SetCursorPos(_screenCenter.x, _screenCenter.y);
+}
+
+void DSH::Input::Device::Mouse::ResetAxes()
+{
+	std::ranges::for_each(_axes | std::views::values, [](Component::AxisComponent* axis) { axis->Reset(); });
+}
+
+void DSH::Input::Device::Mouse::ResetButtons()
+{
+	std::ranges::for_each(_buttons | std::views::values, [](Component::ButtonComponent* button) { button->Reset(); });
 }
 

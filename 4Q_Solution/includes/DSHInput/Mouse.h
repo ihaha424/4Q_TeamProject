@@ -35,9 +35,19 @@ namespace DSH::Input
 
 			[[nodiscard]] Value GetPosition() const override;
 
+			void ShowCursor() override;
+			void HideCursor() override;
+
+			void LockCursor() override;
+			void UnlockCursor() override;
+
 		private:
 			void UpdateAxes();
 			void UpdateButtons();
+			void SetCursorToCenter() const;
+
+			void ResetAxes();
+			void ResetButtons();
 
 			ULONG _referenceCount;
 
@@ -45,6 +55,10 @@ namespace DSH::Input
 
 			std::unordered_map<Axis, Component::AxisComponent*> _axes;
 			std::unordered_map<Button, Component::ButtonComponent*> _buttons;
+
+			bool _isCursorLock;
+
+			POINT _screenCenter;
 		};
 	}
 }

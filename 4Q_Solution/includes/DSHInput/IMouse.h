@@ -51,6 +51,14 @@ namespace DSH::Input
 				_Out_ Component::IAxisComponent** ppComponent) = 0;
 
 			[[nodiscard]] virtual Value STDMETHODCALLTYPE GetPosition() const = 0;
+
+			virtual void STDMETHODCALLTYPE ShowCursor() = 0;
+
+			virtual void STDMETHODCALLTYPE HideCursor() = 0;
+
+			virtual void STDMETHODCALLTYPE LockCursor() = 0;
+
+			virtual void STDMETHODCALLTYPE UnlockCursor() = 0;
 		};
 	}
 }

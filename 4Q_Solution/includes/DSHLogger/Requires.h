@@ -10,6 +10,8 @@
 #include <format>
 #include <vector>
 #include <unordered_map>
+#include <array>
+#include <DbgHelp.h>
 
 #include "Exports.h"
 #include "Declare.h"

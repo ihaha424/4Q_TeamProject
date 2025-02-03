@@ -61,12 +61,11 @@ void ServerLogic::Update()
         //} // if end
         if (_playerSlot[i]._controller == nullptr) {
             continue;
-        }
-        collisionFlg = _playerSlot[i]._controller->Move(
-            _playerSlot[i]._direction * _playerSlot[i]._speed / 5000,
-            0.0001f,
-            _timer->GetDeltaTime()
-        );
+        } // if end
+
+        _playerSlot[i]._controller->SetVelocity(_playerSlot[i]._direction * _playerSlot[i]._speed);
+        _playerSlot[i]._controller->Update(_timer->GetDeltaTime());
+        _playerSlot[i]._flag = _playerSlot[i]._controller->GetCollisionFlag();
 
     } // for end
     _physicsManager->Update(_timer->GetDeltaTime());
@@ -275,7 +274,10 @@ void ServerLogic::RegistPlayer(Player& player)
     Engine::Physics::ControllerDesc cd;
     cd.height = 10.f;
     cd.radius = 2.f;
-    cd.gravity = { 0.f, -0.98f / 100, 0.f };
+    cd.gravity = { 0.f, -9.8f, 0.f };
+    cd.contactOffset = 3.f;
+    cd.stepOffset = 2.f;
+    cd.slopeLimit = 0.5f;
     Engine::Physics::IController* controller = player._controller;
     _physicsManager->CreatePlayerController(&controller, _mainScene, cd);
     player._controller = static_cast<Engine::Physics::Controller*>(controller);
@@ -288,8 +290,8 @@ void ServerLogic::RegistGround(Ground& ground)
     _physicsManager->LoadTriangleMesh(geometryDesc, "terrain", "../Resources/Level/Level.fbx");
 
     Engine::Transform transform{};
-    _physicsManager->CreateStatic(&ground._staticRigid, "terrain", { {0.f,0.f,0.f } }, transform);
+    _physicsManager->CreateTriangleStatic(&ground._staticRigid, "terrain", { {0.f,0.f,0.f } }, transform);
     _mainScene->AddActor(ground._staticRigid);
-    ground._staticRigid->SetTranslate({ -1000.f, -200.f, -1000.f });
+    ground._staticRigid->SetTranslate({ -1000.f, -200.f, 1000.f });
 
 }

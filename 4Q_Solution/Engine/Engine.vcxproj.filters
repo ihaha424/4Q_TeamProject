@@ -436,6 +436,9 @@
     <Filter Include="Components\ChractorController">
       <UniqueIdentifier>{849a9523-2967-4398-97f8-24e524fb9589}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Difinition\PhysicsEngine\99. Utils">
+      <UniqueIdentifier>{fd9e0dec-2f52-44d8-9ead-74ee2af70858}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -852,6 +855,9 @@
     <ClInclude Include="ChractorController.h">
       <Filter>Components\ChractorController</Filter>
     </ClInclude>
+    <ClInclude Include="PHICoordinateConvert.h">
+      <Filter>Modules\Difinition\PhysicsEngine\99. Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1195,6 +1201,9 @@
     </ClCompile>
     <ClCompile Include="ChractorController.cpp">
       <Filter>Components\ChractorController</Filter>
+    </ClCompile>
+    <ClCompile Include="PHICoordinateConvert.cpp">
+      <Filter>Modules\Difinition\PhysicsEngine\99. Utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

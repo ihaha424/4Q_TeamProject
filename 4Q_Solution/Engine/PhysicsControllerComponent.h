@@ -11,6 +11,19 @@ namespace Engine::Physics
 		virtual void	ClearUserData() = 0;
 
 		/***********************************
+				Kinematic Move Setting
+		************************************/
+		virtual void AddForce(const Engine::Math::Vector3& force) = 0;
+		virtual void AddVelocity(const Engine::Math::Vector3& velocity) = 0;
+		virtual void SetVelocity(const Engine::Math::Vector3& velocity) = 0;
+		virtual Engine::Math::Vector3 GetVelocity() = 0;
+		virtual void ClearVelocity() = 0;
+		virtual void SetMass(float mass) = 0;
+		virtual float GetMass() = 0;
+
+
+
+		/***********************************
 					Controller
 		************************************/
 		// return value : Short = Engine::Physics::ControllerCollisionFlag's Combination
@@ -24,6 +37,9 @@ namespace Engine::Physics
 
 		virtual void SetGravity(const Engine::Math::Vector3& gravity) = 0;
 		virtual const Engine::Math::Vector3& GetGravity() const = 0;
+
+		virtual void SetTotalGravity(const Engine::Math::Vector3& gravity) = 0;
+		virtual const Engine::Math::Vector3& GetTotalGravity() const = 0;
 
 		virtual void SetPosition(const Engine::Math::Vector3& position) = 0;
 		virtual const Engine::Math::Vector3& GetPosition() const = 0;
@@ -49,6 +65,7 @@ namespace Engine::Physics
 		virtual void InvalidateCache() = 0;
 
 		virtual void GetState(Engine::Physics::ControllerState& state) const = 0;
+		virtual unsigned short GetCollisionFlag() = 0;
 
 		/***********************************
 				Capsule Controller
@@ -67,8 +84,8 @@ namespace Engine::Physics
 	struct Controller : IController
 	{
 		virtual void Initialize() = 0;
-		virtual void Update(float deltaTime) const = 0;
-		virtual void FixedUpdate() const = 0;
+		virtual void Update(float deltaTime) = 0;
+		virtual void FixedUpdate() = 0;
 		virtual void Finalize() = 0;
 	};
 }

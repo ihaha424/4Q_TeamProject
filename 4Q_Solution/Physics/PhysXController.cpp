@@ -3,6 +3,12 @@
 
 namespace PhysicsEngineAPI
 {
+	PhysXController::PhysXController()
+		: gravity{ 0,0,0 }
+		, flags{ 0 }
+		, controller{ nullptr }
+	{
+	}
 	void PhysXController::SetName(const char* Name)
 	{
 		controller->getActor()->setName(Name);
@@ -33,12 +39,11 @@ namespace PhysicsEngineAPI
 	************************************/
 	unsigned short PhysXController::Move(const Utils::Math::Vector3 _displacement, float minDistance, float deltaTime)
 	{
-		const physx::PxVec3 displacement = Vector3ToPxVec3(_displacement) + gravity;
-
+		physx::PxVec3 displacement = Vector3ToPxVec3(_displacement);
 		const physx::PxControllerFilters filters{};
 		const physx::PxObstacleContext* obstacles = NULL;
-
-		physx::PxU8 flags = controller->move(displacement, minDistance, deltaTime, filters);
+		//controller->invalidateCache();
+		flags = controller->move(displacement, minDistance, deltaTime, filters);
 		return flags;
 	}
 	void PhysXController::SetGravity(const Utils::Math::Vector3& _gravity)

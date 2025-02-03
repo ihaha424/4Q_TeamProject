@@ -45,7 +45,9 @@ void PhysicsSceneExample::PostUpdate(float deltaTime)
 	geometryDesc.data;
 	Engine::Physics::VerticesMeshDesc verticesMeshDesc;
 	Engine::Transform transform; // GetCameraTransform 해서 넣어줘야함
-	cameraScene->Overlap(OverlapInfo, "Camera", geometryDesc, verticesMeshDesc, transform);
+
+	Engine::Application::GetPhysicsManager()->AddGeomtry("Camera", geometryDesc, verticesMeshDesc);
+	cameraScene->Overlap(OverlapInfo, "Camera", transform);
 
 	// 카메라 컬링 된 오브젝트들의 포인터
 	// 현제는 Component::Rigid->_boundBox의 포인터임 일단 Get,Get해서 Object의 포인터는 접근 가능 할 듯

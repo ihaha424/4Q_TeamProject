@@ -38,6 +38,11 @@ namespace Engine::Physics
 			const char* name,
 			const char* filePath
 		) = 0;
+		virtual bool LoadHeightMap(
+			const Engine::Physics::GeometryDesc& geometryDesc,
+			const char* name,
+			const char* filePath
+		) = 0;
 		virtual void CreateTriangleStatic(
 			IRigidStaticComponent** destObject,
 			const char* geomtryName,

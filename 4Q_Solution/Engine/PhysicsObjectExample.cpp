@@ -116,7 +116,8 @@ void PhysicsObjectExample::SceneQueryExample()
 				: 만약 이미 만들어둔 도형이 있으면 이름으로 실행 할 수 있음.
 				geometryDesc, verticesMeshDesc의 경우 이름으로 찾지 못할 경우 정보를 바탕으로 만들어짐.
 		*/
-		PhysicsManager->GetScene(0)->Overlap(OverlapInfo, "Frustum", geometryDesc, verticesMeshDesc, transform);
+		PhysicsManager->AddGeomtry("Frustum", geometryDesc, verticesMeshDesc);
+		PhysicsManager->GetScene(0)->Overlap(OverlapInfo, "Frustum", transform);
 	}
 
 	// Sweep
@@ -143,7 +144,8 @@ void PhysicsObjectExample::SceneQueryExample()
 				: 만약 이미 만들어둔 도형이 있으면 이름으로 실행 할 수 있음.
 				geometryDesc, verticesMeshDesc의 경우 이름으로 찾지 못할 경우 정보를 바탕으로 만들어짐.
 		*/
-		PhysicsManager->GetScene(0)->Sweep(OverlapInfo, "Frustum", geometryDesc, verticesMeshDesc, transform, direction, distance);
+		PhysicsManager->AddGeomtry("Frustum", geometryDesc, verticesMeshDesc);
+		PhysicsManager->GetScene(0)->Sweep(OverlapInfo, "Frustum", transform, direction, distance);
 	}
 	// 도형 추가 옵션
 	{

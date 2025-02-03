@@ -29,14 +29,10 @@ namespace Engine::Physics
 		virtual bool Overlap(
 			QueryData& overlapInfo,
 			const std::string& name,
-			const GeometryDesc&	geometryDesc,
-			const VerticesMeshDesc&	verticesMeshDesc,
 			const Engine::Transform& transform) = 0;
 		virtual bool Sweep(
 			AdditionalQueryData& sweepInfo,
 			const std::string& name,
-			const GeometryDesc& geometryDesc,
-			const VerticesMeshDesc& verticesMeshDesc,
 			const Engine::Transform& transform,
 			const Engine::Math::Vector3& direction,
 			float distance) = 0;

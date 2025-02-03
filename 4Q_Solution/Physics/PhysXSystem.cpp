@@ -203,14 +203,13 @@ namespace PhysicsEngineAPI
 			description.points.data = verticesMeshDesc.vertices.data;
 			description.flags = physx::PxConvexFlag::eCOMPUTE_CONVEX;
 
-			physx::PxTolerancesScale scale;
-			physx::PxCookingParams params(scale);
+			physx::PxCookingParams params(physics->getTolerancesScale());
 			physx::PxDefaultMemoryOutputStream writeBuffer;
 			physx::PxConvexMeshCookingResult::Enum result;
 			bool status = PxCookConvexMesh(params, description, writeBuffer, &result);
 
 			physx::PxDefaultMemoryInputData readBuffer(writeBuffer.getData(), writeBuffer.getSize());
-			physx::PxConvexMesh* convexMesh = physics->createConvexMesh(readBuffer);;
+			physx::PxConvexMesh* convexMesh = physics->createConvexMesh(readBuffer);
 
 			const physx::PxMeshScale MeshScale = physx::PxVec3{ geometryDesc.data.x, geometryDesc.data.y, geometryDesc.data.z };
 			geometry = new physx::PxConvexMeshGeometry(convexMesh, MeshScale);
@@ -231,14 +230,13 @@ namespace PhysicsEngineAPI
 			if (!description.isValid())
 				return false;
 
-			physx::PxTolerancesScale scale;
-			physx::PxCookingParams params(scale);
+			physx::PxCookingParams params(physics->getTolerancesScale());
 			physx::PxDefaultMemoryOutputStream writeBuffer;
 			physx::PxTriangleMeshCookingResult::Enum result;
 			bool status = PxCookTriangleMesh(params, description, writeBuffer, &result);
 
 			physx::PxDefaultMemoryInputData readBuffer(writeBuffer.getData(), writeBuffer.getSize());
-			physx::PxTriangleMesh* triangleMesh = physics->createTriangleMesh(readBuffer);;
+			physx::PxTriangleMesh* triangleMesh = physics->createTriangleMesh(readBuffer);
 			
 			const physx::PxMeshScale MeshScale = physx::PxVec3{ geometryDesc.data.x, geometryDesc.data.y, geometryDesc.data.z };
 			geometry = new physx::PxTriangleMeshGeometry(triangleMesh, MeshScale);
@@ -280,14 +278,13 @@ namespace PhysicsEngineAPI
 			description.points.data		= vertices.data();
 			description.flags = physx::PxConvexFlag::eCOMPUTE_CONVEX;
 
-			physx::PxTolerancesScale scale;
-			physx::PxCookingParams params(scale);
+			physx::PxCookingParams params(physics->getTolerancesScale());
 			physx::PxDefaultMemoryOutputStream writeBuffer;
 			physx::PxConvexMeshCookingResult::Enum result;
 			bool status = PxCookConvexMesh(params, description, writeBuffer, &result);
 
 			physx::PxDefaultMemoryInputData readBuffer(writeBuffer.getData(), writeBuffer.getSize());
-			physx::PxConvexMesh* convexMesh = physics->createConvexMesh(readBuffer);;
+			physx::PxConvexMesh* convexMesh = physics->createConvexMesh(readBuffer);
 
 			const physx::PxMeshScale MeshScale = physx::PxVec3{ 1.f,1.f,1.f };
 			geometry = new physx::PxConvexMeshGeometry(convexMesh, MeshScale);
@@ -793,7 +790,7 @@ namespace PhysicsEngineAPI
 		desc.userData = nullptr;
 		desc.radius = _desc.radius;
 		desc.height = _desc.height;
-		desc.climbingMode = static_cast<physx::PxCapsuleClimbingMode::Enum>(_desc.climbinMode);;
+		desc.climbingMode = static_cast<physx::PxCapsuleClimbingMode::Enum>(_desc.climbinMode);
 		// TODO
 		desc.reportCallback;
 		desc.behaviorCallback;
@@ -842,14 +839,13 @@ namespace PhysicsEngineAPI
 		if (!description.isValid())
 			return false;
 
-		physx::PxTolerancesScale scale;
-		physx::PxCookingParams params(scale);
+		physx::PxCookingParams params(physics->getTolerancesScale());
 		physx::PxDefaultMemoryOutputStream writeBuffer;
 		physx::PxTriangleMeshCookingResult::Enum result;
 		bool status = PxCookTriangleMesh(params, description, writeBuffer, &result);
 
 		physx::PxDefaultMemoryInputData readBuffer(writeBuffer.getData(), writeBuffer.getSize());
-		physx::PxTriangleMesh* triangleMesh = physics->createTriangleMesh(readBuffer);;
+		physx::PxTriangleMesh* triangleMesh = physics->createTriangleMesh(readBuffer);
 
 		const physx::PxMeshScale MeshScale = physx::PxVec3{ geometryDesc.data.x, geometryDesc.data.y, geometryDesc.data.z };
 		geometry = new physx::PxTriangleMeshGeometry(triangleMesh, MeshScale);
@@ -872,15 +868,17 @@ namespace PhysicsEngineAPI
 	{
 		physx::PxGeometry* geometry = nullptr;
 		ImageLoader::Image image;
-		if (!ImageLoader()(image, filePath))
+		if (!ImageLoader()(image, filePath, 1))
 			return false;
 
-		int width = image.width;
-		int height = image.height;
+		int width = image.width < image.height ? image.width : image.height;
+		int height = image.width < image.height ? image.width : image.height;
 		float* heightmap = new float[width * height];
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				heightmap[y * width + x] = (float)image.data[y * width + x] / 255.0f;
+				 // heightmap[y * width + x] = (float)image.data[y * width + x] / 255.0f;
+				 // heightmap[y * width + x] = (float)image.data[y * width + x] / 255.f * 25.f;
+				 heightmap[y * width + x] = (float)image.data[y * width + x];
 			}
 		}
 
@@ -888,16 +886,17 @@ namespace PhysicsEngineAPI
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				physx::PxHeightFieldSample& sample = samples[y * width + x];
-				sample.height = (physx::PxI16)(heightmap[y * width + x] * 0x7fff);
-				sample.materialIndex0 = 0;
-				sample.materialIndex1 = 0;
+				//sample.height = (physx::PxI16)(heightmap[y * width + x] * 0x7fff);
+				sample.materialIndex0 = 0;// physx::PxHeightFieldMaterial::Enum::eHOLE;
+				sample.materialIndex1 = 0;// physx::PxHeightFieldMaterial::Enum::eHOLE;
+				sample.height = heightmap[y * width + x];
 			}
 		}
 
 		physx::PxHeightFieldDesc hfDesc;
 		hfDesc.format = physx::PxHeightFieldFormat::eS16_TM;
-		hfDesc.nbColumns = width;
-		hfDesc.nbRows = height;
+		hfDesc.nbColumns = height;
+		hfDesc.nbRows = width;
 		hfDesc.samples.data = samples;
 		hfDesc.samples.stride = sizeof(physx::PxHeightFieldSample);
 		hfDesc.flags = physx::PxHeightFieldFlags();
@@ -905,13 +904,27 @@ namespace PhysicsEngineAPI
 		if (!hfDesc.isValid())
 			return false;
 
-		physx::PxHeightFieldGeometry* hfGeom = new physx::PxHeightFieldGeometry();
+
+		//physx::PxHeightField* heightField = PxCreateHeightField(hfDesc);
+	
+
+		
+			physx::PxDefaultMemoryOutputStream writeBuffer;
+			bool status = PxCookHeightField(hfDesc, writeBuffer);
+
+			physx::PxDefaultMemoryInputData readBuffer(writeBuffer.getData(), writeBuffer.getSize());
+			physx::PxHeightField* heightField = physics->createHeightField(readBuffer);
+		
+
+
+		physx::PxHeightFieldGeometry* hfGeom = new physx::PxHeightFieldGeometry(heightField, physx::PxMeshGeometryFlags(),15,5,5);
 		if (nullptr == hfGeom)
 			return false;
-		hfGeom->rowScale;
-		hfGeom->columnScale;
-		hfGeom->heightScale;
-		hfGeom->heightField = PxCreateHeightField(hfDesc);
+
+		//hfGeom->rowScale = 1;//(geometryDesc.data.x == 0 ? width : geometryDesc.data.x) / (width - 1);
+		//hfGeom->columnScale = 1;//(geometryDesc.data.y == 0 ? height : geometryDesc.data.y) / (height - 1);
+		//hfGeom->heightScale = 1;//geometryDesc.data.z == 0 ? 100.f : geometryDesc.data.z;
+		//hfGeom->heightField = PxCreateHeightField(hfDesc);
 		delete[] samples;
 
 
@@ -920,9 +933,6 @@ namespace PhysicsEngineAPI
 		if (nullptr == *_geometry)
 			return false;
 		(*_geometry)->SetType(geometryDesc.type);
-		return true;
-
-
 		return true;
 	}
 

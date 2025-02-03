@@ -283,12 +283,17 @@ void ServerLogic::RegistPlayer(Player& player)
 void ServerLogic::RegistGround(Ground& ground)
 {
     Engine::Physics::GeometryDesc geometryDesc;
-    geometryDesc.data = { 1, 1, 1 };
-    _physicsManager->LoadTriangleMesh(geometryDesc, "terrain", "../Resources/Level/Level.fbx");
+    geometryDesc.data = { 10000, 10000, 100 };
+    //_physicsManager->LoadHeightMap(geometryDesc, "terrain", "../Resources/Terrain/landscapeH01.png");
+    //_physicsManager->LoadHeightMap(geometryDesc, "terrain", "../Resources/Terrain/TEST2.png");
+    //_physicsManager->LoadHeightMap(geometryDesc, "terrain", "../Resources/Terrain/landscapeH.png");
+    _physicsManager->LoadHeightMap(geometryDesc, "terrain", "../Resources/Terrain/heightTest.png");
+    //_physicsManager->LoadHeightMap(geometryDesc, "terrain", "../Resources/Terrain/heightTest2.png");
 
     Engine::Transform transform{};
     _physicsManager->CreateTriangleStatic(&ground._staticRigid, "terrain", { {0.f,0.f,0.f } }, transform);
     _mainScene->AddActor(ground._staticRigid);
     ground._staticRigid->SetTranslate({ -1000.f, -200.f, 1000.f });
+    //ground._staticRigid->SetTranslate({ 0.f, 0.f, 0.f });
 
 }

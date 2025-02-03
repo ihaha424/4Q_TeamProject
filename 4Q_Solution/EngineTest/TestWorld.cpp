@@ -61,11 +61,14 @@ void TestWorld::PostFixedUpdate()
 }
 
 void TestWorld::EnterAccept(int num) {
-	
+	_player->SetSerialNumber(num);
 }
 
 void TestWorld::SyncOtherPlayer(int num)
 {
+	if (_player->GetSerialNumber() == num) {
+		return;
+	}
 	_remote = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<RemotePlayer>();
 	_remote->SetSerialNumber(num);
 }

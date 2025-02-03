@@ -141,6 +141,7 @@ void NetworkMain::Disconnect(SessionID sid)
 	// TODO: 여기서 session에 대한 종료를 진행해야 합니다.
 	_pendingDestroySessions.push_back(_sessionMap[sid]);
 	_sessionMap.erase(sid);
+	_sessionProcessCheck.erase(sid);
 }
 
 void NetworkMain::IOWork(HANDLE completionPort)
@@ -158,6 +159,7 @@ void NetworkMain::IOWork(HANDLE completionPort)
 				Lock lock(_sessionMtx);
 				_pendingDestroySessions.push_back(session);
 				_sessionMap.erase(sid);
+				_sessionProcessCheck.erase(sid);
 				printf("[IOWork] Session deleted.\n");
 			} // if end
 		} // if end

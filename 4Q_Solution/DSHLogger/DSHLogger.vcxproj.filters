@@ -25,6 +25,27 @@
     <Filter Include="System">
       <UniqueIdentifier>{37edb949-4df6-44b8-9cd9-860abc7d5c3a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="interfaces\ISystem">
+      <UniqueIdentifier>{712776a4-b934-483d-969b-902382be846a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="interfaces\IStream">
+      <UniqueIdentifier>{38b217ce-db99-4818-baf9-1b5572ca0967}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Targets">
+      <UniqueIdentifier>{6ce19e01-1e4d-4ac7-94c4-3cd71d3d2dce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Targets\Target">
+      <UniqueIdentifier>{f711fad4-1b2c-494b-bab8-c5905e6545e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Targets\Console">
+      <UniqueIdentifier>{7689b8d7-f57f-43e4-834b-af90a5551f3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Targets\FileTarget">
+      <UniqueIdentifier>{6d2e5d25-d335-4578-933c-297e35a5f39e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Stream">
+      <UniqueIdentifier>{e35db8d7-5638-4044-9cc0-91009eb86a5d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -51,6 +72,30 @@
     <ClInclude Include="Interfaces.h">
       <Filter>interfaces</Filter>
     </ClInclude>
+    <ClInclude Include="IStream.h">
+      <Filter>interfaces\IStream</Filter>
+    </ClInclude>
+    <ClInclude Include="ISystem.h">
+      <Filter>interfaces\ISystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Declare.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Target.h">
+      <Filter>Targets\Target</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleTarget.h">
+      <Filter>Targets\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="FileTarget.h">
+      <Filter>Targets\FileTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream.h">
+      <Filter>Stream</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -61,6 +106,27 @@
     </ClCompile>
     <ClCompile Include="Functions.cpp">
       <Filter>Utilities\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="IStream.cpp">
+      <Filter>interfaces\IStream</Filter>
+    </ClCompile>
+    <ClCompile Include="ISystem.cpp">
+      <Filter>interfaces\ISystem</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Target.cpp">
+      <Filter>Targets\Target</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleTarget.cpp">
+      <Filter>Targets\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="FileTarget.cpp">
+      <Filter>Targets\FileTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream.cpp">
+      <Filter>Stream</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

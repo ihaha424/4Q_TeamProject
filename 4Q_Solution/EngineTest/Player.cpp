@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "Player.h"
+
+#include "GameApplication.h"
 #include "NetworkTemp.h"
 
 Player::Player(std::filesystem::path&& meshPath, std::filesystem::path&& fontPath) :
@@ -103,6 +105,9 @@ void Player::PreInitialize(const Engine::Modules& modules)
 		
 	});
 	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) {
+		GameApplication::GetLoggerManager()->Log(Engine::Logger::LogLevel::Debug, std::format(L"x:{0}, y:{1}", value.x, value.y));
+
+		_animator->ChangeAnimation("Run"); 
 
 		_sync->_stateChange.set_stateinfo(1);
 		_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);

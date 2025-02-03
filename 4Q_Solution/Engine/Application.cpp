@@ -4,6 +4,7 @@
 #include "DSHContentManager.h"
 #include "DSHInputManager.h"
 #include "DSHLoadManager.h"
+#include "DSHLoggerManager.h"
 #include "DSHTimeManager.h"
 #include "DSHWindowManager.h"
 #include "GEGraphicsManager.h"
@@ -18,6 +19,7 @@ Engine::Load::Manager* Engine::Application::_loadManager = nullptr;
 Engine::Content::Manager* Engine::Application::_contentManager = nullptr;
 Engine::Network::Manager* Engine::Application::_networkManager = nullptr;
 Engine::Physics::Manager* Engine::Application::_physicsManager = nullptr;
+Engine::Logger::Manager* Engine::Application::_loggerManager = nullptr;
 
 Engine::Application::Application(const HINSTANCE instanceHandle):
 	_instanceHandle(instanceHandle), _size(Math::Size::Zero)
@@ -83,6 +85,7 @@ void Engine::Application::Run(const int showCommand)
 			_graphicsManager->Render();
 			_inputManager->Reset();
 			_networkManager->Send();
+			_loggerManager->Flush();
 		}
 	}
 	_networkManager->Disconnect();
@@ -129,6 +132,11 @@ Engine::Content::IManager* Engine::Application::GetContentManager()
 	return _contentManager;
 }
 
+Engine::Logger::IManager* Engine::Application::GetLoggerManager()
+{
+	return _loggerManager;
+}
+
 void Engine::Application::Register(Content::IManager* contentManager)
 {
 	const auto componentFactory = contentManager->GetComponentFactory();
@@ -150,6 +158,7 @@ void Engine::Application::Register(Content::IManager* contentManager)
 
 void Engine::Application::CreateManagers()
 {
+	CreateLoggerManager(&_loggerManager);
 	CreateTimeManager(&_timeManager);
 	CreateWindowManager(&_windowManager);
 	CreateInputManager(&_inputManager);
@@ -162,6 +171,8 @@ void Engine::Application::CreateManagers()
 
 void Engine::Application::InitializeManagers() const
 {
+	_loggerManager->Initialize(L"Dump.dmp");
+	_loggerManager->EnableConsole();
 	_timeManager->Initialize(0.2f);
 	_windowManager->Initialize(_instanceHandle, _title.c_str(), _size);
 	_inputManager->Initialize(_windowManager->GetHandle());
@@ -190,6 +201,7 @@ void Engine::Application::FinalizeManagers()
     _timeManager->Finalize();
     _networkManager->Finalize();
     _physicsManager->Finalize();
+	_loggerManager->Finalize();
 }
 
 void Engine::Application::DeleteManagers()
@@ -298,5 +310,17 @@ void Engine::Application::CreateContentManager(Content::Manager** contentManager
 		Content::Manager* manager = new DSHContent::Manager();
 		if (manager == nullptr) thrower(E_OUTOFMEMORY);
 		*contentManager = manager;
+	}
+}
+
+void Engine::Application::CreateLoggerManager(Logger::Manager** loggerManager)
+{
+	constexpr Utility::ThrowIfFailed thrower;
+	if (loggerManager == nullptr) thrower(E_INVALIDARG);
+	else
+	{
+		Logger::Manager* manager = new DSHLogger::Manager();
+		if (manager == nullptr) thrower(E_OUTOFMEMORY);
+		*loggerManager = manager;
 	}
 }

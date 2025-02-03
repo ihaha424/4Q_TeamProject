@@ -147,6 +147,7 @@ void Engine::Application::Register(Content::IManager* contentManager)
 	componentFactory->Register<Component::TextRenderer>();
 	componentFactory->Register<Component::SkeletalMesh>();
 	componentFactory->Register<Component::Animator>();
+	componentFactory->Register<Component::SkyBox>();
 	componentFactory->Register<Component::RigidStatic>();
 	componentFactory->Register<Component::RigidDynamic>();
 	componentFactory->Register<Component::RigidKinematic>();

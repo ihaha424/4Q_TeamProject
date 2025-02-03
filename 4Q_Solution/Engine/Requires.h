@@ -29,6 +29,7 @@
 #include "GraphicsEngine/ILight.h"
 #include "GraphicsEngine/IMeshRenderer.h"
 #include "GraphicsEngine/ITextRenderer.h"
+#include "GraphicsEngine/ISkyBoxRenderer.h"
 
 #include "GraphicsEngine/IBloom.h"
 #include "GraphicsEngine/IBlur.h"

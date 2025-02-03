@@ -13,6 +13,7 @@
 #include "SkyBoxRenderer.h"
 #include "VertexShader.h"
 #include "VIBuffer.h"
+#include "ToneMapping.h"
 
 #include "CameraSystem.h"
 #include "LightSystem.h"
@@ -24,8 +25,8 @@ void DX11Renderer::Initialize()
 
 	_matrices.resize(MAX_DRAW_OBJECT);
 	_boneMatrices.resize(MAX_DRAW_OBJECT * MAX_BONE_MATRIX);
-	_directionalLights.resize(4);
-	_pointLights.resize(64);
+	_directionalLights.resize(MAX_DIRECTIONAL_LIGHT);
+	_pointLights.resize(MAX_POINT_LIGHT);
 
 	// Viewport
 	_viewport.MaxDepth = 1.f;
@@ -47,43 +48,13 @@ void DX11Renderer::Initialize()
 	
 	// State
 	InitState();
+
+	// Filters
+	InitFilters();
 }
 
 void DX11Renderer::Render()
-{
-	Camera* pCamera = g_pCameraSystem->GetCurrentCamera();
-
-	XMVECTOR direction = XMVector3Normalize(-Vector3(0.f, 0.f, 1.f));
-	XMVECTOR lightPosition = direction * 5000.f + XMVectorSet(0.f, 5000.f, 0.f, 0.f);
-	XMVECTOR lightTarget = direction;
-	XMVECTOR lightUp = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-
-	XMMATRIX view = XMMatrixLookAtLH(lightPosition, lightTarget, lightUp);
-
-	float viewWidth = SHADOW_WIDTH;
-	float viewHeight = SHADOW_HEIGHT;
-	float nearPlane = 1.f;
-	float farPlane = 10000.0f;
-
-	XMMATRIX proj = XMMatrixOrthographicLH(viewWidth, viewHeight, nearPlane, farPlane);
-	
-	ViewProjection vp
-	{
-		.vp = pCamera->GetViewMatrix() * pCamera->GetProjectionMatrix(),
-		.shadowVP = XMMatrixTranspose(view * proj)
-	};
-
-	CameraDesc cameraDesc
-	{
-		.vpInvers = XMMatrixTranspose(XMMatrixInverse(nullptr, vp.vp)),
-		.cameraPosition = pCamera->GetPosition(),
-	};
-
-	vp.vp = XMMatrixTranspose(vp.vp);
-
-	g_pConstantBuffer->UpdateConstantBuffer(L"ViewProjection", &vp);
-	g_pConstantBuffer->UpdateConstantBuffer(L"CameraDesc", &cameraDesc);
-
+{	
 	const auto& renderData = g_pRenderGroup->GetRenderDatas();
 	
 	std::list<DrawData> alphaMeshes, noneAlphaMeshs;
@@ -92,6 +63,9 @@ void DX11Renderer::Render()
 	unsigned int ID = 0;
 	for (const auto& [component, matrix] : renderData)
 	{
+		if (!component->IsActiveDraw())
+			continue;
+
 		auto& model = component->GetModel();
 		_matrices[ID] = XMMatrixTranspose(*matrix);
 
@@ -108,10 +82,10 @@ void DX11Renderer::Render()
 			continue;
 		}
 
-		const unsigned int mask = component->GetLayer();
+		const unsigned int mask = component->GetPostEffectFlag();
 
 		for (auto& mesh : model->_meshs)
-		{
+		{			
 			if (mesh->_pMaterial->IsAlpha())
 			{
 				alphaMeshes.emplace_back(ID, mask, mesh);
@@ -131,17 +105,23 @@ void DX11Renderer::Render()
 	// meshes[RenderType::NoneAlpha].sort();
 
 	auto& lights = g_pLightSystem->GetLights();
-	unsigned int numLight[2]{};
+	unsigned int numLight[GE::ILight::End]{};
 	
 	for (auto& light : lights)
 	{
 		switch (light->GetType())
 		{
-		case GE::ILight::Type::Directional:
-			_directionalLights[numLight[0]++] = light->_lightData;
+		case GE::ILight::Directional:
+			if (numLight[GE::ILight::Directional] >= MAX_DIRECTIONAL_LIGHT)
+				continue;
+			_directionalLights[numLight[GE::ILight::Directional]++] = light->_lightData;
 			break;
-		case GE::ILight::Type::Point:
-			_pointLights[numLight[1]++] = light->_lightData;
+		case GE::ILight::Point:
+			if (numLight[GE::ILight::Point] >= MAX_POINT_LIGHT)
+				continue;
+			_pointLights[numLight[GE::ILight::Point]++] = light->_lightData;
+			break;
+		case GE::ILight::Spot:
 			break;
 		}
 	}
@@ -162,15 +142,20 @@ void DX11Renderer::Render()
 
 	ShadowPass();
 	
-	_pDeviceContext->PSSetShaderResources(10, 1, &_pShadowSRV);	
+	_pDeviceContext->PSSetShaderResources(10, 1, &_pShadowSRV);
+	for (auto& skyBox : skyBoxes)
+	{
+		skyBox->SetParameter(_pDeviceContext, 11);
+	}
+
 	DeferredPass(noneAlphaMeshs);
 	ForwardPass(alphaMeshes);
 	
 	ID3D11ShaderResourceView* nullSRV = nullptr;
 	_pDeviceContext->PSSetShaderResources(10, 1, &nullSRV);
 	
-	PostProcessing();
 	SkyBoxPass(skyBoxes);
+	PostProcessing();
 }
 
 void DX11Renderer::SetViewport(float width, float height)
@@ -182,6 +167,41 @@ void DX11Renderer::SetViewport(float width, float height)
 
 void DX11Renderer::ShadowPass()
 {
+	Camera* pCamera = g_pCameraSystem->GetCurrentCamera();
+	Light* pMainLight = g_pLightSystem->GetMainLight();
+
+	float dist = 500.f;
+	XMVECTOR direction = XMVector3Normalize(-pMainLight->_lightData.data);
+	XMVECTOR lightPosition = direction * dist + XMVectorSet(0.f, dist, 0.f, 0.f);
+	XMVECTOR lightTarget = direction;
+	XMVECTOR lightUp = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+
+	XMMATRIX view = XMMatrixLookAtLH(lightPosition, lightTarget, lightUp);
+
+	float viewWidth = SHADOW_WIDTH;
+	float viewHeight = SHADOW_HEIGHT;
+	float nearPlane = dist;
+	float farPlane = 10000.0f;
+
+	XMMATRIX proj = XMMatrixPerspectiveFovLH(XM_PIDIV4, 1, nearPlane, farPlane);
+	
+	ViewProjection vp
+	{
+		.vp = pCamera->GetViewMatrix() * pCamera->GetProjectionMatrix(),
+		.shadowVP = XMMatrixTranspose(view * proj)
+	};
+
+	CameraDesc cameraDesc
+	{
+		.vpInvers = XMMatrixTranspose(XMMatrixInverse(nullptr, vp.vp)),
+		.cameraPosition = pCamera->GetPosition(),
+	};
+
+	vp.vp = XMMatrixTranspose(vp.vp);
+
+	g_pConstantBuffer->UpdateConstantBuffer(L"ViewProjection", &vp);
+	g_pConstantBuffer->UpdateConstantBuffer(L"CameraDesc", &cameraDesc);
+
 	SetViewport(SHADOW_WIDTH, SHADOW_HEIGHT);
 	_pDeviceContext->OMSetRenderTargets(0, nullptr, _pShadowDSV);
 	_pDeviceContext->ClearDepthStencilView(_pShadowDSV, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
@@ -194,7 +214,13 @@ void DX11Renderer::ShadowPass()
 	unsigned int ID = 0;
 	for (auto& [component, matrix] : renderDatas)
 	{
+		if (!component->IsActiveShadow())
+			continue;
+
 		auto type = component->GetType();
+		if (type == MeshType::SkyBox)
+			continue;
+
 		if (prevType != type)
 		{
 			_vsShadow[(int)type]->SetVertexShader();
@@ -212,6 +238,9 @@ void DX11Renderer::ShadowPass()
 		}
 	}
 
+	// Directional Pass
+	// Point Pass
+	// Spot Pass
 	_pDeviceContext->OMSetRenderTargets(0, nullptr, nullptr);
 }
 
@@ -256,15 +285,19 @@ void DX11Renderer::ForwardPass(std::list<DrawData>& renderData)
 	_pDeviceContext->OMSetBlendState(_pForwardBlendState, blendFactor, 0xFFFFFFFF);	
 	RenderMesh(renderData, _psForwardLighting);
 
-	_pDeviceContext->OMSetRenderTargets(0, nullptr, nullptr);
+	// _pDeviceContext->OMSetRenderTargets(0, nullptr, nullptr);
 }
 
 void DX11Renderer::SkyBoxPass(std::list<SkyBoxRenderer*>& skyBoxes)
 {
 	_pDeviceContext->RSSetState(_pRSSkyBoxState);
 
+	unsigned int layerMask = 0;
+
 	for (auto& component : skyBoxes)
 	{
+		layerMask = component->GetPostEffectFlag();
+		g_pConstantBuffer->UpdateConstantBuffer(L"LayerMask", &layerMask);
 		component->Render(_pDeviceContext);
 	}
 
@@ -278,16 +311,19 @@ void DX11Renderer::SSAOPass()
 
 void DX11Renderer::PostProcessing()
 {	
+	_pDeviceContext->OMSetRenderTargets(0, nullptr, nullptr);
+
 	auto& [RTVs, SRVs] = g_pViewManagement->GetRenderTargetGroup(L"Blend");
 	auto* pBaseSRV = g_pViewManagement->GetShaderResourceView(L"Base");
 	auto* pLayerMaskSRV = g_pViewManagement->GetShaderResourceView(L"LayerMask");
 	auto* pPostProcessRTV = g_pViewManagement->GetRenderTargetView(L"PostProcess");
-	unsigned int currentIndex = 0;		
 
 	ID3D11ShaderResourceView* pSRV = nullptr;
 	_pDeviceContext->PSSetShaderResources(0, 1, &pBaseSRV);
 	_pDeviceContext->PSSetShaderResources(1, 1, &pLayerMaskSRV);
+	_pDeviceContext->ClearRenderTargetView(pPostProcessRTV, COLOR_ZERO);
 
+	unsigned int currentIndex = 0;
 	auto& filters = g_pPostProcessSystem->GetFilters();
 	for (auto& [mask, filter] : filters)
 	{
@@ -301,20 +337,20 @@ void DX11Renderer::PostProcessing()
 		pSRV = g_pViewManagement->GetShaderResourceView(L"PostProcess");
 	}
 
-	_pDeviceContext->OMSetBlendState(NULL, NULL, 0xFFFFFFF);
+	// _pDeviceContext->OMSetBlendState(NULL, NULL, 0xFFFFFFF);
 
-	// ToneMapping
-	auto* pBackBuffer = g_pGraphicDevice->GetBackBuffer();
+	// Blending
+	ClearBindResource(_pDeviceContext, 2, 2);
+	auto* pPostProcessTarget = g_pViewManagement->GetRenderTargetView(L"PostProcess");
 
-	_pDeviceContext->OMSetRenderTargets(1, &pBackBuffer, nullptr);
-	_pDeviceContext->ClearRenderTargetView(pBackBuffer, COLOR_ZERO);
-	_pDeviceContext->PSSetShaderResources(2, 1, &SRVs[currentIndex]);
-	_psToneMapping->SetPixelShader();
+	_pDeviceContext->OMSetRenderTargets(1, &pPostProcessTarget, nullptr);
+	_pDeviceContext->PSSetShaderResources(2, 1, &pBaseSRV);
+	_pDeviceContext->PSSetShaderResources(3, 1, &SRVs[currentIndex]);
+	_psBlend->SetPixelShader();
 	g_pQuad->Render();
 
-	// Reset
-	ID3D11ShaderResourceView* nullSRVs[2]{ nullptr, };
-	_pDeviceContext->PSSetShaderResources(0, 2, nullSRVs);
+	// ToneMapping
+	_pToneMapping->Render();
 }
 
 void DX11Renderer::BlendPass(ID3D11RenderTargetView* pRTV, ID3D11ShaderResourceView* pSRV)
@@ -422,8 +458,7 @@ void DX11Renderer::InitMRT()
 	g_pViewManagement->AddRenderTargetView(L"Emissive", Vector2(g_width, g_height));
 	g_pViewManagement->AddRenderTargetView(L"ShadowPosition", Vector2(g_width, g_height));
 
-	g_pViewManagement->AddRenderTargetView(L"LayerMask", Vector2(g_width, g_height), DXGI_FORMAT_R32_UINT);
-	g_pViewManagement->AddRenderTargetView(L"PostProcess", Vector2(g_width, g_height));
+	g_pViewManagement->AddRenderTargetView(L"LayerMask", Vector2(g_width, g_height), DXGI_FORMAT_R32_UINT);	
 
 	g_pViewManagement->AddRenderTargetGroup(L"Deferred", L"Diffuse");
 	g_pViewManagement->AddRenderTargetGroup(L"Deferred", L"Normal");
@@ -451,7 +486,6 @@ void DX11Renderer::InitShader()
 	_psDeferredLighting = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/DeferredLightingPS.cso");
 	_psGBuffer = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/GBufferPS.cso");
 	_psBlend = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/BlendPS.cso");
-	_psToneMapping = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/ToneMappingPS.cso");
 }
 
 void DX11Renderer::InitDepthStencil()
@@ -462,15 +496,15 @@ void DX11Renderer::InitDepthStencil()
 		.Height = (unsigned int)g_height,
 		.MipLevels = 1,
 		.ArraySize = 1,
-		.Format = DXGI_FORMAT_D24_UNORM_S8_UINT,
+		.Format = DXGI_FORMAT_R32_TYPELESS,
 		.SampleDesc {.Count = 1 },
 		.Usage = D3D11_USAGE_DEFAULT,
-		.BindFlags = D3D11_BIND_DEPTH_STENCIL,
+		.BindFlags = D3D11_BIND_DEPTH_STENCIL | D3D11_BIND_SHADER_RESOURCE,
 	};
 
 	D3D11_DEPTH_STENCIL_VIEW_DESC dsvDesc
 	{
-		.Format = textureDesc.Format,
+		.Format = DXGI_FORMAT_D32_FLOAT,
 		.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D,
 	};
 	
@@ -478,7 +512,7 @@ void DX11Renderer::InitDepthStencil()
 
 	textureDesc.Width = (unsigned int)SHADOW_WIDTH;
 	textureDesc.Height = (unsigned int)SHADOW_HEIGHT;
-	textureDesc.BindFlags |= D3D11_BIND_SHADER_RESOURCE;
+	//textureDesc.BindFlags |= D3D11_BIND_SHADER_RESOURCE;
 	textureDesc.Format = DXGI_FORMAT_R32_TYPELESS;
 	dsvDesc.Format = DXGI_FORMAT_D32_FLOAT;
 
@@ -494,9 +528,12 @@ void DX11Renderer::InitStructuredBuffer()
 {
 	g_pStructuredBuffer->AddStructuredBuffer(L"WorldMatrices", sizeof(XMMATRIX) * MAX_DRAW_OBJECT, MAX_DRAW_OBJECT);
 	g_pStructuredBuffer->AddStructuredBuffer(L"BoneMatrices", sizeof(XMMATRIX) * MAX_DRAW_OBJECT * MAX_BONE_MATRIX, MAX_DRAW_OBJECT * MAX_BONE_MATRIX);
+}
 
-	//const unsigned int maxLayer = g_pRenderGroup->GetMaxLayer();
-	//g_pStructuredBuffer->AddStructuredBuffer(L"Layers", unsigned int(g_width * g_height * sizeof(float) * maxLayer), maxLayer);
+void DX11Renderer::InitFilters()
+{
+	_pToneMapping = new ToneMapping;
+	_pToneMapping->Initialize();
 }
 
 void DX11Renderer::Free()
@@ -504,4 +541,5 @@ void DX11Renderer::Free()
 	SafeRelease(_pRSSkyBoxState);
 	SafeRelease(_pDeferredBlendState);
 	SafeRelease(_pForwardBlendState);
+	SafeRelease(_pToneMapping);
 }

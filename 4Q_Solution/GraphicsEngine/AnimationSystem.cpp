@@ -36,7 +36,7 @@ void AnimationSystem::Update(const float deltaTime)
 void AnimationSystem::CreateAnimator(GE::IMeshRenderer* pMeshRenderer, GE::IAnimator** ppOutAnimator)
 {
 	SkeletalMeshRenderer* pSkeletalMeshRenderer = static_cast<SkeletalMeshRenderer*>(pMeshRenderer);
-	ASSERT(MeshType::Skeletal == pSkeletalMeshRenderer->GetType(), L"SkeletalMeshRenderer가 아닙니다.");
+	ASSERT(MeshType::Skeletal == pSkeletalMeshRenderer->GetType(), L"Not a SkeletalMeshRenderer");
 	(*ppOutAnimator) = pSkeletalMeshRenderer->GetAnimator();
 }
 
@@ -47,7 +47,7 @@ void AnimationSystem::RegisterAnimator(GE::IAnimator* pAnimator)
 
 	if (std::ranges::any_of(_components, compare))
 	{
-		ASSERT(false, L"이미 등록된 Animator 입니다.");
+		ASSERT(false, L"Already registered Animator.");
 		return;
 	}
 

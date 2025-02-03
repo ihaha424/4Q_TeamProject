@@ -77,7 +77,7 @@ HRESULT PixelShader::LoadResource(const std::filesystem::path& filePath)
 		switch (inputBindDesc.Type)
 		{
 		case D3D_SIT_TEXTURE:
-			if (100 <= inputBindDesc.BindPoint)
+			if (10 <= inputBindDesc.BindPoint)
 				continue;
 
 			if (resourceName.find("diff") != std::string::npos)

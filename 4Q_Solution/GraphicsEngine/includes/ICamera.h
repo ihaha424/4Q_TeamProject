@@ -14,6 +14,7 @@ namespace GE
 		ICamera& operator=(ICamera&&) = delete;
 
 	public:
+		virtual Matrix4x4 GetCameraMatrix() const = 0;
 		virtual void SetPerspective(float nearZ, float farZ, float aspect, float fov) = 0;
 		virtual void SetOrthoGraphic(float nearZ, float farZ, float width, float height) = 0;
 		virtual void SetPosition(float x, float y, float z) = 0;

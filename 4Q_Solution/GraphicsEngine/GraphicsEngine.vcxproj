@@ -230,6 +230,7 @@
     <ClInclude Include="DX11Renderer.h" />
     <ClInclude Include="SkyBoxRenderer.h" />
     <ClInclude Include="StructuredBuffer.h" />
+    <ClInclude Include="ToneMapping.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="ViewManagement.h" />
     <ClInclude Include="SkeletalMesh.h" />
@@ -278,6 +279,7 @@
     <ClCompile Include="DX11Renderer.cpp" />
     <ClCompile Include="SkyBoxRenderer.cpp" />
     <ClCompile Include="StructuredBuffer.cpp" />
+    <ClCompile Include="ToneMapping.cpp" />
     <ClCompile Include="ViewManagement.cpp" />
     <ClCompile Include="StaticMeshRenderer.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -389,6 +391,7 @@
     </FxCompile>
     <FxCompile Include="..\Shaders\ToneMappingPS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

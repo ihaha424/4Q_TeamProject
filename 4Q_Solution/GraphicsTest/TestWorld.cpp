@@ -1,12 +1,12 @@
 #include "pch.h"
 #include "TestWorld.h"
 
-
 void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 {
 	_player = objectFactory->Clone<Player>();
 	_light = objectFactory->Clone<GlobalLight>();
 	_terrain = objectFactory->Clone<Terrain>();
+	_skyBox = objectFactory->Clone<SkyBox>();
 }
 
 void TestWorld::PreInitialize(const Engine::Modules& modules)

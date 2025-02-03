@@ -294,6 +294,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="PhysicsScene.h" />
     <ClInclude Include="ServerNetworkManager.h" />
     <ClInclude Include="SkeletalMesh.h" />
+    <ClInclude Include="SkyBox.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StaticMesh.h" />
     <ClInclude Include="SwizzleAxis.h" />
@@ -426,6 +427,8 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="PhysicsScene.cpp" />
     <ClCompile Include="ServerNetworkManager.cpp" />
     <ClCompile Include="SkeletalMesh.cpp" />
+    <ClCompile Include="SkyBox.cpp" />
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="StaticMesh.cpp" />
     <ClCompile Include="SwizzleAxis.cpp" />
     <ClCompile Include="pch.cpp">

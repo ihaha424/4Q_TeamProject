@@ -18,7 +18,7 @@ namespace GE
 	struct MESH_RENDERER_DESC
 	{
 		const wchar_t*	filePath;
-		enum class Type { Static, Skeletal };
+		enum class Type { Static, Skeletal, SkyBox };
 		Type			type;
 	};
 

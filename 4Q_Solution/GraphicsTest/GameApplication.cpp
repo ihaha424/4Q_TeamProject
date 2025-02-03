@@ -26,9 +26,10 @@ void GameApplication::Register(Engine::Content::IManager* contentManager)
 	worldFactory->Register<TestWorld>();
 
 	const auto objectFactory = contentManager->GetObjectFactory();
-	objectFactory->Register<Player>(L"../Resources/Test/ray.fbx", L"../Resources/Font/Gungseo12.sfont");	
+	objectFactory->Register<Player>(L"../Resources/Test/live_test.fbx", L"../Resources/Font/Gungseo12.sfont");	
 	objectFactory->Register<GlobalLight>();
-	objectFactory->Register<Terrain>(L"../Resources/Level/Level.fbx");	
+	objectFactory->Register<Terrain>(L"../Resources/Level/Level.fbx");
+	objectFactory->Register<SkyBox>(L"../Resources/IBL/skybox.fbx");
 }
 
 void GameApplication::PrepareInitialWorld(Engine::Content::Factory::World* worldFactory)
@@ -82,11 +83,13 @@ void GameApplication::DeclareCameraAction(Engine::Input::IManager* inputManager,
 {
 	Engine::Input::Modifier::INegative* negative = nullptr;
 	Engine::Input::Modifier::ISwizzleAxis* swizzleAxis = nullptr;
-	inputManager->GetModifier(&negative);
-	inputManager->GetModifier(Engine::Input::Modifier::ISwizzleAxis::Type::YXZ, &swizzleAxis);
-
+	
 	Engine::Input::IAction* action = nullptr;
 	mappingContext->GetAction(L"Camera", &action);
+
+	/*inputManager->GetModifier(&negative);
+	inputManager->GetModifier(Engine::Input::Modifier::ISwizzleAxis::Type::YXZ, &swizzleAxis);
+
 
 	Engine::Input::Device::IMouse* mouse = nullptr;
 	inputManager->GetDevice(&mouse);
@@ -103,5 +106,41 @@ void GameApplication::DeclareCameraAction(Engine::Input::IManager* inputManager,
 	Engine::Input::Trigger::IDown* yTrigger = nullptr;
 	action->GetTrigger(&yTrigger);
 	yTrigger->AddModifier(swizzleAxis);
-	yTrigger->SetComponent(yAxis);
+	yTrigger->SetComponent(yAxis);*/
+
+
+	inputManager->GetModifier(&negative);
+	inputManager->GetModifier(Engine::Input::Modifier::ISwizzleAxis::Type::YXZ, &swizzleAxis);
+
+	Engine::Input::Device::IKeyboard* keyboard = nullptr;
+	inputManager->GetDevice(&keyboard);
+
+	Engine::Input::Trigger::IDown* leftTrigger = nullptr;
+	action->GetTrigger(&leftTrigger);
+	Engine::Input::Component::IButtonComponent* left = nullptr;
+	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::A, &left);
+	leftTrigger->AddModifier(negative);
+	leftTrigger->AddModifier(swizzleAxis);
+	leftTrigger->SetComponent(left);
+
+	Engine::Input::Trigger::IDown* rightTrigger = nullptr;
+	action->GetTrigger(&rightTrigger);
+	Engine::Input::Component::IButtonComponent* right = nullptr;
+	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::D, &right);
+	rightTrigger->AddModifier(swizzleAxis);
+	rightTrigger->SetComponent(right);
+
+	Engine::Input::Trigger::IDown* upTrigger = nullptr;
+	action->GetTrigger(&upTrigger);
+	Engine::Input::Component::IButtonComponent* up = nullptr;
+	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::W, &up);
+	upTrigger->AddModifier(negative);
+	upTrigger->SetComponent(up);
+
+	Engine::Input::Trigger::IDown* downTrigger = nullptr;
+	action->GetTrigger(&downTrigger);
+	Engine::Input::Component::IButtonComponent* down = nullptr;
+	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::S, &down);
+	//downTrigger->AddModifier(swizzleAxis);
+	downTrigger->SetComponent(down);
 }

@@ -152,7 +152,7 @@ void Animator::SplitBone(const unsigned int ID, const char* boneName)
 {
 	if (_maxSplit <= ID)
 	{
-		ASSERT(false, L"설정한 값보다 더 큽니다.");
+		ASSERT(false, L"Greater than the number of bones you set.");
 		return;
 	}
 

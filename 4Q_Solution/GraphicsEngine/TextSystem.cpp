@@ -23,7 +23,7 @@ void TextSystem::RegisterFont(const wchar_t* filePath)
 
 	if (nullptr == pFont)
 	{
-		ASSERT(false, L"해당 Font를 로드할 수 없습니다.");
+		ASSERT(false, L"The font could not be found by that path.");
 		return;
 	}
 
@@ -42,7 +42,7 @@ void TextSystem::RegisterRenderQueue(GE::ITextRenderer* pTextRenderer)
 
 	if (std::ranges::any_of(_components, compare))
 	{
-		ASSERT(false, L"이미 등록된 TextRenderer 입니다.");
+		ASSERT(false, L"Already registered TextRenderer.");
 		return;
 	}
 

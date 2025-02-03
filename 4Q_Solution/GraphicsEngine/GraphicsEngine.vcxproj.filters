@@ -148,6 +148,9 @@
     <Filter Include="08. DX11\PostProcess\SSAO">
       <UniqueIdentifier>{94a2fc78-d00d-401f-ae87-2b2b1c3ff935}</UniqueIdentifier>
     </Filter>
+    <Filter Include="08. DX11\PostProcess\ToneMapping">
+      <UniqueIdentifier>{5a6cd6fd-84e0-4c9a-a3ff-3c0d8972d573}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -354,6 +357,9 @@
     <ClInclude Include="SSAO.h">
       <Filter>08. DX11\PostProcess\SSAO</Filter>
     </ClInclude>
+    <ClInclude Include="ToneMapping.h">
+      <Filter>08. DX11\PostProcess\ToneMapping</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp">
@@ -478,6 +484,9 @@
     </ClCompile>
     <ClCompile Include="SSAO.cpp">
       <Filter>08. DX11\PostProcess\SSAO</Filter>
+    </ClCompile>
+    <ClCompile Include="ToneMapping.cpp">
+      <Filter>08. DX11\PostProcess\ToneMapping</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -885,6 +885,9 @@
     <ClInclude Include="LogLevel.h">
       <Filter>Modules\Interfaces\Logger\LogLevel</Filter>
     </ClInclude>
+    <ClInclude Include="SkyBox.h">
+      <Filter>Components\Mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1240,6 +1243,9 @@
     </ClCompile>
     <ClCompile Include="LogLevel.cpp">
       <Filter>Modules\Interfaces\Logger\LogLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyBox.cpp">
+      <Filter>Components\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

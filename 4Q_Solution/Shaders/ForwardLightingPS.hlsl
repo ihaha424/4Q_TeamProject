@@ -107,11 +107,10 @@ PS_OUTPUT main(PS_INPUT input)
     if (length(opacity))
         color.a = opacity.a;
     else
-        color.a = 1.f;
-    
+        color.a = 1.f;    
     
     color.rgb = LinearToGammaSpace(color.rgb);
-    
+    color.rgb += RimLight(N, V);
     float4 emissive = txEmissive.Sample(samLinear_wrap, input.uv);
     color += emissive;
     

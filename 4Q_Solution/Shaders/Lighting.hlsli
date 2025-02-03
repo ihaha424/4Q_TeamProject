@@ -120,4 +120,13 @@ inline float3 AmbientLightIBL(float3 albedo, float3 N, float3 V, float metalness
     
     return (diffuseIBL + specularIBL) * 0.5f;
 }
+
+inline float3 RimLight(float3 N, float3 V)
+{
+    float rim = 1.0 - dot(N, V);
+    rim = pow(rim, 1.5);
+
+    return float3(0.0, 0.5, 1.0) * rim;
+}
+
 #endif

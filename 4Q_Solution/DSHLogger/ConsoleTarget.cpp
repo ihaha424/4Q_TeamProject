@@ -4,6 +4,8 @@
 DSH::Logger::Target::ConsoleTarget::ConsoleTarget()
 {
 	AllocConsole();
+	FILE* traceConsoleStream;
+	freopen_s(&traceConsoleStream, "CONOUT$", "w", stdout);
 }
 
 DSH::Logger::Target::ConsoleTarget::~ConsoleTarget()

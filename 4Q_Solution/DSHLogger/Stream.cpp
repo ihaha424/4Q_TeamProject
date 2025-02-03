@@ -7,11 +7,12 @@
 DSH::Logger::Stream::Stream(const std::vector<Target::Target*>* targets,
                             const LogLevel* leastLogLevel, const std::unordered_map<LogLevel, bool>* loggableMap) :
 	_referenceCount(1),
-	_logLevel(),
+	_logLevel(LogLevel::Trace),
 	_bufferIndex(0),
-	_currentBuffer(nullptr),
+	_currentBuffer(&_buffers[_bufferIndex]),
 	_targets(targets), _leastLogLevel(leastLogLevel), _loggableMap(loggableMap)
 {
+	std::ranges::for_each(_buffers, [](auto& buffer) {buffer.str().reserve(1_GB); });
 }
 
 HRESULT DSH::Logger::Stream::QueryInterface(const IID& riid, void** ppvObject)

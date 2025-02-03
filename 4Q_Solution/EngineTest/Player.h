@@ -34,4 +34,7 @@ private:
 	Engine::Component::TextRenderer* _textRenderer;
 	Engine::Component::Synchronize* _sync;
 	RemoteMoveComponent* _remote;
+
+	//Physics
+	Engine::Component::ChractorController* _chractorController;
 };

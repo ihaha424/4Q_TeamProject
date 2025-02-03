@@ -21,6 +21,7 @@ namespace Client {
 	void SERVER_API SavePacketData(std::string msg, short packetId, long dataSize, int serialNum);
 
 	void SERVER_API SendUpdate();
+	void SERVER_API DisconnectWait();
 	void SERVER_API Finalize();
 }
 

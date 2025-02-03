@@ -73,9 +73,6 @@
     <Filter Include="Library\1. System\00. PhysX\005. Material">
       <UniqueIdentifier>{e65bbb0e-e4b6-4b72-8627-318a4eaed497}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Library\9. Utils">
-      <UniqueIdentifier>{3d3cc417-2a37-45c5-acac-526896c59d8c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Library\0. Interface\98. IUserData">
       <UniqueIdentifier>{ba410ad4-44ff-4bac-9647-c3a5e613d549}</UniqueIdentifier>
     </Filter>
@@ -112,6 +109,18 @@
     <Filter Include="Library\1. System\00. PhysX\998. Collision\CollisionEvent">
       <UniqueIdentifier>{97d001f6-850e-4354-8ce8-597ddede6ff3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Library\0. Interface\06. Contrillor">
+      <UniqueIdentifier>{2bbd1080-2c49-4100-9b10-de0b350962b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\1. System\00. PhysX\006. Controller">
+      <UniqueIdentifier>{a058d35e-e7fc-4165-8990-d83a94b79833}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\9. MeshLoader">
+      <UniqueIdentifier>{aad2f8ec-4ac2-4d21-827b-6b78c6f83498}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\2. Utils">
+      <UniqueIdentifier>{3d3cc417-2a37-45c5-acac-526896c59d8c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -130,7 +139,7 @@
       <Filter>Library\0. Interface\01. IScene</Filter>
     </ClInclude>
     <ClInclude Include="Description.h">
-      <Filter>Library\9. Utils</Filter>
+      <Filter>Library\2. Utils</Filter>
     </ClInclude>
     <ClInclude Include="InterfaceAPI.h">
       <Filter>Library\0. Interface</Filter>
@@ -145,13 +154,13 @@
       <Filter>Library\0. Interface\02. IObject</Filter>
     </ClInclude>
     <ClInclude Include="DataStructure.h">
-      <Filter>Library\9. Utils</Filter>
+      <Filter>Library\2. Utils</Filter>
     </ClInclude>
     <ClInclude Include="Math.h">
-      <Filter>Library\9. Utils</Filter>
+      <Filter>Library\2. Utils</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">
-      <Filter>Library\9. Utils</Filter>
+      <Filter>Library\2. Utils</Filter>
     </ClInclude>
     <ClInclude Include="IGeometry.h">
       <Filter>Library\0. Interface\04. IGeometry</Filter>
@@ -230,6 +239,15 @@
     </ClInclude>
     <ClInclude Include="PhysXCollision.h">
       <Filter>Library\1. System\00. PhysX\998. Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="IController.h">
+      <Filter>Library\0. Interface\06. Contrillor</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysXController.h">
+      <Filter>Library\1. System\00. PhysX\006. Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshLoader.h">
+      <Filter>Library\9. MeshLoader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -322,6 +340,15 @@
     </ClCompile>
     <ClCompile Include="PhysXCollision.cpp">
       <Filter>Library\1. System\00. PhysX\998. Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="IController.cpp">
+      <Filter>Library\0. Interface\06. Contrillor</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXController.cpp">
+      <Filter>Library\1. System\00. PhysX\006. Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshLoader.cpp">
+      <Filter>Library\9. MeshLoader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

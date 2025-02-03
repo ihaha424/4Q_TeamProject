@@ -4,6 +4,7 @@
 #include "PHIRigidStaticComponent.h"
 #include "PHIRigidDynamicComponent.h"
 #include "PHIRigidKinematicComponent.h"
+#include "PHIManager.h"
 
 namespace Engine::PHI
 {
@@ -51,7 +52,7 @@ namespace Engine::PHI
 		const Engine::Physics::VerticesMeshDesc&	verticesMeshDesc, 
 		const Engine::Transform&					transform)
 	{
-		PhysicsEngineAPI::IGeometry* geometry = FindGeometry(name, geometryDesc, verticesMeshDesc);
+		PhysicsEngineAPI::IGeometry* geometry = system->FindGeometry(name, geometryDesc, verticesMeshDesc);
 
 		bool result = scene->Overlap(data,
 			geometry,
@@ -74,7 +75,7 @@ namespace Engine::PHI
 		const Engine::Math::Vector3&				direction, 
 		float										distance)
 	{
-		PhysicsEngineAPI::IGeometry* geometry = FindGeometry(name, geometryDesc, verticesMeshDesc);
+		PhysicsEngineAPI::IGeometry* geometry = system->FindGeometry(name, geometryDesc, verticesMeshDesc);
 
 		bool result = scene->Sweep(data,
 			geometry,
@@ -123,66 +124,11 @@ namespace Engine::PHI
 		return scene->AddActor(componet->object);
 	}
 
-	bool Scene::AddGeomtry(const std::string& name, const Engine::Physics::GeometryDesc& _geometryDesc, const Engine::Physics::VerticesMeshDesc& _verticesMeshDesc)
-	{
-		PhysicsEngineAPI::IGeometry* geometry = nullptr;
-		bool result = false;
-		auto iter = geometryMap.find(name);
-		if (iter == geometryMap.end())
-		{
-			PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
-			PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc;
-			geometryDesc.type = static_cast<PhysicsEngineAPI::Utils::DataStructure::GeometryShape>(_geometryDesc.type);
-			auto& initialGeometrData = _geometryDesc.data;
-			geometryDesc.data = { initialGeometrData.x, initialGeometrData.y, initialGeometrData.z, initialGeometrData.w };
-			verticesMeshDesc.vertices.count = _verticesMeshDesc.vertices.count;
-			verticesMeshDesc.vertices.stride = _verticesMeshDesc.vertices.stride;
-			verticesMeshDesc.vertices.data = _verticesMeshDesc.vertices.data;
-			verticesMeshDesc.indices.count = _verticesMeshDesc.indices.count;
-			verticesMeshDesc.indices.stride = _verticesMeshDesc.indices.stride;
-			verticesMeshDesc.indices.data = _verticesMeshDesc.indices.data;
-			result = system->CreateGeometry(&geometry, geometryDesc, verticesMeshDesc);
-			geometryMap[name] = geometry;
-		}
-
-		return result;
-	}
-
-
 	void* Scene::GetScene()
 	{
 		return scene;
 	}
 
-	PhysicsEngineAPI::IGeometry* Scene::FindGeometry(
-		const std::string& name,
-		const Engine::Physics::GeometryDesc&			_geometryDesc,
-		const Engine::Physics::VerticesMeshDesc&		_verticesMeshDesc
-	)
-	{
-		PhysicsEngineAPI::IGeometry* geometry = nullptr;
-		auto iter = geometryMap.find(name);
-		if (iter == geometryMap.end())
-		{
-			PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
-			PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc;
-			geometryDesc.type = static_cast<PhysicsEngineAPI::Utils::DataStructure::GeometryShape>(_geometryDesc.type);
-			auto& initialGeometrData = _geometryDesc.data;
-			geometryDesc.data = { initialGeometrData.x, initialGeometrData.y, initialGeometrData.z, initialGeometrData.w };
-			verticesMeshDesc.vertices.count = _verticesMeshDesc.vertices.count;
-			verticesMeshDesc.vertices.stride = _verticesMeshDesc.vertices.stride;
-			verticesMeshDesc.vertices.data = _verticesMeshDesc.vertices.data;
-			verticesMeshDesc.indices.count = _verticesMeshDesc.indices.count;
-			verticesMeshDesc.indices.stride = _verticesMeshDesc.indices.stride;
-			verticesMeshDesc.indices.data = _verticesMeshDesc.indices.data;
-			system->CreateGeometry(&geometry, geometryDesc, verticesMeshDesc);
-			geometryMap[name] = geometry;
-		}
-		else
-			geometry = iter->second;
-
-		return geometry;
-	}
 	void Scene::SetGravity(const Math::Vector3& gravity)
 	{
 		scene->SetGravity({ gravity.x, gravity.y, gravity.z});

@@ -8,3 +8,4 @@
 #include "PhysXGeometry.h"
 #include "PhysXShape.h"
 #include "PhysXMaterial.h"
+#include "PhysXController.h"

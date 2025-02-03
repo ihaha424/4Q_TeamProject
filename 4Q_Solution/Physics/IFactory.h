@@ -109,6 +109,25 @@ namespace PhysicsEngineAPI
 			_OUT_ IObject** object,
 			const Utils::Math::Vector3& boxExtents = Utils::Math::Vector3{1, 1, 1}) = 0;
 
+
+
+
+		virtual bool CreateControllerManager(
+			_OUT_ IScene* Scene
+		) = 0;
+
+		virtual bool CreatePlayerController(
+			_OUT_ IController** object,
+			IScene* Scene,
+			const Utils::Description::ControllerDesc& desc
+		) = 0;
+
+		virtual bool LoadTriangleMesh(
+			_OUT_ IGeometry** geometry, 
+			const Utils::Description::GeometryDesc& geometryDesc, 
+			const char* filePath
+		) = 0;
+
 	};
 
 }

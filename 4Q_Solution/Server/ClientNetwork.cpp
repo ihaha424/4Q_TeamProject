@@ -99,6 +99,9 @@ bool ClientNetwork::ConnectToServer()
 int ClientNetwork::RecvUpdate()
 {
 	int res = _server->Recv(_recvData);
+	if (res < 0) {
+		return res;
+	}
 	int write = _saveRecvData->Write(_recvData, res);
 	_packetDispatcherInstance->SaveRecvPacket(_saveRecvData, 0);
 
@@ -139,6 +142,11 @@ int ClientNetwork::SendUpdate()
 
 	return res;
 	//_session->SendUpdate();
+}
+
+void ClientNetwork::WaitDisconnect()
+{
+	_recvThread.join();
 }
 
 void ClientNetwork::Finalize()

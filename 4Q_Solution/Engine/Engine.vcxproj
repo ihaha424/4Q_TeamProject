@@ -184,12 +184,15 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Action.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="Application.h" />
+    <ClInclude Include="ChractorController.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="FiniteStateMachine.h" />
     <ClInclude Include="PHICollision.h" />
+    <ClInclude Include="PHIControllerComponent.h" />
     <ClInclude Include="PHIRigidDynamicComponent.h" />
     <ClInclude Include="PHIRigidKinematicComponent.h" />
     <ClInclude Include="PHIRigidStaticComponent.h" />
+    <ClInclude Include="PhysicsChractorControllerExample.h" />
     <ClInclude Include="PhysicsCollision.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentFactory.h" />
@@ -199,6 +202,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="ContentFactory.h" />
     <ClInclude Include="ContentManager.h" />
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="PhysicsControllerComponent.h" />
     <ClInclude Include="PhysicsCreate.h" />
     <ClInclude Include="PhysicsFactory.h" />
     <ClInclude Include="PhysicsGeometry.h" />
@@ -323,12 +327,15 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="ChractorController.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="FiniteStateMachine.cpp" />
     <ClCompile Include="PHICollision.cpp" />
+    <ClCompile Include="PHIControllerComponent.cpp" />
     <ClCompile Include="PHIRigidDynamicComponent.cpp" />
     <ClCompile Include="PHIRigidKinematicComponent.cpp" />
     <ClCompile Include="PHIRigidStaticComponent.cpp" />
+    <ClCompile Include="PhysicsChractorControllerExample.cpp" />
     <ClCompile Include="PhysicsCollision.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ComponentFactory.cpp" />
@@ -336,6 +343,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="ContentFactory.cpp" />
     <ClCompile Include="ContentManager.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="PhysicsControllerComponent.cpp" />
     <ClCompile Include="PhysicsGeometry.cpp" />
     <ClCompile Include="PhysicsMaterial.cpp" />
     <ClCompile Include="PhysicsObjectExample.cpp" />
@@ -409,7 +417,6 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="PhysicsScene.cpp" />
     <ClCompile Include="ServerNetworkManager.cpp" />
     <ClCompile Include="SkeletalMesh.cpp" />
-    <ClCompile Include="State.cpp" />
     <ClCompile Include="StaticMesh.cpp" />
     <ClCompile Include="SwizzleAxis.cpp" />
     <ClCompile Include="pch.cpp">

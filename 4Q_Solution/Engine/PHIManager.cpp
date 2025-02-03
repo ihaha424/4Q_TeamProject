@@ -5,6 +5,7 @@
 #include "PHIRigidStaticComponent.h"
 #include "PHIRigidDynamicComponent.h"
 #include "PHIRigidKinematicComponent.h"
+#include "PHIControllerComponent.h"
 
 namespace Engine::PHI
 {
@@ -98,7 +99,8 @@ namespace Engine::PHI
 		sceneDesc.CPUDispatcherCount = sceneDescription.CPUDispatcherCount;
 
 		thrower(BoolToHRESULT(system->CreateScene(&scene->scene, sceneDesc)));
-		scene->system = system;
+		scene->system = this;
+		scene->sceneIndex = scene->scene->GetSceneNumber();
 		*_scene = scene;
 		
 	}
@@ -156,7 +158,8 @@ namespace Engine::PHI
 
 		thrower(BoolToHRESULT(system->CreateCameraScene(&scene->scene, sceneDesc)));
 		
-		scene->system = system;
+		scene->system = this;
+		scene->sceneIndex = scene->scene->GetSceneNumber();
 		*_scene = scene;
 	}
 
@@ -395,9 +398,158 @@ namespace Engine::PHI
 		*object = destComponment;
 	}
 
+	void Manager::CreateControllerManager(Physics::IScene* _scene)
+	{
+		constexpr Utility::ThrowIfFailed thrower;
+
+		Scene* scene = static_cast<Scene*>(_scene);
+		thrower(BoolToHRESULT(system->CreateControllerManager(scene->scene)));
+	}
+
+	void Manager::CreatePlayerController(Physics::IController** object, Physics::IScene* _scene, const Physics::ControllerDesc& _desc)
+	{
+		constexpr Utility::ThrowIfFailed thrower;
+
+		Scene* scene = static_cast<Scene*>(_scene);
+		PhysicsEngineAPI::Utils::Description::ControllerDesc desc;
+		desc.gravity = { _desc.gravity.x,_desc.gravity.y, _desc.gravity.z };
+		desc.position = { _desc.position.x, _desc.position.y, _desc.position.z };
+		desc.upDirection = { _desc.upDirection.x,_desc.upDirection.y, _desc.upDirection.z };
+		desc.slopeLimit	= _desc.slopeLimit;
+		desc.invisibleWallHeight = _desc.invisibleWallHeight;
+		desc.maxJumpHeight = _desc.maxJumpHeight;
+		desc.contactOffset = _desc.contactOffset;
+		desc.stepOffset = _desc.stepOffset;
+		desc.slopeMode = static_cast<PhysicsEngineAPI::Utils::DataStructure::ControllerSlope>(_desc.slopeMode);
+		desc.material = { _desc.material.x,_desc.material.y, _desc.material.z };
+		desc.radius	 = _desc.radius;
+		desc.height	 = _desc.height;
+		desc.climbinMode = static_cast<PhysicsEngineAPI::Utils::DataStructure::CapsuleClimbingMode>(_desc.climbinMode);
+
+		Controller* controller = new Controller();
+		thrower(BoolToHRESULT(system->CreatePlayerController(&controller->controller, scene->scene, desc)));
+	
+		*object = controller;
+	}
+
 	Physics::IScene* Manager::GetScene(unsigned int sceneNumber)
 	{
 		return sceneList[sceneNumber];
+	}
+
+
+	/********************************
+				GeometryMap
+	*********************************/
+	bool Manager::AddGeomtry(const std::string& name, const Engine::Physics::GeometryDesc& _geometryDesc, const Engine::Physics::VerticesMeshDesc& _verticesMeshDesc)
+	{
+		PhysicsEngineAPI::IGeometry* geometry = nullptr;
+		bool result = false;
+		auto iter = geometryMap.find(name);
+		if (iter == geometryMap.end())
+		{
+			PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
+			PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc;
+			geometryDesc.type = static_cast<PhysicsEngineAPI::Utils::DataStructure::GeometryShape>(_geometryDesc.type);
+			auto& initialGeometrData = _geometryDesc.data;
+			geometryDesc.data = { initialGeometrData.x, initialGeometrData.y, initialGeometrData.z, initialGeometrData.w };
+			verticesMeshDesc.vertices.count = _verticesMeshDesc.vertices.count;
+			verticesMeshDesc.vertices.stride = _verticesMeshDesc.vertices.stride;
+			verticesMeshDesc.vertices.data = _verticesMeshDesc.vertices.data;
+			verticesMeshDesc.indices.count = _verticesMeshDesc.indices.count;
+			verticesMeshDesc.indices.stride = _verticesMeshDesc.indices.stride;
+			verticesMeshDesc.indices.data = _verticesMeshDesc.indices.data;
+			result = system->CreateGeometry(&geometry, geometryDesc, verticesMeshDesc);
+			geometryMap[name] = geometry;
+		}
+
+		return result;
+	}
+
+	bool Manager::LoadTriangleMesh(
+		const Engine::Physics::GeometryDesc& _geometryDesc,
+		const char* name,
+		const char* filePath
+	)
+	{
+		PhysicsEngineAPI::IGeometry* geometry = nullptr;
+		bool result = false;
+		auto iter = geometryMap.find(name);
+		if (iter == geometryMap.end())
+		{
+			PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
+			geometryDesc.type = static_cast<PhysicsEngineAPI::Utils::DataStructure::GeometryShape>(_geometryDesc.type);
+			auto& initialGeometrData = _geometryDesc.data;
+			geometryDesc.data = { initialGeometrData.x, initialGeometrData.y, initialGeometrData.z, initialGeometrData.w };
+
+			result = system->LoadTriangleMesh(&geometry, geometryDesc, filePath);
+			if (!result)
+				return result;
+			geometryMap[name] = geometry;
+		}
+
+		return result;
+	}
+
+	PhysicsEngineAPI::IGeometry* Manager::FindGeometry(
+		const std::string& name,
+		const Engine::Physics::GeometryDesc& _geometryDesc,
+		const Engine::Physics::VerticesMeshDesc& _verticesMeshDesc
+	)
+	{
+		PhysicsEngineAPI::IGeometry* geometry = nullptr;
+		auto iter = geometryMap.find(name);
+		if (iter == geometryMap.end())
+		{
+			PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
+			PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc;
+			geometryDesc.type = static_cast<PhysicsEngineAPI::Utils::DataStructure::GeometryShape>(_geometryDesc.type);
+			auto& initialGeometrData = _geometryDesc.data;
+			geometryDesc.data = { initialGeometrData.x, initialGeometrData.y, initialGeometrData.z, initialGeometrData.w };
+			verticesMeshDesc.vertices.count = _verticesMeshDesc.vertices.count;
+			verticesMeshDesc.vertices.stride = _verticesMeshDesc.vertices.stride;
+			verticesMeshDesc.vertices.data = _verticesMeshDesc.vertices.data;
+			verticesMeshDesc.indices.count = _verticesMeshDesc.indices.count;
+			verticesMeshDesc.indices.stride = _verticesMeshDesc.indices.stride;
+			verticesMeshDesc.indices.data = _verticesMeshDesc.indices.data;
+			system->CreateGeometry(&geometry, geometryDesc, verticesMeshDesc);
+			geometryMap[name] = geometry;
+		}
+		else
+			geometry = iter->second;
+
+		return geometry;
+	}
+	void Manager::CreateStatic(
+		Engine::Physics::IRigidStaticComponent** _destObject, 
+		const char* geomtryName, 
+		const  Engine::Physics::MaterialDesc& _materialDesc, 
+		const Engine::Transform& _transform, 
+		const Engine::Transform& shapeOffset,
+		bool isExclusive
+	)
+	{
+		constexpr Utility::ThrowIfFailed thrower;
+
+		auto iter = geometryMap.find(geomtryName);
+		if (iter == geometryMap.end())
+			thrower(S_FALSE);
+		RigidStaticComponent* destComponment = new RigidStaticComponent();
+		destComponment->geometry = iter->second;
+
+		PhysicsEngineAPI::Utils::Math::Transform transform = { {_transform.position.x, _transform.position.y, _transform.position.z}, {_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w} };
+
+		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc;
+		auto& initialMeterialData = _materialDesc.data;
+		materialDesc.data = { initialMeterialData.x, initialMeterialData.y, initialMeterialData.z };
+		thrower(BoolToHRESULT(system->CreateMaterial(&destComponment->material, materialDesc)));
+
+		thrower(BoolToHRESULT(system->CreateShape(&destComponment->shape, destComponment->geometry, destComponment->material, isExclusive)));
+
+		thrower(BoolToHRESULT(system->CreateStatic(&destComponment->object, transform, destComponment->shape)));
+
+		destComponment->SetLocalTransform(shapeOffset);
+		*_destObject = destComponment;
 	}
 }
 

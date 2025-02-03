@@ -223,7 +223,7 @@ namespace Engine::PHI
 	void RigidDynamicComponent::Initialize()
 	{
 		object->SetUserData(collision);
-		shape->SetUserData(collision);
+		if (nullptr != shape) shape->SetUserData(collision);
 	}
 	void RigidDynamicComponent::Update(float deltaTime) const
 	{
@@ -235,6 +235,12 @@ namespace Engine::PHI
 		// TODO
 		// TODO
 	}
+
+	void RigidDynamicComponent::FixedUpdate() const
+	{
+		collision->FixedUpdate();
+	}
+
 	void RigidDynamicComponent::Finalize()
 	{
 		constexpr Utility::SafeRelease releaser;
@@ -243,8 +249,7 @@ namespace Engine::PHI
 		releaser(&shape);
 		releaser(&geometry);
 		releaser(&material);
-		collision->Finalize();
-		delete collision;
+		releaser(&collision);
 	}
 
 	void RigidDynamicComponent::BindCollision(const Physics::CallBackTrigger& callback, Physics::TriggerType type)

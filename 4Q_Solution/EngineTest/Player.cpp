@@ -23,6 +23,7 @@ void Player::Prepare(Engine::Content::Factory::Component* componentFactory)
 	_textRenderer = componentFactory->Clone<Engine::Component::TextRenderer>();
     _sync = componentFactory->Clone<Engine::Component::Synchronize>();
 	_remote = componentFactory->Clone<RemoteMoveComponent>();
+	_chractorController = componentFactory->Clone<Engine::Component::ChractorController>();
 }
 
 void Player::DisposeComponents()
@@ -35,6 +36,7 @@ void Player::DisposeComponents()
     _movement->Dispose();
 	_sync->Dispose();
 	_remote->Dispose();
+	_chractorController->Dispose();
 }
 
 void Player::PreInitialize(const Engine::Modules& modules)
@@ -125,6 +127,22 @@ void Player::PreInitialize(const Engine::Modules& modules)
 			_animator->ChangeAnimation("Wait"); 
 			_movement->SetDirection(Engine::Math::Vector3::Zero);
 
+			_sync->_move.set_x(0);
+			_sync->_move.set_y(0);
+			_sync->_move.set_z(0);
+			_sync->_move.set_speed(0);
+
+			_sync->_move.SerializeToString(&_sync->_msgBuffer);
+
+			Engine::Application::GetNetworkManager()->SaveSendData(
+				(short)PacketID::Move,
+				_sync->_msgBuffer,
+				_sync->_move.ByteSizeLong(),
+				_sync->GetSerialNumber()
+			);
+
+			_sync->_move.SerializeToString(&_sync->_msgBuffer);
+
 			_sync->_stateChange.set_stateinfo(0);
 			_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
 
@@ -157,6 +175,13 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	{
 		_camera->Rotate(value);
 	});
+
+	Engine::Physics::ControllerDesc desc;
+	desc.gravity = { 0.f,-9.8f, 0.f };
+	desc.height = 100.f;
+	desc.radius = 20.f;
+	auto PhysicsManager = Engine::Application::GetPhysicsManager();
+	PhysicsManager->CreatePlayerController(&_chractorController->_controller, PhysicsManager->GetScene(0), desc);
 }
 
 void Player::PostInitialize(const Engine::Modules& modules)
@@ -166,7 +191,7 @@ void Player::PostInitialize(const Engine::Modules& modules)
 	_textRenderer->SetPosition(100, 100.f);
 	_textRenderer->SetText(L"Hello World!");
 	_textRenderer->SetFontColor(1.f, 0.f, 0.f, 1.f);
-
+	_animator->ChangeAnimation("Wait");
 	//_skeltalMesh.SetRenderLayer(0);
 	/*_animator.SetUpSplitBone(2);
 	_animator.SplitBone(0, "Dummy_root");
@@ -186,10 +211,13 @@ void Player::PostUpdate(const float deltaTime)
 	_worldMatrix = Engine::Math::Matrix::CreateScale(1.f) * Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
 
 	Engine::Math::Vector3 tempPostion = _transform.position;
+	_chractorController->_controller->SetPosition(_transform.position);
 	tempPostion.z -= 300.f;
 	tempPostion.y += 300.f;
 	_camera->SetPosition(tempPostion);
 	_camera->SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
+
+	//_chractorController->_controller->Move({0,0,0}, 0.1, deltaTime);
 }
 
 void Player::PostFixedUpdate()

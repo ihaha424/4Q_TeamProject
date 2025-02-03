@@ -27,7 +27,7 @@ namespace Engine::PHI
 		void BindCollision(const Physics::CallBackContact& callback, Physics::ContactType type) override;
 
 		void FixedUpdate() override;
-        void Finalize() override;
+        void Release() override;
 
 	private:
 		void ConvertTriggerEvent(PhysicsEngineAPI::Utils::DataStructure::TriggerEvent& API, Engine::Physics::TriggerEvent& engine);
@@ -129,9 +129,8 @@ namespace Engine::PHI
     }
 
     template<typename T>
-    inline void Collision<T>::Finalize()
+    inline void Collision<T>::Release()
     {
-        // ¾ø´Ù?
     }
 
     template<typename T>

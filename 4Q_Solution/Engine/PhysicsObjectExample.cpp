@@ -154,7 +154,7 @@ void PhysicsObjectExample::SceneQueryExample()
 		 * @brief	만드는데 성공하면 true,
 					실패 또는 이미 있는 이름의 도형이면 false
 		 */
-		PhysicsManager->GetScene(0)->AddGeomtry("Frustum", geometryDesc, verticesMeshDesc);
+		PhysicsManager->AddGeomtry("Frustum", geometryDesc, verticesMeshDesc);
 	}
 
 }

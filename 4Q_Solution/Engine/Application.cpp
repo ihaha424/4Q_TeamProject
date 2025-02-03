@@ -85,6 +85,7 @@ void Engine::Application::Run(const int showCommand)
 			_networkManager->Send();
 		}
 	}
+	_networkManager->Disconnect();
 }
 
 void Engine::Application::End()
@@ -142,6 +143,7 @@ void Engine::Application::Register(Content::IManager* contentManager)
 	componentFactory->Register<Component::RigidDynamic>();
 	componentFactory->Register<Component::RigidKinematic>();
 	componentFactory->Register<Component::Rigid>();
+	componentFactory->Register<Component::ChractorController>();
 	componentFactory->Register<Component::Synchronize>();
 	// TODO: Register other components.
 }

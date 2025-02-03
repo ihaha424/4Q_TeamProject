@@ -17,7 +17,7 @@ namespace Engine::Physics
 	struct Collision : ICollision
 	{
 		virtual void FixedUpdate() = 0;
-		virtual void Finalize() = 0;
+		virtual void Release() = 0;
 
 		/********************************
 					Collision

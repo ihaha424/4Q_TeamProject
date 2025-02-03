@@ -50,11 +50,44 @@ namespace Engine::PHI
 		void CreatePlane(Physics::IRigidComponent** object, const Engine::Math::Vector4& plane, const Physics::MaterialDesc& material) override;
 		void CreatePlane(Physics::IRigidComponent** object, const Engine::Math::Vector3& point, const Engine::Math::Vector3& normal, const Physics::MaterialDesc& material) override;
 		void CreateStaticBoundBoxActor(Physics::IRigidComponent** object, const Engine::Math::Vector3& boxExtents) override;
+		void CreateControllerManager(Physics::IScene* Scene) override;
+		void CreatePlayerController(Physics::IController** object, Physics::IScene* Scene, const Engine::Physics::ControllerDesc& desc) override;
+	
+		/********************************
+					GeometryMap
+		*********************************/
+		bool AddGeomtry(
+			const std::string& name,
+			const Engine::Physics::GeometryDesc& _geometryDesc,
+			const Engine::Physics::VerticesMeshDesc& _verticesMeshDesc
+		) override;
 
+		bool LoadTriangleMesh(
+			const Engine::Physics::GeometryDesc& geometryDesc,
+			const char* name,
+			const char* filePath
+		) override;
+
+		void CreateStatic(
+			Engine::Physics::IRigidStaticComponent** destObject, 
+			const char* geomtryName, 
+			const Engine::Physics::MaterialDesc& materialDesc, 
+			const Engine::Transform& transform, 
+			const Engine::Transform& shapeOffset,
+			bool isExclusive
+		) override;
+
+	public:
+		PhysicsEngineAPI::IGeometry* FindGeometry(
+			const std::string& name,
+			const Engine::Physics::GeometryDesc& geometryDesc,
+			const Engine::Physics::VerticesMeshDesc& verticesMeshDesc
+		);
 	private:
 		PhysicsEngineAPI::IPhysicsSystem* system;
 		std::map<unsigned int, Physics::IScene*> sceneList;
-
+		
+		std::map<std::string, PhysicsEngineAPI::IGeometry*> geometryMap;
 	};
 }
 

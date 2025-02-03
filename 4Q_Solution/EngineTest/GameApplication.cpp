@@ -80,6 +80,14 @@ void GameApplication::DeclareMoveAction(Engine::Input::IManager* inputManager, E
 	downTrigger->AddModifier(swizzleAxis);
 	downTrigger->AddModifier(negative);
 	downTrigger->SetComponent(down);
+
+	//Engine::Input::Trigger::IDown* jumpTrigger = nullptr;
+	//action->GetTrigger(&jumpTrigger);
+	//Engine::Input::Component::IButtonComponent* jump = nullptr;
+	//keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::Space, &jump);
+	////jumpTrigger->AddModifier(swizzleAxis);
+	////jumpTrigger->AddModifier(negative);
+	//jumpTrigger->SetComponent(jump);
 }
 
 void GameApplication::DeclareCameraAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext)

@@ -18,6 +18,34 @@ namespace Engine::Physics
 		virtual void AttachUpdateScene(IScene* scene) = 0;
 		virtual void DetachUpdateScene(IScene* scene) = 0;
 		virtual IScene* GetScene(unsigned int sceneNumber) = 0;
+
+
+		/********************************
+					GeometryMap
+		*********************************/
+
+		/**
+		 * @brief	만드는데 성공하면 true,
+					실패 또는 이미 있는 이름의 도형이면 false
+		 */
+		virtual bool AddGeomtry(
+			const std::string& name,
+			const Engine::Physics::GeometryDesc& _geometryDesc,
+			const Engine::Physics::VerticesMeshDesc& _verticesMeshDesc
+		) = 0;
+		virtual bool LoadTriangleMesh(
+			const Engine::Physics::GeometryDesc& geometryDesc,
+			const char* name,
+			const char* filePath
+		) = 0;
+		virtual void CreateStatic(
+			IRigidStaticComponent** destObject,
+			const char* geomtryName,
+			const MaterialDesc& materialDesc,
+			const Engine::Transform& transform,
+			const Engine::Transform& shapeOffset = Engine::Transform(),
+			bool isExclusive = true
+		) = 0;
 	};
 
 	// Engine Interface

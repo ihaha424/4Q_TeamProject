@@ -7,6 +7,7 @@
 #include "../Engine/Transform.h"
 #include "../Engine/PhysicsUtils.h"
 #include "../Engine/Physics.h"
+#include "../Engine/PHICoordinateConvert.h"
 #include "../Engine/PHIManager.h"
 #include "../Packet/PacketID.h"
 #include "../Packet/ProtoInclude.h"
@@ -38,6 +39,7 @@ class ServerLogic
 		float _speed;
 		unsigned long long _sessionId;
 		Engine::Physics::Controller* _controller = nullptr;
+		unsigned short _flag = 0;
 	};
 
 public:

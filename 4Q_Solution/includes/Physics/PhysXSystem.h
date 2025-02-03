@@ -129,6 +129,12 @@ namespace PhysicsEngineAPI
 			const char* filePath
 		) override;
 
+		bool LoadHeightMap(
+			_OUT_ IGeometry** geometry,
+			const Utils::Description::GeometryDesc& geometryDesc,
+			const char* filePath
+		) override;
+
 
 	public:
 		void Release() override;

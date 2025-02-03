@@ -9,6 +9,22 @@ namespace Engine::PHI
 	public:
 		Controller();
 
+
+		/***********************************
+				Kinematic Move Setting
+		************************************/
+		void AddForce(const Engine::Math::Vector3& force) override;
+		void AddVelocity(const Engine::Math::Vector3& velocity) override;
+		void SetVelocity(const Engine::Math::Vector3& velocity) override;
+		Engine::Math::Vector3 GetVelocity() override;
+		void ClearVelocity() override;
+		void SetMass(float mass) override;
+		float GetMass() override;
+		void SetGravity(const Engine::Math::Vector3& gravity) override;
+		const Engine::Math::Vector3& GetGravity() const override;
+		void SetTotalGravity(const Engine::Math::Vector3& gravity) override;
+		const Engine::Math::Vector3& GetTotalGravity() const override;
+
 		/***********************************
 					Controller
 		************************************/
@@ -19,8 +35,6 @@ namespace Engine::PHI
 
 		unsigned short Move(Engine::Math::Vector3 displacement, float minDistance, float deltaTime) override;
 		
-		void SetGravity(const Engine::Math::Vector3& gravity) override;
-		const Engine::Math::Vector3& GetGravity() const override;
 
 		void SetPosition(const Engine::Math::Vector3& position) override;
 		const Engine::Math::Vector3& GetPosition() const override;
@@ -46,6 +60,7 @@ namespace Engine::PHI
 		void InvalidateCache() override;
 
 		void GetState(Engine::Physics::ControllerState& state) const override;
+		unsigned short GetCollisionFlag() override;
 		
 
 		/***********************************
@@ -65,17 +80,20 @@ namespace Engine::PHI
 					Engine
 		************************************/
 		void Initialize() override;
-		void Update(float deltaTime) const override;
+		void Update(float deltaTime) override;
+		void FixedUpdate() override;
 		void Finalize() override;
 	private:
 		PhysicsEngineAPI::IController* controller;
 		Collision<Controller>* collision;
 		unsigned short controllerCollisionFlag;
+		float mass;
+		Engine::Math::Vector3 velocity;
+		Engine::Math::Vector3 force;
+		Engine::Math::Vector3 gravity;
+		Engine::Math::Vector3 totalGravity;
 
 		friend class Manager;
-
-		// Controller을(를) 통해 상속됨
-		void FixedUpdate() const override;
 	};
 }
 

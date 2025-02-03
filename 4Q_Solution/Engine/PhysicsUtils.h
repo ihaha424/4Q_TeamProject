@@ -144,7 +144,7 @@ namespace Engine::Physics
 
 		ConvexMesh,
 		TriangleMesh,
-		//HeightField,
+		HeightField,
 
 		Frustum,
 

@@ -40,12 +40,9 @@ namespace PhysicsEngineAPI
 	unsigned short PhysXController::Move(const Utils::Math::Vector3 _displacement, float minDistance, float deltaTime)
 	{
 		physx::PxVec3 displacement = Vector3ToPxVec3(_displacement);
-		if (!(flags & physx::PxControllerCollisionFlag::eCOLLISION_DOWN))
-			displacement += gravity;
-
 		const physx::PxControllerFilters filters{};
 		const physx::PxObstacleContext* obstacles = NULL;
-		controller->invalidateCache();
+		//controller->invalidateCache();
 		flags = controller->move(displacement, minDistance, deltaTime, filters);
 		return flags;
 	}

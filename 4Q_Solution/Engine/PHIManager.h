@@ -11,7 +11,7 @@ namespace Engine::PHI
 		/********************************
 					  Manager
 		*********************************/
-		void Initialize(Engine::Physics::PhysicsType physicsType, float length, float speed) override;
+		void Initialize(Engine::Physics::PhysicsType physicsType, bool visualDebug, float length, float speed) override;
 		void WorldInitialize() override;
 		void Update(float deltaTime) override;
 		void FetchScene(bool block) override;

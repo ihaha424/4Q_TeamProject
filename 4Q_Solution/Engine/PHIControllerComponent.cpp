@@ -2,12 +2,16 @@
 #include "PHIControllerComponent.h"
 #include "PHICoordinateConvert.h"
 
+using namespace Engine::PHI::CONVERT;
 namespace Engine::PHI
 {
 	Controller::Controller()
 		: controller{ nullptr }
 		, collision{ nullptr }
 		, controllerCollisionFlag{ 0 }
+		, mass{ 1 }
+		, velocity{ }
+		, force{ }
 	{
 		collision = new Collision<Controller>{ this };
 	}
@@ -27,16 +31,27 @@ namespace Engine::PHI
 
 	unsigned short Controller::Move(const Engine::Math::Vector3 displacement, float minDistance, float deltaTime)
 	{
+
 		return controllerCollisionFlag = controller->Move(Vector3ToPhysicsVector3(displacement), minDistance, deltaTime);
 	}
 
-	void Controller::SetGravity(const Engine::Math::Vector3& gravity)
+	void Controller::SetGravity(const Engine::Math::Vector3& _gravity)
 	{
-		controller->SetGravity(Vector3ToPhysicsVector3(gravity));
+		gravity = _gravity;
 	}
 	const Engine::Math::Vector3& Controller::GetGravity() const
 	{
-		return PhysicsVector3ToVector3(controller->GetGravity());
+		return gravity;
+	}
+
+	void Controller::SetTotalGravity(const Engine::Math::Vector3& gravity)
+	{
+		totalGravity = gravity;
+	}
+
+	const Engine::Math::Vector3& Controller::GetTotalGravity() const
+	{
+		return totalGravity;
 	}
 
 	void Controller::SetPosition(const Engine::Math::Vector3& position)
@@ -155,8 +170,18 @@ namespace Engine::PHI
 	{
 		controller->SetUserData(collision);
 	}
-	void Controller::Update(float deltaTime) const
+	void Controller::Update(float deltaTime)
 	{
+		Engine::Math::Vector3 acceleration = force / mass;
+
+		velocity += (acceleration * deltaTime);
+
+		gravity += totalGravity;
+
+		velocity += gravity;
+
+		controllerCollisionFlag = controller->Move(Vector3ToPhysicsVector3(velocity * deltaTime), 0.001f, deltaTime);
+		force = Engine::Math::Vector3::Zero;
 	}
 	void Controller::Finalize()
 	{
@@ -165,8 +190,45 @@ namespace Engine::PHI
 		releaser(&collision);
 		releaser(&controller);
 	}
-	void Controller::FixedUpdate() const
+	unsigned short Controller::GetCollisionFlag()
+	{
+		return controllerCollisionFlag;
+	}
+	void Controller::FixedUpdate()
 	{
 		collision->FixedUpdate();
+	}
+
+
+	/***********************************
+			Kinematic Move Setting
+	************************************/
+	void Controller::AddForce(const Engine::Math::Vector3& _force)
+	{
+		force += _force;
+	}
+	void Controller::AddVelocity(const Engine::Math::Vector3& _velocity)
+	{
+		velocity += _velocity;
+	}
+	void Controller::SetVelocity(const Engine::Math::Vector3& _velocity)
+	{
+		velocity = _velocity;
+	}
+	Engine::Math::Vector3 Controller::GetVelocity()
+	{
+		return Engine::Math::Vector3();
+	}
+	void Controller::ClearVelocity()
+	{
+		velocity = Engine::Math::Vector3::Zero;
+	}
+	void Controller::SetMass(float _mass)
+	{
+		mass = _mass;
+	}
+	float Controller::GetMass()
+	{
+		return mass;
 	}
 }

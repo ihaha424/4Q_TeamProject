@@ -58,11 +58,38 @@ void ServerLogic::Update()
             continue;
         } // if end
 
-        _playerSlot[i]._controller->Move(
-            _playerSlot[i]._direction * _playerSlot[i]._speed / 5000,
-            0.0001f,
-            _timer->GetDeltaTime()
-        );
+        Engine::Physics::AdditionalQueryData raycastInfo;
+        auto pos = _playerSlot[i]._controller->GetPosition();
+        pos.y += -1.f;
+        _mainScene->Raycast(raycastInfo, pos, { 0,-1,0 }, 10.f);
+        //if (raycastInfo.num == 1 && raycastInfo.distance < 0.5f && raycastInfo.distance > 0.1f)
+        if(_playerSlot[i]._flag & 0x04 || _playerSlot[i]._flag & 0x01)
+        {
+            printf("Player%d On The Ground.\n", i + 1);
+            auto temp = _playerSlot->_controller->GetGravity();
+            temp.y = 0;
+            _playerSlot->_controller->SetGravity(temp);
+            _playerSlot->_controller->SetGravity({0,2000.f,0});
+        }
+        else
+        {
+            printf("Player%d Above the Sky.\n", i + 1);
+        }
+
+        //_playerSlot[i]._flag = _playerSlot[i]._controller->Move(
+        //    _playerSlot[i]._direction * _playerSlot[i]._speed / 5000,
+        //    0.0001f,
+        //    _timer->GetDeltaTime()
+        //);
+
+        _playerSlot[i]._controller->SetVelocity(_playerSlot[i]._direction * _playerSlot[i]._speed);
+        _playerSlot[i]._controller->Update(_timer->GetDeltaTime());
+        _playerSlot[i]._flag = _playerSlot[i]._controller->GetCollisionFlag();
+
+        //if (_playerSlot[i]._flag & 0x04 || _playerSlot[i]._flag & 0x01)
+        //    printf("Player%d On The Ground.\n", i + 1);
+        //else
+        //    printf("Player%d Above the Sky.\n", i + 1);
 
     } // for end
     _physicsManager->Update(_timer->GetDeltaTime());
@@ -271,9 +298,12 @@ void ServerLogic::RegistPhysics(Object& obj)
 void ServerLogic::RegistPlayer(Player& player)
 {
     Engine::Physics::ControllerDesc cd;
-    cd.height = 100.f;
-    cd.radius = 20.f;
-    cd.gravity = { 0.f, -0.98f / 1000, 0.f };
+    cd.height = 10.f;
+    cd.radius = 2.f;
+    cd.gravity = { 0.f, -9.8f, 0.f };
+    cd.contactOffset = 3.f;
+    cd.stepOffset = 2.f;
+    cd.slopeLimit = 0.5f;
     Engine::Physics::IController* controller = player._controller;
     _physicsManager->CreatePlayerController(&controller, _mainScene, cd);
     player._controller = static_cast<Engine::Physics::Controller*>(controller);
@@ -286,8 +316,8 @@ void ServerLogic::RegistGround(Ground& ground)
     _physicsManager->LoadTriangleMesh(geometryDesc, "terrain", "../Resources/Level/Level.fbx");
 
     Engine::Transform transform{};
-    _physicsManager->CreateStatic(&ground._staticRigid, "terrain", { {0.f,0.f,0.f } }, transform);
+    _physicsManager->CreateTriangleStatic(&ground._staticRigid, "terrain", { {0.f,0.f,0.f } }, transform);
     _mainScene->AddActor(ground._staticRigid);
-    ground._staticRigid->SetTranslate({ -1000.f, -200.f, -1000.f });
+    ground._staticRigid->SetTranslate({ -1000.f, -200.f, 1000.f });
 
 }

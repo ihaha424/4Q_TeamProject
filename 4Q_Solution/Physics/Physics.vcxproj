@@ -190,6 +190,7 @@ xcopy ".\PhysXLibrary\$(Configuration)\*.dll" "$(OutDir)" /Y</Command>
     <ClInclude Include="IElementDeclaration.h" />
     <ClInclude Include="IFactory.h" />
     <ClInclude Include="IKinematicObject.h" />
+    <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="IMaterial.h" />
     <ClInclude Include="ISceneQuery.h" />
     <ClInclude Include="IShape.h" />
@@ -234,6 +235,7 @@ xcopy ".\PhysXLibrary\$(Configuration)\*.dll" "$(OutDir)" /Y</Command>
     <ClCompile Include="IDynamicObject.cpp" />
     <ClCompile Include="IFactory.cpp" />
     <ClCompile Include="IKinematicObject.cpp" />
+    <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="IMaterial.cpp" />
     <ClCompile Include="IObject.cpp" />
     <ClCompile Include="ISceneQuery.cpp" />

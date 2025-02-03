@@ -2,7 +2,7 @@
 #include "PHIRigidStaticComponent.h"
 #include "PHICoordinateConvert.h"
 
-
+using namespace Engine::PHI::CONVERT;
 namespace Engine::PHI
 {
 	RigidStaticComponent::RigidStaticComponent()

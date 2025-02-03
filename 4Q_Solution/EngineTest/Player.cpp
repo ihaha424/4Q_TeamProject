@@ -215,8 +215,8 @@ void Player::PostUpdate(const float deltaTime)
 	_chractorController->_controller->SetPosition(_transform.position);
 	tempPostion.z -= 300.f;
 	tempPostion.y += 300.f;
-	_camera->SetPosition(tempPostion);
-	_camera->SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
+	//_camera->SetPosition(tempPostion);
+	//_camera->SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
 
 	// auto speed = _movement->GetSpeed();
 	// auto dir = _movement->GetDirection();

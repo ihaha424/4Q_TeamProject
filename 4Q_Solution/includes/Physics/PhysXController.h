@@ -2,6 +2,8 @@
 
 #include "IController.h"
 #include "PhysXUtils.h"
+#include "PhysXReportCallback.h"
+#include "PhysXBehaviorCallback.h"
 
 namespace PhysicsEngineAPI
 {
@@ -70,6 +72,8 @@ namespace PhysicsEngineAPI
 				Capsule Controller
 		************************************/
 		physx::PxCapsuleController* controller;
+		PhysXReportCallback*	hitReportCallback;
+		PhysXBehaviorCallback*	behaviorCallback;
 		
 		/***********************************
 				Controller

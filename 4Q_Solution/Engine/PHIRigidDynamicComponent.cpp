@@ -2,6 +2,7 @@
 #include "PHIRigidDynamicComponent.h"
 #include "PHICoordinateConvert.h"
 
+using namespace Engine::PHI::CONVERT;
 namespace Engine::PHI
 {
 	RigidDynamicComponent::RigidDynamicComponent()

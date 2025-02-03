@@ -130,6 +130,12 @@ namespace PhysicsEngineAPI
 			const char* filePath
 		) = 0;
 
+		virtual bool LoadHeightMap(
+			_OUT_ IGeometry** geometry,
+			const Utils::Description::GeometryDesc& geometryDesc,
+			const char* filePath
+		) = 0;
+
 	};
 
 }

@@ -168,7 +168,7 @@ void Engine::Application::InitializeManagers() const
 	_graphicsManager->Initialize(_windowManager->GetHandle(), L"../Shaders/", _size, false, 1);
 	_contentManager->Initialize();
     _networkManager->Initialize();
-    _physicsManager->Initialize(Engine::Physics::PhysicsType::Physx);
+    _physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, false);
 }
 
 void Engine::Application::LoadGameData()

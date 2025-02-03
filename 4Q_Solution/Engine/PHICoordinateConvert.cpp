@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "PHICoordinateConvert.h"
 
-
+using namespace Engine::PHI::CONVERT;
 namespace Engine::PHI::CONVERT
 {
 	Engine::Math::Vector3 PhysicsVector3ToVector3(const PhysicsEngineAPI::Utils::Math::Vector3& vector3)

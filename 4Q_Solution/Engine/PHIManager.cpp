@@ -8,6 +8,7 @@
 #include "PHIControllerComponent.h"
 #include "PHICoordinateConvert.h"
 
+using namespace Engine::PHI::CONVERT;
 namespace Engine::PHI
 {
 	HRESULT BoolToHRESULT(bool isSuccess)
@@ -25,14 +26,14 @@ namespace Engine::PHI
 	/********************************
 				  Manager
 	*********************************/
-	void Manager::Initialize(Engine::Physics::PhysicsType physicsType, float length, float speed)
+	void Manager::Initialize(Engine::Physics::PhysicsType physicsType, bool visualDebug, float length, float speed)
 	{
 		constexpr Utility::ThrowIfFailed thrower;
 
 		int typeIndex = static_cast<int>(physicsType);
 		PhysicsEngineAPI::IPhysicsSystem::PhysicsType type = static_cast<PhysicsEngineAPI::IPhysicsSystem::PhysicsType>(typeIndex);
 		thrower(BoolToHRESULT(PhysicsEngineAPI::CreateSystem(&system, PhysicsEngineAPI::IPhysicsSystem::Physx)));
-		thrower(BoolToHRESULT(system->CreatePhysics(true, length, speed)));
+		thrower(BoolToHRESULT(system->CreatePhysics(visualDebug, length, speed)));
 	}
 
 	void Manager::WorldInitialize()
@@ -42,7 +43,7 @@ namespace Engine::PHI
 
 	void Manager::Update(float deltaTime)
 	{
-		for (auto scene : sceneList)
+		for (auto& scene : sceneList)
 		{
 			UpdateScene(scene.second, deltaTime);
 		}
@@ -50,7 +51,7 @@ namespace Engine::PHI
 
 	void Manager::FetchScene(bool block)
 	{
-		for (auto scene : sceneList)
+		for (auto& scene : sceneList)
 		{
 			FetchScene(scene.second, block);
 			scene.second->CollisionEvent();
@@ -95,7 +96,7 @@ namespace Engine::PHI
 
 		Scene* scene = new Scene();
 
-		PhysicsEngineAPI::Utils::Description::SceneDesc sceneDesc;
+		PhysicsEngineAPI::Utils::Description::SceneDesc sceneDesc{};
 		sceneDesc.gravity = Vector3ToPhysicsVector3(sceneDescription.gravity);
 		sceneDesc.CPUDispatcherCount = sceneDescription.CPUDispatcherCount;
 
@@ -115,8 +116,8 @@ namespace Engine::PHI
 
 		RigidComponent* componment = new RigidComponent();
 
-		PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
-		PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc;
+		PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc{};
+		PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc{};
 		geometryDesc.type					= static_cast<PhysicsEngineAPI::Utils::DataStructure::GeometryShape>(rigidComponetDesc.shapeDesc.geometryDesc.type);
 		auto& initialGeometrData = rigidComponetDesc.shapeDesc.geometryDesc.data;
 		geometryDesc.data					= { initialGeometrData.x, initialGeometrData.y, initialGeometrData.z, initialGeometrData.w};
@@ -129,7 +130,7 @@ namespace Engine::PHI
 		thrower(BoolToHRESULT(system->CreateGeometry(&componment->geometry, geometryDesc, verticesMeshDesc)));
 
 
-		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc;
+		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc{};
 		auto& initialMeterialData = rigidComponetDesc.shapeDesc.materialDesc.data;
 		materialDesc.data = { initialMeterialData.x, initialMeterialData.y, initialMeterialData.z};
 		thrower(BoolToHRESULT(system->CreateMaterial(&componment->material, materialDesc)));
@@ -153,7 +154,7 @@ namespace Engine::PHI
 
 		Scene* scene = new Scene();
 
-		PhysicsEngineAPI::Utils::Description::SceneDesc sceneDesc;
+		PhysicsEngineAPI::Utils::Description::SceneDesc sceneDesc{};
 		sceneDesc.gravity = {0,0,0};
 		sceneDesc.CPUDispatcherCount = sceneDescription.CPUDispatcherCount;
 
@@ -220,8 +221,8 @@ namespace Engine::PHI
 
 		PhysicsEngineAPI::Utils::Math::Transform transform = TransformToPhysicsTransform(_transform);
 
-		PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
-		PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc;
+		PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc{};
+		PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc{};
 		geometryDesc.type = static_cast<PhysicsEngineAPI::Utils::DataStructure::GeometryShape>(rigidComponetDesc.shapeDesc.geometryDesc.type);
 		Engine::Math::Vector4 initialGeometrData = rigidComponetDesc.shapeDesc.geometryDesc.data;
 		geometryDesc.data = { initialGeometrData.x, initialGeometrData.y, initialGeometrData.z, initialGeometrData.w };
@@ -234,7 +235,7 @@ namespace Engine::PHI
 		thrower(BoolToHRESULT(system->CreateGeometry(&destComponment->geometry, geometryDesc, verticesMeshDesc)));
 
 
-		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc;
+		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc{};
 		auto& initialMeterialData = rigidComponetDesc.shapeDesc.materialDesc.data;
 		materialDesc.data = { initialMeterialData.x, initialMeterialData.y, initialMeterialData.z };
 		thrower(BoolToHRESULT(system->CreateMaterial(&destComponment->material, materialDesc)));
@@ -257,8 +258,8 @@ namespace Engine::PHI
 
 		PhysicsEngineAPI::Utils::Math::Transform transform = TransformToPhysicsTransform(_transform);
 
-		PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
-		PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc;
+		PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc{};
+		PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc{};
 		geometryDesc.type = static_cast<PhysicsEngineAPI::Utils::DataStructure::GeometryShape>(rigidComponetDesc.shapeDesc.geometryDesc.type);
 		auto& initialGeometrData = rigidComponetDesc.shapeDesc.geometryDesc.data;
 		geometryDesc.data = { initialGeometrData.x, initialGeometrData.y, initialGeometrData.z, initialGeometrData.w };
@@ -271,7 +272,7 @@ namespace Engine::PHI
 		thrower(BoolToHRESULT(system->CreateGeometry(&destComponment->geometry, geometryDesc, verticesMeshDesc)));
 
 
-		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc;
+		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc{};
 		auto& initialMeterialData = rigidComponetDesc.shapeDesc.materialDesc.data;
 		materialDesc.data = { initialMeterialData.x, initialMeterialData.y, initialMeterialData.z };
 		thrower(BoolToHRESULT(system->CreateMaterial(&destComponment->material, materialDesc)));
@@ -294,8 +295,8 @@ namespace Engine::PHI
 
 		PhysicsEngineAPI::Utils::Math::Transform transform = TransformToPhysicsTransform(_transform);
 
-		PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
-		PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc;
+		PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc{};
+		PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc{};
 		geometryDesc.type = static_cast<PhysicsEngineAPI::Utils::DataStructure::GeometryShape>(rigidComponetDesc.shapeDesc.geometryDesc.type);
 		auto& initialGeometrData = rigidComponetDesc.shapeDesc.geometryDesc.data;
 		geometryDesc.data = { initialGeometrData.x, initialGeometrData.y, initialGeometrData.z, initialGeometrData.w };
@@ -308,7 +309,7 @@ namespace Engine::PHI
 		thrower(BoolToHRESULT(system->CreateGeometry(&destComponment->geometry, geometryDesc, verticesMeshDesc)));
 
 
-		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc;
+		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc{};
 		auto& initialMeterialData = rigidComponetDesc.shapeDesc.materialDesc.data;
 		materialDesc.data = { initialMeterialData.x, initialMeterialData.y, initialMeterialData.z };
 		thrower(BoolToHRESULT(system->CreateMaterial(&destComponment->material, materialDesc)));
@@ -358,7 +359,7 @@ namespace Engine::PHI
 		
 		PhysicsEngineAPI::Utils::Math::Vector4 plane = Vector4ToPhysicsVector4(_plane);
 
-		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc;
+		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc{};
 		auto& initialMeterialData = _material.data;
 		materialDesc.data = { initialMeterialData.x, initialMeterialData.y, initialMeterialData.z };
 		thrower(BoolToHRESULT(system->CreateMaterial(&destComponment->material, materialDesc)));
@@ -378,7 +379,7 @@ namespace Engine::PHI
 		PhysicsEngineAPI::Utils::Math::Vector3 point = Vector3ToPhysicsVector3(_point);
 		PhysicsEngineAPI::Utils::Math::Vector3 normal = Vector3ToPhysicsVector3(_normal);
 
-		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc;
+		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc{};
 		auto& initialMeterialData = _material.data;
 		materialDesc.data = { initialMeterialData.x, initialMeterialData.y, initialMeterialData.z };
 		thrower(BoolToHRESULT(system->CreateMaterial(&material, materialDesc)));
@@ -430,6 +431,7 @@ namespace Engine::PHI
 		Controller* controller = new Controller();
 		thrower(BoolToHRESULT(system->CreatePlayerController(&controller->controller, scene->scene, desc)));
 	
+		controller->SetTotalGravity(_desc.gravity);
 		*object = controller;
 	}
 
@@ -449,8 +451,8 @@ namespace Engine::PHI
 		auto iter = geometryMap.find(name);
 		if (iter == geometryMap.end())
 		{
-			PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
-			PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc;
+			PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc{};
+			PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc{};
 			geometryDesc.type = static_cast<PhysicsEngineAPI::Utils::DataStructure::GeometryShape>(_geometryDesc.type);
 			auto& initialGeometrData = _geometryDesc.data;
 			geometryDesc.data = { initialGeometrData.x, initialGeometrData.y, initialGeometrData.z, initialGeometrData.w };
@@ -478,7 +480,7 @@ namespace Engine::PHI
 		auto iter = geometryMap.find(name);
 		if (iter == geometryMap.end())
 		{
-			PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
+			PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc{};
 			geometryDesc.type = static_cast<PhysicsEngineAPI::Utils::DataStructure::GeometryShape>(_geometryDesc.type);
 			auto& initialGeometrData = _geometryDesc.data;
 			geometryDesc.data = { initialGeometrData.x, initialGeometrData.y, initialGeometrData.z, initialGeometrData.w };
@@ -502,8 +504,8 @@ namespace Engine::PHI
 		auto iter = geometryMap.find(name);
 		if (iter == geometryMap.end())
 		{
-			PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
-			PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc;
+			PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc{};
+			PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc{};
 			geometryDesc.type = static_cast<PhysicsEngineAPI::Utils::DataStructure::GeometryShape>(_geometryDesc.type);
 			auto& initialGeometrData = _geometryDesc.data;
 			geometryDesc.data = { initialGeometrData.x, initialGeometrData.y, initialGeometrData.z, initialGeometrData.w };
@@ -540,7 +542,7 @@ namespace Engine::PHI
 
 		PhysicsEngineAPI::Utils::Math::Transform transform = TransformToPhysicsTransform(_transform);
 
-		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc;
+		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc{};
 		auto& initialMeterialData = _materialDesc.data;
 		materialDesc.data = { initialMeterialData.x, initialMeterialData.y, initialMeterialData.z };
 		thrower(BoolToHRESULT(system->CreateMaterial(&destComponment->material, materialDesc)));

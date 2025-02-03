@@ -1,7 +1,5 @@
 #pragma once
 
-#pragma once
-
 class Player : public Engine::Object
 {
 public:
@@ -26,4 +24,6 @@ private:
 	Engine::Component::Animator* _animator;
 	Engine::Math::Matrix _worldMatrix;
 	Engine::Component::TextRenderer* _textRenderer;
+
+	Engine::Math::Vector3 _camRotation;
 };

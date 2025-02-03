@@ -3,7 +3,7 @@
 class GlobalLight : public Engine::Object
 {
 public:
-	GlobalLight() = default;
+	GlobalLight();
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
 
 protected:
@@ -12,6 +12,6 @@ protected:
 	void PostInitialize(const Engine::Modules& modules) override;
 
 private:
+	std::vector<Engine::Component::Light*> _pointLights;
 	Engine::Component::Light* _globalLight;
-	Engine::Component::Light* _pointLight;
 };

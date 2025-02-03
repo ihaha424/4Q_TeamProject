@@ -831,6 +831,9 @@
     <ClInclude Include="State.h">
       <Filter>Components\FiniteStateMachine</Filter>
     </ClInclude>
+    <ClInclude Include="SkyBox.h">
+      <Filter>Components\Mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1165,6 +1168,9 @@
     </ClCompile>
     <ClCompile Include="State.cpp">
       <Filter>Components\FiniteStateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyBox.cpp">
+      <Filter>Components\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

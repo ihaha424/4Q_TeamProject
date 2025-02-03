@@ -9,7 +9,7 @@ void Bloom::Initialize()
 
 	_desc =
 	{
-		.mask = 0.3f,
+		.weight = 0.3f,
 		.threshold = 1.f,
 		.level = 5
 	};
@@ -49,4 +49,6 @@ void Bloom::Render()
 	_pDeviceContext->PSSetShaderResources(2, 1, &pSRV);
 	_psSampling->SetPixelShader();
 	g_pQuad->Render();
+
+	ClearBindResource(_pDeviceContext, 2, 1);
 }

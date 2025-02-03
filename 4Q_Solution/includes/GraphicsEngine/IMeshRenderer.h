@@ -10,7 +10,8 @@ namespace GE
 		bool activeDraw;
 	};
 
-	class IMeshRenderer : public IBase
+	enum class Type { Static, Skeletal, SkyBox };
+	class IMeshRenderer : virtual public IBase
 	{
 	protected:
 		explicit IMeshRenderer() = default;
@@ -21,6 +22,7 @@ namespace GE
 		IMeshRenderer& operator=(IMeshRenderer&&) = delete;
 
 	public:
+		virtual void Query(void** ppOut) = 0;
 		virtual void GetDesc(MeshDescription* out) = 0;
 		virtual void SetDesc(const MeshDescription* in) = 0;
 	};

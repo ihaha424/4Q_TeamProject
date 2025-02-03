@@ -7,6 +7,11 @@
 #include "Mesh.h"
 #include "VIBuffer.h"
 
+void SkyBoxRenderer::Query(void** ppOut)
+{
+	(*ppOut) = static_cast<GE::ISkyBoxRenderer*>(this);
+}
+
 void SkyBoxRenderer::SetSkyBoxTexture(const wchar_t* filePath)
 {
 	_skyBox = g_pResourceMgr->LoadResource<Texture>(filePath);
@@ -40,6 +45,18 @@ void SkyBoxRenderer::SetIBLTextures(ID3D11DeviceContext* pDeviceContext)
 	}
 }
 
+void SkyBoxRenderer::SetParameter(ID3D11DeviceContext* pDeviceContext, unsigned int startSlot)
+{
+	auto* pSRV = _textures[Diffsue]->Get();
+	pDeviceContext->PSSetShaderResources(startSlot, 1, &pSRV);
+
+	pSRV = _textures[Specular]->Get();
+	pDeviceContext->PSSetShaderResources(startSlot + 1, 1, &pSRV);
+
+	pSRV = _textures[BRDF]->Get();
+	pDeviceContext->PSSetShaderResources(startSlot + 2, 1, &pSRV);
+}
+
 void SkyBoxRenderer::Initialize(const wchar_t* filePath)
 {
 	_model = g_pResourceMgr->LoadResource<StaticMesh>(filePath);
@@ -58,7 +75,7 @@ void SkyBoxRenderer::Render(ID3D11DeviceContext* pDeviceContext)
 	if (_skyBox.get())
 		pSRV = _skyBox->Get();
 
-	pDeviceContext->PSGetShaderResources(0, 1, &pSRV);
+	pDeviceContext->PSSetShaderResources(0, 1, &pSRV);
 
 	_vertexShader->SetVertexShader();
 	_pixelShader->SetPixelShader();
@@ -68,4 +85,9 @@ void SkyBoxRenderer::Render(ID3D11DeviceContext* pDeviceContext)
 		mesh->_pVIBuffer->SetParameters(pDeviceContext);
 		mesh->_pVIBuffer->DrawIndexed(pDeviceContext);
 	}
+}
+
+void SkyBoxRenderer::Release()
+{
+	MeshRenderer::Release();
 }

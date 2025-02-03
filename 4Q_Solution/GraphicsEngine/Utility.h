@@ -95,6 +95,14 @@ inline std::vector<uint8_t> ReadData(_In_z_ const wchar_t* name)
 	return blob;
 }
 
+inline void ClearBindResource(ID3D11DeviceContext* pDeviceContext, unsigned int startSlot, unsigned int count)
+{
+	ID3D11ShaderResourceView* nullSRV = nullptr;
+
+	for (unsigned int i = startSlot; i < startSlot + count; i++)
+		pDeviceContext->PSSetShaderResources(i, 1, &nullSRV);
+}
+
 #define ERROR_MESSAGE(msg) MessageBox(NULL, msg, L"Error", MB_OK | MB_ICONERROR)
 #define FAILED_CHECK_BREAK(hr) if (((HRESULT)(hr)) < 0) __debugbreak()
 

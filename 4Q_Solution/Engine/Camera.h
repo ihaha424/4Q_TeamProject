@@ -16,8 +16,10 @@ namespace Engine::Component
 
 		void Activate() const;
 
+		Engine::Math::Matrix GetCameraMatrix() const;
 		void SetPosition(Math::Vector3 position) const;
 		void SetRotation(Math::Vector3 rotation) const;
+		Engine::Math::Vector3 Forward() const;
 
 		void Rotate(Math::Vector3 rotation);
 
@@ -30,7 +32,8 @@ namespace Engine::Component
 		float _fov;
 
 		GEGraphics::Manager* _graphicsManager;
-		Graphics::Camera* _camera;
+		//Graphics::Camera* _camera;
+		GE::ICamera* _geCamera;
 	};
 }
 

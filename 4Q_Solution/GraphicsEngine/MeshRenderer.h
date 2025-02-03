@@ -24,6 +24,7 @@ public:
 public:
 	// IMeshRenderer을(를) 통해 상속됨
 	void Release() override;
+	void Query(void** ppOut) override {};
 	void SetDesc(const GE::MeshDescription* in) override;
 	void GetDesc(GE::MeshDescription* out) override;
 

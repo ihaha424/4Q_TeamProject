@@ -1,6 +1,3 @@
-#ifndef __ToneMapping__
-#define __ToneMapping__
-
 #include "PostProcess.hlsli"
 #include "ShaderUtilities.hlsli"
 
@@ -17,26 +14,41 @@ float3 Uncharted2Tonemap(float3 x)
     return ((x * (A * x + C * B) + D * E) / (x * (A * x + B) + D * F)) - E / F;
 }
 
-Texture2D txPostProcess : register(t2);
-
-float4 main(PS_INPUT input) : SV_Target
+float GetLuminance(float3 color)
 {
-    float4 source0 = txSource.Sample(samLinear_wrap, input.uv);
-    float4 source1 = txPostProcess.Sample(samLinear_wrap, input.uv);
-    
-    float3 blend = (source0 + source1).rgb;
-    
-    float3 texColor = GammaToLinearSpace(blend);
-    texColor *= 4; // Hardcoded Exposure Adjustment
+    return dot(color, float3(0.2126, 0.7152, 0.0722));
+}
 
-    float ExposureBias = 2.0f;
-    float3 curr = Uncharted2Tonemap(ExposureBias * texColor);
+#ifdef Lum
+Texture2D txPostProcess : register(t2);
+#else
+Texture2D txLuminance : register(t2);
+#endif
+float4 main(PS_INPUT input) : SV_Target
+{        
+    return txSource.Sample(samLinear_wrap, input.uv);
+    
+#ifdef Lum
+    float3 color = txPostProcess.Sample(samLinear_wrap, input.uv).rgb;
+    color = GammaToLinearSpace(color);
+    float luminance = GetLuminance(color);
+    return float4(luminance, luminance, luminance, 1);
+#else
+    float3 base = txSource.Sample(samLinear_wrap, input.uv).rgb;
+    float3 texColor = GammaToLinearSpace(base);
+    
+    uint width, height, level;
+    txLuminance.GetDimensions(0, width, height, level);
+    float avgLuminance = txLuminance.SampleLevel(samLinear_wrap, input.uv, level - 1).r;
+    float pixelLuminance = GetLuminance(texColor);
+    texColor *= pixelLuminance * 0.042 / avgLuminance;
+
+    float3 curr = Uncharted2Tonemap(texColor);
 
     float3 whiteScale = 1.0f / Uncharted2Tonemap(W);
     float3 color = curr * whiteScale;
       
     float3 retColor = LinearToGammaSpace(color);
     return float4(retColor, 1);
-}
-
 #endif
+}

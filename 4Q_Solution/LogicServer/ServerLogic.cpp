@@ -58,38 +58,9 @@ void ServerLogic::Update()
             continue;
         } // if end
 
-        Engine::Physics::AdditionalQueryData raycastInfo;
-        auto pos = _playerSlot[i]._controller->GetPosition();
-        pos.y += -1.f;
-        _mainScene->Raycast(raycastInfo, pos, { 0,-1,0 }, 10.f);
-        //if (raycastInfo.num == 1 && raycastInfo.distance < 0.5f && raycastInfo.distance > 0.1f)
-        if(_playerSlot[i]._flag & 0x04 || _playerSlot[i]._flag & 0x01)
-        {
-            printf("Player%d On The Ground.\n", i + 1);
-            auto temp = _playerSlot->_controller->GetGravity();
-            temp.y = 0;
-            _playerSlot->_controller->SetGravity(temp);
-            _playerSlot->_controller->SetGravity({0,2000.f,0});
-        }
-        else
-        {
-            printf("Player%d Above the Sky.\n", i + 1);
-        }
-
-        //_playerSlot[i]._flag = _playerSlot[i]._controller->Move(
-        //    _playerSlot[i]._direction * _playerSlot[i]._speed / 5000,
-        //    0.0001f,
-        //    _timer->GetDeltaTime()
-        //);
-
         _playerSlot[i]._controller->SetVelocity(_playerSlot[i]._direction * _playerSlot[i]._speed);
         _playerSlot[i]._controller->Update(_timer->GetDeltaTime());
         _playerSlot[i]._flag = _playerSlot[i]._controller->GetCollisionFlag();
-
-        //if (_playerSlot[i]._flag & 0x04 || _playerSlot[i]._flag & 0x01)
-        //    printf("Player%d On The Ground.\n", i + 1);
-        //else
-        //    printf("Player%d Above the Sky.\n", i + 1);
 
     } // for end
     _physicsManager->Update(_timer->GetDeltaTime());

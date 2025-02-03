@@ -181,6 +181,11 @@ namespace Engine::PHI
 		velocity += gravity;
 
 		controllerCollisionFlag = controller->Move(Vector3ToPhysicsVector3(velocity * deltaTime), 0.001f, deltaTime);
+		if (controllerCollisionFlag & 0x04 || controllerCollisionFlag & 0x01)
+		{
+			gravity.y = 0;
+		}
+		
 		force = Engine::Math::Vector3::Zero;
 	}
 	void Controller::Finalize()

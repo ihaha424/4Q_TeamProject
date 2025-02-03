@@ -144,6 +144,21 @@ void Player::PreInitialize(const Engine::Modules& modules)
 			_remote->SetDirection(Engine::Math::Vector3::Zero);
 		});
 
+	Engine::Input::IAction* jumpAction = nullptr;
+	mappingContext->GetAction(L"Jump", &jumpAction);
+	jumpAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) 
+		{
+			_sync->_jump.set_power(100.f);
+			_sync->_jump.SerializeToString(&_sync->_msgBuffer);
+
+			Engine::Application::GetNetworkManager()->SaveSendData(
+				(short)PacketID::Jump,
+				_sync->_msgBuffer,
+				_sync->_jump.ByteSizeLong(),
+				_sync->GetSerialNumber()
+			);
+		});
+
 	Engine::Input::IAction* cameraAction = nullptr;
 	mappingContext->GetAction(L"Camera", &cameraAction);
 	cameraAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)

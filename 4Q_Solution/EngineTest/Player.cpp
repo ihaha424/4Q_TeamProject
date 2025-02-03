@@ -148,7 +148,7 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	mappingContext->GetAction(L"Jump", &jumpAction);
 	jumpAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) 
 		{
-			_sync->_jump.set_power(100.f);
+			_sync->_jump.set_power(2500.f);
 			_sync->_jump.SerializeToString(&_sync->_msgBuffer);
 
 			Engine::Application::GetNetworkManager()->SaveSendData(
@@ -205,8 +205,8 @@ void Player::PostUpdate(const float deltaTime)
 	_chractorController->_controller->SetPosition(_transform.position);
 	tempPostion.z -= 300.f;
 	tempPostion.y += 300.f;
-	//_camera->SetPosition(tempPostion);
-	//_camera->SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
+	_camera->SetPosition(tempPostion);
+	_camera->SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
 
 	// auto speed = _movement->GetSpeed();
 	// auto dir = _movement->GetDirection();

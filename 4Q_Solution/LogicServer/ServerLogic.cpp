@@ -52,7 +52,7 @@ void ServerLogic::Update()
     static float elapsedTime;
     elapsedTime += _timer->GetDeltaTime();
 
-    unsigned short collisionFlg;
+    static unsigned short collisionFlg;
 
     for (int i = 0; i < 2; i++) {
 
@@ -78,6 +78,7 @@ void ServerLogic::Update()
                 continue;
             } // if end
             Engine::Math::Vector3 position = _playerSlot[i]._controller->GetPosition();
+            printf("Player%d Position : (%f, %f, %f)\n", i + 1, position.x, position.y, position.z);
             _moveSync.set_x(position.x);
             _moveSync.set_y(position.y);
             _moveSync.set_z(position.z);
@@ -207,6 +208,14 @@ void ServerLogic::MessageDispatch()
 
             break;
         } // case end
+        case PacketID::Jump:
+        {
+            _jump.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+            int playerIdx = packet._serialNumber - 1;
+            _playerSlot[playerIdx]._controller->SetGravity({ 0.f, _jump.power(), 0.f });
+
+            break;
+        } // case end
         case PacketID::StateChange:
         {
             _stateChange.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
@@ -274,7 +283,7 @@ void ServerLogic::RegistPlayer(Player& player)
     Engine::Physics::ControllerDesc cd;
     cd.height = 10.f;
     cd.radius = 2.f;
-    cd.gravity = { 0.f, -9.8f, 0.f };
+    cd.gravity = { 0.f, -0.98f, 0.f };
     cd.contactOffset = 3.f;
     cd.stepOffset = 2.f;
     cd.slopeLimit = 0.5f;

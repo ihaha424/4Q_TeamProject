@@ -3,6 +3,7 @@
 
 #include "ConsoleTarget.h"
 #include "FileTarget.h"
+#include "Stream.h"
 
 namespace DSH::Time
 {
@@ -11,16 +12,21 @@ namespace DSH::Time
 
 DSH::Logger::System::System()
 	: _referenceCount(1), _leastLogLevel(LogLevel::Trace),
-	_loggableMap
-	{
-		std::pair<const LogLevel, bool>{LogLevel::Trace, true},
-		std::pair<const LogLevel, bool>{LogLevel::Debug, true},
-		std::pair<const LogLevel, bool>{LogLevel::Information, true},
-		std::pair<const LogLevel, bool>{LogLevel::Warning, true},
-		std::pair<const LogLevel, bool>{LogLevel::Error, true},
-		std::pair<const LogLevel, bool>{LogLevel::Fatal, true}
-	}
+	_loggableMap{
+			std::pair<const LogLevel, bool>{LogLevel::Trace, true},
+			std::pair<const LogLevel, bool>{LogLevel::Debug, true},
+			std::pair<const LogLevel, bool>{LogLevel::Information, true},
+			std::pair<const LogLevel, bool>{LogLevel::Warning, true},
+			std::pair<const LogLevel, bool>{LogLevel::Error, true},
+			std::pair<const LogLevel, bool>{LogLevel::Fatal, true}
+		}
 {
+}
+
+DSH::Logger::System::~System()
+{
+	for (const auto target : _targets) delete target;
+	_targets.clear();
 }
 
 HRESULT DSH::Logger::System::QueryInterface(const IID& riid, void** ppvObject)
@@ -47,20 +53,20 @@ ULONG DSH::Logger::System::Release()
 HRESULT DSH::Logger::System::CreateStream(IStream** ppStream)
 {
 	if (ppStream == nullptr) return E_INVALIDARG;
-	//Stream* pTickTimer = new Stream();
-	//if (pTickTimer == nullptr) return E_OUTOFMEMORY;
-	//*ppStream = pTickTimer;
+	Stream* pTickTimer = new Stream(&_targets, &_leastLogLevel, &_loggableMap);
+	if (pTickTimer == nullptr) return E_OUTOFMEMORY;
+	*ppStream = pTickTimer;
 	return S_OK;
 }
 
 void DSH::Logger::System::EnableConsole()
 {
-	_targets.push_back(std::make_unique<Target::ConsoleTarget>());
+	_targets.push_back(new Target::ConsoleTarget);
 }
 
-void DSH::Logger::System::EnableFile(std::filesystem::path path)
+void DSH::Logger::System::EnableFile(const std::filesystem::path path)
 {
-	_targets.push_back(std::make_unique<Target::FileTarget>(path));
+	_targets.push_back(new Target::FileTarget(path));
 }
 
 void DSH::Logger::System::SetLeastLogLevel(const LogLevel logLevel)
@@ -70,5 +76,5 @@ void DSH::Logger::System::SetLeastLogLevel(const LogLevel logLevel)
 
 void DSH::Logger::System::SetLoggable(const LogLevel logLevel, const bool loggable)
 {
-	_loggableMap[logLevel] = loggable;
+	_loggableMap.at(logLevel) = loggable;
 }

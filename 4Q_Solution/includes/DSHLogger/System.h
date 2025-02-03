@@ -11,7 +11,6 @@ namespace DSH::Logger
 	{
 	public:
 		System();
-		~System() override;
 
 		HRESULT QueryInterface(const IID& riid, void** ppvObject) override;
 		ULONG AddRef() override;
@@ -28,7 +27,7 @@ namespace DSH::Logger
 	private:
 		ULONG _referenceCount;
 
-		std::vector<Target::Target*> _targets;
+		std::vector<std::unique_ptr<Target::Target>> _targets;
 
 		LogLevel _leastLogLevel;
 		std::unordered_map<LogLevel, bool> _loggableMap;

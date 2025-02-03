@@ -10,6 +10,7 @@
 #include <format>
 #include <vector>
 #include <unordered_map>
+#include <array>
 
 #include "Exports.h"
 #include "Declare.h"

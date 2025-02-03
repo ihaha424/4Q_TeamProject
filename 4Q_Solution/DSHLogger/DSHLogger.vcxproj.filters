@@ -43,6 +43,9 @@
     <Filter Include="Targets\FileTarget">
       <UniqueIdentifier>{6d2e5d25-d335-4578-933c-297e35a5f39e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Stream">
+      <UniqueIdentifier>{e35db8d7-5638-4044-9cc0-91009eb86a5d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -90,6 +93,9 @@
     <ClInclude Include="FileTarget.h">
       <Filter>Targets\FileTarget</Filter>
     </ClInclude>
+    <ClInclude Include="Stream.h">
+      <Filter>Stream</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -118,6 +124,9 @@
     </ClCompile>
     <ClCompile Include="FileTarget.cpp">
       <Filter>Targets\FileTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream.cpp">
+      <Filter>Stream</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

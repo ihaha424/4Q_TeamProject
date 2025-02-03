@@ -26,10 +26,6 @@ namespace DSH::Logger
 			/* [annotation][in] */
 			_In_ std::filesystem::path path) = 0;
 
-		virtual void STDMETHODCALLTYPE EnableDatabase(
-			/* [annotation][in] */
-			_In_ std::filesystem::path path) = 0;
-
 		virtual void STDMETHODCALLTYPE SetLeastLogLevel(
 			/* [annotation][in] */
 			_In_ LogLevel logLevel) = 0;

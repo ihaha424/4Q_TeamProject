@@ -11,7 +11,7 @@ namespace Engine::PHI
 		/********************************
 					  Manager
 		*********************************/
-		void Initialize(Engine::Physics::PhysicsType physicsType) override;
+		void Initialize(Engine::Physics::PhysicsType physicsType, bool visualDebug, float length, float speed) override;
 		void WorldInitialize() override;
 		void Update(float deltaTime) override;
 		void FetchScene(bool block) override;
@@ -49,7 +49,7 @@ namespace Engine::PHI
 		void CloneDynamic(Physics::IRigidDynamicComponent** destObject, const Engine::Transform& transform, const Physics::IRigidDynamicComponent* object) override;
 		void CreatePlane(Physics::IRigidComponent** object, const Engine::Math::Vector4& plane, const Physics::MaterialDesc& material) override;
 		void CreatePlane(Physics::IRigidComponent** object, const Engine::Math::Vector3& point, const Engine::Math::Vector3& normal, const Physics::MaterialDesc& material) override;
-		void CreateStaticBoundBoxActor(Physics::IRigidComponent** object, const Engine::Math::Vector3& boxExtents) override;
+		void CreateStaticBoundBoxActor(Physics::IRigidComponent** object, const Engine::Math::Vector3& boxExtents, const Engine::Transform& transform) override;
 		void CreateControllerManager(Physics::IScene* Scene) override;
 		void CreatePlayerController(Physics::IController** object, Physics::IScene* Scene, const Engine::Physics::ControllerDesc& desc) override;
 	
@@ -68,7 +68,7 @@ namespace Engine::PHI
 			const char* filePath
 		) override;
 
-		void CreateStatic(
+		void CreateTriangleStatic(
 			Engine::Physics::IRigidStaticComponent** destObject, 
 			const char* geomtryName, 
 			const Engine::Physics::MaterialDesc& materialDesc, 

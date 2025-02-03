@@ -2,6 +2,16 @@
 
 #define WIN32_LEAN_AND_MEAN             // 거의 사용되지 않는 내용을 Windows 헤더에서 제외합니다.
 
+//#define LEFT_HANDED_COIRDINATE_SYSTEM
+//
+//// If you want to left haned coirdinate system, Define This Flag.
+//#ifdef LEFT_HANDED_COIRDINATE_SYSTEM
+//	#define AXIS -1
+//#else
+//	#define AXIS 1
+//#endif
+
+
 #ifdef NDEBUG	// _DEBUG / NDEBUG
 	#define DEBUG_MODE(Code)
 	#define DEBUG_FLAG false

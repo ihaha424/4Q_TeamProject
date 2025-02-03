@@ -41,12 +41,12 @@ namespace PhysicsEngineAPI
 				*/
 				ConvexMesh,
 				TriangleMesh,
+				HeightField,
 				// Delete ToDo:
 				///* 따로 구분하는게 좋을 듯
 				//	Meshes or Height field
 				//		: This geometry can Cooking Data
 				//*/
-				//HeightField,
 
 				/**
 				 * @brief Triangle or Convex derive Basics Shape

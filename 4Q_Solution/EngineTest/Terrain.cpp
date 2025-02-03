@@ -30,13 +30,13 @@ void Terrain::PreInitialize(const Engine::Modules& modules)
 	geometryDesc.data = {1, 1, 1};
 	PhysicsManager->LoadTriangleMesh(geometryDesc, "terrain", "../Resources/Level/Level.fbx");
 	Engine::Transform transform{};
-	PhysicsManager->CreateStatic(&_terrainMesh->_rigidbody, "terrain", { {0.f,0.f,0.f } }, transform);
+	PhysicsManager->CreateTriangleStatic(&_terrainMesh->_rigidbody, "terrain", { {0.f,0.f,0.f } }, transform);
 	PhysicsManager->GetScene(0)->AddActor(_terrainMesh->_rigidbody);
-	_terrainMesh->_rigidbody->SetTranslate({ -1000.f, -200.f, -1000.f });
+	_terrainMesh->_rigidbody->SetTranslate({ -1000.f, -200.f, 1000.f });
 
 	PhysicsManager->CreateStaticBoundBoxActor(&_terrainMesh->_boundBox);
 	PhysicsManager->GetScene(1)->AddActor(_terrainMesh->_boundBox);
-	_terrainMesh->_boundBox->SetTranslate({ -1000.f, -200.f, -1000.f });
+	_terrainMesh->_boundBox->SetTranslate({ -1000.f, -200.f, 1000.f });
 }
 
 void Terrain::PostInitialize(const Engine::Modules& modules)

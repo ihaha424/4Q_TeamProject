@@ -2,6 +2,8 @@
 
 #include "IController.h"
 #include "PhysXUtils.h"
+#include "PhysXReportCallback.h"
+#include "PhysXBehaviorCallback.h"
 
 namespace PhysicsEngineAPI
 {
@@ -9,6 +11,7 @@ namespace PhysicsEngineAPI
 		: public IController
 	{
 	public:
+		PhysXController();
 		void SetName(const char* Name) override;
 		const char* GetName() const override;
 
@@ -69,11 +72,15 @@ namespace PhysicsEngineAPI
 				Capsule Controller
 		************************************/
 		physx::PxCapsuleController* controller;
+		PhysXReportCallback*	hitReportCallback;
+		PhysXBehaviorCallback*	behaviorCallback;
 		
 		/***********************************
 				Controller
 		************************************/
 		physx::PxVec3 gravity;
+		physx::PxU8 flags;
+		
 
 		friend class PhysXSystem;
 	};

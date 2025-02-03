@@ -1,6 +1,7 @@
 #pragma once
 #include "PhysXUtils.h"
 #include "PhysXScene.h"
+#include "PhysxCollisionEvent.h"
 #include "PhysXActor.h"
 #include "PhysXStaticActor.h"
 #include "PhysXDynamicActor.h"
@@ -8,4 +9,6 @@
 #include "PhysXGeometry.h"
 #include "PhysXShape.h"
 #include "PhysXMaterial.h"
+#include "PhysXBehaviorCallback.h"
+#include "PhysXReportCallback.h"
 #include "PhysXController.h"

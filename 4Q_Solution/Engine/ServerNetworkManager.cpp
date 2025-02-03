@@ -39,6 +39,13 @@ void Engine::ServerNetwork::Manager::Finalize()
 	Client::Finalize();
 }
 
+void Engine::ServerNetwork::Manager::Disconnect()
+{
+	Client::SavePacketData("", (short)PacketID::Exit, 0, 0);
+	Client::SendUpdate();
+	Client::DisconnectWait();
+}
+
 void Engine::ServerNetwork::Manager::Register(Engine::Network::Terminal* terminal)
 {
 	_terminalList.push_back(terminal);
@@ -59,6 +66,7 @@ void Engine::ServerNetwork::Manager::DispatchPacket()
 {
 	if (_msgContainer->empty()) {
 		bool res = Client::SwapPacketContainer();
+
 		if (res == false) {
 			return;
 		}

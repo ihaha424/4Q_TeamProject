@@ -24,3 +24,4 @@
 #include "RigidStaticComponent.h"
 #include "RigidDynamicComponent.h"
 #include "RigidKinematicComponent.h"
+#include "ChractorController.h"

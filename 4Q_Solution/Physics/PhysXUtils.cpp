@@ -29,4 +29,12 @@ namespace PhysicsEngineAPI
 	{
 		return Utils::Math::Transform{{ pxTransform.p.x, pxTransform.p.y, pxTransform.p.z }, { pxTransform.q.x, pxTransform.q.y, pxTransform.q.z, pxTransform.q.w }};
 	}
+	physx::PxExtendedVec3 Vector3ToPxExtendedVec3(const Utils::Math::Vector3& vector3)
+	{
+		return physx::PxExtendedVec3{ vector3.x, vector3.y, vector3.z };
+	}
+	Utils::Math::Vector3 PxExtendedVec3ToVector3(const physx::PxExtendedVec3& pxVec3)
+	{
+		return Utils::Math::Vector3{ float(pxVec3.x), float(pxVec3.y), float(pxVec3.z) };
+	}
 }

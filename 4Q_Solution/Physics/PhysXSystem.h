@@ -15,7 +15,7 @@ namespace PhysicsEngineAPI
 		virtual ~PhysXSystem();
 
 		// Create Physics System
-		bool CreatePhysics(bool isVisualDebuger) override;
+		bool CreatePhysics(bool isVisualDebuger, float length, float speed) override;
 		bool CreateScene(_OUT_ IScene** scene, const Utils::Description::SceneDesc& sceneDescription, const char* name) override;
 		bool CreateObject(_OUT_ IObject** object, const Utils::DataStructure::RigidBodyType& type) override;
 		bool CreateGeometry(_OUT_ IGeometry** geometry, const Utils::Description::GeometryDesc& geometryDesc, const Utils::Description::VerticesMeshDesc verticesMeshDesc) override;
@@ -24,7 +24,7 @@ namespace PhysicsEngineAPI
 
 		// Camera Scene
 		bool CreateCameraScene(_OUT_ IScene** scene, const Utils::Description::SceneDesc& sceneDescription) override;
-		bool CreateStaticBoundBoxActor(_OUT_ IObject** object, const Utils::Math::Vector3& boxExtents) override;
+		bool CreateStaticBoundBoxActor(_OUT_ IObject** object, const Utils::Math::Vector3& boxExtents, const Utils::Math::Transform& transform) override;
 
 		// Frame Per Physics System
 		void UpdateScene(unsigned int sceneNumber, const float deltaTime) override;
@@ -112,6 +112,28 @@ namespace PhysicsEngineAPI
 			IMaterial* material
 		) override;
 
+
+		bool CreateControllerManager(
+			_OUT_ IScene* Scene
+		) override;
+
+		bool CreatePlayerController(
+			_OUT_ IController** object,
+			IScene* Scene,
+			const Utils::Description::ControllerDesc& desc
+		) override;
+
+		bool LoadTriangleMesh(
+			_OUT_ IGeometry** geometry,
+			const Utils::Description::GeometryDesc& geometryDesc,
+			const char* filePath
+		) override;
+
+		bool LoadHeightMap(
+			_OUT_ IGeometry** geometry,
+			const Utils::Description::GeometryDesc& geometryDesc,
+			const char* filePath
+		) override;
 
 
 	public:

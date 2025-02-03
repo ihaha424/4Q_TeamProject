@@ -4,6 +4,9 @@
 #include "PHIRigidStaticComponent.h"
 #include "PHIRigidDynamicComponent.h"
 #include "PHIRigidKinematicComponent.h"
+#include "PHIManager.h"
+#include "PHICoordinateConvert.h"
+using namespace Engine::PHI::CONVERT;
 
 namespace Engine::PHI
 {
@@ -31,14 +34,14 @@ namespace Engine::PHI
 
 	bool Scene::Raycast(Engine::Physics::AdditionalQueryData& raycastInfo, const Engine::Math::Vector3& startPosition, const Engine::Math::Vector3& direction, float distance)
 	{
-		bool result = scene->Raycast(data, { startPosition.x, startPosition.y, startPosition.z }, { direction.x, direction.y, direction.z }, distance);
+		bool result = scene->Raycast(data, Vector3ToPhysicsVector3(startPosition), Vector3ToPhysicsVector3(direction), distance);
 		raycastInfo.flag = static_cast<Physics::QueryData::QueryFlag>(data.flag);
 		raycastInfo.num = data.num;
 		raycastInfo.UserDatas.reserve(data.num);
 		for(size_t i = 0; i < data.num; i++)
 			raycastInfo.UserDatas.push_back(data.UserDatas[i]);
-		raycastInfo.normal = data.normal;
-		raycastInfo.position = data.position;
+		raycastInfo.normal = PhysicsVector3ToVector3(data.normal);
+		raycastInfo.position = PhysicsVector3ToVector3(data.position);
 		raycastInfo.distance = data.distance;
 
 		return result;
@@ -51,11 +54,12 @@ namespace Engine::PHI
 		const Engine::Physics::VerticesMeshDesc&	verticesMeshDesc, 
 		const Engine::Transform&					transform)
 	{
-		PhysicsEngineAPI::IGeometry* geometry = FindGeometry(name, geometryDesc, verticesMeshDesc);
+		PhysicsEngineAPI::IGeometry* geometry = system->FindGeometry(name, geometryDesc, verticesMeshDesc);
 
 		bool result = scene->Overlap(data,
 			geometry,
-			{ { transform.position.x, transform.position.y, transform.position.z }, { transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w} });
+			TransformToPhysicsTransform(transform)
+		);
 		overlapInfo.flag = static_cast<Physics::QueryData::QueryFlag>(data.flag);
 		overlapInfo.num = data.num;
 		overlapInfo.UserDatas.reserve(data.num);
@@ -74,20 +78,20 @@ namespace Engine::PHI
 		const Engine::Math::Vector3&				direction, 
 		float										distance)
 	{
-		PhysicsEngineAPI::IGeometry* geometry = FindGeometry(name, geometryDesc, verticesMeshDesc);
+		PhysicsEngineAPI::IGeometry* geometry = system->FindGeometry(name, geometryDesc, verticesMeshDesc);
 
 		bool result = scene->Sweep(data,
 			geometry,
-			{ { transform.position.x, transform.position.y, transform.position.z }, { transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w} },
-			{ direction.x, direction.y, direction.z },
+			TransformToPhysicsTransform(transform),
+			Vector3ToPhysicsVector3(direction),
 			distance);
 		sweepInfo.flag = static_cast<Physics::QueryData::QueryFlag>(data.flag);
 		sweepInfo.num = data.num;
 		sweepInfo.UserDatas.reserve(data.num);
 		for (size_t i = 0; i < data.num; i++)
 			sweepInfo.UserDatas.push_back(data.UserDatas[i]);
-		sweepInfo.normal = data.normal;
-		sweepInfo.position = data.position;
+		sweepInfo.normal = PhysicsVector3ToVector3(data.normal);
+		sweepInfo.position = PhysicsVector3ToVector3(data.position);
 		sweepInfo.distance = data.distance;
 
 		return result;
@@ -123,73 +127,17 @@ namespace Engine::PHI
 		return scene->AddActor(componet->object);
 	}
 
-	bool Scene::AddGeomtry(const std::string& name, const Engine::Physics::GeometryDesc& _geometryDesc, const Engine::Physics::VerticesMeshDesc& _verticesMeshDesc)
-	{
-		PhysicsEngineAPI::IGeometry* geometry = nullptr;
-		bool result = false;
-		auto iter = geometryMap.find(name);
-		if (iter == geometryMap.end())
-		{
-			PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
-			PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc;
-			geometryDesc.type = static_cast<PhysicsEngineAPI::Utils::DataStructure::GeometryShape>(_geometryDesc.type);
-			auto& initialGeometrData = _geometryDesc.data;
-			geometryDesc.data = { initialGeometrData.x, initialGeometrData.y, initialGeometrData.z, initialGeometrData.w };
-			verticesMeshDesc.vertices.count = _verticesMeshDesc.vertices.count;
-			verticesMeshDesc.vertices.stride = _verticesMeshDesc.vertices.stride;
-			verticesMeshDesc.vertices.data = _verticesMeshDesc.vertices.data;
-			verticesMeshDesc.indices.count = _verticesMeshDesc.indices.count;
-			verticesMeshDesc.indices.stride = _verticesMeshDesc.indices.stride;
-			verticesMeshDesc.indices.data = _verticesMeshDesc.indices.data;
-			result = system->CreateGeometry(&geometry, geometryDesc, verticesMeshDesc);
-			geometryMap[name] = geometry;
-		}
-
-		return result;
-	}
-
-
 	void* Scene::GetScene()
 	{
 		return scene;
 	}
 
-	PhysicsEngineAPI::IGeometry* Scene::FindGeometry(
-		const std::string& name,
-		const Engine::Physics::GeometryDesc&			_geometryDesc,
-		const Engine::Physics::VerticesMeshDesc&		_verticesMeshDesc
-	)
-	{
-		PhysicsEngineAPI::IGeometry* geometry = nullptr;
-		auto iter = geometryMap.find(name);
-		if (iter == geometryMap.end())
-		{
-			PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc;
-			PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc;
-			geometryDesc.type = static_cast<PhysicsEngineAPI::Utils::DataStructure::GeometryShape>(_geometryDesc.type);
-			auto& initialGeometrData = _geometryDesc.data;
-			geometryDesc.data = { initialGeometrData.x, initialGeometrData.y, initialGeometrData.z, initialGeometrData.w };
-			verticesMeshDesc.vertices.count = _verticesMeshDesc.vertices.count;
-			verticesMeshDesc.vertices.stride = _verticesMeshDesc.vertices.stride;
-			verticesMeshDesc.vertices.data = _verticesMeshDesc.vertices.data;
-			verticesMeshDesc.indices.count = _verticesMeshDesc.indices.count;
-			verticesMeshDesc.indices.stride = _verticesMeshDesc.indices.stride;
-			verticesMeshDesc.indices.data = _verticesMeshDesc.indices.data;
-			system->CreateGeometry(&geometry, geometryDesc, verticesMeshDesc);
-			geometryMap[name] = geometry;
-		}
-		else
-			geometry = iter->second;
-
-		return geometry;
-	}
 	void Scene::SetGravity(const Math::Vector3& gravity)
 	{
-		scene->SetGravity({ gravity.x, gravity.y, gravity.z});
+		scene->SetGravity(Vector3ToPhysicsVector3(gravity));
 	}
 	const Math::Vector3& Scene::GetGravity() const
 	{
-		auto& gravity = scene->GetGravity();
-		return { gravity.x, gravity.y, gravity.z };
+		return PhysicsVector3ToVector3(scene->GetGravity());
 	}
 }

@@ -51,6 +51,7 @@ namespace Engine
 	    static Physics::IManager* GetPhysicsManager();
 	    static Load::IManager* GetLoadManager();
 		static Content::IManager* GetContentManager();
+		static Logger::IManager* GetLoggerManager();
 
 	private:
 		static void CreateTimeManager(Time::Manager** timeManager);
@@ -61,6 +62,7 @@ namespace Engine
 	    static void CreatePhysicsManager(Physics::Manager** physicsManager);
 	    static void CreateLoadManager(Load::Manager** loadManager);
 		static void CreateContentManager(Content::Manager** contentManager);
+		static void CreateLoggerManager(Logger::Manager** loggerManager);
 
 		static Time::Manager* _timeManager;
 		static Window::Manager* _windowManager;
@@ -70,6 +72,7 @@ namespace Engine
 	    static Physics::Manager* _physicsManager;
 	    static Load::Manager* _loadManager;
 		static Content::Manager* _contentManager;
+		static Logger::Manager* _loggerManager;
 	};
 }
 

@@ -17,5 +17,8 @@ private:
 	Engine::Component::StaticMesh* _staticMesh;
 	std::filesystem::path _meshPath;
 	Engine::Math::Matrix _matrix;
+
+	Engine::Component::RigidStatic* _terrainMesh;
+
 };
 

@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "PHIRigidComponent.h"
+#include "PHICoordinateConvert.h"
 
+using namespace Engine::PHI::CONVERT;
 namespace Engine::PHI
 {
 	RigidComponent::RigidComponent()
@@ -19,29 +21,27 @@ namespace Engine::PHI
 
 	void RigidComponent::SetTranslate(const Math::Vector3& position)
 	{
-		object->SetTranslate({ position.x, position.y, position.z });
+		object->SetTranslate(Vector3ToPhysicsVector3(position));
 	}
 	const Math::Vector3 RigidComponent::GetTranslate() const
 	{
-		return Math::Vector3(object->GetTranslate());
+		return PhysicsVector3ToVector3(object->GetTranslate());
 	}
 	void RigidComponent::SetRotation(const Math::Quaternion& Rotation)
 	{
-		object->SetRotation({ Rotation.x, Rotation.y, Rotation.z, Rotation.w });
+		object->SetRotation(QuaternionToPhysicsVector4(Rotation));
 	}
 	const Math::Quaternion RigidComponent::GetRotation() const
 	{
-		return Math::Quaternion(object->GetRotation());
+		return PhysicsVector4ToQuaternion(object->GetRotation());
 	}
 	void RigidComponent::SetTransform(const Transform& transform)
 	{
-		object->SetTransform({ { transform.position.x, transform.position.y, transform.position.z },
-			{ transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w} });
+		object->SetTransform(TransformToPhysicsTransform(transform));
 	}
 	const Transform RigidComponent::GetTransform() const
 	{
-		auto transform = object->GetTransform();
-		return Transform({ transform.position, transform.rotation, {1,1,1} });
+		return PhysicsTransformToTransform(object->GetTransform());
 	}
 
 
@@ -55,37 +55,35 @@ namespace Engine::PHI
 	}
 	void RigidComponent::SetLocalTranslate(const Math::Vector3& LocalTranslate)
 	{
-		shape->SetLocalTranslate({ LocalTranslate.x, LocalTranslate.y, LocalTranslate.z });
+		shape->SetLocalTranslate(Vector3ToPhysicsVector3(LocalTranslate));
 	}
 	const Math::Vector3 RigidComponent::GetLocalTranslate() const
 	{
-		return Math::Vector3(shape->GetLocalTranslate());
+		return PhysicsVector3ToVector3(shape->GetLocalTranslate());
 	}
 	void RigidComponent::SetLocalRotation(const Math::Quaternion& LocalRotation)
 	{
-		shape->SetLocalRotation({ LocalRotation.x, LocalRotation.y, LocalRotation.z, LocalRotation.w });
+		shape->SetLocalRotation(QuaternionToPhysicsVector4(LocalRotation));
 	}
 	const Math::Quaternion RigidComponent::GetLocalRotation() const
 	{
-		return Math::Quaternion(shape->GetLocalRotation());
+		return PhysicsVector4ToQuaternion(shape->GetLocalRotation());
 	}
 	void RigidComponent::SetLocalTransform(const Transform& LocalTransform)
 	{
-		shape->SetLocalTransform({ { LocalTransform.position.x, LocalTransform.position.y, LocalTransform.position.z },
-			{ LocalTransform.rotation.x, LocalTransform.rotation.y, LocalTransform.rotation.z, LocalTransform.rotation.w} });
+		shape->SetLocalTransform(TransformToPhysicsTransform(LocalTransform));
 	}
 	const Transform RigidComponent::GetLocalTransform() const
 	{
-		auto transform = shape->GetLocalTransform();
-		return Transform({ transform.position, transform.rotation, {1,1,1} });
+		return PhysicsTransformToTransform(shape->GetLocalTransform());
 	}
 	void RigidComponent::SetScale(const Math::Vector3& Scale)
 	{
-		shape->SetScale({ Scale.x, Scale.y, Scale.z });
+		shape->SetScale(Vector3ToPhysicsVector3(Scale));
 	}
 	const Math::Vector3 RigidComponent::GetScale() const
 	{
-		return Math::Vector3(shape->GetScale());
+		return PhysicsVector3ToVector3(shape->GetScale());
 	}
 
 
@@ -115,14 +113,10 @@ namespace Engine::PHI
 	void RigidComponent::Initialize()
 	{
 		object->SetUserData(collision);
-		shape->SetUserData(collision);
+		if(nullptr != shape) shape->SetUserData(collision);
 	}
 	void RigidComponent::Update(float deltaTime) const
 	{
-		// TODO CollisionUpdate 임시로 여기서 적용 원래는 FixedUpdate로 가는 것이 맞음 아님 Scene으로 모아서 할 수도 있음
-		collision->FixedUpdate();
-
-
 		// TODO Transform Update(Respone)
 		// TODO 로직 후 적용
 		// TODO Transform Update(Request)
@@ -131,6 +125,12 @@ namespace Engine::PHI
 		// TODO
 		// TODO
 	}
+
+	void RigidComponent::FixedUpdate() const
+	{
+		collision->FixedUpdate();
+	}
+
 	void RigidComponent::Finalize()
 	{
 		constexpr Utility::SafeRelease releaser;
@@ -139,9 +139,9 @@ namespace Engine::PHI
 		releaser(&shape);
 		releaser(&geometry);
 		releaser(&material);
-		collision->Finalize();
-		delete collision;
+		releaser(&collision);
 	}
+
 
 	void RigidComponent::BindCollision(const Physics::CallBackTrigger& callback, Physics::TriggerType type)
 	{

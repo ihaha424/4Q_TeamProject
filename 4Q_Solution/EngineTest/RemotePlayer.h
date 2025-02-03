@@ -8,7 +8,7 @@ public:
 	explicit RemotePlayer(std::filesystem::path&& meshPath);
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
 	void DisposeComponents() override;
-
+	void SetSerialNumber(int num);
 protected:
 	void PreInitialize(const Engine::Modules& modules) override;
 	void PostInitialize(const Engine::Modules& modules) override;
@@ -31,5 +31,7 @@ private:
 	Engine::Component::Synchronize* _sync;
 
 	RemoteMoveComponent* _remoteMove;
+
+public:
 };
 

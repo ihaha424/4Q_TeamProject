@@ -1,10 +1,12 @@
 #include "pch.h"
 #include "Player.h"
+
+#include "GameApplication.h"
 #include "NetworkTemp.h"
 
 Player::Player(std::filesystem::path&& meshPath, std::filesystem::path&& fontPath) :
 	_meshPath(std::forward<std::filesystem::path>(meshPath)),
-	_fontPath(std::forward<std::filesystem::path>(fontPath)), _movement(nullptr),
+	_fontPath(std::forward<std::filesystem::path>(fontPath)),
 	_camera(nullptr)
 	//_staticMesh(nullptr), 
 	//_textRenderer(nullptr),
@@ -15,7 +17,6 @@ Player::Player(std::filesystem::path&& meshPath, std::filesystem::path&& fontPat
 
 void Player::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
-	_movement = componentFactory->Clone<Engine::Component::Movement>();
 	_camera = componentFactory->Clone<Engine::Component::Camera>();
 	//_staticMesh = componentFactory->Clone<Engine::Component::StaticMesh>();
 	_skeltalMesh = componentFactory->Clone<Engine::Component::SkeletalMesh>();
@@ -23,6 +24,17 @@ void Player::Prepare(Engine::Content::Factory::Component* componentFactory)
 	_textRenderer = componentFactory->Clone<Engine::Component::TextRenderer>();
     _sync = componentFactory->Clone<Engine::Component::Synchronize>();
 	_remote = componentFactory->Clone<RemoteMoveComponent>();
+	_chractorController = componentFactory->Clone<Engine::Component::ChractorController>();
+}
+
+int Player::GetSerialNumber()
+{
+	return _sync->GetSerialNumber();
+}
+
+void Player::SetSerialNumber(int num)
+{
+	_sync->SetSerialNumber(num);
 }
 
 void Player::DisposeComponents()
@@ -32,19 +44,25 @@ void Player::DisposeComponents()
 	_skeltalMesh->Dispose();
 	_animator->Dispose();
     _camera->Dispose();
-    _movement->Dispose();
 	_sync->Dispose();
 	_remote->Dispose();
+	_chractorController->Dispose();
 }
 
 void Player::PreInitialize(const Engine::Modules& modules)
 {
 	Object::PreInitialize(modules);
-	_movement->SetTarget(&_transform);
-	_remote->SetTarget(&_transform);
+
+	_remote->SetTarget(&_transform);	
+	_remote->BindOnMove([this]() {
+		_animator->ChangeAnimation("Run");
+		});
+	_remote->BindOnStop([this]() {
+		_animator->ChangeAnimation("Wait");
+		});
+
 
     _camera->SetName(L"MainCamera");
-    _movement->SetTarget(&_transform);
     //_staticMesh->SetFilePath(_meshPath);
     //_staticMesh->SetMatrix(&_worldMatrix);
 	_skeltalMesh->SetFilePath(_meshPath);
@@ -66,15 +84,11 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	mappingContext->GetAction(L"Move", &moveAction);
 	moveAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
 	{
-		Engine::Math::Vector3 direction = _movement->GetDirection();
-		if (direction != Engine::Math::Vector3(value)) {
-			//_movement.SetDirection(value);		
-			
-			
+		//if (direction != moveDirection) {
 			_sync->_move.set_x(value.x);
 			_sync->_move.set_y(value.y);
 			_sync->_move.set_z(value.z);
-			_sync->_move.set_speed(_movement->GetSpeed());
+			_sync->_move.set_speed(_remote->GetSpeed());
 
 			_sync->_move.SerializeToString(&_sync->_msgBuffer);
 
@@ -86,20 +100,13 @@ void Player::PreInitialize(const Engine::Modules& modules)
 			);
 
 
-			//NetworkTemp::GetInstance()->_move.set_serialnumber(1);
-			//NetworkTemp::GetInstance()->_move.set_x(value.x);
-			//NetworkTemp::GetInstance()->_move.set_y(value.y);
-			//NetworkTemp::GetInstance()->_move.set_z(value.z);
-			//NetworkTemp::GetInstance()->_move.set_speed(_movement.GetSpeed());
-
-			//Client::SavePacketData(
-			//	NetworkTemp::GetInstance()->_move.SerializeAsString(),
-			//	(short)PacketID::Move,
-			//	NetworkTemp::GetInstance()->_move.ByteSizeLong());
-		}
+			Engine::Math::Vector3 moveDirection = value;
+			_remote->SetDirection(moveDirection);
 		
 	});
 	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) {
+		GameApplication::GetLoggerManager()->Log(Engine::Logger::LogLevel::Debug, std::format(L"x:{0}, y:{1}", value.x, value.y));
+
 		_animator->ChangeAnimation("Run"); 
 
 		_sync->_stateChange.set_stateinfo(1);
@@ -111,19 +118,24 @@ void Player::PreInitialize(const Engine::Modules& modules)
 			_sync->_stateChange.ByteSizeLong(),
 			_sync->GetSerialNumber()
 		);
-
-		//NetworkTemp::GetInstance()->_stateChange.set_serialnumber(1);
-		//NetworkTemp::GetInstance()->_stateChange.set_stateinfo(1);
-
-		//Client::SavePacketData(
-		//	NetworkTemp::GetInstance()->_stateChange.SerializeAsString(),
-		//	(short)PacketID::StateChange,
-		//	NetworkTemp::GetInstance()->_stateChange.ByteSizeLong());
 		});
 	moveAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
 		{ 
-			_animator->ChangeAnimation("Wait"); 
-			_movement->SetDirection(Engine::Math::Vector3::Zero);
+			_sync->_move.set_x(0);
+			_sync->_move.set_y(0);
+			_sync->_move.set_z(0);
+			_sync->_move.set_speed(0);
+
+			_sync->_move.SerializeToString(&_sync->_msgBuffer);
+
+			Engine::Application::GetNetworkManager()->SaveSendData(
+				(short)PacketID::Move,
+				_sync->_msgBuffer,
+				_sync->_move.ByteSizeLong(),
+				_sync->GetSerialNumber()
+			);
+
+			_sync->_move.SerializeToString(&_sync->_msgBuffer);
 
 			_sync->_stateChange.set_stateinfo(0);
 			_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
@@ -134,22 +146,23 @@ void Player::PreInitialize(const Engine::Modules& modules)
 				_sync->_stateChange.ByteSizeLong(),
 				_sync->GetSerialNumber()
 			);
-
-			//NetworkTemp::GetInstance()->_stateChange.set_serialnumber(1);
-			//NetworkTemp::GetInstance()->_stateChange.set_stateinfo(0);
-
-			//Client::SavePacketData(
-			//	NetworkTemp::GetInstance()->_stateChange.SerializeAsString(),
-			//	(short)PacketID::StateChange,
-			//	NetworkTemp::GetInstance()->_stateChange.ByteSizeLong());
-			_movement->SetDirection(Engine::Math::Vector3::Zero);
+			_remote->SetDirection(Engine::Math::Vector3::Zero);
 		});
-	//moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) { /*_animator.ChangeAnimation("Run");*/ });
-	//moveAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
-	//{ 
-	//	//_animator.ChangeAnimation("Wait"); 
 
-	//});
+	Engine::Input::IAction* jumpAction = nullptr;
+	mappingContext->GetAction(L"Jump", &jumpAction);
+	jumpAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) 
+		{
+			_sync->_jump.set_power(2500.f);
+			_sync->_jump.SerializeToString(&_sync->_msgBuffer);
+
+			Engine::Application::GetNetworkManager()->SaveSendData(
+				(short)PacketID::Jump,
+				_sync->_msgBuffer,
+				_sync->_jump.ByteSizeLong(),
+				_sync->GetSerialNumber()
+			);
+		});
 
 	Engine::Input::IAction* cameraAction = nullptr;
 	mappingContext->GetAction(L"Camera", &cameraAction);
@@ -157,16 +170,24 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	{
 		_camera->Rotate(value);
 	});
+
+	Engine::Physics::ControllerDesc desc;
+	desc.stepOffset = 10;
+	desc.height = 10.f;
+	desc.radius = 2.f;
+	desc.climbinMode = Engine::Physics::CapsuleClimbingMode::Easy;
+	auto PhysicsManager = Engine::Application::GetPhysicsManager();
+	PhysicsManager->CreatePlayerController(&_chractorController->_controller, PhysicsManager->GetScene(0), desc);
 }
 
 void Player::PostInitialize(const Engine::Modules& modules)
 {
 	Object::PostInitialize(modules);
-	_movement->SetSpeed(100.f);	
+	_remote->SetSpeed(100.f);
 	_textRenderer->SetPosition(100, 100.f);
 	_textRenderer->SetText(L"Hello World!");
 	_textRenderer->SetFontColor(1.f, 0.f, 0.f, 1.f);
-
+	_animator->ChangeAnimation("Wait");
 	//_skeltalMesh.SetRenderLayer(0);
 	/*_animator.SetUpSplitBone(2);
 	_animator.SplitBone(0, "Dummy_root");
@@ -186,10 +207,19 @@ void Player::PostUpdate(const float deltaTime)
 	_worldMatrix = Engine::Math::Matrix::CreateScale(1.f) * Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
 
 	Engine::Math::Vector3 tempPostion = _transform.position;
+	_chractorController->_controller->SetPosition(_transform.position);
 	tempPostion.z -= 300.f;
 	tempPostion.y += 300.f;
 	_camera->SetPosition(tempPostion);
 	_camera->SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
+
+	// auto speed = _movement->GetSpeed();
+	// auto dir = _movement->GetDirection();
+	// auto translate = speed * dir / 1000.f;
+	// if (!(gravityFlag & static_cast<unsigned short>(Engine::Physics::ControllerCollisionFlag::Down)))
+	// 	translate += {0, -0.098f, 0};
+	// gravityFlag = _chractorController->_controller->Move(translate, 0.001, 0.02);
+
 }
 
 void Player::PostFixedUpdate()

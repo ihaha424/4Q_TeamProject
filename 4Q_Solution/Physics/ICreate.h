@@ -10,7 +10,7 @@ namespace PhysicsEngineAPI
 		virtual ~ICreate() = default;
 
 		// Creat Physics System
-		virtual bool CreatePhysics(bool isVisualDebuger = true) = 0;
+		virtual bool CreatePhysics(bool isVisualDebuger = true, float length = 1.f, float speed = 10.f) = 0;
 		virtual bool CreateScene(_OUT_ IScene** scene, const Utils::Description::SceneDesc& sceneDescription, const char* name = nullptr) = 0;
 		virtual bool CreateObject(_OUT_ IObject** object, const Utils::DataStructure::RigidBodyType& type) = 0;
 		// TODO: 여러 매쉬를 받는 것도 하면 좋을 것 같음 굳이 1개의 메쉬로?

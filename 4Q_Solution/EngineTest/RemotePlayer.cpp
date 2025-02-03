@@ -114,3 +114,8 @@ void RemotePlayer::StateChange(const MoveMsg::StateChange* msg)
 	}
 }
 
+void RemotePlayer::SetSerialNumber(int num)
+{
+	_sync->SetSerialNumber(num);
+}
+

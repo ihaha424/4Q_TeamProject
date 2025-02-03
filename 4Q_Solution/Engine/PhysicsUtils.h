@@ -144,7 +144,7 @@ namespace Engine::Physics
 
 		ConvexMesh,
 		TriangleMesh,
-		//HeightField,
+		HeightField,
 
 		Frustum,
 
@@ -242,11 +242,11 @@ namespace Engine::Physics
 	/**
 	 * @brief CollisionEventData
 	 */
-	class IRigidComponent;
+	class Component;
 	struct TriggerEvent
 	{
-		IRigidComponent* myCollision;
-		IRigidComponent* otherCollision;
+		Component* myCollision;
+		Component* otherCollision;
 	};
 
 	struct ContactEvent : TriggerEvent
@@ -280,5 +280,71 @@ namespace Engine::Physics
 		OnCollisionExit,
 
 		End
+	};
+
+
+	/**
+			 * @brief Where the character hit on a character basis
+			 */
+	enum class ControllerCollisionFlag
+	{
+		None = 0,
+		Sides = (1 << 0),
+		Up = (1 << 1),
+		Down = (1 << 2),
+	};
+
+	/**
+	 * @brief Behaviour when the character meets a slope that can't go up any further
+	 */
+	enum class ControllerSlope
+	{
+		Stop,
+		Slide,
+
+		End
+	};
+
+	/**
+	 * @brief : Controller State
+
+		Vector3 position						: position
+		unsigned int controllerCollisionFlag	: flag(ControllerCollisionFlag)
+		bool isStandingCCT						: Determine if you are standing on a different CCT
+		bool isStandingObstacle					: Determine if you are standing on a different Obstacle
+		bool isMovingUp							: Is the character moving up
+	 */
+	struct ControllerState
+	{
+		Math::Vector3 position;
+		unsigned int controllerCollisionFlag;
+		bool isStandingCCT;
+		bool isStandingObstacle;
+		bool isMovingUp;
+	};
+
+	enum class CapsuleClimbingMode
+	{
+		Easy,			//!< Standard mode, let the capsule climb over surfaces according to impact normal
+		Constrained,	//!< Constrained mode, try to limit climbing according to the step offset
+
+		End
+	};
+
+	struct ControllerDesc
+	{
+		Math::Vector3		gravity{0,0,0};
+		Math::Vector3		position{0,0,0};
+		Math::Vector3		upDirection{ 0.f, 1.f,0.f };
+		float				slopeLimit{ 0.707f };
+		float				invisibleWallHeight;
+		float				maxJumpHeight;
+		float				contactOffset{ 0.1f };
+		float				stepOffset{ 0.5f };
+		ControllerSlope		slopeMode{ ControllerSlope::Slide };
+		Math::Vector3		material{0,0,0};
+		float				radius;
+		float				height;
+		CapsuleClimbingMode	climbinMode{ CapsuleClimbingMode::Constrained };	
 	};
 }

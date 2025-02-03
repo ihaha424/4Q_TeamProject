@@ -1,8 +1,8 @@
 #include "pch.h"
-
 #include "PhysXSystem.h"
 #include "PhysXElement.h"
-#include "PhysxCollisionEvent.h"
+#include "MeshLoader.h"
+#include "ImageLoader.h"
 #include <thread>
 
 namespace PhysicsEngineAPI
@@ -84,26 +84,28 @@ namespace PhysicsEngineAPI
 	/**************************************
 		Create Physics System
 	*************************************/
-	bool PhysXSystem::CreatePhysics(bool isVisualDebuger)
+	bool PhysXSystem::CreatePhysics(bool isVisualDebuger, float length, float speed)
 	{
 		if (!CreateFoundation())
-			return false;
-		if (!CreatePVD())
 			return false;
 
 		if constexpr (DEBUG_FLAG)
 		{
 			DEBUG_MODE
 			(
-				if(isVisualDebuger)
-					physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(), true, pvd);
+				if (isVisualDebuger)
+				{
+					if (!CreatePVD())
+						return false;
+					physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(length, speed), true, pvd);
+				}
 				else
-					physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(), true);
+					physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(length, speed), true);
 			foundation->setErrorLevel(physx::PxErrorCode::eMASK_ALL);
 			)
 		}
 		else
-			physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(), true);
+			physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(length, speed), true);
 		
 		if (nullptr == physics)
 			return false;
@@ -240,6 +242,10 @@ namespace PhysicsEngineAPI
 			
 			const physx::PxMeshScale MeshScale = physx::PxVec3{ geometryDesc.data.x, geometryDesc.data.y, geometryDesc.data.z };
 			geometry = new physx::PxTriangleMeshGeometry(triangleMesh, MeshScale);
+		}
+		else if (geometryDesc.type == GeometryShape::HeightField)
+		{
+			
 		}
 		else if (geometryDesc.type == GeometryShape::Frustum)
 		{
@@ -740,9 +746,190 @@ namespace PhysicsEngineAPI
 		return true;
 	}
 
-	bool PhysXSystem::CreateStaticBoundBoxActor(_OUT_ IObject** object, const Utils::Math::Vector3& boxExtents)
+	bool PhysXSystem::CreateControllerManager(_OUT_ IScene* _Scene)
 	{
-		physx::PxTransform transform = {};
+		if (nullptr == _Scene)
+			return false;
+		PhysXScene* Scene = static_cast<PhysXScene*>(_Scene);
+		if (nullptr == Scene->scene)
+			return false;
+		Scene->controllerManager = PxCreateControllerManager(*Scene->scene);
+		return true;
+	}
+
+	bool PhysXSystem::CreatePlayerController(_OUT_ IController** object, IScene* _Scene, const Utils::Description::ControllerDesc& _desc)
+	{
+		if (nullptr == _Scene)
+			return false;
+		PhysXScene* Scene = static_cast<PhysXScene*>(_Scene);
+		if (nullptr == Scene->scene)
+			return false;
+
+		PhysXController* controller = new PhysXController();
+		if (nullptr == controller)
+			return false;
+
+		controller->hitReportCallback = new PhysXReportCallback();
+		controller->behaviorCallback = new PhysXBehaviorCallback();
+
+
+		physx::PxCapsuleControllerDesc desc;
+		desc.position = Vector3ToPxExtendedVec3(_desc.position);
+		desc.upDirection = Vector3ToPxVec3(_desc.upDirection);
+		desc.slopeLimit = _desc.slopeLimit;
+		desc.invisibleWallHeight = _desc.invisibleWallHeight;
+		desc.maxJumpHeight = _desc.maxJumpHeight;
+		desc.contactOffset = _desc.contactOffset;
+		desc.stepOffset = _desc.stepOffset;
+		desc.density = 10.f;
+		desc.scaleCoeff = 0.8f;
+		desc.volumeGrowth = 1.5f;
+		desc.reportCallback = controller->hitReportCallback;
+		desc.behaviorCallback = controller->behaviorCallback;
+		desc.nonWalkableMode = static_cast<physx::PxControllerNonWalkableMode::Enum>(_desc.slopeMode);
+		desc.material = physics->createMaterial(_desc.material.value[0], _desc.material.value[1], _desc.material.value[2]);
+		desc.registerDeletionListener = true;
+		desc.clientID = physx::PX_DEFAULT_CLIENT;
+		desc.userData = nullptr;
+		desc.radius = _desc.radius;
+		desc.height = _desc.height;
+		desc.climbingMode = static_cast<physx::PxCapsuleClimbingMode::Enum>(_desc.climbinMode);;
+		// TODO
+		desc.reportCallback;
+		desc.behaviorCallback;
+
+
+		physx::PxController* character = Scene->controllerManager->createController(desc);
+
+		controller->controller = static_cast<physx::PxCapsuleController*>(character);
+		controller->gravity = Vector3ToPxVec3(_desc.gravity);
+
+		//desc.reportCallback->SetUserData();
+		//desc.behaviorCallback->SetUserData(); 
+
+		*object = controller;
+		return true;
+	}
+
+	bool PhysXSystem::LoadTriangleMesh(_OUT_ IGeometry** _geometry, const Utils::Description::GeometryDesc& geometryDesc, const char* filePath)
+	{
+		physx::PxGeometry* geometry = nullptr;
+		Utils::Description::VerticesMeshDesc verticesMeshDesc;
+		std::vector<physx::PxVec3> point;
+		std::vector<physx::PxU32> indices;
+		if (!MeshLoader()(filePath, point, indices))
+			return false;
+
+		verticesMeshDesc.vertices.count = point.size();
+		verticesMeshDesc.vertices.stride = sizeof(physx::PxVec3);
+		verticesMeshDesc.vertices.data = point.data();
+
+		verticesMeshDesc.indices.count = indices.size() / 3;
+		verticesMeshDesc.indices.stride = sizeof(physx::PxU32) * 3;
+		verticesMeshDesc.indices.data = indices.data();
+
+		if (nullptr == verticesMeshDesc.vertices.data || nullptr == verticesMeshDesc.indices.data)
+			return false;
+		physx::PxTriangleMeshDesc description;
+		description.points.count = static_cast<physx::PxU32>(verticesMeshDesc.vertices.count);
+		description.points.stride = verticesMeshDesc.vertices.stride;
+		description.points.data = verticesMeshDesc.vertices.data;
+
+		description.triangles.count = static_cast<physx::PxU32>(verticesMeshDesc.indices.count);
+		description.triangles.stride = verticesMeshDesc.indices.stride;
+		description.triangles.data = verticesMeshDesc.indices.data;
+
+		if (!description.isValid())
+			return false;
+
+		physx::PxTolerancesScale scale;
+		physx::PxCookingParams params(scale);
+		physx::PxDefaultMemoryOutputStream writeBuffer;
+		physx::PxTriangleMeshCookingResult::Enum result;
+		bool status = PxCookTriangleMesh(params, description, writeBuffer, &result);
+
+		physx::PxDefaultMemoryInputData readBuffer(writeBuffer.getData(), writeBuffer.getSize());
+		physx::PxTriangleMesh* triangleMesh = physics->createTriangleMesh(readBuffer);;
+
+		const physx::PxMeshScale MeshScale = physx::PxVec3{ geometryDesc.data.x, geometryDesc.data.y, geometryDesc.data.z };
+		geometry = new physx::PxTriangleMeshGeometry(triangleMesh, MeshScale);
+	
+		if (nullptr == geometry)
+			return false;
+
+		*_geometry = new PhysXGeometry(geometry);
+		if (nullptr == *_geometry)
+			return false;
+		(*_geometry)->SetType(geometryDesc.type);
+		return true;
+	}
+
+	bool PhysXSystem::LoadHeightMap(
+		_OUT_ IGeometry** _geometry,
+		const Utils::Description::GeometryDesc& geometryDesc,
+		const char* filePath
+	)
+	{
+		physx::PxGeometry* geometry = nullptr;
+		ImageLoader::Image image;
+		if (!ImageLoader()(image, filePath))
+			return false;
+
+		int width = image.width;
+		int height = image.height;
+		float* heightmap = new float[width * height];
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				heightmap[y * width + x] = (float)image.data[y * width + x] / 255.0f;
+			}
+		}
+
+		physx::PxHeightFieldSample* samples = new physx::PxHeightFieldSample[width * height];
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				physx::PxHeightFieldSample& sample = samples[y * width + x];
+				sample.height = (physx::PxI16)(heightmap[y * width + x] * 0x7fff);
+				sample.materialIndex0 = 0;
+				sample.materialIndex1 = 0;
+			}
+		}
+
+		physx::PxHeightFieldDesc hfDesc;
+		hfDesc.format = physx::PxHeightFieldFormat::eS16_TM;
+		hfDesc.nbColumns = width;
+		hfDesc.nbRows = height;
+		hfDesc.samples.data = samples;
+		hfDesc.samples.stride = sizeof(physx::PxHeightFieldSample);
+		hfDesc.flags = physx::PxHeightFieldFlags();
+
+		if (!hfDesc.isValid())
+			return false;
+
+		physx::PxHeightFieldGeometry* hfGeom = new physx::PxHeightFieldGeometry();
+		if (nullptr == hfGeom)
+			return false;
+		hfGeom->rowScale;
+		hfGeom->columnScale;
+		hfGeom->heightScale;
+		hfGeom->heightField = PxCreateHeightField(hfDesc);
+		delete[] samples;
+
+
+		geometry = hfGeom;
+		*_geometry = new PhysXGeometry(geometry);
+		if (nullptr == *_geometry)
+			return false;
+		(*_geometry)->SetType(geometryDesc.type);
+		return true;
+
+
+		return true;
+	}
+
+
+	bool PhysXSystem::CreateStaticBoundBoxActor(_OUT_ IObject** object, const Utils::Math::Vector3& boxExtents, const Utils::Math::Transform& _transform)
+	{
+		physx::PxTransform transform = TransformToPxTransform(_transform);
 		physx::PxMaterial* material = physics->createMaterial(0,0,0);
 		if (nullptr == material)
 			return false;

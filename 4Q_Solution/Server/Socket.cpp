@@ -160,7 +160,7 @@ int Socket::Recv(char* buffer)
 
 	if (res < 0) {
 		if (WSAGetLastError() != WSAEWOULDBLOCK) {
-			return false;
+			return -1;
 		}
 	}
 

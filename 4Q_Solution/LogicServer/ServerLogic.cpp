@@ -27,6 +27,26 @@ bool ServerLogic::Initialize()
     RegistGround(_ground);
     //============================
 
+    //============================
+    //  Load JSON Data
+    //============================
+    printf("Start Loading MapData.json...\n");
+    _mapData = _jsonLoader.DeSerialize("../Resources/JSONTest/MapData.json");
+    printf("MapData.json Load Complete.\n");
+    LoadBuilding();
+    LoadSudium();
+    //============================
+
+    _testMessage.add_position(1.5f);
+    _testMessage.add_position(2.3f);
+    _testMessage.add_position(6.5f);
+
+    const auto& position = _testMessage.position();
+    printf("proto repeated message Test \n");
+    for (const auto& element : position) {
+        printf("Data : %f\n", element);
+    }
+
     _objs[0]._position = { 100.f, 0.f, 100.f };
     _objs[1]._position = { 500.f, 0.f, 300.f };
     _objs[2]._position = { -100.f, 0.f, 500.f };
@@ -145,6 +165,8 @@ void ServerLogic::MessageDispatch()
                 for (int i = 0; i < 3; i++) {
                     Server::BroadCast("", (short)PacketID::ObjectSync, 0, _objs[i]._serialNumber);
                 }
+                // TODO: 여기서 AddObject에 추가할 오브젝트의 id를 보내는 작업을 수행합니다.
+                //
                 Server::BroadCast("", (short)PacketID::DataSendComplete, 0, 0);
             } // else end
             break;
@@ -242,9 +264,9 @@ void ServerLogic::MessageDispatch()
                 Server::BroadCast(_msgBuffer, (short)PacketID::DataRemote, _syncPlayer.ByteSizeLong(), _playerSlot[i]._serialNumber);
             }  // for end
             for (int i = 0; i < 3; i++) {
-                _syncObject.set_x(_objs[i]._position.x);
-                _syncObject.set_y(_objs[i]._position.y);
-                _syncObject.set_z(_objs[i]._position.z);
+                _syncObject.set_positionx(_objs[i]._position.x);
+                _syncObject.set_positiony(_objs[i]._position.y);
+                _syncObject.set_positionz(_objs[i]._position.z);
                 _syncObject.SerializeToString(&_msgBuffer);
 
                 Server::BroadCast(_msgBuffer, (short)PacketID::DataObject, _syncObject.ByteSizeLong(), _objs[i]._serialNumber);
@@ -259,10 +281,73 @@ void ServerLogic::MessageDispatch()
     } // while end
 }
 
+// =============================
+// JSON Method, Variable Area
+// =============================
+
+void ServerLogic::LoadBuilding()
+{
+    printf("Start Loading Building Data...\n");
+    const auto& groupData = _mapData["objectGroup"]["groups"];
+    const auto& buildingData = (*groupData.begin())["models"];
+    for (const auto& data : buildingData) {
+        Object* obj = new Object();
+        obj->_resourceId = data["className"].get<std::string>();
+        obj->_public = data["publicObject"];
+
+        const auto& transformData = data["transformData"];
+        const auto& position = transformData["position"];
+        const auto& rotation = transformData["rotation"];
+        const auto& scale = transformData["scale"];
+        obj->_position = Engine::Math::Vector3(position["x"], position["y"], position["z"]);
+        obj->_rotation = Engine::Math::Quaternion(Engine::Math::Vector4(rotation["x"], rotation["y"], rotation["z"], rotation["w"]));
+        obj->_scale = Engine::Math::Vector3(scale["x"], scale["y"], scale["z"]);
+        printf("Object Load Complete.\n");
+        printf("ClassName : %s, \nPosition : (%f, %f, %f), \nRotation : (%f, %f, %f, %f), \nScale : (%f, %f, %f)\n",
+            obj->_resourceId.c_str(),
+            obj->_position.x, obj->_position.y, obj->_position.z,
+            obj->_rotation.z, obj->_rotation.y, obj->_rotation.z, obj->_rotation.w,
+            obj->_scale.x, obj->_scale.y, obj->_scale.z
+        );
+        _buildings.push_back(obj);
+    }
+    printf("Building Data Load Complete.\n");
+}
+
+void ServerLogic::LoadSudium()
+{
+    printf("Start Loading Sudium Data...\n");
+    const auto& groupData = _mapData["objectGroup"]["groups"];
+    const auto& sudiumData = (*(groupData.begin() + 1))["models"];
+    for (const auto& data : sudiumData) {
+        Object* obj = new Object();
+        obj->_resourceId = data["className"].get<std::string>();
+        obj->_public = data["publicObject"];
+
+        const auto& transformData = data["transformData"];
+        const auto& position = transformData["position"];
+        const auto& rotation = transformData["rotation"];
+        const auto& scale = transformData["scale"];
+        obj->_position = Engine::Math::Vector3(position["x"], position["y"], position["z"]);
+        obj->_rotation = Engine::Math::Quaternion(Engine::Math::Vector4(rotation["x"], rotation["y"], rotation["z"], rotation["w"]));
+        obj->_scale = Engine::Math::Vector3(scale["x"], scale["y"], scale["z"]);
+        printf("Object Load Complete.\n");
+        printf("ClassName : %s, \nPosition : (%f, %f, %f), \nRotation : (%f, %f, %f, %f), \nScale : (%f, %f, %f)\n",
+            obj->_resourceId.c_str(),
+            obj->_position.x, obj->_position.y, obj->_position.z,
+            obj->_rotation.z, obj->_rotation.y, obj->_rotation.z, obj->_rotation.w,
+            obj->_scale.x, obj->_scale.y, obj->_scale.z
+        );
+        _sudiums.push_back(obj);
+    }
+    printf("Sudium Data Load Complete.\n");
+}
+
 
 // ==============================
 // Physics Area
 // ==============================
+
 void ServerLogic::RegistDynamicPhysics(Object& obj)
 {
     Engine::Physics::RigidComponentDesc rcd;

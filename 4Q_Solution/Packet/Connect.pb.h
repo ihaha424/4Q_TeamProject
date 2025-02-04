@@ -64,6 +64,9 @@ extern EnterAcceptDefaultTypeInternal _EnterAccept_default_instance_;
 class SyncObject;
 struct SyncObjectDefaultTypeInternal;
 extern SyncObjectDefaultTypeInternal _SyncObject_default_instance_;
+class SyncObjectTest;
+struct SyncObjectTestDefaultTypeInternal;
+extern SyncObjectTestDefaultTypeInternal _SyncObjectTest_default_instance_;
 class SyncPlayer;
 struct SyncPlayerDefaultTypeInternal;
 extern SyncPlayerDefaultTypeInternal _SyncPlayer_default_instance_;
@@ -317,6 +320,244 @@ class SyncPlayer final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
+class SyncObjectTest final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:ConnectMsg.SyncObjectTest) */ {
+ public:
+  inline SyncObjectTest() : SyncObjectTest(nullptr) {}
+  ~SyncObjectTest() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(SyncObjectTest* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(SyncObjectTest));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR SyncObjectTest(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline SyncObjectTest(const SyncObjectTest& from) : SyncObjectTest(nullptr, from) {}
+  inline SyncObjectTest(SyncObjectTest&& from) noexcept
+      : SyncObjectTest(nullptr, std::move(from)) {}
+  inline SyncObjectTest& operator=(const SyncObjectTest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline SyncObjectTest& operator=(SyncObjectTest&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const SyncObjectTest& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const SyncObjectTest* internal_default_instance() {
+    return reinterpret_cast<const SyncObjectTest*>(
+        &_SyncObjectTest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 3;
+  friend void swap(SyncObjectTest& a, SyncObjectTest& b) { a.Swap(&b); }
+  inline void Swap(SyncObjectTest* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(SyncObjectTest* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  SyncObjectTest* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<SyncObjectTest>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const SyncObjectTest& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const SyncObjectTest& from) { SyncObjectTest::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(SyncObjectTest* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "ConnectMsg.SyncObjectTest"; }
+
+ protected:
+  explicit SyncObjectTest(::google::protobuf::Arena* arena);
+  SyncObjectTest(::google::protobuf::Arena* arena, const SyncObjectTest& from);
+  SyncObjectTest(::google::protobuf::Arena* arena, SyncObjectTest&& from) noexcept
+      : SyncObjectTest(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kPositionFieldNumber = 1,
+    kRotationFieldNumber = 2,
+    kScaleFieldNumber = 3,
+  };
+  // repeated float position = 1;
+  int position_size() const;
+  private:
+  int _internal_position_size() const;
+
+  public:
+  void clear_position() ;
+  float position(int index) const;
+  void set_position(int index, float value);
+  void add_position(float value);
+  const ::google::protobuf::RepeatedField<float>& position() const;
+  ::google::protobuf::RepeatedField<float>* mutable_position();
+
+  private:
+  const ::google::protobuf::RepeatedField<float>& _internal_position() const;
+  ::google::protobuf::RepeatedField<float>* _internal_mutable_position();
+
+  public:
+  // repeated float rotation = 2;
+  int rotation_size() const;
+  private:
+  int _internal_rotation_size() const;
+
+  public:
+  void clear_rotation() ;
+  float rotation(int index) const;
+  void set_rotation(int index, float value);
+  void add_rotation(float value);
+  const ::google::protobuf::RepeatedField<float>& rotation() const;
+  ::google::protobuf::RepeatedField<float>* mutable_rotation();
+
+  private:
+  const ::google::protobuf::RepeatedField<float>& _internal_rotation() const;
+  ::google::protobuf::RepeatedField<float>* _internal_mutable_rotation();
+
+  public:
+  // repeated float scale = 3;
+  int scale_size() const;
+  private:
+  int _internal_scale_size() const;
+
+  public:
+  void clear_scale() ;
+  float scale(int index) const;
+  void set_scale(int index, float value);
+  void add_scale(float value);
+  const ::google::protobuf::RepeatedField<float>& scale() const;
+  ::google::protobuf::RepeatedField<float>* mutable_scale();
+
+  private:
+  const ::google::protobuf::RepeatedField<float>& _internal_scale() const;
+  ::google::protobuf::RepeatedField<float>* _internal_mutable_scale();
+
+  public:
+  // @@protoc_insertion_point(class_scope:ConnectMsg.SyncObjectTest)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      2, 3, 0,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const SyncObjectTest& from_msg);
+    ::google::protobuf::RepeatedField<float> position_;
+    ::google::protobuf::RepeatedField<float> rotation_;
+    ::google::protobuf::RepeatedField<float> scale_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Connect_2eproto;
+};
+// -------------------------------------------------------------------
+
 class SyncObject final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:ConnectMsg.SyncObject) */ {
  public:
@@ -463,59 +704,137 @@ class SyncObject final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kResourceFieldNumber = 4,
-    kXFieldNumber = 1,
-    kYFieldNumber = 2,
-    kZFieldNumber = 3,
+    kPositionxFieldNumber = 1,
+    kPositionyFieldNumber = 2,
+    kPositionzFieldNumber = 3,
+    kRotationxFieldNumber = 4,
+    kRotationyFieldNumber = 5,
+    kRotationzFieldNumber = 6,
+    kRotationwFieldNumber = 7,
+    kScalexFieldNumber = 8,
+    kScaleyFieldNumber = 9,
+    kScalezFieldNumber = 10,
+    kPublicFieldNumber = 11,
   };
-  // optional string resource = 4;
-  bool has_resource() const;
-  void clear_resource() ;
-  const std::string& resource() const;
-  template <typename Arg_ = const std::string&, typename... Args_>
-  void set_resource(Arg_&& arg, Args_... args);
-  std::string* mutable_resource();
-  PROTOBUF_NODISCARD std::string* release_resource();
-  void set_allocated_resource(std::string* value);
+  // optional float positionx = 1;
+  bool has_positionx() const;
+  void clear_positionx() ;
+  float positionx() const;
+  void set_positionx(float value);
 
   private:
-  const std::string& _internal_resource() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_resource(
-      const std::string& value);
-  std::string* _internal_mutable_resource();
+  float _internal_positionx() const;
+  void _internal_set_positionx(float value);
 
   public:
-  // optional float x = 1;
-  bool has_x() const;
-  void clear_x() ;
-  float x() const;
-  void set_x(float value);
+  // optional float positiony = 2;
+  bool has_positiony() const;
+  void clear_positiony() ;
+  float positiony() const;
+  void set_positiony(float value);
 
   private:
-  float _internal_x() const;
-  void _internal_set_x(float value);
+  float _internal_positiony() const;
+  void _internal_set_positiony(float value);
 
   public:
-  // optional float y = 2;
-  bool has_y() const;
-  void clear_y() ;
-  float y() const;
-  void set_y(float value);
+  // optional float positionz = 3;
+  bool has_positionz() const;
+  void clear_positionz() ;
+  float positionz() const;
+  void set_positionz(float value);
 
   private:
-  float _internal_y() const;
-  void _internal_set_y(float value);
+  float _internal_positionz() const;
+  void _internal_set_positionz(float value);
 
   public:
-  // optional float z = 3;
-  bool has_z() const;
-  void clear_z() ;
-  float z() const;
-  void set_z(float value);
+  // optional float rotationx = 4;
+  bool has_rotationx() const;
+  void clear_rotationx() ;
+  float rotationx() const;
+  void set_rotationx(float value);
 
   private:
-  float _internal_z() const;
-  void _internal_set_z(float value);
+  float _internal_rotationx() const;
+  void _internal_set_rotationx(float value);
+
+  public:
+  // optional float rotationy = 5;
+  bool has_rotationy() const;
+  void clear_rotationy() ;
+  float rotationy() const;
+  void set_rotationy(float value);
+
+  private:
+  float _internal_rotationy() const;
+  void _internal_set_rotationy(float value);
+
+  public:
+  // optional float rotationz = 6;
+  bool has_rotationz() const;
+  void clear_rotationz() ;
+  float rotationz() const;
+  void set_rotationz(float value);
+
+  private:
+  float _internal_rotationz() const;
+  void _internal_set_rotationz(float value);
+
+  public:
+  // optional float rotationw = 7;
+  bool has_rotationw() const;
+  void clear_rotationw() ;
+  float rotationw() const;
+  void set_rotationw(float value);
+
+  private:
+  float _internal_rotationw() const;
+  void _internal_set_rotationw(float value);
+
+  public:
+  // optional float scalex = 8;
+  bool has_scalex() const;
+  void clear_scalex() ;
+  float scalex() const;
+  void set_scalex(float value);
+
+  private:
+  float _internal_scalex() const;
+  void _internal_set_scalex(float value);
+
+  public:
+  // optional float scaley = 9;
+  bool has_scaley() const;
+  void clear_scaley() ;
+  float scaley() const;
+  void set_scaley(float value);
+
+  private:
+  float _internal_scaley() const;
+  void _internal_set_scaley(float value);
+
+  public:
+  // optional float scalez = 10;
+  bool has_scalez() const;
+  void clear_scalez() ;
+  float scalez() const;
+  void set_scalez(float value);
+
+  private:
+  float _internal_scalez() const;
+  void _internal_set_scalez(float value);
+
+  public:
+  // optional bool public = 11;
+  bool has_public_() const;
+  void clear_public_() ;
+  bool public_() const;
+  void set_public_(bool value);
+
+  private:
+  bool _internal_public_() const;
+  void _internal_set_public_(bool value);
 
   public:
   // @@protoc_insertion_point(class_scope:ConnectMsg.SyncObject)
@@ -523,8 +842,8 @@ class SyncObject final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      2, 4, 0,
-      38, 2>
+      4, 11, 0,
+      0, 2>
       _table_;
 
   friend class ::google::protobuf::MessageLite;
@@ -543,10 +862,17 @@ class SyncObject final : public ::google::protobuf::Message
                           const SyncObject& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::google::protobuf::internal::ArenaStringPtr resource_;
-    float x_;
-    float y_;
-    float z_;
+    float positionx_;
+    float positiony_;
+    float positionz_;
+    float rotationx_;
+    float rotationy_;
+    float rotationz_;
+    float rotationw_;
+    float scalex_;
+    float scaley_;
+    float scalez_;
+    bool public__;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -805,7 +1131,7 @@ class AddRemote final : public ::google::protobuf::Message
     return reinterpret_cast<const AddRemote*>(
         &_AddRemote_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 3;
+  static constexpr int kIndexInFileMessages = 4;
   friend void swap(AddRemote& a, AddRemote& b) { a.Swap(&b); }
   inline void Swap(AddRemote* other) {
     if (other == this) return;
@@ -997,7 +1323,7 @@ class AddObject final : public ::google::protobuf::Message
     return reinterpret_cast<const AddObject*>(
         &_AddObject_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 4;
+  static constexpr int kIndexInFileMessages = 5;
   friend void swap(AddObject& a, AddObject& b) { a.Swap(&b); }
   inline void Swap(AddObject* other) {
     if (other == this) return;
@@ -1084,8 +1410,26 @@ class AddObject final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
+    kResourceidFieldNumber = 2,
     kGrantnumberFieldNumber = 1,
   };
+  // optional string resourceid = 2;
+  bool has_resourceid() const;
+  void clear_resourceid() ;
+  const std::string& resourceid() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_resourceid(Arg_&& arg, Args_... args);
+  std::string* mutable_resourceid();
+  PROTOBUF_NODISCARD std::string* release_resourceid();
+  void set_allocated_resourceid(std::string* value);
+
+  private:
+  const std::string& _internal_resourceid() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_resourceid(
+      const std::string& value);
+  std::string* _internal_mutable_resourceid();
+
+  public:
   // optional int32 grantnumber = 1;
   bool has_grantnumber() const;
   void clear_grantnumber() ;
@@ -1102,8 +1446,8 @@ class AddObject final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 0,
-      0, 2>
+      1, 2, 0,
+      39, 2>
       _table_;
 
   friend class ::google::protobuf::MessageLite;
@@ -1122,6 +1466,7 @@ class AddObject final : public ::google::protobuf::Message
                           const AddObject& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::internal::ArenaStringPtr resourceid_;
     ::int32_t grantnumber_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -1334,157 +1679,451 @@ inline void SyncPlayer::set_allocated_resource(std::string* value) {
 
 // SyncObject
 
-// optional float x = 1;
-inline bool SyncObject::has_x() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline void SyncObject::clear_x() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.x_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000002u;
-}
-inline float SyncObject::x() const {
-  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObject.x)
-  return _internal_x();
-}
-inline void SyncObject::set_x(float value) {
-  _internal_set_x(value);
-  _impl_._has_bits_[0] |= 0x00000002u;
-  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObject.x)
-}
-inline float SyncObject::_internal_x() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.x_;
-}
-inline void SyncObject::_internal_set_x(float value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.x_ = value;
-}
-
-// optional float y = 2;
-inline bool SyncObject::has_y() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline void SyncObject::clear_y() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.y_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000004u;
-}
-inline float SyncObject::y() const {
-  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObject.y)
-  return _internal_y();
-}
-inline void SyncObject::set_y(float value) {
-  _internal_set_y(value);
-  _impl_._has_bits_[0] |= 0x00000004u;
-  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObject.y)
-}
-inline float SyncObject::_internal_y() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.y_;
-}
-inline void SyncObject::_internal_set_y(float value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.y_ = value;
-}
-
-// optional float z = 3;
-inline bool SyncObject::has_z() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline void SyncObject::clear_z() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.z_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000008u;
-}
-inline float SyncObject::z() const {
-  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObject.z)
-  return _internal_z();
-}
-inline void SyncObject::set_z(float value) {
-  _internal_set_z(value);
-  _impl_._has_bits_[0] |= 0x00000008u;
-  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObject.z)
-}
-inline float SyncObject::_internal_z() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.z_;
-}
-inline void SyncObject::_internal_set_z(float value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.z_ = value;
-}
-
-// optional string resource = 4;
-inline bool SyncObject::has_resource() const {
+// optional float positionx = 1;
+inline bool SyncObject::has_positionx() const {
   bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
-inline void SyncObject::clear_resource() {
+inline void SyncObject::clear_positionx() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.resource_.ClearToEmpty();
+  _impl_.positionx_ = 0;
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
-inline const std::string& SyncObject::resource() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObject.resource)
-  return _internal_resource();
+inline float SyncObject::positionx() const {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObject.positionx)
+  return _internal_positionx();
 }
-template <typename Arg_, typename... Args_>
-inline PROTOBUF_ALWAYS_INLINE void SyncObject::set_resource(Arg_&& arg,
-                                                     Args_... args) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
+inline void SyncObject::set_positionx(float value) {
+  _internal_set_positionx(value);
   _impl_._has_bits_[0] |= 0x00000001u;
-  _impl_.resource_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObject.resource)
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObject.positionx)
 }
-inline std::string* SyncObject::mutable_resource() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  std::string* _s = _internal_mutable_resource();
-  // @@protoc_insertion_point(field_mutable:ConnectMsg.SyncObject.resource)
-  return _s;
-}
-inline const std::string& SyncObject::_internal_resource() const {
+inline float SyncObject::_internal_positionx() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.resource_.Get();
+  return _impl_.positionx_;
 }
-inline void SyncObject::_internal_set_resource(const std::string& value) {
+inline void SyncObject::_internal_set_positionx(float value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_._has_bits_[0] |= 0x00000001u;
-  _impl_.resource_.Set(value, GetArena());
+  _impl_.positionx_ = value;
 }
-inline std::string* SyncObject::_internal_mutable_resource() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_._has_bits_[0] |= 0x00000001u;
-  return _impl_.resource_.Mutable( GetArena());
+
+// optional float positiony = 2;
+inline bool SyncObject::has_positiony() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
 }
-inline std::string* SyncObject::release_resource() {
+inline void SyncObject::clear_positiony() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:ConnectMsg.SyncObject.resource)
-  if ((_impl_._has_bits_[0] & 0x00000001u) == 0) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000001u;
-  auto* released = _impl_.resource_.Release();
-  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
-    _impl_.resource_.Set("", GetArena());
-  }
-  return released;
+  _impl_.positiony_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000002u;
 }
-inline void SyncObject::set_allocated_resource(std::string* value) {
+inline float SyncObject::positiony() const {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObject.positiony)
+  return _internal_positiony();
+}
+inline void SyncObject::set_positiony(float value) {
+  _internal_set_positiony(value);
+  _impl_._has_bits_[0] |= 0x00000002u;
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObject.positiony)
+}
+inline float SyncObject::_internal_positiony() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.positiony_;
+}
+inline void SyncObject::_internal_set_positiony(float value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (value != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000001u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000001u;
-  }
-  _impl_.resource_.SetAllocated(value, GetArena());
-  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.resource_.IsDefault()) {
-    _impl_.resource_.Set("", GetArena());
-  }
-  // @@protoc_insertion_point(field_set_allocated:ConnectMsg.SyncObject.resource)
+  _impl_.positiony_ = value;
+}
+
+// optional float positionz = 3;
+inline bool SyncObject::has_positionz() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  return value;
+}
+inline void SyncObject::clear_positionz() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.positionz_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000004u;
+}
+inline float SyncObject::positionz() const {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObject.positionz)
+  return _internal_positionz();
+}
+inline void SyncObject::set_positionz(float value) {
+  _internal_set_positionz(value);
+  _impl_._has_bits_[0] |= 0x00000004u;
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObject.positionz)
+}
+inline float SyncObject::_internal_positionz() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.positionz_;
+}
+inline void SyncObject::_internal_set_positionz(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.positionz_ = value;
+}
+
+// optional float rotationx = 4;
+inline bool SyncObject::has_rotationx() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
+  return value;
+}
+inline void SyncObject::clear_rotationx() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.rotationx_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000008u;
+}
+inline float SyncObject::rotationx() const {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObject.rotationx)
+  return _internal_rotationx();
+}
+inline void SyncObject::set_rotationx(float value) {
+  _internal_set_rotationx(value);
+  _impl_._has_bits_[0] |= 0x00000008u;
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObject.rotationx)
+}
+inline float SyncObject::_internal_rotationx() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.rotationx_;
+}
+inline void SyncObject::_internal_set_rotationx(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.rotationx_ = value;
+}
+
+// optional float rotationy = 5;
+inline bool SyncObject::has_rotationy() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
+  return value;
+}
+inline void SyncObject::clear_rotationy() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.rotationy_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000010u;
+}
+inline float SyncObject::rotationy() const {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObject.rotationy)
+  return _internal_rotationy();
+}
+inline void SyncObject::set_rotationy(float value) {
+  _internal_set_rotationy(value);
+  _impl_._has_bits_[0] |= 0x00000010u;
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObject.rotationy)
+}
+inline float SyncObject::_internal_rotationy() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.rotationy_;
+}
+inline void SyncObject::_internal_set_rotationy(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.rotationy_ = value;
+}
+
+// optional float rotationz = 6;
+inline bool SyncObject::has_rotationz() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000020u) != 0;
+  return value;
+}
+inline void SyncObject::clear_rotationz() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.rotationz_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000020u;
+}
+inline float SyncObject::rotationz() const {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObject.rotationz)
+  return _internal_rotationz();
+}
+inline void SyncObject::set_rotationz(float value) {
+  _internal_set_rotationz(value);
+  _impl_._has_bits_[0] |= 0x00000020u;
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObject.rotationz)
+}
+inline float SyncObject::_internal_rotationz() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.rotationz_;
+}
+inline void SyncObject::_internal_set_rotationz(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.rotationz_ = value;
+}
+
+// optional float rotationw = 7;
+inline bool SyncObject::has_rotationw() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000040u) != 0;
+  return value;
+}
+inline void SyncObject::clear_rotationw() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.rotationw_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000040u;
+}
+inline float SyncObject::rotationw() const {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObject.rotationw)
+  return _internal_rotationw();
+}
+inline void SyncObject::set_rotationw(float value) {
+  _internal_set_rotationw(value);
+  _impl_._has_bits_[0] |= 0x00000040u;
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObject.rotationw)
+}
+inline float SyncObject::_internal_rotationw() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.rotationw_;
+}
+inline void SyncObject::_internal_set_rotationw(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.rotationw_ = value;
+}
+
+// optional float scalex = 8;
+inline bool SyncObject::has_scalex() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000080u) != 0;
+  return value;
+}
+inline void SyncObject::clear_scalex() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.scalex_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000080u;
+}
+inline float SyncObject::scalex() const {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObject.scalex)
+  return _internal_scalex();
+}
+inline void SyncObject::set_scalex(float value) {
+  _internal_set_scalex(value);
+  _impl_._has_bits_[0] |= 0x00000080u;
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObject.scalex)
+}
+inline float SyncObject::_internal_scalex() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.scalex_;
+}
+inline void SyncObject::_internal_set_scalex(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.scalex_ = value;
+}
+
+// optional float scaley = 9;
+inline bool SyncObject::has_scaley() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000100u) != 0;
+  return value;
+}
+inline void SyncObject::clear_scaley() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.scaley_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000100u;
+}
+inline float SyncObject::scaley() const {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObject.scaley)
+  return _internal_scaley();
+}
+inline void SyncObject::set_scaley(float value) {
+  _internal_set_scaley(value);
+  _impl_._has_bits_[0] |= 0x00000100u;
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObject.scaley)
+}
+inline float SyncObject::_internal_scaley() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.scaley_;
+}
+inline void SyncObject::_internal_set_scaley(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.scaley_ = value;
+}
+
+// optional float scalez = 10;
+inline bool SyncObject::has_scalez() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000200u) != 0;
+  return value;
+}
+inline void SyncObject::clear_scalez() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.scalez_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000200u;
+}
+inline float SyncObject::scalez() const {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObject.scalez)
+  return _internal_scalez();
+}
+inline void SyncObject::set_scalez(float value) {
+  _internal_set_scalez(value);
+  _impl_._has_bits_[0] |= 0x00000200u;
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObject.scalez)
+}
+inline float SyncObject::_internal_scalez() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.scalez_;
+}
+inline void SyncObject::_internal_set_scalez(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.scalez_ = value;
+}
+
+// optional bool public = 11;
+inline bool SyncObject::has_public_() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000400u) != 0;
+  return value;
+}
+inline void SyncObject::clear_public_() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.public__ = false;
+  _impl_._has_bits_[0] &= ~0x00000400u;
+}
+inline bool SyncObject::public_() const {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObject.public)
+  return _internal_public_();
+}
+inline void SyncObject::set_public_(bool value) {
+  _internal_set_public_(value);
+  _impl_._has_bits_[0] |= 0x00000400u;
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObject.public)
+}
+inline bool SyncObject::_internal_public_() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.public__;
+}
+inline void SyncObject::_internal_set_public_(bool value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.public__ = value;
+}
+
+// -------------------------------------------------------------------
+
+// SyncObjectTest
+
+// repeated float position = 1;
+inline int SyncObjectTest::_internal_position_size() const {
+  return _internal_position().size();
+}
+inline int SyncObjectTest::position_size() const {
+  return _internal_position_size();
+}
+inline void SyncObjectTest::clear_position() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.position_.Clear();
+}
+inline float SyncObjectTest::position(int index) const {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObjectTest.position)
+  return _internal_position().Get(index);
+}
+inline void SyncObjectTest::set_position(int index, float value) {
+  _internal_mutable_position()->Set(index, value);
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObjectTest.position)
+}
+inline void SyncObjectTest::add_position(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _internal_mutable_position()->Add(value);
+  // @@protoc_insertion_point(field_add:ConnectMsg.SyncObjectTest.position)
+}
+inline const ::google::protobuf::RepeatedField<float>& SyncObjectTest::position() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:ConnectMsg.SyncObjectTest.position)
+  return _internal_position();
+}
+inline ::google::protobuf::RepeatedField<float>* SyncObjectTest::mutable_position()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:ConnectMsg.SyncObjectTest.position)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_position();
+}
+inline const ::google::protobuf::RepeatedField<float>&
+SyncObjectTest::_internal_position() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.position_;
+}
+inline ::google::protobuf::RepeatedField<float>* SyncObjectTest::_internal_mutable_position() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.position_;
+}
+
+// repeated float rotation = 2;
+inline int SyncObjectTest::_internal_rotation_size() const {
+  return _internal_rotation().size();
+}
+inline int SyncObjectTest::rotation_size() const {
+  return _internal_rotation_size();
+}
+inline void SyncObjectTest::clear_rotation() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.rotation_.Clear();
+}
+inline float SyncObjectTest::rotation(int index) const {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObjectTest.rotation)
+  return _internal_rotation().Get(index);
+}
+inline void SyncObjectTest::set_rotation(int index, float value) {
+  _internal_mutable_rotation()->Set(index, value);
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObjectTest.rotation)
+}
+inline void SyncObjectTest::add_rotation(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _internal_mutable_rotation()->Add(value);
+  // @@protoc_insertion_point(field_add:ConnectMsg.SyncObjectTest.rotation)
+}
+inline const ::google::protobuf::RepeatedField<float>& SyncObjectTest::rotation() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:ConnectMsg.SyncObjectTest.rotation)
+  return _internal_rotation();
+}
+inline ::google::protobuf::RepeatedField<float>* SyncObjectTest::mutable_rotation()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:ConnectMsg.SyncObjectTest.rotation)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_rotation();
+}
+inline const ::google::protobuf::RepeatedField<float>&
+SyncObjectTest::_internal_rotation() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.rotation_;
+}
+inline ::google::protobuf::RepeatedField<float>* SyncObjectTest::_internal_mutable_rotation() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.rotation_;
+}
+
+// repeated float scale = 3;
+inline int SyncObjectTest::_internal_scale_size() const {
+  return _internal_scale().size();
+}
+inline int SyncObjectTest::scale_size() const {
+  return _internal_scale_size();
+}
+inline void SyncObjectTest::clear_scale() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.scale_.Clear();
+}
+inline float SyncObjectTest::scale(int index) const {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncObjectTest.scale)
+  return _internal_scale().Get(index);
+}
+inline void SyncObjectTest::set_scale(int index, float value) {
+  _internal_mutable_scale()->Set(index, value);
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncObjectTest.scale)
+}
+inline void SyncObjectTest::add_scale(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _internal_mutable_scale()->Add(value);
+  // @@protoc_insertion_point(field_add:ConnectMsg.SyncObjectTest.scale)
+}
+inline const ::google::protobuf::RepeatedField<float>& SyncObjectTest::scale() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:ConnectMsg.SyncObjectTest.scale)
+  return _internal_scale();
+}
+inline ::google::protobuf::RepeatedField<float>* SyncObjectTest::mutable_scale()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:ConnectMsg.SyncObjectTest.scale)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_scale();
+}
+inline const ::google::protobuf::RepeatedField<float>&
+SyncObjectTest::_internal_scale() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.scale_;
+}
+inline ::google::protobuf::RepeatedField<float>* SyncObjectTest::_internal_mutable_scale() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.scale_;
 }
 
 // -------------------------------------------------------------------
@@ -1525,13 +2164,13 @@ inline void AddRemote::_internal_set_grantnumber(::int32_t value) {
 
 // optional int32 grantnumber = 1;
 inline bool AddObject::has_grantnumber() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   return value;
 }
 inline void AddObject::clear_grantnumber() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.grantnumber_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000001u;
+  _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline ::int32_t AddObject::grantnumber() const {
   // @@protoc_insertion_point(field_get:ConnectMsg.AddObject.grantnumber)
@@ -1539,7 +2178,7 @@ inline ::int32_t AddObject::grantnumber() const {
 }
 inline void AddObject::set_grantnumber(::int32_t value) {
   _internal_set_grantnumber(value);
-  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_._has_bits_[0] |= 0x00000002u;
   // @@protoc_insertion_point(field_set:ConnectMsg.AddObject.grantnumber)
 }
 inline ::int32_t AddObject::_internal_grantnumber() const {
@@ -1549,6 +2188,75 @@ inline ::int32_t AddObject::_internal_grantnumber() const {
 inline void AddObject::_internal_set_grantnumber(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.grantnumber_ = value;
+}
+
+// optional string resourceid = 2;
+inline bool AddObject::has_resourceid() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline void AddObject::clear_resourceid() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.resourceid_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline const std::string& AddObject::resourceid() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:ConnectMsg.AddObject.resourceid)
+  return _internal_resourceid();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void AddObject::set_resourceid(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.resourceid_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:ConnectMsg.AddObject.resourceid)
+}
+inline std::string* AddObject::mutable_resourceid() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_resourceid();
+  // @@protoc_insertion_point(field_mutable:ConnectMsg.AddObject.resourceid)
+  return _s;
+}
+inline const std::string& AddObject::_internal_resourceid() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.resourceid_.Get();
+}
+inline void AddObject::_internal_set_resourceid(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.resourceid_.Set(value, GetArena());
+}
+inline std::string* AddObject::_internal_mutable_resourceid() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  return _impl_.resourceid_.Mutable( GetArena());
+}
+inline std::string* AddObject::release_resourceid() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:ConnectMsg.AddObject.resourceid)
+  if ((_impl_._has_bits_[0] & 0x00000001u) == 0) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* released = _impl_.resourceid_.Release();
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
+    _impl_.resourceid_.Set("", GetArena());
+  }
+  return released;
+}
+inline void AddObject::set_allocated_resourceid(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  _impl_.resourceid_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.resourceid_.IsDefault()) {
+    _impl_.resourceid_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:ConnectMsg.AddObject.resourceid)
 }
 
 #ifdef __GNUC__

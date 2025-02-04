@@ -11,6 +11,7 @@
 #include "../Engine/PHIManager.h"
 #include "../Packet/PacketID.h"
 #include "../Packet/ProtoInclude.h"
+#include "JSONLoad.h"
 
 namespace Engine::Physics {
 	class Manager;
@@ -20,10 +21,10 @@ class ServerLogic
 {
 	struct Object {
 		int _serialNumber;
+		std::string _resourceId{ "" };
 		Engine::Math::Vector3 _position;
 		Engine::Math::Vector4 _rotation;
 		Engine::Math::Vector3 _scale;
-		std::string _resourceId{ "" };
 		bool _public;
 		Engine::Physics::IRigidStaticComponent* _staticRigid = nullptr;
 		Engine::Physics::IRigidDynamicComponent* _dynamicRigid = nullptr;
@@ -72,12 +73,15 @@ private:
 	Engine::Math::Vector3 _lastSendPosition[2]{};
 	Object _objs[3]{};
 	Ground _ground{};
+	std::vector<Object*> _buildings;
+	std::vector<Object*> _sudiums;
 	
 	ConnectMsg::EnterAccept _enterAccept;
 	ConnectMsg::SyncPlayer _syncPlayer;
 	ConnectMsg::SyncObject _syncObject;
 	ConnectMsg::AddObject _addObject;
 	ConnectMsg::AddRemote _addRemote;
+	ConnectMsg::SyncObjectTest _testMessage;
 	
 	MoveMsg::Move _move;
 	MoveMsg::Jump _jump;
@@ -91,11 +95,21 @@ private:
 	std::string _msgBuffer = std::string(256, '\0');
 
 	void MessageDispatch();
+private:
+	// =============================
+	// JSON Method, Variable Area
+	// =============================
 
+	JSONLoad _jsonLoader;
+	json _mapData;
+
+	void LoadBuilding();
+	void LoadSudium();
 private:
 	// =============================
 	// Physics Method, Variable Area
 	// =============================
+
 	Engine::Physics::Manager* _physicsManager = nullptr;
 	Engine::Physics::IScene* _mainScene = nullptr;
 
@@ -103,5 +117,6 @@ private:
 	void RegistStaticPhysics(Object& obj);
 	void RegistPlayer(Player& player);
 	void RegistGround(Ground& ground);
+
 };
 

@@ -1,12 +1,14 @@
 #pragma once
-#include <nlohmann/json.hpp>
+#include "json.hpp"
 #include <fstream>
+
+using json = nlohmann::json;
 
 class JSONLoad
 {
-	using json = nlohmann::json;
+	
 public:
-	void deserializeJson(const std::string& fileName);
+	json DeSerialize(const std::string& fileName);
 
 
 private:

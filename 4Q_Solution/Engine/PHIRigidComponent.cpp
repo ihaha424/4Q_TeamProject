@@ -110,8 +110,9 @@ namespace Engine::PHI
 	/********************************
 			Engine Life Cycle
 	*********************************/
-	void RigidComponent::Initialize()
+	void RigidComponent::Initialize(Engine::Component::Component* Owner)
 	{
+		owner = static_cast<Engine::Component::Rigid*>(Owner);
 		object->SetUserData(collision);
 		if(nullptr != shape) shape->SetUserData(collision);
 	}
@@ -142,7 +143,7 @@ namespace Engine::PHI
 		releaser(&collision);
 	}
 
-	void* RigidComponent::GetOwner()
+	Engine::Object* RigidComponent::GetOwner()
 	{
 		return owner->GetOwner();
 	}

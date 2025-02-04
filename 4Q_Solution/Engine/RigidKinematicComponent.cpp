@@ -11,8 +11,8 @@ namespace Engine::Component
 	void RigidKinematic::Initialize(const Modules& modules)
 	{
 		Component::Initialize(modules);
-		static_cast<Physics::RigidKinematicComponent*>(_rigidbody)->Initialize();
-		static_cast<Physics::RigidComponent*>(_boundBox)->Initialize();
+		static_cast<Physics::RigidKinematicComponent*>(_rigidbody)->Initialize(this);
+		static_cast<Physics::RigidComponent*>(_boundBox)->Initialize(this);
 	}
 
 	void RigidKinematic::Attach()

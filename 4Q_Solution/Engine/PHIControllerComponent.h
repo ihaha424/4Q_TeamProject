@@ -101,7 +101,12 @@ namespace Engine::PHI
 		void FixedUpdate() override;
 		void Finalize() override;
 
+		Engine::Object* GetOwner() override;
+
 	private:
+		Engine::Component::RigidDynamic* owner;
+
+
 		PhysicsEngineAPI::IController* controller;
 		Collision<Controller>* collision;
 		unsigned short controllerCollisionFlag;

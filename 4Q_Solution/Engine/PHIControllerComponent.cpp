@@ -187,6 +187,11 @@ namespace Engine::PHI
 		releaser(&collision);
 		releaser(&controller);
 	}
+
+	Engine::Object* Controller::GetOwner()
+	{
+		return owner->GetOwner();
+	}
 	
 
 	unsigned short Controller::GetCollisionFlag()

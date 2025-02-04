@@ -1,5 +1,15 @@
 #pragma once
 
+namespace Engine
+{
+	class Object;
+}
+
+namespace Engine::Component
+{
+	class Component;
+}
+
 namespace Engine::Physics
 {
 	// Engine Interface
@@ -12,7 +22,7 @@ namespace Engine::Physics
 		Component& operator=(Component&& other) noexcept = default;
 		virtual ~Component() = default;
 
-		virtual void* GetOwner() = 0;
+		virtual Engine::Object* GetOwner() = 0;
 	};
 }
 

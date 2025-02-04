@@ -94,12 +94,12 @@ namespace Engine::PHI
 		/********************************
 				Engine Life Cycle
 		*********************************/
-		void Initialize() override;
+		void Initialize(Engine::Component::Component* Owner) override;
 		void Update(float deltaTime) const override;
 		void FixedUpdate() const override;
 		void Finalize() override;
 
-		void* GetOwner() override;
+		Engine::Object* GetOwner() override;
 
 	protected:
 		PhysicsEngineAPI::IKinematicObject* object;

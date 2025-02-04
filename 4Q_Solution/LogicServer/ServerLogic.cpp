@@ -291,6 +291,7 @@ void ServerLogic::RegistPlayer(Player& player)
     Engine::Physics::IController* controller = player._controller;
     _physicsManager->CreatePlayerController(&controller, _mainScene, cd);
     player._controller = static_cast<Engine::Physics::Controller*>(controller);
+    player._controller->SetOwner(&player);
 }
 
 void ServerLogic::RegistGround(Ground& ground)
@@ -303,5 +304,4 @@ void ServerLogic::RegistGround(Ground& ground)
     _physicsManager->CreateTriangleStatic(&ground._staticRigid, "terrain", { {0.f,0.f,0.f } }, transform);
     _mainScene->AddActor(ground._staticRigid);
     ground._staticRigid->SetTranslate({ -1000.f, -200.f, 1000.f });
-
 }

@@ -9,7 +9,7 @@ namespace Engine::Physics
 
 	struct RigidStaticComponent : IRigidStaticComponent
 	{
-		virtual void Initialize(Engine::Component::Component* Owner) = 0;
+		virtual void Initialize() = 0;
 		virtual void Update(float deltaTime) const = 0;
 		virtual void FixedUpdate() const = 0;
 		virtual void Finalize() = 0;

@@ -12,7 +12,12 @@ void MeshRenderer::Release()
 	delete this;
 }
 
-void MeshRenderer::SetRenderLayer(const unsigned int layer)
+void MeshRenderer::SetDesc(const GE::MeshDescription* in)
 {
-	_layer = layer;
+	_description = *in;
+}
+
+void MeshRenderer::GetDesc(GE::MeshDescription* out)
+{
+	*out = _description;
 }

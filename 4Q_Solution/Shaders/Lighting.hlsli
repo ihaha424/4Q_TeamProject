@@ -4,7 +4,7 @@
 #include "Constants.hlsli"
 #include "LightData.hlsli"
 
-inline float3 CalculatePointLightIntensity(float distance, float range, float intensity, float3 K)
+inline float CalculatePointLightIntensity(float distance, float range, float intensity, float3 K)
 {
     //if (range < distance)
     //    return 0;
@@ -59,8 +59,8 @@ inline float3 DirectionalLightPBR(float3 worldPosition, float3 N, float3 V, floa
         float3 kd = lerp(1.0 - F, 0, metalness);
         float  NdotL = max(0, dot(N, L));
     
-        float3 diffusePBR = albedo * kd / PI;
-        float3 specularPBR = (F * D * G) / max(0.00001, 4.0 * NdotL * NdotV);
+        float3 diffusePBR = albedo * kd / PI * light.diffuse.rgb;
+        float3 specularPBR = (F * D * G) / max(0.00001, 4.0 * NdotL * NdotV) * light.specular.rgb;
         
         float intensity = 1.0;
         //float toonStep = 3;
@@ -77,7 +77,7 @@ inline float3 PointLightPBR(float3 worldPosition, float3 N, float3 V, float3 alb
     float3 F0 = lerp(Fdielectric, albedo, metalness);
     float NdotV = max(0, dot(N, V));
     
-    for (uint i = 0; i < numDirectionalLights; i++)
+    for (uint i = 0; i < numPointLights; i++)
     {
         Light light = PointLights[i];
         float3 distance = light.data - worldPosition;
@@ -90,12 +90,43 @@ inline float3 PointLightPBR(float3 worldPosition, float3 N, float3 V, float3 alb
         float3 kd = lerp(1.0 - F, 0, metalness);
         float  NdotL = max(0, dot(N, L));
     
-        float3 diffusePBR = albedo * kd / PI;
-        float3 specularPBR = (F * D * G) / max(0.00001, 4.0 * NdotL * NdotV);
-        directLighting += (diffusePBR + specularPBR) * NdotL * CalculatePointLightIntensity(len, light.range, light.intensity, light.attenuation);
+        float3 diffusePBR = albedo * kd / PI * light.diffuse.rgb;
+        float3 specularPBR = (F * D * G) / max(0.00001, 4.0 * NdotL * NdotV) * light.specular.rgb;
+        float intensity = CalculatePointLightIntensity(len, light.range, light.intensity, light.attenuation);
+        directLighting += (diffusePBR + specularPBR) * NdotL * intensity;
     }
     
     return directLighting;
+}
+
+inline float3 AmbientLightIBL(float3 albedo, float3 N, float3 V, float metalness, float roughness)
+{
+    float3 F0 = lerp(Fdielectric, albedo, metalness);
+    float3 irradiance = txIBL_Diffuse.Sample(samLinear_wrap, N).rgb;
+    
+    float NdotV = max(0, dot(N, V));
+    
+    uint width, height, levels;
+    txIBL_Specular.GetDimensions(0, width, height, levels);
+
+    float3 Lr = 2.0 * NdotV * N - V;
+    float3 preFilteredColor = txIBL_Specular.SampleLevel(samLinear_wrap, Lr, roughness * levels).rgb;
+    float2 brdf = txIBL_BRDF.Sample(samLinear_clamp, float2(NdotV, roughness)).rg;
+        
+    float3 F = FresnelReflection(NdotV, F0);
+    float3 kD = lerp(1.0 - F, 0, metalness);
+    float3 diffuseIBL = kD * albedo * irradiance;
+    float3 specularIBL = (F0 * brdf.x + brdf.y) * preFilteredColor;
+    
+    return (diffuseIBL + specularIBL) * 0.5f;
+}
+
+inline float3 RimLight(float3 N, float3 V)
+{
+    float rim = 1.0 - dot(N, V);
+    rim = pow(rim, 1.5);
+
+    return float3(0.0, 0.5, 1.0) * rim;
 }
 
 #endif

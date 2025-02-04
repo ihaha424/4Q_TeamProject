@@ -64,20 +64,8 @@ PS_OUTPUT main(PS_INPUT input)
     directLighting += PointLightPBR(input.worldPosition, N, V, albedo, roughness, metalness);
 #endif
     
-#ifdef IBL
-    //float3 irradiance = txIBL_Diffuse.Sample(samLinear_wrap, N).rgb;
-    
-    //uint specularTextureLevels = QuerySpecularTextureLevels(txIBL_Specular);
-    //float3 Lr = 2.0 * NdotV * N - V;
-    //float3 preFilteredColor = txIBL_Specular.SampleLevel(samLinear_wrap, Lr, roughness * specularTextureLevels).rgb;
-    //float2 brdf = txIBL_BRDF.Sample(samLinear_clamp, float2(NdotV, roughness)).rg;
-        
-    //F = FresnelReflection(NdotV, F0);
-    //kd = lerp(1.0 - F, 0, metalness);
-    //float3 diffuseIBL = kd * albedo * irradiance;
-    //float3 specularIBL = (F0 * brdf.x + brdf.y) * preFilteredColor;
-    
-    //ambientLighting = diffuseIBL + specularIBL;
+#ifdef IBL        
+    ambientLighting = AmbientLightIBL(albedo, N, V, metalness, roughness);
 #endif
    
 #ifdef Shadow
@@ -111,18 +99,18 @@ PS_OUTPUT main(PS_INPUT input)
 #endif
     
     float4 color = 0;
-    color.rgb = shadowFactor * (directLighting + ambientLighting);
+    color.rgb = shadowFactor * directLighting + ambientLighting;
     color.a = alpha;
         
     float4 opacity = txOpacity.Sample(samLinear_wrap, input.uv);
+    
     if (length(opacity))
         color.a = opacity.a;
-
-    if (color.a < 0.01)
-        discard;
+    else
+        color.a = 1.f;    
     
     color.rgb = LinearToGammaSpace(color.rgb);
-    
+    color.rgb += RimLight(N, V);
     float4 emissive = txEmissive.Sample(samLinear_wrap, input.uv);
     color += emissive;
     

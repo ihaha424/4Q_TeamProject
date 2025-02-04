@@ -167,7 +167,7 @@ namespace Engine::Math
 		EaseInBounce,
 		EaseOutBounce,
 		EaseInOutBounce,
-	};;
+	};
 
 	/**
 	 * @brief				:	Interpolation with Easing Function

@@ -68,7 +68,7 @@ void Light::SetDirectionFromArray(float* pArray)
 	_lightData.data = Vector3(pArray);
 }
 
-void Light::SetDiffsueFromArray(float* pArray)
+void Light::SetDiffuseFromArray(float* pArray)
 {
 	_lightData.diffuse = Vector4(pArray);
 }

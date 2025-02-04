@@ -34,3 +34,13 @@ void Engine::Component::Component::Detach()
 void Engine::Component::Component::Finalize()
 {
 }
+
+void Engine::Component::Component::SetOwner(Object* owner)
+{
+	_owner = owner;
+}
+
+Engine::Object* Engine::Component::Component::GetOwner() const
+{
+	return _owner;
+}

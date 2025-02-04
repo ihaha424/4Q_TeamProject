@@ -31,15 +31,11 @@ namespace Engine::PHI
 		bool Overlap(
 			Engine::Physics::QueryData&					overlapInfo, 
 			const std::string&							name,
-			const Engine::Physics::GeometryDesc&		geometryDesc,
-			const Engine::Physics::VerticesMeshDesc&	verticesMeshDesc,
 			const Engine::Transform&					transform
 		) override;
 		bool Sweep(
 			Engine::Physics::AdditionalQueryData&			sweepInfo, 
 			const std::string&								name,
-			const Engine::Physics::GeometryDesc&			geometryDesc,
-			const Engine::Physics::VerticesMeshDesc&		verticesMeshDesc,
 			const Engine::Transform&						transform, 
 			const Engine::Math::Vector3&					direction, 
 			float distance

@@ -82,6 +82,53 @@ void ViewManagement::AddRenderTargetView(const wchar_t* name, const Vector2& siz
 	_views[name] = { pRTV, pSRV };
 }
 
+void ViewManagement::AddMipMapRenderTargetView(const wchar_t* name, const Vector2& size, DXGI_FORMAT format)
+{
+	ID3D11Device* pDevice = g_pGraphicDevice->GetDevice();
+
+	ID3D11Texture2D* pTexture = nullptr;
+	D3D11_TEXTURE2D_DESC textureDesc
+	{
+		.Width = (unsigned int)size.x,
+		.Height = (unsigned int)size.y,
+		.MipLevels = 0,
+		.ArraySize = 1,
+		.Format = format,
+		.SampleDesc {.Count = 1 },
+		.Usage = D3D11_USAGE_DEFAULT,
+		.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE,
+		.MiscFlags = D3D11_RESOURCE_MISC_GENERATE_MIPS
+	};
+
+	pDevice->CreateTexture2D(&textureDesc, nullptr, &pTexture);
+
+	D3D11_RENDER_TARGET_VIEW_DESC rtvDesc
+	{
+		.Format = textureDesc.Format,
+		.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D
+	};
+
+	ID3D11RenderTargetView* pRTV = nullptr;
+	pDevice->CreateRenderTargetView(pTexture, &rtvDesc, &pRTV);
+
+	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc
+	{
+		.Format = textureDesc.Format,
+		.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D,
+		.Texture2D
+		{
+			.MostDetailedMip = 0,
+			.MipLevels = (UINT)-1
+		}
+	};
+
+	ID3D11ShaderResourceView* pSRV = nullptr;
+	pDevice->CreateShaderResourceView(pTexture, nullptr, &pSRV);
+	SafeRelease(pTexture);
+
+	_views[name] = { pRTV, pSRV };
+}
+
 void ViewManagement::AddDepthStencilView(const wchar_t* name, const D3D11_TEXTURE2D_DESC& textureDesc, const D3D11_DEPTH_STENCIL_VIEW_DESC& viewDesc)
 {
 	assert(_views.find(name) == _views.end());

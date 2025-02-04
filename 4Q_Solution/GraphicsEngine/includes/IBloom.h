@@ -5,8 +5,9 @@ namespace GE
 {
     struct BlOOM_DESC
     {
-        float mask;
+        float weight;
         float threshold;
+        unsigned int level;
     };
 
     class IBloom : public IFilter

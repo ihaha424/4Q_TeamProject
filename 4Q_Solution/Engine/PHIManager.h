@@ -68,6 +68,13 @@ namespace Engine::PHI
 			const char* filePath
 		) override;
 
+		bool LoadHeightMap(
+			const Engine::Physics::GeometryDesc& geometryDesc,
+			const char* name,
+			const char* filePath
+		) override;
+
+
 		void CreateTriangleStatic(
 			Engine::Physics::IRigidStaticComponent** destObject, 
 			const char* geomtryName, 
@@ -78,11 +85,7 @@ namespace Engine::PHI
 		) override;
 
 	public:
-		PhysicsEngineAPI::IGeometry* FindGeometry(
-			const std::string& name,
-			const Engine::Physics::GeometryDesc& geometryDesc,
-			const Engine::Physics::VerticesMeshDesc& verticesMeshDesc
-		);
+		PhysicsEngineAPI::IGeometry* FindGeometry(const std::string& name);
 	private:
 		PhysicsEngineAPI::IPhysicsSystem* system;
 		std::map<unsigned int, Physics::IScene*> sceneList;

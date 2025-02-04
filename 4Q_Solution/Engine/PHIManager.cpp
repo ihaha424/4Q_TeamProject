@@ -463,6 +463,8 @@ namespace Engine::PHI
 			verticesMeshDesc.indices.stride = _verticesMeshDesc.indices.stride;
 			verticesMeshDesc.indices.data = _verticesMeshDesc.indices.data;
 			result = system->CreateGeometry(&geometry, geometryDesc, verticesMeshDesc);
+			if (!result)
+				return result;
 			geometryMap[name] = geometry;
 		}
 
@@ -494,35 +496,41 @@ namespace Engine::PHI
 		return result;
 	}
 
-	PhysicsEngineAPI::IGeometry* Manager::FindGeometry(
-		const std::string& name,
-		const Engine::Physics::GeometryDesc& _geometryDesc,
-		const Engine::Physics::VerticesMeshDesc& _verticesMeshDesc
+	bool Manager::LoadHeightMap(
+		const Engine::Physics::GeometryDesc& _geometryDesc, 
+		const char* name, 
+		const char* filePath
 	)
 	{
 		PhysicsEngineAPI::IGeometry* geometry = nullptr;
+		bool result = false;
 		auto iter = geometryMap.find(name);
 		if (iter == geometryMap.end())
 		{
 			PhysicsEngineAPI::Utils::Description::GeometryDesc geometryDesc{};
-			PhysicsEngineAPI::Utils::Description::VerticesMeshDesc verticesMeshDesc{};
 			geometryDesc.type = static_cast<PhysicsEngineAPI::Utils::DataStructure::GeometryShape>(_geometryDesc.type);
 			auto& initialGeometrData = _geometryDesc.data;
 			geometryDesc.data = { initialGeometrData.x, initialGeometrData.y, initialGeometrData.z, initialGeometrData.w };
-			verticesMeshDesc.vertices.count = _verticesMeshDesc.vertices.count;
-			verticesMeshDesc.vertices.stride = _verticesMeshDesc.vertices.stride;
-			verticesMeshDesc.vertices.data = _verticesMeshDesc.vertices.data;
-			verticesMeshDesc.indices.count = _verticesMeshDesc.indices.count;
-			verticesMeshDesc.indices.stride = _verticesMeshDesc.indices.stride;
-			verticesMeshDesc.indices.data = _verticesMeshDesc.indices.data;
-			system->CreateGeometry(&geometry, geometryDesc, verticesMeshDesc);
+
+			result = system->LoadHeightMap(&geometry, geometryDesc, filePath);
+			if (!result)
+				return result;
 			geometryMap[name] = geometry;
 		}
-		else
+
+		return result;
+	}
+
+	PhysicsEngineAPI::IGeometry* Manager::FindGeometry(const std::string& name)
+	{
+		PhysicsEngineAPI::IGeometry* geometry = nullptr;
+		auto iter = geometryMap.find(name);
+		if (iter != geometryMap.end())
 			geometry = iter->second;
 
 		return geometry;
 	}
+
 	void Manager::CreateTriangleStatic(
 		Engine::Physics::IRigidStaticComponent** _destObject, 
 		const char* geomtryName, 

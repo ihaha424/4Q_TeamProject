@@ -142,6 +142,7 @@ void NetworkMain::Disconnect(SessionID sid)
 	_pendingDestroySessions.push_back(_sessionMap[sid]);
 	_sessionMap.erase(sid);
 	_sessionProcessCheck.erase(sid);
+	PacketDispatcher::GetInstance()->SessionDeleted(sid);
 }
 
 void NetworkMain::IOWork(HANDLE completionPort)
@@ -160,6 +161,7 @@ void NetworkMain::IOWork(HANDLE completionPort)
 				_pendingDestroySessions.push_back(session);
 				_sessionMap.erase(sid);
 				_sessionProcessCheck.erase(sid);
+				PacketDispatcher::GetInstance()->SessionDeleted(sid);
 				printf("[IOWork] Session deleted.\n");
 			} // if end
 		} // if end

@@ -296,7 +296,7 @@ void ServerLogic::RegistGround(Ground& ground)
 {
     Engine::Physics::GeometryDesc geometryDesc;
     geometryDesc.data = { 1, 1, 1 };
-    _physicsManager->LoadTriangleMesh(geometryDesc, "terrain", "../Resources/Level/Level.fbx");
+    _physicsManager->LoadHeightMap(geometryDesc, "terrain", "../Resources/Terrain/testTest.png");
 
     Engine::Transform transform{};
     _physicsManager->CreateTriangleStatic(&ground._staticRigid, "terrain", { {0.f,0.f,0.f } }, transform);

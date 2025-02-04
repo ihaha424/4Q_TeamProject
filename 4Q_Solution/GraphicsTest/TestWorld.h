@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "GlobalLight.h"
 #include "Terrain.h"
+#include "SkyBox.h"
 
 class TestWorld : public Engine::World
 {
@@ -19,6 +20,7 @@ private:
 	Player* _player;
 	GlobalLight* _light;
 	Terrain* _terrain;
+	SkyBox* _skyBox;
 
 	int playerSerialNum = 0;
 };

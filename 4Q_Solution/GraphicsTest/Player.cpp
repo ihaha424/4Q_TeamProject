@@ -14,11 +14,11 @@ Player::Player(std::filesystem::path&& meshPath, std::filesystem::path&& fontPat
 
 void Player::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
-	_movement = componentFactory->Clone<Engine::Component::Movement>();
-	_camera = componentFactory->Clone<Engine::Component::Camera>();
-	_skeletalMesh = componentFactory->Clone<Engine::Component::SkeletalMesh>();
-	_animator = componentFactory->Clone<Engine::Component::Animator>();
-	_textRenderer = componentFactory->Clone<Engine::Component::TextRenderer>();
+	_movement = componentFactory->Clone<Engine::Component::Movement>(this);
+	_camera = componentFactory->Clone<Engine::Component::Camera>(this);
+	_skeletalMesh = componentFactory->Clone<Engine::Component::SkeletalMesh>(this);
+	_animator = componentFactory->Clone<Engine::Component::Animator>(this);
+	_textRenderer = componentFactory->Clone<Engine::Component::TextRenderer>(this);
 }
 
 void Player::DisposeComponents()
@@ -50,24 +50,30 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	mappingContext->GetAction(L"Move", &moveAction);
 	moveAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
 		{
-			_movement->SetDirection(value);
+			Engine::Math::Vector3 direction = value;
+			direction = Engine::Math::Vector3::TransformNormal(direction, _worldMatrix);
+			_movement->SetDirection(-direction);
 		});
 	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
 		{
-			_animator->ChangeAnimation("rig|walking");
+			//_animator->ChangeAnimation("rig|walking");
+			_animator->ChangeAnimation("rig|Anim_Walk_Live");
 		});
 	moveAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
 		{
-			_animator->ChangeAnimation("rig|Breathing"); 
+			//_animator->ChangeAnimation("rig|Breathing"); 
+			_animator->ChangeAnimation("rig|Anim_Idle_Live");
 			_movement->SetDirection(Engine::Math::Vector3::Zero);
 		});
 
-	/*Engine::Input::IAction* cameraAction = nullptr;
+	Engine::Input::IAction* cameraAction = nullptr;
 	mappingContext->GetAction(L"Camera", &cameraAction);
-	cameraAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
+	cameraAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](Engine::Math::Vector3 value)
 		{
-			_camera->Rotate(value);
-		});*/
+			//_camera->Rotate(value);
+			_camRotation += value;
+			_camera->SetRotation(_camRotation);
+		});
 }
 
 void Player::PostInitialize(const Engine::Modules& modules)
@@ -83,6 +89,9 @@ void Player::PostInitialize(const Engine::Modules& modules)
 	_animator.SplitBone(0, "Dummy_root");
 	_animator.SplitBone(1, "Bip01-Spine1");
 	_animator.ChangeAnimation("Wait");*/
+
+	//_skeletalMesh->SetActiveShadow(false);
+	_skeletalMesh->SetPostEffectFlag(1);
 }
 
 void Player::PostAttach()
@@ -94,11 +103,25 @@ void Player::PostAttach()
 void Player::PostUpdate(const float deltaTime)
 {
 	Object::PostUpdate(deltaTime);
-	_worldMatrix = Engine::Math::Matrix::CreateScale(0.5f) * Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
+	
+	//_transform.rotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(Engine::Math::Vector3(0.f, _camRotation.y / 180.f / 3.14f, 0.f));
 
-	/*Engine::Math::Vector3 tempPostion = _transform.position;
-	tempPostion.z -= 300.f;
-	tempPostion.y += 300.f;
-	_camera.SetPosition(tempPostion);
-	_camera.SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));*/
+	_worldMatrix = Engine::Math::Matrix::CreateScale(0.4f)
+			     * Engine::Math::Matrix::CreateFromQuaternion(_transform.rotation)
+				 * Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
+
+
+	Engine::Math::Vector3 tempPostion = _transform.position;
+	tempPostion.y += 50.f;
+	tempPostion += _worldMatrix.Backward() * -200.f;
+	_camera->SetPosition(tempPostion);
+
+	/*Engine::Math::Vector3 playerForward = -_worldMatrix.Forward();
+	playerForward.Normalize();
+
+	Engine::Math::Vector3 cameraForward = -_camera->GetCameraMatrix().Forward();
+	cameraForward.y = 0.f;
+	cameraForward.Normalize();
+	float theta = playerForward.Dot(cameraForward);*/
+	
 }

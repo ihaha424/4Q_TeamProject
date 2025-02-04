@@ -18,5 +18,6 @@ namespace GE
 		virtual void CreateLight(ILight** ppOutLight) = 0;
 		virtual void RegisterLight(ILight* pLight) = 0;
 		virtual void UnRegisterLight(ILight* pLight) = 0;
+		virtual void SetMainLight(ILight* pLight) = 0;
 	};
 }

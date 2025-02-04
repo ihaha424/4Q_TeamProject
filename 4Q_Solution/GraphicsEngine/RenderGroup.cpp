@@ -9,7 +9,7 @@ void RenderGroup::RegisterRenderQueue(GE::IMeshRenderer* pMeshRenderer, Matrix* 
 
 	if (std::ranges::any_of(_datas, compare))
 	{
-		ASSERT(false, L"이미 등록된 MeshRenderer 입니다.");
+		ASSERT(false, L"Already registered MeshRenderer.");
 		return;
 	}
 

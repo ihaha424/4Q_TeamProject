@@ -20,7 +20,7 @@ void Engine::Component::Camera::Initialize(const Modules& modules)
 	auto* cameraSystem = _graphicsManager->GetCameraSystem();
 	cameraSystem->CreateCamera(&_geCamera);
 	_geCamera->SetPerspective(_nearZ, _farZ, static_cast<float>(_size.cx) / static_cast<float>(_size.cy), _fov);
-	_geCamera->SetPosition(0.f, 50.f, -150.f); // TODO: Get position from object.
+	//_geCamera->SetPosition(0.f, 50.f, -150.f); // TODO: Get position from object.
 	_geCamera->SetRotationFromAngle(0.f, 0.f, 0.f);
 }
 
@@ -70,6 +70,11 @@ void Engine::Component::Camera::SetPosition(const Math::Vector3 position) const
 void Engine::Component::Camera::SetRotation(const Math::Vector3 rotation) const
 {
 	_geCamera->SetRotationFromAngle(rotation.x, rotation.y, rotation.z);
+}
+
+void Engine::Component::Camera::SetParent(Math::Matrix* matrix) const
+{
+	_geCamera->SetParent(matrix);
 }
 
 void Engine::Component::Camera::Rotate(Math::Vector3 rotation)

@@ -177,6 +177,7 @@ void Engine::Application::InitializeManagers() const
 	_timeManager->Initialize(0.2f);
 	_windowManager->Initialize(_instanceHandle, _title.c_str(), _size);
 	_inputManager->Initialize(_windowManager->GetHandle());
+	_windowManager->AddProcedure(DSHInput::Manager::Procedure);
 	_graphicsManager->Initialize(_windowManager->GetHandle(), L"../Shaders/", _size, false, 1);
 	_contentManager->Initialize();
     _networkManager->Initialize();

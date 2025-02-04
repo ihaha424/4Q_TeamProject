@@ -99,7 +99,7 @@ inline float3 PointLightPBR(float3 worldPosition, float3 N, float3 V, float3 alb
     return directLighting;
 }
 
-inline float3 AmbientLightIBL(float3 albedo, float3 N, float3 V, float metalness, float roughness)
+inline float3 AmbientLightIBL(float3 albedo, float3 N, float3 V, float roughness, float metalness)
 {
     float3 F0 = lerp(Fdielectric, albedo, metalness);
     float3 irradiance = txIBL_Diffuse.Sample(samLinear_wrap, N).rgb;
@@ -118,7 +118,7 @@ inline float3 AmbientLightIBL(float3 albedo, float3 N, float3 V, float metalness
     float3 diffuseIBL = kD * albedo * irradiance;
     float3 specularIBL = (F0 * brdf.x + brdf.y) * preFilteredColor;
     
-    return (diffuseIBL + specularIBL) * 0.5f;
+    return (diffuseIBL + specularIBL) * 0.5;
 }
 
 inline float3 RimLight(float3 N, float3 V)

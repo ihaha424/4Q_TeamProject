@@ -10,11 +10,18 @@ GameApplication::GameApplication(const HINSTANCE instanceHandle) :
 
 void GameApplication::DeclareInputActions(Engine::Input::IManager* inputManager)
 {
+	Engine::Input::Device::IMouse* mouse = nullptr;
+	inputManager->GetDevice(&mouse);
+	mouse->LockCursor();
+	mouse->HideCursor();
+
     Engine::Input::IMappingContext* mappingContext = nullptr;
     inputManager->GetMappingContext(L"Default", &mappingContext);
 
-    DeclareMoveAction(inputManager, mappingContext);
-    DeclareCameraAction(inputManager, mappingContext);
+
+    //DeclareMoveAction(inputManager, mappingContext);
+    //DeclareCameraAction(inputManager, mappingContext);
+	DeclareSystemAction(inputManager, mappingContext);
 
     inputManager->SetActiveMappingContext(mappingContext);
 }
@@ -100,9 +107,7 @@ void GameApplication::DeclareMoveAction(Engine::Input::IManager* inputManager, E
 
 void GameApplication::DeclareCameraAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext)
 {
-	Engine::Input::Modifier::INegative* negative = nullptr;
 	Engine::Input::Modifier::ISwizzleAxis* swizzleAxis = nullptr;
-	inputManager->GetModifier(&negative);
 	inputManager->GetModifier(Engine::Input::Modifier::ISwizzleAxis::Type::YXZ, &swizzleAxis);
 
 	Engine::Input::IAction* action = nullptr;
@@ -124,4 +129,44 @@ void GameApplication::DeclareCameraAction(Engine::Input::IManager* inputManager,
 	action->GetTrigger(&yTrigger);
 	yTrigger->AddModifier(swizzleAxis);
 	yTrigger->SetComponent(yAxis);
+}
+
+void GameApplication::DeclareSystemAction(Engine::Input::IManager* inputManager,
+	Engine::Input::IMappingContext* mappingContext)
+{
+	Engine::Input::Modifier::ISwizzleAxis* swizzleAxis = nullptr;
+	inputManager->GetModifier(Engine::Input::Modifier::ISwizzleAxis::Type::YXZ, &swizzleAxis);
+
+	Engine::Input::IAction* action = nullptr;
+	mappingContext->GetAction(L"System", &action);
+
+	Engine::Input::Device::IMouse* mouse = nullptr;
+	inputManager->GetDevice(&mouse);
+
+	Engine::Input::Component::IAxisComponent* xAxis = nullptr;
+	mouse->GetComponent(Engine::Input::Device::IMouse::Axis::X, &xAxis);
+	Engine::Input::Component::IAxisComponent* yAxis = nullptr;
+	mouse->GetComponent(Engine::Input::Device::IMouse::Axis::Y, &yAxis);
+
+	Engine::Input::Trigger::IDown* xTrigger = nullptr;
+	action->GetTrigger(&xTrigger);
+	xTrigger->SetComponent(xAxis);
+
+	Engine::Input::Trigger::IDown* yTrigger = nullptr;
+	action->GetTrigger(&yTrigger);
+	yTrigger->AddModifier(swizzleAxis);
+	yTrigger->SetComponent(yAxis);
+	//action->AddListener(Engine::Input::Trigger::Event::Started, [](auto value)
+	//{
+	//	GetLoggerManager()->Log(Engine::Logger::LogLevel::Trace, std::format(L"x:{} \t y:{} \t z:{}", value.x, value.y, value.z));
+	//});
+
+	action->AddListener(Engine::Input::Trigger::Event::Triggered, [](auto value)
+	{
+		GetLoggerManager()->Log(Engine::Logger::LogLevel::Debug, std::format(L"x:{} \t y:{} \t z:{}", value.x, value.y, value.z));
+	});
+	//action->AddListener(Engine::Input::Trigger::Event::Completed, [](auto value)
+	//	{
+	//		GetLoggerManager()->Log(Engine::Logger::LogLevel::Warning, std::format(L"x:{} \t y:{} \t z:{}", value.x, value.y, value.z));
+	//	});
 }

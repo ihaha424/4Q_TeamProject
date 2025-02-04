@@ -24,6 +24,11 @@ namespace Engine::Component
 
 		void SetOwner(Object* owner);
 		[[nodiscard]] Object* GetOwner() const;
+		template <typename T> requires std::derived_from<T, Object>
+		[[nodiscard]] T* GetOwner() const
+		{
+			return dynamic_cast<T*>(_owner);
+		}
 
 	protected:
 		bool _isDispose;

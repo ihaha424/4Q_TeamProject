@@ -24,5 +24,5 @@ float4 main(PS_INPUT input) : SV_Target
     color += txSource1.SampleLevel(samLinear_clamp, input.uv, 4) * 0.05;
     color += txSource1.SampleLevel(samLinear_clamp, input.uv, 5) * 0.05;
     
-    return float4(color.rgb, 1.f) * LayerMasking(input.uv);
+    return float4(color.rgb, 1.f);
 }

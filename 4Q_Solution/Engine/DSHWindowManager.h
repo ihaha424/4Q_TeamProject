@@ -16,8 +16,11 @@ namespace Engine::DSHWindow
 		void Update() const override;
 		void SetCursorDefault() const override;
 
+		void AddProcedure(WNDPROC procedure) override;
+
 	private:
-		static LRESULT WindowProcedure(const HWND windowHandle, const UINT message, const WPARAM wParam, const LPARAM lParam);
+		static LRESULT WindowProcedure(HWND windowHandle, UINT message, WPARAM wParam, LPARAM lParam);
+		static std::vector<WNDPROC> _windowProcedures;
 
 		DSH::Window::ISystem* _system;
 		DSH::Window::IClass* _class;

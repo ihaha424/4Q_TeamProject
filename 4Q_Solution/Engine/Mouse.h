@@ -37,6 +37,12 @@ namespace Engine::Input::Device
 
 		virtual void GetComponent(Button button, Component::IButtonComponent** buttonComponent) = 0;
 		virtual void GetComponent(Axis axis, Component::IAxisComponent** axisComponent) = 0;
+
+		virtual void ShowCursor() = 0;
+		virtual void HideCursor() = 0;
+
+		virtual void LockCursor() = 0;
+		virtual void UnlockCursor() = 0;
 	};
 
 	struct Mouse : IMouse

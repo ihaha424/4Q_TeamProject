@@ -45,7 +45,6 @@ namespace PhysicsEngineAPI
 		const physx::PxControllerFilters filters{};
 		const physx::PxObstacleContext* obstacles = NULL;
 		//controller->invalidateCache();
-		controller->getActor()->wakeUp();
 		flags = controller->move(displacement, minDistance, deltaTime, filters);
 		return flags;
 	}

@@ -14,13 +14,16 @@ namespace PhysicsEngineAPI
 
 		if (collitionMap.find(actor2) == collitionMap.end())
 		{
-			collitionMap[actor2] = true;
-			triggerEvent.myCollision = actor1;
-			triggerEvent.otherCollision = actor2;
-			actor1->OnOverlapBegin(triggerEvent);
-			triggerEvent.myCollision = actor2;
-			triggerEvent.otherCollision = actor1;
-			actor2->OnOverlapBegin(triggerEvent);
+			if (actor1 && actor2)
+			{
+				collitionMap[actor2] = true;
+				triggerEvent.myCollision = actor1;
+				triggerEvent.otherCollision = actor2;
+				actor1->OnOverlapBegin(triggerEvent);
+				triggerEvent.myCollision = actor2;
+				triggerEvent.otherCollision = actor1;
+				actor2->OnOverlapBegin(triggerEvent);
+			}
 		}
 	}
 	void PhysXReportCallback::onControllerHit(const physx::PxControllersHit& hit)

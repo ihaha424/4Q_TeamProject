@@ -2,9 +2,15 @@
 #include "Server/ServerEntrance.h"
 #include "directxtk/SimpleMath.h"
 #include "DSHTime/Time.h"
+#include "Physics/InterfaceAPI.h"
+#include "../Engine/Math.h"
+#include "../Engine/Transform.h"
+#include "../Engine/PhysicsUtils.h"
+#include "../Engine/Physics.h"
+#include "../Engine/PHICoordinateConvert.h"
+#include "../Engine/PHIManager.h"
 #include "../Packet/PacketID.h"
 #include "../Packet/ProtoInclude.h"
-#include "Rigid.h"
 
 namespace Engine::Physics {
 	class Manager;

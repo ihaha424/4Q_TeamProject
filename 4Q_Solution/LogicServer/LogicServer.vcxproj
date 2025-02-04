@@ -163,7 +163,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="LogicServer.cpp" />
-    <ClCompile Include="Rigid.cpp" />
     <ClCompile Include="ServerLogic.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -173,7 +172,6 @@
     <ClInclude Include="..\Packet\Play.pb.h" />
     <ClInclude Include="..\Packet\ProtoInclude.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Rigid.h" />
     <ClInclude Include="ServerLogic.h" />
   </ItemGroup>
   <ItemGroup>

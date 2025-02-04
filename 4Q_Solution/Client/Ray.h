@@ -13,13 +13,17 @@ protected:
 	void PreInitialize(const Engine::Modules& modules) override;
 	void PostInitialize(const Engine::Modules& modules) override;
 	void PostUpdate(float deltaTime) override;
+	void PostAttach() override;
 
 private:
-	Engine::Math::Matrix _worldMatrix;
 	std::filesystem::path _meshPath;
 
+	Engine::Component::Movement* _movement;
+	Engine::Component::Camera* _camera;
 	Engine::Component::SkeletalMesh* _skeletalMesh;
 	Engine::Component::Animator* _animator;
-	Engine::Component::Movement* _movement;
-	Engine::Component::FiniteStateMachine* _animationFSM;
+	Engine::Math::Matrix _worldMatrix;
+
+	Engine::Math::Matrix _cameraParentMatrix;
+	Engine::Math::Vector3 _cameraRotation;
 };

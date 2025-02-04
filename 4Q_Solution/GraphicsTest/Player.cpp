@@ -51,17 +51,18 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	moveAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
 		{
 			Engine::Math::Vector3 direction = value;
-			direction = Engine::Math::Vector3::TransformNormal(direction, _worldMatrix);
-			_movement->SetDirection(-direction);
+			direction = Engine::Math::Vector3::TransformNormal(direction, _cameraParentMatrix);
+			direction.y = 0.f;
+			direction.Normalize();
+			_transform.rotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(Engine::Math::Vector3(0.f, _cameraRotation.y + 3.14f, 0.f));
+			_movement->SetDirection(direction);
 		});
 	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
 		{
-			//_animator->ChangeAnimation("rig|walking");
 			_animator->ChangeAnimation("rig|Anim_Walk");
 		});
 	moveAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
 		{
-			//_animator->ChangeAnimation("rig|Breathing"); 
 			_animator->ChangeAnimation("rig|Anim_Idle");
 			_movement->SetDirection(Engine::Math::Vector3::Zero);
 		});
@@ -70,9 +71,7 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	mappingContext->GetAction(L"Camera", &cameraAction);
 	cameraAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](Engine::Math::Vector3 value)
 		{
-			//_camera->Rotate(value);
-			_camRotation += value;
-			_camera->SetRotation(_camRotation);
+			_cameraRotation += value;
 		});
 }
 
@@ -92,6 +91,7 @@ void Player::PostInitialize(const Engine::Modules& modules)
 
 	//_skeletalMesh->SetActiveShadow(false);
 	_skeletalMesh->SetPostEffectFlag(1);
+	_camera->SetParent(&_cameraParentMatrix);
 }
 
 void Player::PostAttach()
@@ -107,26 +107,21 @@ void Player::PostUpdate(const float deltaTime)
 {
 	Object::PostUpdate(deltaTime);
 	
-	//_transform.rotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(Engine::Math::Vector3(0.f, _camRotation.y / 180.f / 3.14f, 0.f));
-
 	_worldMatrix = Engine::Math::Matrix::CreateScale(0.4f)
 			     * Engine::Math::Matrix::CreateFromQuaternion(_transform.rotation)
 				 * Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
 
+	auto rotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(_cameraRotation);
+	_cameraParentMatrix = Engine::Math::Matrix::CreateFromQuaternion(rotation);	
 
 	Engine::Math::Vector3 tempPostion = _transform.position;
 	tempPostion.y += 50.f;
-	tempPostion += _worldMatrix.Backward() * -200.f;
-	_camera->SetPosition(tempPostion);
+	tempPostion += _cameraParentMatrix.Backward() * -60.f;
+	tempPostion += _cameraParentMatrix.Right() * 10.f;
 
-	/*Engine::Math::Vector3 playerForward = -_worldMatrix.Forward();
-	playerForward.Normalize();
-
-	Engine::Math::Vector3 cameraForward = -_camera->GetCameraMatrix().Forward();
-	cameraForward.y = 0.f;
-	cameraForward.Normalize();
-	float theta = playerForward.Dot(cameraForward);*/
+	_cameraParentMatrix *= Engine::Math::Matrix::CreateTranslation(tempPostion);
 	
+
 	elapsed += deltaTime;
 	frame++;
 	if (1.f < elapsed)

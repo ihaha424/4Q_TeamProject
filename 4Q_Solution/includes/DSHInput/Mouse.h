@@ -15,7 +15,7 @@ namespace DSH::Input
 	{
 		class Mouse final : public IMouse
 		{
-			static constexpr LONG MOUSE_SENSITIVE = 100;
+			static constexpr LONG MOUSE_SENSITIVE = 1000;
 		public:
 			Mouse();
 			~Mouse() override;

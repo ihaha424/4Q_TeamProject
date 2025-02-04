@@ -20,5 +20,6 @@ namespace GE
 		virtual void SetPosition(float x, float y, float z) = 0;
 		virtual void SetRotationFromAngle(float x, float y, float z) = 0;
 		virtual void SetRotationFromRadian(float x, float y, float z) = 0;
+		virtual void SetParent(Matrix4x4* pParent) = 0;
 	};
 }

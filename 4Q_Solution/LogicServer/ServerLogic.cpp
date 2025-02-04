@@ -263,7 +263,7 @@ void ServerLogic::MessageDispatch()
 // ==============================
 // Physics Area
 // ==============================
-void ServerLogic::RegistPhysics(Object& obj)
+void ServerLogic::RegistDynamicPhysics(Object& obj)
 {
     Engine::Physics::RigidComponentDesc rcd;
     rcd.rigidType = Engine::Physics::RigidBodyType::Dynamic;
@@ -274,8 +274,23 @@ void ServerLogic::RegistPhysics(Object& obj)
 
     Engine::Transform tf{};
     tf.position = { 0, 0, 0 };
-    _physicsManager->CreateDynamic(&obj._rigidBody, rcd, tf, 1);
-    _mainScene->AddActor(obj._rigidBody);
+    _physicsManager->CreateDynamic(&obj._dynamicRigid, rcd, tf, 1);
+    _mainScene->AddActor(obj._dynamicRigid);
+}
+
+void ServerLogic::RegistStaticPhysics(Object& obj)
+{
+    Engine::Physics::RigidComponentDesc rcd;
+    rcd.rigidType = Engine::Physics::RigidBodyType::Static;
+    rcd.shapeDesc.geometryDesc.type = Engine::Physics::GeometryShape::Capsule;
+    rcd.shapeDesc.geometryDesc.data = { 100.f, 100.f, 100.f };
+    rcd.shapeDesc.isExclusive = true;
+    rcd.shapeDesc.materialDesc.data = { 0.5f, 0.5f, 0.5f };
+
+    Engine::Transform tf{};
+    tf.position = { 0, 0, 0 };
+    _physicsManager->CreateStatic(&obj._staticRigid, rcd, tf);
+    _mainScene->AddActor(obj._staticRigid);
 }
 
 void ServerLogic::RegistPlayer(Player& player)

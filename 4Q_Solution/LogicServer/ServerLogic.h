@@ -18,22 +18,33 @@ namespace Engine::Physics {
 
 class ServerLogic
 {
-
-
 	struct Object {
 		int _serialNumber;
 		Engine::Math::Vector3 _position;
-		std::string _resourceId;
+		Engine::Math::Vector4 _rotation;
+		Engine::Math::Vector3 _scale;
+		std::string _resourceId{ "" };
+		bool _public;
+		Engine::Physics::IRigidStaticComponent* _staticRigid = nullptr;
+		Engine::Physics::IRigidDynamicComponent* _dynamicRigid = nullptr;
+	};
 
-		Engine::Physics::IRigidDynamicComponent* _rigidBody = nullptr;
-		
+	struct StaticObject : public Object{
+
+	};
+
+	struct DynamicObject : public Object {
+
 	};
 
 	struct Ground : public Object {
 		Engine::Physics::IRigidStaticComponent* _staticRigid = nullptr;
 	};
 
-	struct Player : public Object {
+	struct Player {
+		int _serialNumber;
+		Engine::Math::Vector3 _position;
+		std::string _resourceId;
 		Engine::Math::Vector3 _direction;
 		int _state;
 		float _speed;
@@ -88,7 +99,8 @@ private:
 	Engine::Physics::Manager* _physicsManager = nullptr;
 	Engine::Physics::IScene* _mainScene = nullptr;
 
-	void RegistPhysics(Object& obj);
+	void RegistDynamicPhysics(Object& obj);
+	void RegistStaticPhysics(Object& obj);
 	void RegistPlayer(Player& player);
 	void RegistGround(Ground& ground);
 };

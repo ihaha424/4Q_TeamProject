@@ -3,6 +3,7 @@
     "assimp",
     "directxtex",
     "directxtk",
-    "protobuf"
+    "protobuf",
+    "nlohmann-json"
   ]
 }

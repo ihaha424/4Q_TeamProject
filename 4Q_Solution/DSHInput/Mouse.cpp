@@ -6,13 +6,13 @@
 #include "Value.h"
 
 DSH::Input::Device::Mouse::Mouse() :
-	_referenceCount(1), _handle(nullptr), _isCursorLock(false), _screenCenter{}
+	_referenceCount(1), _handle(nullptr), _isCursorLock(false), _screenCenter{}, _useProcedure(false)
 {
 }
 
 DSH::Input::Device::Mouse::~Mouse()
 {
-	std::ranges::for_each(_axes | std::views::values , [](Component::AxisComponent* axis) { axis->Release(); });
+	std::ranges::for_each(_axes | std::views::values, [](Component::AxisComponent* axis) { axis->Release(); });
 	_axes.clear();
 	std::ranges::for_each(_buttons | std::views::values, [](Component::ButtonComponent* button) { button->Release(); });
 	_buttons.clear();
@@ -40,15 +40,97 @@ ULONG DSH::Input::Device::Mouse::Release()
 	return newRefCount;
 }
 
+LRESULT DSH::Input::Device::Mouse::Procedure(const HWND windowHandle, const UINT message, const WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
+	{
+		//case WM_ACTIVATE:
+		//case WM_INPUT:
+	case WM_MOUSEMOVE:
+	{
+		POINT mousePosition;
+		GetCursorPos(&mousePosition);
+		if (_isCursorLock == false) ScreenToClient(windowHandle, &mousePosition);
+		if (_axes.contains(Axis::X)) _axes.at(Axis::X)->AccumulateAbsoluteValue(mousePosition.x);
+		if (_axes.contains(Axis::Y)) _axes.at(Axis::Y)->AccumulateAbsoluteValue(mousePosition.y);
+		if (_isCursorLock)SetCursorToCenter();
+	}
+	break;
+	//case WM_LBUTTONDOWN:
+	//{
+	//	if (_buttons.contains(Button::Left))_buttons.at(Button::Left)->SetValue(true);
+	//}
+	//break;
+	//case WM_LBUTTONUP:
+	//{
+	//	if (_buttons.contains(Button::Left))_buttons.at(Button::Left)->SetValue(false);
+	//}
+	//break;
+	//case WM_RBUTTONDOWN:
+	//{
+	//	if (_buttons.contains(Button::Right))_buttons.at(Button::Right)->SetValue(true);
+	//}
+	//break;
+	//case WM_RBUTTONUP:
+	//{
+	//	if (_buttons.contains(Button::Right))_buttons.at(Button::Right)->SetValue(false);
+	//}
+	//break;
+	//case WM_MBUTTONDOWN:
+	//{
+	//	if (_buttons.contains(Button::Middle))_buttons.at(Button::Middle)->SetValue(true);
+	//}
+	//break;
+	//case WM_MBUTTONUP:
+	//{
+	//	if (_buttons.contains(Button::Middle))_buttons.at(Button::Middle)->SetValue(false);
+	//}
+	//break;
+	//case WM_MOUSEWHEEL:
+	//{
+	//	if (_axes.contains(Axis::Wheel))_axes.at(Axis::Wheel)->SetRelativeValue(GET_WHEEL_DELTA_WPARAM(wParam));
+	//}
+	//break;
+	//case WM_XBUTTONDOWN:
+	//{
+	//	if (GET_XBUTTON_WPARAM(wParam) == XBUTTON1)
+	//	{
+	//		if (_buttons.contains(Button::X1))_buttons.at(Button::X1)->SetValue(true);
+	//	}
+	//	else if (GET_XBUTTON_WPARAM(wParam) == XBUTTON2)
+	//	{
+	//		if (_buttons.contains(Button::X2))_buttons.at(Button::X2)->SetValue(true);
+	//	}
+	//}
+	//break;
+	//case WM_XBUTTONUP:
+	//{
+	//	if (GET_XBUTTON_WPARAM(wParam) == XBUTTON1)
+	//	{
+	//		if (_buttons.contains(Button::X1))_buttons.at(Button::X1)->SetValue(false);
+	//	}
+	//	else if (GET_XBUTTON_WPARAM(wParam) == XBUTTON2)
+	//	{
+	//		if (_buttons.contains(Button::X2))_buttons.at(Button::X2)->SetValue(false);
+	//	}
+	//}
+	//break;
+	//case WM_MOUSEHOVER:
+	default:
+		break;
+	}
+	return TRUE;
+}
+
 void DSH::Input::Device::Mouse::Update()
 {
-	UpdateAxes();
+	if (_useProcedure) CalculateAxes();
+	else UpdateAxes();
 	UpdateButtons();
 }
 
 void DSH::Input::Device::Mouse::Reset()
 {
-	if (_isCursorLock) SetCursorToCenter();
 	ResetAxes();
 	ResetButtons();
 }
@@ -106,7 +188,7 @@ void DSH::Input::Device::Mouse::ShowCursor()
 	CURSORINFO cursorInfo;
 	::GetCursorInfo(&cursorInfo);
 	if (cursorInfo.flags == NULL) ::ShowCursor(TRUE);
-	
+
 }
 
 void DSH::Input::Device::Mouse::HideCursor()
@@ -114,7 +196,7 @@ void DSH::Input::Device::Mouse::HideCursor()
 	CURSORINFO cursorInfo;
 	::GetCursorInfo(&cursorInfo);
 	if (cursorInfo.flags == CURSOR_SHOWING)	::ShowCursor(FALSE);
-	
+
 }
 
 void DSH::Input::Device::Mouse::LockCursor()
@@ -133,13 +215,18 @@ void DSH::Input::Device::Mouse::UnlockCursor()
 	_isCursorLock = false;
 }
 
+void DSH::Input::Device::Mouse::UseProcedure()
+{
+	_useProcedure = true;
+}
+
 void DSH::Input::Device::Mouse::UpdateAxes()
 {
 	if (_handle == nullptr) return;
 
 	POINT mousePosition;
 	GetCursorPos(&mousePosition);
-	ScreenToClient(_handle, &mousePosition);
+	if (_isCursorLock == false) ScreenToClient(_handle, &mousePosition);
 
 	if (_axes.contains(Axis::X)) _axes[Axis::X]->SetAbsoluteValue(mousePosition.x);
 	if (_axes.contains(Axis::Y)) _axes[Axis::Y]->SetAbsoluteValue(mousePosition.y);
@@ -150,6 +237,13 @@ void DSH::Input::Device::Mouse::UpdateAxes()
 		message.message == WM_MOUSEWHEEL)
 		_axes[Axis::Wheel]->SetRelativeValue(GET_WHEEL_DELTA_WPARAM(message.wParam));
 
+}
+
+void DSH::Input::Device::Mouse::CalculateAxes()
+{
+	if (_axes.contains(Axis::X)) _axes[Axis::X]->CalculateCumulative();
+	if (_axes.contains(Axis::Y)) _axes[Axis::Y]->CalculateCumulative();
+	if (_axes.contains(Axis::Wheel)) _axes[Axis::Wheel]->CalculateCumulative();
 }
 
 void DSH::Input::Device::Mouse::UpdateButtons()
@@ -164,6 +258,8 @@ void DSH::Input::Device::Mouse::SetCursorToCenter() const
 
 void DSH::Input::Device::Mouse::ResetAxes()
 {
+	if (_isCursorLock && _axes.contains(Axis::X)) _axes[Axis::X]->SetAbsoluteValue(_screenCenter.x);
+	if (_isCursorLock && _axes.contains(Axis::Y)) _axes[Axis::Y]->SetAbsoluteValue(_screenCenter.y);
 	std::ranges::for_each(_axes | std::views::values, [](Component::AxisComponent* axis) { axis->Reset(); });
 }
 

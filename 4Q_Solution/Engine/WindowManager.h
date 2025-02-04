@@ -22,5 +22,7 @@ namespace Engine::Window
 		virtual void Show(int showCommand) const = 0;
 		virtual void Update() const = 0;
 		virtual void SetCursorDefault() const = 0;
+
+		virtual void AddProcedure(WNDPROC procedure) = 0;
 	};
 }

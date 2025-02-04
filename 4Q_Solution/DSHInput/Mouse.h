@@ -1,6 +1,5 @@
 #pragma once
 
-
 namespace DSH::Input::Component
 {
 	class ButtonComponent;
@@ -25,6 +24,8 @@ namespace DSH::Input
 			ULONG AddRef() override;
 			ULONG Release() override;
 
+			LRESULT Procedure(HWND windowHandle, UINT message, WPARAM wParam, LPARAM lParam) override;
+
 			void Update() override;
 			void Reset() override;
 
@@ -41,8 +42,11 @@ namespace DSH::Input
 			void LockCursor() override;
 			void UnlockCursor() override;
 
+			void UseProcedure() override;
+
 		private:
 			void UpdateAxes();
+			void CalculateAxes();
 			void UpdateButtons();
 			void SetCursorToCenter() const;
 
@@ -59,6 +63,8 @@ namespace DSH::Input
 			bool _isCursorLock;
 
 			POINT _screenCenter;
+
+			bool _useProcedure;
 		};
 	}
 }

@@ -153,6 +153,12 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Ray.h" />
+    <ClInclude Include="RayIdle.h" />
+    <ClInclude Include="RayInteraction.h" />
+    <ClInclude Include="RayJump.h" />
+    <ClInclude Include="RayState.h" />
+    <ClInclude Include="RayWalk.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -162,6 +168,11 @@
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="RayIdle.cpp" />
+    <ClCompile Include="RayInteraction.cpp" />
+    <ClCompile Include="RayJump.cpp" />
+    <ClCompile Include="RayWalk.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />

@@ -16,6 +16,15 @@
     <Filter Include="Application">
       <UniqueIdentifier>{3e5ef61d-144d-4611-9a44-000f3c8ff647}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Live">
+      <UniqueIdentifier>{23bbc462-2c98-4e15-9a65-b2a852c3430d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ray">
+      <UniqueIdentifier>{bbb5e833-c6ee-427d-876b-dce243b96d31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ray\State">
+      <UniqueIdentifier>{29ce7f2e-14a2-4f80-806e-141bf951c0d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -33,6 +42,24 @@
     <ClInclude Include="Application.h">
       <Filter>Application</Filter>
     </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>Ray</Filter>
+    </ClInclude>
+    <ClInclude Include="RayIdle.h">
+      <Filter>Ray\State</Filter>
+    </ClInclude>
+    <ClInclude Include="RayWalk.h">
+      <Filter>Ray\State</Filter>
+    </ClInclude>
+    <ClInclude Include="RayJump.h">
+      <Filter>Ray\State</Filter>
+    </ClInclude>
+    <ClInclude Include="RayInteraction.h">
+      <Filter>Ray\State</Filter>
+    </ClInclude>
+    <ClInclude Include="RayState.h">
+      <Filter>Ray</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -43,6 +70,21 @@
     </ClCompile>
     <ClCompile Include="Application.cpp">
       <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Ray.cpp">
+      <Filter>Ray</Filter>
+    </ClCompile>
+    <ClCompile Include="RayIdle.cpp">
+      <Filter>Ray\State</Filter>
+    </ClCompile>
+    <ClCompile Include="RayWalk.cpp">
+      <Filter>Ray\State</Filter>
+    </ClCompile>
+    <ClCompile Include="RayJump.cpp">
+      <Filter>Ray\State</Filter>
+    </ClCompile>
+    <ClCompile Include="RayInteraction.cpp">
+      <Filter>Ray\State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

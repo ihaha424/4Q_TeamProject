@@ -4,7 +4,7 @@
 #include "Value.h"
 
 DSH::Input::Component::AxisComponent::AxisComponent() :
-	_referenceCount(1), _value(0), _sensitivity(1), _deadZone(0), _absoluteValue(0), _cumulative(0)
+_referenceCount(1), _value(0), _sensitivity(1), _deadZone(0)
 {
 }
 
@@ -37,7 +37,7 @@ DSH::Input::Value DSH::Input::Component::AxisComponent::GetValue() const
 	if (absoluteValue < _deadZone) return value;
 	absoluteValue = (std::min)(absoluteValue, _sensitivity);
 	const float scalar = static_cast<float>(absoluteValue - _deadZone) / static_cast<float>(_sensitivity - _deadZone);
-	value.scalar = _value < 0 ? -scalar : scalar;
+	value.scalar = _value > 0 ? scalar : -scalar;
 	return value;
 }
 
@@ -51,23 +51,10 @@ void DSH::Input::Component::AxisComponent::SetRelativeValue(const LONG value)
 	_value = value;
 }
 
-void DSH::Input::Component::AxisComponent::SetAbsoluteValue(const LONG value)
+void DSH::Input::Component::AxisComponent::SetAbsoluteValue(LONG value)
 {
 	_value = value - _absoluteValue;
 	_absoluteValue = value;
-	_cumulative = _absoluteValue;
-}
-
-void DSH::Input::Component::AxisComponent::AccumulateValue(const LONG value)
-{
-	_cumulative += value - _absoluteValue;
-}
-
-void DSH::Input::Component::AxisComponent::CalculateCumulative()
-{
-	_value = _cumulative - _absoluteValue;
-	_absoluteValue = _cumulative;
-	_cumulative = _absoluteValue;
 }
 
 void DSH::Input::Component::AxisComponent::SetDeadZone(const LONG deadZone)

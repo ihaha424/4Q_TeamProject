@@ -18,21 +18,19 @@ struct PS_OUTPUT
     uint   layerMask : SV_target1;
 };
 
-cbuffer LayerMask
+cbuffer LayerMask : register(b5)
 {
     uint layerMask;
 }
 
-cbuffer RimLightDesc
-{
-    
-};
-
 Texture2D txDiffuse          : register(t0);
 Texture2D txNormal           : register(t1);
-Texture2D txARM              : register(t2);
+Texture2D txSpecular         : register(t2);
 Texture2D txEmissive         : register(t3);
 Texture2D txOpacity          : register(t4);
+Texture2D txMetalness        : register(t5);
+Texture2D txRoughness        : register(t6);
+Texture2D txAO               : register(t7);
 
 #define PBR
 #define IBL
@@ -56,17 +54,18 @@ PS_OUTPUT main(PS_INPUT input)
     float3 V = normalize(cameraPosition - input.worldPosition);
 
 #ifdef PBR
-    float3 ARM = txARM.Sample(samLinear_wrap, input.uv).rgb;
+    float roughness = txRoughness.Sample(samLinear_wrap, input.uv).r;
+    float metalness = txMetalness.Sample(samLinear_wrap, input.uv).r;
     
     // PBR_Directional
-    directLighting += DirectionalLightPBR(input.worldPosition, N, V, albedo, ARM.g, ARM.b);
+    directLighting += DirectionalLightPBR(input.worldPosition, N, V, albedo, roughness, metalness);
 
     // PBR_Point
-    directLighting += PointLightPBR(input.worldPosition, N, V, albedo, ARM.g, ARM.b);
+    directLighting += PointLightPBR(input.worldPosition, N, V, albedo, roughness, metalness);
 #endif
     
 #ifdef IBL        
-    ambientLighting = AmbientLightIBL(albedo, N, V, ARM.g, ARM.b);
+    ambientLighting = AmbientLightIBL(albedo, N, V, metalness, roughness);
 #endif
    
 #ifdef Shadow
@@ -100,7 +99,7 @@ PS_OUTPUT main(PS_INPUT input)
 #endif
     
     float4 color = 0;
-    color.rgb = shadowFactor * directLighting + (ambientLighting * ARM.r);
+    color.rgb = shadowFactor * directLighting + ambientLighting;
     color.a = alpha;
         
     float4 opacity = txOpacity.Sample(samLinear_wrap, input.uv);
@@ -111,7 +110,7 @@ PS_OUTPUT main(PS_INPUT input)
         color.a = 1.f;    
     
     color.rgb = LinearToGammaSpace(color.rgb);
-    //color.rgb += RimLight(N, V);
+    color.rgb += RimLight(N, V);
     float4 emissive = txEmissive.Sample(samLinear_wrap, input.uv);
     color += emissive;
     

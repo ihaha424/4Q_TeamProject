@@ -26,7 +26,7 @@ Texture2D txLuminance : register(t2);
 #endif
 float4 main(PS_INPUT input) : SV_Target
 {        
-    //return txSource.Sample(samLinear_wrap, input.uv);
+    return txSource.Sample(samLinear_wrap, input.uv);
     
 #ifdef Lum
     float3 color = txPostProcess.Sample(samLinear_wrap, input.uv).rgb;
@@ -41,7 +41,7 @@ float4 main(PS_INPUT input) : SV_Target
     txLuminance.GetDimensions(0, width, height, level);
     float avgLuminance = txLuminance.SampleLevel(samLinear_wrap, input.uv, level - 1).r;
     float pixelLuminance = GetLuminance(texColor);
-    texColor *= 4; //pixelLuminance * 0.042 / avgLuminance;
+    texColor *= pixelLuminance * 0.042 / avgLuminance;
 
     float3 curr = Uncharted2Tonemap(texColor);
 

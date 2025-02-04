@@ -35,18 +35,6 @@ namespace DSH::Input
 				Max
 			};
 
-			virtual LRESULT CALLBACK Procedure(
-				/* [annotation][in] */
-				_In_ HWND windowHandle,
-				/* [annotation][in] */
-				_In_ UINT message,
-				/* [annotation][in] */
-				_In_ WPARAM wParam,
-				/* [annotation][in] */
-				_In_ LPARAM lParam) = 0;
-
-			virtual void UseProcedure() = 0;
-
 			virtual void STDMETHODCALLTYPE SetHandle(
 				HWND handle) = 0;
 
@@ -63,14 +51,6 @@ namespace DSH::Input
 				_Out_ Component::IAxisComponent** ppComponent) = 0;
 
 			[[nodiscard]] virtual Value STDMETHODCALLTYPE GetPosition() const = 0;
-
-			virtual void STDMETHODCALLTYPE ShowCursor() = 0;
-
-			virtual void STDMETHODCALLTYPE HideCursor() = 0;
-
-			virtual void STDMETHODCALLTYPE LockCursor() = 0;
-
-			virtual void STDMETHODCALLTYPE UnlockCursor() = 0;
 		};
 	}
 }

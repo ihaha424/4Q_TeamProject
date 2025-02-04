@@ -12,8 +12,6 @@ namespace Engine::DSHInput
 	class Manager final : public Input::Manager
 	{
 	public:
-		static LRESULT CALLBACK Procedure(HWND windowHandle, UINT message, WPARAM wParam, LPARAM lParam);
-	public:
 		Manager();
 
 		void Initialize(HWND windowHandle) override;
@@ -44,7 +42,5 @@ namespace Engine::DSHInput
 
 		Modifier::Negative _negative;
 		std::unordered_map<Input::Modifier::ISwizzleAxis::Type, Modifier::SwizzleAxis> _swizzleAxes;
-
-		static DSH::Input::MouseProcedure _mouseProcedure;
 	};
 }

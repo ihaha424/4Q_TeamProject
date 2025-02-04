@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "DSHWindowManager.h"
 
-std::vector<WNDPROC> Engine::DSHWindow::Manager::_windowProcedures;
-
 Engine::DSHWindow::Manager::Manager():
 	_system(nullptr), _class(nullptr), _handle(nullptr)
 {
@@ -59,11 +57,6 @@ void Engine::DSHWindow::Manager::SetCursorDefault() const
 	_handle->SetCursor(DSH::Window::IHandle::Cursor::Arrow);
 }
 
-void Engine::DSHWindow::Manager::AddProcedure(const WNDPROC procedure)
-{
-	_windowProcedures.push_back(procedure);
-}
-
 extern void PlaceInCenterOfScreen(const HWND windowHandle)
 {
 	const int screenWidth = GetSystemMetrics(SM_CXSCREEN);
@@ -80,10 +73,6 @@ extern void PlaceInCenterOfScreen(const HWND windowHandle)
 
 LRESULT Engine::DSHWindow::Manager::WindowProcedure(const HWND windowHandle, const UINT message, const WPARAM wParam, const LPARAM lParam)
 {
-	std::ranges::for_each(_windowProcedures, [windowHandle, message, wParam, lParam](const WNDPROC procedure)
-		{
-			std::invoke(procedure, windowHandle, message, wParam, lParam);
-		});
 	switch (message)
 	{
 	case WM_CREATE:

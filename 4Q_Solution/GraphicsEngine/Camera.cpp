@@ -11,11 +11,6 @@ GE::Matrix4x4 Camera::GetCameraMatrix() const
 	return _world;
 }
 
-void Camera::SetParent(GE::Matrix4x4* pParent)
-{
-	_pParent = pParent;
-}
-
 void Camera::SetPerspective(float nearZ, float farZ, float aspect, float fov)
 {
 	_projection = XMMatrixPerspectiveFovLH(fov, aspect, nearZ, farZ);
@@ -48,9 +43,5 @@ void Camera::Update()
 
 	XMMATRIX world = rotation * translation;
 	_world = world;
-
-	if (_pParent)
-		_world *= (*_pParent);
-
-	_view = XMMatrixInverse(nullptr, _world);
+	_view = XMMatrixInverse(nullptr, world);
 }

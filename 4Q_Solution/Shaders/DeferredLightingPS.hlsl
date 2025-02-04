@@ -12,7 +12,7 @@ struct PS_INPUT
 
 Texture2D txDiffuse         : register(t0);
 Texture2D txNormal          : register(t1);
-Texture2D txRMA             : register(t2);
+Texture2D txSpecular        : register(t2);
 Texture2D txEmissive        : register(t3);
 Texture2D txShadowPosition  : register(t4);
 Texture2D txDepth           : register(t5);
@@ -21,7 +21,7 @@ float4 main(PS_INPUT input) : SV_Target
 {
     float  depth = txDepth.Sample(samLinear_wrap, input.uv).r;
     float3 albedo = GammaToLinearSpace(txDiffuse.Sample(samLinear_wrap, input.uv).rgb);        
-    float3 RMA = txRMA.Sample(samLinear_wrap, input.uv).rgb;
+    float2 specular = txSpecular.Sample(samLinear_wrap, input.uv).rg;
     
     float4 NDC = float4(input.uv * 2.0 - 1, depth, 1.0);
     NDC.y = -NDC.y;
@@ -37,13 +37,13 @@ float4 main(PS_INPUT input) : SV_Target
     
 // PBR
     // PBR_Directional
-    directLighting += DirectionalLightPBR(worldPosition, N, V, albedo, RMA.r, RMA.g);;
+    directLighting += DirectionalLightPBR(worldPosition, N, V, albedo, specular.r, specular.g);
 
     // PBR_Point
-    directLighting += PointLightPBR(worldPosition, N, V, albedo, RMA.r, RMA.g);
+    directLighting += PointLightPBR(worldPosition, N, V, albedo, specular.r, specular.g);
     
 // IBL    
-    ambientLighting = AmbientLightIBL(albedo, N, V, RMA.r, RMA.g);
+    ambientLighting = AmbientLightIBL(albedo, N, V, specular.g, specular.r);
     
 //Shadow
     float4 shadowPosition = txShadowPosition.Sample(samLinear_wrap, input.uv);
@@ -70,7 +70,7 @@ float4 main(PS_INPUT input) : SV_Target
     
     float4 color = 0;
     
-    color.rgb = shadowFactor * directLighting + (ambientLighting * RMA.b);
+    color.rgb = shadowFactor * directLighting + ambientLighting;
     color.rgb = LinearToGammaSpace(color.rgb);
     color.a = 1;
     

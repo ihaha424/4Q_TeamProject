@@ -18,10 +18,6 @@ namespace DSH::Input::Component
 		void SetRelativeValue(LONG value);
 		void SetAbsoluteValue(LONG value);
 
-		void AccumulateValue(LONG value);
-
-		void CalculateCumulative();
-
 		void SetDeadZone(LONG deadZone);
 		void SetSensitivity(LONG sensitivity);
 
@@ -33,7 +29,5 @@ namespace DSH::Input::Component
 		LONG _deadZone;
 
 		LONG _absoluteValue;
-
-		LONG _cumulative;
 	};
 }

@@ -215,9 +215,12 @@ void Model::LoadMaterials(const aiScene* paiScene,
 
         textures[i].push_back(LoadTexture(filePath, paiScene, texturePath, pMaterial, aiTextureType_DIFFUSE, L""));
         textures[i].push_back(LoadTexture(filePath, paiScene, texturePath, pMaterial, aiTextureType_NORMALS, L""));
-        textures[i].push_back(LoadTexture(filePath, paiScene, texturePath, pMaterial, aiTextureType_SHININESS, L"")); // RMA
+        textures[i].push_back(LoadTexture(filePath, paiScene, texturePath, pMaterial, aiTextureType_SPECULAR, L""));
         textures[i].push_back(LoadTexture(filePath, paiScene, texturePath, pMaterial, aiTextureType_EMISSIVE, L""));
         textures[i].push_back(LoadTexture(filePath, paiScene, texturePath, pMaterial, aiTextureType_OPACITY, L""));
+        textures[i].push_back(LoadTexture(filePath, paiScene, texturePath, pMaterial, aiTextureType_METALNESS, L""));
+        textures[i].push_back(LoadTexture(filePath, paiScene, texturePath, pMaterial, aiTextureType_SHININESS, L""));
+        textures[i].push_back(LoadTexture(filePath, paiScene, texturePath, pMaterial, aiTextureType_AMBIENT_OCCLUSION, L""));
     }
 }
 

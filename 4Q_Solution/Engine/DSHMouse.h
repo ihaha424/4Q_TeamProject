@@ -24,12 +24,6 @@ namespace Engine::DSHInput::Device
 		void GetComponent(Button button, Input::Component::IButtonComponent** buttonComponent) override;
 		void GetComponent(Axis axis, Input::Component::IAxisComponent** axisComponent) override;
 
-		void ShowCursor() override;
-		void HideCursor() override;
-
-		void LockCursor() override;
-		void UnlockCursor() override;
-
 	private:
 		bool IsButtonState(Button button, std::function<bool(DSH::Input::Component::IButtonComponent*)> state) const;
 

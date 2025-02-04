@@ -250,6 +250,11 @@ namespace Engine::PHI
 		releaser(&collision);
 	}
 
+	void* RigidDynamicComponent::GetOwner()
+	{
+		return owner->GetOwner();
+	}
+
 	void RigidDynamicComponent::BindCollision(const Physics::CallBackTrigger& callback, Physics::TriggerType type)
 	{
 		collision->BindCollision(callback, type);

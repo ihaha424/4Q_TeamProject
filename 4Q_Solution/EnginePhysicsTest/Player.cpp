@@ -209,7 +209,8 @@ void Player::PostFixedUpdate()
 
 void Player::OnHit(Engine::Physics::ContactEvent info)
 {
-	info.myCollision;
+	info.myCollision
+	info.otherCollision;
 }
 
 //RemotePlayer::RemotePlayer()

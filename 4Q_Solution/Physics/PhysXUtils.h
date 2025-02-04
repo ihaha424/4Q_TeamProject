@@ -14,3 +14,4 @@ namespace PhysicsEngineAPI
 	physx::PxExtendedVec3 Vector3ToPxExtendedVec3(const Utils::Math::Vector3& vector3);
 	Utils::Math::Vector3 PxExtendedVec3ToVector3(const physx::PxExtendedVec3& pxVec3);
 }
+

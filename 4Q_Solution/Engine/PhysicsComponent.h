@@ -11,6 +11,8 @@ namespace Engine::Physics
 		Component& operator=(const Component& other) = default;
 		Component& operator=(Component&& other) noexcept = default;
 		virtual ~Component() = default;
+
+		virtual void* GetOwner() = 0;
 	};
 }
 

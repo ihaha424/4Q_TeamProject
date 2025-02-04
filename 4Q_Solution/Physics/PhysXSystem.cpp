@@ -791,20 +791,17 @@ namespace PhysicsEngineAPI
 		desc.radius = _desc.radius;
 		desc.height = _desc.height;
 		desc.climbingMode = static_cast<physx::PxCapsuleClimbingMode::Enum>(_desc.climbinMode);
-		// TODO
-		desc.reportCallback;
-		desc.behaviorCallback;
+
 
 
 		physx::PxController* character = Scene->controllerManager->createController(desc);
-
+		physx::PxTransform pos = physx::PxTransform({ 0.f, _desc.height, 0.f });
+		character->getActor()->setCMassLocalPose(pos);
 		controller->controller = static_cast<physx::PxCapsuleController*>(character);
 		controller->gravity = Vector3ToPxVec3(_desc.gravity);
 
-		//desc.reportCallback->SetUserData();
-		//desc.behaviorCallback->SetUserData(); 
-
 		*object = controller;
+
 		return true;
 	}
 

@@ -16,7 +16,7 @@ namespace PhysicsEngineAPI
 	{
 		return physx::PxControllerBehaviorFlags();
 	}
-	void PhysXBehaviorCallback::SetUserData(IController* _userData)
+	void PhysXBehaviorCallback::SetUserData(ICollision* _userData)
 	{
 		userData = _userData;
 	}

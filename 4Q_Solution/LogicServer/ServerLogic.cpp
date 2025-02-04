@@ -63,7 +63,8 @@ void ServerLogic::Update()
             continue;
         } // if end
 
-        _playerSlot[i]._controller->SetVelocity(_playerSlot[i]._direction * _playerSlot[i]._speed);
+        _playerSlot[i]._controller->SetDirection(_playerSlot[i]._direction);
+        _playerSlot[i]._controller->SetMoveSpeed(_playerSlot[i]._speed);
         _playerSlot[i]._controller->Update(_timer->GetDeltaTime());
         _playerSlot[i]._flag = _playerSlot[i]._controller->GetCollisionFlag();
 
@@ -212,7 +213,7 @@ void ServerLogic::MessageDispatch()
         {
             _jump.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
             int playerIdx = packet._serialNumber - 1;
-            _playerSlot[playerIdx]._controller->SetGravity({ 0.f, _jump.power(), 0.f });
+            _playerSlot[playerIdx]._controller->Jump(_jump.power());
 
             break;
         } // case end
@@ -283,10 +284,10 @@ void ServerLogic::RegistPlayer(Player& player)
     Engine::Physics::ControllerDesc cd;
     cd.height = 10.f;
     cd.radius = 2.f;
-    cd.gravity = { 0.f, -0.98f, 0.f };
-    cd.contactOffset = 3.f;
-    cd.stepOffset = 2.f;
-    cd.slopeLimit = 0.5f;
+    cd.gravity = { 0.f, -9.8f, 0.f };
+    cd.contactOffset = 0.001f;
+    cd.stepOffset = 0.5f;
+    cd.slopeLimit = 0.707f;
     Engine::Physics::IController* controller = player._controller;
     _physicsManager->CreatePlayerController(&controller, _mainScene, cd);
     player._controller = static_cast<Engine::Physics::Controller*>(controller);

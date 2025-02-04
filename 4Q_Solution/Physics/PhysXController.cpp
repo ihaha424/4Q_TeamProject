@@ -20,6 +20,8 @@ namespace PhysicsEngineAPI
 	void PhysXController::SetUserData(ICollision* UserData)
 	{
 		controller->setUserData(UserData);
+		hitReportCallback->SetUserData(UserData);
+		behaviorCallback->SetUserData(UserData);
 	}
 	const ICollision* PhysXController::GetUserData() const
 	{
@@ -43,6 +45,7 @@ namespace PhysicsEngineAPI
 		const physx::PxControllerFilters filters{};
 		const physx::PxObstacleContext* obstacles = NULL;
 		//controller->invalidateCache();
+		controller->getActor()->wakeUp();
 		flags = controller->move(displacement, minDistance, deltaTime, filters);
 		return flags;
 	}
@@ -160,5 +163,9 @@ namespace PhysicsEngineAPI
 	{
 		Utils::DataStructure::CapsuleClimbingMode flag = static_cast<Utils::DataStructure::CapsuleClimbingMode>(controller->getNonWalkableMode());
 		return flag;
+	}
+	void PhysXController::CollisionUpdate()
+	{
+		hitReportCallback->Update();
 	}
 }

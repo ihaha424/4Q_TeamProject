@@ -3,10 +3,10 @@
 
 void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 {
-	_player = objectFactory->Clone<Player>();
-	_light = objectFactory->Clone<GlobalLight>();
-	_terrain = objectFactory->Clone<Terrain>();
-	_skyBox = objectFactory->Clone<SkyBox>();
+	_player = objectFactory->Clone<Player>(this);
+	_light = objectFactory->Clone<GlobalLight>(this);
+	_terrain = objectFactory->Clone<Terrain>(this);
+	_skyBox = objectFactory->Clone<SkyBox>(this);
 }
 
 void TestWorld::PreInitialize(const Engine::Modules& modules)

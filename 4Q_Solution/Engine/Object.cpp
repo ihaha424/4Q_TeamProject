@@ -60,3 +60,13 @@ void Engine::Object::PreFinalize()
 void Engine::Object::PostFinalize()
 {
 }
+
+void Engine::Object::SetOwner(World* owner)
+{
+	_owner = owner;
+}
+
+Engine::World* Engine::Object::GetOwner() const
+{
+	return _owner;
+}

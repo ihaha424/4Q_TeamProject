@@ -11,10 +11,10 @@ RemotePlayer::RemotePlayer(std::filesystem::path&& meshPath) :
 
 void RemotePlayer::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
-	_skeletalMesh = componentFactory->Clone<Engine::Component::SkeletalMesh>();
-	_animator = componentFactory->Clone<Engine::Component::Animator>();
-	_sync = componentFactory->Clone<Engine::Component::Synchronize>();
-	_remoteMove = componentFactory->Clone<RemoteMoveComponent>();
+	_skeletalMesh = componentFactory->Clone<Engine::Component::SkeletalMesh>(this);
+	_animator = componentFactory->Clone<Engine::Component::Animator>(this);
+	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
+	_remoteMove = componentFactory->Clone<RemoteMoveComponent>(this);
 }
 
 void RemotePlayer::DisposeComponents()

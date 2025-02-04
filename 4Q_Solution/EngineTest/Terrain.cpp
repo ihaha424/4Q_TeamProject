@@ -9,8 +9,8 @@ Terrain::Terrain(std::filesystem::path&& meshPath) :
 
 void Terrain::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
-	_staticMesh = componentFactory->Clone<Engine::Component::StaticMesh>();
-	_terrainMesh = componentFactory->Clone<Engine::Component::RigidStatic>();
+	_staticMesh = componentFactory->Clone<Engine::Component::StaticMesh>(this);
+	_terrainMesh = componentFactory->Clone<Engine::Component::RigidStatic>(this);
 }
 
 void Terrain::DisposeComponents()

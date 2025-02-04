@@ -11,9 +11,10 @@ namespace Engine::Content::Factory
 		explicit Component(std::vector<Engine::Component::Component*>* cloned);
 
 		template<is_component T>
-		T* Clone()
+		T* Clone(Object* owner)
 		{
 			T* t = Factory::Copy<T>();
+			t->SetOwner(owner);
 			_cloned->push_back(t);
 			return t;
 		}

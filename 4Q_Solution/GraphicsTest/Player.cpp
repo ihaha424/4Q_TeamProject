@@ -14,11 +14,11 @@ Player::Player(std::filesystem::path&& meshPath, std::filesystem::path&& fontPat
 
 void Player::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
-	_movement = componentFactory->Clone<Engine::Component::Movement>();
-	_camera = componentFactory->Clone<Engine::Component::Camera>();
-	_skeletalMesh = componentFactory->Clone<Engine::Component::SkeletalMesh>();
-	_animator = componentFactory->Clone<Engine::Component::Animator>();
-	_textRenderer = componentFactory->Clone<Engine::Component::TextRenderer>();
+	_movement = componentFactory->Clone<Engine::Component::Movement>(this);
+	_camera = componentFactory->Clone<Engine::Component::Camera>(this);
+	_skeletalMesh = componentFactory->Clone<Engine::Component::SkeletalMesh>(this);
+	_animator = componentFactory->Clone<Engine::Component::Animator>(this);
+	_textRenderer = componentFactory->Clone<Engine::Component::TextRenderer>(this);
 }
 
 void Player::DisposeComponents()

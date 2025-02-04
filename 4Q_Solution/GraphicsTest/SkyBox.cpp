@@ -9,7 +9,7 @@ SkyBox::SkyBox(std::filesystem::path&& meshPath)
 
 void SkyBox::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
-	_skyBox = componentFactory->Clone<Engine::Component::SkyBox>();
+	_skyBox = componentFactory->Clone<Engine::Component::SkyBox>(this);
 }
 
 void SkyBox::DisposeComponents()

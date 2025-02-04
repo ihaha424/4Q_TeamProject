@@ -17,14 +17,14 @@ Player::Player(std::filesystem::path&& meshPath, std::filesystem::path&& fontPat
 
 void Player::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
-	_camera = componentFactory->Clone<Engine::Component::Camera>();
-	//_staticMesh = componentFactory->Clone<Engine::Component::StaticMesh>();
-	_skeltalMesh = componentFactory->Clone<Engine::Component::SkeletalMesh>();
-	_animator = componentFactory->Clone<Engine::Component::Animator>();
-	_textRenderer = componentFactory->Clone<Engine::Component::TextRenderer>();
-    _sync = componentFactory->Clone<Engine::Component::Synchronize>();
-	_remote = componentFactory->Clone<RemoteMoveComponent>();
-	_chractorController = componentFactory->Clone<Engine::Component::ChractorController>();
+	_camera = componentFactory->Clone<Engine::Component::Camera>(this);
+	//_staticMesh = componentFactory->Clone<Engine::Component::StaticMesh>(this);
+	_skeltalMesh = componentFactory->Clone<Engine::Component::SkeletalMesh>(this);
+	_animator = componentFactory->Clone<Engine::Component::Animator>(this);
+	_textRenderer = componentFactory->Clone<Engine::Component::TextRenderer>(this);
+    _sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
+	_remote = componentFactory->Clone<RemoteMoveComponent>(this);
+	_chractorController = componentFactory->Clone<Engine::Component::ChractorController>(this);
 }
 
 int Player::GetSerialNumber()

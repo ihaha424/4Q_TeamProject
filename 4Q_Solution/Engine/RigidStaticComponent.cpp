@@ -11,8 +11,10 @@ namespace Engine::Component
 	void RigidStatic::Initialize(const Modules& modules)
 	{
 		Component::Initialize(modules);
-		static_cast<Physics::RigidStaticComponent*>(_rigidbody)->Initialize(this);
-		static_cast<Physics::RigidComponent*>(_boundBox)->Initialize(this);
+		static_cast<Physics::RigidStaticComponent*>(_rigidbody)->Initialize();
+		static_cast<Physics::RigidComponent*>(_boundBox)->Initialize();
+		_rigidbody->SetOwner(GetOwner());
+		_boundBox->SetOwner(GetOwner());
 	}
 
 	void RigidStatic::Attach()

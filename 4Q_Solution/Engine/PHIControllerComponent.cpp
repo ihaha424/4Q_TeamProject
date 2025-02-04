@@ -17,6 +17,7 @@ namespace Engine::PHI
 		, direction{}
 		, moveSpeed{ 0 }
 		, minDistance{ 0.001 }
+		, owner{ nullptr }
 	{
 		collision = new Collision<Controller>{ this };
 	}
@@ -156,6 +157,7 @@ namespace Engine::PHI
 	void Controller::Initialize()
 	{
 		controller->SetUserData(collision);
+		BindCollision(std::bind(&Controller::IsGround, this, std::placeholders::_1), Engine::Physics::TriggerType::OnTriggerEnter);
 	}
 
 	void Controller::Update(float deltaTime)
@@ -188,11 +190,20 @@ namespace Engine::PHI
 		releaser(&controller);
 	}
 
-	Engine::Object* Controller::GetOwner()
+	void* Controller::GetOwner()
 	{
-		return owner->GetOwner();
+		return owner;
 	}
-	
+
+	void Controller::SetOwner(void* _owner)
+	{
+		owner = _owner;
+	}
+
+	void Controller::IsGround(Engine::Physics::TriggerEvent info)
+	{
+		info.otherCollision;
+	}
 
 	unsigned short Controller::GetCollisionFlag()
 	{

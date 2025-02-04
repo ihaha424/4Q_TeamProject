@@ -16,6 +16,9 @@
     <Filter Include="소스 파일\ProtoBuf">
       <UniqueIdentifier>{bfca1285-987b-4959-93bf-22f7c99a76ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{ae674937-6647-4fda-bdc7-834dd3c08002}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LogicServer.cpp">
@@ -32,6 +35,9 @@
     </ClCompile>
     <ClCompile Include="..\Packet\Play.pb.cc">
       <Filter>소스 파일\ProtoBuf</Filter>
+    </ClCompile>
+    <ClCompile Include="Rigid.cpp">
+      <Filter>Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +61,9 @@
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Rigid.h">
+      <Filter>Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

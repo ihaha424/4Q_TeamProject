@@ -15,6 +15,7 @@ public:
 public:
 	// ICamera을(를) 통해 상속됨
 	void Release() override;
+	GE::Matrix4x4 GetCameraMatrix() const;
 	void SetPerspective(float nearZ, float farZ, float aspect, float fov) override;
 	void SetOrthoGraphic(float nearZ, float farZ, float width, float height) override;
 	void SetPosition(float x, float y, float z) override;

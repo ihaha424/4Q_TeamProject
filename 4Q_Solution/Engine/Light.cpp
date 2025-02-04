@@ -85,12 +85,12 @@ void Engine::Component::Light::SetPositionFromArray(float* pArray) const
 
 void Engine::Component::Light::SetDirectionFromArray(float* pArray) const
 {
-	_geLight->SetDiffsueFromArray(pArray);
+	_geLight->SetDiffuseFromArray(pArray);
 }
 
 void Engine::Component::Light::SetDiffuseFromArray(float* pArray) const
 {
-	_geLight->SetDiffsueFromArray(pArray); // TODO: Fix this typo.
+	_geLight->SetDiffuseFromArray(pArray);
 }
 
 void Engine::Component::Light::SetSpecularFromArray(float* pArray)
@@ -103,3 +103,8 @@ void Engine::Component::Light::SetAmbientFromArray(float* pArray)
 	_geLight->SetAmbientFromArray(pArray);
 }
 
+void Engine::Component::Light::SetMainLight()
+{
+	auto* lightSystem = _graphicsManager->GetLightSystem();
+	lightSystem->SetMainLight(_geLight);
+}

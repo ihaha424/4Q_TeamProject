@@ -5,6 +5,7 @@
 
 #include "StaticMeshRenderer.h"
 #include "SkeletalMeshRenderer.h"
+#include "SkyBoxRenderer.h"
 
 #include "Sampler.h"
 #include "TextSystem.h"
@@ -90,6 +91,9 @@ void RenderSystem::CreateMeshRenderer(GE::IMeshRenderer** ppComponent, const GE:
 		break;
 	case GE::MESH_RENDERER_DESC::Type::Skeletal:
 		pMeshRenderer = new SkeletalMeshRenderer;
+		break;
+	case GE::MESH_RENDERER_DESC::Type::SkyBox:
+		pMeshRenderer = new SkyBoxRenderer;
 		break;
 	}
 

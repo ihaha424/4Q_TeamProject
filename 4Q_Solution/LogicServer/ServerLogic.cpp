@@ -52,9 +52,14 @@ void ServerLogic::Update()
     static float elapsedTime;
     elapsedTime += _timer->GetDeltaTime();
 
+    static unsigned short collisionFlg;
+
     for (int i = 0; i < 2; i++) {
 
-        if (_playerSlot[i]._state == 0) {
+        //if (_playerSlot[i]._state == 0) {
+        //    continue;
+        //} // if end
+        if (_playerSlot[i]._controller == nullptr) {
             continue;
         } // if end
 
@@ -69,7 +74,7 @@ void ServerLogic::Update()
     if (elapsedTime >= 0.02f) {
         elapsedTime -= 0.02f;
         for (int i = 0; i < 2; i++) {
-            if (_playerSlot[i]._state == 0) {
+            if (_playerSlot[i]._controller == nullptr || _playerSlot[i]._state == 0 && (collisionFlg & (unsigned short)Engine::Physics::ControllerCollisionFlag::Down)) {
                 continue;
             } // if end
             Engine::Math::Vector3 position = _playerSlot[i]._controller->GetPosition();
@@ -80,7 +85,6 @@ void ServerLogic::Update()
 
             _moveSync.SerializeToString(&_msgBuffer);
             Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), _playerSlot[i]._serialNumber);
-            printf("Player%d ByteSend : %ld\n", i + 1, _moveSync.ByteSizeLong());
         } // for end
     } // if end
 
@@ -122,10 +126,10 @@ void ServerLogic::MessageDispatch()
             else {
                 _enterAccept.set_grantnumber(grantNum + 1);
                 _enterAccept.SerializeToString(&_msgBuffer);
-                Server::SavePacketData(_msgBuffer, packet.sessionId, (short)PacketID::EnterAccept, _enterAccept.ByteSizeLong(), 0);
+                Server::SavePacketData(_msgBuffer, packet.sessionId, (short)PacketID::EnterAccept, _enterAccept.ByteSizeLong(), grantNum + 1);
 
                 _playerSlot[grantNum]._serialNumber = grantNum + 1;
-                _playerSlot[grantNum]._position = Engine::Math::Vector3(0.0f, 0.0f, 0.0f);
+                _playerSlot[grantNum]._position = Engine::Math::Vector3(0.0f, 400.0f, 0.0f);
                 _playerSlot[grantNum]._sessionId = packet.sessionId;
                 // 물리 환경에 등록
                 RegistPlayer(_playerSlot[grantNum]);
@@ -204,6 +208,14 @@ void ServerLogic::MessageDispatch()
 
             break;
         } // case end
+        case PacketID::Jump:
+        {
+            _jump.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+            int playerIdx = packet._serialNumber - 1;
+            _playerSlot[playerIdx]._controller->SetGravity({ 0.f, _jump.power(), 0.f });
+
+            break;
+        } // case end
         case PacketID::StateChange:
         {
             _stateChange.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
@@ -271,7 +283,7 @@ void ServerLogic::RegistPlayer(Player& player)
     Engine::Physics::ControllerDesc cd;
     cd.height = 10.f;
     cd.radius = 2.f;
-    cd.gravity = { 0.f, -9.8f, 0.f };
+    cd.gravity = { 0.f, -0.98f, 0.f };
     cd.contactOffset = 3.f;
     cd.stepOffset = 2.f;
     cd.slopeLimit = 0.5f;

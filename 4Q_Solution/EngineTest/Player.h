@@ -8,6 +8,8 @@ public:
 	Player(std::filesystem::path&& meshPath, std::filesystem::path&& fontPath);
 
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
+	int GetSerialNumber();
+	void SetSerialNumber(int num);
 protected:
 	void DisposeComponents() override;
 
@@ -25,7 +27,6 @@ private:
 	std::filesystem::path _meshPath;
 	std::filesystem::path _fontPath;
 
-	Engine::Component::Movement* _movement;
 	Engine::Component::Camera* _camera;
 	//Engine::Component::StaticMesh* _staticMesh;
 	Engine::Component::SkeletalMesh* _skeltalMesh;

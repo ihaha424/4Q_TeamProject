@@ -37,7 +37,7 @@ public:
 	void SetAttenuation(float constant, float linear, float quadratic) override;
 	void SetPositionFromArray(float* pArray) override;
 	void SetDirectionFromArray(float* pArray) override;
-	void SetDiffsueFromArray(float* pArray) override;
+	void SetDiffuseFromArray(float* pArray) override;
 	void SetSpecularFromArray(float* pArray) override;
 	void SetAmbientFromArray(float* pArray) override;
 

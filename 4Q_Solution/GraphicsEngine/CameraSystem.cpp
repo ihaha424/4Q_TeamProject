@@ -7,7 +7,7 @@ void CameraSystem::SetCurrentCamera(const wchar_t* name)
 {
 	if (_cameras.find(name) == _cameras.end())
 	{
-		ASSERT(false, L"해당 태그로 카메라를 찾을 수 없습니다.");
+		ASSERT(false, L"No cameras were found with that name.");
 		return;
 	}
 
@@ -28,7 +28,7 @@ void CameraSystem::Update()
 {
 	if (nullptr == _pCurrentCamera)
 	{
-		ASSERT(false, L"설정된 카메라가 없습니다.");
+		ASSERT(false, L"No cameras are currently set up.");
 		return;
 	}
 
@@ -39,7 +39,7 @@ void CameraSystem::RegisterCamera(const wchar_t* name, GE::ICamera* pCaemra)
 {
 	if (_cameras.find(name) != _cameras.end())
 	{
-		ASSERT(false, L"이미 등록된 카메라 입니다.");
+		ASSERT(false, L"Already registered camera.");
 		return;
 	}
 
@@ -50,7 +50,7 @@ void CameraSystem::UnRegisterCamera(const wchar_t* name)
 {
 	if (_cameras.find(name) == _cameras.end())
 	{
-		ASSERT(false, L"등록되지 않은 카메라 입니다.");
+		ASSERT(false, L"Unregistered camera.");
 		return;
 	}
 

@@ -14,6 +14,7 @@
 #include "Animator.h"
 #include "Light.h"
 #include "TextRenderer.h"
+#include "SkyBox.h"
 
 // Network
 #include "Synchronize.h"

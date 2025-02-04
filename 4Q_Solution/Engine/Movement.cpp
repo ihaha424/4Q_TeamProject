@@ -2,7 +2,8 @@
 #include "Movement.h"
 
 Engine::Component::Movement::Movement() :
-	_speed(1.f), _direction(Math::Vector3::Zero), _target(nullptr)
+	_speed(1.f), _direction(Math::Vector3::Zero), 
+	_target(nullptr), _isMoving(false), _isMoved(false)
 {
 }
 
@@ -34,5 +35,48 @@ Engine::Math::Vector3 Engine::Component::Movement::GetDirection() const
 void Engine::Component::Movement::Update(const float deltaTime)
 {
 	Component::Update(deltaTime);
-	_target->Translate(_direction * (_speed * deltaTime));
+	UpdateVelocity(deltaTime);
+	_target->Translate(_velocity);	
+
+	SetIsMoving(_direction != Math::Vector3::Zero);
 }
+
+void Engine::Component::Movement::FixedUpdate()
+{
+
+}
+
+void Engine::Component::Movement::BindOnMove(std::function<void()> onMove)
+{
+	_onMove = onMove;
+}
+
+void Engine::Component::Movement::BindOnStop(std::function<void()> onStop)
+{
+	_onStop = onStop;
+}
+
+void Engine::Component::Movement::UpdateVelocity(float deltaTime)
+{
+	_velocity = _direction * (_speed * deltaTime);
+}
+
+void Engine::Component::Movement::SetIsMoving(bool isMoving)
+{
+	_isMoved = _isMoving;
+	_isMoving = isMoving;
+	if (_onMove != nullptr &&
+		_isMoving == true &&
+		_isMoved == false)
+	{
+		_onMove();
+	}
+
+	if (_onStop != nullptr &&
+		_isMoving == false &&
+		_isMoved == true)
+	{
+		_onStop();
+	}
+}
+

@@ -6,6 +6,11 @@ void Camera::Release()
 	delete this;
 }
 
+GE::Matrix4x4 Camera::GetCameraMatrix() const
+{
+	return _world;
+}
+
 void Camera::SetPerspective(float nearZ, float farZ, float aspect, float fov)
 {
 	_projection = XMMatrixPerspectiveFovLH(fov, aspect, nearZ, farZ);

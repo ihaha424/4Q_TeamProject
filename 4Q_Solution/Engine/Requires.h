@@ -14,6 +14,7 @@
 #include "DSHTime/Time.h"
 #include "DSHWindow/Window.h"
 #include "DSHInput/Input.h"
+#include "DSHLogger/Logger.h"
 #include "GraphicsEngine/IGraphicsSystem.h"
 #include "GraphicsEngine/ICameraSystem.h"
 #include "GraphicsEngine/IRenderSystem.h"
@@ -28,6 +29,7 @@
 #include "GraphicsEngine/ILight.h"
 #include "GraphicsEngine/IMeshRenderer.h"
 #include "GraphicsEngine/ITextRenderer.h"
+#include "GraphicsEngine/ISkyBoxRenderer.h"
 
 #include "GraphicsEngine/IBloom.h"
 #include "GraphicsEngine/IBlur.h"

@@ -1,28 +1,28 @@
 #include "PostProcess.hlsli"
 
-#ifdef Up
 Texture2D txSource1 : register(t2);
-Texture2D txSource2 : register(t3);
-Texture2D txSource3 : register(t4);
-Texture2D txSource4 : register(t5);
-#else
-Texture2D txSource1 : register(t2);
-#endif
 
+cbuffer SamplingDesc : register(b1)
+{
+    uint level;
+};
+
+SamplerState samLinear_clamp : register(s1);
 
 float4 main(PS_INPUT input) : SV_Target
 {
-    float4 color = 0;    
-    uint mask = txLayerMask.Sample(samLinear_wrap, input.uv).r;
+    float4 color = 0;
     
-#ifdef Up
-    color += txSource1.Sample(samLinear_wrap, input.uv);
-    color += txSource2.Sample(samLinear_wrap, input.uv);
-    color += txSource3.Sample(samLinear_wrap, input.uv);
-    color += txSource4.Sample(samLinear_wrap, input.uv);
-#else
-    color = txSource1.Sample(samLinear_wrap, input.uv);
-#endif
+    //for (uint i = 0; i < level; i++)
+    //{
+    //    color += txSource1.SampleLevel(samLinear_wrap, input.uv, i + 1);
+    //}
     
-    return color * LayerMasking(input.uv);
+    color += txSource1.SampleLevel(samLinear_clamp, input.uv, 1) * 0.4;
+    color += txSource1.SampleLevel(samLinear_clamp, input.uv, 2) * 0.3;
+    color += txSource1.SampleLevel(samLinear_clamp, input.uv, 3) * 0.2;
+    color += txSource1.SampleLevel(samLinear_clamp, input.uv, 4) * 0.05;
+    color += txSource1.SampleLevel(samLinear_clamp, input.uv, 5) * 0.05;
+    
+    return float4(color.rgb, 1.f) * LayerMasking(input.uv);
 }

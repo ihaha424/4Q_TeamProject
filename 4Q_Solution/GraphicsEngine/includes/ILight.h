@@ -6,7 +6,7 @@ namespace GE
 	class ILight : public IBase
 	{
 	public:
-		enum class Type { Directional, Point, Spot };
+		enum Type { Directional, Point, Spot, End };
 
 	protected:
 		explicit ILight() = default;
@@ -28,7 +28,7 @@ namespace GE
 		virtual void SetAttenuation(float constant, float linear, float quadratic) = 0;
 		virtual void SetPositionFromArray(float* pArray) = 0;
 		virtual void SetDirectionFromArray(float* pArray) = 0;
-		virtual void SetDiffsueFromArray(float* pArray) = 0;
+		virtual void SetDiffuseFromArray(float* pArray) = 0;
 		virtual void SetSpecularFromArray(float* pArray) = 0;
 		virtual void SetAmbientFromArray(float* pArray) = 0;
 	};

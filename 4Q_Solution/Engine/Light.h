@@ -30,6 +30,7 @@ namespace Engine::Component
 		void SetDiffuseFromArray(float* pArray) const;
 		void SetSpecularFromArray(float* pArray);
 		void SetAmbientFromArray(float* pArray);
+		void SetMainLight();
 
     private:
         GE::ILight* _geLight;

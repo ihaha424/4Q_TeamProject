@@ -2,8 +2,16 @@
 #include "IBash.h"
 
 namespace GE
-{	
-	class IMeshRenderer : public IBase
+{
+	struct MeshDescription
+	{
+		unsigned int postEffectFlag;
+		bool activeShadow;
+		bool activeDraw;
+	};
+
+	enum class Type { Static, Skeletal, SkyBox };
+	class IMeshRenderer : virtual public IBase
 	{
 	protected:
 		explicit IMeshRenderer() = default;
@@ -14,6 +22,8 @@ namespace GE
 		IMeshRenderer& operator=(IMeshRenderer&&) = delete;
 
 	public:
-		virtual void SetRenderLayer(const unsigned int layer) = 0;
+		virtual void Query(void** ppOut) = 0;
+		virtual void GetDesc(MeshDescription* out) = 0;
+		virtual void SetDesc(const MeshDescription* in) = 0;
 	};
 }

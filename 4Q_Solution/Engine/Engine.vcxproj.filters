@@ -439,6 +439,21 @@
     <Filter Include="Modules\Difinition\PhysicsEngine\99. Utils">
       <UniqueIdentifier>{fd9e0dec-2f52-44d8-9ead-74ee2af70858}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Interfaces\Logger">
+      <UniqueIdentifier>{27946cdb-60ed-414a-8021-54d09433e05f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHLogger">
+      <UniqueIdentifier>{961ca569-cca8-4ce1-b76b-41744a6792b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Logger\Manager">
+      <UniqueIdentifier>{8c807898-03fa-477d-af31-2b84f7a00a0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHLogger\Manager">
+      <UniqueIdentifier>{70532f95-c7cc-44b9-876b-add128ee20e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Logger\LogLevel">
+      <UniqueIdentifier>{5181113f-bc64-4df3-9907-5c566ff30abb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -858,6 +873,21 @@
     <ClInclude Include="PHICoordinateConvert.h">
       <Filter>Modules\Difinition\PhysicsEngine\99. Utils</Filter>
     </ClInclude>
+    <ClInclude Include="LoggerManager.h">
+      <Filter>Modules\Interfaces\Logger\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHLoggerManager.h">
+      <Filter>Modules\Difinition\DSHLogger\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Modules\Interfaces\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="LogLevel.h">
+      <Filter>Modules\Interfaces\Logger\LogLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyBox.h">
+      <Filter>Components\Mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1204,6 +1234,21 @@
     </ClCompile>
     <ClCompile Include="PHICoordinateConvert.cpp">
       <Filter>Modules\Difinition\PhysicsEngine\99. Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="LoggerManager.cpp">
+      <Filter>Modules\Interfaces\Logger\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHLoggerManager.cpp">
+      <Filter>Modules\Difinition\DSHLogger\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="LogLevel.cpp">
+      <Filter>Modules\Interfaces\Logger\LogLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyBox.cpp">
+      <Filter>Components\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Components\FiniteStateMachine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

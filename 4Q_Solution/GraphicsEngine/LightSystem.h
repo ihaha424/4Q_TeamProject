@@ -9,19 +9,18 @@ public:
 	virtual ~LightSystem() = default;
 
 public:
-	std::list<Light*>& GetLights() { return _lights; }
-	const unsigned int GetNumDirectionalLights() const { return _numDirectionalLights; }
-	const unsigned int GetNumPointLights() const { return _numPointLights; }
+	std::list<Light*>& GetLights();
+	Light* GetMainLight();
 
 public:
 	// ILightSystem을(를) 통해 상속됨
 	void CreateLight(GE::ILight** ppOutLight) override;
 	void RegisterLight(GE::ILight* pLight) override;
 	void UnRegisterLight(GE::ILight* pLight) override;
+	void SetMainLight(GE::ILight* pLight) override;
 	void Release() override;
-
+	
 private:
 	std::list<Light*> _lights;
-	unsigned int _numDirectionalLights;
-	unsigned int _numPointLights;
+	Light* _pMainLight{ nullptr };
 };

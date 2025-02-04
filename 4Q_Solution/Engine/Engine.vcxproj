@@ -186,6 +186,10 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Application.h" />
     <ClInclude Include="ChractorController.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="DSHLoggerManager.h" />
+    <ClInclude Include="Logger.h" />
+    <ClInclude Include="LoggerManager.h" />
+    <ClInclude Include="LogLevel.h" />
     <ClInclude Include="PHICoordinateConvert.h" />
     <ClInclude Include="FiniteStateMachine.h" />
     <ClInclude Include="PHICollision.h" />
@@ -290,6 +294,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="PhysicsScene.h" />
     <ClInclude Include="ServerNetworkManager.h" />
     <ClInclude Include="SkeletalMesh.h" />
+    <ClInclude Include="SkyBox.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StaticMesh.h" />
     <ClInclude Include="SwizzleAxis.h" />
@@ -318,18 +323,24 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
   <ItemGroup>
     <ClCompile Include="..\Packet\Connect.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\Packet\Move.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\Packet\Play.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="ChractorController.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="DSHLoggerManager.cpp" />
+    <ClCompile Include="LoggerManager.cpp" />
+    <ClCompile Include="LogLevel.cpp" />
     <ClCompile Include="PHICoordinateConvert.cpp" />
     <ClCompile Include="FiniteStateMachine.cpp" />
     <ClCompile Include="PHICollision.cpp" />
@@ -419,6 +430,8 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="PhysicsScene.cpp" />
     <ClCompile Include="ServerNetworkManager.cpp" />
     <ClCompile Include="SkeletalMesh.cpp" />
+    <ClCompile Include="SkyBox.cpp" />
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="StaticMesh.cpp" />
     <ClCompile Include="SwizzleAxis.cpp" />
     <ClCompile Include="pch.cpp">

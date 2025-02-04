@@ -12,11 +12,4 @@ inline float3 LinearToGammaSpace(float3 linRGB)
     return max(1.055 * pow(linRGB, 0.416666667) - 0.055, 0.0);
 }
 
-inline uint QuerySpecularTextureLevels(TextureCube txSpecular)
-{
-    uint width, height, levels;
-    txSpecular.GetDimensions(0, width, height, levels);
-    return levels;
-}
-
 #endif

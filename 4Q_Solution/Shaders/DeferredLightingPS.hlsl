@@ -42,20 +42,9 @@ float4 main(PS_INPUT input) : SV_Target
     // PBR_Point
     directLighting += PointLightPBR(worldPosition, N, V, albedo, specular.r, specular.g);
     
-// IBL
-    //float3 irradiance = txIBL_Diffuse.Sample(samLinear_wrap, N).rgb;
+// IBL    
+    ambientLighting = AmbientLightIBL(albedo, N, V, specular.g, specular.r);
     
-    //uint specularTextureLevels = QuerySpecularTextureLevels(txIBL_Specular);
-    //float3 Lr = 2.0 * NdotV * N - V;
-    //float3 preFilteredColor = txIBL_Specular.SampleLevel(samLinear_wrap, Lr, roughness * specularTextureLevels).rgb;
-    //float2 brdf = txIBL_BRDF.Sample(samLinear_clamp, float2(NdotV, roughness)).rg;
-        
-    //F = FresnelReflection(NdotV, F0);
-    //kd = lerp(1.0 - F, 0, metalness);
-    //float3 diffuseIBL = kd * albedo * irradiance;
-    //float3 specularIBL = (F0 * brdf.x + brdf.y) * preFilteredColor;
-    
-    //ambientLighting = diffuseIBL + specularIBL;
 //Shadow
     float4 shadowPosition = txShadowPosition.Sample(samLinear_wrap, input.uv);
     float currentShadowDepth = shadowPosition.z / shadowPosition.w;

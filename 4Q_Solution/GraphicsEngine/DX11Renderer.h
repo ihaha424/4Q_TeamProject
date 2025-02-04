@@ -7,6 +7,7 @@ class VertexShader;
 class PixelShader;
 class Mesh;
 class SkyBoxRenderer;
+class ToneMapping;
 class DX11Renderer : public IRenderer
 {
 	struct DrawData
@@ -43,6 +44,7 @@ private:
 	void InitShader();
 	void InitDepthStencil();
 	void InitStructuredBuffer();
+	void InitFilters();
 
 private:
 	// IRenderer을(를) 통해 상속됨
@@ -55,13 +57,15 @@ private:
 	std::vector<LightData>				_pointLights;
 	D3D11_VIEWPORT						_viewport{};
 
+	// Filters
+	ToneMapping*						_pToneMapping{ nullptr };
+
 	// Shaders
 	std::shared_ptr<VertexShader>		_vsShadow[MeshType::End];
 	std::shared_ptr<PixelShader>		_psGBuffer;
 	std::shared_ptr<PixelShader>		_psDeferredLighting;
 	std::shared_ptr<PixelShader>		_psForwardLighting;
 	std::shared_ptr<PixelShader>		_psBlend;
-	std::shared_ptr<PixelShader>		_psToneMapping;
 
 	// Device
 	ID3D11DeviceContext*				_pDeviceContext{ nullptr };

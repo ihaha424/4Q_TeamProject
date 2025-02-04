@@ -8,6 +8,7 @@
 #include "Network.h"
 #include "Load.h"
 #include "Content.h"
+#include "Logger.h"
 
 namespace Engine
 {

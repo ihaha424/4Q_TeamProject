@@ -1247,5 +1247,8 @@
     <ClCompile Include="SkyBox.cpp">
       <Filter>Components\Mesh</Filter>
     </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Components\FiniteStateMachine</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

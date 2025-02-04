@@ -17,7 +17,6 @@ public:
 	void PostFixedUpdate() override;
 	
 	void SceneQueryExample();
-	void OnHit(Engine::Physics::ContactEvent info);
 
 private:
 	Engine::Component::Rigid*			_rigid;

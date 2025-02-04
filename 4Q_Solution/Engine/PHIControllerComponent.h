@@ -101,14 +101,10 @@ namespace Engine::PHI
 		void FixedUpdate() override;
 		void Finalize() override;
 
-		void* GetOwner() override;
-		void SetOwner(void* owner) override;
+		Engine::Object* GetOwner() override;
 
 	private:
-		void IsGround(Engine::Physics::TriggerEvent info);
-
-	private:
-		void* owner;
+		Engine::Component::RigidDynamic* owner;
 
 
 		PhysicsEngineAPI::IController* controller;

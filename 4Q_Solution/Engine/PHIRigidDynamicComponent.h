@@ -93,13 +93,12 @@ namespace Engine::PHI
 		/********************************
 				Engine Life Cycle
 		*********************************/
-		void Initialize() override;
+		void Initialize(Engine::Component::Component* Owner) override;
 		void Update(float deltaTime) const override;
 		void FixedUpdate() const override;
 		void Finalize() override;
 
-		void* GetOwner() override;
-		void SetOwner(void* owner) override;
+		Engine::Object* GetOwner() override;
 
 	protected:
 		PhysicsEngineAPI::IDynamicObject* object;
@@ -109,11 +108,11 @@ namespace Engine::PHI
 
 	private:
 		Collision<RigidDynamicComponent>* collision;
-		void* owner;
+		Engine::Component::ChractorController* owner;
 	private:
 		friend class Manager;
 		friend class Scene;
-};
+	};
 
 }
 

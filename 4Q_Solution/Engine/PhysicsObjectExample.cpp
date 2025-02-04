@@ -7,10 +7,10 @@ PhysicsObjectExample::PhysicsObjectExample()
 
 void PhysicsObjectExample::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
-	_rigid			= componentFactory->Clone<Engine::Component::Rigid>();
-	_rigidStatic	= componentFactory->Clone<Engine::Component::RigidStatic>();
-	_rigidDynamic	= componentFactory->Clone<Engine::Component::RigidDynamic>();
-	_rigidKinematic = componentFactory->Clone<Engine::Component::RigidKinematic>();
+	_rigid			= componentFactory->Clone<Engine::Component::Rigid>(this);
+	_rigidStatic	= componentFactory->Clone<Engine::Component::RigidStatic>(this);
+	_rigidDynamic	= componentFactory->Clone<Engine::Component::RigidDynamic>(this);
+	_rigidKinematic = componentFactory->Clone<Engine::Component::RigidKinematic>(this);
 }
 
 void PhysicsObjectExample::DisposeComponents()

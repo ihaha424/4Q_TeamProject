@@ -36,12 +36,15 @@ namespace Engine
 		virtual void PreFinalize();
 		virtual void PostFinalize();
 
+		void SetOwner(World* owner);
+		[[nodiscard]] World* GetOwner() const;
+
 	protected:
 		virtual void DisposeComponents() = 0;
 
 		Transform _transform;
 		bool _isDispose;
 
-		// TODO: Owner
+		World* _owner;
 	};
 }

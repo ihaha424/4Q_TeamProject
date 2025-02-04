@@ -8,10 +8,10 @@ GlobalLight::GlobalLight()
 
 void GlobalLight::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
-	_globalLight = componentFactory->Clone<Engine::Component::Light>();
-	_pointLights.push_back(componentFactory->Clone<Engine::Component::Light>());
-	_pointLights.push_back(componentFactory->Clone<Engine::Component::Light>());
-	_pointLights.push_back(componentFactory->Clone<Engine::Component::Light>());
+	_globalLight = componentFactory->Clone<Engine::Component::Light>(this);
+	_pointLights.push_back(componentFactory->Clone<Engine::Component::Light>(this));
+	_pointLights.push_back(componentFactory->Clone<Engine::Component::Light>(this));
+	_pointLights.push_back(componentFactory->Clone<Engine::Component::Light>(this));
 }
 
 void GlobalLight::DisposeComponents()

@@ -22,9 +22,13 @@ namespace Engine::Component
 		virtual void Detach();
 		virtual void Finalize();
 
+		void SetOwner(Object* owner);
+		[[nodiscard]] Object* GetOwner() const;
+
 	protected:
 		bool _isDispose;
-		// TODO: Owner
+
+		Object* _owner;
 	};
 }
 

@@ -4,6 +4,7 @@
 #include "Movement.h"
 #include "State.h"
 #include "FiniteStateMachine.h"
+#include "FixedArm.h"
 
 // Graphics
 #include "GraphicsComponent.h"

@@ -154,6 +154,7 @@ void Engine::Application::Register(Content::IManager* contentManager)
 	componentFactory->Register<Component::Rigid>();
 	componentFactory->Register<Component::ChractorController>();
 	componentFactory->Register<Component::Synchronize>();
+	componentFactory->Register<Component::FixedArm>();
 	// TODO: Register other components.
 }
 

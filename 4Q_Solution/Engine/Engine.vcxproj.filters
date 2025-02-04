@@ -454,6 +454,9 @@
     <Filter Include="Modules\Interfaces\Logger\LogLevel">
       <UniqueIdentifier>{5181113f-bc64-4df3-9907-5c566ff30abb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\FixedArm">
+      <UniqueIdentifier>{b744d9ce-45b5-4f42-912c-bdfafc0cfe21}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -888,6 +891,9 @@
     <ClInclude Include="SkyBox.h">
       <Filter>Components\Mesh</Filter>
     </ClInclude>
+    <ClInclude Include="FixedArm.h">
+      <Filter>Components\FixedArm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1249,6 +1255,9 @@
     </ClCompile>
     <ClCompile Include="State.cpp">
       <Filter>Components\FiniteStateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="FixedArm.cpp">
+      <Filter>Components\FixedArm</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

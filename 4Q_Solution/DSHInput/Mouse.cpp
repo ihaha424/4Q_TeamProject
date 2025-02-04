@@ -185,18 +185,21 @@ DSH::Input::Value DSH::Input::Device::Mouse::GetPosition() const
 
 void DSH::Input::Device::Mouse::ShowCursor()
 {
-	CURSORINFO cursorInfo;
-	::GetCursorInfo(&cursorInfo);
-	if (cursorInfo.flags == NULL) ::ShowCursor(TRUE);
-
+	int result;
+	do
+	{
+		result = ::ShowCursor(TRUE);
+	}
+	while (result < 1);
 }
 
 void DSH::Input::Device::Mouse::HideCursor()
 {
-	CURSORINFO cursorInfo;
-	::GetCursorInfo(&cursorInfo);
-	if (cursorInfo.flags == CURSOR_SHOWING)	::ShowCursor(FALSE);
-
+	int result;
+	do
+	{
+		result = ::ShowCursor(FALSE);
+	} while (result > 0);
 }
 
 void DSH::Input::Device::Mouse::LockCursor()

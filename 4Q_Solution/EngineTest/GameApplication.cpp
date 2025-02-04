@@ -12,7 +12,7 @@ void GameApplication::DeclareInputActions(Engine::Input::IManager* inputManager)
 {
 	Engine::Input::Device::IMouse* mouse = nullptr;
 	inputManager->GetDevice(&mouse);
-	//mouse->LockCursor();
+	mouse->LockCursor();
 	mouse->HideCursor();
 
     Engine::Input::IMappingContext* mappingContext = nullptr;

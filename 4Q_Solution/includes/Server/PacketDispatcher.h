@@ -29,6 +29,7 @@ public:
 	// session에서 보낼 메시지 컨테이너를 가져갈 때 사용합니다.
 	SendQueue* GetSendMessageContainer(SessionID sid) override;
 	void SessionCreated(SessionID sid) override;
+	void SessionDeleted(SessionID sid) override;
 
 	void SaveBroadCastPacket(std::string data, short packetId, long dataSize, int serialNum) override;
 

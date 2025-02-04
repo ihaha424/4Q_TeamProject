@@ -13,7 +13,8 @@ void Session::Initialize(Socket* socket, ULL size)
 	_socket = socket;
 	_recvOl._listen = _socket->GetSocket();
 
-	_packetDispatcherInstance->SessionCreated(_sessionId);
+	// 여기가 문제같음.
+	//_packetDispatcherInstance->SessionCreated(_sessionId);
 
 	_recvOl._overlappedType = OlType::Recv;
 	_sendOl._overlappedType = OlType::Send;

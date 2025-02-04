@@ -67,6 +67,7 @@ void ServerLogic::Update()
         _playerSlot[i]._controller->SetMoveSpeed(_playerSlot[i]._speed);
         _playerSlot[i]._controller->Update(_timer->GetDeltaTime());
         _playerSlot[i]._flag = _playerSlot[i]._controller->GetCollisionFlag();
+        _playerSlot[i]._controller->FixedUpdate();
 
     } // for end
     _physicsManager->Update(_timer->GetDeltaTime());
@@ -275,7 +276,9 @@ void ServerLogic::RegistPhysics(Object& obj)
 
     Engine::Transform tf{};
     tf.position = { 0, 0, 0 };
-    _physicsManager->CreateDynamic(&obj._rigidBody, rcd, tf, 1);
+    Engine::Physics::IRigidDynamicComponent* dynamicrigid;
+    _physicsManager->CreateDynamic(&dynamicrigid, rcd, tf, 1);
+    obj._rigidBody = static_cast<Engine::Physics::RigidDynamicComponent*>(dynamicrigid);
     _mainScene->AddActor(obj._rigidBody);
 }
 
@@ -291,7 +294,9 @@ void ServerLogic::RegistPlayer(Player& player)
     Engine::Physics::IController* controller = player._controller;
     _physicsManager->CreatePlayerController(&controller, _mainScene, cd);
     player._controller = static_cast<Engine::Physics::Controller*>(controller);
+    player._controller->SetBottomPosition({0,-5,0});
     player._controller->SetOwner(&player);
+    player._controller->Initialize();
 }
 
 void ServerLogic::RegistGround(Ground& ground)
@@ -301,7 +306,12 @@ void ServerLogic::RegistGround(Ground& ground)
     _physicsManager->LoadHeightMap(geometryDesc, "terrain", "../Resources/Terrain/testTest.png");
 
     Engine::Transform transform{};
-    _physicsManager->CreateTriangleStatic(&ground._staticRigid, "terrain", { {0.f,0.f,0.f } }, transform);
+    Engine::Physics::IRigidStaticComponent* staticrigid;
+    _physicsManager->CreateTriangleStatic(&staticrigid, "terrain", { {0.f,0.f,0.f } }, transform);
+    ground._staticRigid = static_cast<Engine::Physics::RigidStaticComponent*>(staticrigid);
     _mainScene->AddActor(ground._staticRigid);
     ground._staticRigid->SetTranslate({ -1000.f, -200.f, 1000.f });
+
+    ground._staticRigid->SetOwner(&ground);
+    ground._staticRigid->Initialize();
 }

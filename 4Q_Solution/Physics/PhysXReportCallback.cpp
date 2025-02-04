@@ -35,28 +35,30 @@ namespace PhysicsEngineAPI
 	}
 	void PhysXReportCallback::Update()
 	{
-		for (auto& node : collitionMap)
+		for (auto it = collitionMap.begin(); it != collitionMap.end(); )
 		{
-			if (node.second == true)
+			if (it->second == true)
 			{
-				//OnTrigger
+				// OnTrigger
 
-				node.second = false;
+				it->second = false;
+				++it;
 			}
 			else
 			{
 				Utils::DataStructure::TriggerEvent triggerEvent{};
 				ICollision* actor1 = static_cast<ICollision*>(userData);
-				ICollision* actor2 = static_cast<ICollision*>(node.first);
+				ICollision* actor2 = static_cast<ICollision*>(it->first);
+
 				triggerEvent.myCollision = actor1;
 				triggerEvent.otherCollision = actor2;
 				actor1->OnOverlapEnd(triggerEvent);
+
 				triggerEvent.myCollision = actor2;
 				triggerEvent.otherCollision = actor1;
 				actor2->OnOverlapEnd(triggerEvent);
 
-
-				collitionMap.erase(node.first);
+				it = collitionMap.erase(it);
 			}
 		}
 	}

@@ -795,8 +795,8 @@ namespace PhysicsEngineAPI
 
 
 		physx::PxController* character = Scene->controllerManager->createController(desc);
-		physx::PxTransform pos = physx::PxTransform({ 0.f, _desc.height, 0.f });
-		character->getActor()->setCMassLocalPose(pos);
+		//physx::PxTransform pos = physx::PxTransform({ 0.f, _desc.height, 0.f });
+		//character->getActor()->setCMassLocalPose(pos);
 		controller->controller = static_cast<physx::PxCapsuleController*>(character);
 		controller->gravity = Vector3ToPxVec3(_desc.gravity);
 

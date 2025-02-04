@@ -2,9 +2,16 @@
 #include "Server/ServerEntrance.h"
 #include "directxtk/SimpleMath.h"
 #include "DSHTime/Time.h"
+#include "Physics/InterfaceAPI.h"
+#include "../Engine/Math.h"
+#include "../Engine/Transform.h"
+#include "../Engine/PhysicsUtils.h"
+#include "../Engine/Physics.h"
+#include "../Engine/PHICoordinateConvert.h"
+#include "../Engine/PHIManager.h"
 #include "../Packet/PacketID.h"
 #include "../Packet/ProtoInclude.h"
-#include "Rigid.h"
+
 
 namespace Engine::Physics {
 	class Manager;
@@ -17,12 +24,12 @@ class ServerLogic
 		Engine::Math::Vector3 _position;
 		std::string _resourceId;
 
-		Engine::Physics::IRigidDynamicComponent* _rigidBody = nullptr;
+		Engine::Physics::RigidDynamicComponent* _rigidBody = nullptr;
 
 	};
 
 	struct Ground : public Object {
-		Engine::Physics::IRigidStaticComponent* _staticRigid = nullptr;
+		Engine::Physics::RigidStaticComponent* _staticRigid = nullptr;
 	};
 
 	struct Player : public Object {

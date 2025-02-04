@@ -170,8 +170,8 @@ namespace Engine::PHI
 		velocity.x = velo.x;
 		velocity.z = velo.z;
 
-		if(velocity.y > -jumpMax)
-			velocity += gravity;
+
+		velocity += gravity;
 
 		controllerCollisionFlag = controller->Move(Vector3ToPhysicsVector3(velocity * deltaTime), minDistance, deltaTime);
 		if ((controllerCollisionFlag & 0x04 || controllerCollisionFlag & 0x01) || (jumpFlag == true && velocity.y < -jumpMax))

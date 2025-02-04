@@ -22,7 +22,7 @@ void GlobalLight::PostInitialize(const Engine::Modules& modules)
 	_globalLight->SetAmbient(0.2f, 0.2f, 0.2f, 0.2f);
 	_globalLight->SetDirection(0.f, 0.f, 1.f);
 	_globalLight->SetIntensity(1.f);
-
+	_globalLight->SetMainLight();
 	/*_pointLight.SetType(Engine::Component::Light::Type::Point);
 	_pointLight.SetDiffuse(1.f, 1.f, 1.f, 1.f);
 	_pointLight.SetSpecular(1.f, 1.f, 1.f, 1.f);

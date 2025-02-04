@@ -18,7 +18,7 @@ namespace DSH::Input::Component
 		void SetRelativeValue(LONG value);
 		void SetAbsoluteValue(LONG value);
 
-		void AccumulateAbsoluteValue(LONG value);
+		void AccumulateValue(LONG value);
 
 		void CalculateCumulative();
 

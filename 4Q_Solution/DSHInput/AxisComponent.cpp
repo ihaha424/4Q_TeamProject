@@ -58,9 +58,9 @@ void DSH::Input::Component::AxisComponent::SetAbsoluteValue(const LONG value)
 	_cumulative = _absoluteValue;
 }
 
-void DSH::Input::Component::AxisComponent::AccumulateAbsoluteValue(const LONG value)
+void DSH::Input::Component::AxisComponent::AccumulateValue(const LONG value)
 {
-	_cumulative = value - _absoluteValue;
+	_cumulative += value - _absoluteValue;
 }
 
 void DSH::Input::Component::AxisComponent::CalculateCumulative()
@@ -68,8 +68,6 @@ void DSH::Input::Component::AxisComponent::CalculateCumulative()
 	_value = _cumulative - _absoluteValue;
 	_absoluteValue = _cumulative;
 	_cumulative = _absoluteValue;
-
-	printf("%ld\n", _value);
 }
 
 void DSH::Input::Component::AxisComponent::SetDeadZone(const LONG deadZone)

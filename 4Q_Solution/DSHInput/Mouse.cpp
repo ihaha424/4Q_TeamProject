@@ -51,8 +51,8 @@ LRESULT DSH::Input::Device::Mouse::Procedure(const HWND windowHandle, const UINT
 		POINT mousePosition;
 		GetCursorPos(&mousePosition);
 		if (_isCursorLock == false) ScreenToClient(windowHandle, &mousePosition);
-		if (_axes.contains(Axis::X)) _axes.at(Axis::X)->AccumulateAbsoluteValue(mousePosition.x);
-		if (_axes.contains(Axis::Y)) _axes.at(Axis::Y)->AccumulateAbsoluteValue(mousePosition.y);
+		if (_axes.contains(Axis::X)) _axes.at(Axis::X)->AccumulateValue(mousePosition.x);
+		if (_axes.contains(Axis::Y)) _axes.at(Axis::Y)->AccumulateValue(mousePosition.y);
 		if (_isCursorLock)SetCursorToCenter();
 	}
 	break;

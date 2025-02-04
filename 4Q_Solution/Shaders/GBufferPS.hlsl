@@ -13,7 +13,7 @@ struct PS_OUTPUT
 {
     float4 diffuse          : SV_Target0;
     float4 normal           : SV_Target1;
-    float4 specular         : SV_Target2;
+    float4 RMA              : SV_Target2;
     float4 emissive         : SV_Target3;
     float4 shadowPosition   : SV_Target4;
     uint   layerMask        : SV_Target5;
@@ -26,12 +26,9 @@ cbuffer LayerMask : register(b0)
 
 Texture2D txDiffuse          : register(t0);
 Texture2D txNormal           : register(t1);
-Texture2D txSpecular         : register(t2);
+Texture2D txARM              : register(t2);
 Texture2D txEmissive         : register(t3);
 Texture2D txOpacity          : register(t4);
-Texture2D txMetalness        : register(t5);
-Texture2D txRoughness        : register(t6);
-Texture2D txAO               : register(t7);
 
 SamplerState samLinear_wrap : register(s0);
 
@@ -48,15 +45,13 @@ PS_OUTPUT main(PS_INPUT input)
     output.normal = float4(normalize(mul(normal * 2.0f - 1.0f, TBN)), 1);
     
     // pbr
-    output.specular.r = txRoughness.Sample(samLinear_wrap, input.uv).r;
-    output.specular.g = txMetalness.Sample(samLinear_wrap, input.uv).r;
+    float3 arm = txARM.Sample(samLinear_wrap, input.uv).rgb;
+    output.RMA.r = arm.g;
+    output.RMA.g = arm.b;
+    output.RMA.b = arm.r;
 
     // emissive
-    output.emissive = txEmissive.Sample(samLinear_wrap, input.uv);
-    
-    //// depth
-    //output.depth.r = input.position.z;
-    //output.depth.g = input.clipPosition.z / input.clipPosition.w;
+    output.emissive = txEmissive.Sample(samLinear_wrap, input.uv);   
     
     // shadow
     output.shadowPosition = input.shadowPosition;

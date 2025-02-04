@@ -57,12 +57,12 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
 		{
 			//_animator->ChangeAnimation("rig|walking");
-			_animator->ChangeAnimation("rig|Anim_Walk_Live");
+			_animator->ChangeAnimation("rig|Anim_Walk");
 		});
 	moveAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
 		{
 			//_animator->ChangeAnimation("rig|Breathing"); 
-			_animator->ChangeAnimation("rig|Anim_Idle_Live");
+			_animator->ChangeAnimation("rig|Anim_Idle");
 			_movement->SetDirection(Engine::Math::Vector3::Zero);
 		});
 
@@ -100,6 +100,9 @@ void Player::PostAttach()
 	_camera->Activate();
 }
 
+float elapsed = 0.f;
+int frame = 0;
+
 void Player::PostUpdate(const float deltaTime)
 {
 	Object::PostUpdate(deltaTime);
@@ -124,4 +127,12 @@ void Player::PostUpdate(const float deltaTime)
 	cameraForward.Normalize();
 	float theta = playerForward.Dot(cameraForward);*/
 	
+	elapsed += deltaTime;
+	frame++;
+	if (1.f < elapsed)
+	{
+		printf("%d\n", frame);
+		frame = 0;
+		elapsed = 0.f;
+	}
 }

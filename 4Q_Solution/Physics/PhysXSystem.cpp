@@ -886,10 +886,9 @@ namespace PhysicsEngineAPI
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				physx::PxHeightFieldSample& sample = samples[y * width + x];
-				//sample.height = (physx::PxI16)(heightmap[y * width + x] * 0x7fff);
-				sample.materialIndex0 = 0;// physx::PxHeightFieldMaterial::Enum::eHOLE;
-				sample.materialIndex1 = 0;// physx::PxHeightFieldMaterial::Enum::eHOLE;
 				sample.height = heightmap[y * width + x];
+				sample.materialIndex0 = 0;
+				sample.materialIndex1 = 0;
 			}
 		}
 
@@ -903,28 +902,22 @@ namespace PhysicsEngineAPI
 
 		if (!hfDesc.isValid())
 			return false;
-
-
-		//physx::PxHeightField* heightField = PxCreateHeightField(hfDesc);
-	
-
 		
-			physx::PxDefaultMemoryOutputStream writeBuffer;
-			bool status = PxCookHeightField(hfDesc, writeBuffer);
+		physx::PxDefaultMemoryOutputStream writeBuffer;
+		bool status = PxCookHeightField(hfDesc, writeBuffer);
 
-			physx::PxDefaultMemoryInputData readBuffer(writeBuffer.getData(), writeBuffer.getSize());
-			physx::PxHeightField* heightField = physics->createHeightField(readBuffer);
+		physx::PxDefaultMemoryInputData readBuffer(writeBuffer.getData(), writeBuffer.getSize());
+		physx::PxHeightField* heightField = physics->createHeightField(readBuffer);
 		
+		float rowScale = geometryDesc.data.x == 0 ? width : geometryDesc.data.x;
+		float columnScale = geometryDesc.data.y == 0 ? height : geometryDesc.data.y;
+		float heightScale = geometryDesc.data.z == 0 ? 100.f : geometryDesc.data.z;
 
-
-		physx::PxHeightFieldGeometry* hfGeom = new physx::PxHeightFieldGeometry(heightField, physx::PxMeshGeometryFlags(),15,5,5);
+		physx::PxHeightFieldGeometry* hfGeom = new physx::PxHeightFieldGeometry(heightField, physx::PxMeshGeometryFlags(), heightScale, rowScale, columnScale);
 		if (nullptr == hfGeom)
 			return false;
 
-		//hfGeom->rowScale = 1;//(geometryDesc.data.x == 0 ? width : geometryDesc.data.x) / (width - 1);
-		//hfGeom->columnScale = 1;//(geometryDesc.data.y == 0 ? height : geometryDesc.data.y) / (height - 1);
-		//hfGeom->heightScale = 1;//geometryDesc.data.z == 0 ? 100.f : geometryDesc.data.z;
-		//hfGeom->heightField = PxCreateHeightField(hfDesc);
+		
 		delete[] samples;
 
 

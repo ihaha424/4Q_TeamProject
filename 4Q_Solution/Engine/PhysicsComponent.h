@@ -22,8 +22,7 @@ namespace Engine::Physics
 		Component& operator=(Component&& other) noexcept = default;
 		virtual ~Component() = default;
 
-		virtual void SetOwner(void* owner) = 0;
-		virtual void* GetOwner() = 0;
+		virtual Engine::Object* GetOwner() = 0;
 	};
 }
 

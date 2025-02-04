@@ -18,13 +18,15 @@ namespace Engine::Physics {
 
 class ServerLogic
 {
+
+
 	struct Object {
 		int _serialNumber;
 		Engine::Math::Vector3 _position;
 		std::string _resourceId;
 
 		Engine::Physics::IRigidDynamicComponent* _rigidBody = nullptr;
-
+		
 	};
 
 	struct Ground : public Object {

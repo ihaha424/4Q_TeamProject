@@ -10,7 +10,6 @@ namespace Engine::PHI
 		, shape{ nullptr }
 		, geometry{ nullptr }
 		, material{ nullptr }
-		, owner{ nullptr }
 	{
 		collision = new Collision<RigidStaticComponent>{ this };
 	}
@@ -104,8 +103,9 @@ namespace Engine::PHI
 	/********************************
 			Engine Life Cycle
 	*********************************/
-	void RigidStaticComponent::Initialize()
+	void RigidStaticComponent::Initialize(Engine::Component::Component* Owner)
 	{
+		owner = static_cast<Engine::Component::RigidStatic*>(Owner);
 		object->SetUserData(collision);
 		if (nullptr != shape) shape->SetUserData(collision);
 	}
@@ -136,14 +136,9 @@ namespace Engine::PHI
 		releaser(&collision);
 	}
 
-	void* RigidStaticComponent::GetOwner()
+	Engine::Object* RigidStaticComponent::GetOwner()
 	{
-		return owner;
-	}
-
-	void RigidStaticComponent::SetOwner(void* _owner)
-	{
-		owner = _owner;
+		return owner->GetOwner();
 	}
 
 	void RigidStaticComponent::BindCollision(const Physics::CallBackTrigger& callback, Physics::TriggerType type)

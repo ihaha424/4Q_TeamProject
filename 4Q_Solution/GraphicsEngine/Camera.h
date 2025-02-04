@@ -10,13 +10,12 @@ public:
 public:
 	const Matrix& GetViewMatrix() const { return _view; }
 	const Matrix& GetProjectionMatrix() const { return _projection; }
-	Vector3 GetPosition() const { return _world.Translation(); }
+	const Vector3& GetPosition() const { return _position; }
 
 public:
 	// ICamera을(를) 통해 상속됨
 	void Release() override;
 	GE::Matrix4x4 GetCameraMatrix() const;
-	void SetParent(GE::Matrix4x4* pParent) override;
 	void SetPerspective(float nearZ, float farZ, float aspect, float fov) override;
 	void SetOrthoGraphic(float nearZ, float farZ, float width, float height) override;
 	void SetPosition(float x, float y, float z) override;
@@ -32,5 +31,4 @@ private:
 	Matrix	_projection;
 	Vector3	_position;
 	Vector3	_rotation;
-	Matrix* _pParent{ nullptr };
 };

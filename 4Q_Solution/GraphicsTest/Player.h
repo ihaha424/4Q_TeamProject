@@ -25,6 +25,5 @@ private:
 	Engine::Math::Matrix _worldMatrix;
 	Engine::Component::TextRenderer* _textRenderer;
 
-	Engine::Math::Matrix _cameraParentMatrix;
-	Engine::Math::Vector3 _cameraRotation;
+	Engine::Math::Vector3 _camRotation;
 };

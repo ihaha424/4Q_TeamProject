@@ -51,8 +51,6 @@ void PhysicsObjectExample::PreInitialize(const Engine::Modules& modules)
 		// 5. 카메라 씬에 추가 :GetScene(1): 카메라 씬이라고 가정
 		PhysicsManager->GetScene(1)->AddActor(_rigidDynamic->_boundBox);
 	}
-
-	_rigid->_rigidbody->BindCollision(std::bind(&PhysicsObjectExample::OnHit, this, std::placeholders::_1), Engine::Physics::ContactType::OnHit);
 }
 
 void PhysicsObjectExample::PreUpdate(float deltaTime)
@@ -160,10 +158,5 @@ void PhysicsObjectExample::SceneQueryExample()
 		 */
 		PhysicsManager->AddGeomtry("Frustum", geometryDesc, verticesMeshDesc);
 	}
-}
 
-void PhysicsObjectExample::OnHit(Engine::Physics::ContactEvent info)
-{
-	info.myCollision;
-	info.otherCollision;
 }

@@ -37,17 +37,17 @@ bool ServerLogic::Initialize()
     LoadSudium();
     //============================
 
-    _objs[0]._position = { 100.f, 0.f, 100.f };
-    _objs[1]._position = { 500.f, 0.f, 300.f };
-    _objs[2]._position = { -100.f, 0.f, 500.f };
+    //_objs[0]._position = { 100.f, 0.f, 100.f };
+    //_objs[1]._position = { 500.f, 0.f, 300.f };
+    //_objs[2]._position = { -100.f, 0.f, 500.f };
 
-    _objs[0]._resourceId = "../Resources/TestObject/cube.fbx";
-    _objs[1]._resourceId = "../Resources/TestObject/cube.fbx";
-    _objs[2]._resourceId = "../Resources/TestObject/cube.fbx";
+    //_objs[0]._resourceId = "../Resources/TestObject/cube.fbx";
+    //_objs[1]._resourceId = "../Resources/TestObject/cube.fbx";
+    //_objs[2]._resourceId = "../Resources/TestObject/cube.fbx";
 
-    _objs[0]._serialNumber = 100;
-    _objs[1]._serialNumber = 101;
-    _objs[2]._serialNumber = 102;
+    //_objs[0]._serialNumber = 100;
+    //_objs[1]._serialNumber = 101;
+    //_objs[2]._serialNumber = 102;
 
     return true;
 }
@@ -88,7 +88,7 @@ void ServerLogic::Update()
                 continue;
             } // if end
             Engine::Math::Vector3 position = _playerSlot[i]._controller->GetPosition();
-            printf("Player%d Position : (%f, %f, %f)\n", i + 1, position.x, position.y, position.z);
+            //printf("Player%d Position : (%f, %f, %f)\n", i + 1, position.x, position.y, position.z);
             _moveSync.add_position(position.x);
             _moveSync.add_position(position.y);
             _moveSync.add_position(position.z);
@@ -155,6 +155,30 @@ void ServerLogic::MessageDispatch()
                 }  // for end
                 for (int i = 0; i < 3; i++) {
                     Server::BroadCast("", (short)PacketID::ObjectSync, 0, _objs[i]._serialNumber);
+                }
+                for (int i = 0; i < _buildings.size(); i++) {
+                    _addObject.set_grantnumber(_buildings[i]->_serialNumber);
+                    _addObject.set_resourceid(_buildings[i]->_resourceId);
+                    _addObject.SerializeToString(&_msgBuffer);
+                    Server::SavePacketData(
+                        _msgBuffer,
+                        packet.sessionId,
+                        (short)PacketID::ObjectSync,
+                        _addObject.ByteSizeLong(),
+                        _buildings[i]->_serialNumber
+                    );
+                }
+                for (int i = 0; i < _sudiums.size(); i++) {
+                    _addObject.set_grantnumber(_sudiums[i]->_serialNumber);
+                    _addObject.set_resourceid(_sudiums[i]->_resourceId);
+                    _addObject.SerializeToString(&_msgBuffer);
+                    Server::SavePacketData(
+                        _msgBuffer,
+                        packet.sessionId,
+                        (short)PacketID::ObjectSync,
+                        _addObject.ByteSizeLong(),
+                        _sudiums[i]->_serialNumber
+                    );
                 }
                 // TODO: 여기서 AddObject에 추가할 오브젝트의 id를 보내는 작업을 수행합니다.
                 //
@@ -263,6 +287,50 @@ void ServerLogic::MessageDispatch()
                 Server::BroadCast(_msgBuffer, (short)PacketID::DataObject, _syncObject.ByteSizeLong(), _objs[i]._serialNumber);
                 _syncObject.clear_position();
             }
+            for (int i = 0; i < _buildings.size(); i++) {
+                _syncObject.set_public_(_buildings[i]->_public);
+                _syncObject.add_position(_buildings[i]->_position.x);
+                _syncObject.add_position(_buildings[i]->_position.y);
+                _syncObject.add_position(_buildings[i]->_position.z);
+                _syncObject.add_rotation(_buildings[i]->_rotation.x);
+                _syncObject.add_rotation(_buildings[i]->_rotation.y);
+                _syncObject.add_rotation(_buildings[i]->_rotation.z);
+                _syncObject.add_rotation(_buildings[i]->_rotation.w);
+                _syncObject.add_scale(_buildings[i]->_scale.x);
+                _syncObject.add_scale(_buildings[i]->_scale.y);
+                _syncObject.add_scale(_buildings[i]->_scale.z);
+                _syncObject.SerializeToString(&_msgBuffer);
+                Server::SavePacketData(
+                    _msgBuffer,
+                    packet.sessionId,
+                    (short)PacketID::DataRemote,
+                    _addObject.ByteSizeLong(),
+                    _buildings[i]->_serialNumber
+                );
+                _syncObject.Clear();
+            }
+            for (int i = 0; i < _sudiums.size(); i++) {
+                _syncObject.set_public_(_sudiums[i]->_public);
+                _syncObject.add_position(_sudiums[i]->_position.x);
+                _syncObject.add_position(_sudiums[i]->_position.y);
+                _syncObject.add_position(_sudiums[i]->_position.z);
+                _syncObject.add_rotation(_sudiums[i]->_rotation.x);
+                _syncObject.add_rotation(_sudiums[i]->_rotation.y);
+                _syncObject.add_rotation(_sudiums[i]->_rotation.z);
+                _syncObject.add_rotation(_sudiums[i]->_rotation.w);
+                _syncObject.add_scale(_sudiums[i]->_scale.x);
+                _syncObject.add_scale(_sudiums[i]->_scale.y);
+                _syncObject.add_scale(_sudiums[i]->_scale.z);
+                _syncObject.SerializeToString(&_msgBuffer);
+                Server::SavePacketData(
+                    _msgBuffer,
+                    packet.sessionId,
+                    (short)PacketID::DataRemote,
+                    _addObject.ByteSizeLong(),
+                    _sudiums[i]->_serialNumber
+                );
+                _syncObject.Clear();
+            }
             Server::BroadCast("", (short)PacketID::DataSendComplete, 0, 0);
 
             break;
@@ -301,6 +369,7 @@ void ServerLogic::LoadBuilding()
             obj->_rotation.z, obj->_rotation.y, obj->_rotation.z, obj->_rotation.w,
             obj->_scale.x, obj->_scale.y, obj->_scale.z
         );
+        obj->_serialNumber = _staticObjectSerialNumber++;
         _buildings.push_back(obj);
     }
     printf("Building Data Load Complete.\n");
@@ -330,6 +399,7 @@ void ServerLogic::LoadSudium()
             obj->_rotation.z, obj->_rotation.y, obj->_rotation.z, obj->_rotation.w,
             obj->_scale.x, obj->_scale.y, obj->_scale.z
         );
+        obj->_serialNumber = _staticObjectSerialNumber++;
         _sudiums.push_back(obj);
     }
     printf("Sudium Data Load Complete.\n");

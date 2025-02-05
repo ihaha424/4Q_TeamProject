@@ -29,7 +29,7 @@ void GameApplication::Register(Engine::Content::IManager* contentManager)
 	objectFactory->Register<RemotePlayer>(L"../Resources/Player/Player.X");
 	objectFactory->Register<GlobalLight>();
 	objectFactory->Register<Terrain>(L"../Resources/Level/Level.fbx");
-	objectFactory->Register<Cube>(L"../Resources/FBX/char.fbx");
+	objectFactory->Register<Cube>(L"../Resources/TestObject/BG_Hide_Flower_1.fbx");
 	//objectFactory->Register<Sphere>(L"../Resources/TestObject/sphere.fbx");
 	const auto componentFactory = contentManager->GetComponentFactory();
 	componentFactory->Register<RemoteMoveComponent>();

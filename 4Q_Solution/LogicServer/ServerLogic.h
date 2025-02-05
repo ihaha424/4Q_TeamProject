@@ -95,6 +95,10 @@ private:
 
 	void MessageDispatch();
 private:
+	short _dynamicObjectSerialNumber = 100;
+	short _staticObjectSerialNumber = 1000;
+
+private:
 	// =============================
 	// JSON Method, Variable Area
 	// =============================

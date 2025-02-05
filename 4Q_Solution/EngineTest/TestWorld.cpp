@@ -4,8 +4,6 @@
 #include "GameApplication.h"
 #include "NetworkTemp.h"
 
-
-
 void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 {
 	auto building1Data = GameApplication::GetLoadManager()->GetObjectCloneData(L"Building1");

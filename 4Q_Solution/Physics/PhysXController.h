@@ -21,6 +21,7 @@ namespace PhysicsEngineAPI
 
 		void Release() override;
 
+		void CollisionUpdate() override;
 
 		/***********************************
 					Controller

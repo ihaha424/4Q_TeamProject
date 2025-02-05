@@ -1,9 +1,10 @@
 #pragma once
+//#include "RayState.h"
 
-class Player : public Engine::Object
+class Ray : public Engine::Object
 {
 public:
-	Player(std::filesystem::path&& meshPath, std::filesystem::path&& fontPath);
+	Ray(std::filesystem::path&& meshPath);
 
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
 protected:
@@ -11,19 +12,17 @@ protected:
 
 	void PreInitialize(const Engine::Modules& modules) override;
 	void PostInitialize(const Engine::Modules& modules) override;
-	void PostAttach() override;
 	void PostUpdate(float deltaTime) override;
+	void PostAttach() override;
 
 private:
 	std::filesystem::path _meshPath;
-	std::filesystem::path _fontPath;
 
 	Engine::Component::Movement* _movement;
 	Engine::Component::Camera* _camera;
 	Engine::Component::SkeletalMesh* _skeletalMesh;
 	Engine::Component::Animator* _animator;
 	Engine::Math::Matrix _worldMatrix;
-	Engine::Component::TextRenderer* _textRenderer;
 
 	Engine::Math::Matrix _cameraParentMatrix;
 	Engine::Math::Vector3 _cameraRotation;

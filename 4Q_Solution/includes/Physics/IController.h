@@ -16,6 +16,7 @@ namespace PhysicsEngineAPI
 	{
 	public:
 		// virtual IDynamicObject* GetActor() const = 0;
+		virtual void CollisionUpdate() = 0;
 
 		/***********************************
 				Capsule Controller

@@ -10,6 +10,7 @@ namespace Engine::PHI
 		, shape{ nullptr }
 		, geometry{ nullptr }
 		, material{ nullptr }
+		, owner{ nullptr }
 	{
 		collision = new Collision<RigidKinematicComponent>{ this };
 	}
@@ -250,6 +251,16 @@ namespace Engine::PHI
 		releaser(&geometry);
 		releaser(&material);
 		releaser(&collision);
+	}
+
+	void* RigidKinematicComponent::GetOwner()
+	{
+		return owner;
+	}
+
+	void RigidKinematicComponent::SetOwner(void* _owner)
+	{
+		owner = _owner;
 	}
 
 	void RigidKinematicComponent::BindCollision(const Physics::CallBackTrigger& callback, Physics::TriggerType type)

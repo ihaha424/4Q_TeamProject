@@ -8,6 +8,12 @@ GameApplication::GameApplication(const HINSTANCE instanceHandle) :
 {
 }
 
+void GameApplication::LoadData(Engine::Load::IManager* loadManager)
+{
+	loadManager->LoadRegisterData(L"MapData.json");
+	loadManager->LoadCloneData(L"MapData.json");
+}
+
 void GameApplication::DeclareInputActions(Engine::Input::IManager* inputManager)
 {
 	Engine::Input::Device::IMouse* mouse = nullptr;
@@ -19,23 +25,27 @@ void GameApplication::DeclareInputActions(Engine::Input::IManager* inputManager)
     inputManager->GetMappingContext(L"Default", &mappingContext);
 
 
-    //DeclareMoveAction(inputManager, mappingContext);
-    //DeclareCameraAction(inputManager, mappingContext);
+    DeclareMoveAction(inputManager, mappingContext);
+    DeclareCameraAction(inputManager, mappingContext);
 	DeclareSystemAction(inputManager, mappingContext);
 
     inputManager->SetActiveMappingContext(mappingContext);
 }
 
-void GameApplication::Register(Engine::Content::IManager* contentManager)
+void GameApplication::Register(Engine::Content::IManager* contentManager, Engine::Load::IManager* loadManager)
 {
-	Application::Register(contentManager);
+	Application::Register(contentManager, loadManager);
+
+	auto buildingConfig = loadManager->GetObjectRegisterData(L"Building1").value();
+	auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+
 	const auto worldFactory = contentManager->GetWorldFactory();
 	worldFactory->Register<TestWorld>();
 	const auto objectFactory = contentManager->GetObjectFactory();
-	objectFactory->Register<Player>(L"../Resources/Player/Player.X", L"../Resources/Font/Gungseo12.sfont");
+	objectFactory->Register<Player>(buildingProperty.c_str(), L"../Resources/Font/Gungseo12.sfont");
 	objectFactory->Register<RemotePlayer>(L"../Resources/Player/Player.X");
 	objectFactory->Register<GlobalLight>();
-	objectFactory->Register<Terrain>(L"../Resources/Level/Level.fbx");
+	objectFactory->Register<Terrain>(L"../Resources/Terrain/untitled.fbx");
 	objectFactory->Register<Cube>(L"../Resources/FBX/char.fbx");
 	//objectFactory->Register<Sphere>(L"../Resources/TestObject/sphere.fbx");
 	const auto componentFactory = contentManager->GetComponentFactory();

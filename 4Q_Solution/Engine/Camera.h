@@ -19,6 +19,7 @@ namespace Engine::Component
 		Engine::Math::Matrix GetCameraMatrix() const;
 		void SetPosition(Math::Vector3 position) const;
 		void SetRotation(Math::Vector3 rotation) const;
+		void SetParent(Math::Matrix* matrix) const;
 		Engine::Math::Vector3 Forward() const;
 
 		void Rotate(Math::Vector3 rotation);

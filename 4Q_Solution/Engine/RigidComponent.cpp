@@ -5,6 +5,7 @@ namespace Engine::Component
 {
 	Rigid::Rigid()
 		: _rigidbody{ nullptr }
+		, _boundBox{ nullptr }
 	{}
 
 	void Rigid::Initialize(const Modules& modules)
@@ -12,6 +13,8 @@ namespace Engine::Component
 		Component::Initialize(modules);
 		static_cast<Physics::RigidComponent*>(_rigidbody)->Initialize();
 		static_cast<Physics::RigidComponent*>(_boundBox)->Initialize();
+		_rigidbody->SetOwner(GetOwner());
+		_boundBox->SetOwner(GetOwner());
 	}
 
 	void Rigid::Attach()

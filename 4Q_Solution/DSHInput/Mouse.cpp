@@ -199,7 +199,7 @@ void DSH::Input::Device::Mouse::HideCursor()
 	do
 	{
 		result = ::ShowCursor(FALSE);
-	} while (result > 0);
+	} while (result > -1);
 }
 
 void DSH::Input::Device::Mouse::LockCursor()

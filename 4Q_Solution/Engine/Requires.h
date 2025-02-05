@@ -8,8 +8,10 @@
 #include <optional>
 #include <typeinfo>
 #include <typeindex>
+#include <fstream>
 
 #include "directxtk/SimpleMath.h"
+#include "nlohmann/json.hpp"
 
 #include "DSHTime/Time.h"
 #include "DSHWindow/Window.h"

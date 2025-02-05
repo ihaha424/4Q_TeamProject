@@ -33,7 +33,7 @@ void Engine::Application::Begin()
 	LoadGameData();
 	InitializeManagers();
 	DeclareInputActions(_inputManager);
-	Register(_contentManager);
+	Register(_contentManager, _loadManager);
 	PrepareInitialWorld(_contentManager->GetWorldFactory());
 }
 
@@ -137,7 +137,7 @@ Engine::Logger::IManager* Engine::Application::GetLoggerManager()
 	return _loggerManager;
 }
 
-void Engine::Application::Register(Content::IManager* contentManager)
+void Engine::Application::Register(Content::IManager* contentManager, Load::IManager* loadManager)
 {
 	const auto componentFactory = contentManager->GetComponentFactory();
 	componentFactory->Register<Component::Movement>();
@@ -187,7 +187,8 @@ void Engine::Application::InitializeManagers() const
 
 void Engine::Application::LoadGameData()
 {
-	_loadManager->Initialize(_gameDataPath);
+	_loadManager->Initialize();
+	LoadData(_loadManager);
 
 	const auto configData = _loadManager->GetGameConfigData();
 	_title = configData.GetProperty<std::wstring>(L"Title").value_or(L"Game");

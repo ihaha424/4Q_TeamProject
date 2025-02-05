@@ -25,6 +25,7 @@ bool ServerLogic::Initialize()
     _physicsManager->AttachUpdateScene(_mainScene);
     _physicsManager->CreateControllerManager(_mainScene);
     RegistGround(_ground);
+    RegistTrigerBox(_triggerBox);
     //============================
 
     _objs[0]._position = { 100.f, 0.f, 100.f };
@@ -314,4 +315,26 @@ void ServerLogic::RegistGround(Ground& ground)
 
     ground._staticRigid->SetOwner(&ground);
     ground._staticRigid->Initialize();
+}
+
+void ServerLogic::RegistTrigerBox(TriggerBox& triggerBox)
+{
+    Engine::Physics::RigidComponentDesc rcd;
+    rcd.rigidType = Engine::Physics::RigidBodyType::Static;
+    rcd.shapeDesc.geometryDesc.type = Engine::Physics::GeometryShape::Box;
+    rcd.shapeDesc.geometryDesc.data = { 100.f, 100.f, 100.f };
+    rcd.shapeDesc.isExclusive = true;
+    rcd.shapeDesc.materialDesc.data = { 0.5f, 0.5f, 0.5f };
+
+    Engine::Transform tf{};
+    tf.position = { 500, -100.f, 500 };
+    Engine::Physics::IRigidStaticComponent* staticRigid;
+    _physicsManager->CreateStatic(&staticRigid, rcd, tf);
+    triggerBox._staticRigid = static_cast<Engine::Physics::RigidStaticComponent*>(staticRigid);
+    triggerBox._staticRigid->SetFlag(Engine::Physics::CollisionType::Collision, false);
+    triggerBox._staticRigid->SetFlag(Engine::Physics::CollisionType::Trigger, true);
+    _mainScene->AddActor(triggerBox._staticRigid);
+
+    triggerBox._staticRigid->SetOwner(&triggerBox);
+    triggerBox._staticRigid->Initialize();
 }

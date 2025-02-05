@@ -32,6 +32,10 @@ class ServerLogic
 		Engine::Physics::RigidStaticComponent* _staticRigid = nullptr;
 	};
 
+	struct TriggerBox : public Object {
+		Engine::Physics::RigidStaticComponent* _staticRigid = nullptr;
+	};
+
 	struct Player : public Object {
 		Engine::Math::Vector3 _direction;
 		int _state;
@@ -60,6 +64,7 @@ private:
 	Engine::Math::Vector3 _lastSendPosition[2]{};
 	Object _objs[3]{};
 	Ground _ground{};
+	TriggerBox _triggerBox{};
 	
 	ConnectMsg::EnterAccept _enterAccept;
 	ConnectMsg::SyncPlayer _syncPlayer;
@@ -90,5 +95,6 @@ private:
 	void RegistPhysics(Object& obj);
 	void RegistPlayer(Player& player);
 	void RegistGround(Ground& ground);
+	void RegistTrigerBox(TriggerBox& triggerBox);
 };
 

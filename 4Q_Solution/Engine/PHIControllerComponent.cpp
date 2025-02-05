@@ -171,7 +171,7 @@ namespace Engine::PHI
 		velocity.z = velo.z;
 
 
-		velocity += gravity;
+		velocity += gravity * deltaTime;
 
 		controllerCollisionFlag = controller->Move(Vector3ToPhysicsVector3(velocity * deltaTime), minDistance, deltaTime);
 		if ((controllerCollisionFlag & 0x04 || controllerCollisionFlag & 0x01) || (jumpFlag == true && velocity.y < -jumpMax))
@@ -225,7 +225,7 @@ namespace Engine::PHI
 		if (jumpFlag)
 			return;
 		jumpFlag = true;
-		velocity.y += JumpForce;
+		force.y += JumpForce;
 	}
 	void Controller::SetDirection(Engine::Math::Vector3 _direction)
 	{

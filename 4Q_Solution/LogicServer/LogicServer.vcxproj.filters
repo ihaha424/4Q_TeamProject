@@ -16,6 +16,9 @@
     <Filter Include="소스 파일\ProtoBuf">
       <UniqueIdentifier>{bfca1285-987b-4959-93bf-22f7c99a76ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\JSON">
+      <UniqueIdentifier>{63382a51-1bc9-43f6-bd9b-2f88af919e29}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LogicServer.cpp">
@@ -32,6 +35,9 @@
     </ClCompile>
     <ClCompile Include="..\Packet\Play.pb.cc">
       <Filter>소스 파일\ProtoBuf</Filter>
+    </ClCompile>
+    <ClCompile Include="JSONLoad.cpp">
+      <Filter>소스 파일\JSON</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +61,12 @@
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="JSONLoad.h">
+      <Filter>소스 파일\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>소스 파일\JSON</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

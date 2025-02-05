@@ -89,6 +89,7 @@ void TestWorld::CreateStaticObject(int num)
 	Cube* cube = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Cube>(this);
 	_cubes.push_back(cube);
 	cube->SetSerialNumber(num);
+	printf("Object Create Success. SerialNumber : %d\n", num);
 }
 
 void TestWorld::RequestData(int num)

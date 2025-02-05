@@ -11,6 +11,7 @@
 #include "../Engine/PHIManager.h"
 #include "../Packet/PacketID.h"
 #include "../Packet/ProtoInclude.h"
+#include "JSONLoad.h"
 
 
 namespace Engine::Physics {
@@ -21,10 +22,20 @@ class ServerLogic
 {
 	struct Object {
 		int _serialNumber;
+		std::string _resourceId{ "" };
 		Engine::Math::Vector3 _position;
-		std::string _resourceId;
+		Engine::Math::Vector4 _rotation;
+		Engine::Math::Vector3 _scale;
+		bool _public;
+		Engine::Physics::IRigidStaticComponent* _staticRigid = nullptr;
+		Engine::Physics::IRigidDynamicComponent* _dynamicRigid = nullptr;
+	};
 
-		Engine::Physics::RigidDynamicComponent* _rigidBody = nullptr;
+	struct StaticObject : public Object{
+
+	};
+
+	struct DynamicObject : public Object {
 
 	};
 
@@ -36,7 +47,10 @@ class ServerLogic
 		Engine::Physics::RigidStaticComponent* _staticRigid = nullptr;
 	};
 
-	struct Player : public Object {
+	struct Player {
+		int _serialNumber;
+		Engine::Math::Vector3 _position;
+		std::string _resourceId;
 		Engine::Math::Vector3 _direction;
 		int _state;
 		float _speed;
@@ -64,6 +78,8 @@ private:
 	Engine::Math::Vector3 _lastSendPosition[2]{};
 	Object _objs[3]{};
 	Ground _ground{};
+	std::vector<Object*> _buildings;
+	std::vector<Object*> _sudiums;
 	TriggerBox _triggerBox{};
 	
 	ConnectMsg::EnterAccept _enterAccept;
@@ -84,16 +100,31 @@ private:
 	std::string _msgBuffer = std::string(256, '\0');
 
 	void MessageDispatch();
+private:
+	short _dynamicObjectSerialNumber = 100;
+	short _staticObjectSerialNumber = 1000;
 
+private:
+	// =============================
+	// JSON Method, Variable Area
+	// =============================
+
+	JSONLoad _jsonLoader;
+	json _mapData;
+
+	void LoadBuilding();
+	void LoadSudium();
 private:
 	// =============================
 	// Physics Method, Variable Area
 	// =============================
+
 	Engine::Physics::Manager* _physicsManager = nullptr;
 	Engine::Physics::IScene* _mainScene = nullptr;
 
-	void RegistPhysics(Object& obj);
-	void RegistPlayer(Player& player);
+	void RegistDynamicPhysics(Object& obj);
+	void RegistStaticPhysics(Object& obj);
+	void RegistPlayer(Player* player);
 	void RegistGround(Ground& ground);
 	void RegistTrigerBox(TriggerBox& triggerBox);
 };

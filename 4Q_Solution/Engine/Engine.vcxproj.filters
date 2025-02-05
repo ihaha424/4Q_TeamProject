@@ -1248,7 +1248,7 @@
       <Filter>Components\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="State.cpp">
-      <Filter>Components\FiniteStateMachine</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

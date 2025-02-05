@@ -298,6 +298,7 @@ void ServerLogic::RegistPlayer(Player& player)
     player._controller->SetBottomPosition({0,10,0});
     player._controller->SetOwner(&player);
     player._controller->Initialize();
+    player._controller->SetPosition({ 100, 1000, 100 });
 }
 
 void ServerLogic::RegistGround(Ground& ground)

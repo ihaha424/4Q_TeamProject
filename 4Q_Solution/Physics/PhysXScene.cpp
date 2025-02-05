@@ -47,7 +47,7 @@ namespace PhysicsEngineAPI
 		scene->setGravity(Vector3ToPxVec3(gravity));
 	}
 
-	const Utils::Math::Vector3& PhysXScene::GetGravity() const
+	 Utils::Math::Vector3 PhysXScene::GetGravity() const
 	{
 		return PxVec3ToVector3(scene->getGravity());
 	}

@@ -39,7 +39,7 @@ namespace Engine::PHI
 	{
 		gravity = _gravity;
 	}
-	const Engine::Math::Vector3& Controller::GetGravity() const
+	 Engine::Math::Vector3 Controller::GetGravity() const
 	{
 		return gravity;
 	}
@@ -48,7 +48,7 @@ namespace Engine::PHI
 	{
 		controller->SetPosition(Vector3ToPhysicsVector3(position));
 	}
-	const Engine::Math::Vector3& Controller::GetPosition() const
+	 Engine::Math::Vector3 Controller::GetPosition() const
 	{
 		return PhysicsVector3ToVector3(controller->GetPosition());
 	}
@@ -57,7 +57,7 @@ namespace Engine::PHI
 	{
 		controller->SetBottomPosition(Vector3ToPhysicsVector3(position));
 	}
-	const Engine::Math::Vector3& Controller::GetBottomPosition() const
+	 Engine::Math::Vector3 Controller::GetBottomPosition() const
 	{
 		return PhysicsVector3ToVector3(controller->GetBottomPosition());
 	}
@@ -93,7 +93,7 @@ namespace Engine::PHI
 	{
 		controller->SetUpDirection(Vector3ToPhysicsVector3(direction));
 	}
-	const Engine::Math::Vector3& Controller::GetUpdirection() const
+	 Engine::Math::Vector3 Controller::GetUpdirection() const
 	{
 		return PhysicsVector3ToVector3(controller->GetUpdirection());
 	}
@@ -227,7 +227,7 @@ namespace Engine::PHI
 		direction = _direction;
 		direction.Normalize();
 	}
-	const Engine::Math::Vector3& Controller::GetDirection() const
+	 Engine::Math::Vector3 Controller::GetDirection() const
 	{
 		return direction;
 	}

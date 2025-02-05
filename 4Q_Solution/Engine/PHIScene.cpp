@@ -136,7 +136,7 @@ namespace Engine::PHI
 	{
 		scene->SetGravity(Vector3ToPhysicsVector3(gravity));
 	}
-	const Math::Vector3& Scene::GetGravity() const
+	 Math::Vector3 Scene::GetGravity() const
 	{
 		return PhysicsVector3ToVector3(scene->GetGravity());
 	}

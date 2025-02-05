@@ -19,7 +19,7 @@ namespace PhysicsEngineAPI
 	{
 		function.SetTranslate(position, actor);
 	}
-	const Utils::Math::Vector3 PhysXStaticActor::GetTranslate() const
+	 Utils::Math::Vector3 PhysXStaticActor::GetTranslate() const
 	{
 		return function.GetTranslate(actor);
 	}
@@ -28,7 +28,7 @@ namespace PhysicsEngineAPI
 	{
 		return function.SetRotation(Rotation, actor);
 	}
-	const Utils::Math::Vector4 PhysXStaticActor::GetRotation() const
+	 Utils::Math::Vector4 PhysXStaticActor::GetRotation() const
 	{
 		return function.GetRotation(actor);
 	}
@@ -37,7 +37,7 @@ namespace PhysicsEngineAPI
 	{
 		return function.SetTransform(_transform, actor);
 	}
-	const Utils::Math::Transform PhysXStaticActor::GetTransform() const
+	 Utils::Math::Transform PhysXStaticActor::GetTransform() const
 	{
 		return function.GetTransform(actor);
 	}

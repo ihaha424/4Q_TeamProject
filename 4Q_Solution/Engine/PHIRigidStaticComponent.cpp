@@ -23,7 +23,7 @@ namespace Engine::PHI
 	{
 		object->SetTranslate(Vector3ToPhysicsVector3(position));
 	}
-	const Math::Vector3 RigidStaticComponent::GetTranslate() const
+	 Math::Vector3 RigidStaticComponent::GetTranslate() const
 	{
 		return PhysicsVector3ToVector3(object->GetTranslate());
 	}
@@ -31,7 +31,7 @@ namespace Engine::PHI
 	{
 		object->SetRotation(QuaternionToPhysicsVector4(Rotation));
 	}
-	const Math::Quaternion RigidStaticComponent::GetRotation() const
+	 Math::Quaternion RigidStaticComponent::GetRotation() const
 	{
 		return PhysicsVector4ToQuaternion(object->GetRotation());
 	}
@@ -39,7 +39,7 @@ namespace Engine::PHI
 	{
 		object->SetTransform(TransformToPhysicsTransform(transform));
 	}
-	const Transform RigidStaticComponent::GetTransform() const
+	 Transform RigidStaticComponent::GetTransform() const
 	{
 		return PhysicsTransformToTransform(object->GetTransform());
 	}
@@ -57,7 +57,7 @@ namespace Engine::PHI
 	{
 		shape->SetLocalTranslate(Vector3ToPhysicsVector3(LocalTranslate));
 	}
-	const Math::Vector3 RigidStaticComponent::GetLocalTranslate() const
+	 Math::Vector3 RigidStaticComponent::GetLocalTranslate() const
 	{
 		return PhysicsVector3ToVector3(shape->GetLocalTranslate());
 	}
@@ -65,7 +65,7 @@ namespace Engine::PHI
 	{
 		shape->SetLocalRotation(QuaternionToPhysicsVector4(LocalRotation));
 	}
-	const Math::Quaternion RigidStaticComponent::GetLocalRotation() const
+	 Math::Quaternion RigidStaticComponent::GetLocalRotation() const
 	{
 		return PhysicsVector4ToQuaternion(shape->GetLocalRotation());
 	}
@@ -73,7 +73,7 @@ namespace Engine::PHI
 	{
 		shape->SetLocalTransform(TransformToPhysicsTransform(LocalTransform));
 	}
-	const Transform RigidStaticComponent::GetLocalTransform() const
+	 Transform RigidStaticComponent::GetLocalTransform() const
 	{
 		return PhysicsTransformToTransform(shape->GetLocalTransform());
 	}
@@ -81,7 +81,7 @@ namespace Engine::PHI
 	{
 		shape->SetScale(Vector3ToPhysicsVector3(Scale));
 	}
-	const Math::Vector3 RigidStaticComponent::GetScale() const
+	 Math::Vector3 RigidStaticComponent::GetScale() const
 	{
 		return PhysicsVector3ToVector3(shape->GetScale());
 	}

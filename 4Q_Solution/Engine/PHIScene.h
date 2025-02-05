@@ -20,7 +20,7 @@ namespace Engine::PHI
 		void SetSceneFilter() override;
 
 		void SetGravity(const Math::Vector3& gravity) override;
-		const Math::Vector3& GetGravity() const override;
+		 Math::Vector3 GetGravity() const override;
 		
 		bool Raycast(
 			Engine::Physics::AdditionalQueryData&	raycastInfo, 

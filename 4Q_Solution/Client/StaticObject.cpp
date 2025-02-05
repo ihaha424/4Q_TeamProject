@@ -34,10 +34,6 @@ void StaticObject::PreInitialize(const Engine::Modules& modules)
 	Object::PreInitialize(modules);
 	_staticMesh->SetFilePath(_meshPath);
 	_staticMesh->SetMatrix(&_matrix);
-
-	//_matrix = Engine::Math::Matrix::CreateScale(_transform.position)
-	//	* Engine::Math::Matrix::CreateFromYawPitchRoll(_transform.rotation)
-	//	* Engine::Math::Matrix::CreateTranslation(data.position);
 	
 	auto PhysicsManager = Engine::Application::GetPhysicsManager();
 	if (_meshData)
@@ -47,6 +43,7 @@ void StaticObject::PreInitialize(const Engine::Modules& modules)
 		geometryDesc.data = { _transform.scale.x, _transform.scale.y, _transform.scale.z, 0 };
 		PhysicsManager->LoadTriangleMesh(geometryDesc, _physicsPath.string().c_str(), _physicsPath.string().c_str());
 		PhysicsManager->CreateTriangleStatic(&_rigidStatc->_rigidbody, _physicsPath.string().c_str(), { {0.f,0.f,0.f } }, _transform, shapeTransform, false);
+		_rigidStatc->_rigidbody->SetOwner(this);
 	}
 	else
 	{

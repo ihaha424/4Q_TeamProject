@@ -7,6 +7,8 @@ public:
 
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
 
+	void SetBoxScale(Engine::Math::Vector3 boxScale);
+
 protected:
 	void DisposeComponents() override;
 
@@ -20,5 +22,8 @@ private:
 
 	Engine::Component::RigidStatic* _rigidStatc;
 	std::filesystem::path _physicsPath;
+
+protected:
+	Engine::Math::Vector3 _boxScale;
 };
 

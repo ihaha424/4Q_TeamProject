@@ -152,6 +152,15 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Building1.h" />
+    <ClInclude Include="Building10.h" />
+    <ClInclude Include="Building2.h" />
+    <ClInclude Include="Building3.h" />
+    <ClInclude Include="Building4.h" />
+    <ClInclude Include="Building5.h" />
+    <ClInclude Include="Building6.h" />
+    <ClInclude Include="Building7.h" />
+    <ClInclude Include="Building8.h" />
+    <ClInclude Include="Building9.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GlobalLight.h" />
     <ClInclude Include="pch.h" />
@@ -160,13 +169,24 @@
     <ClInclude Include="SceneFillter.h" />
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="StaticObject.h" />
+    <ClInclude Include="SudiumBlue.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TestWorld.h" />
+    <ClInclude Include="MapData.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Building1.cpp" />
+    <ClCompile Include="Building10.cpp" />
+    <ClCompile Include="Building2.cpp" />
+    <ClCompile Include="Building3.cpp" />
+    <ClCompile Include="Building4.cpp" />
+    <ClCompile Include="Building5.cpp" />
+    <ClCompile Include="Building6.cpp" />
+    <ClCompile Include="Building7.cpp" />
+    <ClCompile Include="Building8.cpp" />
+    <ClCompile Include="Building9.cpp" />
     <ClCompile Include="GlobalLight.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pch.cpp">
@@ -175,6 +195,7 @@
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="StaticObject.cpp" />
+    <ClCompile Include="SudiumBlue.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TestWorld.cpp" />
   </ItemGroup>

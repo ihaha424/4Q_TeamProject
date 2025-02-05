@@ -27,6 +27,7 @@ protected:
 	Engine::Component::RigidStatic* _rigidStatc;
 	std::filesystem::path _physicsPath;
 
+protected:
 	bool _meshData;
 	Engine::Math::Vector3 _boxScale;
 };

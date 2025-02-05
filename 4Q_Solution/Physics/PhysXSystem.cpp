@@ -106,7 +106,6 @@ namespace PhysicsEngineAPI
 		}
 		else
 			physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(length, speed), true);
-		pvd->isConnected();
 		if (nullptr == physics)
 			return false;
 		return true;

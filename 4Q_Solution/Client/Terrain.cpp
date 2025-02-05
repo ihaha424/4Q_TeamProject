@@ -14,6 +14,11 @@ void Terrain::Prepare(Engine::Content::Factory::Component* componentFactory)
 	_rigidStatc = componentFactory->Clone<Engine::Component::RigidStatic>(this);
 }
 
+void Terrain::SetBoxScale(Engine::Math::Vector3 boxScale)
+{
+	_boxScale = boxScale;
+}
+
 void Terrain::DisposeComponents()
 {
 	_staticMesh->Dispose();
@@ -26,20 +31,25 @@ void Terrain::PreInitialize(const Engine::Modules& modules)
 	_staticMesh->SetFilePath(_meshPath);
 	_staticMesh->SetMatrix(&_matrix);
 
+
+
 	auto PhysicsManager = Engine::Application::GetPhysicsManager();
+
 	Engine::Physics::GeometryDesc geometryDesc;
-	geometryDesc.data = { 1, 1, 1 };
-	PhysicsManager->LoadTriangleMesh(geometryDesc, "terrain", "../Resources/Level/Level.fbx");
+	geometryDesc.data = { _boxScale.x, _boxScale.y, _boxScale.z };
+	PhysicsManager->LoadHeightMap(geometryDesc, "terrain", _physicsPath.string().c_str());
+
 	Engine::Transform transform{};
 	PhysicsManager->CreateTriangleStatic(&_rigidStatc->_rigidbody, "terrain", { {0.f,0.f,0.f } }, transform);
-	PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::cameraScene))->AddActor(_rigidStatc->_rigidbody);
+	_rigidStatc->_rigidbody->SetOwner(this);
+	PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::mainScene))->AddActor(_rigidStatc->_rigidbody);
 
-	PhysicsManager->CreateStaticBoundBoxActor(&_rigidStatc->_boundBox);
-	PhysicsManager->GetScene(1)->AddActor(_rigidStatc->_boundBox);
+	//TODO: Scale을 어떻게 조절 할지???
+	PhysicsManager->CreateStaticBoundBoxActor(&_rigidStatc->_boundBox, _boxScale, _transform);
+	PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::cameraScene))->AddActor(_rigidStatc->_boundBox);
 }
 
 void Terrain::PostInitialize(const Engine::Modules& modules)
 {
 	Object::PostInitialize(modules);
-	_matrix = Engine::Math::Matrix::CreateTranslation(0.f, 0.f, 100.f);
 }

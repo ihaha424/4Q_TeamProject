@@ -6,6 +6,10 @@
 #include "Ray.h"
 
 
+#include "StaticObject.h"
+#include "MapData.h"
+
+
 class TestWorld : public Engine::World
 {
 public:

@@ -1,7 +1,7 @@
 #include "pch.h"
-#include "Building1.h"
+#include "Building9.h"
 
-Building1::Building1(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath)
+Building9::Building9(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath)
 	: StaticObject(std::forward<std::filesystem::path>(meshPath), std::forward<std::filesystem::path>(physicsPath))
 {
 }

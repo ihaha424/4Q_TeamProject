@@ -6,10 +6,10 @@
 
 void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 {
-	//_player = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Player>();
-	_player = objectFactory->Clone<Player>();
-	_light = objectFactory->Clone<GlobalLight>();
-	_terrain = objectFactory->Clone<Terrain>();
+	//_player = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Player>(this);
+	_player = objectFactory->Clone<Player>(this);
+	_light = objectFactory->Clone<GlobalLight>(this);
+	_terrain = objectFactory->Clone<Terrain>(this);
 }
 
 void TestWorld::PreInitialize(const Engine::Modules& modules)
@@ -69,13 +69,13 @@ void TestWorld::SyncOtherPlayer(int num)
 	if (_player->GetSerialNumber() == num) {
 		return;
 	}
-	_remote = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<RemotePlayer>();
+	_remote = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<RemotePlayer>(this);
 	_remote->SetSerialNumber(num);
 }
 
 void TestWorld::CreateStaticObject(int num)
 {
-	Cube* cube = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Cube>();
+	Cube* cube = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Cube>(this);
 	_cubes.push_back(cube);
 	cube->SetSerialNumber(num);
 	printf("Object Create Success. SerialNumber : %d\n", num);

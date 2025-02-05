@@ -1,36 +1,32 @@
 #include "pch.h"
-#include "Player.h"
+#include "Ray.h"
 
-Player::Player(std::filesystem::path&& meshPath, std::filesystem::path&& fontPath)
+Ray::Ray(std::filesystem::path&& meshPath)
 	: _meshPath(std::forward<std::filesystem::path>(meshPath))
-	, _fontPath(std::forward<std::filesystem::path>(fontPath))
 	, _movement(nullptr)
-	, _camera(nullptr)
 	, _skeletalMesh(nullptr)
 	, _animator(nullptr)
-	, _textRenderer(nullptr)
+	, _camera(nullptr)
 {
 }
 
-void Player::Prepare(Engine::Content::Factory::Component* componentFactory)
+void Ray::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
 	_movement = componentFactory->Clone<Engine::Component::Movement>(this);
 	_camera = componentFactory->Clone<Engine::Component::Camera>(this);
 	_skeletalMesh = componentFactory->Clone<Engine::Component::SkeletalMesh>(this);
 	_animator = componentFactory->Clone<Engine::Component::Animator>(this);
-	_textRenderer = componentFactory->Clone<Engine::Component::TextRenderer>(this);
 }
 
-void Player::DisposeComponents()
+void Ray::DisposeComponents()
 {
 	_camera->Dispose();
 	_movement->Dispose();
 	_animator->Dispose();
 	_skeletalMesh->Dispose();
-	_textRenderer->Dispose();
 }
 
-void Player::PreInitialize(const Engine::Modules& modules)
+void Ray::PreInitialize(const Engine::Modules& modules)
 {
 	Object::PreInitialize(modules);
 
@@ -40,7 +36,6 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	_skeletalMesh->SetFilePath(_meshPath);
 	_skeletalMesh->SetMatrix(&_worldMatrix);
 	_animator->SetSkeletalMesh(_skeletalMesh);
-	_textRenderer->SetFontPath(_fontPath);
 
 	const auto inputManager = Engine::Application::GetInputManager();
 	Engine::Input::IMappingContext* mappingContext = nullptr;
@@ -75,13 +70,10 @@ void Player::PreInitialize(const Engine::Modules& modules)
 		});
 }
 
-void Player::PostInitialize(const Engine::Modules& modules)
+void Ray::PostInitialize(const Engine::Modules& modules)
 {
 	Object::PostInitialize(modules);
 	_movement->SetSpeed(100.f);
-	_textRenderer->SetPosition(100, 100.f);
-	_textRenderer->SetText(L"진지한 궁서체\nHello World!");
-	_textRenderer->SetFontColor(1.f, 0.f, 0.f, 1.f);
 
 	//_skeltalMesh.SetRenderLayer(0);
 	/*_animator.SetUpSplitBone(2);
@@ -94,16 +86,8 @@ void Player::PostInitialize(const Engine::Modules& modules)
 	_camera->SetParent(&_cameraParentMatrix);
 }
 
-void Player::PostAttach()
-{
-	Object::PostAttach();
-	_camera->Activate();
-}
 
-float elapsed = 0.f;
-int frame = 0;
-
-void Player::PostUpdate(const float deltaTime)
+void Ray::PostUpdate(float deltaTime)
 {
 	Object::PostUpdate(deltaTime);
 	
@@ -111,6 +95,7 @@ void Player::PostUpdate(const float deltaTime)
 			     * Engine::Math::Matrix::CreateFromQuaternion(_transform.rotation)
 				 * Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
 
+	// Temp Shoulder View Camera;
 	auto rotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(_cameraRotation);
 	_cameraParentMatrix = Engine::Math::Matrix::CreateFromQuaternion(rotation);	
 
@@ -120,14 +105,10 @@ void Player::PostUpdate(const float deltaTime)
 	tempPostion += _cameraParentMatrix.Right() * 10.f;
 
 	_cameraParentMatrix *= Engine::Math::Matrix::CreateTranslation(tempPostion);
-	
+}
 
-	elapsed += deltaTime;
-	frame++;
-	if (1.f < elapsed)
-	{
-		printf("%d\n", frame);
-		frame = 0;
-		elapsed = 0.f;
-	}
+void Ray::PostAttach()
+{
+	Object::PostAttach();
+	_camera->Activate();
 }

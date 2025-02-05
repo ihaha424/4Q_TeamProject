@@ -3,7 +3,7 @@
 
 void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 {
-	_player = objectFactory->Clone<Player>(this);
+	_ray = objectFactory->Clone<Ray>(this);
 	_light = objectFactory->Clone<GlobalLight>(this);
 	_terrain = objectFactory->Clone<Terrain>(this);
 	_skyBox = objectFactory->Clone<SkyBox>(this);

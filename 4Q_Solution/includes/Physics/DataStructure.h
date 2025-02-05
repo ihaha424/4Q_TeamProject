@@ -16,11 +16,20 @@ namespace PhysicsEngineAPI
 						Sphere			:	data.x: radius
 						Capsule			:	data.x: radius, 
 											data.y: halfHeight
+
 						Box				:	data.xyz: half extents¡¯ each element
+
 						Plane			:	Parameter is ignore. 
 											Plane Position & Rotation is Plane's Actor's Position & Rotation.
+						
 						ConvexMesh		:	data.xyz: Scale of Mesh
+
 						TriangleMesh	:	data.xyz: Scale of Mesh
+
+						HeightField		:	data.x : row
+											data.y : col
+											data.z : height
+
 						Frustum			:   data.x: fovY
 											data.y: aspect
 											data.z: nearPlane

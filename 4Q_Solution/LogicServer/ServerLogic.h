@@ -13,6 +13,7 @@
 #include "../Packet/ProtoInclude.h"
 #include "JSONLoad.h"
 
+
 namespace Engine::Physics {
 	class Manager;
 }
@@ -39,7 +40,11 @@ class ServerLogic
 	};
 
 	struct Ground : public Object {
-		Engine::Physics::IRigidStaticComponent* _staticRigid = nullptr;
+		Engine::Physics::RigidStaticComponent* _staticRigid = nullptr;
+	};
+
+	struct TriggerBox : public Object {
+		Engine::Physics::RigidStaticComponent* _staticRigid = nullptr;
 	};
 
 	struct Player {
@@ -75,6 +80,7 @@ private:
 	Ground _ground{};
 	std::vector<Object*> _buildings;
 	std::vector<Object*> _sudiums;
+	TriggerBox _triggerBox{};
 	
 	ConnectMsg::EnterAccept _enterAccept;
 	ConnectMsg::SyncPlayer _syncPlayer;
@@ -120,6 +126,6 @@ private:
 	void RegistStaticPhysics(Object& obj);
 	void RegistPlayer(Player& player);
 	void RegistGround(Ground& ground);
-
+	void RegistTrigerBox(TriggerBox& triggerBox);
 };
 

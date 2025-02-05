@@ -7,10 +7,10 @@ PhysicsObjectExample::PhysicsObjectExample()
 
 void PhysicsObjectExample::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
-	_rigid			= componentFactory->Clone<Engine::Component::Rigid>();
-	_rigidStatic	= componentFactory->Clone<Engine::Component::RigidStatic>();
-	_rigidDynamic	= componentFactory->Clone<Engine::Component::RigidDynamic>();
-	_rigidKinematic = componentFactory->Clone<Engine::Component::RigidKinematic>();
+	_rigid			= componentFactory->Clone<Engine::Component::Rigid>(this);
+	_rigidStatic	= componentFactory->Clone<Engine::Component::RigidStatic>(this);
+	_rigidDynamic	= componentFactory->Clone<Engine::Component::RigidDynamic>(this);
+	_rigidKinematic = componentFactory->Clone<Engine::Component::RigidKinematic>(this);
 }
 
 void PhysicsObjectExample::DisposeComponents()
@@ -51,6 +51,8 @@ void PhysicsObjectExample::PreInitialize(const Engine::Modules& modules)
 		// 5. 카메라 씬에 추가 :GetScene(1): 카메라 씬이라고 가정
 		PhysicsManager->GetScene(1)->AddActor(_rigidDynamic->_boundBox);
 	}
+
+	_rigid->_rigidbody->BindCollision(std::bind(&PhysicsObjectExample::OnHit, this, std::placeholders::_1), Engine::Physics::ContactType::OnHit);
 }
 
 void PhysicsObjectExample::PreUpdate(float deltaTime)
@@ -116,7 +118,8 @@ void PhysicsObjectExample::SceneQueryExample()
 				: 만약 이미 만들어둔 도형이 있으면 이름으로 실행 할 수 있음.
 				geometryDesc, verticesMeshDesc의 경우 이름으로 찾지 못할 경우 정보를 바탕으로 만들어짐.
 		*/
-		PhysicsManager->GetScene(0)->Overlap(OverlapInfo, "Frustum", geometryDesc, verticesMeshDesc, transform);
+		PhysicsManager->AddGeomtry("Frustum", geometryDesc, verticesMeshDesc);
+		PhysicsManager->GetScene(0)->Overlap(OverlapInfo, "Frustum", transform);
 	}
 
 	// Sweep
@@ -143,7 +146,8 @@ void PhysicsObjectExample::SceneQueryExample()
 				: 만약 이미 만들어둔 도형이 있으면 이름으로 실행 할 수 있음.
 				geometryDesc, verticesMeshDesc의 경우 이름으로 찾지 못할 경우 정보를 바탕으로 만들어짐.
 		*/
-		PhysicsManager->GetScene(0)->Sweep(OverlapInfo, "Frustum", geometryDesc, verticesMeshDesc, transform, direction, distance);
+		PhysicsManager->AddGeomtry("Frustum", geometryDesc, verticesMeshDesc);
+		PhysicsManager->GetScene(0)->Sweep(OverlapInfo, "Frustum", transform, direction, distance);
 	}
 	// 도형 추가 옵션
 	{
@@ -156,5 +160,10 @@ void PhysicsObjectExample::SceneQueryExample()
 		 */
 		PhysicsManager->AddGeomtry("Frustum", geometryDesc, verticesMeshDesc);
 	}
+}
 
+void PhysicsObjectExample::OnHit(Engine::Physics::ContactEvent info)
+{
+	info.myCollision;
+	info.otherCollision;
 }

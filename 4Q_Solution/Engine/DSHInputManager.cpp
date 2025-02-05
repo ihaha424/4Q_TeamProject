@@ -2,6 +2,14 @@
 #include "DSHInputManager.h"
 #include "DSHNegative.h"
 #include "DSHController.h"
+#include "../DSHInput/Mouse.h"
+
+DSH::Input::MouseProcedure Engine::DSHInput::Manager::_mouseProcedure(nullptr);
+
+LRESULT Engine::DSHInput::Manager::Procedure(const HWND windowHandle, const UINT message, const WPARAM wParam, const LPARAM lParam)
+{
+	return _mouseProcedure(windowHandle, message, wParam, lParam);
+}
 
 Engine::DSHInput::Manager::Manager() :
 	_system(nullptr), _mappingContext(nullptr)
@@ -19,6 +27,7 @@ void Engine::DSHInput::Manager::Initialize(const HWND windowHandle)
 	DSH::Input::Device::IMouse* mouse = nullptr;
 	thrower(_system->CreateMouse(&mouse));
 	mouse->SetHandle(windowHandle);
+	_mouseProcedure = DSH::Input::MouseProcedure(mouse);
 	_mouse.Setup(mouse);
 	releaser(&mouse);
 

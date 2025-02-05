@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Engine::Component
+namespace Engine
 {
 	class State abstract
 	{

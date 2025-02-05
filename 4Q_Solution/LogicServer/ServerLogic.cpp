@@ -25,6 +25,7 @@ bool ServerLogic::Initialize()
     _physicsManager->AttachUpdateScene(_mainScene);
     _physicsManager->CreateControllerManager(_mainScene);
     RegistGround(_ground);
+    RegistTrigerBox(_triggerBox);
     //============================
 
     //============================
@@ -73,9 +74,11 @@ void ServerLogic::Update()
             continue;
         } // if end
 
-        _playerSlot[i]._controller->SetVelocity(_playerSlot[i]._direction * _playerSlot[i]._speed);
+        _playerSlot[i]._controller->SetDirection(_playerSlot[i]._direction);
+        _playerSlot[i]._controller->SetMoveSpeed(_playerSlot[i]._speed);
         _playerSlot[i]._controller->Update(_timer->GetDeltaTime());
         _playerSlot[i]._flag = _playerSlot[i]._controller->GetCollisionFlag();
+        _playerSlot[i]._controller->FixedUpdate();
 
     } // for end
     _physicsManager->Update(_timer->GetDeltaTime());
@@ -248,7 +251,7 @@ void ServerLogic::MessageDispatch()
         {
             _jump.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
             int playerIdx = packet._serialNumber - 1;
-            _playerSlot[playerIdx]._controller->SetGravity({ 0.f, _jump.power(), 0.f });
+            _playerSlot[playerIdx]._controller->Jump(_jump.power());
 
             break;
         } // case end
@@ -445,24 +448,53 @@ void ServerLogic::RegistPlayer(Player& player)
     Engine::Physics::ControllerDesc cd;
     cd.height = 10.f;
     cd.radius = 2.f;
-    cd.gravity = { 0.f, -0.98f, 0.f };
-    cd.contactOffset = 3.f;
-    cd.stepOffset = 2.f;
-    cd.slopeLimit = 0.5f;
+    cd.gravity = { 0.f, -9.8f, 0.f };
+    cd.contactOffset = 0.001f;
+    cd.stepOffset = 1.f;
+    cd.slopeLimit = 0.707f;
     Engine::Physics::IController* controller = player._controller;
     _physicsManager->CreatePlayerController(&controller, _mainScene, cd);
     player._controller = static_cast<Engine::Physics::Controller*>(controller);
+    player._controller->SetBottomPosition({0,10,0});
+    player._controller->SetOwner(&player);
+    player._controller->Initialize();
 }
 
 void ServerLogic::RegistGround(Ground& ground)
 {
     Engine::Physics::GeometryDesc geometryDesc;
     geometryDesc.data = { 1, 1, 1 };
-    _physicsManager->LoadTriangleMesh(geometryDesc, "terrain", "../Resources/Level/Level.fbx");
+    _physicsManager->LoadHeightMap(geometryDesc, "terrain", "../Resources/Terrain/testTest.png");
 
     Engine::Transform transform{};
-    _physicsManager->CreateTriangleStatic(&ground._staticRigid, "terrain", { {0.f,0.f,0.f } }, transform);
+    Engine::Physics::IRigidStaticComponent* staticrigid;
+    _physicsManager->CreateTriangleStatic(&staticrigid, "terrain", { {0.f,0.f,0.f } }, transform);
+    ground._staticRigid = static_cast<Engine::Physics::RigidStaticComponent*>(staticrigid);
     _mainScene->AddActor(ground._staticRigid);
     ground._staticRigid->SetTranslate({ -1000.f, -200.f, 1000.f });
 
+    ground._staticRigid->SetOwner(&ground);
+    ground._staticRigid->Initialize();
+}
+
+void ServerLogic::RegistTrigerBox(TriggerBox& triggerBox)
+{
+    Engine::Physics::RigidComponentDesc rcd;
+    rcd.rigidType = Engine::Physics::RigidBodyType::Static;
+    rcd.shapeDesc.geometryDesc.type = Engine::Physics::GeometryShape::Box;
+    rcd.shapeDesc.geometryDesc.data = { 100.f, 100.f, 100.f };
+    rcd.shapeDesc.isExclusive = true;
+    rcd.shapeDesc.materialDesc.data = { 0.5f, 0.5f, 0.5f };
+
+    Engine::Transform tf{};
+    tf.position = { 500, -100.f, 500 };
+    Engine::Physics::IRigidStaticComponent* staticRigid;
+    _physicsManager->CreateStatic(&staticRigid, rcd, tf);
+    triggerBox._staticRigid = static_cast<Engine::Physics::RigidStaticComponent*>(staticRigid);
+    triggerBox._staticRigid->SetFlag(Engine::Physics::CollisionType::Collision, false);
+    triggerBox._staticRigid->SetFlag(Engine::Physics::CollisionType::Trigger, true);
+    _mainScene->AddActor(triggerBox._staticRigid);
+
+    triggerBox._staticRigid->SetOwner(&triggerBox);
+    triggerBox._staticRigid->Initialize();
 }

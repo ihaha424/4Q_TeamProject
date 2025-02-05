@@ -19,5 +19,5 @@ void Engine::DSHInput::Modifier::Negative::Finalize()
 
 DSH::Input::Modifier::INegative* Engine::DSHInput::Modifier::Negative::Get() const
 {
-	return _negative;;
+	return _negative;
 }

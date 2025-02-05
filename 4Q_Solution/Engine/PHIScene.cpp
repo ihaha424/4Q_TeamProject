@@ -50,11 +50,11 @@ namespace Engine::PHI
 	bool Scene::Overlap(
 		Engine::Physics::QueryData&					overlapInfo, 
 		const std::string&							name, 
-		const Engine::Physics::GeometryDesc&		geometryDesc, 
-		const Engine::Physics::VerticesMeshDesc&	verticesMeshDesc, 
 		const Engine::Transform&					transform)
 	{
-		PhysicsEngineAPI::IGeometry* geometry = system->FindGeometry(name, geometryDesc, verticesMeshDesc);
+		PhysicsEngineAPI::IGeometry* geometry = system->FindGeometry(name);
+		if (nullptr == geometry)
+			return false;
 
 		bool result = scene->Overlap(data,
 			geometry,
@@ -72,13 +72,13 @@ namespace Engine::PHI
 	bool Scene::Sweep(
 		Engine::Physics::AdditionalQueryData&		sweepInfo, 
 		const std::string&							name, 
-		const Engine::Physics::GeometryDesc&		geometryDesc, 
-		const Engine::Physics::VerticesMeshDesc&	verticesMeshDesc, 
 		const Engine::Transform&					transform, 
 		const Engine::Math::Vector3&				direction, 
 		float										distance)
 	{
-		PhysicsEngineAPI::IGeometry* geometry = system->FindGeometry(name, geometryDesc, verticesMeshDesc);
+		PhysicsEngineAPI::IGeometry* geometry = system->FindGeometry(name);
+		if (nullptr == geometry)
+			return false;
 
 		bool result = scene->Sweep(data,
 			geometry,

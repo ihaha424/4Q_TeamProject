@@ -3,8 +3,8 @@
 
 void GlobalLight::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
-	_globalLight = componentFactory->Clone<Engine::Component::Light>();
-	_pointLight = componentFactory->Clone<Engine::Component::Light>();
+	_globalLight = componentFactory->Clone<Engine::Component::Light>(this);
+	_pointLight = componentFactory->Clone<Engine::Component::Light>(this);
 }
 
 void GlobalLight::DisposeComponents()

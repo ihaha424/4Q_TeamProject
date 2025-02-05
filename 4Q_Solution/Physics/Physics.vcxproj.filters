@@ -109,9 +109,6 @@
     <Filter Include="Library\1. System\00. PhysX\998. Collision\CollisionEvent">
       <UniqueIdentifier>{97d001f6-850e-4354-8ce8-597ddede6ff3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Library\0. Interface\06. Contrillor">
-      <UniqueIdentifier>{2bbd1080-2c49-4100-9b10-de0b350962b0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Library\1. System\00. PhysX\006. Controller">
       <UniqueIdentifier>{a058d35e-e7fc-4165-8990-d83a94b79833}</UniqueIdentifier>
     </Filter>
@@ -129,6 +126,9 @@
     </Filter>
     <Filter Include="Library\9. Loader\ImageLoader">
       <UniqueIdentifier>{f991fb73-dbb2-4113-a671-401450fd92f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\0. Interface\06. IContrillor">
+      <UniqueIdentifier>{2bbd1080-2c49-4100-9b10-de0b350962b0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -250,7 +250,7 @@
       <Filter>Library\1. System\00. PhysX\998. Collision</Filter>
     </ClInclude>
     <ClInclude Include="IController.h">
-      <Filter>Library\0. Interface\06. Contrillor</Filter>
+      <Filter>Library\0. Interface\06. IContrillor</Filter>
     </ClInclude>
     <ClInclude Include="PhysXController.h">
       <Filter>Library\1. System\00. PhysX\006. Controller</Filter>
@@ -360,7 +360,7 @@
       <Filter>Library\1. System\00. PhysX\998. Collision</Filter>
     </ClCompile>
     <ClCompile Include="IController.cpp">
-      <Filter>Library\0. Interface\06. Contrillor</Filter>
+      <Filter>Library\0. Interface\06. IContrillor</Filter>
     </ClCompile>
     <ClCompile Include="PhysXController.cpp">
       <Filter>Library\1. System\00. PhysX\006. Controller</Filter>

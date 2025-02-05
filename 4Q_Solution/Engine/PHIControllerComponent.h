@@ -13,17 +13,30 @@ namespace Engine::PHI
 		/***********************************
 				Kinematic Move Setting
 		************************************/
+		void Jump(float JumpForce) override;
+		
 		void AddForce(const Engine::Math::Vector3& force) override;
+		
 		void AddVelocity(const Engine::Math::Vector3& velocity) override;
 		void SetVelocity(const Engine::Math::Vector3& velocity) override;
 		Engine::Math::Vector3 GetVelocity() override;
 		void ClearVelocity() override;
+		
 		void SetMass(float mass) override;
 		float GetMass() override;
+		
 		void SetGravity(const Engine::Math::Vector3& gravity) override;
 		const Engine::Math::Vector3& GetGravity() const override;
-		void SetTotalGravity(const Engine::Math::Vector3& gravity) override;
-		const Engine::Math::Vector3& GetTotalGravity() const override;
+		
+		void SetDirection(Engine::Math::Vector3 _direction) override;
+		const Engine::Math::Vector3& GetDirection() const override;
+
+		void SetMoveSpeed(float moveSpeed) override;
+		float GetMoveSpeed() const override;
+		
+		void SetMinDistancet(float minDistance) override;
+		float GetMinDistance() const override;
+		
 
 		/***********************************
 					Controller
@@ -32,8 +45,6 @@ namespace Engine::PHI
 		const char* GetName() const override;
 
 		void ClearUserData() override;
-
-		unsigned short Move(Engine::Math::Vector3 displacement, float minDistance, float deltaTime) override;
 		
 
 		void SetPosition(const Engine::Math::Vector3& position) override;
@@ -75,6 +86,12 @@ namespace Engine::PHI
 		void SetClimbingMode(const Engine::Physics::CapsuleClimbingMode mode) override;
 		Engine::Physics::CapsuleClimbingMode GetClimbingMode() const override;
 
+		/********************************
+					Collision
+		*********************************/
+		void BindCollision(const Physics::CallBackTrigger& callback, Physics::TriggerType type) override;
+		void BindCollision(const Physics::CallBackContact& callback, Physics::ContactType type) override;
+
 
 		/***********************************
 					Engine
@@ -83,7 +100,17 @@ namespace Engine::PHI
 		void Update(float deltaTime) override;
 		void FixedUpdate() override;
 		void Finalize() override;
+
+		void* GetOwner() override;
+		void SetOwner(void* owner) override;
+
 	private:
+		void IsGround(Engine::Physics::TriggerEvent info);
+
+	private:
+		void* owner;
+
+
 		PhysicsEngineAPI::IController* controller;
 		Collision<Controller>* collision;
 		unsigned short controllerCollisionFlag;
@@ -91,9 +118,16 @@ namespace Engine::PHI
 		Engine::Math::Vector3 velocity;
 		Engine::Math::Vector3 force;
 		Engine::Math::Vector3 gravity;
-		Engine::Math::Vector3 totalGravity;
+		
+		bool jumpFlag = false;
+		float jumpMax;
+
+		Engine::Math::Vector3 direction;
+		float moveSpeed;
+
+		float minDistance;
 
 		friend class Manager;
-	};
+};
 }
 

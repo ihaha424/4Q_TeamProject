@@ -62,6 +62,8 @@ namespace Engine::PHI
 		void FixedUpdate() const override;
 		void Finalize() override;
 
+		void SetOwner(void* owner) override;
+		void* GetOwner() override;
 	protected:
 		PhysicsEngineAPI::IObject*		object;
 		PhysicsEngineAPI::IShape*		shape;
@@ -70,7 +72,7 @@ namespace Engine::PHI
 
 	private:
 		Collision<RigidComponent>* collision;
-
+		void* owner;
 	private:
 		friend class Manager;
 		friend class Scene;

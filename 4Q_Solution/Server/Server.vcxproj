@@ -97,24 +97,33 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Properties\Debug Target Name.props" />
+    <Import Project="..\Properties\Dll Library.props" />
+    <Import Project="..\Properties\Pre Build All Header Copy Event.props" />
+    <Import Project="..\Properties\CPP Version.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Properties\Dll Library.props" />
+    <Import Project="..\Properties\Pre Build All Header Copy Event.props" />
+    <Import Project="..\Properties\CPP Version.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Properties\Debug Target Name.props" />
+    <Import Project="..\Properties\Dll Library.props" />
+    <Import Project="..\Properties\Pre Build All Header Copy Event.props" />
+    <Import Project="..\Properties\CPP Version.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Properties\Dll Library.props" />
+    <Import Project="..\Properties\Pre Build All Header Copy Event.props" />
+    <Import Project="..\Properties\CPP Version.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(ProjectDir)bin\$(Configuration)</OutDir>
-    <TargetName>$(ProjectName)_d</TargetName>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(ProjectDir)bin\$(Configuration)</OutDir>
-  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -157,7 +166,6 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp20</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -165,19 +173,14 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
     </Link>
-    <PostBuildEvent>
-      <Command>mkdir "includes";
-mkdir "includes\Utils";
-xcopy /y /d "$(OutDir)*.lib" "$(SolutionDir)lib\"
-xcopy /y /d "$(OutDir)*.pdb" "$(SolutionDir)lib\"
-xcopy /y /d "$(OutDir)*.dll" "$(SolutionDir)dll\"
+    <PostBuildEvent />
+    <PreBuildEvent />
+    <PreLinkEvent>
+      <Command>xcopy /y /d "includes\*.h" "$(SolutionDir)includes\$(ProjectName)\"
+xcopy /y /d "includes\Utils\*.h" "$(SolutionDir)includes\$(ProjectName)\Utils\"
 xcopy /y /d "..\Server\*.h" "includes\"
 xcopy /y /d "..\Server\Utils\*.h" "includes\Utils\"</Command>
-    </PostBuildEvent>
-    <PreBuildEvent>
-      <Command>xcopy /y /d "includes\*.h" "$(SolutionDir)includes\$(ProjectName)\"
-xcopy /y /d "includes\Utils\*.h" "$(SolutionDir)includes\$(ProjectName)\Utils\"</Command>
-    </PreBuildEvent>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -189,7 +192,6 @@ xcopy /y /d "includes\Utils\*.h" "$(SolutionDir)includes\$(ProjectName)\Utils\"<
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp20</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -199,19 +201,14 @@ xcopy /y /d "includes\Utils\*.h" "$(SolutionDir)includes\$(ProjectName)\Utils\"<
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
     </Link>
-    <PostBuildEvent>
-      <Command>mkdir "includes";
-mkdir "includes\Utils";
-xcopy /y /d "$(OutDir)*.lib" "$(SolutionDir)lib\"
-xcopy /y /d "$(OutDir)*.pdb" "$(SolutionDir)lib\"
-xcopy /y /d "$(OutDir)*.dll" "$(SolutionDir)dll\"
+    <PostBuildEvent />
+    <PreBuildEvent />
+    <PreLinkEvent>
+      <Command>xcopy /y /d "includes\*.h" "$(SolutionDir)includes\$(ProjectName)\"
+xcopy /y /d "includes\Utils\*.h" "$(SolutionDir)includes\$(ProjectName)\Utils\"
 xcopy /y /d "..\Server\*.h" "includes\"
 xcopy /y /d "..\Server\Utils\*.h" "includes\Utils\"</Command>
-    </PostBuildEvent>
-    <PreBuildEvent>
-      <Command>xcopy /y /d "includes\*.h" "$(SolutionDir)includes\$(ProjectName)\"
-xcopy /y /d "includes\Utils\*.h" "$(SolutionDir)includes\$(ProjectName)\Utils\"</Command>
-    </PreBuildEvent>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

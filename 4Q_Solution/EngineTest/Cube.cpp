@@ -10,8 +10,8 @@ Cube::Cube(std::filesystem::path&& meshPath) :
 
 void Cube::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
-	_staticMesh = componentFactory->Clone<Engine::Component::StaticMesh>();
-	_sync = componentFactory->Clone<Engine::Component::Synchronize>();
+	_staticMesh = componentFactory->Clone<Engine::Component::StaticMesh>(this);
+	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
 }
 
 

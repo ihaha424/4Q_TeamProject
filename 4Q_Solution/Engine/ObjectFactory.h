@@ -14,9 +14,10 @@ namespace Engine::Content::Factory
 		Object(Component* objectFactory, std::vector<Engine::Object*>* cloned);
 
 		template<is_object T>
-		T* Clone()
+		T* Clone(World* owner)
 		{
 			T* t = Factory::Copy<T>();
+			t->SetOwner(owner);
 			t->Prepare(_componentFactory);
 			_cloned->push_back(t);
 			return t;

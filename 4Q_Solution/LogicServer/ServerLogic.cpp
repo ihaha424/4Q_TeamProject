@@ -361,7 +361,7 @@ void ServerLogic::LoadBuilding()
         );
         obj->_serialNumber = _staticObjectSerialNumber++;
         _buildings.push_back(obj);
-        RegistStaticPhysics(*obj);
+        //RegistStaticPhysics(*obj);
     }
     printf("Building Data Load Complete.\n");
 }
@@ -392,7 +392,7 @@ void ServerLogic::LoadSudium()
         );
         obj->_serialNumber = _staticObjectSerialNumber++;
         _sudiums.push_back(obj);
-        RegistStaticPhysics(*obj);
+        //RegistStaticPhysics(*obj);
         printf("Sudium Create Complete. SerialNumber : %d\n", obj->_serialNumber);
     }
     printf("Sudium Data Load Complete.\n");

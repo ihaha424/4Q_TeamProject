@@ -27,6 +27,7 @@ class ServerLogic
 		Engine::Math::Vector4 _rotation;
 		Engine::Math::Vector3 _scale;
 		bool _public;
+		bool _meshCollider;
 		Engine::Physics::IRigidStaticComponent* _staticRigid = nullptr;
 		Engine::Physics::IRigidDynamicComponent* _dynamicRigid = nullptr;
 	};

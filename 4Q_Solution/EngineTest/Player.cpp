@@ -18,9 +18,9 @@ Player::Player(std::filesystem::path&& meshPath, std::filesystem::path&& fontPat
 void Player::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
 	_camera = componentFactory->Clone<Engine::Component::Camera>(this);
-	//_staticMesh = componentFactory->Clone<Engine::Component::StaticMesh>(this);
-	_skeltalMesh = componentFactory->Clone<Engine::Component::SkeletalMesh>(this);
-	_animator = componentFactory->Clone<Engine::Component::Animator>(this);
+	_staticMesh = componentFactory->Clone<Engine::Component::StaticMesh>(this);
+	//_skeltalMesh = componentFactory->Clone<Engine::Component::SkeletalMesh>(this);
+	//_animator = componentFactory->Clone<Engine::Component::Animator>(this);
 	_textRenderer = componentFactory->Clone<Engine::Component::TextRenderer>(this);
     _sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
 	_remote = componentFactory->Clone<RemoteMoveComponent>(this);
@@ -40,9 +40,9 @@ void Player::SetSerialNumber(int num)
 void Player::DisposeComponents()
 {
     _textRenderer->Dispose();
-    //_staticMesh->Dispose();
-	_skeltalMesh->Dispose();
-	_animator->Dispose();
+    _staticMesh->Dispose();
+	//_skeltalMesh->Dispose();
+	//_animator->Dispose();
     _camera->Dispose();
 	_sync->Dispose();
 	_remote->Dispose();
@@ -55,19 +55,19 @@ void Player::PreInitialize(const Engine::Modules& modules)
 
 	_remote->SetTarget(&_transform);	
 	_remote->BindOnMove([this]() {
-		_animator->ChangeAnimation("Run");
+		//_animator->ChangeAnimation("Run");
 		});
 	_remote->BindOnStop([this]() {
-		_animator->ChangeAnimation("Wait");
+		//_animator->ChangeAnimation("Wait");
 		});
 
 
     _camera->SetName(L"MainCamera");
-    //_staticMesh->SetFilePath(_meshPath);
-    //_staticMesh->SetMatrix(&_worldMatrix);
-	_skeltalMesh->SetFilePath(_meshPath);
-	_skeltalMesh->SetMatrix(&_worldMatrix);
-	_animator->SetSkeletalMesh(_skeltalMesh);
+    _staticMesh->SetFilePath(_meshPath);
+    _staticMesh->SetMatrix(&_worldMatrix);
+	//_skeltalMesh->SetFilePath(_meshPath);
+	//_skeltalMesh->SetMatrix(&_worldMatrix);
+	//_animator->SetSkeletalMesh(_skeltalMesh);
     _textRenderer->SetFontPath(_fontPath);
 
 	_sync->AddCallback((short)PacketID::EnterAccept, &Player::EnterSuccess, this);
@@ -106,7 +106,7 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) {
 		GameApplication::GetLoggerManager()->Log(Engine::Logger::LogLevel::Debug, std::format(L"x:{0}, y:{1}", value.x, value.y));
 
-		_animator->ChangeAnimation("Run"); 
+		//_animator->ChangeAnimation("Run"); 
 
 		_sync->_stateChange.set_stateinfo(1);
 		_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
@@ -184,7 +184,7 @@ void Player::PostInitialize(const Engine::Modules& modules)
 	_textRenderer->SetPosition(100, 100.f);
 	_textRenderer->SetText(L"Hello World!");
 	_textRenderer->SetFontColor(1.f, 0.f, 0.f, 1.f);
-	_animator->ChangeAnimation("Wait");
+	//_animator->ChangeAnimation("Wait");
 	//_skeltalMesh.SetRenderLayer(0);
 	/*_animator.SetUpSplitBone(2);
 	_animator.SplitBone(0, "Dummy_root");

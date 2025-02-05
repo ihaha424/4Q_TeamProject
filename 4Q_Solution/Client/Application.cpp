@@ -7,6 +7,12 @@ GameClient::Application::Application(const HINSTANCE instanceHandle) : Engine::A
 {
 }
 
+void GameClient::Application::LoadData(Engine::Load::IManager* loadManager)
+{
+	loadManager->LoadRegisterData(L"MapData.json");
+	loadManager->LoadCloneData(L"MapData.json");
+}
+
 void GameClient::Application::DeclareInputActions(Engine::Input::IManager* inputManager)
 {
 	Engine::Input::IMappingContext* mappingContext = nullptr;
@@ -19,9 +25,9 @@ void GameClient::Application::DeclareInputActions(Engine::Input::IManager* input
 	inputManager->SetActiveMappingContext(mappingContext);
 }
 
-void GameClient::Application::Register(Engine::Content::IManager* contentManager)
+void GameClient::Application::Register(Engine::Content::IManager* contentManager, Engine::Load::IManager* loadManager)
 {
-	Engine::Application::Register(contentManager);
+	Engine::Application::Register(contentManager, loadManager);
 
 	const auto worldFactory = contentManager->GetWorldFactory();
 	worldFactory->Register<TestWorld>();

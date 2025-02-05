@@ -23,8 +23,9 @@ namespace Engine
 		void End();
 
 	protected:
+		virtual void LoadData(Load::IManager* loadManager) = 0;
 		virtual void DeclareInputActions(Input::IManager* inputManager) = 0;
-		virtual void Register(Content::IManager* contentManager);
+		virtual void Register(Content::IManager* contentManager, Load::IManager* loadManager);
 		virtual void PrepareInitialWorld(Content::Factory::World* worldFactory) = 0;
 
 	private:

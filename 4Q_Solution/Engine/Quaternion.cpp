@@ -1,6 +1,11 @@
 #include "pch.h"
 #include "Quaternion.h"
 
+Engine::Math::Quaternion::Quaternion(const float x, const float y, const float z, const float w) noexcept :
+	DirectX::SimpleMath::Quaternion(x, y, z, w)
+{
+}
+
 Engine::Math::Quaternion::Quaternion(const DirectX::SimpleMath::Quaternion& quaternion) noexcept :
 	DirectX::SimpleMath::Quaternion(quaternion)
 {

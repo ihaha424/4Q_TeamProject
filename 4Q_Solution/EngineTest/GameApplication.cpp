@@ -10,7 +10,8 @@ GameApplication::GameApplication(const HINSTANCE instanceHandle) :
 
 void GameApplication::LoadData(Engine::Load::IManager* loadManager)
 {
-	loadManager->LoadMapData(L"MapData.json");
+	loadManager->LoadRegisterData(L"MapData.json");
+	loadManager->LoadCloneData(L"MapData.json");
 }
 
 void GameApplication::DeclareInputActions(Engine::Input::IManager* inputManager)

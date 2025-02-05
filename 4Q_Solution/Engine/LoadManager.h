@@ -11,11 +11,11 @@ namespace Engine::Load
 		IManager& operator=(IManager&& other) noexcept = default;
 		virtual ~IManager() = default;
 
-		virtual void LoadMapData(std::filesystem::path path) = 0;
+		virtual void LoadRegisterData(const std::filesystem::path& path) = 0;
+		virtual void LoadCloneData(const std::filesystem::path& path) = 0;
 
-		virtual std::optional<ConfigData> GetWorldConfigData(std::wstring name) = 0;
-		virtual std::optional<ConfigData> GetObjectRegisterData(std::wstring name) = 0;
-		virtual std::optional<ConfigData> GetComponentConfigData(std::wstring name) = 0;
+		virtual std::optional<ConfigData> GetObjectRegisterData(const std::wstring& name) = 0;
+		virtual std::vector<ConfigData> GetObjectCloneData(const std::wstring& name) = 0;
 	};
 
 	struct Manager : IManager

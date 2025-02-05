@@ -20,6 +20,9 @@ namespace PhysicsEngineAPI
 	void PhysXController::SetUserData(ICollision* UserData)
 	{
 		controller->setUserData(UserData);
+		controller->getActor()->userData = UserData;
+		hitReportCallback->SetUserData(UserData);
+		behaviorCallback->SetUserData(UserData);
 	}
 	const ICollision* PhysXController::GetUserData() const
 	{
@@ -160,5 +163,9 @@ namespace PhysicsEngineAPI
 	{
 		Utils::DataStructure::CapsuleClimbingMode flag = static_cast<Utils::DataStructure::CapsuleClimbingMode>(controller->getNonWalkableMode());
 		return flag;
+	}
+	void PhysXController::CollisionUpdate()
+	{
+		hitReportCallback->Update();
 	}
 }

@@ -431,7 +431,7 @@ namespace Engine::PHI
 		Controller* controller = new Controller();
 		thrower(BoolToHRESULT(system->CreatePlayerController(&controller->controller, scene->scene, desc)));
 	
-		controller->SetTotalGravity(_desc.gravity);
+		controller->SetGravity(_desc.gravity);
 		*object = controller;
 	}
 

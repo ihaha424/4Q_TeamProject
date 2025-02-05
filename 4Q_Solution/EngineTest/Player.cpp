@@ -153,7 +153,7 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	mappingContext->GetAction(L"Jump", &jumpAction);
 	jumpAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) 
 		{
-			_sync->_jump.set_power(2500.f);
+			_sync->_jump.set_power(10.f);
 			_sync->_jump.SerializeToString(&_sync->_msgBuffer);
 
 			Engine::Application::GetNetworkManager()->SaveSendData(

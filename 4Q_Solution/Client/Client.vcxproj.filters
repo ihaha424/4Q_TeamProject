@@ -16,6 +16,24 @@
     <Filter Include="Application">
       <UniqueIdentifier>{3e5ef61d-144d-4611-9a44-000f3c8ff647}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{18df019a-58ff-4313-98cc-55ef0c19992c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World">
+      <UniqueIdentifier>{b91d8580-9a65-44c2-be84-b723c4a01858}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Ray">
+      <UniqueIdentifier>{bbb5e833-c6ee-427d-876b-dce243b96d31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Live">
+      <UniqueIdentifier>{23bbc462-2c98-4e15-9a65-b2a852c3430d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Light">
+      <UniqueIdentifier>{23c4e8d4-35c7-4ea6-9018-a439026c241b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\SkyBox">
+      <UniqueIdentifier>{716308c1-4293-4856-bf1e-a58530687c52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -33,6 +51,21 @@
     <ClInclude Include="Application.h">
       <Filter>Application</Filter>
     </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>Object\Ray</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TestWorld.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalLight.h">
+      <Filter>Object\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyBox.h">
+      <Filter>Object\SkyBox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -43,6 +76,21 @@
     </ClCompile>
     <ClCompile Include="Application.cpp">
       <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Ray.cpp">
+      <Filter>Object\Ray</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="TestWorld.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalLight.cpp">
+      <Filter>Object\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyBox.cpp">
+      <Filter>Object\SkyBox</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

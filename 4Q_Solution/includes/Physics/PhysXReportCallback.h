@@ -3,7 +3,7 @@
 
 namespace PhysicsEngineAPI
 {
-	class IController;
+	class ICollision;
 }
 
 namespace PhysicsEngineAPI
@@ -17,8 +17,12 @@ namespace PhysicsEngineAPI
 		void onControllerHit(const physx::PxControllersHit& hit) override;
 		void onObstacleHit(const physx::PxControllerObstacleHit& hit) override;
 
-		void SetUserData(IController* userData);
+		void Update();
+		void SetUserData(ICollision* userData);
 	private:
-		IController* userData;
+		ICollision* userData;
+		
+		std::map<void*, bool> collitionMap;
+		friend class PhysxController;
 	};
 }

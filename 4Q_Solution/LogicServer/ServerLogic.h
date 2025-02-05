@@ -12,25 +12,28 @@
 #include "../Packet/PacketID.h"
 #include "../Packet/ProtoInclude.h"
 
+
 namespace Engine::Physics {
 	class Manager;
 }
 
 class ServerLogic
 {
-
-
 	struct Object {
 		int _serialNumber;
 		Engine::Math::Vector3 _position;
 		std::string _resourceId;
 
-		Engine::Physics::IRigidDynamicComponent* _rigidBody = nullptr;
-		
+		Engine::Physics::RigidDynamicComponent* _rigidBody = nullptr;
+
 	};
 
 	struct Ground : public Object {
-		Engine::Physics::IRigidStaticComponent* _staticRigid = nullptr;
+		Engine::Physics::RigidStaticComponent* _staticRigid = nullptr;
+	};
+
+	struct TriggerBox : public Object {
+		Engine::Physics::RigidStaticComponent* _staticRigid = nullptr;
 	};
 
 	struct Player : public Object {
@@ -61,6 +64,7 @@ private:
 	Engine::Math::Vector3 _lastSendPosition[2]{};
 	Object _objs[3]{};
 	Ground _ground{};
+	TriggerBox _triggerBox{};
 	
 	ConnectMsg::EnterAccept _enterAccept;
 	ConnectMsg::SyncPlayer _syncPlayer;
@@ -91,5 +95,6 @@ private:
 	void RegistPhysics(Object& obj);
 	void RegistPlayer(Player& player);
 	void RegistGround(Ground& ground);
+	void RegistTrigerBox(TriggerBox& triggerBox);
 };
 

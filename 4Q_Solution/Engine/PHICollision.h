@@ -162,7 +162,7 @@ namespace Engine::PHI
 
         auto& callBack = triggerFunctions[static_cast<int>(Physics::TriggerType::OnTriggerEnter)];
         callBack.isOn = true;
-        if (callBack.eventIndex < callBack.event.size())
+        if (callBack.eventIndex <= callBack.event.size())
             callBack.event.push_back(Physics::TriggerEvent{});
         ConvertTriggerEvent(info, callBack.event[callBack.eventIndex++]);
     }
@@ -173,7 +173,7 @@ namespace Engine::PHI
 
         auto& callBack = triggerFunctions[static_cast<int>(Physics::TriggerType::OnTrigger)];
         callBack.isOn = true;
-        if (callBack.eventIndex < callBack.event.size())
+        if (callBack.eventIndex <= callBack.event.size())
             callBack.event.push_back(Physics::TriggerEvent{});
         ConvertTriggerEvent(info, callBack.event[callBack.eventIndex++]);
     }
@@ -184,7 +184,7 @@ namespace Engine::PHI
 
         auto& callBack = triggerFunctions[static_cast<int>(Physics::TriggerType::OnTriggerExit)];
         callBack.isOn = true;
-        if (callBack.eventIndex < callBack.event.size())
+        if (callBack.eventIndex <= callBack.event.size())
             callBack.event.push_back(Physics::TriggerEvent{});
         ConvertTriggerEvent(info, callBack.event[callBack.eventIndex++]);
     }
@@ -195,7 +195,7 @@ namespace Engine::PHI
 
         auto& callBack = contactFunctions[static_cast<int>(Physics::ContactType::OnCollisionEnter)];
         callBack.isOn = true;
-        if (callBack.eventIndex < callBack.event.size())
+        if (callBack.eventIndex <= callBack.event.size())
             callBack.event.push_back(Physics::ContactEvent{});
         ConvertContactEvent(info, callBack.event[callBack.eventIndex++]);
     }
@@ -206,7 +206,7 @@ namespace Engine::PHI
 
         auto& callBack = contactFunctions[static_cast<int>(Physics::ContactType::OnCollision)];
         callBack.isOn = true;
-        if (callBack.eventIndex < callBack.event.size())
+        if (callBack.eventIndex <= callBack.event.size())
             callBack.event.push_back(Physics::ContactEvent{});
         ConvertContactEvent(info, callBack.event[callBack.eventIndex++]);
     }
@@ -217,7 +217,7 @@ namespace Engine::PHI
 
         auto& callBack = contactFunctions[static_cast<int>(Physics::ContactType::OnCollisionExit)];
         callBack.isOn = true;
-        if (callBack.eventIndex < callBack.event.size())
+        if (callBack.eventIndex <= callBack.event.size())
             callBack.event.push_back(Physics::ContactEvent{});
         ConvertContactEvent(info, callBack.event[callBack.eventIndex++]);
     }
@@ -239,7 +239,7 @@ namespace Engine::PHI
 
         auto& callBack = triggerFunctions[static_cast<int>(Physics::TriggerType::OnOverlapBegin)];
         callBack.isOn = true;
-        if (callBack.eventIndex < callBack.event.size())
+        if (callBack.eventIndex <= callBack.event.size())
             callBack.event.push_back(Physics::TriggerEvent{});
         ConvertTriggerEvent(info, callBack.event[callBack.eventIndex++]);
     }
@@ -250,7 +250,7 @@ namespace Engine::PHI
 
         auto& callBack = triggerFunctions[static_cast<int>(Physics::TriggerType::OnOverlapEnd)];
         callBack.isOn = true;
-        if (callBack.eventIndex < callBack.event.size())
+        if (callBack.eventIndex <= callBack.event.size())
             callBack.event.push_back(Physics::TriggerEvent{});
         ConvertTriggerEvent(info, callBack.event[callBack.eventIndex++]);
     }

@@ -60,16 +60,23 @@ namespace PhysicsEngineAPI
 	bool PhysXSystem::CreatePVD()
 	{
 
-		DEBUG_MODE
-		(
+		//DEBUG_MODE
+		//(
+		//	pvd = physx::PxCreatePvd(*foundation);
+		//	if (nullptr == pvd)
+		//		return false;
+		//	transport = physx::PxDefaultPvdSocketTransportCreate("localhost", 5425, 10);
+		//	if (nullptr == transport)
+		//		return false;
+		//	pvd->connect(*transport, physx::PxPvdInstrumentationFlag::eALL);
+		//)
 			pvd = physx::PxCreatePvd(*foundation);
-			if (nullptr == pvd)
-				return false;
-			transport = physx::PxDefaultPvdSocketTransportCreate("localhost", 5425, 10);
-			if (nullptr == transport)
-				return false;
-			pvd->connect(*transport, physx::PxPvdInstrumentationFlag::eALL);
-		)
+		if (nullptr == pvd)
+			return false;
+		transport = physx::PxDefaultPvdSocketTransportCreate("localhost", 5425, 10);
+		if (nullptr == transport)
+			return false;
+		pvd->connect(*transport, physx::PxPvdInstrumentationFlag::eALL);
 		return true;
 	}
 
@@ -89,24 +96,28 @@ namespace PhysicsEngineAPI
 		if (!CreateFoundation())
 			return false;
 
-		if constexpr (DEBUG_FLAG)
-		{
-			DEBUG_MODE
-			(
-				if (isVisualDebuger)
-				{
-					if (!CreatePVD())
-						return false;
-					physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(length, speed), true, pvd);
-				}
-				else
-					physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(length, speed), true);
-			foundation->setErrorLevel(physx::PxErrorCode::eMASK_ALL);
-			)
-		}
-		else
-			physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(length, speed), true);
+		//if constexpr (DEBUG_FLAG)
+		//{
+		//	DEBUG_MODE
+		//	(
+		//		if (isVisualDebuger)
+		//		{
+		//			if (!CreatePVD())
+		//				return false;
+		//			physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(length, speed), true, pvd);
+		//		}
+		//		else
+		//			physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(length, speed), true);
+		//	foundation->setErrorLevel(physx::PxErrorCode::eMASK_ALL);
+		//	)
+		//}
+		//else
+		//	physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(length, speed), true);
 		
+
+		if (!CreatePVD())
+			return false;
+		physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(length, speed), true, pvd);
 		if (nullptr == physics)
 			return false;
 		return true;

@@ -33,7 +33,8 @@ namespace Engine::PHI
 		int typeIndex = static_cast<int>(physicsType);
 		PhysicsEngineAPI::IPhysicsSystem::PhysicsType type = static_cast<PhysicsEngineAPI::IPhysicsSystem::PhysicsType>(typeIndex);
 		thrower(BoolToHRESULT(PhysicsEngineAPI::CreateSystem(&system, PhysicsEngineAPI::IPhysicsSystem::Physx)));
-		thrower(BoolToHRESULT(system->CreatePhysics(visualDebug, length, speed)));
+		system->CreatePhysics(visualDebug, length, speed);
+		//thrower(BoolToHRESULT());
 	}
 
 	void Manager::WorldInitialize()

@@ -102,8 +102,28 @@ void Engine::DSHInput::Device::Mouse::GetComponent(const Axis axis, Input::Compo
 	}
 }
 
+void Engine::DSHInput::Device::Mouse::ShowCursor()
+{
+	_mouse->ShowCursor();
+}
+
+void Engine::DSHInput::Device::Mouse::HideCursor()
+{
+	_mouse->HideCursor();
+}
+
+void Engine::DSHInput::Device::Mouse::LockCursor()
+{
+	_mouse->LockCursor();
+}
+
+void Engine::DSHInput::Device::Mouse::UnlockCursor()
+{
+	_mouse->UnlockCursor();
+}
+
 bool Engine::DSHInput::Device::Mouse::IsButtonState(const Button button,
-	std::function<bool(DSH::Input::Component::IButtonComponent*)> state) const
+                                                    std::function<bool(DSH::Input::Component::IButtonComponent*)> state) const
 {
 	DSH::Input::Component::IButtonComponent* buttonComponent = nullptr;
 	Utility::ThrowIfFailed()(_mouse->GetComponent(_buttonMap.at(button), &buttonComponent));

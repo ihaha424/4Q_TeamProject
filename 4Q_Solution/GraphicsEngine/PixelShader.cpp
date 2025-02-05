@@ -88,9 +88,9 @@ HRESULT PixelShader::LoadResource(const std::filesystem::path& filePath)
 			{
 				_inputBindSlot[(int)TextureType::Normal] = { inputBindDesc.BindPoint, inputBindDesc.BindCount };
 			}
-			else if (resourceName.find("spec") != std::string::npos)
+			else if (resourceName.find("arm") != std::string::npos)
 			{
-				_inputBindSlot[(int)TextureType::Specular] = { inputBindDesc.BindPoint, inputBindDesc.BindCount };
+				_inputBindSlot[(int)TextureType::RMA] = { inputBindDesc.BindPoint, inputBindDesc.BindCount };
 			}
 			else if (resourceName.find("emis") != std::string::npos)
 			{
@@ -99,18 +99,6 @@ HRESULT PixelShader::LoadResource(const std::filesystem::path& filePath)
 			else if (resourceName.find("opac") != std::string::npos)
 			{
 				_inputBindSlot[(int)TextureType::Opacity] = { inputBindDesc.BindPoint, inputBindDesc.BindCount };
-			}
-			else if (resourceName.find("ao") != std::string::npos)
-			{
-				_inputBindSlot[(int)TextureType::AmbientOcclusion] = { inputBindDesc.BindPoint, inputBindDesc.BindCount };
-			}
-			else if (resourceName.find("metal") != std::string::npos)
-			{
-				_inputBindSlot[(int)TextureType::Metalness] = { inputBindDesc.BindPoint, inputBindDesc.BindCount };
-			}
-			else if (resourceName.find("rough") != std::string::npos)
-			{
-				_inputBindSlot[(int)TextureType::Roughness] = { inputBindDesc.BindPoint, inputBindDesc.BindCount };
 			}
 			break;
 		case D3D_SIT_SAMPLER:

@@ -25,6 +25,7 @@ void Player::Prepare(Engine::Content::Factory::Component* componentFactory)
     _sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
 	_remote = componentFactory->Clone<RemoteMoveComponent>(this);
 	_chractorController = componentFactory->Clone<Engine::Component::ChractorController>(this);
+	_fixedArm = componentFactory->Clone<Engine::Component::FixedArm>(this);
 }
 
 int Player::GetSerialNumber()
@@ -47,6 +48,7 @@ void Player::DisposeComponents()
 	_sync->Dispose();
 	_remote->Dispose();
 	_chractorController->Dispose();
+	_fixedArm->Dispose();
 }
 
 void Player::PreInitialize(const Engine::Modules& modules)
@@ -69,6 +71,10 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	_skeltalMesh->SetMatrix(&_worldMatrix);
 	_animator->SetSkeletalMesh(_skeltalMesh);
     _textRenderer->SetFontPath(_fontPath);
+
+	//FixedArm
+	_fixedArm->SetTarget(&_transform);
+	_fixedArm->SetCameraComponent(_camera);
 
 	_sync->AddCallback((short)PacketID::EnterAccept, &Player::EnterSuccess, this);
 	_sync->AddCallback((short)PacketID::MoveSync, &Player::SyncMove, this);
@@ -210,8 +216,8 @@ void Player::PostUpdate(const float deltaTime)
 	_chractorController->_controller->SetPosition(_transform.position);
 	tempPostion.z -= 300.f;
 	tempPostion.y += 300.f;
-	_camera->SetPosition(tempPostion);
-	_camera->SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
+	//_camera->SetPosition(tempPostion);
+	//_camera->SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
 
 	// auto speed = _movement->GetSpeed();
 	// auto dir = _movement->GetDirection();

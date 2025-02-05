@@ -39,4 +39,7 @@ private:
 	//Physics
 	Engine::Component::ChractorController* _chractorController;
 	unsigned short gravityFlag = true;
+
+	// FixedArm
+	Engine::Component::FixedArm* _fixedArm;
 };

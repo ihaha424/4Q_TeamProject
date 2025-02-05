@@ -19,3 +19,33 @@ void Engine::Transform::Translate(const Math::Vector3 translation)
 {
 	position += translation;
 }
+
+Engine::Math::Vector3 Engine::Transform::GetForward() const
+{
+	return Math::Vector3::Transform(Math::Vector3::Forward, rotation);
+}
+
+Engine::Math::Vector3 Engine::Transform::GetRight() const
+{
+	return Math::Vector3::Transform(Math::Vector3::Right, rotation);
+}
+
+Engine::Math::Vector3 Engine::Transform::GetUp() const
+{
+	return Math::Vector3::Transform(Math::Vector3::Up, rotation);
+}
+
+Engine::Math::Vector3 Engine::Transform::GetBackward() const
+{
+	return Math::Vector3::Transform(Math::Vector3::Backward, rotation);
+}
+
+Engine::Math::Vector3 Engine::Transform::GetLeft() const
+{
+	return Math::Vector3::Transform(Math::Vector3::Left, rotation);
+}
+
+Engine::Math::Vector3 Engine::Transform::GetDown() const
+{
+	return Math::Vector3::Transform(Math::Vector3::Down, rotation);
+}

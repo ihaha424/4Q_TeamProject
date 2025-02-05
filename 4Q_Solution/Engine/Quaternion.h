@@ -11,6 +11,8 @@ namespace Engine::Math
 	{
 		using DirectX::SimpleMath::Quaternion::Identity;
 
+		Quaternion() noexcept = default;
+		Quaternion(float x, float y, float z, float w) noexcept;
 		Quaternion(const DirectX::SimpleMath::Quaternion& quaternion) noexcept;
 		Quaternion(const PhysicsEngineAPI::Utils::Math::Vector4& value) noexcept;
 

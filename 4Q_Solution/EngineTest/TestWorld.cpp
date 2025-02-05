@@ -1,11 +1,22 @@
 #include "pch.h"
 #include "TestWorld.h"
+
+#include "GameApplication.h"
 #include "NetworkTemp.h"
-
-
 
 void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 {
+	auto building1Data = GameApplication::GetLoadManager()->GetObjectCloneData(L"Building1");
+	//for (auto& data : building1Data) 
+	//{
+	//	auto building = objectFactory->Clone<Buliding1>(this);
+	//	building->SetPublic(data.GetProperty<bool>(L"isPublic").value());
+	//	building->SetPosition(data.GetProperty<Engine::Math::Vector3>(L"position").value());
+	//	building->SetRotation(data.GetProperty<Engine::Math::Quaternion>(L"rotation").value());
+	//	building->SetScale(data.GetProperty<Engine::Math::Vector3>(L"scale").value());
+	//}
+
+
 	//_player = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Player>(this);
 	_player = objectFactory->Clone<Player>(this);
 	_light = objectFactory->Clone<GlobalLight>(this);
@@ -19,7 +30,7 @@ void TestWorld::PreInitialize(const Engine::Modules& modules)
 		[this](int num) {
 			EnterAccept(num);
 		}
-		);
+	);
 	Engine::Application::GetNetworkManager()->RegistWorldEvent(
 		(short)PacketID::Sync,
 		[this](int num) {

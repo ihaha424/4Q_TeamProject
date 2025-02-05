@@ -1,9 +1,8 @@
 #pragma once
-
-class Terrain : public Engine::Object
+class Building1 : public Engine::Object
 {
 public:
-	explicit Terrain(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
+	explicit Building1(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
 
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
 
@@ -18,7 +17,7 @@ private:
 	std::filesystem::path _meshPath;
 	Engine::Math::Matrix _matrix;
 
-	Engine::Component::RigidStatic* _rigidStatc;
+	Engine::Component::RigidStatic* _terrainMesh;
 	std::filesystem::path _physicsPath;
 };
 

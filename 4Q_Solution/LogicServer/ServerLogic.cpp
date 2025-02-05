@@ -37,16 +37,6 @@ bool ServerLogic::Initialize()
     LoadSudium();
     //============================
 
-    _testMessage.add_position(1.5f);
-    _testMessage.add_position(2.3f);
-    _testMessage.add_position(6.5f);
-
-    const auto& position = _testMessage.position();
-    printf("proto repeated message Test \n");
-    for (const auto& element : position) {
-        printf("Data : %f\n", element);
-    }
-
     _objs[0]._position = { 100.f, 0.f, 100.f };
     _objs[1]._position = { 500.f, 0.f, 300.f };
     _objs[2]._position = { -100.f, 0.f, 500.f };
@@ -99,12 +89,13 @@ void ServerLogic::Update()
             } // if end
             Engine::Math::Vector3 position = _playerSlot[i]._controller->GetPosition();
             printf("Player%d Position : (%f, %f, %f)\n", i + 1, position.x, position.y, position.z);
-            _moveSync.set_x(position.x);
-            _moveSync.set_y(position.y);
-            _moveSync.set_z(position.z);
+            _moveSync.add_position(position.x);
+            _moveSync.add_position(position.y);
+            _moveSync.add_position(position.z);
 
             _moveSync.SerializeToString(&_msgBuffer);
             Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), _playerSlot[i]._serialNumber);
+            _moveSync.clear_position();
         } // for end
     } // if end
 
@@ -208,9 +199,9 @@ void ServerLogic::MessageDispatch()
             int serialNum = packet._serialNumber - 1;
 
             Engine::Math::Vector3 direction;
-            direction.x = _move.x();
-            direction.y = _move.y();
-            direction.z = _move.z();
+            direction.x = *(_move.direction().begin());
+            direction.y = *(_move.direction().begin() + 1);
+            direction.z = *(_move.direction().begin() + 2);
             _playerSlot[serialNum]._speed = _move.speed();
 
             if (direction != _playerSlot[serialNum]._direction) {
@@ -218,14 +209,13 @@ void ServerLogic::MessageDispatch()
 
                 Engine::Math::Vector3 position = _playerSlot[serialNum]._controller->GetPosition();
                 printf("Player%d Position : (%f, %f, %f)\n", serialNum + 1, position.x, position.y, position.z);
-                _moveSync.set_x(position.x);
-                _moveSync.set_y(position.y);
-                _moveSync.set_z(position.z);
-
-
+                _moveSync.add_position(position.x);
+                _moveSync.add_position(position.y);
+                _moveSync.add_position(position.z);
 
                 _moveSync.SerializeToString(&_msgBuffer);
                 Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), packet._serialNumber);
+                _moveSync.clear_position();
             }
 
             break;
@@ -256,20 +246,22 @@ void ServerLogic::MessageDispatch()
                      continue;
                 } // if end
 
-                _syncPlayer.set_x(_playerSlot[i]._position.x);
-                _syncPlayer.set_y(_playerSlot[i]._position.y);
-                _syncPlayer.set_z(_playerSlot[i]._position.z);
+                _syncPlayer.add_position(_playerSlot[i]._position.x);
+                _syncPlayer.add_position(_playerSlot[i]._position.y);
+                _syncPlayer.add_position(_playerSlot[i]._position.z);
                 _syncPlayer.SerializeToString(&_msgBuffer);
 
                 Server::BroadCast(_msgBuffer, (short)PacketID::DataRemote, _syncPlayer.ByteSizeLong(), _playerSlot[i]._serialNumber);
+                _syncPlayer.clear_position();
             }  // for end
             for (int i = 0; i < 3; i++) {
-                _syncObject.set_positionx(_objs[i]._position.x);
-                _syncObject.set_positiony(_objs[i]._position.y);
-                _syncObject.set_positionz(_objs[i]._position.z);
+                _syncObject.add_position(_objs[i]._position.x);
+                _syncObject.add_position(_objs[i]._position.y);
+                _syncObject.add_position(_objs[i]._position.z);
                 _syncObject.SerializeToString(&_msgBuffer);
 
                 Server::BroadCast(_msgBuffer, (short)PacketID::DataObject, _syncObject.ByteSizeLong(), _objs[i]._serialNumber);
+                _syncObject.clear_position();
             }
             Server::BroadCast("", (short)PacketID::DataSendComplete, 0, 0);
 

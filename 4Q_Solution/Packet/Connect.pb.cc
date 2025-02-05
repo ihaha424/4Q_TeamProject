@@ -29,12 +29,10 @@ namespace ConnectMsg {
 inline constexpr SyncPlayer::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
+        position_{},
         resource_(
             &::google::protobuf::internal::fixed_address_empty_string,
-            ::_pbi::ConstantInitialized()),
-        x_{0},
-        y_{0},
-        z_{0} {}
+            ::_pbi::ConstantInitialized()) {}
 
 template <typename>
 PROTOBUF_CONSTEXPR SyncPlayer::SyncPlayer(::_pbi::ConstantInitialized)
@@ -56,46 +54,12 @@ struct SyncPlayerDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SyncPlayerDefaultTypeInternal _SyncPlayer_default_instance_;
 
-inline constexpr SyncObjectTest::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : position_{},
-        rotation_{},
-        scale_{},
-        _cached_size_{0} {}
-
-template <typename>
-PROTOBUF_CONSTEXPR SyncObjectTest::SyncObjectTest(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(::_pbi::ConstantInitialized()) {
-}
-struct SyncObjectTestDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR SyncObjectTestDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~SyncObjectTestDefaultTypeInternal() {}
-  union {
-    SyncObjectTest _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SyncObjectTestDefaultTypeInternal _SyncObjectTest_default_instance_;
-
 inline constexpr SyncObject::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
-        positionx_{0},
-        positiony_{0},
-        positionz_{0},
-        rotationx_{0},
-        rotationy_{0},
-        rotationz_{0},
-        rotationw_{0},
-        scalex_{0},
-        scaley_{0},
-        scalez_{0},
+        position_{},
+        rotation_{},
+        scale_{},
         public__{false} {}
 
 template <typename>
@@ -221,13 +185,9 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncPlayer, _impl_.x_),
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncPlayer, _impl_.y_),
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncPlayer, _impl_.z_),
+        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncPlayer, _impl_.position_),
         PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncPlayer, _impl_.resource_),
-        1,
-        2,
-        3,
+        ~0u,
         0,
         PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncObject, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncObject, _internal_metadata_),
@@ -237,39 +197,14 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncObject, _impl_.positionx_),
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncObject, _impl_.positiony_),
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncObject, _impl_.positionz_),
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncObject, _impl_.rotationx_),
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncObject, _impl_.rotationy_),
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncObject, _impl_.rotationz_),
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncObject, _impl_.rotationw_),
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncObject, _impl_.scalex_),
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncObject, _impl_.scaley_),
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncObject, _impl_.scalez_),
         PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncObject, _impl_.public__),
+        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncObject, _impl_.position_),
+        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncObject, _impl_.rotation_),
+        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncObject, _impl_.scale_),
         0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncObjectTest, _internal_metadata_),
-        ~0u,  // no _extensions_
-        ~0u,  // no _oneof_case_
-        ~0u,  // no _weak_field_map_
-        ~0u,  // no _inlined_string_donated_
-        ~0u,  // no _split_
-        ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncObjectTest, _impl_.position_),
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncObjectTest, _impl_.rotation_),
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::SyncObjectTest, _impl_.scale_),
+        ~0u,
+        ~0u,
+        ~0u,
         PROTOBUF_FIELD_OFFSET(::ConnectMsg::AddRemote, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::ConnectMsg::AddRemote, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -297,17 +232,15 @@ const ::uint32_t
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, 9, -1, sizeof(::ConnectMsg::EnterAccept)},
-        {10, 22, -1, sizeof(::ConnectMsg::SyncPlayer)},
-        {26, 45, -1, sizeof(::ConnectMsg::SyncObject)},
-        {56, -1, -1, sizeof(::ConnectMsg::SyncObjectTest)},
-        {67, 76, -1, sizeof(::ConnectMsg::AddRemote)},
-        {77, 87, -1, sizeof(::ConnectMsg::AddObject)},
+        {10, 20, -1, sizeof(::ConnectMsg::SyncPlayer)},
+        {22, 34, -1, sizeof(::ConnectMsg::SyncObject)},
+        {38, 47, -1, sizeof(::ConnectMsg::AddRemote)},
+        {48, 58, -1, sizeof(::ConnectMsg::AddObject)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::ConnectMsg::_EnterAccept_default_instance_._instance,
     &::ConnectMsg::_SyncPlayer_default_instance_._instance,
     &::ConnectMsg::_SyncObject_default_instance_._instance,
-    &::ConnectMsg::_SyncObjectTest_default_instance_._instance,
     &::ConnectMsg::_AddRemote_default_instance_._instance,
     &::ConnectMsg::_AddObject_default_instance_._instance,
 };
@@ -315,37 +248,27 @@ const char descriptor_table_protodef_Connect_2eproto[] ABSL_ATTRIBUTE_SECTION_VA
     protodesc_cold) = {
     "\n\rConnect.proto\022\nConnectMsg\"7\n\013EnterAcce"
     "pt\022\030\n\013grantnumber\030\001 \001(\005H\000\210\001\001B\016\n\014_grantnu"
-    "mber\"r\n\nSyncPlayer\022\016\n\001x\030\001 \001(\002H\000\210\001\001\022\016\n\001y\030"
-    "\002 \001(\002H\001\210\001\001\022\016\n\001z\030\003 \001(\002H\002\210\001\001\022\025\n\010resource\030\004"
-    " \001(\tH\003\210\001\001B\004\n\002_xB\004\n\002_yB\004\n\002_zB\013\n\t_resource"
-    "\"\226\003\n\nSyncObject\022\026\n\tpositionx\030\001 \001(\002H\000\210\001\001\022"
-    "\026\n\tpositiony\030\002 \001(\002H\001\210\001\001\022\026\n\tpositionz\030\003 \001"
-    "(\002H\002\210\001\001\022\026\n\trotationx\030\004 \001(\002H\003\210\001\001\022\026\n\trotat"
-    "iony\030\005 \001(\002H\004\210\001\001\022\026\n\trotationz\030\006 \001(\002H\005\210\001\001\022"
-    "\026\n\trotationw\030\007 \001(\002H\006\210\001\001\022\023\n\006scalex\030\010 \001(\002H"
-    "\007\210\001\001\022\023\n\006scaley\030\t \001(\002H\010\210\001\001\022\023\n\006scalez\030\n \001("
-    "\002H\t\210\001\001\022\023\n\006public\030\013 \001(\010H\n\210\001\001B\014\n\n_position"
-    "xB\014\n\n_positionyB\014\n\n_positionzB\014\n\n_rotati"
-    "onxB\014\n\n_rotationyB\014\n\n_rotationzB\014\n\n_rota"
-    "tionwB\t\n\007_scalexB\t\n\007_scaleyB\t\n\007_scalezB\t"
-    "\n\007_public\"C\n\016SyncObjectTest\022\020\n\010position\030"
-    "\001 \003(\002\022\020\n\010rotation\030\002 \003(\002\022\r\n\005scale\030\003 \003(\002\"5"
-    "\n\tAddRemote\022\030\n\013grantnumber\030\001 \001(\005H\000\210\001\001B\016\n"
-    "\014_grantnumber\"]\n\tAddObject\022\030\n\013grantnumbe"
-    "r\030\001 \001(\005H\000\210\001\001\022\027\n\nresourceid\030\002 \001(\tH\001\210\001\001B\016\n"
-    "\014_grantnumberB\r\n\013_resourceidb\006proto3"
+    "mber\"B\n\nSyncPlayer\022\020\n\010position\030\001 \003(\002\022\025\n\010"
+    "resource\030\002 \001(\tH\000\210\001\001B\013\n\t_resource\"_\n\nSync"
+    "Object\022\023\n\006public\030\001 \001(\010H\000\210\001\001\022\020\n\010position\030"
+    "\002 \003(\002\022\020\n\010rotation\030\003 \003(\002\022\r\n\005scale\030\004 \003(\002B\t"
+    "\n\007_public\"5\n\tAddRemote\022\030\n\013grantnumber\030\001 "
+    "\001(\005H\000\210\001\001B\016\n\014_grantnumber\"]\n\tAddObject\022\030\n"
+    "\013grantnumber\030\001 \001(\005H\000\210\001\001\022\027\n\nresourceid\030\002 "
+    "\001(\tH\001\210\001\001B\016\n\014_grantnumberB\r\n\013_resourceidb"
+    "\006proto3"
 };
 static ::absl::once_flag descriptor_table_Connect_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_Connect_2eproto = {
     false,
     false,
-    836,
+    407,
     descriptor_table_protodef_Connect_2eproto,
     "Connect.proto",
     &descriptor_table_Connect_2eproto_once,
     nullptr,
     0,
-    6,
+    5,
     schemas,
     file_default_instances,
     TableStruct_Connect_2eproto::offsets,
@@ -594,6 +517,7 @@ inline PROTOBUF_NDEBUG_INLINE SyncPlayer::Impl_::Impl_(
     const Impl_& from, const ::ConnectMsg::SyncPlayer& from_msg)
       : _has_bits_{from._has_bits_},
         _cached_size_{0},
+        position_{visibility, arena, from.position_},
         resource_(arena, from.resource_) {}
 
 SyncPlayer::SyncPlayer(
@@ -609,13 +533,6 @@ SyncPlayer::SyncPlayer(
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-  ::memcpy(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, x_),
-           reinterpret_cast<const char *>(&from._impl_) +
-               offsetof(Impl_, x_),
-           offsetof(Impl_, z_) -
-               offsetof(Impl_, x_) +
-               sizeof(Impl_::z_));
 
   // @@protoc_insertion_point(copy_constructor:ConnectMsg.SyncPlayer)
 }
@@ -623,16 +540,11 @@ inline PROTOBUF_NDEBUG_INLINE SyncPlayer::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : _cached_size_{0},
+        position_{visibility, arena},
         resource_(arena) {}
 
 inline void SyncPlayer::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  ::memset(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, x_),
-           0,
-           offsetof(Impl_, z_) -
-               offsetof(Impl_, x_) +
-               sizeof(Impl_::z_));
 }
 SyncPlayer::~SyncPlayer() {
   // @@protoc_insertion_point(destructor:ConnectMsg.SyncPlayer)
@@ -651,8 +563,20 @@ inline void* SyncPlayer::PlacementNew_(const void*, void* mem,
   return ::new (mem) SyncPlayer(arena);
 }
 constexpr auto SyncPlayer::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(SyncPlayer),
-                                            alignof(SyncPlayer));
+  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
+      PROTOBUF_FIELD_OFFSET(SyncPlayer, _impl_.position_) +
+          decltype(SyncPlayer::_impl_.position_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
+  });
+  if (arena_bits.has_value()) {
+    return ::google::protobuf::internal::MessageCreator::CopyInit(
+        sizeof(SyncPlayer), alignof(SyncPlayer), *arena_bits);
+  } else {
+    return ::google::protobuf::internal::MessageCreator(&SyncPlayer::PlacementNew_,
+                                 sizeof(SyncPlayer),
+                                 alignof(SyncPlayer));
+  }
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
@@ -682,15 +606,15 @@ const ::google::protobuf::internal::ClassData* SyncPlayer::GetClassData() const 
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 4, 0, 38, 2> SyncPlayer::_table_ = {
+const ::_pbi::TcParseTable<1, 2, 0, 38, 2> SyncPlayer::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(SyncPlayer, _impl_._has_bits_),
     0, // no _extensions_
-    4, 24,  // max_field_number, fast_idx_mask
+    2, 8,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967280,  // skipmap
+    4294967292,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    4,  // num_field_entries
+    2,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
@@ -700,37 +624,25 @@ const ::_pbi::TcParseTable<2, 4, 0, 38, 2> SyncPlayer::_table_ = {
     ::_pbi::TcParser::GetTable<::ConnectMsg::SyncPlayer>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // optional string resource = 4;
+    // optional string resource = 2;
     {::_pbi::TcParser::FastUS1,
-     {34, 0, 0, PROTOBUF_FIELD_OFFSET(SyncPlayer, _impl_.resource_)}},
-    // optional float x = 1;
-    {::_pbi::TcParser::FastF32S1,
-     {13, 1, 0, PROTOBUF_FIELD_OFFSET(SyncPlayer, _impl_.x_)}},
-    // optional float y = 2;
-    {::_pbi::TcParser::FastF32S1,
-     {21, 2, 0, PROTOBUF_FIELD_OFFSET(SyncPlayer, _impl_.y_)}},
-    // optional float z = 3;
-    {::_pbi::TcParser::FastF32S1,
-     {29, 3, 0, PROTOBUF_FIELD_OFFSET(SyncPlayer, _impl_.z_)}},
+     {18, 0, 0, PROTOBUF_FIELD_OFFSET(SyncPlayer, _impl_.resource_)}},
+    // repeated float position = 1;
+    {::_pbi::TcParser::FastF32P1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(SyncPlayer, _impl_.position_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // optional float x = 1;
-    {PROTOBUF_FIELD_OFFSET(SyncPlayer, _impl_.x_), _Internal::kHasBitsOffset + 1, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // optional float y = 2;
-    {PROTOBUF_FIELD_OFFSET(SyncPlayer, _impl_.y_), _Internal::kHasBitsOffset + 2, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // optional float z = 3;
-    {PROTOBUF_FIELD_OFFSET(SyncPlayer, _impl_.z_), _Internal::kHasBitsOffset + 3, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // optional string resource = 4;
+    // repeated float position = 1;
+    {PROTOBUF_FIELD_OFFSET(SyncPlayer, _impl_.position_), -1, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kPackedFloat)},
+    // optional string resource = 2;
     {PROTOBUF_FIELD_OFFSET(SyncPlayer, _impl_.resource_), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kUtf8String | ::_fl::kRepAString)},
   }},
   // no aux_entries
   {{
-    "\25\0\0\0\10\0\0\0"
+    "\25\0\10\0\0\0\0\0"
     "ConnectMsg.SyncPlayer"
     "resource"
   }},
@@ -743,14 +655,10 @@ PROTOBUF_NOINLINE void SyncPlayer::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  _impl_.position_.Clear();
   cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
     _impl_.resource_.ClearNonDefaultToEmpty();
-  }
-  if (cached_has_bits & 0x0000000eu) {
-    ::memset(&_impl_.x_, 0, static_cast<::size_t>(
-        reinterpret_cast<char*>(&_impl_.z_) -
-        reinterpret_cast<char*>(&_impl_.x_)) + sizeof(_impl_.z_));
   }
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
@@ -771,34 +679,18 @@ PROTOBUF_NOINLINE void SyncPlayer::Clear() {
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
+          // repeated float position = 1;
+          if (this_._internal_position_size() > 0) {
+            target = stream->WriteFixedPacked(1, this_._internal_position(), target);
+          }
+
           cached_has_bits = this_._impl_._has_bits_[0];
-          // optional float x = 1;
-          if (cached_has_bits & 0x00000002u) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteFloatToArray(
-                1, this_._internal_x(), target);
-          }
-
-          // optional float y = 2;
-          if (cached_has_bits & 0x00000004u) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteFloatToArray(
-                2, this_._internal_y(), target);
-          }
-
-          // optional float z = 3;
-          if (cached_has_bits & 0x00000008u) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteFloatToArray(
-                3, this_._internal_z(), target);
-          }
-
-          // optional string resource = 4;
+          // optional string resource = 2;
           if (cached_has_bits & 0x00000001u) {
             const std::string& _s = this_._internal_resource();
             ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
                 _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "ConnectMsg.SyncPlayer.resource");
-            target = stream->WriteStringMaybeAliased(4, _s, target);
+            target = stream->WriteStringMaybeAliased(2, _s, target);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -825,24 +717,24 @@ PROTOBUF_NOINLINE void SyncPlayer::Clear() {
           (void)cached_has_bits;
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
-          cached_has_bits = this_._impl_._has_bits_[0];
-          if (cached_has_bits & 0x0000000fu) {
-            // optional string resource = 4;
+           {
+            // repeated float position = 1;
+            {
+              std::size_t data_size = std::size_t{4} *
+                  ::_pbi::FromIntSize(this_._internal_position_size());
+              std::size_t tag_size = data_size == 0
+                  ? 0
+                  : 1 + ::_pbi::WireFormatLite::Int32Size(
+                                      static_cast<int32_t>(data_size));
+              total_size += tag_size + data_size;
+            }
+          }
+           {
+            // optional string resource = 2;
+            cached_has_bits = this_._impl_._has_bits_[0];
             if (cached_has_bits & 0x00000001u) {
               total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
                                               this_._internal_resource());
-            }
-            // optional float x = 1;
-            if (cached_has_bits & 0x00000002u) {
-              total_size += 5;
-            }
-            // optional float y = 2;
-            if (cached_has_bits & 0x00000004u) {
-              total_size += 5;
-            }
-            // optional float z = 3;
-            if (cached_has_bits & 0x00000008u) {
-              total_size += 5;
             }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
@@ -857,20 +749,10 @@ void SyncPlayer::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::goog
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  _this->_internal_mutable_position()->MergeFrom(from._internal_position());
   cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x0000000fu) {
-    if (cached_has_bits & 0x00000001u) {
-      _this->_internal_set_resource(from._internal_resource());
-    }
-    if (cached_has_bits & 0x00000002u) {
-      _this->_impl_.x_ = from._impl_.x_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      _this->_impl_.y_ = from._impl_.y_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      _this->_impl_.z_ = from._impl_.z_;
-    }
+  if (cached_has_bits & 0x00000001u) {
+    _this->_internal_set_resource(from._internal_resource());
   }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
@@ -890,13 +772,8 @@ void SyncPlayer::InternalSwap(SyncPlayer* PROTOBUF_RESTRICT other) {
   ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  _impl_.position_.InternalSwap(&other->_impl_.position_);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.resource_, &other->_impl_.resource_, arena);
-  ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(SyncPlayer, _impl_.z_)
-      + sizeof(SyncPlayer::_impl_.z_)
-      - PROTOBUF_FIELD_OFFSET(SyncPlayer, _impl_.x_)>(
-          reinterpret_cast<char*>(&_impl_.x_),
-          reinterpret_cast<char*>(&other->_impl_.x_));
 }
 
 ::google::protobuf::Metadata SyncPlayer::GetMetadata() const {
@@ -921,24 +798,43 @@ SyncObject::SyncObject(::google::protobuf::Arena* arena)
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:ConnectMsg.SyncObject)
 }
+inline PROTOBUF_NDEBUG_INLINE SyncObject::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::ConnectMsg::SyncObject& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0},
+        position_{visibility, arena, from.position_},
+        rotation_{visibility, arena, from.rotation_},
+        scale_{visibility, arena, from.scale_} {}
+
 SyncObject::SyncObject(
-    ::google::protobuf::Arena* arena, const SyncObject& from)
-    : SyncObject(arena) {
-  MergeFrom(from);
+    ::google::protobuf::Arena* arena,
+    const SyncObject& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SyncObject* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  _impl_.public__ = from._impl_.public__;
+
+  // @@protoc_insertion_point(copy_constructor:ConnectMsg.SyncObject)
 }
 inline PROTOBUF_NDEBUG_INLINE SyncObject::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
-      : _cached_size_{0} {}
+      : _cached_size_{0},
+        position_{visibility, arena},
+        rotation_{visibility, arena},
+        scale_{visibility, arena} {}
 
 inline void SyncObject::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  ::memset(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, positionx_),
-           0,
-           offsetof(Impl_, public__) -
-               offsetof(Impl_, positionx_) +
-               sizeof(Impl_::public__));
+  _impl_.public__ = {};
 }
 SyncObject::~SyncObject() {
   // @@protoc_insertion_point(destructor:ConnectMsg.SyncObject)
@@ -956,8 +852,28 @@ inline void* SyncObject::PlacementNew_(const void*, void* mem,
   return ::new (mem) SyncObject(arena);
 }
 constexpr auto SyncObject::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(SyncObject),
-                                            alignof(SyncObject));
+  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
+      PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.position_) +
+          decltype(SyncObject::_impl_.position_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
+      PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.rotation_) +
+          decltype(SyncObject::_impl_.rotation_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
+      PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.scale_) +
+          decltype(SyncObject::_impl_.scale_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
+  });
+  if (arena_bits.has_value()) {
+    return ::google::protobuf::internal::MessageCreator::ZeroInit(
+        sizeof(SyncObject), alignof(SyncObject), *arena_bits);
+  } else {
+    return ::google::protobuf::internal::MessageCreator(&SyncObject::PlacementNew_,
+                                 sizeof(SyncObject),
+                                 alignof(SyncObject));
+  }
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
@@ -987,15 +903,15 @@ const ::google::protobuf::internal::ClassData* SyncObject::GetClassData() const 
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<4, 11, 0, 0, 2> SyncObject::_table_ = {
+const ::_pbi::TcParseTable<2, 4, 0, 0, 2> SyncObject::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(SyncObject, _impl_._has_bits_),
     0, // no _extensions_
-    11, 120,  // max_field_number, fast_idx_mask
+    4, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294965248,  // skipmap
+    4294967280,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    11,  // num_field_entries
+    4,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
@@ -1005,80 +921,33 @@ const ::_pbi::TcParseTable<4, 11, 0, 0, 2> SyncObject::_table_ = {
     ::_pbi::TcParser::GetTable<::ConnectMsg::SyncObject>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    {::_pbi::TcParser::MiniParse, {}},
-    // optional float positionx = 1;
-    {::_pbi::TcParser::FastF32S1,
-     {13, 0, 0, PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.positionx_)}},
-    // optional float positiony = 2;
-    {::_pbi::TcParser::FastF32S1,
-     {21, 1, 0, PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.positiony_)}},
-    // optional float positionz = 3;
-    {::_pbi::TcParser::FastF32S1,
-     {29, 2, 0, PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.positionz_)}},
-    // optional float rotationx = 4;
-    {::_pbi::TcParser::FastF32S1,
-     {37, 3, 0, PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.rotationx_)}},
-    // optional float rotationy = 5;
-    {::_pbi::TcParser::FastF32S1,
-     {45, 4, 0, PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.rotationy_)}},
-    // optional float rotationz = 6;
-    {::_pbi::TcParser::FastF32S1,
-     {53, 5, 0, PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.rotationz_)}},
-    // optional float rotationw = 7;
-    {::_pbi::TcParser::FastF32S1,
-     {61, 6, 0, PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.rotationw_)}},
-    // optional float scalex = 8;
-    {::_pbi::TcParser::FastF32S1,
-     {69, 7, 0, PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.scalex_)}},
-    // optional float scaley = 9;
-    {::_pbi::TcParser::FastF32S1,
-     {77, 8, 0, PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.scaley_)}},
-    // optional float scalez = 10;
-    {::_pbi::TcParser::FastF32S1,
-     {85, 9, 0, PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.scalez_)}},
-    // optional bool public = 11;
-    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(SyncObject, _impl_.public__), 10>(),
-     {88, 10, 0, PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.public__)}},
-    {::_pbi::TcParser::MiniParse, {}},
-    {::_pbi::TcParser::MiniParse, {}},
-    {::_pbi::TcParser::MiniParse, {}},
-    {::_pbi::TcParser::MiniParse, {}},
+    // repeated float scale = 4;
+    {::_pbi::TcParser::FastF32P1,
+     {34, 63, 0, PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.scale_)}},
+    // optional bool public = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(SyncObject, _impl_.public__), 0>(),
+     {8, 0, 0, PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.public__)}},
+    // repeated float position = 2;
+    {::_pbi::TcParser::FastF32P1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.position_)}},
+    // repeated float rotation = 3;
+    {::_pbi::TcParser::FastF32P1,
+     {26, 63, 0, PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.rotation_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // optional float positionx = 1;
-    {PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.positionx_), _Internal::kHasBitsOffset + 0, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // optional float positiony = 2;
-    {PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.positiony_), _Internal::kHasBitsOffset + 1, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // optional float positionz = 3;
-    {PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.positionz_), _Internal::kHasBitsOffset + 2, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // optional float rotationx = 4;
-    {PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.rotationx_), _Internal::kHasBitsOffset + 3, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // optional float rotationy = 5;
-    {PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.rotationy_), _Internal::kHasBitsOffset + 4, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // optional float rotationz = 6;
-    {PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.rotationz_), _Internal::kHasBitsOffset + 5, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // optional float rotationw = 7;
-    {PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.rotationw_), _Internal::kHasBitsOffset + 6, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // optional float scalex = 8;
-    {PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.scalex_), _Internal::kHasBitsOffset + 7, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // optional float scaley = 9;
-    {PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.scaley_), _Internal::kHasBitsOffset + 8, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // optional float scalez = 10;
-    {PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.scalez_), _Internal::kHasBitsOffset + 9, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // optional bool public = 11;
-    {PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.public__), _Internal::kHasBitsOffset + 10, 0,
+    // optional bool public = 1;
+    {PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.public__), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kBool)},
+    // repeated float position = 2;
+    {PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.position_), -1, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kPackedFloat)},
+    // repeated float rotation = 3;
+    {PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.rotation_), -1, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kPackedFloat)},
+    // repeated float scale = 4;
+    {PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.scale_), -1, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kPackedFloat)},
   }},
   // no aux_entries
   {{
@@ -1092,17 +961,10 @@ PROTOBUF_NOINLINE void SyncObject::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x000000ffu) {
-    ::memset(&_impl_.positionx_, 0, static_cast<::size_t>(
-        reinterpret_cast<char*>(&_impl_.scalex_) -
-        reinterpret_cast<char*>(&_impl_.positionx_)) + sizeof(_impl_.scalex_));
-  }
-  if (cached_has_bits & 0x00000700u) {
-    ::memset(&_impl_.scaley_, 0, static_cast<::size_t>(
-        reinterpret_cast<char*>(&_impl_.public__) -
-        reinterpret_cast<char*>(&_impl_.scaley_)) + sizeof(_impl_.public__));
-  }
+  _impl_.position_.Clear();
+  _impl_.rotation_.Clear();
+  _impl_.scale_.Clear();
+  _impl_.public__ = false;
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
@@ -1123,81 +985,26 @@ PROTOBUF_NOINLINE void SyncObject::Clear() {
           (void)cached_has_bits;
 
           cached_has_bits = this_._impl_._has_bits_[0];
-          // optional float positionx = 1;
+          // optional bool public = 1;
           if (cached_has_bits & 0x00000001u) {
             target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteFloatToArray(
-                1, this_._internal_positionx(), target);
-          }
-
-          // optional float positiony = 2;
-          if (cached_has_bits & 0x00000002u) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteFloatToArray(
-                2, this_._internal_positiony(), target);
-          }
-
-          // optional float positionz = 3;
-          if (cached_has_bits & 0x00000004u) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteFloatToArray(
-                3, this_._internal_positionz(), target);
-          }
-
-          // optional float rotationx = 4;
-          if (cached_has_bits & 0x00000008u) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteFloatToArray(
-                4, this_._internal_rotationx(), target);
-          }
-
-          // optional float rotationy = 5;
-          if (cached_has_bits & 0x00000010u) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteFloatToArray(
-                5, this_._internal_rotationy(), target);
-          }
-
-          // optional float rotationz = 6;
-          if (cached_has_bits & 0x00000020u) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteFloatToArray(
-                6, this_._internal_rotationz(), target);
-          }
-
-          // optional float rotationw = 7;
-          if (cached_has_bits & 0x00000040u) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteFloatToArray(
-                7, this_._internal_rotationw(), target);
-          }
-
-          // optional float scalex = 8;
-          if (cached_has_bits & 0x00000080u) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteFloatToArray(
-                8, this_._internal_scalex(), target);
-          }
-
-          // optional float scaley = 9;
-          if (cached_has_bits & 0x00000100u) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteFloatToArray(
-                9, this_._internal_scaley(), target);
-          }
-
-          // optional float scalez = 10;
-          if (cached_has_bits & 0x00000200u) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteFloatToArray(
-                10, this_._internal_scalez(), target);
-          }
-
-          // optional bool public = 11;
-          if (cached_has_bits & 0x00000400u) {
-            target = stream->EnsureSpace(target);
             target = ::_pbi::WireFormatLite::WriteBoolToArray(
-                11, this_._internal_public_(), target);
+                1, this_._internal_public_(), target);
+          }
+
+          // repeated float position = 2;
+          if (this_._internal_position_size() > 0) {
+            target = stream->WriteFixedPacked(2, this_._internal_position(), target);
+          }
+
+          // repeated float rotation = 3;
+          if (this_._internal_rotation_size() > 0) {
+            target = stream->WriteFixedPacked(3, this_._internal_rotation(), target);
+          }
+
+          // repeated float scale = 4;
+          if (this_._internal_scale_size() > 0) {
+            target = stream->WriteFixedPacked(4, this_._internal_scale(), target);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -1224,52 +1031,42 @@ PROTOBUF_NOINLINE void SyncObject::Clear() {
           (void)cached_has_bits;
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
-          cached_has_bits = this_._impl_._has_bits_[0];
-          if (cached_has_bits & 0x000000ffu) {
-            // optional float positionx = 1;
-            if (cached_has_bits & 0x00000001u) {
-              total_size += 5;
+           {
+            // repeated float position = 2;
+            {
+              std::size_t data_size = std::size_t{4} *
+                  ::_pbi::FromIntSize(this_._internal_position_size());
+              std::size_t tag_size = data_size == 0
+                  ? 0
+                  : 1 + ::_pbi::WireFormatLite::Int32Size(
+                                      static_cast<int32_t>(data_size));
+              total_size += tag_size + data_size;
             }
-            // optional float positiony = 2;
-            if (cached_has_bits & 0x00000002u) {
-              total_size += 5;
+            // repeated float rotation = 3;
+            {
+              std::size_t data_size = std::size_t{4} *
+                  ::_pbi::FromIntSize(this_._internal_rotation_size());
+              std::size_t tag_size = data_size == 0
+                  ? 0
+                  : 1 + ::_pbi::WireFormatLite::Int32Size(
+                                      static_cast<int32_t>(data_size));
+              total_size += tag_size + data_size;
             }
-            // optional float positionz = 3;
-            if (cached_has_bits & 0x00000004u) {
-              total_size += 5;
-            }
-            // optional float rotationx = 4;
-            if (cached_has_bits & 0x00000008u) {
-              total_size += 5;
-            }
-            // optional float rotationy = 5;
-            if (cached_has_bits & 0x00000010u) {
-              total_size += 5;
-            }
-            // optional float rotationz = 6;
-            if (cached_has_bits & 0x00000020u) {
-              total_size += 5;
-            }
-            // optional float rotationw = 7;
-            if (cached_has_bits & 0x00000040u) {
-              total_size += 5;
-            }
-            // optional float scalex = 8;
-            if (cached_has_bits & 0x00000080u) {
-              total_size += 5;
+            // repeated float scale = 4;
+            {
+              std::size_t data_size = std::size_t{4} *
+                  ::_pbi::FromIntSize(this_._internal_scale_size());
+              std::size_t tag_size = data_size == 0
+                  ? 0
+                  : 1 + ::_pbi::WireFormatLite::Int32Size(
+                                      static_cast<int32_t>(data_size));
+              total_size += tag_size + data_size;
             }
           }
-          if (cached_has_bits & 0x00000700u) {
-            // optional float scaley = 9;
-            if (cached_has_bits & 0x00000100u) {
-              total_size += 5;
-            }
-            // optional float scalez = 10;
-            if (cached_has_bits & 0x00000200u) {
-              total_size += 5;
-            }
-            // optional bool public = 11;
-            if (cached_has_bits & 0x00000400u) {
+           {
+            // optional bool public = 1;
+            cached_has_bits = this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
               total_size += 2;
             }
           }
@@ -1285,43 +1082,12 @@ void SyncObject::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::goog
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  _this->_internal_mutable_position()->MergeFrom(from._internal_position());
+  _this->_internal_mutable_rotation()->MergeFrom(from._internal_rotation());
+  _this->_internal_mutable_scale()->MergeFrom(from._internal_scale());
   cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x000000ffu) {
-    if (cached_has_bits & 0x00000001u) {
-      _this->_impl_.positionx_ = from._impl_.positionx_;
-    }
-    if (cached_has_bits & 0x00000002u) {
-      _this->_impl_.positiony_ = from._impl_.positiony_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      _this->_impl_.positionz_ = from._impl_.positionz_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      _this->_impl_.rotationx_ = from._impl_.rotationx_;
-    }
-    if (cached_has_bits & 0x00000010u) {
-      _this->_impl_.rotationy_ = from._impl_.rotationy_;
-    }
-    if (cached_has_bits & 0x00000020u) {
-      _this->_impl_.rotationz_ = from._impl_.rotationz_;
-    }
-    if (cached_has_bits & 0x00000040u) {
-      _this->_impl_.rotationw_ = from._impl_.rotationw_;
-    }
-    if (cached_has_bits & 0x00000080u) {
-      _this->_impl_.scalex_ = from._impl_.scalex_;
-    }
-  }
-  if (cached_has_bits & 0x00000700u) {
-    if (cached_has_bits & 0x00000100u) {
-      _this->_impl_.scaley_ = from._impl_.scaley_;
-    }
-    if (cached_has_bits & 0x00000200u) {
-      _this->_impl_.scalez_ = from._impl_.scalez_;
-    }
-    if (cached_has_bits & 0x00000400u) {
-      _this->_impl_.public__ = from._impl_.public__;
-    }
+  if (cached_has_bits & 0x00000001u) {
+    _this->_impl_.public__ = from._impl_.public__;
   }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
@@ -1339,314 +1105,13 @@ void SyncObject::InternalSwap(SyncObject* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.public__)
-      + sizeof(SyncObject::_impl_.public__)
-      - PROTOBUF_FIELD_OFFSET(SyncObject, _impl_.positionx_)>(
-          reinterpret_cast<char*>(&_impl_.positionx_),
-          reinterpret_cast<char*>(&other->_impl_.positionx_));
-}
-
-::google::protobuf::Metadata SyncObject::GetMetadata() const {
-  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
-}
-// ===================================================================
-
-class SyncObjectTest::_Internal {
- public:
-};
-
-SyncObjectTest::SyncObjectTest(::google::protobuf::Arena* arena)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:ConnectMsg.SyncObjectTest)
-}
-inline PROTOBUF_NDEBUG_INLINE SyncObjectTest::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::ConnectMsg::SyncObjectTest& from_msg)
-      : position_{visibility, arena, from.position_},
-        rotation_{visibility, arena, from.rotation_},
-        scale_{visibility, arena, from.scale_},
-        _cached_size_{0} {}
-
-SyncObjectTest::SyncObjectTest(
-    ::google::protobuf::Arena* arena,
-    const SyncObjectTest& from)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  SyncObjectTest* const _this = this;
-  (void)_this;
-  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
-      from._internal_metadata_);
-  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-
-  // @@protoc_insertion_point(copy_constructor:ConnectMsg.SyncObjectTest)
-}
-inline PROTOBUF_NDEBUG_INLINE SyncObjectTest::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility,
-    ::google::protobuf::Arena* arena)
-      : position_{visibility, arena},
-        rotation_{visibility, arena},
-        scale_{visibility, arena},
-        _cached_size_{0} {}
-
-inline void SyncObjectTest::SharedCtor(::_pb::Arena* arena) {
-  new (&_impl_) Impl_(internal_visibility(), arena);
-}
-SyncObjectTest::~SyncObjectTest() {
-  // @@protoc_insertion_point(destructor:ConnectMsg.SyncObjectTest)
-  SharedDtor(*this);
-}
-inline void SyncObjectTest::SharedDtor(MessageLite& self) {
-  SyncObjectTest& this_ = static_cast<SyncObjectTest&>(self);
-  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
-  ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.~Impl_();
-}
-
-inline void* SyncObjectTest::PlacementNew_(const void*, void* mem,
-                                        ::google::protobuf::Arena* arena) {
-  return ::new (mem) SyncObjectTest(arena);
-}
-constexpr auto SyncObjectTest::InternalNewImpl_() {
-  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
-      PROTOBUF_FIELD_OFFSET(SyncObjectTest, _impl_.position_) +
-          decltype(SyncObjectTest::_impl_.position_)::
-              InternalGetArenaOffset(
-                  ::google::protobuf::Message::internal_visibility()),
-      PROTOBUF_FIELD_OFFSET(SyncObjectTest, _impl_.rotation_) +
-          decltype(SyncObjectTest::_impl_.rotation_)::
-              InternalGetArenaOffset(
-                  ::google::protobuf::Message::internal_visibility()),
-      PROTOBUF_FIELD_OFFSET(SyncObjectTest, _impl_.scale_) +
-          decltype(SyncObjectTest::_impl_.scale_)::
-              InternalGetArenaOffset(
-                  ::google::protobuf::Message::internal_visibility()),
-  });
-  if (arena_bits.has_value()) {
-    return ::google::protobuf::internal::MessageCreator::ZeroInit(
-        sizeof(SyncObjectTest), alignof(SyncObjectTest), *arena_bits);
-  } else {
-    return ::google::protobuf::internal::MessageCreator(&SyncObjectTest::PlacementNew_,
-                                 sizeof(SyncObjectTest),
-                                 alignof(SyncObjectTest));
-  }
-}
-PROTOBUF_CONSTINIT
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull SyncObjectTest::_class_data_ = {
-    ::google::protobuf::internal::ClassData{
-        &_SyncObjectTest_default_instance_._instance,
-        &_table_.header,
-        nullptr,  // OnDemandRegisterArenaDtor
-        nullptr,  // IsInitialized
-        &SyncObjectTest::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<SyncObjectTest>(),
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        &SyncObjectTest::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<SyncObjectTest>(), &SyncObjectTest::ByteSizeLong,
-            &SyncObjectTest::_InternalSerialize,
-#endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(SyncObjectTest, _impl_._cached_size_),
-        false,
-    },
-    &SyncObjectTest::kDescriptorMethods,
-    &descriptor_table_Connect_2eproto,
-    nullptr,  // tracker
-};
-const ::google::protobuf::internal::ClassData* SyncObjectTest::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
-  return _class_data_.base();
-}
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 0, 0, 2> SyncObjectTest::_table_ = {
-  {
-    0,  // no _has_bits_
-    0, // no _extensions_
-    3, 24,  // max_field_number, fast_idx_mask
-    offsetof(decltype(_table_), field_lookup_table),
-    4294967288,  // skipmap
-    offsetof(decltype(_table_), field_entries),
-    3,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
-    _class_data_.base(),
-    nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
-    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::ConnectMsg::SyncObjectTest>(),  // to_prefetch
-    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
-  }, {{
-    {::_pbi::TcParser::MiniParse, {}},
-    // repeated float position = 1;
-    {::_pbi::TcParser::FastF32P1,
-     {10, 63, 0, PROTOBUF_FIELD_OFFSET(SyncObjectTest, _impl_.position_)}},
-    // repeated float rotation = 2;
-    {::_pbi::TcParser::FastF32P1,
-     {18, 63, 0, PROTOBUF_FIELD_OFFSET(SyncObjectTest, _impl_.rotation_)}},
-    // repeated float scale = 3;
-    {::_pbi::TcParser::FastF32P1,
-     {26, 63, 0, PROTOBUF_FIELD_OFFSET(SyncObjectTest, _impl_.scale_)}},
-  }}, {{
-    65535, 65535
-  }}, {{
-    // repeated float position = 1;
-    {PROTOBUF_FIELD_OFFSET(SyncObjectTest, _impl_.position_), 0, 0,
-    (0 | ::_fl::kFcRepeated | ::_fl::kPackedFloat)},
-    // repeated float rotation = 2;
-    {PROTOBUF_FIELD_OFFSET(SyncObjectTest, _impl_.rotation_), 0, 0,
-    (0 | ::_fl::kFcRepeated | ::_fl::kPackedFloat)},
-    // repeated float scale = 3;
-    {PROTOBUF_FIELD_OFFSET(SyncObjectTest, _impl_.scale_), 0, 0,
-    (0 | ::_fl::kFcRepeated | ::_fl::kPackedFloat)},
-  }},
-  // no aux_entries
-  {{
-  }},
-};
-
-PROTOBUF_NOINLINE void SyncObjectTest::Clear() {
-// @@protoc_insertion_point(message_clear_start:ConnectMsg.SyncObjectTest)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.position_.Clear();
-  _impl_.rotation_.Clear();
-  _impl_.scale_.Clear();
-  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
-}
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* SyncObjectTest::_InternalSerialize(
-            const MessageLite& base, ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const SyncObjectTest& this_ = static_cast<const SyncObjectTest&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* SyncObjectTest::_InternalSerialize(
-            ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const SyncObjectTest& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:ConnectMsg.SyncObjectTest)
-          ::uint32_t cached_has_bits = 0;
-          (void)cached_has_bits;
-
-          // repeated float position = 1;
-          if (this_._internal_position_size() > 0) {
-            target = stream->WriteFixedPacked(1, this_._internal_position(), target);
-          }
-
-          // repeated float rotation = 2;
-          if (this_._internal_rotation_size() > 0) {
-            target = stream->WriteFixedPacked(2, this_._internal_rotation(), target);
-          }
-
-          // repeated float scale = 3;
-          if (this_._internal_scale_size() > 0) {
-            target = stream->WriteFixedPacked(3, this_._internal_scale(), target);
-          }
-
-          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-            target =
-                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
-          }
-          // @@protoc_insertion_point(serialize_to_array_end:ConnectMsg.SyncObjectTest)
-          return target;
-        }
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t SyncObjectTest::ByteSizeLong(const MessageLite& base) {
-          const SyncObjectTest& this_ = static_cast<const SyncObjectTest&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t SyncObjectTest::ByteSizeLong() const {
-          const SyncObjectTest& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:ConnectMsg.SyncObjectTest)
-          ::size_t total_size = 0;
-
-          ::uint32_t cached_has_bits = 0;
-          // Prevent compiler warnings about cached_has_bits being unused
-          (void)cached_has_bits;
-
-          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
-           {
-            // repeated float position = 1;
-            {
-              std::size_t data_size = std::size_t{4} *
-                  ::_pbi::FromIntSize(this_._internal_position_size());
-              std::size_t tag_size = data_size == 0
-                  ? 0
-                  : 1 + ::_pbi::WireFormatLite::Int32Size(
-                                      static_cast<int32_t>(data_size));
-              total_size += tag_size + data_size;
-            }
-            // repeated float rotation = 2;
-            {
-              std::size_t data_size = std::size_t{4} *
-                  ::_pbi::FromIntSize(this_._internal_rotation_size());
-              std::size_t tag_size = data_size == 0
-                  ? 0
-                  : 1 + ::_pbi::WireFormatLite::Int32Size(
-                                      static_cast<int32_t>(data_size));
-              total_size += tag_size + data_size;
-            }
-            // repeated float scale = 3;
-            {
-              std::size_t data_size = std::size_t{4} *
-                  ::_pbi::FromIntSize(this_._internal_scale_size());
-              std::size_t tag_size = data_size == 0
-                  ? 0
-                  : 1 + ::_pbi::WireFormatLite::Int32Size(
-                                      static_cast<int32_t>(data_size));
-              total_size += tag_size + data_size;
-            }
-          }
-          return this_.MaybeComputeUnknownFieldsSize(total_size,
-                                                     &this_._impl_._cached_size_);
-        }
-
-void SyncObjectTest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<SyncObjectTest*>(&to_msg);
-  auto& from = static_cast<const SyncObjectTest&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:ConnectMsg.SyncObjectTest)
-  ABSL_DCHECK_NE(&from, _this);
-  ::uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  _this->_internal_mutable_position()->MergeFrom(from._internal_position());
-  _this->_internal_mutable_rotation()->MergeFrom(from._internal_rotation());
-  _this->_internal_mutable_scale()->MergeFrom(from._internal_scale());
-  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void SyncObjectTest::CopyFrom(const SyncObjectTest& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:ConnectMsg.SyncObjectTest)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-
-void SyncObjectTest::InternalSwap(SyncObjectTest* PROTOBUF_RESTRICT other) {
-  using std::swap;
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   _impl_.position_.InternalSwap(&other->_impl_.position_);
   _impl_.rotation_.InternalSwap(&other->_impl_.rotation_);
   _impl_.scale_.InternalSwap(&other->_impl_.scale_);
+        swap(_impl_.public__, other->_impl_.public__);
 }
 
-::google::protobuf::Metadata SyncObjectTest::GetMetadata() const {
+::google::protobuf::Metadata SyncObject::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================

@@ -85,9 +85,9 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	moveAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
 	{
 		//if (direction != moveDirection) {
-			_sync->_move.set_x(value.x);
-			_sync->_move.set_y(value.y);
-			_sync->_move.set_z(value.z);
+			_sync->_move.add_direction(value.x);
+			_sync->_move.add_direction(value.y);
+			_sync->_move.add_direction(value.z);
 			_sync->_move.set_speed(_remote->GetSpeed());
 
 			_sync->_move.SerializeToString(&_sync->_msgBuffer);
@@ -98,7 +98,7 @@ void Player::PreInitialize(const Engine::Modules& modules)
 				_sync->_move.ByteSizeLong(),
 				_sync->GetSerialNumber()
 			);
-
+			_sync->_move.clear_direction();
 
 			Engine::Math::Vector3 moveDirection = value;
 			_remote->SetDirection(moveDirection);
@@ -121,9 +121,9 @@ void Player::PreInitialize(const Engine::Modules& modules)
 		});
 	moveAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
 		{ 
-			_sync->_move.set_x(0);
-			_sync->_move.set_y(0);
-			_sync->_move.set_z(0);
+			_sync->_move.add_direction(0);
+			_sync->_move.add_direction(0);
+			_sync->_move.add_direction(0);
 			_sync->_move.set_speed(0);
 
 			_sync->_move.SerializeToString(&_sync->_msgBuffer);
@@ -134,8 +134,7 @@ void Player::PreInitialize(const Engine::Modules& modules)
 				_sync->_move.ByteSizeLong(),
 				_sync->GetSerialNumber()
 			);
-
-			_sync->_move.SerializeToString(&_sync->_msgBuffer);
+			_sync->_move.clear_direction();
 
 			_sync->_stateChange.set_stateinfo(0);
 			_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
@@ -234,11 +233,19 @@ void Player::EnterSuccess(const ConnectMsg::EnterAccept* msg)
 
 void Player::SyncMove(const MoveMsg::MoveSync* msg)
 {
-	Engine::Math::Vector3 nextLocation(msg->x(), msg->y(), msg->z());
+	const auto& position = msg->position();
+	float x = *(position.begin());
+	float y = *(position.begin() + 1);
+	float z = *(position.begin() + 2);
+	Engine::Math::Vector3 nextLocation(x, y, z);
 	_remote->SetNextLocation(nextLocation);
 }
 
 void Player::SetLocation(const MoveMsg::MoveSync* msg)
 {
-	_transform.position = Engine::Math::Vector3(msg->x(), msg->y(), msg->z());
+	const auto& position = msg->position();
+	float x = *(position.begin());
+	float y = *(position.begin() + 1);
+	float z = *(position.begin() + 2);
+	_transform.position = Engine::Math::Vector3(x, y, z);
 }

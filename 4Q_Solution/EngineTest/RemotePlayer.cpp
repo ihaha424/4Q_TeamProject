@@ -94,13 +94,21 @@ void RemotePlayer::PostUpdate(float deltaTime)
 
 void RemotePlayer::SyncMove(const MoveMsg::MoveSync* msg)
 {
-	Engine::Math::Vector3 nextLocation(msg->x(), msg->y(), msg->z());
+	const auto& position = msg->position();
+	float x = *(position.begin());
+	float y = *(position.begin() + 1);
+	float z = *(position.begin() + 2);
+	Engine::Math::Vector3 nextLocation(x, y, z);
 	_remoteMove->SetNextLocation(nextLocation);
 }
 
 void RemotePlayer::FirstInitialize(const ConnectMsg::SyncPlayer* msg)
 {
-	Engine::Math::Vector3 location(msg->x(), msg->y(), msg->z());
+	const auto& position = msg->position();
+	float x = *(position.begin());
+	float y = *(position.begin() + 1);
+	float z = *(position.begin() + 2);
+	Engine::Math::Vector3 location(x, y, z);
 	_transform.position = location;
 }
 

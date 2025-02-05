@@ -53,7 +53,11 @@ void Cube::PostFixedUpdate()
 
 void Cube::SyncLocation(const ConnectMsg::SyncObject* msg)
 {
-	_transform.position = Engine::Math::Vector3(msg->x(), msg->y(), msg->z());
+	const auto& position = msg->position();
+	float x = position.Get(0);
+	float y = position.Get(1);
+	float z = position.Get(2);
+	_transform.position = Engine::Math::Vector3(x, y, z);
 }
 
 void Cube::SetSerialNumber(int num)

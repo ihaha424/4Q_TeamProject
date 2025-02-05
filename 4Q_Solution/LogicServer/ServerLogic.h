@@ -81,7 +81,6 @@ private:
 	ConnectMsg::SyncObject _syncObject;
 	ConnectMsg::AddObject _addObject;
 	ConnectMsg::AddRemote _addRemote;
-	ConnectMsg::SyncObjectTest _testMessage;
 	
 	MoveMsg::Move _move;
 	MoveMsg::Jump _jump;

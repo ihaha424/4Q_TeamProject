@@ -34,7 +34,7 @@ namespace PhysicsEngineAPI
 		virtual const Utils::Math::Vector3& GetGravity() const = 0;
 
 		virtual void SetPosition(const Utils::Math::Vector3& position) = 0;
-		virtual const Utils::Math::Vector3& GetPosition() const = 0;
+		virtual const Utils::Math::Vector3 GetPosition() const = 0;
 
 		virtual void SetBottomPosition(const Utils::Math::Vector3& position) = 0;
 		virtual const Utils::Math::Vector3& GetBottomPosition() const = 0;

@@ -34,7 +34,7 @@ namespace PhysicsEngineAPI
 		const Utils::Math::Vector3& GetGravity() const override;
 
 		void SetPosition(const Utils::Math::Vector3& position) override;
-		const Utils::Math::Vector3& GetPosition() const override;
+		const Utils::Math::Vector3 GetPosition() const override;
 
 		void SetBottomPosition(const Utils::Math::Vector3& position) override;
 		const Utils::Math::Vector3& GetBottomPosition() const override;

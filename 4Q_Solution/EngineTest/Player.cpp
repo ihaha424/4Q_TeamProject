@@ -85,9 +85,9 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	moveAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
 	{
 		//if (direction != moveDirection) {
-			_sync->_move.add_direction(value.x);
-			_sync->_move.add_direction(value.y);
-			_sync->_move.add_direction(value.z);
+			_sync->_move.set_x(value.x);
+			_sync->_move.set_y(value.y);
+			_sync->_move.set_z(value.z);
 			_sync->_move.set_speed(_remote->GetSpeed());
 
 			_sync->_move.SerializeToString(&_sync->_msgBuffer);
@@ -98,7 +98,6 @@ void Player::PreInitialize(const Engine::Modules& modules)
 				_sync->_move.ByteSizeLong(),
 				_sync->GetSerialNumber()
 			);
-			_sync->_move.clear_direction();
 
 			Engine::Math::Vector3 moveDirection = value;
 			_remote->SetDirection(moveDirection);
@@ -121,9 +120,9 @@ void Player::PreInitialize(const Engine::Modules& modules)
 		});
 	moveAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
 		{ 
-			_sync->_move.add_direction(0);
-			_sync->_move.add_direction(0);
-			_sync->_move.add_direction(0);
+			_sync->_move.set_x(0);
+			_sync->_move.set_y(0);
+			_sync->_move.set_z(0);
 			_sync->_move.set_speed(0);
 
 			_sync->_move.SerializeToString(&_sync->_msgBuffer);
@@ -134,7 +133,6 @@ void Player::PreInitialize(const Engine::Modules& modules)
 				_sync->_move.ByteSizeLong(),
 				_sync->GetSerialNumber()
 			);
-			_sync->_move.clear_direction();
 
 			_sync->_stateChange.set_stateinfo(0);
 			_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
@@ -152,7 +150,7 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	mappingContext->GetAction(L"Jump", &jumpAction);
 	jumpAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) 
 		{
-			_sync->_jump.set_power(10.f);
+			_sync->_jump.set_power(30.f);
 			_sync->_jump.SerializeToString(&_sync->_msgBuffer);
 
 			Engine::Application::GetNetworkManager()->SaveSendData(
@@ -165,9 +163,9 @@ void Player::PreInitialize(const Engine::Modules& modules)
 
 	Engine::Input::IAction* cameraAction = nullptr;
 	mappingContext->GetAction(L"Camera", &cameraAction);
-	cameraAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
+	cameraAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](Engine::Math::Vector3 value)
 	{
-		_camera->Rotate(value);
+		_cameraRotation += value;
 	});
 
 	Engine::Physics::ControllerDesc desc;
@@ -192,6 +190,7 @@ void Player::PostInitialize(const Engine::Modules& modules)
 	_animator.SplitBone(0, "Dummy_root");
 	_animator.SplitBone(1, "Bip01-Spine1");
 	_animator.ChangeAnimation("Wait");*/
+	_camera->SetParent(&_cameraParentMatrix);
 }
 
 void Player::PostAttach()
@@ -203,14 +202,20 @@ void Player::PostAttach()
 void Player::PostUpdate(const float deltaTime)
 {
 	Object::PostUpdate(deltaTime);
-	_worldMatrix = Engine::Math::Matrix::CreateScale(1.f) * Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
+	_worldMatrix = Engine::Math::Matrix::CreateScale(1.f)
+		* Engine::Math::Matrix::CreateFromQuaternion(_transform.rotation)
+		* Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
+	//printf("Position : %f, %f, %f\n", _transform.position.x, _transform.position.y, _transform.position.z);
+	// Temp Shoulder View Camera;
+	auto rotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(_cameraRotation);
+	_cameraParentMatrix = Engine::Math::Matrix::CreateFromQuaternion(rotation);
 
 	Engine::Math::Vector3 tempPostion = _transform.position;
-	_chractorController->_controller->SetPosition(_transform.position);
-	tempPostion.z -= 300.f;
-	tempPostion.y += 300.f;
-	_camera->SetPosition(tempPostion);
-	_camera->SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
+	tempPostion.y += 50.f;
+	tempPostion += _cameraParentMatrix.Backward() * -60.f;
+	tempPostion += _cameraParentMatrix.Right() * 10.f;
+
+	_cameraParentMatrix *= Engine::Math::Matrix::CreateTranslation(tempPostion);
 
 	// auto speed = _movement->GetSpeed();
 	// auto dir = _movement->GetDirection();
@@ -233,19 +238,17 @@ void Player::EnterSuccess(const ConnectMsg::EnterAccept* msg)
 
 void Player::SyncMove(const MoveMsg::MoveSync* msg)
 {
-	const auto& position = msg->position();
-	float x = *(position.begin());
-	float y = *(position.begin() + 1);
-	float z = *(position.begin() + 2);
+	float x = msg->x();
+	float y = msg->y();
+	float z = msg->z();
 	Engine::Math::Vector3 nextLocation(x, y, z);
 	_remote->SetNextLocation(nextLocation);
 }
 
 void Player::SetLocation(const MoveMsg::MoveSync* msg)
 {
-	const auto& position = msg->position();
-	float x = *(position.begin());
-	float y = *(position.begin() + 1);
-	float z = *(position.begin() + 2);
+	float x = msg->x();
+	float y = msg->y();
+	float z = msg->z();
 	_transform.position = Engine::Math::Vector3(x, y, z);
 }

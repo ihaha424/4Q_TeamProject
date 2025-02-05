@@ -43,7 +43,7 @@ using Lock = std::lock_guard<std::mutex>;
 
 constexpr DWORD DWMAX = (std::numeric_limits<DWORD>::max)();
 constexpr ULL ServerPort = 7777;
-constexpr ULL BufferSize = 8192;
+constexpr ULL BufferSize = 16384;
 constexpr ULL ThreadCount = 2;
 
 #endif

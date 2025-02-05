@@ -3,8 +3,10 @@ syntax = "proto3";
 package MoveMsg;
 
 message Move {
-	repeated float direction = 1;
-	optional float speed = 2;
+	optional float x = 1;
+	optional float y = 2;
+	optional float z = 3;
+	optional float speed = 4;
 }
 
 message Jump {
@@ -16,5 +18,7 @@ message StateChange {
 }
 
 message MoveSync {
-	repeated float position = 1;
+	optional float x = 1;
+	optional float y = 2;
+	optional float z = 3;
 }

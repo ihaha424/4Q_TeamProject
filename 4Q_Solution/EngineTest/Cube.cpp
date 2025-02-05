@@ -44,7 +44,8 @@ void Cube::PostUpdate(float deltaTime)
 {
 	Object::PostUpdate(deltaTime);
 
-	_worldMatrix = Engine::Math::Matrix::CreateScale(1.f) * Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
+	_worldMatrix = Engine::Math::Matrix::CreateScale(0.1f) * Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
+	//assert(_transform.position != Engine::Math::Vector3::Zero);
 }
 
 void Cube::PostFixedUpdate()
@@ -54,10 +55,13 @@ void Cube::PostFixedUpdate()
 void Cube::SyncLocation(const ConnectMsg::SyncObject* msg)
 {
 	const auto& position = msg->position();
-	float x = position.Get(0);
-	float y = position.Get(1);
-	float z = position.Get(2);
+	const auto& rotation = msg->rotation();
+	const auto& scale = msg->scale();
+	float x = *(position.begin());
+	float y = *(position.begin() + 1);
+	float z = *(position.begin() + 2);
 	_transform.position = Engine::Math::Vector3(x, y, z);
+	printf("Object Location Sync Complete Num : %d. Position : %f, %f, %f\n", _sync->GetSerialNumber(), x, y, z);
 }
 
 void Cube::SetSerialNumber(int num)

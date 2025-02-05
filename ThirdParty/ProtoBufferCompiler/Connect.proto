@@ -7,8 +7,10 @@ message EnterAccept {
 }
 
 message SyncPlayer {
-	repeated float position = 1;
-	optional string resource = 2;
+	optional float x = 1;
+	optional float y = 2;
+	optional float z = 3;
+	optional string resource = 4;
 }
 
 message SyncObject {

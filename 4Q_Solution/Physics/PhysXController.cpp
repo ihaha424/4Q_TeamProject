@@ -61,7 +61,7 @@ namespace PhysicsEngineAPI
 	{
 		controller->setPosition(Vector3ToPxExtendedVec3(position));
 	}
-	const Utils::Math::Vector3& PhysXController::GetPosition() const
+	const Utils::Math::Vector3 PhysXController::GetPosition() const
 	{
 		return PxExtendedVec3ToVector3(controller->getPosition());
 	}

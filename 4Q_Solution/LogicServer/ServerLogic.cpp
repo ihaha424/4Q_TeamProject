@@ -56,12 +56,14 @@ bool ServerLogic::Initialize()
 void ServerLogic::Update()
 {
     _timer->Tick();
-
+    Server::SendUpdate();
     MessageDispatch();
 
     // TODO: 내부적으로 업데이트 할 로직을 여기다 넣습니다.
     static float elapsedTime;
-    elapsedTime += _timer->GetDeltaTime();
+    //float deltaTime = std::clamp(_timer->GetDeltaTime(), 0.0f, 0.16666f);
+    float deltaTime = _timer->GetDeltaTime();
+    elapsedTime += deltaTime;
 
     static unsigned short collisionFlg;
 
@@ -73,15 +75,15 @@ void ServerLogic::Update()
         if (_playerSlot[i]._controller == nullptr) {
             continue;
         } // if end
-
+        
         _playerSlot[i]._controller->SetDirection(_playerSlot[i]._direction);
         _playerSlot[i]._controller->SetMoveSpeed(_playerSlot[i]._speed);
-        _playerSlot[i]._controller->Update(_timer->GetDeltaTime());
+        _playerSlot[i]._controller->Update(deltaTime);
         _playerSlot[i]._flag = _playerSlot[i]._controller->GetCollisionFlag();
         _playerSlot[i]._controller->FixedUpdate();
-
+        
     } // for end
-    _physicsManager->Update(_timer->GetDeltaTime());
+    _physicsManager->Update(deltaTime);
     _physicsManager->FetchScene();
 
     if (elapsedTime >= 0.02f) {
@@ -91,14 +93,13 @@ void ServerLogic::Update()
                 continue;
             } // if end
             Engine::Math::Vector3 position = _playerSlot[i]._controller->GetPosition();
-            //printf("Player%d Position : (%f, %f, %f)\n", i + 1, position.x, position.y, position.z);
-            _moveSync.add_position(position.x);
-            _moveSync.add_position(position.y);
-            _moveSync.add_position(position.z);
+            printf("Player%d Position : (%f, %f, %f)\n", i + 1, position.x, position.y, position.z);
+            _moveSync.set_x(position.x);
+            _moveSync.set_y(position.y);
+            _moveSync.set_z(position.z);
 
             _moveSync.SerializeToString(&_msgBuffer);
             Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), _playerSlot[i]._serialNumber);
-            _moveSync.clear_position();
         } // for end
     } // if end
 
@@ -143,10 +144,10 @@ void ServerLogic::MessageDispatch()
                 Server::SavePacketData(_msgBuffer, packet.sessionId, (short)PacketID::EnterAccept, _enterAccept.ByteSizeLong(), grantNum + 1);
 
                 _playerSlot[grantNum]._serialNumber = grantNum + 1;
-                _playerSlot[grantNum]._position = Engine::Math::Vector3(0.0f, 400.0f, 0.0f);
+                _playerSlot[grantNum]._position = Engine::Math::Vector3(500.0f, 400.0f, 500.0f);
                 _playerSlot[grantNum]._sessionId = packet.sessionId;
                 // 물리 환경에 등록
-                RegistPlayer(_playerSlot[grantNum]);
+                RegistPlayer(&_playerSlot[grantNum]);
 
                 printf("[MessageDispatch] Player Enter Accepted. Grant Num : %d\n", grantNum + 1);
 
@@ -156,9 +157,6 @@ void ServerLogic::MessageDispatch()
                     } // if end
                     Server::BroadCast("", (short)PacketID::Sync, 0, _playerSlot[i]._serialNumber);
                 }  // for end
-                for (int i = 0; i < 3; i++) {
-                    Server::BroadCast("", (short)PacketID::ObjectSync, 0, _objs[i]._serialNumber);
-                }
                 for (int i = 0; i < _buildings.size(); i++) {
                     _addObject.set_grantnumber(_buildings[i]->_serialNumber);
                     _addObject.set_resourceid(_buildings[i]->_resourceId);
@@ -226,23 +224,22 @@ void ServerLogic::MessageDispatch()
             int serialNum = packet._serialNumber - 1;
 
             Engine::Math::Vector3 direction;
-            direction.x = *(_move.direction().begin());
-            direction.y = *(_move.direction().begin() + 1);
-            direction.z = *(_move.direction().begin() + 2);
+            direction.x = _move.x();
+            direction.y = _move.y();
+            direction.z = _move.z();
             _playerSlot[serialNum]._speed = _move.speed();
 
             if (direction != _playerSlot[serialNum]._direction) {
                 _playerSlot[serialNum]._direction = direction;
 
                 Engine::Math::Vector3 position = _playerSlot[serialNum]._controller->GetPosition();
-                printf("Player%d Position : (%f, %f, %f)\n", serialNum + 1, position.x, position.y, position.z);
-                _moveSync.add_position(position.x);
-                _moveSync.add_position(position.y);
-                _moveSync.add_position(position.z);
+                //printf("Player%d Direction : (%f, %f, %f)\n", serialNum + 1, direction.x, direction.y, direction.z);
+                _moveSync.set_x(position.x);
+                _moveSync.set_y(position.y);
+                _moveSync.set_z(position.z);
 
                 _moveSync.SerializeToString(&_msgBuffer);
                 Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), packet._serialNumber);
-                _moveSync.clear_position();
             }
 
             break;
@@ -260,7 +257,7 @@ void ServerLogic::MessageDispatch()
             _stateChange.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
 
             _playerSlot[packet._serialNumber - 1]._state = _stateChange.stateinfo();
-            printf("Player%d State Changed. CurrentState : %d\n", packet._serialNumber - 1, _stateChange.stateinfo());
+            printf("Player%d State Changed. CurrentState : %d\n", packet._serialNumber, _stateChange.stateinfo());
             _stateChange.SerializeToString(&_msgBuffer);
             Server::BroadCast(_msgBuffer, (short)PacketID::StateChange, _stateChange.ByteSizeLong(), packet._serialNumber);
 
@@ -273,23 +270,13 @@ void ServerLogic::MessageDispatch()
                      continue;
                 } // if end
 
-                _syncPlayer.add_position(_playerSlot[i]._position.x);
-                _syncPlayer.add_position(_playerSlot[i]._position.y);
-                _syncPlayer.add_position(_playerSlot[i]._position.z);
+                _syncPlayer.set_x(_playerSlot[i]._position.x);
+                _syncPlayer.set_y(_playerSlot[i]._position.y);
+                _syncPlayer.set_z(_playerSlot[i]._position.z);
                 _syncPlayer.SerializeToString(&_msgBuffer);
 
                 Server::BroadCast(_msgBuffer, (short)PacketID::DataRemote, _syncPlayer.ByteSizeLong(), _playerSlot[i]._serialNumber);
-                _syncPlayer.clear_position();
             }  // for end
-            for (int i = 0; i < 3; i++) {
-                _syncObject.add_position(_objs[i]._position.x);
-                _syncObject.add_position(_objs[i]._position.y);
-                _syncObject.add_position(_objs[i]._position.z);
-                _syncObject.SerializeToString(&_msgBuffer);
-
-                Server::BroadCast(_msgBuffer, (short)PacketID::DataObject, _syncObject.ByteSizeLong(), _objs[i]._serialNumber);
-                _syncObject.clear_position();
-            }
             for (int i = 0; i < _buildings.size(); i++) {
                 _syncObject.set_public_(_buildings[i]->_public);
                 _syncObject.add_position(_buildings[i]->_position.x);
@@ -303,11 +290,11 @@ void ServerLogic::MessageDispatch()
                 _syncObject.add_scale(_buildings[i]->_scale.y);
                 _syncObject.add_scale(_buildings[i]->_scale.z);
                 _syncObject.SerializeToString(&_msgBuffer);
-                Server::SavePacketData(
+                Server::BroadCast(
                     _msgBuffer,
-                    packet.sessionId,
-                    (short)PacketID::DataRemote,
-                    _addObject.ByteSizeLong(),
+                    //packet.sessionId,
+                    (short)PacketID::DataObject,
+                    _syncObject.ByteSizeLong(),
                     _buildings[i]->_serialNumber
                 );
                 _syncObject.Clear();
@@ -325,11 +312,11 @@ void ServerLogic::MessageDispatch()
                 _syncObject.add_scale(_sudiums[i]->_scale.y);
                 _syncObject.add_scale(_sudiums[i]->_scale.z);
                 _syncObject.SerializeToString(&_msgBuffer);
-                Server::SavePacketData(
+                Server::BroadCast(
                     _msgBuffer,
-                    packet.sessionId,
-                    (short)PacketID::DataRemote,
-                    _addObject.ByteSizeLong(),
+                    //packet.sessionId,
+                    (short)PacketID::DataObject,
+                    _syncObject.ByteSizeLong(),
                     _sudiums[i]->_serialNumber
                 );
                 _syncObject.Clear();
@@ -374,6 +361,7 @@ void ServerLogic::LoadBuilding()
         );
         obj->_serialNumber = _staticObjectSerialNumber++;
         _buildings.push_back(obj);
+        RegistStaticPhysics(*obj);
     }
     printf("Building Data Load Complete.\n");
 }
@@ -404,6 +392,8 @@ void ServerLogic::LoadSudium()
         );
         obj->_serialNumber = _staticObjectSerialNumber++;
         _sudiums.push_back(obj);
+        RegistStaticPhysics(*obj);
+        printf("Sudium Create Complete. SerialNumber : %d\n", obj->_serialNumber);
     }
     printf("Sudium Data Load Complete.\n");
 }
@@ -443,21 +433,23 @@ void ServerLogic::RegistStaticPhysics(Object& obj)
     _mainScene->AddActor(obj._staticRigid);
 }
 
-void ServerLogic::RegistPlayer(Player& player)
+void ServerLogic::RegistPlayer(Player* player)
 {
     Engine::Physics::ControllerDesc cd;
+    cd.position = Engine::Math::Vector3(400, 400, 400);
     cd.height = 10.f;
     cd.radius = 2.f;
-    cd.gravity = { 0.f, -9.8f, 0.f };
+    //cd.gravity = { 0.f, -9.8f, 0.f };
     cd.contactOffset = 0.001f;
     cd.stepOffset = 1.f;
     cd.slopeLimit = 0.707f;
-    Engine::Physics::IController* controller = player._controller;
+    Engine::Physics::IController* controller = player->_controller;
     _physicsManager->CreatePlayerController(&controller, _mainScene, cd);
-    player._controller = static_cast<Engine::Physics::Controller*>(controller);
-    player._controller->SetBottomPosition({0,10,0});
-    player._controller->SetOwner(&player);
-    player._controller->Initialize();
+    player->_controller = static_cast<Engine::Physics::Controller*>(controller);
+    player->_controller->SetBottomPosition({0,10,0});
+    player->_controller->SetOwner(&player);
+    player->_controller->Initialize();
+    player->_controller->SetPosition(Engine::Math::Vector3(3053, -4000, -14304));
 }
 
 void ServerLogic::RegistGround(Ground& ground)

@@ -226,28 +226,12 @@ class SyncPlayer final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kPositionFieldNumber = 1,
-    kResourceFieldNumber = 2,
+    kResourceFieldNumber = 4,
+    kXFieldNumber = 1,
+    kYFieldNumber = 2,
+    kZFieldNumber = 3,
   };
-  // repeated float position = 1;
-  int position_size() const;
-  private:
-  int _internal_position_size() const;
-
-  public:
-  void clear_position() ;
-  float position(int index) const;
-  void set_position(int index, float value);
-  void add_position(float value);
-  const ::google::protobuf::RepeatedField<float>& position() const;
-  ::google::protobuf::RepeatedField<float>* mutable_position();
-
-  private:
-  const ::google::protobuf::RepeatedField<float>& _internal_position() const;
-  ::google::protobuf::RepeatedField<float>* _internal_mutable_position();
-
-  public:
-  // optional string resource = 2;
+  // optional string resource = 4;
   bool has_resource() const;
   void clear_resource() ;
   const std::string& resource() const;
@@ -264,12 +248,45 @@ class SyncPlayer final : public ::google::protobuf::Message
   std::string* _internal_mutable_resource();
 
   public:
+  // optional float x = 1;
+  bool has_x() const;
+  void clear_x() ;
+  float x() const;
+  void set_x(float value);
+
+  private:
+  float _internal_x() const;
+  void _internal_set_x(float value);
+
+  public:
+  // optional float y = 2;
+  bool has_y() const;
+  void clear_y() ;
+  float y() const;
+  void set_y(float value);
+
+  private:
+  float _internal_y() const;
+  void _internal_set_y(float value);
+
+  public:
+  // optional float z = 3;
+  bool has_z() const;
+  void clear_z() ;
+  float z() const;
+  void set_z(float value);
+
+  private:
+  float _internal_z() const;
+  void _internal_set_z(float value);
+
+  public:
   // @@protoc_insertion_point(class_scope:ConnectMsg.SyncPlayer)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      1, 2, 0,
+      2, 4, 0,
       38, 2>
       _table_;
 
@@ -289,8 +306,10 @@ class SyncPlayer final : public ::google::protobuf::Message
                           const SyncPlayer& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::google::protobuf::RepeatedField<float> position_;
     ::google::protobuf::internal::ArenaStringPtr resource_;
+    float x_;
+    float y_;
+    float z_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -1192,52 +1211,91 @@ inline void EnterAccept::_internal_set_grantnumber(::int32_t value) {
 
 // SyncPlayer
 
-// repeated float position = 1;
-inline int SyncPlayer::_internal_position_size() const {
-  return _internal_position().size();
+// optional float x = 1;
+inline bool SyncPlayer::has_x() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
 }
-inline int SyncPlayer::position_size() const {
-  return _internal_position_size();
-}
-inline void SyncPlayer::clear_position() {
+inline void SyncPlayer::clear_x() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.position_.Clear();
+  _impl_.x_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000002u;
 }
-inline float SyncPlayer::position(int index) const {
-  // @@protoc_insertion_point(field_get:ConnectMsg.SyncPlayer.position)
-  return _internal_position().Get(index);
+inline float SyncPlayer::x() const {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncPlayer.x)
+  return _internal_x();
 }
-inline void SyncPlayer::set_position(int index, float value) {
-  _internal_mutable_position()->Set(index, value);
-  // @@protoc_insertion_point(field_set:ConnectMsg.SyncPlayer.position)
+inline void SyncPlayer::set_x(float value) {
+  _internal_set_x(value);
+  _impl_._has_bits_[0] |= 0x00000002u;
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncPlayer.x)
 }
-inline void SyncPlayer::add_position(float value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _internal_mutable_position()->Add(value);
-  // @@protoc_insertion_point(field_add:ConnectMsg.SyncPlayer.position)
-}
-inline const ::google::protobuf::RepeatedField<float>& SyncPlayer::position() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_list:ConnectMsg.SyncPlayer.position)
-  return _internal_position();
-}
-inline ::google::protobuf::RepeatedField<float>* SyncPlayer::mutable_position()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable_list:ConnectMsg.SyncPlayer.position)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _internal_mutable_position();
-}
-inline const ::google::protobuf::RepeatedField<float>&
-SyncPlayer::_internal_position() const {
+inline float SyncPlayer::_internal_x() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.position_;
+  return _impl_.x_;
 }
-inline ::google::protobuf::RepeatedField<float>* SyncPlayer::_internal_mutable_position() {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return &_impl_.position_;
+inline void SyncPlayer::_internal_set_x(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.x_ = value;
 }
 
-// optional string resource = 2;
+// optional float y = 2;
+inline bool SyncPlayer::has_y() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  return value;
+}
+inline void SyncPlayer::clear_y() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.y_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000004u;
+}
+inline float SyncPlayer::y() const {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncPlayer.y)
+  return _internal_y();
+}
+inline void SyncPlayer::set_y(float value) {
+  _internal_set_y(value);
+  _impl_._has_bits_[0] |= 0x00000004u;
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncPlayer.y)
+}
+inline float SyncPlayer::_internal_y() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.y_;
+}
+inline void SyncPlayer::_internal_set_y(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.y_ = value;
+}
+
+// optional float z = 3;
+inline bool SyncPlayer::has_z() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
+  return value;
+}
+inline void SyncPlayer::clear_z() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.z_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000008u;
+}
+inline float SyncPlayer::z() const {
+  // @@protoc_insertion_point(field_get:ConnectMsg.SyncPlayer.z)
+  return _internal_z();
+}
+inline void SyncPlayer::set_z(float value) {
+  _internal_set_z(value);
+  _impl_._has_bits_[0] |= 0x00000008u;
+  // @@protoc_insertion_point(field_set:ConnectMsg.SyncPlayer.z)
+}
+inline float SyncPlayer::_internal_z() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.z_;
+}
+inline void SyncPlayer::_internal_set_z(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.z_ = value;
+}
+
+// optional string resource = 4;
 inline bool SyncPlayer::has_resource() const {
   bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   return value;

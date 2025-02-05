@@ -124,7 +124,7 @@ private:
 
 	void RegistDynamicPhysics(Object& obj);
 	void RegistStaticPhysics(Object& obj);
-	void RegistPlayer(Player& player);
+	void RegistPlayer(Player* player);
 	void RegistGround(Ground& ground);
 	void RegistTrigerBox(TriggerBox& triggerBox);
 };

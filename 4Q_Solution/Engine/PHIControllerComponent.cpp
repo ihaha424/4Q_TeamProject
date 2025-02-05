@@ -157,7 +157,6 @@ namespace Engine::PHI
 	void Controller::Initialize()
 	{
 		controller->SetUserData(collision);
-		BindCollision(std::bind(&Controller::IsGround, this, std::placeholders::_1), Engine::Physics::TriggerType::OnTriggerEnter);
 	}
 
 	void Controller::Update(float deltaTime)
@@ -174,7 +173,7 @@ namespace Engine::PHI
 		velocity += gravity * deltaTime;
 
 		controllerCollisionFlag = controller->Move(Vector3ToPhysicsVector3(velocity * deltaTime), minDistance, deltaTime);
-		if ((controllerCollisionFlag & 0x04 || controllerCollisionFlag & 0x01) || (jumpFlag == true && velocity.y < -jumpMax))
+		if (controllerCollisionFlag & 0x04)
 		{
 			jumpFlag = false;
 			velocity.y = 0;
@@ -200,11 +199,6 @@ namespace Engine::PHI
 		owner = _owner;
 	}
 
-	void Controller::IsGround(Engine::Physics::TriggerEvent info)
-	{
-		info.otherCollision;
-	}
-
 	unsigned short Controller::GetCollisionFlag()
 	{
 		return controllerCollisionFlag;
@@ -225,6 +219,7 @@ namespace Engine::PHI
 		if (jumpFlag)
 			return;
 		jumpFlag = true;
+		velocity.y = 0;
 		force.y += JumpForce;
 	}
 	void Controller::SetDirection(Engine::Math::Vector3 _direction)

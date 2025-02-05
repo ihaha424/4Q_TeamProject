@@ -19,8 +19,8 @@ void GameApplication::DeclareInputActions(Engine::Input::IManager* inputManager)
     inputManager->GetMappingContext(L"Default", &mappingContext);
 
 
-    //DeclareMoveAction(inputManager, mappingContext);
-    //DeclareCameraAction(inputManager, mappingContext);
+    DeclareMoveAction(inputManager, mappingContext);
+    DeclareCameraAction(inputManager, mappingContext);
 	DeclareSystemAction(inputManager, mappingContext);
 
     inputManager->SetActiveMappingContext(mappingContext);
@@ -35,7 +35,7 @@ void GameApplication::Register(Engine::Content::IManager* contentManager)
 	objectFactory->Register<Player>(L"../Resources/Player/Player.X", L"../Resources/Font/Gungseo12.sfont");
 	objectFactory->Register<RemotePlayer>(L"../Resources/Player/Player.X");
 	objectFactory->Register<GlobalLight>();
-	objectFactory->Register<Terrain>(L"../Resources/Level/Level.fbx");
+	objectFactory->Register<Terrain>(L"../Resources/Terrain/untitled.fbx");
 	objectFactory->Register<Cube>(L"../Resources/FBX/char.fbx");
 	//objectFactory->Register<Sphere>(L"../Resources/TestObject/sphere.fbx");
 	const auto componentFactory = contentManager->GetComponentFactory();

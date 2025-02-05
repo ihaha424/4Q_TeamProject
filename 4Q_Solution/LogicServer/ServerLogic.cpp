@@ -290,12 +290,12 @@ void ServerLogic::RegistPlayer(Player& player)
     cd.radius = 2.f;
     cd.gravity = { 0.f, -9.8f, 0.f };
     cd.contactOffset = 0.001f;
-    cd.stepOffset = 0.5f;
+    cd.stepOffset = 1.f;
     cd.slopeLimit = 0.707f;
     Engine::Physics::IController* controller = player._controller;
     _physicsManager->CreatePlayerController(&controller, _mainScene, cd);
     player._controller = static_cast<Engine::Physics::Controller*>(controller);
-    player._controller->SetBottomPosition({0,-5,0});
+    player._controller->SetBottomPosition({0,10,0});
     player._controller->SetOwner(&player);
     player._controller->Initialize();
 }

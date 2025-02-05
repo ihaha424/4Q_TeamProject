@@ -20,6 +20,7 @@ namespace PhysicsEngineAPI
 	void PhysXController::SetUserData(ICollision* UserData)
 	{
 		controller->setUserData(UserData);
+		controller->getActor()->userData = UserData;
 		hitReportCallback->SetUserData(UserData);
 		behaviorCallback->SetUserData(UserData);
 	}

@@ -13,6 +13,12 @@ void StaticObject::Prepare(Engine::Content::Factory::Component* componentFactory
 	_rigidStatc = componentFactory->Clone<Engine::Component::RigidStatic>(this);
 }
 
+void StaticObject::DisposeComponents()
+{
+	_staticMesh->Dispose();
+	_rigidStatc->Dispose();
+}
+
 void StaticObject::SetMeshData(bool meshData)
 {
 	_meshData = meshData;
@@ -21,12 +27,6 @@ void StaticObject::SetMeshData(bool meshData)
 void StaticObject::SetBoxScale(Engine::Math::Vector3 boxScale)
 {
 	_boxScale = boxScale;
-}
-
-void StaticObject::DisposeComponents()
-{
-	_staticMesh->Dispose();
-	_rigidStatc->Dispose();
 }
 
 void StaticObject::PreInitialize(const Engine::Modules& modules)
@@ -48,10 +48,12 @@ void StaticObject::PreInitialize(const Engine::Modules& modules)
 	else
 	{
 		PhysicsManager->CreateStaticBoundBoxActor(&_rigidStatc->_boundBox, _boxScale, _transform);
+		_rigidStatc->_rigidbody->SetOwner(this);
 	}
 	PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::mainScene))->AddActor(_rigidStatc->_rigidbody);
 
 
 	PhysicsManager->CreateStaticBoundBoxActor(&_rigidStatc->_boundBox, _boxScale, _transform);
+	_rigidStatc->_boundBox->SetOwner(this);
 	PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::cameraScene))->AddActor(_rigidStatc->_boundBox);
 }

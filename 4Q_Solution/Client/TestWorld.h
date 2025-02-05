@@ -20,6 +20,7 @@ public:
 protected:
 	void PreInitialize(const Engine::Modules& moduels) override;
 	void PreUpdate(float deltaTime) override;
+	void PostUpdate(float deltaTime )override;
 	void PostFixedUpdate() override;
 
 private:
@@ -29,5 +30,8 @@ private:
 	SkyBox* _skyBox;
 
 	int playerSerialNum = 0;
+
+	Engine::Physics::IScene* mainScene;
+	Engine::Physics::IScene* cameraScene;
 };
 

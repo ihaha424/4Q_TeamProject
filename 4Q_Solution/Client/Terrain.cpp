@@ -14,15 +14,15 @@ void Terrain::Prepare(Engine::Content::Factory::Component* componentFactory)
 	_rigidStatc = componentFactory->Clone<Engine::Component::RigidStatic>(this);
 }
 
-void Terrain::SetBoxScale(Engine::Math::Vector3 boxScale)
-{
-	_boxScale = boxScale;
-}
-
 void Terrain::DisposeComponents()
 {
 	_staticMesh->Dispose();
 	_rigidStatc->Dispose();
+}
+
+void Terrain::SetBoxScale(Engine::Math::Vector3 boxScale)
+{
+	_boxScale = boxScale;
 }
 
 void Terrain::PreInitialize(const Engine::Modules& modules)
@@ -46,6 +46,7 @@ void Terrain::PreInitialize(const Engine::Modules& modules)
 
 	//TODO: Scale을 어떻게 조절 할지???
 	PhysicsManager->CreateStaticBoundBoxActor(&_rigidStatc->_boundBox, _boxScale, _transform);
+	_rigidStatc->_boundBox->SetOwner(this);
 	PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::cameraScene))->AddActor(_rigidStatc->_boundBox);
 }
 

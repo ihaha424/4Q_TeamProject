@@ -54,4 +54,17 @@ Engine::Math::Vector3 Engine::Component::FixedArm::GetForward() const
 	return _matrix.Forward();
 }
 
+Engine::Math::Vector3 Engine::Component::FixedArm::TransformDirection(const Math::Vector3& direction) const
+{
+	auto result = Math::Vector3::TransformNormal(direction, _matrix);
+	result.y = 0.f;
+	result.Normalize();
+	return result;
+}
+
+Engine::Math::Quaternion Engine::Component::FixedArm::GetForwardRotation() const
+{
+	return Math::Quaternion::CreateFromYawPitchRoll({ 0,_rotation.y,0 });
+}
+
 

@@ -20,7 +20,9 @@ namespace Engine::Component
 
 		void SetCameraPosition(const Math::Vector2& value);
 
-		Math::Vector3 GetForward() const;
+		[[nodiscard]] Math::Vector3 GetForward() const;
+		[[nodiscard]] Math::Vector3 TransformDirection(const Math::Vector3& direction) const;
+		[[nodiscard]] Math::Quaternion GetForwardRotation() const;
 
 	private:
 		Transform* _target;

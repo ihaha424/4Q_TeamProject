@@ -24,10 +24,8 @@ private:
 	Engine::Component::Camera* _camera;
 	Engine::Component::SkeletalMesh* _skeletalMesh;
 	Engine::Component::Animator* _animator;
+	Engine::Component::FixedArm* _fixedArm;
 	Engine::Math::Matrix _worldMatrix;
-
-	Engine::Math::Matrix _cameraParentMatrix;
-	Engine::Math::Vector3 _cameraRotation;
 
 	Engine::Component::ChractorController* _rigid;
 

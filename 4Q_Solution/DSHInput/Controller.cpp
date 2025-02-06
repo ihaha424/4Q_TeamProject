@@ -5,8 +5,8 @@
 #include "AxisComponent.h"
 
 DSH::Input::Device::Controller::Controller() :
-	_referenceCount(1), _connectionState(Disconnected), _connectPendingCount(0),
-	_controllerIndex(CONTROLLER_UNKNOWN_INDEX), _state{}
+	_referenceCount(1), _thumbStickSensitive(THUMB_STICK_SENSITIVE), _connectionState(Disconnected),
+	_connectPendingCount(0), _controllerIndex(CONTROLLER_UNKNOWN_INDEX), _state{}, _triggerSensitive(TRIGGER_SENSITIVE)
 {
 }
 
@@ -55,8 +55,8 @@ void DSH::Input::Device::Controller::Update()
 	}
 
 	std::ranges::for_each(_buttons, [this](const std::pair<const Button, Component::ButtonComponent*>& buttonPair) { buttonPair.second->SetValue(_buttonFlags[buttonPair.first] & _state.Gamepad.wButtons); });
-	std::ranges::for_each(_triggers, [this](const std::pair<const Trigger, Component::AxisComponent*>& axisPair) { axisPair.second->SetAbsoluteValue(*_triggerValues[axisPair.first]); });
-	std::ranges::for_each(_thumbs, [this](const std::pair<const Thumb, Component::AxisComponent*>& axisPair) { axisPair.second->SetAbsoluteValue(*_thumbValues[axisPair.first]); });
+	std::ranges::for_each(_triggers, [this](const std::pair<const Trigger, Component::AxisComponent*>& axisPair) { axisPair.second->SetRelativeValue(*_triggerValues[axisPair.first]); });
+	std::ranges::for_each(_thumbs, [this](const std::pair<const Thumb, Component::AxisComponent*>& axisPair) { axisPair.second->SetRelativeValue(*_thumbValues[axisPair.first]); });
 }
 
 void DSH::Input::Device::Controller::Reset()
@@ -98,7 +98,7 @@ HRESULT DSH::Input::Device::Controller::GetComponent(const Trigger trigger, Comp
 	{
 		pAxisComponent = new Component::AxisComponent();
 		if (pAxisComponent == nullptr) return E_OUTOFMEMORY;
-		pAxisComponent->SetSensitivity(TRIGGER_SENSITIVE);
+		pAxisComponent->SetSensitivity(_triggerSensitive);
 		pAxisComponent->SetDeadZone(XINPUT_GAMEPAD_TRIGGER_THRESHOLD);
 		_triggers[trigger] = pAxisComponent;
 		_triggerValues[trigger] = GetTriggerValuePointer(trigger);
@@ -120,7 +120,7 @@ HRESULT DSH::Input::Device::Controller::GetComponent(const Thumb thumb, Componen
 		if (pAxisComponent == nullptr) return E_OUTOFMEMORY;
 		if (thumb == Thumb::LeftX || thumb == Thumb::LeftY) pAxisComponent->SetDeadZone(XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE);
 		if (thumb == Thumb::RightX || thumb == Thumb::RightY) pAxisComponent->SetDeadZone(XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE);
-		pAxisComponent->SetSensitivity(THUMB_STICK_SENSITIVE);
+		pAxisComponent->SetSensitivity(_thumbStickSensitive);
 		_thumbs[thumb] = pAxisComponent;
 		_thumbValues[thumb] = GetThumbValuePointer(thumb);
 	}
@@ -128,6 +128,18 @@ HRESULT DSH::Input::Device::Controller::GetComponent(const Thumb thumb, Componen
 	pAxisComponent->AddRef();
 	*ppComponent = pAxisComponent;
 	return S_OK;
+}
+
+void DSH::Input::Device::Controller::SetThumbStickSensitive(const LONG sensitive)
+{
+	_thumbStickSensitive = sensitive;
+	std::ranges::for_each(_thumbs | std::views::values, [sensitive](Component::AxisComponent* thumb) { thumb->SetSensitivity(sensitive); });
+}
+
+void DSH::Input::Device::Controller::SetTriggerSensitive(const LONG sensitive)
+{
+	_triggerSensitive = sensitive;
+	std::ranges::for_each(_triggers | std::views::values, [sensitive](Component::AxisComponent* trigger) { trigger->SetSensitivity(sensitive); });
 }
 
 WORD DSH::Input::Device::Controller::GetFlag(Button button)

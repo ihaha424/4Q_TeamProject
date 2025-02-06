@@ -38,3 +38,13 @@ Engine::Math::Vector3& Engine::Math::Vector3::operator=(const PhysicsEngineAPI::
 	DirectX::SimpleMath::Vector3::operator=(Vector3(value));
 	return *this;
 }
+
+Engine::Math::Vector3 Engine::Math::Vector3::Split(const Vector3& v) const
+{
+	return Vector3(x * v.x, y * v.y, z * v.z);
+}
+
+Engine::Math::Vector3 Engine::Math::Vector3::Split(const Vector2& v) const
+{
+	return Vector3(x * v.x, y * v.y, z);
+}

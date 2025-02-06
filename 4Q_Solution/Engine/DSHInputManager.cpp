@@ -39,7 +39,6 @@ void Engine::DSHInput::Manager::Initialize(const HWND windowHandle)
 	DSH::Input::Device::IController* controller = nullptr;
 	thrower(_system->CreateController(&controller));
 	_controller.Setup(controller);
-	_controller.Initialize();
 	releaser(&controller);
 
 	DSH::Input::Modifier::INegative* negative = nullptr;

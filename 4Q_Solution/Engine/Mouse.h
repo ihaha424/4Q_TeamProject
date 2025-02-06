@@ -43,6 +43,7 @@ namespace Engine::Input::Device
 
 		virtual void LockCursor() = 0;
 		virtual void UnlockCursor() = 0;
+		virtual bool IsCursorLocked() const = 0;
 	};
 
 	struct Mouse : IMouse

@@ -52,11 +52,17 @@ namespace Engine::Input::Device
 		[[nodiscard]] virtual bool IsButtonUp(Button button) const = 0;
 		[[nodiscard]] virtual bool IsButtonPressed(Button button) const = 0;
 		[[nodiscard]] virtual bool IsButtonReleased(Button button) const = 0;
+
+		virtual void GetComponent(Button button, Component::IButtonComponent** component) = 0;
+		virtual void GetComponent(Trigger trigger, Component::IAxisComponent** component) = 0;
+		virtual void GetComponent(Thumb thumb, Component::IAxisComponent** component) = 0;
+
+		virtual void SetThumbStickSensitive(long sensitive) = 0;
+		virtual void SetTriggerSensitive(long sensitive) = 0;
 	};
 
 	struct Controller : IController
 	{
-		virtual void Initialize() = 0;
 		virtual void Update() = 0;
 		virtual void Reset() = 0;
 		virtual void Finalize() = 0;

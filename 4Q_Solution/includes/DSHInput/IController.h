@@ -73,6 +73,14 @@ namespace DSH::Input
 				_In_ Thumb thumb,
 				/* [annotation][out] */
 				_Out_ Component::IAxisComponent** ppComponent) = 0;
+
+			virtual void STDMETHODCALLTYPE SetThumbStickSensitive(
+				/* [annotation][in] */
+				_In_ LONG sensitive) = 0;
+
+			virtual void STDMETHODCALLTYPE SetTriggerSensitive(
+				/* [annotation][in] */
+				_In_ LONG sensitive) = 0;
 		};
 	}
 }

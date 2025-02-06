@@ -39,6 +39,9 @@ namespace DSH::Input
 			HRESULT GetComponent(Trigger trigger, Component::IAxisComponent** ppComponent) override;
 			HRESULT GetComponent(Thumb thumb, Component::IAxisComponent** ppComponent) override;
 
+			void SetThumbStickSensitive(LONG sensitive) override;
+			void SetTriggerSensitive(LONG sensitive) override;
+
 		private:
 			static WORD GetFlag(Button button);
 			BYTE* GetTriggerValuePointer(Trigger trigger);
@@ -46,6 +49,9 @@ namespace DSH::Input
 			[[nodiscard]] bool CheckConnection();
 
 			ULONG _referenceCount;
+
+			LONG _thumbStickSensitive;
+			LONG _triggerSensitive;
 
 			ConnectionState _connectionState;
 			BYTE _connectPendingCount;

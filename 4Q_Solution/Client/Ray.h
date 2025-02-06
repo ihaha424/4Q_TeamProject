@@ -31,4 +31,5 @@ private:
 
 private:
 	Engine::Math::Vector3 _capsuleScale;
+	Engine::Math::Quaternion _offset;
 };

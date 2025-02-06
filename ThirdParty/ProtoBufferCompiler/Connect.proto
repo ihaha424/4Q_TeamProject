@@ -10,7 +10,6 @@ message SyncPlayer {
 	optional float x = 1;
 	optional float y = 2;
 	optional float z = 3;
-	optional string resource = 4;
 }
 
 message SyncObject {
@@ -20,11 +19,12 @@ message SyncObject {
 	repeated float scale = 4;
 }
 
-message AddRemote {
+message AddPlayer {
 	optional int32 grantnumber = 1;
+	optional string classid = 2;
 }
 
 message AddObject {
 	optional int32 grantnumber = 1;
-	optional string resourceid = 2;
+	optional string classid = 2;
 }

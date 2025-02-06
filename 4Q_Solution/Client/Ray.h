@@ -3,6 +3,18 @@
 
 class Ray : public Engine::Object
 {
+	enum StateFlag : unsigned long long
+	{
+		Idle				= 1 << 0,
+		Walk				= 1 << 1,
+		Jump				= 1 << 2,
+		Interact			= 1 << 3,
+		Jump_Started		= 1 << 4,
+		Jump_Triggered		= 1 << 5,
+		Interact_Started	= 1 << 6,
+		Interact_Triggered	= 1 << 7,
+	};
+
 public:
 	Ray(std::filesystem::path&& meshPath);
 
@@ -18,23 +30,35 @@ protected:
 	void PostAttach() override;
 
 private:
+	void MoveStarted();
+	void MoveTriggered(Engine::Math::Vector3 value);
+	void MoveCompleted();
+
+	void JumpStarted();
+
+private:
 	std::filesystem::path _meshPath;
+	Engine::Math::Matrix _worldMatrix;
 
 	Engine::Component::Movement* _movement;
 	Engine::Component::Camera* _camera;
 	Engine::Component::SkeletalMesh* _skeletalMesh;
 	Engine::Component::Animator* _animator;
 	Engine::Component::FixedArm* _fixedArm;
-	Engine::Math::Matrix _worldMatrix;
 
 	Engine::Component::ChractorController* _rigid;
-
 	Engine::Component::Synchronize* _sync;
 	RemoteMove* _remote;
+
+	Engine::Component::BitFlag* _bitFlag;
 
 private:
 	Engine::Math::Vector3 _capsuleScale;
 	Engine::Math::Quaternion _offset;
+
+private:
+	// State Test
+	void UpdateState();
 
 public:
 	void SetSerialNumber(int num);

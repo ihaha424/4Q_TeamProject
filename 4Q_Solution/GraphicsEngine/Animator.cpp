@@ -50,8 +50,7 @@ void Animator::Update(const float deltaTime)
 		if (_blendInfo.isBlending)
 		{
 			/*const Animation::Channel& prevAnimation = _animation->_animations[_blendInfo.prevAnimation];
-			_blendInfo.prevPlayTime += prevAnimation.ticksPerSecond * deltaTime;
-			_blendInfo.prevPlayTime = fmod(_blendInfo.prevPlayTime, prevAnimation.duration);
+			_blendInfo.prevPlayTime += _speed * deltaTime;
 
 			if (_blendInfo.prevPlayTime > prevAnimation.lastTime)
 				_blendInfo.prevPlayTime = 0.f;*/
@@ -93,14 +92,14 @@ void Animator::Release()
 
 void Animator::ChangeAnimation(const char* animation)
 {
-	if (_animation->_animations.find(animation) == _animation->_animations.end())
+	auto iter = _animation->_animations.find(animation);
+	if (iter == _animation->_animations.end())
 		return;
 
 	if (!strcmp(_controllers[0].animation, animation))
 		return;
 
 	memcpy(_blendInfo.prevAnimation.data(), _controllers[0].animation, strlen(_controllers[0].animation));
-	//_blendInfo.prevAnimation = _controllers[0].animation;
 	_blendInfo.prevPlayTime = _controllers[0].playTime;
 	_blendInfo.blendTime = 0.f;
 	_blendInfo.isBlending = true;
@@ -110,6 +109,7 @@ void Animator::ChangeAnimation(const char* animation)
 	{
 		controller.animation = animation;
 		controller.playTime = 0.f;
+		controller.lastTime = iter->second.lastTime;
 	}
 }
 

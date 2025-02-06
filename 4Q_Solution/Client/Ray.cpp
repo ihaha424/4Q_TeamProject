@@ -72,7 +72,7 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 			//_movement->SetDirection(_fixedArm->GetTransformDirection(value));
 			_remote->SetDirection(_fixedArm->GetTransformDirection(value));
 			_transform.rotation = _fixedArm->GetRotation(value, _transform.rotation);
-			_fixedArm->FollowDirection(value);
+			//_fixedArm->FollowDirection(value);
 
 			Engine::Math::Vector3 direction = _fixedArm->GetTransformDirection(value);
 			_sync->_move.set_x(direction.x);
@@ -162,7 +162,15 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 	mappingContext->GetAction(L"Jump", &jumpAction);
 	jumpAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
 		{
-			_transform.position.y += 100.f;
+			_sync->_jump.set_power(30.f);
+			_sync->_jump.SerializeToString(&_sync->_msgBuffer);
+
+			Engine::Application::GetNetworkManager()->SaveSendData(
+				(short)PacketID::Jump,
+				_sync->_msgBuffer,
+				_sync->_jump.ByteSizeLong(),
+				_sync->GetSerialNumber()
+			);
 		});
 
 	Engine::Input::IAction* interactAction = nullptr;
@@ -188,7 +196,7 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 	PhysicsManager->CreatePlayerController(&controller, PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::mainScene)), cd);
 	_rigid->_controller = static_cast<Engine::Physics::Controller*>(controller);
 
-	_rigid->_controller->SetMoveSpeed(1000.f);
+	_rigid->_controller->SetMoveSpeed(0.f);
 
 	// TODO: 적용해보고 속성값 조절
 	// _rigid->_controller->SetBottomPosition({ 0,10,0 });

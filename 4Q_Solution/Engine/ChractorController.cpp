@@ -20,10 +20,10 @@ namespace Engine::Component
 	{
 		Component::Update(deltaTime);
 		static_cast<Engine::Physics::Controller*>(_controller)->Update(deltaTime);
-		auto transform = GetOwner()->GetTransform();
+		/*auto transform = GetOwner()->GetTransform();
 		transform.position = _controller->GetPosition();
 		GetOwner()->SetTransform(transform);
-		std::cout << "X: " << transform.position.x << " Y: " << transform.position.y << " Z: " << transform.position.z << std::endl;
+		std::cout << "X: " << transform.position.x << " Y: " << transform.position.y << " Z: " << transform.position.z << std::endl;*/
 	}
 
 	void ChractorController::FixedUpdate()

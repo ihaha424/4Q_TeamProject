@@ -116,6 +116,7 @@ namespace Engine::PHI
 		Engine::Math::Vector3 force;
 		Engine::Math::Vector3 gravity;
 		
+		bool gravityFlag = true;
 		bool jumpFlag = false;
 		float jumpMax;
 

@@ -19,11 +19,11 @@ void Terrain::PreInitialize(const Engine::Modules& modules)
 	auto PhysicsManager = Engine::Application::GetPhysicsManager();
 
 	Engine::Physics::GeometryDesc geometryDesc;
-	geometryDesc.data = { _transform.scale.x, _transform.scale.y, 1 };
+	geometryDesc.data = { _transform.scale.x, _transform.scale.y,  _transform.scale.z };
 	PhysicsManager->LoadHeightMap(geometryDesc, "terrain", "../Resources/Terrain/HeightMap.png");
 
 	Engine::Transform transform{};
-	PhysicsManager->CreateTriangleStatic(&_rigidStatc->_rigidbody, "terrain", { {0.2f,0.f,0.f } }, transform);
+	PhysicsManager->CreateTriangleStatic(&_rigidStatc->_rigidbody, "terrain", { {0.3f,0.f,0.f } }, transform);
 	_rigidStatc->_rigidbody->SetOwner(this);
 	PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::mainScene))->AddActor(_rigidStatc->_rigidbody);
 
@@ -34,4 +34,3 @@ void Terrain::PreInitialize(const Engine::Modules& modules)
 
 }
 
-}

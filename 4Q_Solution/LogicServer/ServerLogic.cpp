@@ -217,7 +217,10 @@ void ServerLogic::EnterProcess(const Packet& packet)
             } // if end
 
             // TODO: 나중에 플레이어 class 타입이 나오면 그 때 수정해야 합니다.
-            Server::BroadCast("", (short)PacketID::Sync, 0, _playerSlot[i]._serialNumber);
+            _addObject.set_grantnumber(_playerSlot[i]._serialNumber);
+            _addObject.SerializeToString(&_msgBuffer);
+
+            Server::BroadCast(_msgBuffer, (short)PacketID::Sync, _addObject.ByteSizeLong(), _playerSlot[i]._serialNumber);
 
         }  // for end
         for (int i = 0; i < _buildings.size(); i++) {

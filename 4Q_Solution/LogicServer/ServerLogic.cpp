@@ -192,9 +192,10 @@ void ServerLogic::EnterProcess(const Packet& packet)
         Server::SavePacketData("", packet.sessionId, (short)PacketID::EnterReject, 0, 0);
     } // if end
     else {
-        _enterAccept.set_grantnumber(grantNum + 1);
-        _enterAccept.SerializeToString(&_msgBuffer);
-        Server::SavePacketData(_msgBuffer, packet.sessionId, (short)PacketID::EnterAccept, _enterAccept.ByteSizeLong(), grantNum + 1);
+        _addObject.set_grantnumber(grantNum + 1);
+        _addObject.set_classid("Player");
+        _addObject.SerializeToString(&_msgBuffer);
+        Server::SavePacketData(_msgBuffer, packet.sessionId, (short)PacketID::EnterAccept, _addObject.ByteSizeLong(), grantNum + 1);
 
         _playerSlot[grantNum]._serialNumber = grantNum + 1;
         _playerSlot[grantNum]._position = Engine::Math::Vector3(500.0f, 400.0f, 500.0f);

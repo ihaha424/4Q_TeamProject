@@ -15,7 +15,7 @@ namespace Engine::Network
 		virtual void Register(Terminal* terminal) = 0;
 		virtual void Unregister(Terminal* terminal) = 0;
 		virtual void SaveSendData(short packetId, std::string data, long dataSize, int serialNum) = 0;
-		virtual void RegistWorldEvent(short packetId, std::function<void(int)> callback) = 0;
+		virtual void RegistWorldEvent(short packetId, std::function<void(const ConnectMsg::AddObject*)> callback) = 0;
 		virtual void Disconnect() = 0;
 	};
 

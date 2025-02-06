@@ -87,7 +87,6 @@ private:
 	ConnectMsg::SyncPlayer _syncPlayer;
 	ConnectMsg::SyncObject _syncObject;
 	ConnectMsg::AddObject _addObject;
-	ConnectMsg::AddPlayer _addPlayer;
 	
 	MoveMsg::Move _move;
 	MoveMsg::Jump _jump;
@@ -98,6 +97,7 @@ private:
 	PlayMsg::SelectPart _selectPart;
 	PlayMsg::PickObject _pickObject;
 	PlayMsg::PutObject _putObject;
+	PlayMsg::SoundPlay _soundPlay;
 
 	PlayMsg::InteractDialog _interactDialog;
 	PlayMsg::DialogProgress _dialogProgress;

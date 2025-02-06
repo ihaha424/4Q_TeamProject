@@ -11,10 +11,7 @@ void Animation::LoadAnimation(const aiScene* paiScene)
 		Channel animation;
 		aiAnimation* anim = paiScene->mAnimations[i];
 
-		if (anim->mTicksPerSecond != 0.f)
-			animation.ticksPerSecond = (float)anim->mTicksPerSecond;
-
-		animation.duration = float(anim->mDuration * anim->mTicksPerSecond);
+		float offset = 1.f / (float)anim->mTicksPerSecond;
 		
 		for (unsigned int j = 0; j < anim->mNumChannels; j++)
 		{
@@ -24,21 +21,21 @@ void Animation::LoadAnimation(const aiScene* paiScene)
 			for (unsigned int k = 0; k < channel->mNumPositionKeys; k++)
 			{				
 				track.positions.emplace_back(
-					(float)channel->mPositionKeys[k].mTime,
+					(float)channel->mPositionKeys[k].mTime * offset,
 					AssimpVec3ToSimpleMathVec3(channel->mPositionKeys[k].mValue));
 			}
 
 			for (unsigned int k = 0; k < channel->mNumRotationKeys; k++)
 			{
 				track.rotations.emplace_back(
-					(float)channel->mRotationKeys[k].mTime,
+					(float)channel->mRotationKeys[k].mTime * offset,
 					AssimpQuatToSimpleMathQuat(channel->mRotationKeys[k].mValue));
 			}
 
 			for (unsigned int k = 0; k < channel->mNumScalingKeys; k++)
 			{
 				track.scales.emplace_back(
-					(float)channel->mScalingKeys[k].mTime,
+					(float)channel->mScalingKeys[k].mTime * offset,
 					AssimpVec3ToSimpleMathVec3(channel->mScalingKeys[k].mValue));
 			}
 

@@ -6,7 +6,7 @@ Ray::Ray(std::filesystem::path&& meshPath)
 	  //, _movement(nullptr)
 	  , _camera(nullptr)
 	  , _skeletalMesh(nullptr)
-	  , _animator(nullptr), _fixedArm(nullptr), _rigid(nullptr)
+	  , _animator(nullptr), _fixedArm(nullptr), _rigid(nullptr), _bitFlag(nullptr)
 	  , _offset(Engine::Math::Quaternion::CreateFromYawPitchRoll(std::numbers::pi_v<float>,0, 0))
 {
 }
@@ -21,6 +21,7 @@ void Ray::Prepare(Engine::Content::Factory::Component* componentFactory)
 	_fixedArm = componentFactory->Clone<Engine::Component::FixedArm>(this);
 	_remote = componentFactory->Clone<RemoteMove>(this);
 	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
+	_bitFlag = componentFactory->Clone<Engine::Component::BitFlag>(this);
 }
 
 void Ray::SetCapsuleScale(Engine::Math::Vector3 capsuleScale)
@@ -38,6 +39,7 @@ void Ray::DisposeComponents()
 	_fixedArm->Dispose();
 	_remote->Dispose();
 	_sync->Dispose();
+	_bitFlag->Dispose();
 }
 
 void Ray::PreInitialize(const Engine::Modules& modules)
@@ -65,115 +67,24 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 	Engine::Input::IMappingContext* mappingContext = nullptr;
 	inputManager->GetMappingContext(L"Default", &mappingContext);
 
-	Engine::Input::IAction* moveAction = nullptr;
-	mappingContext->GetAction(L"Move", &moveAction);
-	moveAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
-		{
-			//_movement->SetDirection(_fixedArm->GetTransformDirection(value));
-			_remote->SetDirection(_fixedArm->GetTransformDirection(value));
-			_transform.rotation = _fixedArm->GetRotation(value, _transform.rotation);
-			//_fixedArm->FollowDirection(value);
-
-			Engine::Math::Vector3 direction = _fixedArm->GetTransformDirection(value);
-			_sync->_move.set_x(direction.x);
-			_sync->_move.set_y(direction.y);
-			_sync->_move.set_z(direction.z);
-			_sync->_move.add_rotation(_transform.rotation.x);
-			_sync->_move.add_rotation(_transform.rotation.y);
-			_sync->_move.add_rotation(_transform.rotation.z);
-			_sync->_move.add_rotation(_transform.rotation.w);
-			_sync->_move.set_speed(_remote->GetSpeed());
-
-			_sync->_move.SerializeToString(&_sync->_msgBuffer);
-
-			Engine::Application::GetNetworkManager()->SaveSendData(
-				(short)PacketID::Move,
-				_sync->_msgBuffer,
-				_sync->_move.ByteSizeLong(),
-				_sync->GetSerialNumber()
-			);
-			_sync->_move.Clear();
-
-
-			//Engine::Math::Vector3 direction = value;
-			//direction = Engine::Math::Vector3::TransformNormal(direction, _cameraParentMatrix);
-			//direction.y = 0.f;
-			//direction.Normalize();
-			//_transform.rotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(Engine::Math::Vector3(0.f, _cameraRotation.y + 3.14f, 0.f));
-			//_rigid->_controller->SetDirection(direction);
-			//// _movement->SetDirection(direction);
-		});
-	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
-		{
-			_animator->ChangeAnimation("rig|Anim_Walk");
-
-			_sync->_stateChange.set_stateinfo(1);
-			_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
-
-			Engine::Application::GetNetworkManager()->SaveSendData(
-				(short)PacketID::StateChange,
-				_sync->_msgBuffer,
-				_sync->_stateChange.ByteSizeLong(),
-				_sync->GetSerialNumber()
-			);
-		});
-	moveAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
-		{
-			_animator->ChangeAnimation("rig|Anim_Idle");
-			//_movement->SetDirection(Engine::Math::Vector3::Zero);
-			_remote->SetDirection(Engine::Math::Vector3::Zero);
-
-			_sync->_move.set_x(0);
-			_sync->_move.set_y(0);
-			_sync->_move.set_z(0);
-			_sync->_move.set_speed(0);
-
-			_sync->_move.SerializeToString(&_sync->_msgBuffer);
-
-			Engine::Application::GetNetworkManager()->SaveSendData(
-				(short)PacketID::Move,
-				_sync->_msgBuffer,
-				_sync->_move.ByteSizeLong(),
-				_sync->GetSerialNumber()
-			);
-
-			_sync->_stateChange.set_stateinfo(0);
-			_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
-
-			Engine::Application::GetNetworkManager()->SaveSendData(
-				(short)PacketID::StateChange,
-				_sync->_msgBuffer,
-				_sync->_stateChange.ByteSizeLong(),
-				_sync->GetSerialNumber()
-			);
-
-			// _rigid->_controller->SetDirection(Engine::Math::Vector3::Zero);
-			//_movement->SetDirection(Engine::Math::Vector3::Zero);
-		});
-
 	Engine::Input::IAction* cameraAction = nullptr;
 	mappingContext->GetAction(L"Camera", &cameraAction);
 	cameraAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](Engine::Math::Vector3 value)
-		{
-			_fixedArm->Rotate(value);
-		});
+		{ _fixedArm->Rotate(value); });
+
+	Engine::Input::IAction* moveAction = nullptr;
+	mappingContext->GetAction(L"Move", &moveAction);
+	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
+		{ MoveStarted(); });
+	moveAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
+		{ MoveTriggered(value); });
+	moveAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
+		{ MoveCompleted(); });
 
 	Engine::Input::IAction* jumpAction = nullptr;
 	mappingContext->GetAction(L"Jump", &jumpAction);
 	jumpAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
-		{
-			_animator->ChangeAnimation("rig|Anim_Jump_start");
-			//_transform.position.y += 100.f;
-			_sync->_jump.set_power(5.f);
-			_sync->_jump.SerializeToString(&_sync->_msgBuffer);
-
-			Engine::Application::GetNetworkManager()->SaveSendData(
-				(short)PacketID::Jump,
-				_sync->_msgBuffer,
-				_sync->_jump.ByteSizeLong(),
-				_sync->GetSerialNumber()
-			);
-		});
+		{ JumpStarted(); });
 
 	Engine::Input::IAction* interactAction = nullptr;
 	mappingContext->GetAction(L"Interact", &interactAction);
@@ -235,12 +146,160 @@ void Ray::PostUpdate(float deltaTime)
 	_worldMatrix = Engine::Math::Matrix::CreateScale(0.4f)
 			     * Engine::Math::Matrix::CreateFromQuaternion(q)
 				 * Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
+
+	UpdateState();
 }
 
 void Ray::PostAttach()
 {
 	Object::PostAttach();
 	_camera->Activate();
+}
+
+void Ray::MoveStarted()
+{	
+	_bitFlag->OnFlag(StateFlag::Walk);
+
+	_sync->_stateChange.set_stateinfo(1);
+	_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
+
+	Engine::Application::GetNetworkManager()->SaveSendData(
+		(short)PacketID::StateChange,
+		_sync->_msgBuffer,
+		_sync->_stateChange.ByteSizeLong(),
+		_sync->GetSerialNumber()
+	);
+}
+
+void Ray::MoveTriggered(Engine::Math::Vector3 value)
+{
+	if (!_bitFlag->IsOnFlag(StateFlag::Jump))
+		_animator->ChangeAnimation("rig|Anim_Walk");
+
+	//_movement->SetDirection(_fixedArm->GetTransformDirection(value));
+	_remote->SetDirection(_fixedArm->GetTransformDirection(value));
+	_transform.rotation = _fixedArm->GetRotation(value, _transform.rotation);
+	//_fixedArm->FollowDirection(value);
+
+	Engine::Math::Vector3 direction = _fixedArm->GetTransformDirection(value);
+	_sync->_move.set_x(direction.x);
+	_sync->_move.set_y(direction.y);
+	_sync->_move.set_z(direction.z);
+	_sync->_move.add_rotation(_transform.rotation.x);
+	_sync->_move.add_rotation(_transform.rotation.y);
+	_sync->_move.add_rotation(_transform.rotation.z);
+	_sync->_move.add_rotation(_transform.rotation.w);
+	_sync->_move.set_speed(_remote->GetSpeed());
+
+	_sync->_move.SerializeToString(&_sync->_msgBuffer);
+
+	Engine::Application::GetNetworkManager()->SaveSendData(
+		(short)PacketID::Move,
+		_sync->_msgBuffer,
+		_sync->_move.ByteSizeLong(),
+		_sync->GetSerialNumber()
+	);
+	_sync->_move.Clear();
+
+
+	//Engine::Math::Vector3 direction = value;
+	//direction = Engine::Math::Vector3::TransformNormal(direction, _cameraParentMatrix);
+	//direction.y = 0.f;
+	//direction.Normalize();
+	//_transform.rotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(Engine::Math::Vector3(0.f, _cameraRotation.y + 3.14f, 0.f));
+	//_rigid->_controller->SetDirection(direction);
+	//// _movement->SetDirection(direction);
+}
+
+void Ray::MoveCompleted()
+{
+	if (!_bitFlag->IsOnFlag(StateFlag::Jump | StateFlag::Interact))
+		_animator->ChangeAnimation("rig|Anim_Idle");
+
+	_bitFlag->OffFlag(StateFlag::Walk);
+
+	//_movement->SetDirection(Engine::Math::Vector3::Zero);
+	_remote->SetDirection(Engine::Math::Vector3::Zero);
+
+	_sync->_move.set_x(0);
+	_sync->_move.set_y(0);
+	_sync->_move.set_z(0);
+	_sync->_move.set_speed(0);
+
+	_sync->_move.SerializeToString(&_sync->_msgBuffer);
+
+	Engine::Application::GetNetworkManager()->SaveSendData(
+		(short)PacketID::Move,
+		_sync->_msgBuffer,
+		_sync->_move.ByteSizeLong(),
+		_sync->GetSerialNumber()
+	);
+
+	_sync->_stateChange.set_stateinfo(0);
+	_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
+
+	Engine::Application::GetNetworkManager()->SaveSendData(
+		(short)PacketID::StateChange,
+		_sync->_msgBuffer,
+		_sync->_stateChange.ByteSizeLong(),
+		_sync->GetSerialNumber()
+	);
+
+	// _rigid->_controller->SetDirection(Engine::Math::Vector3::Zero);
+	//_movement->SetDirection(Engine::Math::Vector3::Zero);
+}
+
+void Ray::JumpStarted()
+{
+	if (_bitFlag->IsOnFlag(StateFlag::Jump))
+		return;
+
+	_bitFlag->OnFlag(StateFlag::Jump | StateFlag::Jump_Started);
+	_animator->ChangeAnimation("rig|Anim_Jump_start");
+	_animator->SetAnimationSpeed(1.5f);
+
+	_sync->_jump.set_power(10.f);
+	_sync->_jump.SerializeToString(&_sync->_msgBuffer);
+
+	Engine::Application::GetNetworkManager()->SaveSendData(
+		(short)PacketID::Jump,
+		_sync->_msgBuffer,
+		_sync->_jump.ByteSizeLong(),
+		_sync->GetSerialNumber()
+	);
+}
+
+void Ray::UpdateState()
+{
+	// Jump
+	if (_bitFlag->IsOnFlag(StateFlag::Jump_Started))
+	{		
+		if (_animator->IsLastFrame(0.1f))
+		{
+			if (!_bitFlag->IsOnFlag(StateFlag::Jump_Triggered))
+			{
+				_bitFlag->OnFlag(StateFlag::Jump_Triggered);
+				_animator->ChangeAnimation("rig|Anim_Jump_loop");
+				_animator->SetAnimationSpeed(1.f);
+				goto out_jump;
+			}
+
+			if (_bitFlag->IsOnFlag(StateFlag::Jump_Triggered))
+			{
+				_bitFlag->OffFlag(StateFlag::Jump | StateFlag::Jump_Started | StateFlag::Jump_Triggered);
+				_animator->ChangeAnimation("rig|Anim_Jump_end");
+			}
+		}
+	}
+	
+out_jump:;
+	if (!_bitFlag->IsOnFlag(StateFlag::Walk | StateFlag::Jump | StateFlag::Interact))
+	{
+		if (_animator->IsLastFrame(0.1f))
+		{
+			_animator->ChangeAnimation("rig|Anim_Idle");
+		}
+	}
 }
 
 void Ray::SetSerialNumber(int num)

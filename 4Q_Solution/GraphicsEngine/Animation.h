@@ -15,8 +15,6 @@ class Animation : public Resource
 	struct Channel
 	{
 		std::unordered_map<std::string, BoneTransformTrack> boneTransforms;
-		float duration = 0.0f;
-		float ticksPerSecond = 1.0f;
 		float lastTime = 0.f;
 	};
 

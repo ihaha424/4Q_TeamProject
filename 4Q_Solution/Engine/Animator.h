@@ -19,9 +19,10 @@ namespace Engine::Component
 
         void ChangeAnimation(const char* animation) const;
         void ChangeAnimation(const char* animation, const unsigned int id) const;
-        bool IsLastFrame(float interval) const;
+        bool IsLastFrame(float interval, const unsigned int id = 0) const;
         void SetUpSplitBone(const unsigned int maxSplit) const;
         void SplitBone(const unsigned int id, const char* boneName) const;
+        void SetAnimationSpeed(float speed) const;
 
     private:
         SkeletalMesh* _skeletalMesh;

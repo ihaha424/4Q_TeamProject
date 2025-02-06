@@ -36,6 +36,11 @@ namespace Engine
 		virtual void PreFinalize();
 		virtual void PostFinalize();
 
+		virtual void Hide();
+		virtual void Show();
+		virtual void Activate();
+		virtual void Deactivate();
+
 		void SetOwner(World* owner);
 		[[nodiscard]] World* GetOwner() const;
 

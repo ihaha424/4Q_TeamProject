@@ -44,6 +44,8 @@ namespace Engine
 		void SetOwner(World* owner);
 		[[nodiscard]] World* GetOwner() const;
 
+		void SetTransform(const Engine::Transform& transform);
+		[[nodiscard]] Engine::Transform GetTransform() const;
 	protected:
 		virtual void DisposeComponents() = 0;
 

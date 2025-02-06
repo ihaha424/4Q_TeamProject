@@ -455,7 +455,7 @@ void ServerLogic::RegistPlayer(Player* player)
 void ServerLogic::RegistGround(Ground& ground)
 {
     Engine::Physics::GeometryDesc geometryDesc;
-    geometryDesc.data = { 100, 100, 100 };
+    geometryDesc.data = { 1, 1, 1 };
     _physicsManager->LoadHeightMap(geometryDesc, "terrain", "../Resources/Terrain/testTest.png");
 
     Engine::Transform transform{};

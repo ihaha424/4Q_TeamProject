@@ -75,7 +75,7 @@
     <ClInclude Include="SkyBox.h">
       <Filter>Object\SkyBox</Filter>
     </ClInclude>
-    <ClInclude Include="Building1.h">
+    <ClInclude Include="Obj_BG_Tree_1.h">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClInclude>
     <ClInclude Include="SceneFillter.h">
@@ -84,37 +84,67 @@
     <ClInclude Include="StaticObject.h">
       <Filter>Object\StaticObject</Filter>
     </ClInclude>
-    <ClInclude Include="Building2.h">
+    <ClInclude Include="Obj_BG_Tree_2.h">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClInclude>
-    <ClInclude Include="Building3.h">
+    <ClInclude Include="Obj_BG_Mountain.h">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClInclude>
-    <ClInclude Include="Building4.h">
+    <ClInclude Include="Obj_Props_Fence.h">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClInclude>
-    <ClInclude Include="Building5.h">
+    <ClInclude Include="Obj_Buildings_Shinave.h">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClInclude>
-    <ClInclude Include="Building6.h">
+    <ClInclude Include="Obj_Buildings_Bermiore_Atelier_1.h">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClInclude>
-    <ClInclude Include="Building7.h">
+    <ClInclude Include="Obj_Buildings_Bermiore_Atelier_2.h">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClInclude>
-    <ClInclude Include="Building8.h">
+    <ClInclude Include="Obj_Buildings_Bermiore_Atelier_3.h">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClInclude>
-    <ClInclude Include="Building9.h">
+    <ClInclude Include="Obj_Props_Bermiore_Loom_1.h">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClInclude>
-    <ClInclude Include="Building10.h">
+    <ClInclude Include="Obj_Props_Bermiore_Loom_2.h">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClInclude>
-    <ClInclude Include="SudiumBlue.h">
+    <ClInclude Include="Obj_Props_Bermiore_Cloth_1.h">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClInclude>
     <ClInclude Include="MapData.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Buildings_Hide_House_1.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Buildings_Hide_House_3.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Buildings_Hide_House_2.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Buildings_Hide_House_4.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Buildings_Ornoa_House_1.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Buildings_Ornoa_House_2.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Buildings_Ornoa_House_3.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Buildings_Ornoa_House_4.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Props_Bermiore_Cloth_2.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Buildings_Sudium.h">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClInclude>
   </ItemGroup>
@@ -143,40 +173,70 @@
     <ClCompile Include="SkyBox.cpp">
       <Filter>Object\SkyBox</Filter>
     </ClCompile>
-    <ClCompile Include="Building1.cpp">
+    <ClCompile Include="Obj_BG_Tree_1.cpp">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClCompile>
     <ClCompile Include="StaticObject.cpp">
       <Filter>Object\StaticObject</Filter>
     </ClCompile>
-    <ClCompile Include="Building2.cpp">
+    <ClCompile Include="Obj_BG_Tree_2.cpp">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClCompile>
-    <ClCompile Include="Building3.cpp">
+    <ClCompile Include="Obj_BG_Mountain.cpp">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClCompile>
-    <ClCompile Include="Building4.cpp">
+    <ClCompile Include="Obj_Props_Fence.cpp">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClCompile>
-    <ClCompile Include="Building5.cpp">
+    <ClCompile Include="Obj_Buildings_Shinave.cpp">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClCompile>
-    <ClCompile Include="Building6.cpp">
+    <ClCompile Include="Obj_Buildings_Bermiore_Atelier_1.cpp">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClCompile>
-    <ClCompile Include="Building7.cpp">
+    <ClCompile Include="Obj_Buildings_Bermiore_Atelier_2.cpp">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClCompile>
-    <ClCompile Include="Building8.cpp">
+    <ClCompile Include="Obj_Buildings_Bermiore_Atelier_3.cpp">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClCompile>
-    <ClCompile Include="Building9.cpp">
+    <ClCompile Include="Obj_Props_Bermiore_Loom_1.cpp">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClCompile>
-    <ClCompile Include="Building10.cpp">
+    <ClCompile Include="Obj_Props_Bermiore_Loom_2.cpp">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClCompile>
-    <ClCompile Include="SudiumBlue.cpp">
+    <ClCompile Include="Obj_Props_Bermiore_Cloth_1.cpp">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Buildings_Hide_House_3.cpp">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Buildings_Hide_House_2.cpp">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Buildings_Hide_House_4.cpp">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Buildings_Ornoa_House_1.cpp">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Buildings_Ornoa_House_2.cpp">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Buildings_Ornoa_House_3.cpp">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Buildings_Ornoa_House_4.cpp">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Props_Bermiore_Cloth_2.cpp">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Buildings_Sudium.cpp">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Buildings_Hide_House_1.cpp">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClCompile>
   </ItemGroup>

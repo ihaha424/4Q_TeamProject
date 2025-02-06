@@ -157,10 +157,10 @@ namespace PhysicsEngineAPI
 		unsigned int									callbackCount;
 		std::vector<physx::PxSimulationEventCallback*>	callbackList;
 
-		DEBUG_MODE
-		(
+		//DEBUG_MODE
+		//(
 			physx::PxPvd* pvd = { nullptr };
 			physx::PxPvdTransport* transport = { nullptr };
-		)
+//		)
 	};
 }

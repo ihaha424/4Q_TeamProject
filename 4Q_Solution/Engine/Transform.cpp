@@ -19,3 +19,13 @@ void Engine::Transform::Translate(const Math::Vector3 translation)
 {
 	position += translation;
 }
+
+Engine::Math::Matrix Engine::Transform::GetMatrix()
+{
+	Engine::Math::Matrix matrix;
+
+	matrix = Engine::Math::Matrix::CreateScale(scale)
+		* Engine::Math::Matrix::CreateFromQuaternion(rotation)
+		* Engine::Math::Matrix::CreateTranslation(position);
+	return matrix;
+}

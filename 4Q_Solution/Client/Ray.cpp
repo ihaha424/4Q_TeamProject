@@ -57,7 +57,8 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 			direction.y = 0.f;
 			direction.Normalize();
 			_transform.rotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(Engine::Math::Vector3(0.f, _cameraRotation.y + 3.14f, 0.f));
-			_movement->SetDirection(direction);
+			_rigid->_controller->SetDirection(direction);
+			// _movement->SetDirection(direction);
 		});
 	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
 		{
@@ -66,7 +67,8 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 	moveAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
 		{
 			_animator->ChangeAnimation("rig|Anim_Idle");
-			_movement->SetDirection(Engine::Math::Vector3::Zero);
+			_rigid->_controller->SetDirection(Engine::Math::Vector3::Zero);
+			//_movement->SetDirection(Engine::Math::Vector3::Zero);
 		});
 
 	Engine::Input::IAction* cameraAction = nullptr;
@@ -80,18 +82,21 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 	auto PhysicsManager = Engine::Application::GetPhysicsManager();
 
 	Engine::Physics::ControllerDesc cd;
-	cd.position = Engine::Math::Vector3(400, 400, 400);
+	cd.position = Engine::Math::Vector3(1115.f, 674.f, -872.f);
 	cd.height = 10.f;
 	cd.radius = 2.f;
 	// TODO: Player Gravity
-	//cd.gravity = { 0.f, -9.8f, 0.f };
-	cd.contactOffset = 0.001f;
+	cd.gravity = { 0.f, -9.8f, 0.f };
+	cd.contactOffset = 0.1f;
 	cd.stepOffset = 1.f;
 	cd.slopeLimit = 0.707f;
 
 	Engine::Physics::IController* controller;
 	PhysicsManager->CreatePlayerController(&controller, PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::mainScene)), cd);
 	_rigid->_controller = static_cast<Engine::Physics::Controller*>(controller);
+
+	_rigid->_controller->SetMoveSpeed(1000.f);
+
 	// TODO: 적용해보고 속성값 조절
 	// _rigid->_controller->SetBottomPosition({ 0,10,0 });
 

@@ -10,7 +10,9 @@ public:
 	/**
 			Set Property
 	 **/
-	void SetMeshData(bool meshData);
+	void SetIsPublic(bool isPublic);
+	void SetisDynamic(bool isDynamic);
+	void SetHasMesh(bool hasMesh);
 	void SetBoxScale(Engine::Math::Vector3 boxScale);
 
 protected:
@@ -28,7 +30,9 @@ protected:
 	std::filesystem::path _physicsPath;
 
 protected:
-	bool _meshData;
+	bool _isPublic;
+	bool _isDynamic;
+	bool _hasMesh;
 	Engine::Math::Vector3 _boxScale;
 };
 

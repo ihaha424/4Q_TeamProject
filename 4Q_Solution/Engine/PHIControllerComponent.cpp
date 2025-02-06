@@ -15,7 +15,7 @@ namespace Engine::PHI
 		, gravity{}
 		, jumpMax{ 1000 }
 		, direction{}
-		, moveSpeed{ 0 }
+		, moveSpeed{ 1.f }
 		, minDistance{ 0.001 }
 		, owner{ nullptr }
 	{

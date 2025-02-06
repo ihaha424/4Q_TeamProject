@@ -151,16 +151,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
-    <ClInclude Include="Building1.h" />
-    <ClInclude Include="Building10.h" />
-    <ClInclude Include="Building2.h" />
-    <ClInclude Include="Building3.h" />
-    <ClInclude Include="Building4.h" />
-    <ClInclude Include="Building5.h" />
-    <ClInclude Include="Building6.h" />
-    <ClInclude Include="Building7.h" />
-    <ClInclude Include="Building8.h" />
-    <ClInclude Include="Building9.h" />
+    <ClInclude Include="Obj_Buildings_Ornoa_House_3.h" />
+    <ClInclude Include="Obj_Props_Bermiore_Cloth_2.h" />
+    <ClInclude Include="Obj_Buildings_Sudium.h" />
+    <ClInclude Include="Obj_Buildings_Hide_House_1.h" />
+    <ClInclude Include="Obj_Buildings_Hide_House_3.h" />
+    <ClInclude Include="Obj_Buildings_Hide_House_2.h" />
+    <ClInclude Include="Obj_Buildings_Hide_House_4.h" />
+    <ClInclude Include="Obj_Buildings_Ornoa_House_1.h" />
+    <ClInclude Include="Obj_Buildings_Ornoa_House_2.h" />
+    <ClInclude Include="Obj_Buildings_Ornoa_House_4.h" />
+    <ClInclude Include="Obj_BG_Tree_1.h" />
+    <ClInclude Include="Obj_Props_Bermiore_Loom_2.h" />
+    <ClInclude Include="Obj_BG_Tree_2.h" />
+    <ClInclude Include="Obj_BG_Mountain.h" />
+    <ClInclude Include="Obj_Props_Fence.h" />
+    <ClInclude Include="Obj_Buildings_Shinave.h" />
+    <ClInclude Include="Obj_Buildings_Bermiore_Atelier_1.h" />
+    <ClInclude Include="Obj_Buildings_Bermiore_Atelier_2.h" />
+    <ClInclude Include="Obj_Buildings_Bermiore_Atelier_3.h" />
+    <ClInclude Include="Obj_Props_Bermiore_Loom_1.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GlobalLight.h" />
     <ClInclude Include="pch.h" />
@@ -169,7 +179,7 @@
     <ClInclude Include="SceneFillter.h" />
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="StaticObject.h" />
-    <ClInclude Include="SudiumBlue.h" />
+    <ClInclude Include="Obj_Props_Bermiore_Cloth_1.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TestWorld.h" />
@@ -177,16 +187,26 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Building1.cpp" />
-    <ClCompile Include="Building10.cpp" />
-    <ClCompile Include="Building2.cpp" />
-    <ClCompile Include="Building3.cpp" />
-    <ClCompile Include="Building4.cpp" />
-    <ClCompile Include="Building5.cpp" />
-    <ClCompile Include="Building6.cpp" />
-    <ClCompile Include="Building7.cpp" />
-    <ClCompile Include="Building8.cpp" />
-    <ClCompile Include="Building9.cpp" />
+    <ClCompile Include="Obj_Buildings_Ornoa_House_3.cpp" />
+    <ClCompile Include="Obj_Props_Bermiore_Cloth_2.cpp" />
+    <ClCompile Include="Obj_Buildings_Sudium.cpp" />
+    <ClCompile Include="Obj_Buildings_Hide_House_1.cpp" />
+    <ClCompile Include="Obj_Buildings_Hide_House_3.cpp" />
+    <ClCompile Include="Obj_Buildings_Hide_House_2.cpp" />
+    <ClCompile Include="Obj_Buildings_Hide_House_4.cpp" />
+    <ClCompile Include="Obj_Buildings_Ornoa_House_1.cpp" />
+    <ClCompile Include="Obj_Buildings_Ornoa_House_2.cpp" />
+    <ClCompile Include="Obj_Buildings_Ornoa_House_4.cpp" />
+    <ClCompile Include="Obj_BG_Tree_1.cpp" />
+    <ClCompile Include="Obj_Props_Bermiore_Loom_2.cpp" />
+    <ClCompile Include="Obj_BG_Tree_2.cpp" />
+    <ClCompile Include="Obj_BG_Mountain.cpp" />
+    <ClCompile Include="Obj_Props_Fence.cpp" />
+    <ClCompile Include="Obj_Buildings_Shinave.cpp" />
+    <ClCompile Include="Obj_Buildings_Bermiore_Atelier_1.cpp" />
+    <ClCompile Include="Obj_Buildings_Bermiore_Atelier_2.cpp" />
+    <ClCompile Include="Obj_Buildings_Bermiore_Atelier_3.cpp" />
+    <ClCompile Include="Obj_Props_Bermiore_Loom_1.cpp" />
     <ClCompile Include="GlobalLight.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pch.cpp">
@@ -195,7 +215,7 @@
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="StaticObject.cpp" />
-    <ClCompile Include="SudiumBlue.cpp" />
+    <ClCompile Include="Obj_Props_Bermiore_Cloth_1.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TestWorld.cpp" />
   </ItemGroup>

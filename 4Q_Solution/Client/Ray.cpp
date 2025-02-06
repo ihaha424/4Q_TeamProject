@@ -20,6 +20,7 @@ void Ray::Prepare(Engine::Content::Factory::Component* componentFactory)
 	_rigid = componentFactory->Clone<Engine::Component::ChractorController>(this);
 	_fixedArm = componentFactory->Clone<Engine::Component::FixedArm>(this);
 	_remote = componentFactory->Clone<RemoteMove>(this);
+	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
 }
 
 void Ray::SetCapsuleScale(Engine::Math::Vector3 capsuleScale)
@@ -36,6 +37,7 @@ void Ray::DisposeComponents()
 	_rigid->Dispose();
 	_fixedArm->Dispose();
 	_remote->Dispose();
+	_sync->Dispose();
 }
 
 void Ray::PreInitialize(const Engine::Modules& modules)
@@ -71,16 +73,65 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 			_remote->SetDirection(_fixedArm->GetTransformDirection(value));
 			_transform.rotation = _fixedArm->GetRotation(value, _transform.rotation);
 			_fixedArm->FollowDirection(value);
+
+			Engine::Math::Vector3 direction = _fixedArm->GetTransformDirection(value);
+			_sync->_move.set_x(direction.x);
+			_sync->_move.set_y(direction.y);
+			_sync->_move.set_z(direction.z);
+			_sync->_move.set_speed(_remote->GetSpeed());
+
+			_sync->_move.SerializeToString(&_sync->_msgBuffer);
+
+			Engine::Application::GetNetworkManager()->SaveSendData(
+				(short)PacketID::Move,
+				_sync->_msgBuffer,
+				_sync->_move.ByteSizeLong(),
+				_sync->GetSerialNumber()
+			);
 		});
 	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
 		{
 			_animator->ChangeAnimation("rig|Anim_Walk");
+
+			_sync->_stateChange.set_stateinfo(1);
+			_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
+
+			Engine::Application::GetNetworkManager()->SaveSendData(
+				(short)PacketID::StateChange,
+				_sync->_msgBuffer,
+				_sync->_stateChange.ByteSizeLong(),
+				_sync->GetSerialNumber()
+			);
 		});
 	moveAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
 		{
 			_animator->ChangeAnimation("rig|Anim_Idle");
 			//_movement->SetDirection(Engine::Math::Vector3::Zero);
 			_remote->SetDirection(Engine::Math::Vector3::Zero);
+
+			_sync->_move.set_x(0);
+			_sync->_move.set_y(0);
+			_sync->_move.set_z(0);
+			_sync->_move.set_speed(0);
+
+			_sync->_move.SerializeToString(&_sync->_msgBuffer);
+
+			Engine::Application::GetNetworkManager()->SaveSendData(
+				(short)PacketID::Move,
+				_sync->_msgBuffer,
+				_sync->_move.ByteSizeLong(),
+				_sync->GetSerialNumber()
+			);
+
+			_sync->_stateChange.set_stateinfo(0);
+			_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
+
+			Engine::Application::GetNetworkManager()->SaveSendData(
+				(short)PacketID::StateChange,
+				_sync->_msgBuffer,
+				_sync->_stateChange.ByteSizeLong(),
+				_sync->GetSerialNumber()
+			);
 		});
 
 	Engine::Input::IAction* cameraAction = nullptr;
@@ -110,6 +161,9 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 	// _rigid->_controller->SetBottomPosition({ 0,10,0 });
 
 	// TODO: Camera Scene¿¡ Ãß°¡
+
+	_sync->AddCallback((short)PacketID::MoveSync, &Ray::SyncMove, this);
+	_sync->AddCallback((short)PacketID::DataRemote, &Ray::SetLocation, this);
 }
 
 void Ray::PostInitialize(const Engine::Modules& modules)
@@ -144,6 +198,16 @@ void Ray::PostAttach()
 {
 	Object::PostAttach();
 	_camera->Activate();
+}
+
+void Ray::SetSerialNumber(int num)
+{
+	_sync->SetSerialNumber(num);
+}
+
+const int Ray::GetSerialNumber() const
+{
+	return _sync->GetSerialNumber();
 }
 
 void Ray::SyncMove(const MoveMsg::MoveSync* msg)

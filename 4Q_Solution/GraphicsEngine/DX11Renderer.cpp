@@ -40,6 +40,8 @@ void DX11Renderer::Initialize()
 	// Viewport
 	_viewport.MaxDepth = 1.f;	
 
+	SetViewport(g_width, g_height);
+
 	// Shader
 	InitShaders();
 

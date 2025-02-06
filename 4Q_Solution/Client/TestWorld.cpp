@@ -99,6 +99,7 @@ void TestWorld::EnterAccept(const ConnectMsg::AddObject* msg) {
 	if (msg->grantnumber() == 1) {
 		_ray = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Ray>(this);
 		playerSerialNum = msg->grantnumber();
+		_ray->SetSerialNumber(msg->grantnumber());
 	}
 	else if (msg->grantnumber() == 2) {
 		// TODO: 여기에 리브의 오브젝트를 생성하는 코드를 넣어야 합니다.
@@ -111,6 +112,7 @@ void TestWorld::CreatePlayer(const ConnectMsg::AddObject* msg) {
 	}
 	if (msg->grantnumber() == 1) {
 		_ray = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Ray>(this);
+		_ray->SetSerialNumber(msg->grantnumber());
 	}
 	else if (msg->grantnumber() == 2) {
 		// TODO: 여기에 리브의 오브젝트를 생성하는 코드를 넣어야 합니다.

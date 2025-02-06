@@ -28,6 +28,8 @@ private:
 	Engine::Math::Matrix _worldMatrix;
 
 	Engine::Component::ChractorController* _rigid;
+
+	Engine::Component::Synchronize* _sync;
 	RemoteMove* _remote;
 
 private:
@@ -35,6 +37,8 @@ private:
 	Engine::Math::Quaternion _offset;
 
 public:
+	void SetSerialNumber(int num);
+	const int GetSerialNumber() const;
 	void SyncMove(const MoveMsg::MoveSync* msg);
 	// 이 함수는 최초 입장 했을 때 초기 위치 설정을 위한 함수입니다.
 	void SetLocation(const MoveMsg::MoveSync* msg);

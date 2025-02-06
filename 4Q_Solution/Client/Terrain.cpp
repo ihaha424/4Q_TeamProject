@@ -20,7 +20,7 @@ void Terrain::PreInitialize(const Engine::Modules& modules)
 
 	Engine::Physics::GeometryDesc geometryDesc;
 	geometryDesc.data = { _transform.scale.x, _transform.scale.y,  _transform.scale.z };
-	PhysicsManager->LoadHeightMap(geometryDesc, "terrain", "../Resources/Terrain/HeightMap.png");
+	PhysicsManager->LoadHeightMap(geometryDesc, "terrain", "Assets/Test/HeightMap.png");
 
 	Engine::Transform transform{};
 	PhysicsManager->CreateTriangleStatic(&_rigidStatc->_rigidbody, "terrain", { {0.3f,0.f,0.f } }, transform);

@@ -6,8 +6,8 @@ Ray::Ray(std::filesystem::path&& meshPath)
 	  //, _movement(nullptr)
 	  , _camera(nullptr)
 	  , _skeletalMesh(nullptr)
-	  , _animator(nullptr), _fixedArm(nullptr), _rigid(nullptr),
-_offset(Engine::Math::Quaternion::CreateFromYawPitchRoll(std::numbers::pi_v<float>,0, 0))
+	  , _animator(nullptr), _fixedArm(nullptr), _rigid(nullptr)
+	  , _offset(Engine::Math::Quaternion::CreateFromYawPitchRoll(std::numbers::pi_v<float>,0, 0))
 {
 }
 
@@ -162,6 +162,8 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 	mappingContext->GetAction(L"Jump", &jumpAction);
 	jumpAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
 		{
+			_animator->ChangeAnimation("rig|Anim_Jump_start");
+			//_transform.position.y += 100.f;
 			_sync->_jump.set_power(30.f);
 			_sync->_jump.SerializeToString(&_sync->_msgBuffer);
 
@@ -177,7 +179,7 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 	mappingContext->GetAction(L"Interact", &interactAction);
 	interactAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
 		{
-			_transform.position.y -= 100.f;
+			//_transform.position.y -= 100.f;
 		});
 
 	auto PhysicsManager = Engine::Application::GetPhysicsManager();

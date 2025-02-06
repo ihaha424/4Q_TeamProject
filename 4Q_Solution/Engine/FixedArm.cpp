@@ -2,7 +2,8 @@
 #include "FixedArm.h"
 
 Engine::Component::FixedArm::FixedArm() :
-_target(nullptr), _camera(nullptr), _distance(200.0f), _rotationSpeed(Math::Vector2::One)
+	_target(nullptr), _camera(nullptr), _distance(200.0f), _rotationSpeed(Math::Vector2::One),
+_followSpeed(0.01f)
 {
 }
 
@@ -30,6 +31,7 @@ void Engine::Component::FixedArm::Initialize(const Modules& modules)
 void Engine::Component::FixedArm::Update(const float deltaTime)
 {
 	Component::Update(deltaTime);
+
 	_matrix = Math::Matrix::CreateFromYawPitchRoll(_rotation);
 
 	Math::Vector3 tempPosition = _target->position;
@@ -60,7 +62,7 @@ Engine::Math::Vector3 Engine::Component::FixedArm::GetForward() const
 	return _matrix.Forward();
 }
 
-Engine::Math::Vector3 Engine::Component::FixedArm::TransformDirection(const Math::Vector3& direction) const
+Engine::Math::Vector3 Engine::Component::FixedArm::GetTransformDirection(const Math::Vector3& direction) const
 {
 	auto result = Math::Vector3::TransformNormal(direction, _matrix);
 	result.y = 0.f;
@@ -73,4 +75,27 @@ Engine::Math::Quaternion Engine::Component::FixedArm::GetForwardRotation() const
 	return Math::Quaternion::CreateFromYawPitchRoll({ 0,_rotation.y + std::numbers::pi_v<float>,0 });
 }
 
+Engine::Math::Quaternion Engine::Component::FixedArm::GetRotation(const Math::Vector3& direction) const
+{
+	auto result = Math::Vector3::TransformNormal(direction, _matrix);
+	result.y = 0.f;
+	result.Normalize();
+	return Math::Quaternion::CreateFromYawPitchRoll({ 0, std::atan2(result.x, result.z) + std::numbers::pi_v<float>,0 });
+}
 
+void Engine::Component::FixedArm::FollowDirection(const Math::Vector3& direction)
+{
+	auto transformDirection = Math::Vector3::TransformNormal(direction, _matrix);
+	transformDirection.y = 0.f;
+	transformDirection.Normalize();
+	auto cameraDirection = GetForward();
+	cameraDirection.y = 0.f;
+	cameraDirection.Normalize();
+	const auto upVector = cameraDirection.Cross(transformDirection);
+	_rotation.y -= upVector.y * _followSpeed;
+}
+
+void Engine::Component::FixedArm::SetFollowSpeed(const float speed)
+{
+	_followSpeed = speed;
+}

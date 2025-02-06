@@ -23,8 +23,12 @@ namespace Engine::Component
 		void SetRotationSpeed(const Math::Vector2& speed);
 
 		[[nodiscard]] Math::Vector3 GetForward() const;
-		[[nodiscard]] Math::Vector3 TransformDirection(const Math::Vector3& direction) const;
+		[[nodiscard]] Math::Vector3 GetTransformDirection(const Math::Vector3& direction) const;
 		[[nodiscard]] Math::Quaternion GetForwardRotation() const;
+		[[nodiscard]] Math::Quaternion GetRotation(const Math::Vector3& direction) const;
+		void FollowDirection(const Math::Vector3& direction);
+
+		void SetFollowSpeed(float speed);
 
 	private:
 		Transform* _target;
@@ -37,5 +41,7 @@ namespace Engine::Component
 		Math::Vector3 _rotation;
 		Math::Vector2 _cameraPosition;
 		Math::Matrix _matrix;
+
+		float _followSpeed;
 	};
 }

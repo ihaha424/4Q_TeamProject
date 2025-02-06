@@ -51,7 +51,8 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 	_fixedArm->SetCameraComponent(_camera);
 	_fixedArm->SetDistance(150.f);
 	_fixedArm->SetCameraPosition(Engine::Math::Vector2{ 0.f, 60.f });
-	_fixedArm->SetRotationSpeed(Engine::Math::Vector2{ 0.04f, 0.08f });
+	_fixedArm->SetRotationSpeed(Engine::Math::Vector2{ 0.02f, 0.04f });
+	_fixedArm->SetFollowSpeed(0.01f);
 
 	const auto inputManager = Engine::Application::GetInputManager();
 	Engine::Input::IMappingContext* mappingContext = nullptr;
@@ -61,8 +62,12 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 	mappingContext->GetAction(L"Move", &moveAction);
 	moveAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
 		{
-			_movement->SetDirection(_fixedArm->TransformDirection(value));
-			_transform.rotation = _fixedArm->GetForwardRotation();
+			_movement->SetDirection(_fixedArm->GetTransformDirection(value));
+			_transform.rotation = _fixedArm->GetRotation(value);
+			_fixedArm->FollowDirection(value);
+
+			//_movement->SetDirection(_fixedArm->GetTransformDirection(value));
+			//_transform.rotation = _fixedArm->GetForwardRotation();
 		});
 	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
 		{

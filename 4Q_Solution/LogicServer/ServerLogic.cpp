@@ -38,18 +38,6 @@ bool ServerLogic::Initialize()
     LoadSudium();
     //============================
 
-    //_objs[0]._position = { 100.f, 0.f, 100.f };
-    //_objs[1]._position = { 500.f, 0.f, 300.f };
-    //_objs[2]._position = { -100.f, 0.f, 500.f };
-
-    //_objs[0]._resourceId = "../Resources/TestObject/cube.fbx";
-    //_objs[1]._resourceId = "../Resources/TestObject/cube.fbx";
-    //_objs[2]._resourceId = "../Resources/TestObject/cube.fbx";
-
-    //_objs[0]._serialNumber = 100;
-    //_objs[1]._serialNumber = 101;
-    //_objs[2]._serialNumber = 102;
-
     return true;
 }
 
@@ -61,46 +49,16 @@ void ServerLogic::Update()
 
     // TODO: 내부적으로 업데이트 할 로직을 여기다 넣습니다.
     static float elapsedTime;
-    //float deltaTime = std::clamp(_timer->GetDeltaTime(), 0.0f, 0.16666f);
     float deltaTime = _timer->GetDeltaTime();
     elapsedTime += deltaTime;
 
-    static unsigned short collisionFlg;
+    UpdateObject(deltaTime);
 
-    for (int i = 0; i < 2; i++) {
-
-        //if (_playerSlot[i]._state == 0) {
-        //    continue;
-        //} // if end
-        if (_playerSlot[i]._controller == nullptr) {
-            continue;
-        } // if end
-        
-        _playerSlot[i]._controller->SetDirection(_playerSlot[i]._direction);
-        _playerSlot[i]._controller->SetMoveSpeed(_playerSlot[i]._speed);
-        _playerSlot[i]._controller->Update(deltaTime);
-        _playerSlot[i]._flag = _playerSlot[i]._controller->GetCollisionFlag();
-        _playerSlot[i]._controller->FixedUpdate();
-        
-    } // for end
-    _physicsManager->Update(deltaTime);
-    _physicsManager->FetchScene();
-
+    // Fixed Update
     if (elapsedTime >= 0.02f) {
         elapsedTime -= 0.02f;
-        for (int i = 0; i < 2; i++) {
-            if (_playerSlot[i]._controller == nullptr || _playerSlot[i]._state == 0 && (collisionFlg & (unsigned short)Engine::Physics::ControllerCollisionFlag::Down)) {
-                continue;
-            } // if end
-            Engine::Math::Vector3 position = _playerSlot[i]._controller->GetPosition();
-            printf("Player%d Position : (%f, %f, %f)\n", i + 1, position.x, position.y, position.z);
-            _moveSync.set_x(position.x);
-            _moveSync.set_y(position.y);
-            _moveSync.set_z(position.z);
 
-            _moveSync.SerializeToString(&_msgBuffer);
-            Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), _playerSlot[i]._serialNumber);
-        } // for end
+        SendPositionData();
     } // if end
 
     Server::SendUpdate();
@@ -137,12 +95,6 @@ void ServerLogic::MessageDispatch()
             ExitProcess(packet);
             break;
         } // case end
-        case PacketID::ExitOk:
-        {
-            // TODO: 여기서 해당하는 클라이언트의 세션을 제거해야 합니다.
-
-            break;
-        } // case end
         case PacketID::Move:
         {
             MoveProcess(packet);
@@ -158,6 +110,16 @@ void ServerLogic::MessageDispatch()
             StateChangeProcess(packet);
             break;
         } // case end
+        case PacketID::PickObject:
+        {
+            ObjectPickProcess(packet);
+            break;
+        }
+        case PacketID::PutObject:
+        {
+            ObjectPutProcess(packet);
+            break;
+        }
         case PacketID::DataRequest:
         {
             DataRequestProcess(packet);
@@ -168,6 +130,55 @@ void ServerLogic::MessageDispatch()
         } // switch end
     } // while end
 }
+
+// =============================
+// Update Function Area
+// =============================
+
+void ServerLogic::UpdateObject(float deltaTime)
+{
+    for (int i = 0; i < 2; i++) {
+
+        //if (_playerSlot[i]._state == 0) {
+        //    continue;
+        //} // if end
+        if (_playerSlot[i]._controller == nullptr) {
+            continue;
+        } // if end
+
+        _playerSlot[i]._controller->SetDirection(_playerSlot[i]._direction);
+        _playerSlot[i]._controller->SetMoveSpeed(_playerSlot[i]._speed);
+        _playerSlot[i]._controller->Update(deltaTime);
+        _playerSlot[i]._flag = _playerSlot[i]._controller->GetCollisionFlag();
+        _playerSlot[i]._controller->FixedUpdate();
+
+    } // for end
+    _physicsManager->Update(deltaTime);
+    _physicsManager->FetchScene();
+}
+void ServerLogic::SendPositionData()
+{
+    for (int i = 0; i < 2; i++) {
+        if (_playerSlot[i]._controller == nullptr || _playerSlot[i]._state == 0 && (_playerSlot[i]._flag & (unsigned short)Engine::Physics::ControllerCollisionFlag::Down)) {
+            continue;
+        } // if end
+        Engine::Math::Vector3 position = _playerSlot[i]._controller->GetPosition();
+        printf("Player%d Position : (%f, %f, %f)\n", i + 1, position.x, position.y, position.z);
+        _moveSync.set_x(position.x);
+        _moveSync.set_y(position.y);
+        _moveSync.set_z(position.z);
+
+        _moveSync.SerializeToString(&_msgBuffer);
+        Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), _playerSlot[i]._serialNumber);
+    } // for end
+
+    // TODO: 여기서 업데이트를 진행하는 dynamic object에 대해 위치 정보를 클라이언트로 전송해야 합니다.
+}
+// =============================
+
+// =============================
+// Message Dispatch Area
+// =============================
 
 void ServerLogic::EnterProcess(const Packet& packet)
 {
@@ -197,7 +208,10 @@ void ServerLogic::EnterProcess(const Packet& packet)
             if (_playerSlot[i]._serialNumber == 0) {
                 continue;
             } // if end
+
+            // TODO: 나중에 플레이어 class 타입이 나오면 그 때 수정해야 합니다.
             Server::BroadCast("", (short)PacketID::Sync, 0, _playerSlot[i]._serialNumber);
+
         }  // for end
         for (int i = 0; i < _buildings.size(); i++) {
             _addObject.set_grantnumber(_buildings[i]->_serialNumber);
@@ -350,7 +364,33 @@ void ServerLogic::DataRequestProcess(const Packet& packet)
     }
     Server::BroadCast("", (short)PacketID::DataSendComplete, 0, 0);
 }
+void ServerLogic::ObjectPickProcess(const Packet& packet)
+{
+    _pickObject.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+    // TODO: Dynamic Object를 찾아서 위치 업데이트를 시작하기 위해 상태를 변경해줘야 합니다.
 
+    _pickObject.SerializeToString(&_msgBuffer);
+    Server::BroadCast(
+        _msgBuffer,
+        (short)PacketID::PickObject,
+        _pickObject.ByteSizeLong(),
+        _pickObject.targetserialnumber()
+    );
+}
+void ServerLogic::ObjectPutProcess(const Packet& packet)
+{
+    _putObject.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+    // TODO: Dynamic Object를 찾아서 위치 업데이트를 종료하기 위해 상태를 변경해줘야 합니다.
+
+    _putObject.SerializeToString(&_msgBuffer);
+    Server::BroadCast(
+        _msgBuffer,
+        (short)PacketID::PutObject,
+        _putObject.ByteSizeLong(),
+        _putObject.targetserialnumber()
+    );
+}
+// =============================
 
 // =============================
 // JSON Method, Variable Area
@@ -417,7 +457,7 @@ void ServerLogic::LoadSudium()
     }
     printf("Sudium Data Load Complete.\n");
 }
-
+// =============================
 
 // ==============================
 // Physics Area
@@ -510,3 +550,4 @@ void ServerLogic::RegistTrigerBox(TriggerBox& triggerBox)
     triggerBox._staticRigid->SetOwner(&triggerBox);
     triggerBox._staticRigid->Initialize();
 }
+// =============================

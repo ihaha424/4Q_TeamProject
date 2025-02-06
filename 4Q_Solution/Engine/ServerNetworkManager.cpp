@@ -76,7 +76,8 @@ void Engine::ServerNetwork::Manager::DispatchPacket()
 			_msgContainer->pop();
 
 			if (_worldCallback.find(packet._packetId) != _worldCallback.end()) {
-				_worldCallback[packet._packetId](packet._serialNumber);
+				_addObject.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+				_worldCallback[packet._packetId](&_addObject);
 			}
 
 			for (auto& terminal : _terminalList) {
@@ -91,7 +92,7 @@ void Engine::ServerNetwork::Manager::SaveSendData(short packetId, std::string da
 	Client::SavePacketData(std::forward<std::string>(data), packetId, dataSize, serialNum);
 }
 
-void Engine::ServerNetwork::Manager::RegistWorldEvent(short packetId, std::function<void(int)> callback)
+void Engine::ServerNetwork::Manager::RegistWorldEvent(short packetId, std::function<void(const ConnectMsg::AddObject*)> callback)
 {
 	_worldCallback.insert({ packetId, callback });
 }

@@ -19,6 +19,7 @@ enum class PacketID : short {
 	Move,
 	Jump,
 	StateChange,
+	ObjectMove,
 	PickObject,
 	PutObject,
 	PuzzleSuccess,

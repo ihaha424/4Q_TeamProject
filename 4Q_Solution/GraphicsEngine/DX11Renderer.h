@@ -8,6 +8,7 @@ class PixelShader;
 class Mesh;
 class SkyBoxRenderer;
 class ToneMapping;
+class AO;
 class DX11Renderer : public IRenderer
 {
 	struct DrawData
@@ -16,7 +17,7 @@ class DX11Renderer : public IRenderer
 		unsigned int layerMask;
 		Mesh* mesh;
 	};
-	enum TextureType { Diffuse, Normal, Specular, Emissive, ShadowPosition, End };
+	enum TextureType { Diffuse, Normal, RMA, Emissive, ShadowPosition, LayerMask, End };
 public:
 	explicit DX11Renderer() = default;
 	virtual ~DX11Renderer() = default;
@@ -29,22 +30,24 @@ private:
 	void SetViewport(float width, float height);
 
 	void ShadowPass();
-	void DeferredPass(std::list<DrawData>& renderData);
-	void ForwardPass(std::list<DrawData>& renderData);
-	void SkyBoxPass(std::list<SkyBoxRenderer*>& skyBoxes);
-	void SSAOPass();
-	void PostProcessing();
-	void BlendPass(ID3D11RenderTargetView* pRTV, ID3D11ShaderResourceView* pSRV);
+	void GBufferPass(std::list<DrawData>& noneAlphaMeshes);
+	void LigthingPass(SkyBoxRenderer* pSkyBox, std::list<DrawData>& alphaMeshes);
+	void SkyBoxPass(std::list<std::pair<unsigned int, SkyBoxRenderer*>>& skyBoxes);
+	void PostProcessPass();
+	void DeferredLighting();
+	void ForwardLigthing(std::list<DrawData>& alphaMeshes);
+	void Blending(ID3D11RenderTargetView* pRTV, ID3D11ShaderResourceView* pSRV);
 	void RenderMesh(std::list<DrawData>& renderData, std::shared_ptr<PixelShader>& pixelShader);
 
 private:
 	void InitState();
 	void InitOptional();
 	void InitMRT();
-	void InitShader();
+	void InitShaders();
 	void InitDepthStencil();
 	void InitStructuredBuffer();
 	void InitFilters();
+	void InitTextures();
 
 private:
 	// IRenderer을(를) 통해 상속됨
@@ -55,6 +58,7 @@ private:
 	std::vector<Matrix>					_boneMatrices;
 	std::vector<LightData>				_directionalLights;
 	std::vector<LightData>				_pointLights;
+	std::vector<Vector3>				_kernel;
 	D3D11_VIEWPORT						_viewport{};
 
 	// Filters
@@ -66,6 +70,9 @@ private:
 	std::shared_ptr<PixelShader>		_psDeferredLighting;
 	std::shared_ptr<PixelShader>		_psForwardLighting;
 	std::shared_ptr<PixelShader>		_psBlend;
+
+	// Textures
+	std::shared_ptr<Texture>			_aoNoiseTexture{ nullptr };
 
 	// Device
 	ID3D11DeviceContext*				_pDeviceContext{ nullptr };

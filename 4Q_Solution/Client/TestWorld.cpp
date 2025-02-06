@@ -5,7 +5,7 @@
 
 void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 {
-	_ray = objectFactory->Clone<Ray>(this);
+	//_ray = objectFactory->Clone<Ray>(this);
 	_light = objectFactory->Clone<GlobalLight>(this);
 	_skyBox = objectFactory->Clone<SkyBox>(this);
 
@@ -71,7 +71,30 @@ void TestWorld::PreInitialize(const Engine::Modules& modules)
 	_physicsManager->AddGeomtry("Camera", geometryDesc, {});
 
 
-	
+	Engine::Application::GetNetworkManager()->RegistWorldEvent(
+		(short)PacketID::EnterAccept,
+		[this](const ConnectMsg::AddObject* msg) {
+			EnterAccept(msg);
+		}
+	);
+	Engine::Application::GetNetworkManager()->RegistWorldEvent(
+		(short)PacketID::Sync,
+		[this](const ConnectMsg::AddObject* msg) {
+			CreatePlayer(msg);
+		}
+	);
+	Engine::Application::GetNetworkManager()->RegistWorldEvent(
+		(short)PacketID::ObjectSync,
+		[this](const ConnectMsg::AddObject* msg) {
+			CreateStaticObject(msg);
+		}
+	);
+	Engine::Application::GetNetworkManager()->RegistWorldEvent(
+		(short)PacketID::DataSendComplete,
+		[this](const ConnectMsg::AddObject* msg) {
+			RequestData(msg);
+		}
+	);
 }
 
 void TestWorld::PreUpdate(float deltaTime)
@@ -100,4 +123,43 @@ void TestWorld::PostUpdate(float deltaTime)
 void TestWorld::PostFixedUpdate()
 {
 
+}
+
+
+void TestWorld::EnterAccept(const ConnectMsg::AddObject* msg) {
+	if (msg->grantnumber() == 1) {
+		_ray = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Ray>(this);
+		playerSerialNum = msg->grantnumber();
+		_ray->SetSerialNumber(msg->grantnumber());
+	}
+	else if (msg->grantnumber() == 2) {
+		// TODO: 여기에 리브의 오브젝트를 생성하는 코드를 넣어야 합니다.
+		_remote = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Ray>(this);
+		playerSerialNum = msg->grantnumber();
+		_remote->SetSerialNumber(msg->grantnumber());
+	}
+}
+void TestWorld::CreatePlayer(const ConnectMsg::AddObject* msg) {
+	if (playerSerialNum == msg->grantnumber()) {
+		return;
+	}
+	if (msg->grantnumber() == 1) {
+		_ray = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Ray>(this);
+		_ray->SetSerialNumber(msg->grantnumber());
+	}
+	else if (msg->grantnumber() == 2) {
+		// TODO: 여기에 리브의 오브젝트를 생성하는 코드를 넣어야 합니다.
+		_remote = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Ray>(this);
+		_remote->SetSerialNumber(msg->grantnumber());
+	}
+}
+void TestWorld::CreateStaticObject(const ConnectMsg::AddObject* msg) {
+	
+}
+void TestWorld::RequestData(const ConnectMsg::AddObject* msg) {
+	if (_dataLoad == false) {
+		std::string data = "";
+		Engine::Application::GetNetworkManager()->SaveSendData((short)PacketID::DataRequest, data, 0, 0);
+		_dataLoad = true;
+	}
 }

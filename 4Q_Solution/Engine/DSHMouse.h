@@ -29,6 +29,7 @@ namespace Engine::DSHInput::Device
 
 		void LockCursor() override;
 		void UnlockCursor() override;
+		[[nodiscard]] bool IsCursorLocked() const override;
 
 	private:
 		bool IsButtonState(Button button, std::function<bool(DSH::Input::Component::IButtonComponent*)> state) const;

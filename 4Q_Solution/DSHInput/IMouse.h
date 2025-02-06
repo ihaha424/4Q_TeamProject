@@ -71,6 +71,8 @@ namespace DSH::Input
 			virtual void STDMETHODCALLTYPE LockCursor() = 0;
 
 			virtual void STDMETHODCALLTYPE UnlockCursor() = 0;
+
+			[[nodiscard]] virtual bool STDMETHODCALLTYPE IsCursorLocked() const = 0;
 		};
 	}
 }

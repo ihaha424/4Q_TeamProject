@@ -11,6 +11,7 @@ void Terrain::PreInitialize(const Engine::Modules& modules)
 	Object::PreInitialize(modules);
 	_staticMesh->SetFilePath(_meshPath);
 	_matrix = _transform.GetMatrix();
+	_matrix = Engine::Math::Matrix::CreateScale(100.f);
 	_staticMesh->SetMatrix(&_matrix);
 
 
@@ -31,5 +32,6 @@ void Terrain::PreInitialize(const Engine::Modules& modules)
 	_rigidStatc->_boundBox->SetOwner(this);
 	PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::cameraScene))->AddActor(_rigidStatc->_boundBox);
 
+}
 
 }

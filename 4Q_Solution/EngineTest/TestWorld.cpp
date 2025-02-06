@@ -25,30 +25,30 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 
 void TestWorld::PreInitialize(const Engine::Modules& modules)
 {
-	Engine::Application::GetNetworkManager()->RegistWorldEvent(
-		(short)PacketID::EnterAccept,
-		[this](int num) {
-			EnterAccept(num);
-		}
-	);
-	Engine::Application::GetNetworkManager()->RegistWorldEvent(
-		(short)PacketID::Sync,
-		[this](int num) {
-			SyncOtherPlayer(num);
-		}
-	);
-	Engine::Application::GetNetworkManager()->RegistWorldEvent(
-		(short)PacketID::ObjectSync,
-		[this](int num) {
-			CreateStaticObject(num);
-		}
-	);
-	Engine::Application::GetNetworkManager()->RegistWorldEvent(
-		(short)PacketID::DataSendComplete,
-		[this](int num) {
-			RequestData(num);
-		}
-	);
+	//Engine::Application::GetNetworkManager()->RegistWorldEvent(
+	//	(short)PacketID::EnterAccept,
+	//	[this](int num) {
+	//		EnterAccept(num);
+	//	}
+	//);
+	//Engine::Application::GetNetworkManager()->RegistWorldEvent(
+	//	(short)PacketID::Sync,
+	//	[this](int num) {
+	//		SyncOtherPlayer(num);
+	//	}
+	//);
+	//Engine::Application::GetNetworkManager()->RegistWorldEvent(
+	//	(short)PacketID::ObjectSync,
+	//	[this](int num) {
+	//		CreateStaticObject(num);
+	//	}
+	//);
+	//Engine::Application::GetNetworkManager()->RegistWorldEvent(
+	//	(short)PacketID::DataSendComplete,
+	//	[this](int num) {
+	//		RequestData(num);
+	//	}
+	//);
 
 	auto PhysicsManager = Engine::Application::GetPhysicsManager();
 	Engine::Physics::SceneDesc testSceneDesc{ {0.f,-9.8f,0.f},10 };
@@ -75,21 +75,21 @@ void TestWorld::EnterAccept(int num) {
 	_player->SetSerialNumber(num);
 }
 
-void TestWorld::SyncOtherPlayer(int num)
+void TestWorld::SyncOtherPlayer(const ConnectMsg::AddPlayer* msg)
 {
-	if (_player->GetSerialNumber() == num) {
+	if (_player->GetSerialNumber() == msg->grantnumber()) {
 		return;
 	}
 	_remote = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<RemotePlayer>(this);
-	_remote->SetSerialNumber(num);
+	_remote->SetSerialNumber(msg->grantnumber());
 }
 
-void TestWorld::CreateStaticObject(int num)
+void TestWorld::CreateStaticObject(const ConnectMsg::AddObject* msg)
 {
 	Cube* cube = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Cube>(this);
 	_cubes.push_back(cube);
-	cube->SetSerialNumber(num);
-	printf("Object Create Success. SerialNumber : %d\n", num);
+	cube->SetSerialNumber(msg->grantnumber());
+	printf("Object Create Success. SerialNumber : %d\n", msg->grantnumber());
 }
 
 void TestWorld::RequestData(int num)

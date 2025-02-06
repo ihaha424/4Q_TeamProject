@@ -8,7 +8,7 @@ namespace Engine::Network {
 
 namespace Engine::ServerNetwork {
 	using TerminalList = std::list<Engine::Network::Terminal*>;
-	using WorldCallback = std::unordered_map<short, std::function<void(int)>>;
+	using WorldCallback = std::unordered_map<short, std::function<void(const ConnectMsg::AddObject*)>>;
 
 	class Manager final : public Engine::Network::Manager
 	{
@@ -26,13 +26,14 @@ namespace Engine::ServerNetwork {
 
 		void DispatchPacket() override;
 		void SaveSendData(short packetId, std::string data, long dataSize, int serialNum) override;
-		void RegistWorldEvent(short packetId, std::function<void(int)> callback) override;
+		void RegistWorldEvent(short packetId, std::function<void(const ConnectMsg::AddObject*)> callback) override;
 	private:
 		TerminalList _terminalList;
 		PacketQueue* _msgContainer = nullptr;
 		Engine::Network::PacketFilter _filter;
 
 		WorldCallback _worldCallback;
+		ConnectMsg::AddObject _addObject;
 	};
 
 }

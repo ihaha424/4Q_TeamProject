@@ -1,5 +1,10 @@
 #pragma once
 
+namespace Engine::Math
+{
+	struct Vector2;
+}
+
 namespace Engine::Input
 {
 	union Value;
@@ -27,5 +32,8 @@ namespace Engine::Math
 		Vector3& operator=(const DirectX::SimpleMath::Vector3& vector) noexcept;
 		Vector3& operator=(const Input::Value& value) noexcept;
 		Vector3& operator=(const PhysicsEngineAPI::Utils::Math::Vector3& value) noexcept;
+
+		Vector3 Split(const Vector3& v) const;
+		Vector3 Split(const Vector2& v) const;
 	};
 }

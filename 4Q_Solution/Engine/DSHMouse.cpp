@@ -122,6 +122,11 @@ void Engine::DSHInput::Device::Mouse::UnlockCursor()
 	_mouse->UnlockCursor();
 }
 
+bool Engine::DSHInput::Device::Mouse::IsCursorLocked() const
+{
+	return _mouse->IsCursorLocked();
+}
+
 bool Engine::DSHInput::Device::Mouse::IsButtonState(const Button button,
                                                     std::function<bool(DSH::Input::Component::IButtonComponent*)> state) const
 {

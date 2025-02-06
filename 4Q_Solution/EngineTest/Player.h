@@ -28,18 +28,18 @@ private:
 	std::filesystem::path _fontPath;
 
 	Engine::Component::Camera* _camera;
-	//Engine::Component::StaticMesh* _staticMesh;
-	Engine::Component::SkeletalMesh* _skeltalMesh;
-	Engine::Component::Animator* _animator;
+	Engine::Component::StaticMesh* _staticMesh;
+	//Engine::Component::SkeletalMesh* _skeltalMesh;
+	//Engine::Component::Animator* _animator;
 	Engine::Math::Matrix _worldMatrix;
 	Engine::Component::TextRenderer* _textRenderer;
 	Engine::Component::Synchronize* _sync;
 	RemoteMoveComponent* _remote;
 
-	Engine::Math::Matrix _cameraParentMatrix;
-	Engine::Math::Vector3 _cameraRotation;
-
 	//Physics
 	Engine::Component::ChractorController* _chractorController;
 	unsigned short gravityFlag = true;
+
+	// FixedArm
+	Engine::Component::FixedArm* _fixedArm;
 };

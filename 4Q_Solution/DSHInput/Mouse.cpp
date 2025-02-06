@@ -218,6 +218,11 @@ void DSH::Input::Device::Mouse::UnlockCursor()
 	_isCursorLock = false;
 }
 
+bool DSH::Input::Device::Mouse::IsCursorLocked() const
+{
+	return _isCursorLock;
+}
+
 void DSH::Input::Device::Mouse::UseProcedure()
 {
 	_useProcedure = true;

@@ -7,8 +7,11 @@ struct PS_INPUT
     float2 uv       : TEXCOORD0;
 };
 
-//StructuredBuffer<Light> DirectionalLight : register(t100);
-//StructuredBuffer<Light> PointLight : register(t101);
+struct PS_OUTPUT
+{
+    float4 color    : SV_Target0;
+    float4 ambient  : SV_Target1;
+};
 
 Texture2D txDiffuse         : register(t0);
 Texture2D txNormal          : register(t1);
@@ -17,8 +20,10 @@ Texture2D txEmissive        : register(t3);
 Texture2D txShadowPosition  : register(t4);
 Texture2D txDepth           : register(t5);
 
-float4 main(PS_INPUT input) : SV_Target
+PS_OUTPUT main(PS_INPUT input)
 {
+    PS_OUTPUT output = (PS_OUTPUT)0;
+    
     float  depth = txDepth.Sample(samLinear_wrap, input.uv).r;
     float3 albedo = GammaToLinearSpace(txDiffuse.Sample(samLinear_wrap, input.uv).rgb);        
     float3 RMA = txRMA.Sample(samLinear_wrap, input.uv).rgb;
@@ -42,8 +47,10 @@ float4 main(PS_INPUT input) : SV_Target
     // PBR_Point
     directLighting += PointLightPBR(worldPosition, N, V, albedo, RMA.r, RMA.g);
     
-// IBL    
-    ambientLighting = AmbientLightIBL(albedo, N, V, RMA.r, RMA.g);
+// IBL
+    AmbientIBL ambientIBL = AmbientLightIBL(input.uv, N, V, albedo, RMA.r, RMA.g, RMA.b);
+    ambientIBL.diffuseIBL.rgb = LinearToGammaSpace(ambientIBL.diffuseIBL.rgb);
+    ambientLighting = ambientIBL.specularIBL;
     
 //Shadow
     float4 shadowPosition = txShadowPosition.Sample(samLinear_wrap, input.uv);
@@ -66,16 +73,16 @@ float4 main(PS_INPUT input) : SV_Target
         }
         
         shadowFactor = shadowFactor / 9.0;
-    }
+    }   
     
-    float4 color = 0;
-    
-    color.rgb = shadowFactor * directLighting + (ambientLighting * RMA.b);
-    color.rgb = LinearToGammaSpace(color.rgb);
-    color.a = 1;
+    output.color.rgb = shadowFactor * directLighting + ambientLighting;
+    output.color.rgb = LinearToGammaSpace(output.color.rgb);
+    output.color.a = 1;
     
     float4 emissive = txEmissive.Sample(samLinear_wrap, input.uv);
-    color += emissive;
+    output.color += emissive;
     
-    return color;
+    output.ambient = ambientIBL.diffuseIBL;
+    
+    return output;
 }

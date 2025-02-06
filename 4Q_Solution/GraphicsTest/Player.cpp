@@ -121,7 +121,6 @@ void Player::PostUpdate(const float deltaTime)
 
 	_cameraParentMatrix *= Engine::Math::Matrix::CreateTranslation(tempPostion);
 	
-
 	elapsed += deltaTime;
 	frame++;
 	if (1.f < elapsed)

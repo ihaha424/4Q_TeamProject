@@ -395,7 +395,7 @@ namespace Engine::PHI
 
 		RigidComponent* destComponment = new RigidComponent();
 		
-		PhysicsEngineAPI::Utils::Math::Vector3 boxExtents = { _boxExtents.x, _boxExtents.y, _boxExtents.z };
+		PhysicsEngineAPI::Utils::Math::Vector3 boxExtents = { 1,1,1 }; // TODO Refactor this
 		PhysicsEngineAPI::Utils::Transform transform = TransformToPhysicsTransform(_transform);
 		thrower(BoolToHRESULT(system->CreateStaticBoundBoxActor(&destComponment->object, boxExtents, transform)));
 		*object = destComponment;

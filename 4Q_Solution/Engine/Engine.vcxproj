@@ -187,6 +187,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="ChractorController.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DSHLoggerManager.h" />
+    <ClInclude Include="FixedArm.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="LoggerManager.h" />
     <ClInclude Include="LogLevel.h" />
@@ -339,6 +340,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="ChractorController.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DSHLoggerManager.cpp" />
+    <ClCompile Include="FixedArm.cpp" />
     <ClCompile Include="LoggerManager.cpp" />
     <ClCompile Include="LogLevel.cpp" />
     <ClCompile Include="PHICoordinateConvert.cpp" />

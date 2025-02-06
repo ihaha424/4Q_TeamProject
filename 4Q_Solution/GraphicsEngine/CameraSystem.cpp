@@ -28,7 +28,7 @@ void CameraSystem::Update()
 {
 	if (nullptr == _pCurrentCamera)
 	{
-		ASSERT(false, L"No cameras are currently set up.");
+		// ASSERT(false, L"No cameras are currently set up.");
 		return;
 	}
 

@@ -13,8 +13,8 @@ public:
 
 	void Prepare(Engine::Content::Factory::Object* objectFactory) override;
 	void EnterAccept(int num);
-	void SyncOtherPlayer(int num);
-	void CreateStaticObject(int num);
+	void SyncOtherPlayer(const ConnectMsg::AddPlayer* msg);
+	void CreateStaticObject(const ConnectMsg::AddObject* msg);
 	void RequestData(int num);
     
 protected:

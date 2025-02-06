@@ -23,31 +23,58 @@ void Engine::Component::Synchronize::InvokeMessage(const Packet& packet)
 		return;
 	}
 
-    switch ((PacketID)packet._packetId) {
-    case PacketID::EnterAccept:
-    {
-        _enterAccept.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
-        _callbackMap[packet._packetId]->Invoke(&_enterAccept);
-        break;
-    }
+	switch ((PacketID)packet._packetId) {
+	case PacketID::EnterAccept:
+	{
+		_enterAccept.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+		_callbackMap[packet._packetId]->Invoke(&_enterAccept);
+		break;
+	}
 	case PacketID::Sync:
 	{
 		_syncPlayer.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
 		_callbackMap[packet._packetId]->Invoke(&_syncPlayer);
-
 		break;
 	}
 	case PacketID::ObjectSync:
 	{
 		_syncObject.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
 		_callbackMap[packet._packetId]->Invoke(&_syncObject);
-
 		break;
 	}
 	case PacketID::MoveSync:
 	{
 		_moveSync.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
 		_callbackMap[packet._packetId]->Invoke(&_moveSync);
+		break;
+	}
+	case PacketID::ObjectMove:
+	{
+		_objectMove.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+		_callbackMap[packet._packetId]->Invoke(&_objectMove);
+		break;
+	}
+	case PacketID::PickObject:
+	{
+		_pickObject.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+		_callbackMap[packet._packetId]->Invoke(&_pickObject);
+		break;
+	}
+	case PacketID::PutObject:
+	{
+		_putObject.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+		_callbackMap[packet._packetId]->Invoke(&_putObject);
+		break;
+	}
+	case PacketID::PuzzleSuccess:
+	{
+		_callbackMap[packet._packetId]->Invoke(nullptr);
+		break;
+	}
+	case PacketID::SoundPlay:
+	{
+		_soundPlay.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+		_callbackMap[packet._packetId]->Invoke(&_soundPlay);
 		break;
 	}
 	case PacketID::StateChange:
@@ -60,17 +87,15 @@ void Engine::Component::Synchronize::InvokeMessage(const Packet& packet)
 	{
 		_syncPlayer.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
 		_callbackMap[packet._packetId]->Invoke(&_syncPlayer);
-
 		break;
 	}
 	case PacketID::DataObject:
 	{
 		_syncObject.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
 		_callbackMap[packet._packetId]->Invoke(&_syncObject);
-
 		break;
 	}
-
+	
     default:
         break;
     }

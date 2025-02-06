@@ -13,6 +13,6 @@ namespace Engine::Component
 		void Finalize() override;
 
 	public:
-		Engine::Physics::Controller* _controller;
+		Engine::Physics::IController* _controller;
 	};
 }

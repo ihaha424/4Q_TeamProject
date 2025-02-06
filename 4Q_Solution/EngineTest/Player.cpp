@@ -75,6 +75,8 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	//FixedArm
 	_fixedArm->SetTarget(&_transform);
 	_fixedArm->SetCameraComponent(_camera);
+	_fixedArm->SetDistance(200.f);
+	_fixedArm->SetCameraPosition({ 10.f, 50.f });
 
 	_sync->AddCallback((short)PacketID::EnterAccept, &Player::EnterSuccess, this);
 	_sync->AddCallback((short)PacketID::MoveSync, &Player::SyncMove, this);
@@ -169,9 +171,9 @@ void Player::PreInitialize(const Engine::Modules& modules)
 
 	Engine::Input::IAction* cameraAction = nullptr;
 	mappingContext->GetAction(L"Camera", &cameraAction);
-	cameraAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](Engine::Math::Vector3 value)
+	cameraAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](const Engine::Math::Vector3 value)
 	{
-		_cameraRotation += value;
+		_fixedArm->Rotate(value);
 	});
 
 	Engine::Physics::ControllerDesc desc;
@@ -196,7 +198,6 @@ void Player::PostInitialize(const Engine::Modules& modules)
 	_animator.SplitBone(0, "Dummy_root");
 	_animator.SplitBone(1, "Bip01-Spine1");
 	_animator.ChangeAnimation("Wait");*/
-	_camera->SetParent(&_cameraParentMatrix);
 }
 
 void Player::PostAttach()
@@ -212,16 +213,6 @@ void Player::PostUpdate(const float deltaTime)
 		* Engine::Math::Matrix::CreateFromQuaternion(_transform.rotation)
 		* Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
 	//printf("Position : %f, %f, %f\n", _transform.position.x, _transform.position.y, _transform.position.z);
-	// Temp Shoulder View Camera;
-	auto rotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(_cameraRotation);
-	_cameraParentMatrix = Engine::Math::Matrix::CreateFromQuaternion(rotation);
-
-	Engine::Math::Vector3 tempPostion = _transform.position;
-	tempPostion.y += 50.f;
-	tempPostion += _cameraParentMatrix.Backward() * -60.f;
-	tempPostion += _cameraParentMatrix.Right() * 10.f;
-
-	_cameraParentMatrix *= Engine::Math::Matrix::CreateTranslation(tempPostion);
 
 	// auto speed = _movement->GetSpeed();
 	// auto dir = _movement->GetDirection();

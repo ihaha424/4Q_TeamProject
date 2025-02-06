@@ -165,6 +165,7 @@
     <ClInclude Include="GlobalLight.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="RemoteMove.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SceneFillter.h" />
     <ClInclude Include="SkyBox.h" />
@@ -193,6 +194,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="RemoteMove.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="StaticObject.cpp" />
     <ClCompile Include="SudiumBlue.cpp" />

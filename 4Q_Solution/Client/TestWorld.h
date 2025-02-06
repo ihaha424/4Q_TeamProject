@@ -25,13 +25,21 @@ protected:
 
 private:
 	Ray* _ray;
+	//Live* _live;
 	GlobalLight* _light;
 	Terrain* _terrain;
 	SkyBox* _skyBox;
 
 	int playerSerialNum = 0;
+	bool _dataLoad = false;
 
 	Engine::Physics::IScene* mainScene;
 	Engine::Physics::IScene* cameraScene;
+
+public:
+	void EnterAccept(const ConnectMsg::AddObject* msg);
+	void CreatePlayer(const ConnectMsg::AddObject* msg);
+	void CreateStaticObject(const ConnectMsg::AddObject* msg);
+	void RequestData(const ConnectMsg::AddObject* msg);
 };
 

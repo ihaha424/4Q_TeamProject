@@ -43,6 +43,9 @@
     <Filter Include="Object\StaticObject\MapData">
       <UniqueIdentifier>{06860741-d122-4ccb-b2f6-f6c41542ea4e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{6002622e-1893-4355-8300-4951bd7c774d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -117,6 +120,9 @@
     <ClInclude Include="MapData.h">
       <Filter>Object\StaticObject\MapData</Filter>
     </ClInclude>
+    <ClInclude Include="RemoteMove.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -178,6 +184,9 @@
     </ClCompile>
     <ClCompile Include="SudiumBlue.cpp">
       <Filter>Object\StaticObject\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="RemoteMove.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

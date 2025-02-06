@@ -497,7 +497,7 @@ void ServerLogic::RegistStaticPhysics(Object& obj)
 void ServerLogic::RegistPlayer(Player* player)
 {
     Engine::Physics::ControllerDesc cd;
-    cd.position = Engine::Math::Vector3(400, 400, 400);
+    cd.position = Engine::Math::Vector3(0, 0, 0);
     cd.height = 10.f;
     cd.radius = 2.f;
     //cd.gravity = { 0.f, -9.8f, 0.f };
@@ -510,7 +510,7 @@ void ServerLogic::RegistPlayer(Player* player)
     player->_controller->SetBottomPosition({0,10,0});
     player->_controller->SetOwner(&player);
     player->_controller->Initialize();
-    player->_controller->SetPosition(Engine::Math::Vector3(3053, -4000, -14304));
+    player->_controller->SetPosition(Engine::Math::Vector3(0, 0, 0));
 }
 
 void ServerLogic::RegistGround(Ground& ground)

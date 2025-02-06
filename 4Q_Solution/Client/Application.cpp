@@ -53,7 +53,8 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	objectFactory->Register<Building10>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
 	objectFactory->Register<SudiumBlue>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
 
-
+	const auto componentFactory = contentManager->GetComponentFactory();
+	componentFactory->Register<RemoteMove>();
 }
 
 void GameClient::Application::PrepareInitialWorld(Engine::Content::Factory::World* worldFactory)

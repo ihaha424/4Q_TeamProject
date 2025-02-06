@@ -49,7 +49,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client", "Client\Client.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DSHLogger", "DSHLogger\DSHLogger.vcxproj", "{8E127631-A014-47ED-8E24-DC012403AFCB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DSHSound", "DSHSound\DSHSound.vcxproj", "{9B9DCDE4-1F54-43BB-B975-AD55A1B7C6C0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DSHAudio", "DSHAudio\DSHAudio.vcxproj", "{9B9DCDE4-1F54-43BB-B975-AD55A1B7C6C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

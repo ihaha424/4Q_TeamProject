@@ -22,6 +22,18 @@
     <Filter Include="Utilities\Functions">
       <UniqueIdentifier>{55840594-7d0c-452e-b500-7b33d4fe809b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Interfaces\ISystem">
+      <UniqueIdentifier>{555266b8-6f33-4372-b102-17f820453df4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\ISound">
+      <UniqueIdentifier>{e9f95c9b-50f6-484a-96c4-93e0ad4fd300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{8b9e0b66-b8fe-4bc1-ba81-35c003b67203}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{4283b0fd-7534-431f-8bd0-0982caccf33f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -36,7 +48,7 @@
     <ClInclude Include="Requires.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sound.h">
+    <ClInclude Include="Audio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Interfaces.h">
@@ -48,6 +60,18 @@
     <ClInclude Include="Functions.h">
       <Filter>Utilities\Functions</Filter>
     </ClInclude>
+    <ClInclude Include="ISystem.h">
+      <Filter>Interfaces\ISystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Declare.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ISound.h">
+      <Filter>Interfaces\ISound</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -58,6 +82,18 @@
     </ClCompile>
     <ClCompile Include="Functions.cpp">
       <Filter>Utilities\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="ISystem.cpp">
+      <Filter>Interfaces\ISystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ISound.cpp">
+      <Filter>Interfaces\ISound</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Sound</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

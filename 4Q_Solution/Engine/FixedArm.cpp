@@ -64,7 +64,7 @@ Engine::Math::Vector3 Engine::Component::FixedArm::TransformDirection(const Math
 
 Engine::Math::Quaternion Engine::Component::FixedArm::GetForwardRotation() const
 {
-	return Math::Quaternion::CreateFromYawPitchRoll({ 0,_rotation.y,0 });
+	return Math::Quaternion::CreateFromYawPitchRoll({ 0,_rotation.y + std::numbers::pi_v<float>,0 });
 }
 
 

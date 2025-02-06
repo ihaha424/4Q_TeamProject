@@ -9,8 +9,8 @@ GameClient::Application::Application(const HINSTANCE instanceHandle) : Engine::A
 
 void GameClient::Application::LoadData(Engine::Load::IManager* loadManager)
 {
-	loadManager->LoadRegisterData(L"../Resources/JSONTest/MapData.json");
-	loadManager->LoadCloneData(L"../Resources/JSONTest/MapData.json");
+	loadManager->LoadRegisterData(L"Assets/Test/MapData.json");
+	loadManager->LoadCloneData(L"Assets/Test/MapData.json");
 }
 
 void GameClient::Application::DeclareInputActions(Engine::Input::IManager* inputManager)
@@ -33,25 +33,22 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	worldFactory->Register<TestWorld>();
 
 	const auto objectFactory = contentManager->GetObjectFactory();
-	objectFactory->Register<Ray>(L"../Resources/Test/Ray.fbx");
 	objectFactory->Register<GlobalLight>();
-	objectFactory->Register<Terrain>(L"../Resources/Level/Landscape03.fbx", "../Resources/Terrain/testTest.png");
-	objectFactory->Register<SkyBox>(L"../Resources/IBL/skybox.fbx");
+	objectFactory->Register<Ray>(L"Assets/Models/Ray.fbx");
+	objectFactory->Register<Terrain>(L"Assets/Test/Landscape03.fbx", "Assets/Test/testTest.png");
+	objectFactory->Register<SkyBox>(L"Assets/Models/skybox.fbx");
 
-
-
-
-	objectFactory->Register<Building1>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
-	objectFactory->Register<Building2>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
-	objectFactory->Register<Building3>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
-	objectFactory->Register<Building4>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
-	objectFactory->Register<Building5>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
-	objectFactory->Register<Building6>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
-	objectFactory->Register<Building7>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
-	objectFactory->Register<Building8>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
-	objectFactory->Register<Building9>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
-	objectFactory->Register<Building10>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
-	objectFactory->Register<SudiumBlue>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
+	objectFactory->Register<Building1>(L"Assets/Test/sphere.fbx", L"Assets/Test/sphere.fbx");
+	objectFactory->Register<Building2>(L"Assets/Test/sphere.fbx", L"Assets/Test/sphere.fbx");
+	objectFactory->Register<Building3>(L"Assets/Test/sphere.fbx", L"Assets/Test/sphere.fbx");
+	objectFactory->Register<Building4>(L"Assets/Test/sphere.fbx", L"Assets/Test/sphere.fbx");
+	objectFactory->Register<Building5>(L"Assets/Test/sphere.fbx", L"Assets/Test/sphere.fbx");
+	objectFactory->Register<Building6>(L"Assets/Test/sphere.fbx", L"Assets/Test/sphere.fbx");
+	objectFactory->Register<Building7>(L"Assets/Test/sphere.fbx", L"Assets/Test/sphere.fbx");
+	objectFactory->Register<Building8>(L"Assets/Test/sphere.fbx", L"Assets/Test/sphere.fbx");
+	objectFactory->Register<Building9>(L"Assets/Test/sphere.fbx", L"Assets/Test/sphere.fbx");
+	objectFactory->Register<Building10>(L"Assets/Test/sphere.fbx", L"Assets/Test/sphere.fbx");
+	objectFactory->Register<SudiumBlue>(L"Assets/Test/sphere.fbx", L"Assets/Test/sphere.fbx");
 
 	const auto componentFactory = contentManager->GetComponentFactory();
 	componentFactory->Register<RemoteMove>();

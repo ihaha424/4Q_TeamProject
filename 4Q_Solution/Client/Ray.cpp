@@ -72,7 +72,7 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 			//_movement->SetDirection(_fixedArm->GetTransformDirection(value));
 			_remote->SetDirection(_fixedArm->GetTransformDirection(value));
 			_transform.rotation = _fixedArm->GetRotation(value, _transform.rotation);
-			_fixedArm->FollowDirection(value);
+			//_fixedArm->FollowDirection(value);
 
 			Engine::Math::Vector3 direction = _fixedArm->GetTransformDirection(value);
 			_sync->_move.set_x(direction.x);

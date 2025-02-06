@@ -32,7 +32,7 @@ bool ServerLogic::Initialize()
     //  Load JSON Data
     //============================
     printf("Start Loading MapData.json...\n");
-    _mapData = _jsonLoader.DeSerialize("../Resources/JSONTest/MapData.json");
+    _mapData = _jsonLoader.DeSerialize("Assets/Test/MapData.json");
     printf("MapData.json Load Complete.\n");
     LoadBuilding();
     LoadSudium();
@@ -542,8 +542,8 @@ void ServerLogic::RegistPlayer(Player* player)
 void ServerLogic::RegistGround(Ground& ground)
 {
     Engine::Physics::GeometryDesc geometryDesc;
-    geometryDesc.data = { 10, 10, 15 };
-    _physicsManager->LoadHeightMap(geometryDesc, "terrain", "../Resources/Terrain/test3.png");
+    geometryDesc.data = { 100, 100, 100 };
+    _physicsManager->LoadHeightMap(geometryDesc, "terrain", "Assets/Test/testTest.png");
 
     Engine::Transform transform{};
     Engine::Physics::IRigidStaticComponent* staticrigid;

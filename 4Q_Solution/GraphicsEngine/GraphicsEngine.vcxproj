@@ -61,10 +61,10 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\Properties\Debug Target Name.props" />
-    <Import Project="..\Properties\Post Build CSO Copy Event.props" />
     <Import Project="..\Properties\Dll Library.props" />
     <Import Project="..\Properties\Pre Build Includes Header Copy Event.props" />
     <Import Project="..\Properties\CPP Version.props" />
+    <Import Project="..\Properties\Post Build CSO Copy Event.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -75,10 +75,10 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\Properties\Debug Target Name.props" />
-    <Import Project="..\Properties\Post Build CSO Copy Event.props" />
     <Import Project="..\Properties\Dll Library.props" />
     <Import Project="..\Properties\Pre Build Includes Header Copy Event.props" />
     <Import Project="..\Properties\CPP Version.props" />
+    <Import Project="..\Properties\Post Build CSO Copy Event.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -155,6 +155,11 @@
     <FxCompile>
       <ShaderModel>5.0</ShaderModel>
     </FxCompile>
+    <PostBuildEvent />
+    <PostBuildEvent />
+    <PostBuildEvent />
+    <PostBuildEvent />
+    <PostBuildEvent />
     <PostBuildEvent />
     <PostBuildEvent />
     <PostBuildEvent />

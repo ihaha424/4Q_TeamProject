@@ -61,8 +61,8 @@ void SkyBoxRenderer::Initialize(const wchar_t* filePath)
 {
 	_model = g_pResourceMgr->LoadResource<StaticMesh>(filePath);
 
-	_vertexShader = g_pResourceMgr->LoadResource<VertexShader>(L"../Resources/Shaders/SkyBoxVS.cso");
-	_pixelShader = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/SkyBoxPS.cso");
+	_vertexShader = g_pResourceMgr->LoadResource<VertexShader>(L"Assets/Shaders/SkyBoxVS.cso");
+	_pixelShader = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/SkyBoxPS.cso");
 	_type = MeshType::SkyBox;
 
 	_model->BindVertexShader(_vertexShader);

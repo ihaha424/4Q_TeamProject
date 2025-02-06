@@ -4,8 +4,15 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
   <ItemDefinitionGroup>
+    <PostBuildEvent />
+    <PostBuildEvent />
+    <PostBuildEvent />
     <PostBuildEvent>
-      <Command>xcopy /y /d "$(OutDir)*.cso" "$(SolutionDir)Resources\Shaders\"</Command>
+      <Command>xcopy /y /d "$(OutDir)*.dll" "$(SolutionDir)dll\"
+xcopy /y /d "$(OutDir)*.lib" "$(SolutionDir)lib\"
+xcopy /y /d "$(OutDir)*.pbd" "$(SolutionDir)bin\"
+xcopy /y /d "$(OutDir)*.dll" "$(SolutionDir)bin\"
+xcopy /y /d "$(OutDir)*.cso" "$(OutDir)Assets\Shaders\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup />

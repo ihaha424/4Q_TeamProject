@@ -9,8 +9,8 @@ GameClient::Application::Application(const HINSTANCE instanceHandle) : Engine::A
 
 void GameClient::Application::LoadData(Engine::Load::IManager* loadManager)
 {
-	loadManager->LoadRegisterData(L"../Resources/JSONTest/MapData.json");
-	loadManager->LoadCloneData(L"../Resources/JSONTest/MapData.json");
+	loadManager->LoadRegisterData(L"Assets/Test/MapData.json");
+	loadManager->LoadCloneData(L"Assets/Test/MapData.json");
 }
 
 void GameClient::Application::DeclareInputActions(Engine::Input::IManager* inputManager)
@@ -33,10 +33,9 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	worldFactory->Register<TestWorld>();
 
 	const auto objectFactory = contentManager->GetObjectFactory();
-
-	objectFactory->Register<Ray>(L"../Resources/Test/Ray.fbx");
 	objectFactory->Register<GlobalLight>();
-	objectFactory->Register<SkyBox>(L"../Resources/IBL/skybox.fbx");
+	objectFactory->Register<Ray>(L"Assets/Models/Ray.fbx");
+	objectFactory->Register<SkyBox>(L"Assets/Models/skybox.fbx");
 
 
 	/*

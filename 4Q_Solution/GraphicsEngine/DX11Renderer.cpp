@@ -513,13 +513,13 @@ void DX11Renderer::InitMRT()
 
 void DX11Renderer::InitShaders()
 {
-	_vsShadow[MeshType::Static] = g_pResourceMgr->LoadResource<VertexShader>(L"../Resources/Shaders/ShadowVS.cso");
-	_vsShadow[MeshType::Skeletal] = g_pResourceMgr->LoadResource<VertexShader>(L"../Resources/Shaders/ShadowVS_Skeletal.cso");	
+	_vsShadow[MeshType::Static] = g_pResourceMgr->LoadResource<VertexShader>(L"Assets/Shaders/ShadowVS.cso");
+	_vsShadow[MeshType::Skeletal] = g_pResourceMgr->LoadResource<VertexShader>(L"Assets/Shaders/ShadowVS_Skeletal.cso");	
 
-	_psForwardLighting = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/ForwardLightingPS.cso");
-	_psDeferredLighting = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/DeferredLightingPS.cso");
-	_psGBuffer = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/GBufferPS.cso");
-	_psBlend = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/BlendPS.cso");	
+	_psForwardLighting = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/ForwardLightingPS.cso");
+	_psDeferredLighting = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/DeferredLightingPS.cso");
+	_psGBuffer = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/GBufferPS.cso");
+	_psBlend = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/BlendPS.cso");	
 }
 
 void DX11Renderer::InitDepthStencil()

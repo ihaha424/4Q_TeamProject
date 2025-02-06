@@ -32,7 +32,7 @@ bool ServerLogic::Initialize()
     //  Load JSON Data
     //============================
     printf("Start Loading MapData.json...\n");
-    _mapData = _jsonLoader.DeSerialize("../Resources/JSONTest/MapData.json");
+    _mapData = _jsonLoader.DeSerialize("Assets/Test/MapData.json");
     printf("MapData.json Load Complete.\n");
     LoadBuilding();
     LoadSudium();

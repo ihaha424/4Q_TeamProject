@@ -61,6 +61,22 @@ void Engine::Object::PostFinalize()
 {
 }
 
+void Engine::Object::Hide()
+{
+}
+
+void Engine::Object::Show()
+{
+}
+
+void Engine::Object::Activate()
+{
+}
+
+void Engine::Object::Deactivate()
+{
+}
+
 void Engine::Object::SetOwner(World* owner)
 {
 	_owner = owner;

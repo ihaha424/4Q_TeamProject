@@ -152,7 +152,7 @@ namespace PhysicsEngineAPI
 				};
 				QueryFlag			flag;
 				unsigned int		num;
-				std::vector<void*>	UserDatas{};
+				std::vector<ICollision*>	UserDatas{};
 			};
 
 			struct AdditionalQueryData

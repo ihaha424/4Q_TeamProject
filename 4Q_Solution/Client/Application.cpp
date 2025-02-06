@@ -41,7 +41,7 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	/*
 		Static Object
 	*/
-	objectFactory->Register<Terrain>("Assets/Test/untitled.fbx", L"Assets/Test/HeightMap.png");
+	objectFactory->Register<Terrain>("Assets/Test/Landscape03.fbx", L"Assets/Test/HeightMap.png");
 
 	// RegisterHelp<Obj_BG_Tree_1>(L"Obj_BG_Tree_1", loadManager, objectFactory);
 	// RegisterHelp<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", loadManager, objectFactory);

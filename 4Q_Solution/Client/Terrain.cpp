@@ -10,8 +10,8 @@ void Terrain::PreInitialize(const Engine::Modules& modules)
 {
 	Object::PreInitialize(modules);
 	_staticMesh->SetFilePath(_meshPath);
+	_transform.Translate({ 0.f, -1000.f, 0.f });
 	_matrix = _transform.GetMatrix();
-	_matrix = Engine::Math::Matrix::CreateScale(100.f);
 	_staticMesh->SetMatrix(&_matrix);
 
 

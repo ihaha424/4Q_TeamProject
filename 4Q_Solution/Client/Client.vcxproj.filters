@@ -153,6 +153,9 @@
     <ClInclude Include="RemoteMove.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="TriggerBox.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -246,6 +249,9 @@
       <Filter>Object\StaticObject\MapData</Filter>
     </ClCompile>
     <ClCompile Include="RemoteMove.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TriggerBox.cpp">
       <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>

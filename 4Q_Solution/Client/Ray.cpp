@@ -164,7 +164,7 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 		{
 			_animator->ChangeAnimation("rig|Anim_Jump_start");
 			//_transform.position.y += 100.f;
-			_sync->_jump.set_power(30.f);
+			_sync->_jump.set_power(5.f);
 			_sync->_jump.SerializeToString(&_sync->_msgBuffer);
 
 			Engine::Application::GetNetworkManager()->SaveSendData(

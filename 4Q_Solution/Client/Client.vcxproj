@@ -185,6 +185,7 @@
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TestWorld.h" />
     <ClInclude Include="MapData.h" />
+    <ClInclude Include="TriggerBox.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
@@ -220,6 +221,7 @@
     <ClCompile Include="Obj_Props_Bermiore_Cloth_1.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TestWorld.cpp" />
+    <ClCompile Include="TriggerBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />

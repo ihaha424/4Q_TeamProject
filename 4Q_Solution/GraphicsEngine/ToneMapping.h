@@ -2,7 +2,7 @@
 #include "Base.h"
 #include "Filter.h"
 
-class ToneMapping : public Filter, public Base
+class ToneMapping : public Base, public Filter
 {
 public:
 	explicit ToneMapping() = default;

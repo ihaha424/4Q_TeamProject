@@ -2,7 +2,7 @@
 
 namespace GE
 {
-    enum class FilterType { Bloom, Blur, End };
+    enum class FilterType { Bloom, SSAO, Blur, End };
     enum FILTER_FLAG
     { 
         Bloom   = 1 << 0,

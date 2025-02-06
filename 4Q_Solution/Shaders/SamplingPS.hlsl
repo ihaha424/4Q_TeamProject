@@ -11,12 +11,7 @@ SamplerState samLinear_clamp : register(s1);
 
 float4 main(PS_INPUT input) : SV_Target
 {
-    float4 color = 0;
-    
-    //for (uint i = 0; i < level; i++)
-    //{
-    //    color += txSource1.SampleLevel(samLinear_wrap, input.uv, i + 1);
-    //}
+    float4 color = 0;   
     
     color += txSource1.SampleLevel(samLinear_clamp, input.uv, 1) * 0.4;
     color += txSource1.SampleLevel(samLinear_clamp, input.uv, 2) * 0.3;

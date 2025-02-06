@@ -616,10 +616,29 @@ class MoveSync final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
+    kRotationFieldNumber = 4,
     kXFieldNumber = 1,
     kYFieldNumber = 2,
     kZFieldNumber = 3,
   };
+  // repeated float rotation = 4;
+  int rotation_size() const;
+  private:
+  int _internal_rotation_size() const;
+
+  public:
+  void clear_rotation() ;
+  float rotation(int index) const;
+  void set_rotation(int index, float value);
+  void add_rotation(float value);
+  const ::google::protobuf::RepeatedField<float>& rotation() const;
+  ::google::protobuf::RepeatedField<float>* mutable_rotation();
+
+  private:
+  const ::google::protobuf::RepeatedField<float>& _internal_rotation() const;
+  ::google::protobuf::RepeatedField<float>* _internal_mutable_rotation();
+
+  public:
   // optional float x = 1;
   bool has_x() const;
   void clear_x() ;
@@ -658,7 +677,7 @@ class MoveSync final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      2, 3, 0,
+      2, 4, 0,
       0, 2>
       _table_;
 
@@ -678,6 +697,7 @@ class MoveSync final : public ::google::protobuf::Message
                           const MoveSync& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::RepeatedField<float> rotation_;
     float x_;
     float y_;
     float z_;
@@ -834,11 +854,30 @@ class Move final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
+    kRotationFieldNumber = 4,
     kXFieldNumber = 1,
     kYFieldNumber = 2,
     kZFieldNumber = 3,
-    kSpeedFieldNumber = 4,
+    kSpeedFieldNumber = 5,
   };
+  // repeated float rotation = 4;
+  int rotation_size() const;
+  private:
+  int _internal_rotation_size() const;
+
+  public:
+  void clear_rotation() ;
+  float rotation(int index) const;
+  void set_rotation(int index, float value);
+  void add_rotation(float value);
+  const ::google::protobuf::RepeatedField<float>& rotation() const;
+  ::google::protobuf::RepeatedField<float>* mutable_rotation();
+
+  private:
+  const ::google::protobuf::RepeatedField<float>& _internal_rotation() const;
+  ::google::protobuf::RepeatedField<float>* _internal_mutable_rotation();
+
+  public:
   // optional float x = 1;
   bool has_x() const;
   void clear_x() ;
@@ -872,7 +911,7 @@ class Move final : public ::google::protobuf::Message
   void _internal_set_z(float value);
 
   public:
-  // optional float speed = 4;
+  // optional float speed = 5;
   bool has_speed() const;
   void clear_speed() ;
   float speed() const;
@@ -888,7 +927,7 @@ class Move final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      2, 4, 0,
+      3, 5, 0,
       0, 2>
       _table_;
 
@@ -908,6 +947,7 @@ class Move final : public ::google::protobuf::Message
                           const Move& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::RepeatedField<float> rotation_;
     float x_;
     float y_;
     float z_;
@@ -1210,7 +1250,52 @@ inline void Move::_internal_set_z(float value) {
   _impl_.z_ = value;
 }
 
-// optional float speed = 4;
+// repeated float rotation = 4;
+inline int Move::_internal_rotation_size() const {
+  return _internal_rotation().size();
+}
+inline int Move::rotation_size() const {
+  return _internal_rotation_size();
+}
+inline void Move::clear_rotation() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.rotation_.Clear();
+}
+inline float Move::rotation(int index) const {
+  // @@protoc_insertion_point(field_get:MoveMsg.Move.rotation)
+  return _internal_rotation().Get(index);
+}
+inline void Move::set_rotation(int index, float value) {
+  _internal_mutable_rotation()->Set(index, value);
+  // @@protoc_insertion_point(field_set:MoveMsg.Move.rotation)
+}
+inline void Move::add_rotation(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _internal_mutable_rotation()->Add(value);
+  // @@protoc_insertion_point(field_add:MoveMsg.Move.rotation)
+}
+inline const ::google::protobuf::RepeatedField<float>& Move::rotation() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:MoveMsg.Move.rotation)
+  return _internal_rotation();
+}
+inline ::google::protobuf::RepeatedField<float>* Move::mutable_rotation()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:MoveMsg.Move.rotation)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_rotation();
+}
+inline const ::google::protobuf::RepeatedField<float>&
+Move::_internal_rotation() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.rotation_;
+}
+inline ::google::protobuf::RepeatedField<float>* Move::_internal_mutable_rotation() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.rotation_;
+}
+
+// optional float speed = 5;
 inline bool Move::has_speed() const {
   bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
   return value;
@@ -1388,6 +1473,51 @@ inline float MoveSync::_internal_z() const {
 inline void MoveSync::_internal_set_z(float value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.z_ = value;
+}
+
+// repeated float rotation = 4;
+inline int MoveSync::_internal_rotation_size() const {
+  return _internal_rotation().size();
+}
+inline int MoveSync::rotation_size() const {
+  return _internal_rotation_size();
+}
+inline void MoveSync::clear_rotation() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.rotation_.Clear();
+}
+inline float MoveSync::rotation(int index) const {
+  // @@protoc_insertion_point(field_get:MoveMsg.MoveSync.rotation)
+  return _internal_rotation().Get(index);
+}
+inline void MoveSync::set_rotation(int index, float value) {
+  _internal_mutable_rotation()->Set(index, value);
+  // @@protoc_insertion_point(field_set:MoveMsg.MoveSync.rotation)
+}
+inline void MoveSync::add_rotation(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _internal_mutable_rotation()->Add(value);
+  // @@protoc_insertion_point(field_add:MoveMsg.MoveSync.rotation)
+}
+inline const ::google::protobuf::RepeatedField<float>& MoveSync::rotation() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:MoveMsg.MoveSync.rotation)
+  return _internal_rotation();
+}
+inline ::google::protobuf::RepeatedField<float>* MoveSync::mutable_rotation()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:MoveMsg.MoveSync.rotation)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_rotation();
+}
+inline const ::google::protobuf::RepeatedField<float>&
+MoveSync::_internal_rotation() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.rotation_;
+}
+inline ::google::protobuf::RepeatedField<float>* MoveSync::_internal_mutable_rotation() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.rotation_;
 }
 
 // -------------------------------------------------------------------

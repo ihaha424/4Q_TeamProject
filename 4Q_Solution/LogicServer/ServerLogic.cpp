@@ -163,13 +163,19 @@ void ServerLogic::SendPositionData()
             continue;
         } // if end
         Engine::Math::Vector3 position = _playerSlot[i]._controller->GetPosition();
+        Engine::Math::Quaternion rotation = _playerSlot[i]._rotation;
         printf("Player%d Position : (%f, %f, %f)\n", i + 1, position.x, position.y, position.z);
         _moveSync.set_x(position.x);
         _moveSync.set_y(position.y);
         _moveSync.set_z(position.z);
+        _moveSync.add_rotation(rotation.x);
+        _moveSync.add_rotation(rotation.y);
+        _moveSync.add_rotation(rotation.z);
+        _moveSync.add_rotation(rotation.w);
 
         _moveSync.SerializeToString(&_msgBuffer);
         Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), _playerSlot[i]._serialNumber);
+        _moveSync.Clear();
     } // for end
 
     // TODO: 여기서 업데이트를 진행하는 dynamic object에 대해 위치 정보를 클라이언트로 전송해야 합니다.
@@ -275,6 +281,15 @@ void ServerLogic::MoveProcess(const Packet& packet)
     direction.x = _move.x();
     direction.y = _move.y();
     direction.z = _move.z();
+
+    const auto& r = _move.rotation();
+    Engine::Math::Quaternion rotation;
+    rotation.x = *(r.begin());
+    rotation.y = *(r.begin() + 1);
+    rotation.z = *(r.begin() + 2);
+    rotation.w = *(r.begin() + 3);
+
+    _playerSlot[serialNum]._rotation = rotation;
     _playerSlot[serialNum]._speed = _move.speed();
 
     if (direction != _playerSlot[serialNum]._direction) {

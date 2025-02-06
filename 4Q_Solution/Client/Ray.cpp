@@ -78,6 +78,10 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 			_sync->_move.set_x(direction.x);
 			_sync->_move.set_y(direction.y);
 			_sync->_move.set_z(direction.z);
+			_sync->_move.add_rotation(_transform.rotation.x);
+			_sync->_move.add_rotation(_transform.rotation.y);
+			_sync->_move.add_rotation(_transform.rotation.z);
+			_sync->_move.add_rotation(_transform.rotation.w);
 			_sync->_move.set_speed(_remote->GetSpeed());
 
 			_sync->_move.SerializeToString(&_sync->_msgBuffer);
@@ -88,6 +92,7 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 				_sync->_move.ByteSizeLong(),
 				_sync->GetSerialNumber()
 			);
+			_sync->_move.Clear();
 		});
 	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
 		{

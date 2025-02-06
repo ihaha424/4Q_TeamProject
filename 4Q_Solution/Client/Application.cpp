@@ -87,20 +87,28 @@ void GameClient::Application::DeclareMoveAction(Engine::Input::IManager* inputMa
 	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::D, &right);
 	rightTrigger->SetComponent(right);
 
-	Engine::Input::Trigger::IDown* upTrigger = nullptr;
-	action->GetTrigger(&upTrigger);
+	Engine::Input::Trigger::IDown* forwardTrigger = nullptr;
+	action->GetTrigger(&forwardTrigger);
 	Engine::Input::Component::IButtonComponent* up = nullptr;
 	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::W, &up);
-	upTrigger->AddModifier(swizzleAxis);
-	upTrigger->SetComponent(up);
+	forwardTrigger->AddModifier(swizzleAxis);
+	forwardTrigger->SetComponent(up);
 
-	Engine::Input::Trigger::IDown* downTrigger = nullptr;
-	action->GetTrigger(&downTrigger);
+	Engine::Input::Trigger::IDown* backwardTrigger = nullptr;
+	action->GetTrigger(&backwardTrigger);
 	Engine::Input::Component::IButtonComponent* down = nullptr;
 	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::S, &down);
-	downTrigger->AddModifier(swizzleAxis);
-	downTrigger->AddModifier(negative);
-	downTrigger->SetComponent(down);
+	backwardTrigger->AddModifier(swizzleAxis);
+	backwardTrigger->AddModifier(negative);
+	backwardTrigger->SetComponent(down);
+
+	Engine::Input::Device::IController* controller = nullptr;
+	inputManager->GetDevice(&controller);
+
+	Engine::Input::Trigger::IDown* leftStickXTrigger = nullptr;
+	action->GetTrigger(&leftStickXTrigger);
+	Engine::Input::Component::IAxisComponent* leftStickX = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Thumb::LeftX, &leftStickX);
 }
 
 void GameClient::Application::DeclareCameraAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext)

@@ -309,7 +309,7 @@ void ServerLogic::JumpProcess(const Packet& packet)
 {
     _jump.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
     int playerIdx = packet._serialNumber - 1;
-    _playerSlot[playerIdx]._controller->Jump(_jump.power());
+    _playerSlot[playerIdx]._controller->Jump(_jump.power() * 5);
 }
 void ServerLogic::StateChangeProcess(const Packet& packet)
 {
@@ -526,7 +526,7 @@ void ServerLogic::RegistPlayer(Player* player)
     cd.position = Engine::Math::Vector3(100, 100, 100);
     cd.height = 10.f;
     cd.radius = 2.f;
-    cd.gravity = { 0.f, -9.8f, 0.f };
+    cd.gravity = { 0.f, -9.8f * 10, 0.f };
     cd.contactOffset = 0.001f;
     cd.stepOffset = 1.f;
     cd.slopeLimit = 0.707f;
@@ -541,15 +541,18 @@ void ServerLogic::RegistPlayer(Player* player)
 void ServerLogic::RegistGround(Ground& ground)
 {
     Engine::Physics::GeometryDesc geometryDesc;
-    geometryDesc.data = { 5, 5, 5 };
-    _physicsManager->LoadHeightMap(geometryDesc, "terrain", "Assets/Test/testHeight.png");
+    geometryDesc.data = { 100, 100, 100 };
+    //_physicsManager->LoadHeightMap(geometryDesc, "terrain", "Assets/Test/testHeight.png");
+    _physicsManager->LoadTriangleMesh(geometryDesc, "terrain", "Assets/Test/Landscape03.fbx");
 
     Engine::Transform transform{};
     Engine::Physics::IRigidStaticComponent* staticrigid;
     _physicsManager->CreateTriangleStatic(&staticrigid, "terrain", { {0.f,0.f,0.f } }, transform);
     ground._staticRigid = static_cast<Engine::Physics::RigidStaticComponent*>(staticrigid);
     _mainScene->AddActor(ground._staticRigid);
-    ground._staticRigid->SetTranslate({ -1000.f * geometryDesc.data.x, -200.f * geometryDesc.data.y, 1000.f * geometryDesc.data.z });
+    //ground._staticRigid->SetTranslate({ -1000.f * geometryDesc.data.x, -200.f * geometryDesc.data.y, 1000.f * geometryDesc.data.z });
+    ground._staticRigid->SetTranslate({ 0.f, -1000.f, 0.f });
+    ground._staticRigid->SetRotation(Engine::Math::Quaternion::CreateFromYawPitchRoll(3.14f, 0.f, 0.f));
 
     ground._staticRigid->SetOwner(&ground);
     ground._staticRigid->Initialize();

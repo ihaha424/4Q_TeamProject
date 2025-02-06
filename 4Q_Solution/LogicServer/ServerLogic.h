@@ -87,7 +87,7 @@ private:
 	ConnectMsg::SyncPlayer _syncPlayer;
 	ConnectMsg::SyncObject _syncObject;
 	ConnectMsg::AddObject _addObject;
-	ConnectMsg::AddRemote _addRemote;
+	ConnectMsg::AddPlayer _addPlayer;
 	
 	MoveMsg::Move _move;
 	MoveMsg::Jump _jump;
@@ -101,6 +101,15 @@ private:
 	std::string _msgBuffer = std::string(256, '\0');
 
 	void MessageDispatch();
+
+private:
+	void EnterProcess(const Packet& packet);
+	void ExitProcess(const Packet& packet);
+	void MoveProcess(const Packet& packet);
+	void JumpProcess(const Packet& packet);
+	void StateChangeProcess(const Packet& packet);
+	void DataRequestProcess(const Packet& packet);
+
 private:
 	short _dynamicObjectSerialNumber = 100;
 	short _staticObjectSerialNumber = 1000;

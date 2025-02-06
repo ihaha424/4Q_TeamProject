@@ -166,6 +166,8 @@ void DX11Renderer::SetViewport(float width, float height)
 void DX11Renderer::ShadowPass()
 {
 	Camera* pCamera = g_pCameraSystem->GetCurrentCamera();
+	if (nullptr == pCamera) return;
+
 	Light* pMainLight = g_pLightSystem->GetMainLight();
 
 	float dist = 500.f;

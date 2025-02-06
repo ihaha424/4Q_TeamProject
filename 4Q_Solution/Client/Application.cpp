@@ -35,7 +35,7 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	const auto objectFactory = contentManager->GetObjectFactory();
 	objectFactory->Register<Ray>(L"../Resources/Test/Ray.fbx");
 	objectFactory->Register<GlobalLight>();
-	objectFactory->Register<Terrain>(L"../Resources/Level/Level.fbx", "../Resources/Terrain/testTest.png");
+	objectFactory->Register<Terrain>(L"../Resources/Level/Landscape03.fbx", "../Resources/Terrain/testTest.png");
 	objectFactory->Register<SkyBox>(L"../Resources/IBL/skybox.fbx");
 
 

@@ -13,7 +13,7 @@ namespace Engine::Physics
 		virtual ~Geometry() = default;
 
 		virtual void	SetScale(const Engine::Math::Vector3& position) = 0;
-		virtual const	Engine::Math::Vector3 GetScale() const			= 0;
+		virtual 	Engine::Math::Vector3 GetScale() const			= 0;
 
 		virtual GeometryShape SetType(GeometryShape type)	= 0;
 		virtual void GetType(GeometryShape type)			= 0;

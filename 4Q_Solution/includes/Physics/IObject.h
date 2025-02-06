@@ -22,13 +22,13 @@ namespace PhysicsEngineAPI
 		virtual bool	DetachShape(IShape* shape) = 0;
 
 		virtual void	SetTranslate(const Utils::Math::Vector3& position)	= 0;
-		virtual const	Utils::Math::Vector3 GetTranslate() const			= 0;
+		virtual 	Utils::Math::Vector3 GetTranslate() const			= 0;
 
 		virtual void	SetRotation(const Utils::Math::Vector4& Rotation)	= 0;
-		virtual const	Utils::Math::Vector4 GetRotation() const			= 0;
+		virtual 	Utils::Math::Vector4 GetRotation() const			= 0;
 
 		virtual void	SetTransform(const Utils::Math::Transform& transform)	= 0;
-		virtual const	Utils::Math::Transform GetTransform() const				= 0;
+		virtual 	Utils::Math::Transform GetTransform() const				= 0;
 
 		virtual void*	GetPhysicsObject() = 0;
 	public:

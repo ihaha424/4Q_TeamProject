@@ -39,7 +39,8 @@ namespace Engine::PHI
 		raycastInfo.num = data.num;
 		raycastInfo.UserDatas.reserve(data.num);
 		for(size_t i = 0; i < data.num; i++)
-			raycastInfo.UserDatas.push_back(data.UserDatas[i]);
+			raycastInfo.UserDatas.push_back(static_cast<Collision<Engine::Physics::Component>*>(data.UserDatas[0])->rigidComponent);
+			//raycastInfo.UserDatas.push_back(data.UserDatas[i]);
 		raycastInfo.normal = PhysicsVector3ToVector3(data.normal);
 		raycastInfo.position = PhysicsVector3ToVector3(data.position);
 		raycastInfo.distance = data.distance;
@@ -64,7 +65,7 @@ namespace Engine::PHI
 		overlapInfo.num = data.num;
 		overlapInfo.UserDatas.reserve(data.num);
 		for (size_t i = 0; i < data.num; i++)
-			overlapInfo.UserDatas.push_back(data.UserDatas[i]);
+			overlapInfo.UserDatas.push_back(static_cast<Collision<Engine::Physics::Component>*>(data.UserDatas[0])->rigidComponent);
 
 		return result;
 	}
@@ -89,7 +90,7 @@ namespace Engine::PHI
 		sweepInfo.num = data.num;
 		sweepInfo.UserDatas.reserve(data.num);
 		for (size_t i = 0; i < data.num; i++)
-			sweepInfo.UserDatas.push_back(data.UserDatas[i]);
+			sweepInfo.UserDatas.push_back(static_cast<Collision<Engine::Physics::Component>*>(data.UserDatas[0])->rigidComponent);
 		sweepInfo.normal = PhysicsVector3ToVector3(data.normal);
 		sweepInfo.position = PhysicsVector3ToVector3(data.position);
 		sweepInfo.distance = data.distance;
@@ -136,7 +137,7 @@ namespace Engine::PHI
 	{
 		scene->SetGravity(Vector3ToPhysicsVector3(gravity));
 	}
-	const Math::Vector3& Scene::GetGravity() const
+	 Math::Vector3 Scene::GetGravity() const
 	{
 		return PhysicsVector3ToVector3(scene->GetGravity());
 	}

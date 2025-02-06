@@ -30,7 +30,7 @@ namespace Engine::Physics
 		virtual void Jump(float JumpForce) = 0;
 
 		virtual void SetDirection(Engine::Math::Vector3 displacement) = 0;
-		virtual const Engine::Math::Vector3& GetDirection() const = 0;
+		virtual  Engine::Math::Vector3 GetDirection() const = 0;
 
 		virtual void SetMinDistancet(float minDistance) = 0;
 		virtual float GetMinDistance() const = 0;
@@ -39,13 +39,13 @@ namespace Engine::Physics
 		virtual float GetMoveSpeed() const = 0;
 
 		virtual void SetGravity(const Engine::Math::Vector3& gravity) = 0;
-		virtual const Engine::Math::Vector3& GetGravity() const = 0;
+		virtual  Engine::Math::Vector3 GetGravity() const = 0;
 
 		virtual void SetPosition(const Engine::Math::Vector3& position) = 0;
-		virtual const Engine::Math::Vector3& GetPosition() const = 0;
+		virtual  Engine::Math::Vector3 GetPosition() const = 0;
 
 		virtual void SetBottomPosition(const Engine::Math::Vector3& position) = 0;
-		virtual const Engine::Math::Vector3& GetBottomPosition() const = 0;
+		virtual  Engine::Math::Vector3 GetBottomPosition() const = 0;
 
 		virtual void SetStepOffset(float offset) = 0;
 		virtual float GetStepOffset() const = 0;
@@ -57,7 +57,7 @@ namespace Engine::Physics
 		virtual float GetContactOffset() const = 0;
 
 		virtual void SetUpDirection(const Engine::Math::Vector3& direction) = 0;
-		virtual const Engine::Math::Vector3& GetUpdirection() const = 0;
+		virtual  Engine::Math::Vector3 GetUpdirection() const = 0;
 
 		virtual void SetSlopeLimit(float limit) = 0;
 		virtual float GetSlopeLimit() const = 0;

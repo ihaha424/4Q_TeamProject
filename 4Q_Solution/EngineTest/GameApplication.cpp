@@ -11,7 +11,7 @@ GameApplication::GameApplication(const HINSTANCE instanceHandle) :
 void GameApplication::LoadData(Engine::Load::IManager* loadManager)
 {
 	loadManager->LoadRegisterData(L"../Resources/JSONTest/MapData.json");
-	//loadManager->LoadCloneData(L"MapData.json");
+	loadManager->LoadCloneData(L"../Resources/JSONTest/MapData.json");
 }
 
 void GameApplication::DeclareInputActions(Engine::Input::IManager* inputManager)
@@ -42,11 +42,11 @@ void GameApplication::Register(Engine::Content::IManager* contentManager, Engine
 	const auto worldFactory = contentManager->GetWorldFactory();
 	worldFactory->Register<TestWorld>();
 	const auto objectFactory = contentManager->GetObjectFactory();
-	objectFactory->Register<Player>(buildingProperty.c_str(), L"../Resources/Font/Gungseo12.sfont");
+	objectFactory->Register<Player>(L"../Resources/Player/Player.X", L"../Resources/Font/Gungseo12.sfont");
 	objectFactory->Register<RemotePlayer>(L"../Resources/Player/Player.X");
 	objectFactory->Register<GlobalLight>();
 	objectFactory->Register<Terrain>(L"../Resources/Level/Level.fbx");
-	objectFactory->Register<Cube>(L"../Resources/TestObject/BG_Hide_Flower_1.fbx");
+	objectFactory->Register<Cube>(L"../Resources/TestObject/BG_Hide_House_1.fbx");
 	//objectFactory->Register<Sphere>(L"../Resources/TestObject/sphere.fbx");
 	const auto componentFactory = contentManager->GetComponentFactory();
 	componentFactory->Register<RemoteMoveComponent>();

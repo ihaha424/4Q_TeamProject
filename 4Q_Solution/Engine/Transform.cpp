@@ -8,14 +8,44 @@ Engine::Transform::Transform() :
 {
 }
 
-Engine::Transform::Transform(Math::Vector3 _position, Math::Quaternion _rotation, Math::Vector3 _scale) :
-	position(_position),
-	rotation(_rotation),
-	scale(_scale)
+Engine::Transform::Transform(const Math::Vector3 position, const Math::Quaternion rotation, const Math::Vector3 scale) :
+	position(position),
+	rotation(rotation),
+	scale(scale)
 {
 }
 
 void Engine::Transform::Translate(const Math::Vector3 translation)
 {
 	position += translation;
+}
+
+Engine::Math::Vector3 Engine::Transform::GetForward() const
+{
+	return Math::Vector3::Transform(Math::Vector3::Forward, rotation);
+}
+
+Engine::Math::Vector3 Engine::Transform::GetRight() const
+{
+	return Math::Vector3::Transform(Math::Vector3::Right, rotation);
+}
+
+Engine::Math::Vector3 Engine::Transform::GetUp() const
+{
+	return Math::Vector3::Transform(Math::Vector3::Up, rotation);
+}
+
+Engine::Math::Vector3 Engine::Transform::GetBackward() const
+{
+	return Math::Vector3::Transform(Math::Vector3::Backward, rotation);
+}
+
+Engine::Math::Vector3 Engine::Transform::GetLeft() const
+{
+	return Math::Vector3::Transform(Math::Vector3::Left, rotation);
+}
+
+Engine::Math::Vector3 Engine::Transform::GetDown() const
+{
+	return Math::Vector3::Transform(Math::Vector3::Down, rotation);
 }

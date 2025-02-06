@@ -17,7 +17,7 @@ namespace PhysicsEngineAPI
 	{
 		function.SetVelocity(velocity, actor);
 	}
-	const Utils::Math::Vector3 PhysXKinematicActor::GetVelocity() const
+	 Utils::Math::Vector3 PhysXKinematicActor::GetVelocity() const
 	{
 		return function.GetVelocity(actor);
 	}
@@ -25,7 +25,7 @@ namespace PhysicsEngineAPI
 	{
 		function.SetLinearVelocity(velocity, actor);
 	}
-	const Utils::Math::Vector3 PhysXKinematicActor::GetLinearVelocity() const
+	 Utils::Math::Vector3 PhysXKinematicActor::GetLinearVelocity() const
 	{
 		return function.GetLinearVelocity(actor);
 	}
@@ -33,7 +33,7 @@ namespace PhysicsEngineAPI
 	{
 		return function.SetMaxLinearVelocity(velocity, actor);
 	}
-	const float PhysXKinematicActor::GetMaxLinearVelocity() const
+	 float PhysXKinematicActor::GetMaxLinearVelocity() const
 	{
 		return function.GetMaxLinearVelocity(actor);
 	}
@@ -41,7 +41,7 @@ namespace PhysicsEngineAPI
 	{
 		function.SetAngularVelocity(angularVelocity, actor);
 	}
-	const Utils::Math::Vector3 PhysXKinematicActor::GetAngularVelocity() const
+	 Utils::Math::Vector3 PhysXKinematicActor::GetAngularVelocity() const
 	{
 		return function.GetAngularVelocity(actor);
 	}
@@ -49,7 +49,7 @@ namespace PhysicsEngineAPI
 	{
 		function.SetMaxAngularVelocity(velocity, actor);
 	}
-	const float PhysXKinematicActor::GetMaxAngularVelocity() const
+	 float PhysXKinematicActor::GetMaxAngularVelocity() const
 	{
 		return function.GetMaxAngularVelocity(actor);
 	}
@@ -114,7 +114,7 @@ namespace PhysicsEngineAPI
 	{
 		function.SetTranslate(position, actor);
 	}
-	const Utils::Math::Vector3 PhysXKinematicActor::GetTranslate() const
+	 Utils::Math::Vector3 PhysXKinematicActor::GetTranslate() const
 	{
 		return function.GetTranslate(actor);
 	}
@@ -123,7 +123,7 @@ namespace PhysicsEngineAPI
 	{
 		return function.SetRotation(Rotation, actor);
 	}
-	const Utils::Math::Vector4 PhysXKinematicActor::GetRotation() const
+	 Utils::Math::Vector4 PhysXKinematicActor::GetRotation() const
 	{
 		return function.GetRotation(actor);
 	}
@@ -132,7 +132,7 @@ namespace PhysicsEngineAPI
 	{
 		return function.SetTransform(_transform, actor);
 	}
-	const Utils::Math::Transform PhysXKinematicActor::GetTransform() const
+	 Utils::Math::Transform PhysXKinematicActor::GetTransform() const
 	{
 		return function.GetTransform(actor);
 	}

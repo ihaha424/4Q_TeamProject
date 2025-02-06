@@ -14,11 +14,11 @@ namespace Engine::PHI
 					Rigid Object
 		*********************************/
 		void SetTranslate(const Math::Vector3& position) override;
-		const Math::Vector3 GetTranslate() const override;
+		 Math::Vector3 GetTranslate() const override;
 		void SetRotation(const Math::Quaternion& Rotation) override;
-		const Math::Quaternion GetRotation() const override;
+		 Math::Quaternion GetRotation() const override;
 		void SetTransform(const Transform& transform) override;
-		const Transform GetTransform() const override;
+		 Transform GetTransform() const override;
 
 
 		/********************************
@@ -26,13 +26,13 @@ namespace Engine::PHI
 		*********************************/
 		void SetFlag(Physics::CollisionType flag, bool value) override;
 		void SetLocalTranslate(const Math::Vector3& LocalTranslate) override;
-		const Math::Vector3 GetLocalTranslate() const override;
+		 Math::Vector3 GetLocalTranslate() const override;
 		void SetLocalRotation(const Math::Quaternion& LocalRotation) override;
-		const Math::Quaternion GetLocalRotation() const override;
+		 Math::Quaternion GetLocalRotation() const override;
 		void SetLocalTransform(const Transform& LocalTransform) override;
-		const Transform GetLocalTransform() const override;
+		 Transform GetLocalTransform() const override;
 		void SetScale(const Math::Vector3& Scale) override;
-		const Math::Vector3 GetScale() const override;
+		 Math::Vector3 GetScale() const override;
 
 		
 		/********************************

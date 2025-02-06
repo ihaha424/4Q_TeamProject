@@ -47,7 +47,7 @@ namespace PhysicsEngineAPI
 		scene->setGravity(Vector3ToPxVec3(gravity));
 	}
 
-	const Utils::Math::Vector3& PhysXScene::GetGravity() const
+	 Utils::Math::Vector3 PhysXScene::GetGravity() const
 	{
 		return PxVec3ToVector3(scene->getGravity());
 	}
@@ -73,9 +73,9 @@ namespace PhysicsEngineAPI
 			physx::PxRaycastHit hitInfo = HitBuffer.block;
 			raycastInfo.UserDatas.reserve(raycastInfo.num);
 			if (raycastInfo.num < raycastInfo.UserDatas.size())
-				raycastInfo.UserDatas[0] = hitInfo.actor->userData;
+				raycastInfo.UserDatas[0] = static_cast<ICollision*>(hitInfo.actor->userData);
 			else
-				raycastInfo.UserDatas.push_back(hitInfo.actor->userData);
+				raycastInfo.UserDatas.push_back(static_cast<ICollision*>(hitInfo.actor->userData));
 			raycastInfo.normal = PxVec3ToVector3(hitInfo.normal);
 			raycastInfo.position = PxVec3ToVector3(hitInfo.position);
 			raycastInfo.distance = hitInfo.distance;
@@ -109,10 +109,10 @@ namespace PhysicsEngineAPI
 			for (size_t i = 0; i < howMany; i++)
 			{
 				const PxOverlapHit& hitInfo = hitOv[i];
-				if(i < overlapInfo.UserDatas.size())
-					overlapInfo.UserDatas[i] = hitInfo.actor->userData;
+				if (i < overlapInfo.UserDatas.size())
+					overlapInfo.UserDatas[i] = static_cast<ICollision*>(hitInfo.actor->userData);
 				else
-					overlapInfo.UserDatas.push_back(hitInfo.actor->userData);
+					overlapInfo.UserDatas.push_back(static_cast<ICollision*>(hitInfo.actor->userData));
 			}
 		}
 		else
@@ -153,9 +153,9 @@ namespace PhysicsEngineAPI
 				const PxSweepHit& hitInfo = hitOv[i];
 				
 				if (i < sweepInfo.UserDatas.size())
-					sweepInfo.UserDatas[i] = hitInfo.actor->userData;
+					sweepInfo.UserDatas[i] = static_cast<ICollision*>(hitInfo.actor->userData);
 				else
-					sweepInfo.UserDatas.push_back(hitInfo.actor->userData);
+					sweepInfo.UserDatas.push_back(static_cast<ICollision*>(hitInfo.actor->userData));
 				sweepInfo.normal = PxVec3ToVector3(hitInfo.normal);
 				sweepInfo.position = PxVec3ToVector3(hitInfo.position);
 				sweepInfo.distance = hitInfo.distance;

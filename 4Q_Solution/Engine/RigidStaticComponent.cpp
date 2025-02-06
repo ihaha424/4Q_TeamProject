@@ -4,7 +4,7 @@
 namespace Engine::Component
 {
 	RigidStatic::RigidStatic()
-		: _rigidbody{ nullptr }
+		: _rigidbody{nullptr}, _boundBox(nullptr)
 	{
 	}
 

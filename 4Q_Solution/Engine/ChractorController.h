@@ -8,6 +8,7 @@ namespace Engine::Component
 		ChractorController();
 
 		void Initialize(const Modules& modules) override;
+		void Update(float deltaTime) override;
 		void FixedUpdate() override;
 		void Finalize() override;
 

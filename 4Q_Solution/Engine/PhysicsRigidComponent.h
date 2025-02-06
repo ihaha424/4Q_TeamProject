@@ -8,17 +8,17 @@ namespace Engine::Physics
 					Rigid Object
 		*********************************/
 		virtual void	SetTranslate(const Engine::Math::Vector3& position) = 0;
-		virtual const	Engine::Math::Vector3 GetTranslate() const = 0;
+		virtual 	Engine::Math::Vector3 GetTranslate() const = 0;
 
 		virtual void	SetRotation(const Engine::Math::Quaternion& Rotation) = 0;
-		virtual const	Engine::Math::Quaternion GetRotation() const = 0;
+		virtual 	Engine::Math::Quaternion GetRotation() const = 0;
 
 		/**
 		 * @brief				: Internal Transform - Non-existent transform without scale
 		 * @param transform		: Non-existent transform without scale
 		 */
 		virtual void	SetTransform(const Transform& transform) = 0;
-		virtual const	Transform GetTransform() const = 0;
+		virtual 	Transform GetTransform() const = 0;
 
 		/********************************
 					   Shape
@@ -26,16 +26,16 @@ namespace Engine::Physics
 		virtual void SetFlag(CollisionType flag, bool value) = 0;
 
 		virtual void SetLocalTranslate(const Engine::Math::Vector3& LocalTranslate) = 0;
-		virtual const Engine::Math::Vector3 GetLocalTranslate()const = 0;
+		virtual  Engine::Math::Vector3 GetLocalTranslate()const = 0;
 
 		virtual void SetLocalRotation(const Engine::Math::Quaternion& LocalRotation) = 0;
-		virtual const Engine::Math::Quaternion GetLocalRotation() const = 0;
+		virtual  Engine::Math::Quaternion GetLocalRotation() const = 0;
 
 		virtual void SetLocalTransform(const Engine::Transform& LocalTransform) = 0;
-		virtual const Engine::Transform GetLocalTransform() const = 0;
+		virtual  Engine::Transform GetLocalTransform() const = 0;
 
 		virtual void SetScale(const Engine::Math::Vector3& Scale) = 0;
-		virtual const Engine::Math::Vector3 GetScale() const = 0;
+		virtual  Engine::Math::Vector3 GetScale() const = 0;
 
 		/********************************
 					Geometry

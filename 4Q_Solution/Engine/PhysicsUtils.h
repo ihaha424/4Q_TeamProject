@@ -79,6 +79,7 @@ namespace Engine::Physics
 	 * @brief		: QueryData
 	 * @UserDatas	: Actor's UserData
 	 */
+	class Component;
 	struct QueryData
 	{
 		enum QueryFlag
@@ -91,8 +92,7 @@ namespace Engine::Physics
 		};
 		QueryFlag			flag;
 		unsigned int		num;
-		// void* UserDatas;
-		std::vector<void*>	UserDatas{};
+		std::vector<Component*>	UserDatas{};
 	};
 
 	struct AdditionalQueryData

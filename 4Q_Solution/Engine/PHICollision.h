@@ -29,6 +29,7 @@ namespace Engine::PHI
 		void FixedUpdate() override;
         void Release() override;
 
+        T* rigidComponent;
 	private:
 		void ConvertTriggerEvent(PhysicsEngineAPI::Utils::DataStructure::TriggerEvent& API, Engine::Physics::TriggerEvent& engine);
 		void ConvertContactEvent(PhysicsEngineAPI::Utils::DataStructure::ContactEvent& API, Engine::Physics::ContactEvent& engine);
@@ -50,7 +51,6 @@ namespace Engine::PHI
 		};
 
 
-        T* rigidComponent;
 		bool dirtyFlag;
 		std::vector<CallBackTriggerFunctions> triggerFunctions;
 		std::vector<CallBackContactFunctions> contactFunctions;

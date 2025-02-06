@@ -94,11 +94,10 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 	cd.slopeLimit = 0.707f;
 
 	Engine::Physics::IController* controller;
-	PhysicsManager->CreatePlayerController(&controller, PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::cameraScene)), cd);
+	PhysicsManager->CreatePlayerController(&controller, PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::mainScene)), cd);
 	_rigid->_controller = static_cast<Engine::Physics::Controller*>(controller);
 	// TODO: 적용해보고 속성값 조절
 	// _rigid->_controller->SetBottomPosition({ 0,10,0 });
-	_rigid->_controller->SetOwner(this);
 
 	// TODO: Camera Scene에 추가
 }

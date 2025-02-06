@@ -13,6 +13,7 @@ namespace Engine::Component
 	{
 		Component::Initialize(modules);
 		static_cast<Physics::Controller*>(_controller)->Initialize();
+		static_cast<Physics::Controller*>(_controller)->SetOwner(GetOwner());
 	}
 
 	void ChractorController::Update(float deltaTime)

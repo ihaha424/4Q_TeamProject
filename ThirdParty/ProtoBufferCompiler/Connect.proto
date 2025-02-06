@@ -19,11 +19,6 @@ message SyncObject {
 	repeated float scale = 4;
 }
 
-message AddPlayer {
-	optional int32 grantnumber = 1;
-	optional string classid = 2;
-}
-
 message AddObject {
 	optional int32 grantnumber = 1;
 	optional string classid = 2;

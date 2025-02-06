@@ -106,34 +106,6 @@ struct EnterAcceptDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 EnterAcceptDefaultTypeInternal _EnterAccept_default_instance_;
 
-inline constexpr AddPlayer::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : _cached_size_{0},
-        classid_(
-            &::google::protobuf::internal::fixed_address_empty_string,
-            ::_pbi::ConstantInitialized()),
-        grantnumber_{0} {}
-
-template <typename>
-PROTOBUF_CONSTEXPR AddPlayer::AddPlayer(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(::_pbi::ConstantInitialized()) {
-}
-struct AddPlayerDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR AddPlayerDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~AddPlayerDefaultTypeInternal() {}
-  union {
-    AddPlayer _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AddPlayerDefaultTypeInternal _AddPlayer_default_instance_;
-
 inline constexpr AddObject::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
@@ -209,18 +181,6 @@ const ::uint32_t
         ~0u,
         ~0u,
         ~0u,
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::AddPlayer, _impl_._has_bits_),
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::AddPlayer, _internal_metadata_),
-        ~0u,  // no _extensions_
-        ~0u,  // no _oneof_case_
-        ~0u,  // no _weak_field_map_
-        ~0u,  // no _inlined_string_donated_
-        ~0u,  // no _split_
-        ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::AddPlayer, _impl_.grantnumber_),
-        PROTOBUF_FIELD_OFFSET(::ConnectMsg::AddPlayer, _impl_.classid_),
-        1,
-        0,
         PROTOBUF_FIELD_OFFSET(::ConnectMsg::AddObject, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::ConnectMsg::AddObject, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -240,14 +200,12 @@ static const ::_pbi::MigrationSchema
         {0, 9, -1, sizeof(::ConnectMsg::EnterAccept)},
         {10, 21, -1, sizeof(::ConnectMsg::SyncPlayer)},
         {24, 36, -1, sizeof(::ConnectMsg::SyncObject)},
-        {40, 50, -1, sizeof(::ConnectMsg::AddPlayer)},
-        {52, 62, -1, sizeof(::ConnectMsg::AddObject)},
+        {40, 50, -1, sizeof(::ConnectMsg::AddObject)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::ConnectMsg::_EnterAccept_default_instance_._instance,
     &::ConnectMsg::_SyncPlayer_default_instance_._instance,
     &::ConnectMsg::_SyncObject_default_instance_._instance,
-    &::ConnectMsg::_AddPlayer_default_instance_._instance,
     &::ConnectMsg::_AddObject_default_instance_._instance,
 };
 const char descriptor_table_protodef_Connect_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
@@ -258,24 +216,21 @@ const char descriptor_table_protodef_Connect_2eproto[] ABSL_ATTRIBUTE_SECTION_VA
     "\002 \001(\002H\001\210\001\001\022\016\n\001z\030\003 \001(\002H\002\210\001\001B\004\n\002_xB\004\n\002_yB\004"
     "\n\002_z\"_\n\nSyncObject\022\023\n\006public\030\001 \001(\010H\000\210\001\001\022"
     "\020\n\010position\030\002 \003(\002\022\020\n\010rotation\030\003 \003(\002\022\r\n\005s"
-    "cale\030\004 \003(\002B\t\n\007_public\"W\n\tAddPlayer\022\030\n\013gr"
+    "cale\030\004 \003(\002B\t\n\007_public\"W\n\tAddObject\022\030\n\013gr"
     "antnumber\030\001 \001(\005H\000\210\001\001\022\024\n\007classid\030\002 \001(\tH\001\210"
-    "\001\001B\016\n\014_grantnumberB\n\n\010_classid\"W\n\tAddObj"
-    "ect\022\030\n\013grantnumber\030\001 \001(\005H\000\210\001\001\022\024\n\007classid"
-    "\030\002 \001(\tH\001\210\001\001B\016\n\014_grantnumberB\n\n\010_classidb"
-    "\006proto3"
+    "\001\001B\016\n\014_grantnumberB\n\n\010_classidb\006proto3"
 };
 static ::absl::once_flag descriptor_table_Connect_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_Connect_2eproto = {
     false,
     false,
-    447,
+    358,
     descriptor_table_protodef_Connect_2eproto,
     "Connect.proto",
     &descriptor_table_Connect_2eproto_once,
     nullptr,
     0,
-    5,
+    4,
     schemas,
     file_default_instances,
     TableStruct_Connect_2eproto::offsets,
@@ -1108,279 +1063,6 @@ void SyncObject::InternalSwap(SyncObject* PROTOBUF_RESTRICT other) {
 }
 
 ::google::protobuf::Metadata SyncObject::GetMetadata() const {
-  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
-}
-// ===================================================================
-
-class AddPlayer::_Internal {
- public:
-  using HasBits =
-      decltype(std::declval<AddPlayer>()._impl_._has_bits_);
-  static constexpr ::int32_t kHasBitsOffset =
-      8 * PROTOBUF_FIELD_OFFSET(AddPlayer, _impl_._has_bits_);
-};
-
-AddPlayer::AddPlayer(::google::protobuf::Arena* arena)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:ConnectMsg.AddPlayer)
-}
-inline PROTOBUF_NDEBUG_INLINE AddPlayer::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::ConnectMsg::AddPlayer& from_msg)
-      : _has_bits_{from._has_bits_},
-        _cached_size_{0},
-        classid_(arena, from.classid_) {}
-
-AddPlayer::AddPlayer(
-    ::google::protobuf::Arena* arena,
-    const AddPlayer& from)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  AddPlayer* const _this = this;
-  (void)_this;
-  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
-      from._internal_metadata_);
-  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-  _impl_.grantnumber_ = from._impl_.grantnumber_;
-
-  // @@protoc_insertion_point(copy_constructor:ConnectMsg.AddPlayer)
-}
-inline PROTOBUF_NDEBUG_INLINE AddPlayer::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility,
-    ::google::protobuf::Arena* arena)
-      : _cached_size_{0},
-        classid_(arena) {}
-
-inline void AddPlayer::SharedCtor(::_pb::Arena* arena) {
-  new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.grantnumber_ = {};
-}
-AddPlayer::~AddPlayer() {
-  // @@protoc_insertion_point(destructor:ConnectMsg.AddPlayer)
-  SharedDtor(*this);
-}
-inline void AddPlayer::SharedDtor(MessageLite& self) {
-  AddPlayer& this_ = static_cast<AddPlayer&>(self);
-  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
-  ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.classid_.Destroy();
-  this_._impl_.~Impl_();
-}
-
-inline void* AddPlayer::PlacementNew_(const void*, void* mem,
-                                        ::google::protobuf::Arena* arena) {
-  return ::new (mem) AddPlayer(arena);
-}
-constexpr auto AddPlayer::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(AddPlayer),
-                                            alignof(AddPlayer));
-}
-PROTOBUF_CONSTINIT
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull AddPlayer::_class_data_ = {
-    ::google::protobuf::internal::ClassData{
-        &_AddPlayer_default_instance_._instance,
-        &_table_.header,
-        nullptr,  // OnDemandRegisterArenaDtor
-        nullptr,  // IsInitialized
-        &AddPlayer::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<AddPlayer>(),
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        &AddPlayer::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<AddPlayer>(), &AddPlayer::ByteSizeLong,
-            &AddPlayer::_InternalSerialize,
-#endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(AddPlayer, _impl_._cached_size_),
-        false,
-    },
-    &AddPlayer::kDescriptorMethods,
-    &descriptor_table_Connect_2eproto,
-    nullptr,  // tracker
-};
-const ::google::protobuf::internal::ClassData* AddPlayer::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
-  return _class_data_.base();
-}
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<1, 2, 0, 36, 2> AddPlayer::_table_ = {
-  {
-    PROTOBUF_FIELD_OFFSET(AddPlayer, _impl_._has_bits_),
-    0, // no _extensions_
-    2, 8,  // max_field_number, fast_idx_mask
-    offsetof(decltype(_table_), field_lookup_table),
-    4294967292,  // skipmap
-    offsetof(decltype(_table_), field_entries),
-    2,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
-    _class_data_.base(),
-    nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
-    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::ConnectMsg::AddPlayer>(),  // to_prefetch
-    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
-  }, {{
-    // optional string classid = 2;
-    {::_pbi::TcParser::FastUS1,
-     {18, 0, 0, PROTOBUF_FIELD_OFFSET(AddPlayer, _impl_.classid_)}},
-    // optional int32 grantnumber = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(AddPlayer, _impl_.grantnumber_), 1>(),
-     {8, 1, 0, PROTOBUF_FIELD_OFFSET(AddPlayer, _impl_.grantnumber_)}},
-  }}, {{
-    65535, 65535
-  }}, {{
-    // optional int32 grantnumber = 1;
-    {PROTOBUF_FIELD_OFFSET(AddPlayer, _impl_.grantnumber_), _Internal::kHasBitsOffset + 1, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
-    // optional string classid = 2;
-    {PROTOBUF_FIELD_OFFSET(AddPlayer, _impl_.classid_), _Internal::kHasBitsOffset + 0, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kUtf8String | ::_fl::kRepAString)},
-  }},
-  // no aux_entries
-  {{
-    "\24\0\7\0\0\0\0\0"
-    "ConnectMsg.AddPlayer"
-    "classid"
-  }},
-};
-
-PROTOBUF_NOINLINE void AddPlayer::Clear() {
-// @@protoc_insertion_point(message_clear_start:ConnectMsg.AddPlayer)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    _impl_.classid_.ClearNonDefaultToEmpty();
-  }
-  _impl_.grantnumber_ = 0;
-  _impl_._has_bits_.Clear();
-  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
-}
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* AddPlayer::_InternalSerialize(
-            const MessageLite& base, ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const AddPlayer& this_ = static_cast<const AddPlayer&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* AddPlayer::_InternalSerialize(
-            ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const AddPlayer& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:ConnectMsg.AddPlayer)
-          ::uint32_t cached_has_bits = 0;
-          (void)cached_has_bits;
-
-          cached_has_bits = this_._impl_._has_bits_[0];
-          // optional int32 grantnumber = 1;
-          if (cached_has_bits & 0x00000002u) {
-            target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt32ToArrayWithField<1>(
-                    stream, this_._internal_grantnumber(), target);
-          }
-
-          // optional string classid = 2;
-          if (cached_has_bits & 0x00000001u) {
-            const std::string& _s = this_._internal_classid();
-            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "ConnectMsg.AddPlayer.classid");
-            target = stream->WriteStringMaybeAliased(2, _s, target);
-          }
-
-          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-            target =
-                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
-          }
-          // @@protoc_insertion_point(serialize_to_array_end:ConnectMsg.AddPlayer)
-          return target;
-        }
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t AddPlayer::ByteSizeLong(const MessageLite& base) {
-          const AddPlayer& this_ = static_cast<const AddPlayer&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t AddPlayer::ByteSizeLong() const {
-          const AddPlayer& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:ConnectMsg.AddPlayer)
-          ::size_t total_size = 0;
-
-          ::uint32_t cached_has_bits = 0;
-          // Prevent compiler warnings about cached_has_bits being unused
-          (void)cached_has_bits;
-
-          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
-          cached_has_bits = this_._impl_._has_bits_[0];
-          if (cached_has_bits & 0x00000003u) {
-            // optional string classid = 2;
-            if (cached_has_bits & 0x00000001u) {
-              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                              this_._internal_classid());
-            }
-            // optional int32 grantnumber = 1;
-            if (cached_has_bits & 0x00000002u) {
-              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-                  this_._internal_grantnumber());
-            }
-          }
-          return this_.MaybeComputeUnknownFieldsSize(total_size,
-                                                     &this_._impl_._cached_size_);
-        }
-
-void AddPlayer::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<AddPlayer*>(&to_msg);
-  auto& from = static_cast<const AddPlayer&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:ConnectMsg.AddPlayer)
-  ABSL_DCHECK_NE(&from, _this);
-  ::uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000003u) {
-    if (cached_has_bits & 0x00000001u) {
-      _this->_internal_set_classid(from._internal_classid());
-    }
-    if (cached_has_bits & 0x00000002u) {
-      _this->_impl_.grantnumber_ = from._impl_.grantnumber_;
-    }
-  }
-  _this->_impl_._has_bits_[0] |= cached_has_bits;
-  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void AddPlayer::CopyFrom(const AddPlayer& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:ConnectMsg.AddPlayer)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-
-void AddPlayer::InternalSwap(AddPlayer* PROTOBUF_RESTRICT other) {
-  using std::swap;
-  auto* arena = GetArena();
-  ABSL_DCHECK_EQ(arena, other->GetArena());
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.classid_, &other->_impl_.classid_, arena);
-        swap(_impl_.grantnumber_, other->_impl_.grantnumber_);
-}
-
-::google::protobuf::Metadata AddPlayer::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================

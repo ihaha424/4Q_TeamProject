@@ -1,6 +1,6 @@
 #pragma once
 
-namespace DSH::Sound
+namespace DSH::Audio
 {
 	struct ISystem;
 

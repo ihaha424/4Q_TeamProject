@@ -1,6 +1,6 @@
 #pragma once
 
-namespace DSH::Sound
+namespace DSH::Audio
 {
 	EXTERN_C const IID IID_ISound;
 

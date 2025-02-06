@@ -1,4 +1,4 @@
 #include "pch.h"
 #include "ISystem.h"
 
-const IID DSH::Sound::IID_ISystem = __uuidof(ISystem);
+const IID DSH::Audio::IID_ISystem = __uuidof(ISystem);

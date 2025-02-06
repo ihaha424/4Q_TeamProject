@@ -1,7 +1,13 @@
 #include "pch.h"
 #include "Functions.h"
 
-HRESULT DSH::Sound::CreateSystem::operator()(ISystem** ppSystem) const
+#include "System.h"
+
+HRESULT DSH::Audio::CreateSystem::operator()(ISystem** ppSystem) const
 {
-	// TODO: Add your implementation code here.
+	if (ppSystem == nullptr) return E_INVALIDARG;
+	System* pSystem = new System();
+	if (pSystem == nullptr) return E_OUTOFMEMORY;
+	*ppSystem = pSystem;
+	return S_OK;
 }

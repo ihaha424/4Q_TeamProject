@@ -163,6 +163,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Requires.h" />
     <ClInclude Include="Audio.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Utilities.h" />
   </ItemGroup>

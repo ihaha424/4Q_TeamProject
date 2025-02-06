@@ -1,6 +1,6 @@
 #pragma once
 
-namespace DSH::Sound
+namespace DSH::Audio
 {
 	enum class ChannelGroupType : unsigned char
 	{

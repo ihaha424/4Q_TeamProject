@@ -42,8 +42,8 @@ using Lock = std::lock_guard<std::mutex>;
 // 초기 설정 값이 들어있습니다.
 
 constexpr DWORD DWMAX = (std::numeric_limits<DWORD>::max)();
-constexpr ULL ServerPort = 7070;
-constexpr ULL BufferSize = 8192;
+constexpr ULL ServerPort = 7777;
+constexpr ULL BufferSize = 16384;
 constexpr ULL ThreadCount = 2;
 
 #endif

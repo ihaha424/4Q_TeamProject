@@ -33,7 +33,7 @@ namespace PhysicsEngineAPI
 		transform.p = { position.x, position.y, position.z };
 		shape->setLocalPose(transform);
 	}
-	const Utils::Math::Vector3 PhysXShape::GetLocalTranslate() const
+	 Utils::Math::Vector3 PhysXShape::GetLocalTranslate() const
 	{
 		auto transform = shape->getLocalPose();
 		return Utils::Math::Vector3({ transform.p.x, transform.p.y, transform.p.z });
@@ -44,7 +44,7 @@ namespace PhysicsEngineAPI
 		transform.q = { Rotation.x, Rotation.y, Rotation.z, Rotation.w };
 		shape->setLocalPose(transform);
 	}
-	const Utils::Math::Vector4 PhysXShape::GetLocalRotation() const
+	 Utils::Math::Vector4 PhysXShape::GetLocalRotation() const
 	{
 		auto transform = shape->getLocalPose();
 		return Utils::Math::Vector4({ transform.q.x, transform.q.y, transform.q.z, transform.q.w });
@@ -58,7 +58,7 @@ namespace PhysicsEngineAPI
 		};
 		shape->setLocalPose(transform);
 	}
-	const Utils::Math::Transform PhysXShape::GetLocalTransform() const
+	 Utils::Math::Transform PhysXShape::GetLocalTransform() const
 	{
 		auto transform = shape->getLocalPose();
 		return Utils::Math::Transform({ transform.p.x, transform.p.y, transform.p.z }, { transform.q.x, transform.q.y, transform.q.z, transform.q.w });
@@ -77,7 +77,7 @@ namespace PhysicsEngineAPI
 		
 	}
 
-	const Utils::Math::Vector3 PhysXShape::GetScale() const
+	 Utils::Math::Vector3 PhysXShape::GetScale() const
 	{
 		return scale;
 	}

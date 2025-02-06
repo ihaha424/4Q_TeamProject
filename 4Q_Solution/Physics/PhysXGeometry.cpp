@@ -31,7 +31,7 @@ namespace PhysicsEngineAPI
 	{
 	}
 
-	const Utils::Math::Vector3 PhysXGeometry::GetScale() const
+	 Utils::Math::Vector3 PhysXGeometry::GetScale() const
 	{
 		return Utils::Math::Vector3();
 	}

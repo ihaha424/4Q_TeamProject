@@ -15,7 +15,7 @@ namespace PhysicsEngineAPI
 		void Release() override;
 
 		void SetScale(const Utils::Math::Vector3& position) override;
-		const Utils::Math::Vector3 GetScale() const override;
+		 Utils::Math::Vector3 GetScale() const override;
 
 		const physx::PxGeometry* GetGeometry() const;
 		physx::PxGeometry* operator->() { return geometry; }

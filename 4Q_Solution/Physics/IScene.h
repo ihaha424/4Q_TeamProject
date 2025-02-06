@@ -25,7 +25,7 @@ namespace PhysicsEngineAPI
 		// TODO: 
 		virtual void SetSceneFilter() = 0;
 		virtual void SetGravity(const Utils::Math::Vector3& gravity) = 0;
-		virtual const Utils::Math::Vector3& GetGravity() const = 0;
+		virtual Utils::Math::Vector3 GetGravity() const = 0;
 
 		unsigned int GetSceneNumber();
 

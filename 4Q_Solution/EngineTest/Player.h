@@ -36,6 +36,9 @@ private:
 	Engine::Component::Synchronize* _sync;
 	RemoteMoveComponent* _remote;
 
+	Engine::Math::Matrix _cameraParentMatrix;
+	Engine::Math::Vector3 _cameraRotation;
+
 	//Physics
 	Engine::Component::ChractorController* _chractorController;
 	unsigned short gravityFlag = true;

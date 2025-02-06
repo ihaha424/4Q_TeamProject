@@ -7,6 +7,8 @@ public:
 	Ray(std::filesystem::path&& meshPath);
 
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
+
+	void SetCapsuleScale(Engine::Math::Vector3 capsuleScale);
 protected:
 	void DisposeComponents() override;
 
@@ -26,4 +28,9 @@ private:
 
 	Engine::Math::Matrix _cameraParentMatrix;
 	Engine::Math::Vector3 _cameraRotation;
+
+	Engine::Component::ChractorController* _rigid;
+
+private:
+	Engine::Math::Vector3 _capsuleScale;
 };

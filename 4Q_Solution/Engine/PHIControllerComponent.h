@@ -26,10 +26,10 @@ namespace Engine::PHI
 		float GetMass() override;
 		
 		void SetGravity(const Engine::Math::Vector3& gravity) override;
-		const Engine::Math::Vector3& GetGravity() const override;
+		 Engine::Math::Vector3 GetGravity() const override;
 		
 		void SetDirection(Engine::Math::Vector3 _direction) override;
-		const Engine::Math::Vector3& GetDirection() const override;
+		 Engine::Math::Vector3 GetDirection() const override;
 
 		void SetMoveSpeed(float moveSpeed) override;
 		float GetMoveSpeed() const override;
@@ -48,10 +48,10 @@ namespace Engine::PHI
 		
 
 		void SetPosition(const Engine::Math::Vector3& position) override;
-		const Engine::Math::Vector3& GetPosition() const override;
+		 Engine::Math::Vector3 GetPosition() const override;
 
 		void SetBottomPosition(const Engine::Math::Vector3& position) override;
-		const Engine::Math::Vector3& GetBottomPosition() const override;
+		 Engine::Math::Vector3 GetBottomPosition() const override;
 
 		void SetStepOffset(float offset) override;
 		float GetStepOffset() const override;
@@ -63,7 +63,7 @@ namespace Engine::PHI
 		float GetContactOffset() const override;
 
 		void SetUpDirection(const Engine::Math::Vector3& direction) override;
-		const Engine::Math::Vector3& GetUpdirection() const override;
+		 Engine::Math::Vector3 GetUpdirection() const override;
 
 		void SetSlopeLimit(float limit) override;
 		float GetSlopeLimit() const override;
@@ -104,8 +104,6 @@ namespace Engine::PHI
 		void* GetOwner() override;
 		void SetOwner(void* owner) override;
 
-	private:
-		void IsGround(Engine::Physics::TriggerEvent info);
 
 	private:
 		void* owner;

@@ -8,10 +8,11 @@ namespace Engine::Component
 		ChractorController();
 
 		void Initialize(const Modules& modules) override;
+		void Update(float deltaTime) override;
 		void FixedUpdate() override;
 		void Finalize() override;
 
 	public:
-		Engine::Physics::IController* _controller;
+		Engine::Physics::Controller* _controller;
 	};
 }

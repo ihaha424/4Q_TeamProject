@@ -13,7 +13,7 @@ namespace PhysicsEngineAPI
 		transform.p = { position.x, position.y, position.z };
 		actor->setGlobalPose(transform);
 	}
-	const Utils::Math::Vector3 PhysXActorFunction::GetTranslate(physx::PxRigidActor* actor) const
+	 Utils::Math::Vector3 PhysXActorFunction::GetTranslate(physx::PxRigidActor* actor) const
 	{
 		auto transform = actor->getGlobalPose();
 		return Utils::Math::Vector3({ transform.p.x, transform.p.y, transform.p.z });
@@ -25,7 +25,7 @@ namespace PhysicsEngineAPI
 		transform.q = { Rotation.x, Rotation.y, Rotation.z, Rotation.w };
 		actor->setGlobalPose(transform);
 	}
-	const Utils::Math::Vector4 PhysXActorFunction::GetRotation(physx::PxRigidActor* actor) const
+	 Utils::Math::Vector4 PhysXActorFunction::GetRotation(physx::PxRigidActor* actor) const
 	{
 		auto transform = actor->getGlobalPose();
 		return Utils::Math::Vector4({ transform.q.x, transform.q.y, transform.q.z, transform.q.w });
@@ -40,7 +40,7 @@ namespace PhysicsEngineAPI
 		};
 		actor->setGlobalPose(transform);
 	}
-	const Utils::Math::Transform PhysXActorFunction::GetTransform(physx::PxRigidActor* actor) const
+	 Utils::Math::Transform PhysXActorFunction::GetTransform(physx::PxRigidActor* actor) const
 	{
 		auto transform = actor->getGlobalPose();
 		return Utils::Math::Transform({ transform.p.x, transform.p.y, transform.p.z }, { transform.q.x, transform.q.y, transform.q.z, transform.q.w });
@@ -98,7 +98,7 @@ namespace PhysicsEngineAPI
 		actor->setLinearVelocity({ velocity.x, velocity.y, velocity.z });
 	}
 
-	const Utils::Math::Vector3 PhysXDynamicActorFunction::GetVelocity(physx::PxRigidDynamic* actor) const
+	 Utils::Math::Vector3 PhysXDynamicActorFunction::GetVelocity(physx::PxRigidDynamic* actor) const
 	{
 		auto velocity = actor->getLinearVelocity();
 		return Utils::Math::Vector3({ velocity.x, velocity.y, velocity.z });
@@ -109,7 +109,7 @@ namespace PhysicsEngineAPI
 		actor->setLinearVelocity({ velocity.x,velocity.y,velocity.z });
 	}
 
-	const Utils::Math::Vector3 PhysXDynamicActorFunction::GetLinearVelocity(physx::PxRigidDynamic* actor) const
+	 Utils::Math::Vector3 PhysXDynamicActorFunction::GetLinearVelocity(physx::PxRigidDynamic* actor) const
 	{
 		auto velocity = actor->getLinearVelocity();
 		return Utils::Math::Vector3({ velocity.x, velocity.y, velocity.z });
@@ -119,7 +119,7 @@ namespace PhysicsEngineAPI
 		actor->setMaxLinearVelocity(velocity);
 	}
 
-	const float PhysXDynamicActorFunction::GetMaxLinearVelocity(physx::PxRigidDynamic* actor) const
+	 float PhysXDynamicActorFunction::GetMaxLinearVelocity(physx::PxRigidDynamic* actor) const
 	{
 		auto velocity = actor->getMaxLinearVelocity();
 		return velocity;
@@ -130,7 +130,7 @@ namespace PhysicsEngineAPI
 		actor->setAngularVelocity({ angularVelocity.x, angularVelocity.y, angularVelocity.z });
 	}
 
-	const Utils::Math::Vector3 PhysXDynamicActorFunction::GetAngularVelocity(physx::PxRigidDynamic* actor) const
+	 Utils::Math::Vector3 PhysXDynamicActorFunction::GetAngularVelocity(physx::PxRigidDynamic* actor) const
 	{
 		auto angularVelocity = actor->getAngularVelocity();
 		return Utils::Math::Vector3({ angularVelocity.x, angularVelocity.y, angularVelocity.z });
@@ -141,7 +141,7 @@ namespace PhysicsEngineAPI
 		actor->setMaxAngularVelocity(velocity);
 	}
 
-	const float PhysXDynamicActorFunction::GetMaxAngularVelocity(physx::PxRigidDynamic* actor) const
+	 float PhysXDynamicActorFunction::GetMaxAngularVelocity(physx::PxRigidDynamic* actor) const
 	{
 		auto velocity = actor->getMaxAngularVelocity();
 		return velocity;

@@ -24,16 +24,16 @@ namespace PhysicsEngineAPI
 	
 		
 		void SetLocalTranslate(const Utils::Math::Vector3& LocalTranslate)	override; 
-		const Utils::Math::Vector3 GetLocalTranslate() const				override;
+		 Utils::Math::Vector3 GetLocalTranslate() const				override;
 
 		void SetLocalRotation(const Utils::Math::Vector4& LocalRotation)	override; 
-		const Utils::Math::Vector4 GetLocalRotation() const				override;
+		 Utils::Math::Vector4 GetLocalRotation() const				override;
 
 		void SetLocalTransform(const Utils::Math::Transform& LocalTransform)	override; 
-		const Utils::Math::Transform GetLocalTransform() const					override;
+		 Utils::Math::Transform GetLocalTransform() const					override;
 
 		void SetScale(const Utils::Math::Vector3& Scale)	override;
-		const Utils::Math::Vector3 GetScale() const		override;
+		 Utils::Math::Vector3 GetScale() const		override;
 
 		
 		void SetName(const char* Name) override; 

@@ -16,6 +16,12 @@ void Ray::Prepare(Engine::Content::Factory::Component* componentFactory)
 	_camera = componentFactory->Clone<Engine::Component::Camera>(this);
 	_skeletalMesh = componentFactory->Clone<Engine::Component::SkeletalMesh>(this);
 	_animator = componentFactory->Clone<Engine::Component::Animator>(this);
+	_rigid = componentFactory->Clone<Engine::Component::ChractorController>(this);
+}
+
+void Ray::SetCapsuleScale(Engine::Math::Vector3 capsuleScale)
+{
+	_capsuleScale = capsuleScale;
 }
 
 void Ray::DisposeComponents()
@@ -24,6 +30,7 @@ void Ray::DisposeComponents()
 	_movement->Dispose();
 	_animator->Dispose();
 	_skeletalMesh->Dispose();
+	_rigid->Dispose();
 }
 
 void Ray::PreInitialize(const Engine::Modules& modules)
@@ -68,6 +75,28 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 		{
 			_cameraRotation += value;
 		});
+
+
+	auto PhysicsManager = Engine::Application::GetPhysicsManager();
+
+	Engine::Physics::ControllerDesc cd;
+	cd.position = Engine::Math::Vector3(400, 400, 400);
+	cd.height = 10.f;
+	cd.radius = 2.f;
+	// TODO: Player Gravity
+	//cd.gravity = { 0.f, -9.8f, 0.f };
+	cd.contactOffset = 0.001f;
+	cd.stepOffset = 1.f;
+	cd.slopeLimit = 0.707f;
+
+	Engine::Physics::IController* controller;
+	PhysicsManager->CreatePlayerController(&controller, PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::cameraScene)), cd);
+	_rigid->_controller = static_cast<Engine::Physics::Controller*>(controller);
+	// TODO: 적용해보고 속성값 조절
+	// _rigid->_controller->SetBottomPosition({ 0,10,0 });
+	_rigid->_controller->SetOwner(this);
+
+	// TODO: Camera Scene에 추가
 }
 
 void Ray::PostInitialize(const Engine::Modules& modules)

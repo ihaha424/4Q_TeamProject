@@ -93,6 +93,7 @@ namespace PhysicsEngineAPI
 		{
 			DEBUG_MODE
 			(
+				foundation->setErrorLevel(physx::PxErrorCode::eMASK_ALL);
 				if (isVisualDebuger)
 				{
 					if (!CreatePVD())
@@ -101,12 +102,10 @@ namespace PhysicsEngineAPI
 				}
 				else
 					physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(length, speed), true);
-			foundation->setErrorLevel(physx::PxErrorCode::eMASK_ALL);
 			)
 		}
 		else
 			physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(length, speed), true);
-		
 		if (nullptr == physics)
 			return false;
 		return true;

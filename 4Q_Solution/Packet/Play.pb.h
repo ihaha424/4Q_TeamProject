@@ -58,6 +58,12 @@ extern DialogProgressDefaultTypeInternal _DialogProgress_default_instance_;
 class InteractDialog;
 struct InteractDialogDefaultTypeInternal;
 extern InteractDialogDefaultTypeInternal _InteractDialog_default_instance_;
+class PickObject;
+struct PickObjectDefaultTypeInternal;
+extern PickObjectDefaultTypeInternal _PickObject_default_instance_;
+class PutObject;
+struct PutObjectDefaultTypeInternal;
+extern PutObjectDefaultTypeInternal _PutObject_default_instance_;
 class SelectPart;
 struct SelectPartDefaultTypeInternal;
 extern SelectPartDefaultTypeInternal _SelectPart_default_instance_;
@@ -266,6 +272,390 @@ class SelectPart final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
+class PutObject final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:PlayMsg.PutObject) */ {
+ public:
+  inline PutObject() : PutObject(nullptr) {}
+  ~PutObject() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(PutObject* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(PutObject));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR PutObject(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline PutObject(const PutObject& from) : PutObject(nullptr, from) {}
+  inline PutObject(PutObject&& from) noexcept
+      : PutObject(nullptr, std::move(from)) {}
+  inline PutObject& operator=(const PutObject& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline PutObject& operator=(PutObject&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const PutObject& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const PutObject* internal_default_instance() {
+    return reinterpret_cast<const PutObject*>(
+        &_PutObject_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 2;
+  friend void swap(PutObject& a, PutObject& b) { a.Swap(&b); }
+  inline void Swap(PutObject* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(PutObject* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  PutObject* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<PutObject>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const PutObject& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const PutObject& from) { PutObject::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(PutObject* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "PlayMsg.PutObject"; }
+
+ protected:
+  explicit PutObject(::google::protobuf::Arena* arena);
+  PutObject(::google::protobuf::Arena* arena, const PutObject& from);
+  PutObject(::google::protobuf::Arena* arena, PutObject&& from) noexcept
+      : PutObject(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kTargetserialnumberFieldNumber = 1,
+  };
+  // optional int32 targetserialnumber = 1;
+  bool has_targetserialnumber() const;
+  void clear_targetserialnumber() ;
+  ::int32_t targetserialnumber() const;
+  void set_targetserialnumber(::int32_t value);
+
+  private:
+  ::int32_t _internal_targetserialnumber() const;
+  void _internal_set_targetserialnumber(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:PlayMsg.PutObject)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      0, 1, 0,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const PutObject& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::int32_t targetserialnumber_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Play_2eproto;
+};
+// -------------------------------------------------------------------
+
+class PickObject final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:PlayMsg.PickObject) */ {
+ public:
+  inline PickObject() : PickObject(nullptr) {}
+  ~PickObject() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(PickObject* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(PickObject));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR PickObject(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline PickObject(const PickObject& from) : PickObject(nullptr, from) {}
+  inline PickObject(PickObject&& from) noexcept
+      : PickObject(nullptr, std::move(from)) {}
+  inline PickObject& operator=(const PickObject& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline PickObject& operator=(PickObject&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const PickObject& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const PickObject* internal_default_instance() {
+    return reinterpret_cast<const PickObject*>(
+        &_PickObject_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 1;
+  friend void swap(PickObject& a, PickObject& b) { a.Swap(&b); }
+  inline void Swap(PickObject* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(PickObject* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  PickObject* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<PickObject>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const PickObject& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const PickObject& from) { PickObject::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(PickObject* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "PlayMsg.PickObject"; }
+
+ protected:
+  explicit PickObject(::google::protobuf::Arena* arena);
+  PickObject(::google::protobuf::Arena* arena, const PickObject& from);
+  PickObject(::google::protobuf::Arena* arena, PickObject&& from) noexcept
+      : PickObject(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kTargetserialnumberFieldNumber = 1,
+  };
+  // optional int32 targetserialnumber = 1;
+  bool has_targetserialnumber() const;
+  void clear_targetserialnumber() ;
+  ::int32_t targetserialnumber() const;
+  void set_targetserialnumber(::int32_t value);
+
+  private:
+  ::int32_t _internal_targetserialnumber() const;
+  void _internal_set_targetserialnumber(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:PlayMsg.PickObject)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      0, 1, 0,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const PickObject& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::int32_t targetserialnumber_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Play_2eproto;
+};
+// -------------------------------------------------------------------
+
 class InteractDialog final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:PlayMsg.InteractDialog) */ {
  public:
@@ -325,7 +715,7 @@ class InteractDialog final : public ::google::protobuf::Message
     return reinterpret_cast<const InteractDialog*>(
         &_InteractDialog_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 1;
+  static constexpr int kIndexInFileMessages = 3;
   friend void swap(InteractDialog& a, InteractDialog& b) { a.Swap(&b); }
   inline void Swap(InteractDialog* other) {
     if (other == this) return;
@@ -530,7 +920,7 @@ class DialogProgress final : public ::google::protobuf::Message
     return reinterpret_cast<const DialogProgress*>(
         &_DialogProgress_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 2;
+  static constexpr int kIndexInFileMessages = 4;
   friend void swap(DialogProgress& a, DialogProgress& b) { a.Swap(&b); }
   inline void Swap(DialogProgress* other) {
     if (other == this) return;
@@ -704,6 +1094,70 @@ inline ::int32_t SelectPart::_internal_selectpart() const {
 inline void SelectPart::_internal_set_selectpart(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.selectpart_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// PickObject
+
+// optional int32 targetserialnumber = 1;
+inline bool PickObject::has_targetserialnumber() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline void PickObject::clear_targetserialnumber() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.targetserialnumber_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline ::int32_t PickObject::targetserialnumber() const {
+  // @@protoc_insertion_point(field_get:PlayMsg.PickObject.targetserialnumber)
+  return _internal_targetserialnumber();
+}
+inline void PickObject::set_targetserialnumber(::int32_t value) {
+  _internal_set_targetserialnumber(value);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  // @@protoc_insertion_point(field_set:PlayMsg.PickObject.targetserialnumber)
+}
+inline ::int32_t PickObject::_internal_targetserialnumber() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.targetserialnumber_;
+}
+inline void PickObject::_internal_set_targetserialnumber(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.targetserialnumber_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// PutObject
+
+// optional int32 targetserialnumber = 1;
+inline bool PutObject::has_targetserialnumber() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline void PutObject::clear_targetserialnumber() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.targetserialnumber_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline ::int32_t PutObject::targetserialnumber() const {
+  // @@protoc_insertion_point(field_get:PlayMsg.PutObject.targetserialnumber)
+  return _internal_targetserialnumber();
+}
+inline void PutObject::set_targetserialnumber(::int32_t value) {
+  _internal_set_targetserialnumber(value);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  // @@protoc_insertion_point(field_set:PlayMsg.PutObject.targetserialnumber)
+}
+inline ::int32_t PutObject::_internal_targetserialnumber() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.targetserialnumber_;
+}
+inline void PutObject::_internal_set_targetserialnumber(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.targetserialnumber_ = value;
 }
 
 // -------------------------------------------------------------------

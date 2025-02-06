@@ -42,5 +42,5 @@ void Terrain::PreInitialize(const Engine::Modules& modules)
 void Terrain::PostInitialize(const Engine::Modules& modules)
 {
 	Object::PostInitialize(modules);
-	//_matrix = Engine::Math::Matrix::CreateTranslation(-1000.f, -200.f, 1000.f);
+	_matrix = Engine::Math::Matrix::CreateTranslation(-1000.f, -200.f, 1000.f);
 }

@@ -1254,7 +1254,7 @@
       <Filter>Components\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="State.cpp">
-      <Filter>Components\FiniteStateMachine</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FixedArm.cpp">
       <Filter>Components\FixedArm</Filter>

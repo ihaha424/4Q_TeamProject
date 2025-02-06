@@ -48,6 +48,8 @@ void Terrain::PreInitialize(const Engine::Modules& modules)
 	PhysicsManager->CreateStaticBoundBoxActor(&_rigidStatc->_boundBox, _boxScale, _transform);
 	_rigidStatc->_boundBox->SetOwner(this);
 	PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::cameraScene))->AddActor(_rigidStatc->_boundBox);
+
+	_matrix = Engine::Math::Matrix::CreateScale(100.f);
 }
 
 void Terrain::PostInitialize(const Engine::Modules& modules)

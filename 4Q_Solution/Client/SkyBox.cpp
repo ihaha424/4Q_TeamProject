@@ -23,7 +23,7 @@ void SkyBox::PreInitialize(const Engine::Modules& modules)
 
 	_skyBox->SetFilePath(_meshPath);
 	_skyBox->SetMatrix(&_worldMatrix);
-	
+	_worldMatrix = Engine::Math::Matrix::CreateScale(5.f);
 }
 
 void SkyBox::PostInitialize(const Engine::Modules& modules)

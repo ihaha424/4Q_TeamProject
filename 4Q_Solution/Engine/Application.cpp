@@ -143,7 +143,7 @@ void Engine::Application::Register(Content::IManager* contentManager, Load::IMan
 	componentFactory->Register<Component::Movement>();
 	componentFactory->Register<Component::Light>();
 	componentFactory->Register<Component::StaticMesh>();
-	componentFactory->Register<Component::Camera>(30.f, 1000.f, _size, std::numbers::pi_v<float> / 4);
+	componentFactory->Register<Component::Camera>(30.f, 5000.f, _size, std::numbers::pi_v<float> / 4);
 	componentFactory->Register<Component::TextRenderer>();
 	componentFactory->Register<Component::SkeletalMesh>();
 	componentFactory->Register<Component::Animator>();

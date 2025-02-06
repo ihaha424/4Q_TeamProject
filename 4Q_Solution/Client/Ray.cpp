@@ -141,6 +141,19 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 			_fixedArm->Rotate(value);
 		});
 
+	Engine::Input::IAction* jumpAction = nullptr;
+	mappingContext->GetAction(L"Jump", &jumpAction);
+	jumpAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
+		{
+			_transform.position.y += 100.f;
+		});
+
+	Engine::Input::IAction* interactAction = nullptr;
+	mappingContext->GetAction(L"Interact", &interactAction);
+	interactAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
+		{
+			_transform.position.y -= 100.f;
+		});
 
 	auto PhysicsManager = Engine::Application::GetPhysicsManager();
 

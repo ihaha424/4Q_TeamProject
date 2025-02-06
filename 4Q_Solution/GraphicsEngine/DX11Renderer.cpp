@@ -276,6 +276,18 @@ void DX11Renderer::LigthingPass(SkyBoxRenderer* pSkyBox, std::list<DrawData>& al
 
 void DX11Renderer::SkyBoxPass(std::list<std::pair<unsigned int, SkyBoxRenderer*>>& skyBoxes)
 {
+	Camera* pCamera = g_pCameraSystem->GetCurrentCamera();
+	if (nullptr == pCamera) return;
+	
+	Matrix view = pCamera->GetViewMatrix();
+	
+	view.m[3][0] = 0.f;
+	view.m[3][1] = 0.f;
+	view.m[3][2] = 0.f;
+	Matrix skyVP = (view * pCamera->GetProjectionMatrix()).Transpose();
+
+	g_pConstantBuffer->UpdateConstantBuffer(L"SkyVP", &skyVP);
+
 	_pDeviceContext->RSSetState(_pRSSkyBoxState);
 
 	unsigned int offset[2]{ 0, MAX_BONE_MATRIX };

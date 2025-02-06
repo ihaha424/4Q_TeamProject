@@ -56,6 +56,9 @@ namespace Engine::Input::Device
 		virtual void GetComponent(Button button, Component::IButtonComponent** component) = 0;
 		virtual void GetComponent(Trigger trigger, Component::IAxisComponent** component) = 0;
 		virtual void GetComponent(Thumb thumb, Component::IAxisComponent** component) = 0;
+
+		virtual void SetThumbStickSensitive(long sensitive) = 0;
+		virtual void SetTriggerSensitive(long sensitive) = 0;
 	};
 
 	struct Controller : IController

@@ -23,6 +23,9 @@ namespace Engine::DSHInput::Device
 		void GetComponent(Trigger trigger, Input::Component::IAxisComponent** component) override;
 		void GetComponent(Thumb thumb, Input::Component::IAxisComponent** component) override;
 
+		void SetThumbStickSensitive(long sensitive) override;
+		void SetTriggerSensitive(long sensitive) override;
+
 	private:
 		bool IsButtonState(Button button, std::function<bool(DSH::Input::Component::IButtonComponent*)> state) const;
 

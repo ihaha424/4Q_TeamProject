@@ -20,6 +20,8 @@ namespace Engine::Component
 
 		void SetCameraPosition(const Math::Vector2& value);
 
+		void SetRotationSpeed(const Math::Vector2& speed);
+
 		[[nodiscard]] Math::Vector3 GetForward() const;
 		[[nodiscard]] Math::Vector3 TransformDirection(const Math::Vector3& direction) const;
 		[[nodiscard]] Math::Quaternion GetForwardRotation() const;
@@ -29,6 +31,8 @@ namespace Engine::Component
 		Camera* _camera;
 
 		float _distance;
+
+		Math::Vector2 _rotationSpeed;
 
 		Math::Vector3 _rotation;
 		Math::Vector2 _cameraPosition;

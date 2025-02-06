@@ -49,8 +49,9 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 	// FixedArm
 	_fixedArm->SetTarget(&_transform);
 	_fixedArm->SetCameraComponent(_camera);
-	_fixedArm->SetDistance(60.f);
-	_fixedArm->SetCameraPosition({ 10.f, 50.f });
+	_fixedArm->SetDistance(150.f);
+	_fixedArm->SetCameraPosition(Engine::Math::Vector2{ 0.f, 60.f });
+	_fixedArm->SetRotationSpeed(Engine::Math::Vector2{ 0.04f, 0.08f });
 
 	const auto inputManager = Engine::Application::GetInputManager();
 	Engine::Input::IMappingContext* mappingContext = nullptr;

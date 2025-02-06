@@ -64,8 +64,8 @@ void GameClient::Application::PrepareInitialWorld(Engine::Content::Factory::Worl
 void GameClient::Application::DeclareMoveAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext)
 {
 	Engine::Input::Modifier::INegative* negative = nullptr;
-	Engine::Input::Modifier::ISwizzleAxis* swizzleAxis = nullptr;
 	inputManager->GetModifier(&negative);
+	Engine::Input::Modifier::ISwizzleAxis* swizzleAxis = nullptr;
 	inputManager->GetModifier(Engine::Input::Modifier::ISwizzleAxis::Type::ZXY, &swizzleAxis);
 
 	Engine::Input::IAction* action = nullptr;
@@ -109,10 +109,20 @@ void GameClient::Application::DeclareMoveAction(Engine::Input::IManager* inputMa
 	action->GetTrigger(&leftStickXTrigger);
 	Engine::Input::Component::IAxisComponent* leftStickX = nullptr;
 	controller->GetComponent(Engine::Input::Device::IController::Thumb::LeftX, &leftStickX);
+	leftStickXTrigger->SetComponent(leftStickX);
+
+	Engine::Input::Trigger::IDown* leftStickYTrigger = nullptr;
+	action->GetTrigger(&leftStickYTrigger);
+	Engine::Input::Component::IAxisComponent* leftStickY = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Thumb::LeftY, &leftStickY);
+	leftStickYTrigger->SetComponent(leftStickY);
+	leftStickYTrigger->AddModifier(swizzleAxis);
 }
 
 void GameClient::Application::DeclareCameraAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext)
 {
+	Engine::Input::Modifier::INegative* negative = nullptr;
+	inputManager->GetModifier(&negative);
 	Engine::Input::Modifier::ISwizzleAxis* swizzleAxis = nullptr;
 	inputManager->GetModifier(Engine::Input::Modifier::ISwizzleAxis::Type::YXZ, &swizzleAxis);
 
@@ -122,19 +132,35 @@ void GameClient::Application::DeclareCameraAction(Engine::Input::IManager* input
 	Engine::Input::Device::IMouse* mouse = nullptr;
 	inputManager->GetDevice(&mouse);
 
-	Engine::Input::Component::IAxisComponent* xAxis = nullptr;
-	mouse->GetComponent(Engine::Input::Device::IMouse::Axis::X, &xAxis);
-	Engine::Input::Component::IAxisComponent* yAxis = nullptr;
-	mouse->GetComponent(Engine::Input::Device::IMouse::Axis::Y, &yAxis);
+	Engine::Input::Trigger::IDown* mouseXTrigger = nullptr;
+	action->GetTrigger(&mouseXTrigger);
+	Engine::Input::Component::IAxisComponent* mouseXAxis = nullptr;
+	mouse->GetComponent(Engine::Input::Device::IMouse::Axis::X, &mouseXAxis);
+	mouseXTrigger->SetComponent(mouseXAxis);
+	mouseXTrigger->AddModifier(swizzleAxis);
 
-	Engine::Input::Trigger::IDown* xTrigger = nullptr;
-	action->GetTrigger(&xTrigger);
-	xTrigger->SetComponent(xAxis);
-	xTrigger->AddModifier(swizzleAxis);
+	Engine::Input::Trigger::IDown* mouseYTrigger = nullptr;
+	action->GetTrigger(&mouseYTrigger);
+	Engine::Input::Component::IAxisComponent* mouseYAxis = nullptr;
+	mouse->GetComponent(Engine::Input::Device::IMouse::Axis::Y, &mouseYAxis);
+	mouseYTrigger->SetComponent(mouseYAxis);
 
-	Engine::Input::Trigger::IDown* yTrigger = nullptr;
-	action->GetTrigger(&yTrigger);
-	yTrigger->SetComponent(yAxis);
+	Engine::Input::Device::IController* controller = nullptr;
+	inputManager->GetDevice(&controller);
+
+	Engine::Input::Trigger::IDown* rightStickXTrigger = nullptr;
+	action->GetTrigger(&rightStickXTrigger);
+	Engine::Input::Component::IAxisComponent* rightStickX = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Thumb::RightX, &rightStickX);
+	rightStickXTrigger->SetComponent(rightStickX);
+	rightStickXTrigger->AddModifier(swizzleAxis);
+
+	Engine::Input::Trigger::IDown* rightStickYTrigger = nullptr;
+	action->GetTrigger(&rightStickYTrigger);
+	Engine::Input::Component::IAxisComponent* rightStickY = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Thumb::RightY, &rightStickY);
+	rightStickYTrigger->SetComponent(rightStickY);
+	rightStickYTrigger->AddModifier(negative);
 }
 
 void GameClient::Application::DeclareSystemAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext)
@@ -145,31 +171,72 @@ void GameClient::Application::DeclareSystemAction(Engine::Input::IManager* input
 	Engine::Input::Device::IKeyboard* keyboard = nullptr;
 	inputManager->GetDevice(&keyboard);
 
-	Engine::Input::IAction* unlockShowAction = nullptr;
-	mappingContext->GetAction(L"UnlockShow", &unlockShowAction);
+	Engine::Input::Device::IController* controller = nullptr;
+	inputManager->GetDevice(&controller);
+
+	Engine::Input::IAction* unlockAction = nullptr;
+	mappingContext->GetAction(L"UnlockCursor", &unlockAction);
 
 	Engine::Input::Trigger::IDown* f1Trigger = nullptr;
-	unlockShowAction->GetTrigger(&f1Trigger);
+	unlockAction->GetTrigger(&f1Trigger);
 	Engine::Input::Component::IButtonComponent* f1 = nullptr;
 	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::F1, &f1);
 	f1Trigger->SetComponent(f1);
 
-	unlockShowAction->AddListener(Engine::Input::Trigger::Event::Started, [mouse](auto) {
+	unlockAction->AddListener(Engine::Input::Trigger::Event::Started, [mouse](auto) {
 		mouse->ShowCursor();
 		mouse->UnlockCursor();
 		});
 
-	Engine::Input::IAction* lockHideAction = nullptr;
-	mappingContext->GetAction(L"LockHide", &lockHideAction);
+	Engine::Input::IAction* lockAction = nullptr;
+	mappingContext->GetAction(L"LockCursor", &lockAction);
 
 	Engine::Input::Trigger::IDown* f2Trigger = nullptr;
-	lockHideAction->GetTrigger(&f2Trigger);
+	lockAction->GetTrigger(&f2Trigger);
 	Engine::Input::Component::IButtonComponent* f2 = nullptr;
 	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::F2, &f2);
 	f2Trigger->SetComponent(f2);
 
-	lockHideAction->AddListener(Engine::Input::Trigger::Event::Started, [mouse](auto) {
+	lockAction->AddListener(Engine::Input::Trigger::Event::Started, [mouse](auto) {
 		mouse->HideCursor();
 		mouse->LockCursor();
+		});
+
+	Engine::Input::IAction* showAction = nullptr;
+	mappingContext->GetAction(L"ShowCursor", &showAction);
+
+	Engine::Input::Trigger::IDown* mouseXTrigger = nullptr;
+	showAction->GetTrigger(&mouseXTrigger);
+	Engine::Input::Component::IAxisComponent* mouseXAxis = nullptr;
+	mouse->GetComponent(Engine::Input::Device::IMouse::Axis::X, &mouseXAxis);
+	mouseXTrigger->SetComponent(mouseXAxis);
+
+	Engine::Input::Trigger::IDown* mouseYTrigger = nullptr;
+	showAction->GetTrigger(&mouseYTrigger);
+	Engine::Input::Component::IAxisComponent* mouseYAxis = nullptr;
+	mouse->GetComponent(Engine::Input::Device::IMouse::Axis::Y, &mouseYAxis);
+	mouseYTrigger->SetComponent(mouseYAxis);
+
+	showAction->AddListener(Engine::Input::Trigger::Event::Started, [mouse](auto value) {
+		if (mouse->IsCursorLocked() == false) mouse->ShowCursor();
+		});
+
+	Engine::Input::IAction* hideAction = nullptr;
+	mappingContext->GetAction(L"HideCursor", &hideAction);
+
+	Engine::Input::Trigger::IDown* rightStickXTrigger = nullptr;
+	hideAction->GetTrigger(&rightStickXTrigger);
+	Engine::Input::Component::IAxisComponent* rightStickX = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Thumb::RightX, &rightStickX);
+	rightStickXTrigger->SetComponent(rightStickX);
+
+	Engine::Input::Trigger::IDown* rightStickYTrigger = nullptr;
+	hideAction->GetTrigger(&rightStickYTrigger);
+	Engine::Input::Component::IAxisComponent* rightStickY = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Thumb::RightY, &rightStickY);
+	rightStickYTrigger->SetComponent(rightStickY);
+
+	hideAction->AddListener(Engine::Input::Trigger::Event::Started, [mouse](auto value) {
+		mouse->HideCursor();
 		});
 }

@@ -119,8 +119,18 @@ void Engine::DSHInput::Device::Controller::GetComponent(const Thumb thumb, Input
 	}
 }
 
+void Engine::DSHInput::Device::Controller::SetThumbStickSensitive(const long sensitive)
+{
+	_controller->SetThumbStickSensitive(sensitive);
+}
+
+void Engine::DSHInput::Device::Controller::SetTriggerSensitive(const long sensitive)
+{
+	_controller->SetTriggerSensitive(sensitive);
+}
+
 bool Engine::DSHInput::Device::Controller::IsButtonState(const Button button,
-	std::function<bool(DSH::Input::Component::IButtonComponent*)> state) const
+                                                         std::function<bool(DSH::Input::Component::IButtonComponent*)> state) const
 {
 	DSH::Input::Component::IButtonComponent* buttonComponent = nullptr;
 	Utility::ThrowIfFailed()(_controller->GetComponent(_buttonMap.at(button), &buttonComponent));

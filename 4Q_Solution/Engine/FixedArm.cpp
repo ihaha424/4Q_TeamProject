@@ -1,7 +1,8 @@
 #include "pch.h"
 #include "FixedArm.h"
 
-Engine::Component::FixedArm::FixedArm() : _target(nullptr), _camera(nullptr), _distance(200.0f)
+Engine::Component::FixedArm::FixedArm() :
+_target(nullptr), _camera(nullptr), _distance(200.0f), _rotationSpeed(Math::Vector2::One)
 {
 }
 
@@ -41,12 +42,17 @@ void Engine::Component::FixedArm::Update(const float deltaTime)
 
 void Engine::Component::FixedArm::Rotate(const Math::Vector3& value)
 {
-	_rotation += value;
+	_rotation += value.Split(_rotationSpeed);
 }
 
 void Engine::Component::FixedArm::SetCameraPosition(const Math::Vector2& value)
 {
 	_cameraPosition = value;
+}
+
+void Engine::Component::FixedArm::SetRotationSpeed(const Math::Vector2& speed)
+{
+	_rotationSpeed = speed;
 }
 
 Engine::Math::Vector3 Engine::Component::FixedArm::GetForward() const

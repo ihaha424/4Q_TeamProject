@@ -15,7 +15,7 @@ namespace DSH::Input
 	{
 		class Mouse final : public IMouse
 		{
-			static constexpr LONG MOUSE_SENSITIVE = 1000;
+			static constexpr LONG MOUSE_SENSITIVE = 10;
 		public:
 			Mouse();
 			~Mouse() override;
@@ -41,6 +41,7 @@ namespace DSH::Input
 
 			void LockCursor() override;
 			void UnlockCursor() override;
+			[[nodiscard]] bool IsCursorLocked() const override;
 
 			void UseProcedure() override;
 

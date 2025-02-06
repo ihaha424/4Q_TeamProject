@@ -27,6 +27,7 @@ class ServerLogic
 		Engine::Math::Vector4 _rotation;
 		Engine::Math::Vector3 _scale;
 		bool _public;
+		bool _meshCollider;
 		Engine::Physics::IRigidStaticComponent* _staticRigid = nullptr;
 		Engine::Physics::IRigidDynamicComponent* _dynamicRigid = nullptr;
 	};
@@ -86,20 +87,47 @@ private:
 	ConnectMsg::SyncPlayer _syncPlayer;
 	ConnectMsg::SyncObject _syncObject;
 	ConnectMsg::AddObject _addObject;
-	ConnectMsg::AddRemote _addRemote;
 	
 	MoveMsg::Move _move;
 	MoveMsg::Jump _jump;
 	MoveMsg::MoveSync _moveSync;
 	MoveMsg::StateChange _stateChange;
+	MoveMsg::ObjectMove _objectMove;
 
 	PlayMsg::SelectPart _selectPart;
+	PlayMsg::PickObject _pickObject;
+	PlayMsg::PutObject _putObject;
+	PlayMsg::SoundPlay _soundPlay;
+
 	PlayMsg::InteractDialog _interactDialog;
 	PlayMsg::DialogProgress _dialogProgress;
 
 	std::string _msgBuffer = std::string(256, '\0');
 
 	void MessageDispatch();
+private: 
+	// =============================
+	// Update Function Area
+	// =============================
+
+	void UpdateObject(float deltaTime);
+
+	void SendPositionData();
+
+private:
+	// =============================
+	// Message Dispatch Area
+	// =============================
+
+	void EnterProcess(const Packet& packet);
+	void ExitProcess(const Packet& packet);
+	void MoveProcess(const Packet& packet);
+	void JumpProcess(const Packet& packet);
+	void StateChangeProcess(const Packet& packet);
+	void DataRequestProcess(const Packet& packet);
+	void ObjectPickProcess(const Packet& packet);
+	void ObjectPutProcess(const Packet& packet);
+
 private:
 	short _dynamicObjectSerialNumber = 100;
 	short _staticObjectSerialNumber = 1000;

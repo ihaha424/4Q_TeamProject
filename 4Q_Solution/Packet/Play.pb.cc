@@ -26,6 +26,31 @@ namespace _pbi = ::google::protobuf::internal;
 namespace _fl = ::google::protobuf::internal::field_layout;
 namespace PlayMsg {
 
+inline constexpr SoundPlay::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        soundid_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR SoundPlay::SoundPlay(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct SoundPlayDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR SoundPlayDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~SoundPlayDefaultTypeInternal() {}
+  union {
+    SoundPlay _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SoundPlayDefaultTypeInternal _SoundPlay_default_instance_;
+
 inline constexpr SelectPart::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
@@ -189,6 +214,16 @@ const ::uint32_t
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::PlayMsg::PutObject, _impl_.targetserialnumber_),
         0,
+        PROTOBUF_FIELD_OFFSET(::PlayMsg::SoundPlay, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::PlayMsg::SoundPlay, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::PlayMsg::SoundPlay, _impl_.soundid_),
+        0,
         PROTOBUF_FIELD_OFFSET(::PlayMsg::InteractDialog, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::PlayMsg::InteractDialog, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -218,13 +253,15 @@ static const ::_pbi::MigrationSchema
         {0, 9, -1, sizeof(::PlayMsg::SelectPart)},
         {10, 19, -1, sizeof(::PlayMsg::PickObject)},
         {20, 29, -1, sizeof(::PlayMsg::PutObject)},
-        {30, 40, -1, sizeof(::PlayMsg::InteractDialog)},
-        {42, 51, -1, sizeof(::PlayMsg::DialogProgress)},
+        {30, 39, -1, sizeof(::PlayMsg::SoundPlay)},
+        {40, 50, -1, sizeof(::PlayMsg::InteractDialog)},
+        {52, 61, -1, sizeof(::PlayMsg::DialogProgress)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::PlayMsg::_SelectPart_default_instance_._instance,
     &::PlayMsg::_PickObject_default_instance_._instance,
     &::PlayMsg::_PutObject_default_instance_._instance,
+    &::PlayMsg::_SoundPlay_default_instance_._instance,
     &::PlayMsg::_InteractDialog_default_instance_._instance,
     &::PlayMsg::_DialogProgress_default_instance_._instance,
 };
@@ -235,23 +272,24 @@ const char descriptor_table_protodef_Play_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIA
     "ickObject\022\037\n\022targetserialnumber\030\001 \001(\005H\000\210"
     "\001\001B\025\n\023_targetserialnumber\"C\n\tPutObject\022\037"
     "\n\022targetserialnumber\030\001 \001(\005H\000\210\001\001B\025\n\023_targ"
-    "etserialnumber\"X\n\016InteractDialog\022\025\n\010dial"
-    "ogid\030\001 \001(\005H\000\210\001\001\022\025\n\010buttonid\030\002 \001(\005H\001\210\001\001B\013"
-    "\n\t_dialogidB\013\n\t_buttonid\"<\n\016DialogProgre"
-    "ss\022\031\n\014nextdialogid\030\001 \001(\005H\000\210\001\001B\017\n\r_nextdi"
-    "alogidb\006proto3"
+    "etserialnumber\"-\n\tSoundPlay\022\024\n\007soundid\030\001"
+    " \001(\005H\000\210\001\001B\n\n\010_soundid\"X\n\016InteractDialog\022"
+    "\025\n\010dialogid\030\001 \001(\005H\000\210\001\001\022\025\n\010buttonid\030\002 \001(\005"
+    "H\001\210\001\001B\013\n\t_dialogidB\013\n\t_buttonid\"<\n\016Dialo"
+    "gProgress\022\031\n\014nextdialogid\030\001 \001(\005H\000\210\001\001B\017\n\r"
+    "_nextdialogidb\006proto3"
 };
 static ::absl::once_flag descriptor_table_Play_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_Play_2eproto = {
     false,
     false,
-    374,
+    421,
     descriptor_table_protodef_Play_2eproto,
     "Play.proto",
     &descriptor_table_Play_2eproto_once,
     nullptr,
     0,
-    5,
+    6,
     schemas,
     file_default_instances,
     TableStruct_Play_2eproto::offsets,
@@ -908,6 +946,223 @@ void PutObject::InternalSwap(PutObject* PROTOBUF_RESTRICT other) {
 }
 
 ::google::protobuf::Metadata PutObject::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class SoundPlay::_Internal {
+ public:
+  using HasBits =
+      decltype(std::declval<SoundPlay>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(SoundPlay, _impl_._has_bits_);
+};
+
+SoundPlay::SoundPlay(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:PlayMsg.SoundPlay)
+}
+SoundPlay::SoundPlay(
+    ::google::protobuf::Arena* arena, const SoundPlay& from)
+    : SoundPlay(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE SoundPlay::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void SoundPlay::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.soundid_ = {};
+}
+SoundPlay::~SoundPlay() {
+  // @@protoc_insertion_point(destructor:PlayMsg.SoundPlay)
+  SharedDtor(*this);
+}
+inline void SoundPlay::SharedDtor(MessageLite& self) {
+  SoundPlay& this_ = static_cast<SoundPlay&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* SoundPlay::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) SoundPlay(arena);
+}
+constexpr auto SoundPlay::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(SoundPlay),
+                                            alignof(SoundPlay));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull SoundPlay::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_SoundPlay_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &SoundPlay::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<SoundPlay>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &SoundPlay::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<SoundPlay>(), &SoundPlay::ByteSizeLong,
+            &SoundPlay::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(SoundPlay, _impl_._cached_size_),
+        false,
+    },
+    &SoundPlay::kDescriptorMethods,
+    &descriptor_table_Play_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* SoundPlay::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> SoundPlay::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(SoundPlay, _impl_._has_bits_),
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::PlayMsg::SoundPlay>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // optional int32 soundid = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SoundPlay, _impl_.soundid_), 0>(),
+     {8, 0, 0, PROTOBUF_FIELD_OFFSET(SoundPlay, _impl_.soundid_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // optional int32 soundid = 1;
+    {PROTOBUF_FIELD_OFFSET(SoundPlay, _impl_.soundid_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void SoundPlay::Clear() {
+// @@protoc_insertion_point(message_clear_start:PlayMsg.SoundPlay)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.soundid_ = 0;
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* SoundPlay::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const SoundPlay& this_ = static_cast<const SoundPlay&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* SoundPlay::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const SoundPlay& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:PlayMsg.SoundPlay)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // optional int32 soundid = 1;
+          if (cached_has_bits & 0x00000001u) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_soundid(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:PlayMsg.SoundPlay)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t SoundPlay::ByteSizeLong(const MessageLite& base) {
+          const SoundPlay& this_ = static_cast<const SoundPlay&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t SoundPlay::ByteSizeLong() const {
+          const SoundPlay& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:PlayMsg.SoundPlay)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // optional int32 soundid = 1;
+            cached_has_bits = this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_soundid());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void SoundPlay::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<SoundPlay*>(&to_msg);
+  auto& from = static_cast<const SoundPlay&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:PlayMsg.SoundPlay)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    _this->_impl_.soundid_ = from._impl_.soundid_;
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void SoundPlay::CopyFrom(const SoundPlay& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:PlayMsg.SoundPlay)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void SoundPlay::InternalSwap(SoundPlay* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+        swap(_impl_.soundid_, other->_impl_.soundid_);
+}
+
+::google::protobuf::Metadata SoundPlay::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================

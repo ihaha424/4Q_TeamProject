@@ -55,15 +55,18 @@ namespace Engine::Component
 		ConnectMsg::EnterAccept _enterAccept;
 		ConnectMsg::SyncPlayer _syncPlayer;
 		ConnectMsg::SyncObject _syncObject;
-		ConnectMsg::AddObject _addObject;
-		ConnectMsg::AddRemote _addRemote;
 
 		MoveMsg::Move _move;
 		MoveMsg::Jump _jump;
 		MoveMsg::MoveSync _moveSync;
 		MoveMsg::StateChange _stateChange;
+		MoveMsg::ObjectMove _objectMove;
 
 		PlayMsg::SelectPart _selectPart;
+		PlayMsg::PickObject _pickObject;
+		PlayMsg::PutObject _putObject;
+		PlayMsg::SoundPlay _soundPlay;
+
 		PlayMsg::InteractDialog _interactDialog;
 		PlayMsg::DialogProgress _dialogProgress;
 	};

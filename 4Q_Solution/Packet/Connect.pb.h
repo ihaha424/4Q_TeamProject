@@ -55,9 +55,6 @@ namespace ConnectMsg {
 class AddObject;
 struct AddObjectDefaultTypeInternal;
 extern AddObjectDefaultTypeInternal _AddObject_default_instance_;
-class AddRemote;
-struct AddRemoteDefaultTypeInternal;
-extern AddRemoteDefaultTypeInternal _AddRemote_default_instance_;
 class EnterAccept;
 struct EnterAcceptDefaultTypeInternal;
 extern EnterAcceptDefaultTypeInternal _EnterAccept_default_instance_;
@@ -226,28 +223,10 @@ class SyncPlayer final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kResourceFieldNumber = 4,
     kXFieldNumber = 1,
     kYFieldNumber = 2,
     kZFieldNumber = 3,
   };
-  // optional string resource = 4;
-  bool has_resource() const;
-  void clear_resource() ;
-  const std::string& resource() const;
-  template <typename Arg_ = const std::string&, typename... Args_>
-  void set_resource(Arg_&& arg, Args_... args);
-  std::string* mutable_resource();
-  PROTOBUF_NODISCARD std::string* release_resource();
-  void set_allocated_resource(std::string* value);
-
-  private:
-  const std::string& _internal_resource() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_resource(
-      const std::string& value);
-  std::string* _internal_mutable_resource();
-
-  public:
   // optional float x = 1;
   bool has_x() const;
   void clear_x() ;
@@ -286,8 +265,8 @@ class SyncPlayer final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      2, 4, 0,
-      38, 2>
+      2, 3, 0,
+      0, 2>
       _table_;
 
   friend class ::google::protobuf::MessageLite;
@@ -306,7 +285,6 @@ class SyncPlayer final : public ::google::protobuf::Message
                           const SyncPlayer& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::google::protobuf::internal::ArenaStringPtr resource_;
     float x_;
     float y_;
     float z_;
@@ -761,198 +739,6 @@ class EnterAccept final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
-class AddRemote final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:ConnectMsg.AddRemote) */ {
- public:
-  inline AddRemote() : AddRemote(nullptr) {}
-  ~AddRemote() PROTOBUF_FINAL;
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(AddRemote* msg, std::destroying_delete_t) {
-    SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(AddRemote));
-  }
-#endif
-
-  template <typename = void>
-  explicit PROTOBUF_CONSTEXPR AddRemote(
-      ::google::protobuf::internal::ConstantInitialized);
-
-  inline AddRemote(const AddRemote& from) : AddRemote(nullptr, from) {}
-  inline AddRemote(AddRemote&& from) noexcept
-      : AddRemote(nullptr, std::move(from)) {}
-  inline AddRemote& operator=(const AddRemote& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline AddRemote& operator=(AddRemote&& from) noexcept {
-    if (this == &from) return *this;
-    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
-  }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::google::protobuf::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::google::protobuf::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const AddRemote& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const AddRemote* internal_default_instance() {
-    return reinterpret_cast<const AddRemote*>(
-        &_AddRemote_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages = 3;
-  friend void swap(AddRemote& a, AddRemote& b) { a.Swap(&b); }
-  inline void Swap(AddRemote* other) {
-    if (other == this) return;
-    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
-      InternalSwap(other);
-    } else {
-      ::google::protobuf::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(AddRemote* other) {
-    if (other == this) return;
-    ABSL_DCHECK(GetArena() == other->GetArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  AddRemote* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<AddRemote>(arena);
-  }
-  using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const AddRemote& from);
-  using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const AddRemote& from) { AddRemote::MergeImpl(*this, from); }
-
-  private:
-  static void MergeImpl(
-      ::google::protobuf::MessageLite& to_msg,
-      const ::google::protobuf::MessageLite& from_msg);
-
-  public:
-  bool IsInitialized() const {
-    return true;
-  }
-  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* _InternalSerialize(
-      const MessageLite& msg, ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream);
-
-  public:
-  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-    return _InternalSerialize(*this, target, stream);
-  }
-  #else   // PROTOBUF_CUSTOM_VTABLE
-  ::size_t ByteSizeLong() const final;
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
-  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::google::protobuf::Arena* arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(AddRemote* other);
- private:
-  template <typename T>
-  friend ::absl::string_view(
-      ::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "ConnectMsg.AddRemote"; }
-
- protected:
-  explicit AddRemote(::google::protobuf::Arena* arena);
-  AddRemote(::google::protobuf::Arena* arena, const AddRemote& from);
-  AddRemote(::google::protobuf::Arena* arena, AddRemote&& from) noexcept
-      : AddRemote(arena) {
-    *this = ::std::move(from);
-  }
-  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
-  static void* PlacementNew_(const void*, void* mem,
-                             ::google::protobuf::Arena* arena);
-  static constexpr auto InternalNewImpl_();
-  static const ::google::protobuf::internal::ClassDataFull _class_data_;
-
- public:
-  ::google::protobuf::Metadata GetMetadata() const;
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-  enum : int {
-    kGrantnumberFieldNumber = 1,
-  };
-  // optional int32 grantnumber = 1;
-  bool has_grantnumber() const;
-  void clear_grantnumber() ;
-  ::int32_t grantnumber() const;
-  void set_grantnumber(::int32_t value);
-
-  private:
-  ::int32_t _internal_grantnumber() const;
-  void _internal_set_grantnumber(::int32_t value);
-
-  public:
-  // @@protoc_insertion_point(class_scope:ConnectMsg.AddRemote)
- private:
-  class _Internal;
-  friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 0,
-      0, 2>
-      _table_;
-
-  friend class ::google::protobuf::MessageLite;
-  friend class ::google::protobuf::Arena;
-  template <typename T>
-  friend class ::google::protobuf::Arena::InternalHelper;
-  using InternalArenaConstructable_ = void;
-  using DestructorSkippable_ = void;
-  struct Impl_ {
-    inline explicit constexpr Impl_(
-        ::google::protobuf::internal::ConstantInitialized) noexcept;
-    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                          ::google::protobuf::Arena* arena);
-    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                          ::google::protobuf::Arena* arena, const Impl_& from,
-                          const AddRemote& from_msg);
-    ::google::protobuf::internal::HasBits<1> _has_bits_;
-    ::google::protobuf::internal::CachedSize _cached_size_;
-    ::int32_t grantnumber_;
-    PROTOBUF_TSAN_DECLARE_MEMBER
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_Connect_2eproto;
-};
-// -------------------------------------------------------------------
-
 class AddObject final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:ConnectMsg.AddObject) */ {
  public:
@@ -1012,7 +798,7 @@ class AddObject final : public ::google::protobuf::Message
     return reinterpret_cast<const AddObject*>(
         &_AddObject_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 4;
+  static constexpr int kIndexInFileMessages = 3;
   friend void swap(AddObject& a, AddObject& b) { a.Swap(&b); }
   inline void Swap(AddObject* other) {
     if (other == this) return;
@@ -1099,24 +885,24 @@ class AddObject final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kResourceidFieldNumber = 2,
+    kClassidFieldNumber = 2,
     kGrantnumberFieldNumber = 1,
   };
-  // optional string resourceid = 2;
-  bool has_resourceid() const;
-  void clear_resourceid() ;
-  const std::string& resourceid() const;
+  // optional string classid = 2;
+  bool has_classid() const;
+  void clear_classid() ;
+  const std::string& classid() const;
   template <typename Arg_ = const std::string&, typename... Args_>
-  void set_resourceid(Arg_&& arg, Args_... args);
-  std::string* mutable_resourceid();
-  PROTOBUF_NODISCARD std::string* release_resourceid();
-  void set_allocated_resourceid(std::string* value);
+  void set_classid(Arg_&& arg, Args_... args);
+  std::string* mutable_classid();
+  PROTOBUF_NODISCARD std::string* release_classid();
+  void set_allocated_classid(std::string* value);
 
   private:
-  const std::string& _internal_resourceid() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_resourceid(
+  const std::string& _internal_classid() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_classid(
       const std::string& value);
-  std::string* _internal_mutable_resourceid();
+  std::string* _internal_mutable_classid();
 
   public:
   // optional int32 grantnumber = 1;
@@ -1136,7 +922,7 @@ class AddObject final : public ::google::protobuf::Message
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
       1, 2, 0,
-      39, 2>
+      36, 2>
       _table_;
 
   friend class ::google::protobuf::MessageLite;
@@ -1155,7 +941,7 @@ class AddObject final : public ::google::protobuf::Message
                           const AddObject& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::google::protobuf::internal::ArenaStringPtr resourceid_;
+    ::google::protobuf::internal::ArenaStringPtr classid_;
     ::int32_t grantnumber_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -1213,13 +999,13 @@ inline void EnterAccept::_internal_set_grantnumber(::int32_t value) {
 
 // optional float x = 1;
 inline bool SyncPlayer::has_x() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
 inline void SyncPlayer::clear_x() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.x_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000002u;
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline float SyncPlayer::x() const {
   // @@protoc_insertion_point(field_get:ConnectMsg.SyncPlayer.x)
@@ -1227,7 +1013,7 @@ inline float SyncPlayer::x() const {
 }
 inline void SyncPlayer::set_x(float value) {
   _internal_set_x(value);
-  _impl_._has_bits_[0] |= 0x00000002u;
+  _impl_._has_bits_[0] |= 0x00000001u;
   // @@protoc_insertion_point(field_set:ConnectMsg.SyncPlayer.x)
 }
 inline float SyncPlayer::_internal_x() const {
@@ -1241,13 +1027,13 @@ inline void SyncPlayer::_internal_set_x(float value) {
 
 // optional float y = 2;
 inline bool SyncPlayer::has_y() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   return value;
 }
 inline void SyncPlayer::clear_y() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.y_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000004u;
+  _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline float SyncPlayer::y() const {
   // @@protoc_insertion_point(field_get:ConnectMsg.SyncPlayer.y)
@@ -1255,7 +1041,7 @@ inline float SyncPlayer::y() const {
 }
 inline void SyncPlayer::set_y(float value) {
   _internal_set_y(value);
-  _impl_._has_bits_[0] |= 0x00000004u;
+  _impl_._has_bits_[0] |= 0x00000002u;
   // @@protoc_insertion_point(field_set:ConnectMsg.SyncPlayer.y)
 }
 inline float SyncPlayer::_internal_y() const {
@@ -1269,13 +1055,13 @@ inline void SyncPlayer::_internal_set_y(float value) {
 
 // optional float z = 3;
 inline bool SyncPlayer::has_z() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
   return value;
 }
 inline void SyncPlayer::clear_z() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.z_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000008u;
+  _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline float SyncPlayer::z() const {
   // @@protoc_insertion_point(field_get:ConnectMsg.SyncPlayer.z)
@@ -1283,7 +1069,7 @@ inline float SyncPlayer::z() const {
 }
 inline void SyncPlayer::set_z(float value) {
   _internal_set_z(value);
-  _impl_._has_bits_[0] |= 0x00000008u;
+  _impl_._has_bits_[0] |= 0x00000004u;
   // @@protoc_insertion_point(field_set:ConnectMsg.SyncPlayer.z)
 }
 inline float SyncPlayer::_internal_z() const {
@@ -1293,75 +1079,6 @@ inline float SyncPlayer::_internal_z() const {
 inline void SyncPlayer::_internal_set_z(float value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.z_ = value;
-}
-
-// optional string resource = 4;
-inline bool SyncPlayer::has_resource() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline void SyncPlayer::clear_resource() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.resource_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000001u;
-}
-inline const std::string& SyncPlayer::resource() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:ConnectMsg.SyncPlayer.resource)
-  return _internal_resource();
-}
-template <typename Arg_, typename... Args_>
-inline PROTOBUF_ALWAYS_INLINE void SyncPlayer::set_resource(Arg_&& arg,
-                                                     Args_... args) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_._has_bits_[0] |= 0x00000001u;
-  _impl_.resource_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:ConnectMsg.SyncPlayer.resource)
-}
-inline std::string* SyncPlayer::mutable_resource() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  std::string* _s = _internal_mutable_resource();
-  // @@protoc_insertion_point(field_mutable:ConnectMsg.SyncPlayer.resource)
-  return _s;
-}
-inline const std::string& SyncPlayer::_internal_resource() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.resource_.Get();
-}
-inline void SyncPlayer::_internal_set_resource(const std::string& value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_._has_bits_[0] |= 0x00000001u;
-  _impl_.resource_.Set(value, GetArena());
-}
-inline std::string* SyncPlayer::_internal_mutable_resource() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_._has_bits_[0] |= 0x00000001u;
-  return _impl_.resource_.Mutable( GetArena());
-}
-inline std::string* SyncPlayer::release_resource() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:ConnectMsg.SyncPlayer.resource)
-  if ((_impl_._has_bits_[0] & 0x00000001u) == 0) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000001u;
-  auto* released = _impl_.resource_.Release();
-  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
-    _impl_.resource_.Set("", GetArena());
-  }
-  return released;
-}
-inline void SyncPlayer::set_allocated_resource(std::string* value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (value != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000001u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000001u;
-  }
-  _impl_.resource_.SetAllocated(value, GetArena());
-  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.resource_.IsDefault()) {
-    _impl_.resource_.Set("", GetArena());
-  }
-  // @@protoc_insertion_point(field_set_allocated:ConnectMsg.SyncPlayer.resource)
 }
 
 // -------------------------------------------------------------------
@@ -1533,38 +1250,6 @@ inline ::google::protobuf::RepeatedField<float>* SyncObject::_internal_mutable_s
 
 // -------------------------------------------------------------------
 
-// AddRemote
-
-// optional int32 grantnumber = 1;
-inline bool AddRemote::has_grantnumber() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline void AddRemote::clear_grantnumber() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.grantnumber_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000001u;
-}
-inline ::int32_t AddRemote::grantnumber() const {
-  // @@protoc_insertion_point(field_get:ConnectMsg.AddRemote.grantnumber)
-  return _internal_grantnumber();
-}
-inline void AddRemote::set_grantnumber(::int32_t value) {
-  _internal_set_grantnumber(value);
-  _impl_._has_bits_[0] |= 0x00000001u;
-  // @@protoc_insertion_point(field_set:ConnectMsg.AddRemote.grantnumber)
-}
-inline ::int32_t AddRemote::_internal_grantnumber() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.grantnumber_;
-}
-inline void AddRemote::_internal_set_grantnumber(::int32_t value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.grantnumber_ = value;
-}
-
-// -------------------------------------------------------------------
-
 // AddObject
 
 // optional int32 grantnumber = 1;
@@ -1595,73 +1280,73 @@ inline void AddObject::_internal_set_grantnumber(::int32_t value) {
   _impl_.grantnumber_ = value;
 }
 
-// optional string resourceid = 2;
-inline bool AddObject::has_resourceid() const {
+// optional string classid = 2;
+inline bool AddObject::has_classid() const {
   bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
-inline void AddObject::clear_resourceid() {
+inline void AddObject::clear_classid() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.resourceid_.ClearToEmpty();
+  _impl_.classid_.ClearToEmpty();
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
-inline const std::string& AddObject::resourceid() const
+inline const std::string& AddObject::classid() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:ConnectMsg.AddObject.resourceid)
-  return _internal_resourceid();
+  // @@protoc_insertion_point(field_get:ConnectMsg.AddObject.classid)
+  return _internal_classid();
 }
 template <typename Arg_, typename... Args_>
-inline PROTOBUF_ALWAYS_INLINE void AddObject::set_resourceid(Arg_&& arg,
+inline PROTOBUF_ALWAYS_INLINE void AddObject::set_classid(Arg_&& arg,
                                                      Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000001u;
-  _impl_.resourceid_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:ConnectMsg.AddObject.resourceid)
+  _impl_.classid_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:ConnectMsg.AddObject.classid)
 }
-inline std::string* AddObject::mutable_resourceid() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  std::string* _s = _internal_mutable_resourceid();
-  // @@protoc_insertion_point(field_mutable:ConnectMsg.AddObject.resourceid)
+inline std::string* AddObject::mutable_classid() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_classid();
+  // @@protoc_insertion_point(field_mutable:ConnectMsg.AddObject.classid)
   return _s;
 }
-inline const std::string& AddObject::_internal_resourceid() const {
+inline const std::string& AddObject::_internal_classid() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.resourceid_.Get();
+  return _impl_.classid_.Get();
 }
-inline void AddObject::_internal_set_resourceid(const std::string& value) {
+inline void AddObject::_internal_set_classid(const std::string& value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000001u;
-  _impl_.resourceid_.Set(value, GetArena());
+  _impl_.classid_.Set(value, GetArena());
 }
-inline std::string* AddObject::_internal_mutable_resourceid() {
+inline std::string* AddObject::_internal_mutable_classid() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000001u;
-  return _impl_.resourceid_.Mutable( GetArena());
+  return _impl_.classid_.Mutable( GetArena());
 }
-inline std::string* AddObject::release_resourceid() {
+inline std::string* AddObject::release_classid() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:ConnectMsg.AddObject.resourceid)
+  // @@protoc_insertion_point(field_release:ConnectMsg.AddObject.classid)
   if ((_impl_._has_bits_[0] & 0x00000001u) == 0) {
     return nullptr;
   }
   _impl_._has_bits_[0] &= ~0x00000001u;
-  auto* released = _impl_.resourceid_.Release();
+  auto* released = _impl_.classid_.Release();
   if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
-    _impl_.resourceid_.Set("", GetArena());
+    _impl_.classid_.Set("", GetArena());
   }
   return released;
 }
-inline void AddObject::set_allocated_resourceid(std::string* value) {
+inline void AddObject::set_allocated_classid(std::string* value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (value != nullptr) {
     _impl_._has_bits_[0] |= 0x00000001u;
   } else {
     _impl_._has_bits_[0] &= ~0x00000001u;
   }
-  _impl_.resourceid_.SetAllocated(value, GetArena());
-  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.resourceid_.IsDefault()) {
-    _impl_.resourceid_.Set("", GetArena());
+  _impl_.classid_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.classid_.IsDefault()) {
+    _impl_.classid_.Set("", GetArena());
   }
-  // @@protoc_insertion_point(field_set_allocated:ConnectMsg.AddObject.resourceid)
+  // @@protoc_insertion_point(field_set_allocated:ConnectMsg.AddObject.classid)
 }
 
 #ifdef __GNUC__

@@ -32,8 +32,7 @@ void Animator::Update(const float deltaTime)
 	{
 		const Animation::Channel& animation = _animation->_animations[_controllers[i].animation];
 
-		_controllers[i].playTime += animation.ticksPerSecond * deltaTime;
-		_controllers[i].playTime = fmod(_controllers[i].playTime, animation.duration);
+		_controllers[i].playTime += _speed * deltaTime;
 	
 		if (_controllers[i].playTime >= animation.lastTime)
 		{
@@ -133,10 +132,9 @@ void Animator::ChangeAnimation(const char* animation, const unsigned int ID)
 	_controllers[ID].playTime = 0.f;
 }
 
-bool Animator::IsLastFrame(float interval) const
+bool Animator::IsLastFrame(float interval, const unsigned int ID) const
 {
-	//_controller[Lower].playTime + interval > _controller[Lower].lastTime;
-	return false;
+	return _controllers[ID].playTime + interval > _controllers[ID].lastTime;
 }
 
 void Animator::SetUpSplitBone(const unsigned int maxSplit)
@@ -158,6 +156,11 @@ void Animator::SplitBone(const unsigned int ID, const char* boneName)
 
 	_pSkeleton->SplitBone(ID, boneName);
 	BoneMasking(_pSkeleton->GetBone(ID), ID);
+}
+
+void Animator::SetAnimationSpeed(float speed)
+{
+	_speed = speed;
 }
 
 void Animator::UpdateAnimationTransform(const Bone& skeletion,

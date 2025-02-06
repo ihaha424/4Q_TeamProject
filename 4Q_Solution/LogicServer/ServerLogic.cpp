@@ -438,7 +438,12 @@ void ServerLogic::LoadBuilding()
         );
         obj->_serialNumber = _staticObjectSerialNumber++;
         _buildings.push_back(obj);
-        //RegistStaticPhysics(*obj);
+        RegistStaticPhysics(*obj);
+        Engine::Transform transform{};
+        transform.position = obj->_position;
+        transform.rotation = obj->_rotation;
+
+        obj->_staticRigid->SetTransform(transform);
     }
     printf("Building Data Load Complete.\n");
 }
@@ -468,7 +473,13 @@ void ServerLogic::LoadSudium()
         );
         obj->_serialNumber = _staticObjectSerialNumber++;
         _sudiums.push_back(obj);
-        //RegistStaticPhysics(*obj);
+        RegistStaticPhysics(*obj);
+        Engine::Transform transform{};
+        transform.position = obj->_position;
+        transform.rotation = obj->_rotation;
+
+        obj->_staticRigid->SetTransform(transform);
+
         printf("Sudium Create Complete. SerialNumber : %d\n", obj->_serialNumber);
     }
     printf("Sudium Data Load Complete.\n");
@@ -498,7 +509,7 @@ void ServerLogic::RegistStaticPhysics(Object& obj)
 {
     Engine::Physics::RigidComponentDesc rcd;
     rcd.rigidType = Engine::Physics::RigidBodyType::Static;
-    rcd.shapeDesc.geometryDesc.type = Engine::Physics::GeometryShape::Capsule;
+    rcd.shapeDesc.geometryDesc.type = Engine::Physics::GeometryShape::Box;
     rcd.shapeDesc.geometryDesc.data = { 100.f, 100.f, 100.f };
     rcd.shapeDesc.isExclusive = true;
     rcd.shapeDesc.materialDesc.data = { 0.5f, 0.5f, 0.5f };
@@ -531,15 +542,15 @@ void ServerLogic::RegistPlayer(Player* player)
 void ServerLogic::RegistGround(Ground& ground)
 {
     Engine::Physics::GeometryDesc geometryDesc;
-    geometryDesc.data = { 100, 100, 100 };
-    _physicsManager->LoadHeightMap(geometryDesc, "terrain", "../Resources/Terrain/testTest.png");
+    geometryDesc.data = { 10, 10, 15 };
+    _physicsManager->LoadHeightMap(geometryDesc, "terrain", "../Resources/Terrain/test3.png");
 
     Engine::Transform transform{};
     Engine::Physics::IRigidStaticComponent* staticrigid;
     _physicsManager->CreateTriangleStatic(&staticrigid, "terrain", { {0.f,0.f,0.f } }, transform);
     ground._staticRigid = static_cast<Engine::Physics::RigidStaticComponent*>(staticrigid);
     _mainScene->AddActor(ground._staticRigid);
-    ground._staticRigid->SetTranslate({ -1000.f, -200.f, 1000.f });
+    //ground._staticRigid->SetTranslate({ -1000.f, -200.f, 1000.f });
 
     ground._staticRigid->SetOwner(&ground);
     ground._staticRigid->Initialize();

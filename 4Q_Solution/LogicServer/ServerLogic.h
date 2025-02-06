@@ -11,6 +11,8 @@
 #include "../Engine/PHIManager.h"
 #include "../Packet/PacketID.h"
 #include "../Packet/ProtoInclude.h"
+#include "JSONLoad.h"
+
 
 namespace Engine::Physics {
 	class Manager;
@@ -18,22 +20,38 @@ namespace Engine::Physics {
 
 class ServerLogic
 {
-
-
 	struct Object {
 		int _serialNumber;
+		std::string _resourceId{ "" };
 		Engine::Math::Vector3 _position;
-		std::string _resourceId;
+		Engine::Math::Vector4 _rotation;
+		Engine::Math::Vector3 _scale;
+		bool _public;
+		bool _meshCollider;
+		Engine::Physics::IRigidStaticComponent* _staticRigid = nullptr;
+		Engine::Physics::IRigidDynamicComponent* _dynamicRigid = nullptr;
+	};
 
-		Engine::Physics::IRigidDynamicComponent* _rigidBody = nullptr;
-		
+	struct StaticObject : public Object{
+
+	};
+
+	struct DynamicObject : public Object {
+
 	};
 
 	struct Ground : public Object {
-		Engine::Physics::IRigidStaticComponent* _staticRigid = nullptr;
+		Engine::Physics::RigidStaticComponent* _staticRigid = nullptr;
 	};
 
-	struct Player : public Object {
+	struct TriggerBox : public Object {
+		Engine::Physics::RigidStaticComponent* _staticRigid = nullptr;
+	};
+
+	struct Player {
+		int _serialNumber;
+		Engine::Math::Vector3 _position;
+		std::string _resourceId;
 		Engine::Math::Vector3 _direction;
 		int _state;
 		float _speed;
@@ -61,35 +79,81 @@ private:
 	Engine::Math::Vector3 _lastSendPosition[2]{};
 	Object _objs[3]{};
 	Ground _ground{};
+	std::vector<Object*> _buildings;
+	std::vector<Object*> _sudiums;
+	TriggerBox _triggerBox{};
 	
 	ConnectMsg::EnterAccept _enterAccept;
 	ConnectMsg::SyncPlayer _syncPlayer;
 	ConnectMsg::SyncObject _syncObject;
 	ConnectMsg::AddObject _addObject;
-	ConnectMsg::AddRemote _addRemote;
+	ConnectMsg::AddPlayer _addPlayer;
 	
 	MoveMsg::Move _move;
 	MoveMsg::Jump _jump;
 	MoveMsg::MoveSync _moveSync;
 	MoveMsg::StateChange _stateChange;
+	MoveMsg::ObjectMove _objectMove;
 
 	PlayMsg::SelectPart _selectPart;
+	PlayMsg::PickObject _pickObject;
+	PlayMsg::PutObject _putObject;
+
 	PlayMsg::InteractDialog _interactDialog;
 	PlayMsg::DialogProgress _dialogProgress;
 
 	std::string _msgBuffer = std::string(256, '\0');
 
 	void MessageDispatch();
+private: 
+	// =============================
+	// Update Function Area
+	// =============================
 
+	void UpdateObject(float deltaTime);
+
+	void SendPositionData();
+
+private:
+	// =============================
+	// Message Dispatch Area
+	// =============================
+
+	void EnterProcess(const Packet& packet);
+	void ExitProcess(const Packet& packet);
+	void MoveProcess(const Packet& packet);
+	void JumpProcess(const Packet& packet);
+	void StateChangeProcess(const Packet& packet);
+	void DataRequestProcess(const Packet& packet);
+	void ObjectPickProcess(const Packet& packet);
+	void ObjectPutProcess(const Packet& packet);
+
+private:
+	short _dynamicObjectSerialNumber = 100;
+	short _staticObjectSerialNumber = 1000;
+
+private:
+	// =============================
+	// JSON Method, Variable Area
+	// =============================
+
+	JSONLoad _jsonLoader;
+	json _mapData;
+
+	void LoadBuilding();
+	void LoadSudium();
 private:
 	// =============================
 	// Physics Method, Variable Area
 	// =============================
+
 	Engine::Physics::Manager* _physicsManager = nullptr;
 	Engine::Physics::IScene* _mainScene = nullptr;
 
-	void RegistPhysics(Object& obj);
-	void RegistPlayer(Player& player);
+	void RegistDynamicPhysics(Object& obj);
+	void RegistStaticPhysics(Object& obj);
+	void RegistPlayer(Player* player);
 	void RegistGround(Ground& ground);
+	void RegistTrigerBox(TriggerBox& triggerBox);
 };
 

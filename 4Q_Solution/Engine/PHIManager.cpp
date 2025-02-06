@@ -33,7 +33,8 @@ namespace Engine::PHI
 		int typeIndex = static_cast<int>(physicsType);
 		PhysicsEngineAPI::IPhysicsSystem::PhysicsType type = static_cast<PhysicsEngineAPI::IPhysicsSystem::PhysicsType>(typeIndex);
 		thrower(BoolToHRESULT(PhysicsEngineAPI::CreateSystem(&system, PhysicsEngineAPI::IPhysicsSystem::Physx)));
-		thrower(BoolToHRESULT(system->CreatePhysics(visualDebug, length, speed)));
+		system->CreatePhysics(visualDebug, length, speed);
+		//thrower(BoolToHRESULT());
 	}
 
 	void Manager::WorldInitialize()
@@ -394,7 +395,7 @@ namespace Engine::PHI
 
 		RigidComponent* destComponment = new RigidComponent();
 		
-		PhysicsEngineAPI::Utils::Math::Vector3 boxExtents = { _boxExtents.x, _boxExtents.y, _boxExtents.z };
+		PhysicsEngineAPI::Utils::Math::Vector3 boxExtents = { 1,1,1 }; // TODO Refactor this
 		PhysicsEngineAPI::Utils::Transform transform = TransformToPhysicsTransform(_transform);
 		thrower(BoolToHRESULT(system->CreateStaticBoundBoxActor(&destComponment->object, boxExtents, transform)));
 		*object = destComponment;
@@ -431,7 +432,7 @@ namespace Engine::PHI
 		Controller* controller = new Controller();
 		thrower(BoolToHRESULT(system->CreatePlayerController(&controller->controller, scene->scene, desc)));
 	
-		controller->SetTotalGravity(_desc.gravity);
+		controller->SetGravity(_desc.gravity);
 		*object = controller;
 	}
 

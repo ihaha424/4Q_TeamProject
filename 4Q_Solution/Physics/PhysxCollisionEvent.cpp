@@ -77,14 +77,11 @@ namespace PhysicsEngineAPI
 				
 				//TODO: 유니티에 대한 Event도 나중에 처리 해야함...	
 				//OnTriggerEnter();
-				if (actor1)
+				if (actor1 && actor2)
 				{
 					triggerEvent.myCollision = actor1;
 					triggerEvent.otherCollision = actor2;
 					actor1->OnOverlapBegin(triggerEvent);
-				}
-				if (actor2)
-				{
 					triggerEvent.myCollision = actor2;
 					triggerEvent.otherCollision = actor1;
 					actor2->OnOverlapBegin(triggerEvent);
@@ -107,14 +104,11 @@ namespace PhysicsEngineAPI
 
 				//TODO: 유니티에 대한 Event도 나중에 처리 해야함...	
 				//OnTriggerExit();
-				if (actor1)
+				if (actor1 && actor2)
 				{
 					triggerEvent.myCollision = actor1;
 					triggerEvent.otherCollision = actor2;
 					actor1->OnOverlapEnd(triggerEvent);
-				}
-				if (actor2)
-				{
 					triggerEvent.myCollision = actor2;
 					triggerEvent.otherCollision = actor1;
 					actor2->OnOverlapEnd(triggerEvent);

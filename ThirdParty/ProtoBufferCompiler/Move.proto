@@ -22,3 +22,7 @@ message MoveSync {
 	optional float y = 2;
 	optional float z = 3;
 }
+
+message ObjectMove {
+	repeated float position = 1;
+}

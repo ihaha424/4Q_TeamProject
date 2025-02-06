@@ -16,11 +16,11 @@ namespace PhysicsEngineAPI
 		bool DetachShape(IShape* shape) override;
 
 		void	SetTranslate(const Utils::Math::Vector3& position)		override;
-		const	Utils::Math::Vector3 GetTranslate() const				override;
+			Utils::Math::Vector3 GetTranslate() const				override;
 		void	SetRotation(const Utils::Math::Vector4& Rotation)		override;
-		const	Utils::Math::Vector4 GetRotation() const				override;
+			Utils::Math::Vector4 GetRotation() const				override;
 		void	SetTransform(const Utils::Math::Transform& transform)	override;
-		const	Utils::Math::Transform GetTransform() const				override;
+			Utils::Math::Transform GetTransform() const				override;
 
 		void SetName(const char* name)	override;
 		const char* GetName() const		override;

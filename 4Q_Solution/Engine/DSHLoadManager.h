@@ -5,20 +5,22 @@ namespace Engine::DSHLoad
 {
 	class Manager final : public Load::Manager
 	{
+		using ClassName = std::wstring;
+		using Properties = Load::ConfigData::Data;
 	public:
-		void Initialize(std::filesystem::path path) override;
+		void Initialize() override;
 		void Finalize() override;
 
-		Load::ConfigData GetGameConfigData() override;
+		void LoadRegisterData(const std::filesystem::path& path) override;
+		void LoadCloneData(const std::filesystem::path& path) override;
 
-		std::optional<Load::ConfigData> GetWorldConfigData(std::wstring name) override;
-		std::optional<Load::ConfigData> GetObjectConfigData(std::wstring name) override;
-		std::optional<Load::ConfigData> GetComponentConfigData(std::wstring name) override;
+		Load::ConfigData GetGameConfigData() override;
+		std::optional<Load::ConfigData> GetObjectRegisterData(const std::wstring& name) override;
+		std::vector<Load::ConfigData> GetObjectCloneData(const std::wstring& name) override;
 
 	private:
 		Load::ConfigData::Data _gameConfigData;
-		std::unordered_map<std::wstring, Load::ConfigData::Data> _worldConfigData;
-		std::unordered_map<std::wstring, Load::ConfigData::Data> _objectConfigData;
-		std::unordered_map<std::wstring, Load::ConfigData::Data> _componentConfigData;
+		std::unordered_map<ClassName, Properties> _objectRegisterData;
+		std::unordered_map<std::wstring, std::vector<Properties>> _objectCloneData;
 	};
 }

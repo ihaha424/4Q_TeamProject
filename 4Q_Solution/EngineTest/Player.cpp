@@ -18,13 +18,14 @@ Player::Player(std::filesystem::path&& meshPath, std::filesystem::path&& fontPat
 void Player::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
 	_camera = componentFactory->Clone<Engine::Component::Camera>(this);
-	//_staticMesh = componentFactory->Clone<Engine::Component::StaticMesh>(this);
-	_skeltalMesh = componentFactory->Clone<Engine::Component::SkeletalMesh>(this);
-	_animator = componentFactory->Clone<Engine::Component::Animator>(this);
+	_staticMesh = componentFactory->Clone<Engine::Component::StaticMesh>(this);
+	//_skeltalMesh = componentFactory->Clone<Engine::Component::SkeletalMesh>(this);
+	//_animator = componentFactory->Clone<Engine::Component::Animator>(this);
 	_textRenderer = componentFactory->Clone<Engine::Component::TextRenderer>(this);
     _sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
 	_remote = componentFactory->Clone<RemoteMoveComponent>(this);
 	_chractorController = componentFactory->Clone<Engine::Component::ChractorController>(this);
+	_fixedArm = componentFactory->Clone<Engine::Component::FixedArm>(this);
 }
 
 int Player::GetSerialNumber()
@@ -40,13 +41,14 @@ void Player::SetSerialNumber(int num)
 void Player::DisposeComponents()
 {
     _textRenderer->Dispose();
-    //_staticMesh->Dispose();
-	_skeltalMesh->Dispose();
-	_animator->Dispose();
+    _staticMesh->Dispose();
+	//_skeltalMesh->Dispose();
+	//_animator->Dispose();
     _camera->Dispose();
 	_sync->Dispose();
 	_remote->Dispose();
 	_chractorController->Dispose();
+	_fixedArm->Dispose();
 }
 
 void Player::PreInitialize(const Engine::Modules& modules)
@@ -55,20 +57,26 @@ void Player::PreInitialize(const Engine::Modules& modules)
 
 	_remote->SetTarget(&_transform);	
 	_remote->BindOnMove([this]() {
-		_animator->ChangeAnimation("Run");
+		//_animator->ChangeAnimation("Run");
 		});
 	_remote->BindOnStop([this]() {
-		_animator->ChangeAnimation("Wait");
+		//_animator->ChangeAnimation("Wait");
 		});
 
 
     _camera->SetName(L"MainCamera");
-    //_staticMesh->SetFilePath(_meshPath);
-    //_staticMesh->SetMatrix(&_worldMatrix);
-	_skeltalMesh->SetFilePath(_meshPath);
-	_skeltalMesh->SetMatrix(&_worldMatrix);
-	_animator->SetSkeletalMesh(_skeltalMesh);
+    _staticMesh->SetFilePath(_meshPath);
+    _staticMesh->SetMatrix(&_worldMatrix);
+	//_skeltalMesh->SetFilePath(_meshPath);
+	//_skeltalMesh->SetMatrix(&_worldMatrix);
+	//_animator->SetSkeletalMesh(_skeltalMesh);
     _textRenderer->SetFontPath(_fontPath);
+
+	//FixedArm
+	_fixedArm->SetTarget(&_transform);
+	_fixedArm->SetCameraComponent(_camera);
+	_fixedArm->SetDistance(200.f);
+	_fixedArm->SetCameraPosition({ 10.f, 50.f });
 
 	_sync->AddCallback((short)PacketID::EnterAccept, &Player::EnterSuccess, this);
 	_sync->AddCallback((short)PacketID::MoveSync, &Player::SyncMove, this);
@@ -99,7 +107,6 @@ void Player::PreInitialize(const Engine::Modules& modules)
 				_sync->GetSerialNumber()
 			);
 
-
 			Engine::Math::Vector3 moveDirection = value;
 			_remote->SetDirection(moveDirection);
 		
@@ -107,7 +114,7 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) {
 		GameApplication::GetLoggerManager()->Log(Engine::Logger::LogLevel::Debug, std::format(L"x:{0}, y:{1}", value.x, value.y));
 
-		_animator->ChangeAnimation("Run"); 
+		//_animator->ChangeAnimation("Run"); 
 
 		_sync->_stateChange.set_stateinfo(1);
 		_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
@@ -135,8 +142,6 @@ void Player::PreInitialize(const Engine::Modules& modules)
 				_sync->GetSerialNumber()
 			);
 
-			_sync->_move.SerializeToString(&_sync->_msgBuffer);
-
 			_sync->_stateChange.set_stateinfo(0);
 			_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
 
@@ -153,7 +158,7 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	mappingContext->GetAction(L"Jump", &jumpAction);
 	jumpAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) 
 		{
-			_sync->_jump.set_power(2500.f);
+			_sync->_jump.set_power(30.f);
 			_sync->_jump.SerializeToString(&_sync->_msgBuffer);
 
 			Engine::Application::GetNetworkManager()->SaveSendData(
@@ -166,9 +171,9 @@ void Player::PreInitialize(const Engine::Modules& modules)
 
 	Engine::Input::IAction* cameraAction = nullptr;
 	mappingContext->GetAction(L"Camera", &cameraAction);
-	cameraAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
+	cameraAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](const Engine::Math::Vector3 value)
 	{
-		_camera->Rotate(value);
+		_fixedArm->Rotate(value);
 	});
 
 	Engine::Physics::ControllerDesc desc;
@@ -187,7 +192,7 @@ void Player::PostInitialize(const Engine::Modules& modules)
 	_textRenderer->SetPosition(100, 100.f);
 	_textRenderer->SetText(L"Hello World!");
 	_textRenderer->SetFontColor(1.f, 0.f, 0.f, 1.f);
-	_animator->ChangeAnimation("Wait");
+	//_animator->ChangeAnimation("Wait");
 	//_skeltalMesh.SetRenderLayer(0);
 	/*_animator.SetUpSplitBone(2);
 	_animator.SplitBone(0, "Dummy_root");
@@ -204,14 +209,10 @@ void Player::PostAttach()
 void Player::PostUpdate(const float deltaTime)
 {
 	Object::PostUpdate(deltaTime);
-	_worldMatrix = Engine::Math::Matrix::CreateScale(1.f) * Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
-
-	Engine::Math::Vector3 tempPostion = _transform.position;
-	_chractorController->_controller->SetPosition(_transform.position);
-	tempPostion.z -= 300.f;
-	tempPostion.y += 300.f;
-	_camera->SetPosition(tempPostion);
-	_camera->SetRotation(Engine::Math::Vector3(45.f, 0.f, 0.f));
+	_worldMatrix = Engine::Math::Matrix::CreateScale(1.f)
+		* Engine::Math::Matrix::CreateFromQuaternion(_transform.rotation)
+		* Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
+	//printf("Position : %f, %f, %f\n", _transform.position.x, _transform.position.y, _transform.position.z);
 
 	// auto speed = _movement->GetSpeed();
 	// auto dir = _movement->GetDirection();
@@ -234,11 +235,17 @@ void Player::EnterSuccess(const ConnectMsg::EnterAccept* msg)
 
 void Player::SyncMove(const MoveMsg::MoveSync* msg)
 {
-	Engine::Math::Vector3 nextLocation(msg->x(), msg->y(), msg->z());
+	float x = msg->x();
+	float y = msg->y();
+	float z = msg->z();
+	Engine::Math::Vector3 nextLocation(x, y, z);
 	_remote->SetNextLocation(nextLocation);
 }
 
 void Player::SetLocation(const MoveMsg::MoveSync* msg)
 {
-	_transform.position = Engine::Math::Vector3(msg->x(), msg->y(), msg->z());
+	float x = msg->x();
+	float y = msg->y();
+	float z = msg->z();
+	_transform.position = Engine::Math::Vector3(x, y, z);
 }

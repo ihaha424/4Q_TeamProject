@@ -16,7 +16,7 @@ namespace PhysicsEngineAPI
 	{
 		function.SetVelocity(velocity, actor);
 	}
-	const Utils::Math::Vector3 PhysXDynamicActor::GetVelocity() const
+	 Utils::Math::Vector3 PhysXDynamicActor::GetVelocity() const
 	{
 		return function.GetVelocity(actor);
 	}
@@ -24,7 +24,7 @@ namespace PhysicsEngineAPI
 	{
 		function.SetLinearVelocity(velocity, actor);
 	}
-	const Utils::Math::Vector3 PhysXDynamicActor::GetLinearVelocity() const
+	 Utils::Math::Vector3 PhysXDynamicActor::GetLinearVelocity() const
 	{
 		return function.GetLinearVelocity(actor);
 	}
@@ -32,7 +32,7 @@ namespace PhysicsEngineAPI
 	{
 		return function.SetMaxLinearVelocity(velocity, actor);
 	}
-	const float PhysXDynamicActor::GetMaxLinearVelocity() const
+	 float PhysXDynamicActor::GetMaxLinearVelocity() const
 	{
 		return function.GetMaxLinearVelocity(actor);
 	}
@@ -40,7 +40,7 @@ namespace PhysicsEngineAPI
 	{
 		function.SetAngularVelocity(angularVelocity, actor);
 	}
-	const Utils::Math::Vector3 PhysXDynamicActor::GetAngularVelocity() const
+	 Utils::Math::Vector3 PhysXDynamicActor::GetAngularVelocity() const
 	{
 		return function.GetAngularVelocity(actor);
 	}
@@ -48,7 +48,7 @@ namespace PhysicsEngineAPI
 	{
 		function.SetMaxAngularVelocity(velocity, actor);
 	}
-	const float PhysXDynamicActor::GetMaxAngularVelocity() const
+	 float PhysXDynamicActor::GetMaxAngularVelocity() const
 	{
 		return function.GetMaxAngularVelocity(actor);
 	}
@@ -113,7 +113,7 @@ namespace PhysicsEngineAPI
 	{
 		function.SetTranslate(position, actor);
 	}
-	const Utils::Math::Vector3 PhysXDynamicActor::GetTranslate() const
+	 Utils::Math::Vector3 PhysXDynamicActor::GetTranslate() const
 	{
 		return function.GetTranslate(actor);
 	}
@@ -122,7 +122,7 @@ namespace PhysicsEngineAPI
 	{
 		return function.SetRotation(Rotation, actor);
 	}
-	const Utils::Math::Vector4 PhysXDynamicActor::GetRotation() const
+	 Utils::Math::Vector4 PhysXDynamicActor::GetRotation() const
 	{
 		return function.GetRotation(actor);
 	}
@@ -131,7 +131,7 @@ namespace PhysicsEngineAPI
 	{
 		return function.SetTransform(_transform, actor);
 	}
-	const Utils::Math::Transform PhysXDynamicActor::GetTransform() const
+	 Utils::Math::Transform PhysXDynamicActor::GetTransform() const
 	{
 		return function.GetTransform(actor);
 	}

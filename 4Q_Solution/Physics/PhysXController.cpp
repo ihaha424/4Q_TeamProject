@@ -20,6 +20,9 @@ namespace PhysicsEngineAPI
 	void PhysXController::SetUserData(ICollision* UserData)
 	{
 		controller->setUserData(UserData);
+		controller->getActor()->userData = UserData;
+		hitReportCallback->SetUserData(UserData);
+		behaviorCallback->SetUserData(UserData);
 	}
 	const ICollision* PhysXController::GetUserData() const
 	{
@@ -50,7 +53,7 @@ namespace PhysicsEngineAPI
 	{
 		gravity = Vector3ToPxVec3(_gravity);
 	}
-	const Utils::Math::Vector3& PhysXController::GetGravity() const
+	 Utils::Math::Vector3 PhysXController::GetGravity() const
 	{
 		return PxVec3ToVector3(gravity);
 	}
@@ -58,7 +61,7 @@ namespace PhysicsEngineAPI
 	{
 		controller->setPosition(Vector3ToPxExtendedVec3(position));
 	}
-	const Utils::Math::Vector3& PhysXController::GetPosition() const
+	Utils::Math::Vector3 PhysXController::GetPosition() const
 	{
 		return PxExtendedVec3ToVector3(controller->getPosition());
 	}
@@ -66,7 +69,7 @@ namespace PhysicsEngineAPI
 	{
 		controller->setFootPosition(Vector3ToPxExtendedVec3(position));
 	}
-	const Utils::Math::Vector3& PhysXController::GetBottomPosition() const
+	 Utils::Math::Vector3 PhysXController::GetBottomPosition() const
 	{
 		return PxExtendedVec3ToVector3(controller->getFootPosition());
 	}
@@ -100,7 +103,7 @@ namespace PhysicsEngineAPI
 	{
 		controller->setUpDirection(Vector3ToPxVec3(direction));
 	}
-	const Utils::Math::Vector3& PhysXController::GetUpdirection() const
+	 Utils::Math::Vector3 PhysXController::GetUpdirection() const
 	{
 		return PxVec3ToVector3(controller->getUpDirection());
 	}
@@ -160,5 +163,9 @@ namespace PhysicsEngineAPI
 	{
 		Utils::DataStructure::CapsuleClimbingMode flag = static_cast<Utils::DataStructure::CapsuleClimbingMode>(controller->getNonWalkableMode());
 		return flag;
+	}
+	void PhysXController::CollisionUpdate()
+	{
+		hitReportCallback->Update();
 	}
 }

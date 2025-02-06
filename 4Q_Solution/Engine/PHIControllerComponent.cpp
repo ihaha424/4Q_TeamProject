@@ -12,6 +12,12 @@ namespace Engine::PHI
 		, mass{ 1 }
 		, velocity{ }
 		, force{ }
+		, gravity{}
+		, jumpMax{ 1000 }
+		, direction{}
+		, moveSpeed{ 0 }
+		, minDistance{ 0.001 }
+		, owner{ nullptr }
 	{
 		collision = new Collision<Controller>{ this };
 	}
@@ -29,36 +35,20 @@ namespace Engine::PHI
 		controller->ClearUserData();
 	}
 
-	unsigned short Controller::Move(const Engine::Math::Vector3 displacement, float minDistance, float deltaTime)
-	{
-
-		return controllerCollisionFlag = controller->Move(Vector3ToPhysicsVector3(displacement), minDistance, deltaTime);
-	}
-
 	void Controller::SetGravity(const Engine::Math::Vector3& _gravity)
 	{
 		gravity = _gravity;
 	}
-	const Engine::Math::Vector3& Controller::GetGravity() const
+	 Engine::Math::Vector3 Controller::GetGravity() const
 	{
 		return gravity;
-	}
-
-	void Controller::SetTotalGravity(const Engine::Math::Vector3& gravity)
-	{
-		totalGravity = gravity;
-	}
-
-	const Engine::Math::Vector3& Controller::GetTotalGravity() const
-	{
-		return totalGravity;
 	}
 
 	void Controller::SetPosition(const Engine::Math::Vector3& position)
 	{
 		controller->SetPosition(Vector3ToPhysicsVector3(position));
 	}
-	const Engine::Math::Vector3& Controller::GetPosition() const
+	 Engine::Math::Vector3 Controller::GetPosition() const
 	{
 		return PhysicsVector3ToVector3(controller->GetPosition());
 	}
@@ -67,7 +57,7 @@ namespace Engine::PHI
 	{
 		controller->SetBottomPosition(Vector3ToPhysicsVector3(position));
 	}
-	const Engine::Math::Vector3& Controller::GetBottomPosition() const
+	 Engine::Math::Vector3 Controller::GetBottomPosition() const
 	{
 		return PhysicsVector3ToVector3(controller->GetBottomPosition());
 	}
@@ -103,7 +93,7 @@ namespace Engine::PHI
 	{
 		controller->SetUpDirection(Vector3ToPhysicsVector3(direction));
 	}
-	const Engine::Math::Vector3& Controller::GetUpdirection() const
+	 Engine::Math::Vector3 Controller::GetUpdirection() const
 	{
 		return PhysicsVector3ToVector3(controller->GetUpdirection());
 	}
@@ -161,8 +151,6 @@ namespace Engine::PHI
 		return static_cast<Engine::Physics::CapsuleClimbingMode>(controller->GetClimbingMode());
 	}
 
-
-
 	/***********************************
 				Engine
 	************************************/
@@ -170,22 +158,27 @@ namespace Engine::PHI
 	{
 		controller->SetUserData(collision);
 	}
+
 	void Controller::Update(float deltaTime)
 	{
 		Engine::Math::Vector3 acceleration = force / mass;
 
-		velocity += (acceleration * deltaTime);
+		velocity += (acceleration);
 
-		gravity += totalGravity;
+		auto velo = direction * moveSpeed;
+		velocity.x = velo.x;
+		velocity.z = velo.z;
 
-		velocity += gravity;
 
-		controllerCollisionFlag = controller->Move(Vector3ToPhysicsVector3(velocity * deltaTime), 0.001f, deltaTime);
-		if (controllerCollisionFlag & 0x04 || controllerCollisionFlag & 0x01)
+		velocity += gravity * deltaTime;
+
+		controllerCollisionFlag = controller->Move(Vector3ToPhysicsVector3(velocity * deltaTime), minDistance, deltaTime);
+		if (controllerCollisionFlag & 0x04)
 		{
-			gravity.y = 0;
+			jumpFlag = false;
+			velocity.y = 0;
 		}
-		
+
 		force = Engine::Math::Vector3::Zero;
 	}
 	void Controller::Finalize()
@@ -195,12 +188,24 @@ namespace Engine::PHI
 		releaser(&collision);
 		releaser(&controller);
 	}
+
+	void* Controller::GetOwner()
+	{
+		return owner;
+	}
+
+	void Controller::SetOwner(void* _owner)
+	{
+		owner = _owner;
+	}
+
 	unsigned short Controller::GetCollisionFlag()
 	{
 		return controllerCollisionFlag;
 	}
 	void Controller::FixedUpdate()
 	{
+		controller->CollisionUpdate();
 		collision->FixedUpdate();
 	}
 
@@ -208,6 +213,40 @@ namespace Engine::PHI
 	/***********************************
 			Kinematic Move Setting
 	************************************/
+
+	void Controller::Jump(float JumpForce)
+	{
+		if (jumpFlag)
+			return;
+		jumpFlag = true;
+		velocity.y = 0;
+		force.y += JumpForce;
+	}
+	void Controller::SetDirection(Engine::Math::Vector3 _direction)
+	{
+		direction = _direction;
+		direction.Normalize();
+	}
+	 Engine::Math::Vector3 Controller::GetDirection() const
+	{
+		return direction;
+	}
+	void Controller::SetMinDistancet(float _minDistance)
+	{
+		minDistance = _minDistance;
+	}
+	float Controller::GetMinDistance() const
+	{
+		return minDistance;
+	}
+	void Controller::SetMoveSpeed(float _moveSpeed)
+	{
+		moveSpeed = _moveSpeed;
+	}
+	float Controller::GetMoveSpeed() const
+	{
+		return moveSpeed;
+	}
 	void Controller::AddForce(const Engine::Math::Vector3& _force)
 	{
 		force += _force;
@@ -235,5 +274,14 @@ namespace Engine::PHI
 	float Controller::GetMass()
 	{
 		return mass;
+	}
+
+	void Controller::BindCollision(const Physics::CallBackTrigger& callback, Physics::TriggerType type)
+	{
+		collision->BindCollision(callback, type);
+	}
+	void Controller::BindCollision(const Physics::CallBackContact& callback, Physics::ContactType type)
+	{
+		collision->BindCollision(callback, type);
 	}
 }

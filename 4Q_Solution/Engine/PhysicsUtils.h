@@ -79,6 +79,7 @@ namespace Engine::Physics
 	 * @brief		: QueryData
 	 * @UserDatas	: Actor's UserData
 	 */
+	class Component;
 	struct QueryData
 	{
 		enum QueryFlag
@@ -91,8 +92,7 @@ namespace Engine::Physics
 		};
 		QueryFlag			flag;
 		unsigned int		num;
-		// void* UserDatas;
-		std::vector<void*>	UserDatas{};
+		std::vector<Component*>	UserDatas{};
 	};
 
 	struct AdditionalQueryData
@@ -194,14 +194,14 @@ namespace Engine::Physics
 	{
 		struct VerticesDesc
 		{
-			unsigned long long	count = -1;
-			unsigned char		stride = -1;
+			unsigned long long	count = 0;
+			unsigned char		stride = 0;
 			void* data = nullptr;
 		};
 		struct IndicesDesc
 		{
-			unsigned long long	count = -1;
-			unsigned char		stride = -1;
+			unsigned long long	count = 0;
+			unsigned char		stride = 0;
 			void* data = nullptr;
 		};
 		VerticesDesc	vertices;

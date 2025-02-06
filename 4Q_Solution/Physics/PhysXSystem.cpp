@@ -93,6 +93,7 @@ namespace PhysicsEngineAPI
 		{
 			DEBUG_MODE
 			(
+				foundation->setErrorLevel(physx::PxErrorCode::eMASK_ALL);
 				if (isVisualDebuger)
 				{
 					if (!CreatePVD())
@@ -101,12 +102,10 @@ namespace PhysicsEngineAPI
 				}
 				else
 					physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(length, speed), true);
-			foundation->setErrorLevel(physx::PxErrorCode::eMASK_ALL);
 			)
 		}
 		else
 			physics = PxCreatePhysics(PX_PHYSICS_VERSION, *foundation, physx::PxTolerancesScale(length, speed), true);
-		
 		if (nullptr == physics)
 			return false;
 		return true;
@@ -793,20 +792,17 @@ namespace PhysicsEngineAPI
 		desc.radius = _desc.radius;
 		desc.height = _desc.height;
 		desc.climbingMode = static_cast<physx::PxCapsuleClimbingMode::Enum>(_desc.climbinMode);
-		// TODO
-		desc.reportCallback;
-		desc.behaviorCallback;
+
 
 
 		physx::PxController* character = Scene->controllerManager->createController(desc);
-
+		//physx::PxTransform pos = physx::PxTransform({ 0.f, _desc.height, 0.f });
+		//character->getActor()->setCMassLocalPose(pos);
 		controller->controller = static_cast<physx::PxCapsuleController*>(character);
 		controller->gravity = Vector3ToPxVec3(_desc.gravity);
 
-		//desc.reportCallback->SetUserData();
-		//desc.behaviorCallback->SetUserData(); 
-
 		*object = controller;
+
 		return true;
 	}
 

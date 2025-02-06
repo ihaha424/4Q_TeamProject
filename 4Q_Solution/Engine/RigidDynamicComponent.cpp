@@ -13,6 +13,8 @@ namespace Engine::Component
 		Component::Initialize(modules);
 		static_cast<Physics::RigidDynamicComponent*>(_rigidbody)->Initialize();
 		static_cast<Physics::RigidComponent*>(_boundBox)->Initialize();
+		_rigidbody->SetOwner(GetOwner());
+		_boundBox->SetOwner(GetOwner());
 	}
 
 	void RigidDynamic::Attach()

@@ -10,7 +10,7 @@ namespace PhysicsEngineAPI
 		virtual ~IGeometry() = default;
 
  		virtual void	SetScale(const Utils::Math::Vector3& position) = 0;
-		virtual const	Utils::Math::Vector3 GetScale() const = 0;
+		virtual 	Utils::Math::Vector3 GetScale() const = 0;
 
 		virtual void SetType(Utils::DataStructure::GeometryShape type) = 0;
 		virtual Utils::DataStructure::GeometryShape GetType() = 0;

@@ -3,7 +3,7 @@
 
 namespace PhysicsEngineAPI
 {
-	class IController;
+	class ICollision;
 }
 
 namespace PhysicsEngineAPI
@@ -17,8 +17,8 @@ namespace PhysicsEngineAPI
 		physx::PxControllerBehaviorFlags getBehaviorFlags(const physx::PxController& controller) override;
 		physx::PxControllerBehaviorFlags getBehaviorFlags(const physx::PxObstacle& obstacle) override;
 	
-		void SetUserData(IController* userData);
+		void SetUserData(ICollision* userData);
 	private:
-		IController* userData;
+		ICollision* userData;
 	};
 }

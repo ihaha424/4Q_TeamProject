@@ -34,6 +34,15 @@
     <Filter Include="Object\SkyBox">
       <UniqueIdentifier>{716308c1-4293-4856-bf1e-a58530687c52}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PhysicsSceneFillter">
+      <UniqueIdentifier>{c85736a0-875e-466a-a4fc-15c1f8225cae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\StaticObject">
+      <UniqueIdentifier>{23283b30-2c80-4ee5-b209-386908918f23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\StaticObject\MapData">
+      <UniqueIdentifier>{06860741-d122-4ccb-b2f6-f6c41542ea4e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -66,6 +75,48 @@
     <ClInclude Include="SkyBox.h">
       <Filter>Object\SkyBox</Filter>
     </ClInclude>
+    <ClInclude Include="Building1.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneFillter.h">
+      <Filter>PhysicsSceneFillter</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticObject.h">
+      <Filter>Object\StaticObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Building2.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="Building3.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="Building4.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="Building5.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="Building6.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="Building7.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="Building8.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="Building9.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="Building10.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="SudiumBlue.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="MapData.h">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -91,6 +142,42 @@
     </ClCompile>
     <ClCompile Include="SkyBox.cpp">
       <Filter>Object\SkyBox</Filter>
+    </ClCompile>
+    <ClCompile Include="Building1.cpp">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticObject.cpp">
+      <Filter>Object\StaticObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Building2.cpp">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Building3.cpp">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Building4.cpp">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Building5.cpp">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Building6.cpp">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Building7.cpp">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Building8.cpp">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Building9.cpp">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Building10.cpp">
+      <Filter>Object\StaticObject\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="SudiumBlue.cpp">
+      <Filter>Object\StaticObject\MapData</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

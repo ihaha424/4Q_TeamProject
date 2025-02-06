@@ -4,7 +4,7 @@
 namespace Engine::Component
 {
 	RigidStatic::RigidStatic()
-		: _rigidbody{ nullptr }
+		: _rigidbody{nullptr}, _boundBox(nullptr)
 	{
 	}
 
@@ -13,6 +13,8 @@ namespace Engine::Component
 		Component::Initialize(modules);
 		static_cast<Physics::RigidStaticComponent*>(_rigidbody)->Initialize();
 		static_cast<Physics::RigidComponent*>(_boundBox)->Initialize();
+		_rigidbody->SetOwner(GetOwner());
+		_boundBox->SetOwner(GetOwner());
 	}
 
 	void RigidStatic::Attach()

@@ -21,6 +21,7 @@ namespace PhysicsEngineAPI
 
 		void Release() override;
 
+		void CollisionUpdate() override;
 
 		/***********************************
 					Controller
@@ -30,13 +31,13 @@ namespace PhysicsEngineAPI
 		unsigned short Move(const Utils::Math::Vector3 displacement, float minDistance, float deltaTime) override;
 		
 		void SetGravity(const Utils::Math::Vector3& gravity) override;
-		const Utils::Math::Vector3& GetGravity() const override;
+		Utils::Math::Vector3 GetGravity() const override;
 
 		void SetPosition(const Utils::Math::Vector3& position) override;
-		const Utils::Math::Vector3& GetPosition() const override;
+		Utils::Math::Vector3 GetPosition() const override;
 
 		void SetBottomPosition(const Utils::Math::Vector3& position) override;
-		const Utils::Math::Vector3& GetBottomPosition() const override;
+		Utils::Math::Vector3 GetBottomPosition() const override;
 
 		void SetStepOffset(float offset) override;
 		float GetStepOffset() const override;
@@ -48,7 +49,7 @@ namespace PhysicsEngineAPI
 		float GetContactOffset() const override;
 
 		void SetUpDirection(const Utils::Math::Vector3& direction) override;
-		const Utils::Math::Vector3& GetUpdirection() const override;
+		Utils::Math::Vector3 GetUpdirection() const override;
 
 		void SetSlopeLimit(float limit) override;
 		float GetSlopeLimit() const override;

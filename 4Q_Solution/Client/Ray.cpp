@@ -3,10 +3,10 @@
 
 Ray::Ray(std::filesystem::path&& meshPath)
 	: _meshPath(std::forward<std::filesystem::path>(meshPath))
-	, _movement(nullptr)
-	, _skeletalMesh(nullptr)
-	, _animator(nullptr)
-	, _camera(nullptr)
+	  , _movement(nullptr)
+	  , _camera(nullptr)
+	  , _skeletalMesh(nullptr)
+	  , _animator(nullptr), _fixedArm(nullptr), _rigid(nullptr)
 {
 }
 
@@ -16,6 +16,13 @@ void Ray::Prepare(Engine::Content::Factory::Component* componentFactory)
 	_camera = componentFactory->Clone<Engine::Component::Camera>(this);
 	_skeletalMesh = componentFactory->Clone<Engine::Component::SkeletalMesh>(this);
 	_animator = componentFactory->Clone<Engine::Component::Animator>(this);
+	_rigid = componentFactory->Clone<Engine::Component::ChractorController>(this);
+	_fixedArm = componentFactory->Clone<Engine::Component::FixedArm>(this);
+}
+
+void Ray::SetCapsuleScale(Engine::Math::Vector3 capsuleScale)
+{
+	_capsuleScale = capsuleScale;
 }
 
 void Ray::DisposeComponents()
@@ -24,6 +31,8 @@ void Ray::DisposeComponents()
 	_movement->Dispose();
 	_animator->Dispose();
 	_skeletalMesh->Dispose();
+	_rigid->Dispose();
+	_fixedArm->Dispose();
 }
 
 void Ray::PreInitialize(const Engine::Modules& modules)
@@ -37,6 +46,12 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 	_skeletalMesh->SetMatrix(&_worldMatrix);
 	_animator->SetSkeletalMesh(_skeletalMesh);
 
+	// FixedArm
+	_fixedArm->SetTarget(&_transform);
+	_fixedArm->SetCameraComponent(_camera);
+	_fixedArm->SetDistance(60.f);
+	_fixedArm->SetCameraPosition({ 10.f, 50.f });
+
 	const auto inputManager = Engine::Application::GetInputManager();
 	Engine::Input::IMappingContext* mappingContext = nullptr;
 	inputManager->GetMappingContext(L"Default", &mappingContext);
@@ -45,12 +60,8 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 	mappingContext->GetAction(L"Move", &moveAction);
 	moveAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
 		{
-			Engine::Math::Vector3 direction = value;
-			direction = Engine::Math::Vector3::TransformNormal(direction, _cameraParentMatrix);
-			direction.y = 0.f;
-			direction.Normalize();
-			_transform.rotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(Engine::Math::Vector3(0.f, _cameraRotation.y + 3.14f, 0.f));
-			_movement->SetDirection(direction);
+			_movement->SetDirection(_fixedArm->TransformDirection(value));
+			_transform.rotation = _fixedArm->GetForwardRotation();
 		});
 	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
 		{
@@ -66,8 +77,29 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 	mappingContext->GetAction(L"Camera", &cameraAction);
 	cameraAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](Engine::Math::Vector3 value)
 		{
-			_cameraRotation += value;
+			_fixedArm->Rotate(value);
 		});
+
+
+	auto PhysicsManager = Engine::Application::GetPhysicsManager();
+
+	Engine::Physics::ControllerDesc cd;
+	cd.position = Engine::Math::Vector3(400, 400, 400);
+	cd.height = 10.f;
+	cd.radius = 2.f;
+	// TODO: Player Gravity
+	//cd.gravity = { 0.f, -9.8f, 0.f };
+	cd.contactOffset = 0.001f;
+	cd.stepOffset = 1.f;
+	cd.slopeLimit = 0.707f;
+
+	Engine::Physics::IController* controller;
+	PhysicsManager->CreatePlayerController(&controller, PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::mainScene)), cd);
+	_rigid->_controller = static_cast<Engine::Physics::Controller*>(controller);
+	// TODO: 적용해보고 속성값 조절
+	// _rigid->_controller->SetBottomPosition({ 0,10,0 });
+
+	// TODO: Camera Scene에 추가
 }
 
 void Ray::PostInitialize(const Engine::Modules& modules)
@@ -83,7 +115,6 @@ void Ray::PostInitialize(const Engine::Modules& modules)
 
 	//_skeletalMesh->SetActiveShadow(false);
 	_skeletalMesh->SetPostEffectFlag(1);
-	_camera->SetParent(&_cameraParentMatrix);
 }
 
 
@@ -94,17 +125,6 @@ void Ray::PostUpdate(float deltaTime)
 	_worldMatrix = Engine::Math::Matrix::CreateScale(0.4f)
 			     * Engine::Math::Matrix::CreateFromQuaternion(_transform.rotation)
 				 * Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
-
-	// Temp Shoulder View Camera;
-	auto rotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(_cameraRotation);
-	_cameraParentMatrix = Engine::Math::Matrix::CreateFromQuaternion(rotation);	
-
-	Engine::Math::Vector3 tempPostion = _transform.position;
-	tempPostion.y += 50.f;
-	tempPostion += _cameraParentMatrix.Backward() * -60.f;
-	tempPostion += _cameraParentMatrix.Right() * 10.f;
-
-	_cameraParentMatrix *= Engine::Math::Matrix::CreateTranslation(tempPostion);
 }
 
 void Ray::PostAttach()

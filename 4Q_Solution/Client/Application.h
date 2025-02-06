@@ -8,8 +8,9 @@ namespace GameClient
 		explicit Application(HINSTANCE instanceHandle);
 
 	protected:
+		void LoadData(Engine::Load::IManager* loadManager) override;
 		void DeclareInputActions(Engine::Input::IManager* inputManager) override;
-		void Register(Engine::Content::IManager* contentManager) override;
+		void Register(Engine::Content::IManager* contentManager, Engine::Load::IManager* loadManager) override;
 		void PrepareInitialWorld(Engine::Content::Factory::World* worldFactory) override;
 
 	private:

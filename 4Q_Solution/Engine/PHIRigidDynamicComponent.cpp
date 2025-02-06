@@ -11,6 +11,7 @@ namespace Engine::PHI
 		, geometry{ nullptr }
 		, material{ nullptr }
 		, collision{ nullptr }
+		, owner{ nullptr }
 	{
 		collision = new Collision<RigidDynamicComponent>{ this };
 	}
@@ -23,7 +24,7 @@ namespace Engine::PHI
 	{
 		object->SetTranslate(Vector3ToPhysicsVector3(position));
 	}
-	const Math::Vector3 RigidDynamicComponent::GetTranslate() const
+	 Math::Vector3 RigidDynamicComponent::GetTranslate() const
 	{
 		return PhysicsVector3ToVector3(object->GetTranslate());
 	}
@@ -31,7 +32,7 @@ namespace Engine::PHI
 	{
 		object->SetRotation(QuaternionToPhysicsVector4(Rotation));
 	}
-	const Math::Quaternion RigidDynamicComponent::GetRotation() const
+	 Math::Quaternion RigidDynamicComponent::GetRotation() const
 	{
 		return PhysicsVector4ToQuaternion(object->GetRotation());
 	}
@@ -39,7 +40,7 @@ namespace Engine::PHI
 	{
 		object->SetTransform(TransformToPhysicsTransform(transform));
 	}
-	const Transform RigidDynamicComponent::GetTransform() const
+	 Transform RigidDynamicComponent::GetTransform() const
 	{
 		return PhysicsTransformToTransform(object->GetTransform());
 	}
@@ -55,7 +56,7 @@ namespace Engine::PHI
 		object->SetVelocity(Vector3ToPhysicsVector3(velocity));
 	}
 
-	const Engine::Math::Vector3 RigidDynamicComponent::GetVelocity() const
+	 Engine::Math::Vector3 RigidDynamicComponent::GetVelocity() const
 	{
 		return PhysicsVector3ToVector3(object->GetVelocity());
 	}
@@ -65,7 +66,7 @@ namespace Engine::PHI
 		object->SetLinearVelocity(Vector3ToPhysicsVector3(velocity));
 	}
 
-	const Engine::Math::Vector3 RigidDynamicComponent::GetLinearVelocity() const
+	 Engine::Math::Vector3 RigidDynamicComponent::GetLinearVelocity() const
 	{
 		return PhysicsVector3ToVector3(object->GetLinearVelocity());
 	}
@@ -75,7 +76,7 @@ namespace Engine::PHI
 		object->SetMaxLinearVelocity(velocity);
 	}
 
-	const float RigidDynamicComponent::GetMaxLinearVelocity() const
+	 float RigidDynamicComponent::GetMaxLinearVelocity() const
 	{
 		return object->GetMaxLinearVelocity();
 	}
@@ -85,7 +86,7 @@ namespace Engine::PHI
 		object->SetAngularVelocity(Vector3ToPhysicsVector3(angularVelocity));
 	}
 
-	const Engine::Math::Vector3 RigidDynamicComponent::GetAngularVelocity() const
+	 Engine::Math::Vector3 RigidDynamicComponent::GetAngularVelocity() const
 	{
 		return PhysicsVector3ToVector3(object->GetAngularVelocity());
 	}
@@ -95,7 +96,7 @@ namespace Engine::PHI
 		object->SetMaxAngularVelocity(velocity);
 	}
 
-	const float RigidDynamicComponent::GetMaxAngularVelocity() const
+	 float RigidDynamicComponent::GetMaxAngularVelocity() const
 	{
 		return object->GetMaxAngularVelocity();
 	}
@@ -173,7 +174,7 @@ namespace Engine::PHI
 	{
 		shape->SetLocalTranslate(Vector3ToPhysicsVector3(LocalTranslate));
 	}
-	const Math::Vector3 RigidDynamicComponent::GetLocalTranslate() const
+	 Math::Vector3 RigidDynamicComponent::GetLocalTranslate() const
 	{
 		return PhysicsVector3ToVector3(shape->GetLocalTranslate());
 	}
@@ -181,7 +182,7 @@ namespace Engine::PHI
 	{
 		shape->SetLocalRotation(QuaternionToPhysicsVector4(LocalRotation));
 	}
-	const Math::Quaternion RigidDynamicComponent::GetLocalRotation() const
+	 Math::Quaternion RigidDynamicComponent::GetLocalRotation() const
 	{
 		return PhysicsVector4ToQuaternion(shape->GetLocalRotation());
 	}
@@ -189,7 +190,7 @@ namespace Engine::PHI
 	{
 		shape->SetLocalTransform(TransformToPhysicsTransform(LocalTransform));
 	}
-	const Transform RigidDynamicComponent::GetLocalTransform() const
+	 Transform RigidDynamicComponent::GetLocalTransform() const
 	{
 		return PhysicsTransformToTransform(shape->GetLocalTransform());
 	}
@@ -197,7 +198,7 @@ namespace Engine::PHI
 	{
 		shape->SetScale(Vector3ToPhysicsVector3(Scale));
 	}
-	const Math::Vector3 RigidDynamicComponent::GetScale() const
+	 Math::Vector3 RigidDynamicComponent::GetScale() const
 	{
 		return PhysicsVector3ToVector3(shape->GetScale());
 	}
@@ -248,6 +249,16 @@ namespace Engine::PHI
 		releaser(&geometry);
 		releaser(&material);
 		releaser(&collision);
+	}
+
+	void* RigidDynamicComponent::GetOwner()
+	{
+		return owner;
+	}
+
+	void RigidDynamicComponent::SetOwner(void* _owner)
+	{
+		owner = _owner;
 	}
 
 	void RigidDynamicComponent::BindCollision(const Physics::CallBackTrigger& callback, Physics::TriggerType type)

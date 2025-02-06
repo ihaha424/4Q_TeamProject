@@ -6,7 +6,8 @@ Ray::Ray(std::filesystem::path&& meshPath)
 	  , _movement(nullptr)
 	  , _camera(nullptr)
 	  , _skeletalMesh(nullptr)
-	  , _animator(nullptr), _fixedArm(nullptr), _rigid(nullptr)
+	  , _animator(nullptr), _fixedArm(nullptr), _rigid(nullptr),
+_offset(Engine::Math::Quaternion::CreateFromYawPitchRoll(std::numbers::pi_v<float>,0, 0))
 {
 }
 
@@ -63,8 +64,8 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 	moveAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
 		{
 			_movement->SetDirection(_fixedArm->GetTransformDirection(value));
-			_transform.rotation = _fixedArm->GetRotation(value);
-			_fixedArm->FollowDirection(value);
+			_transform.rotation = _fixedArm->GetRotation(value, _transform.rotation);
+			//_fixedArm->FollowDirection(value);
 
 			//_movement->SetDirection(_fixedArm->GetTransformDirection(value));
 			//_transform.rotation = _fixedArm->GetForwardRotation();
@@ -127,9 +128,11 @@ void Ray::PostInitialize(const Engine::Modules& modules)
 void Ray::PostUpdate(float deltaTime)
 {
 	Object::PostUpdate(deltaTime);
+
+	Engine::Math::Quaternion q = Engine::Math::Quaternion::Concatenate(_transform.rotation, _offset);
 	
 	_worldMatrix = Engine::Math::Matrix::CreateScale(0.4f)
-			     * Engine::Math::Matrix::CreateFromQuaternion(_transform.rotation)
+			     * Engine::Math::Matrix::CreateFromQuaternion(q)
 				 * Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
 }
 

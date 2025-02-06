@@ -26,6 +26,7 @@ namespace Engine::Component
 		[[nodiscard]] Math::Vector3 GetTransformDirection(const Math::Vector3& direction) const;
 		[[nodiscard]] Math::Quaternion GetForwardRotation() const;
 		[[nodiscard]] Math::Quaternion GetRotation(const Math::Vector3& direction) const;
+		[[nodiscard]] Math::Quaternion GetRotation(const Math::Vector3& direction, const Math::Quaternion& rotation) const;
 		void FollowDirection(const Math::Vector3& direction);
 
 		void SetFollowSpeed(float speed);

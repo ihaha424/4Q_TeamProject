@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "FixedArm.h"
 
+#include "../Client/Application.h"
+
 Engine::Component::FixedArm::FixedArm() :
 	_target(nullptr), _camera(nullptr), _distance(200.0f), _rotationSpeed(Math::Vector2::One),
 _followSpeed(0.01f)
@@ -72,7 +74,7 @@ Engine::Math::Vector3 Engine::Component::FixedArm::GetTransformDirection(const M
 
 Engine::Math::Quaternion Engine::Component::FixedArm::GetForwardRotation() const
 {
-	return Math::Quaternion::CreateFromYawPitchRoll({ 0,_rotation.y + std::numbers::pi_v<float>,0 });
+	return Math::Quaternion::CreateFromYawPitchRoll({ 0,_rotation.y,0 });
 }
 
 Engine::Math::Quaternion Engine::Component::FixedArm::GetRotation(const Math::Vector3& direction) const
@@ -80,7 +82,29 @@ Engine::Math::Quaternion Engine::Component::FixedArm::GetRotation(const Math::Ve
 	auto result = Math::Vector3::TransformNormal(direction, _matrix);
 	result.y = 0.f;
 	result.Normalize();
-	return Math::Quaternion::CreateFromYawPitchRoll({ 0, std::atan2(result.x, result.z) + std::numbers::pi_v<float>,0 });
+	return Math::Quaternion::CreateFromYawPitchRoll({ 0, std::atan2(result.x, result.z),0 });
+}
+
+Engine::Math::Quaternion Engine::Component::FixedArm::GetRotation(const Math::Vector3& direction,
+	const Math::Quaternion& rotation) const
+{
+	auto beforeForward = Math::Vector3::Transform(Math::Vector3::Forward, rotation);
+	beforeForward.Normalize();
+
+	auto afterForward = Math::Vector3::TransformNormal(direction, _matrix);
+	afterForward.y = 0.f;
+	afterForward.Normalize();
+
+	const float start = rotation.ToEuler().y;
+	const float end = std::atan2(afterForward.x, afterForward.z);
+
+	float delta = end - start;
+	delta = std::fmod(delta + std::numbers::pi_v<float>, std::numbers::pi_v<float> * 2.f) - std::numbers::pi_v<float>;
+	if (std::abs(delta) > std::numbers::pi_v<float>) delta -= std::numbers::pi_v<float> *2.f * (delta > 0 ? 1 : -1);
+
+	float current = std::lerp(start, start + delta, 0.1f);
+
+	return Math::Quaternion::CreateFromYawPitchRoll({ 0, current,0 });
 }
 
 void Engine::Component::FixedArm::FollowDirection(const Math::Vector3& direction)

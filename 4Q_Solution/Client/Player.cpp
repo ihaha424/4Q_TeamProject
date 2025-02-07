@@ -160,7 +160,7 @@ void Player::MoveStarted()
 {
 	_bitFlag->OnFlag(StateFlag::Walk);
 
-	_sync->_stateChange.set_stateinfo(1);
+	_sync->_stateChange.set_stateinfo(StateFlag::Walk);
 	_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
 
 	Engine::Application::GetNetworkManager()->SaveSendData(
@@ -235,16 +235,6 @@ void Player::MoveCompleted()
 		_sync->GetSerialNumber()
 	);
 
-	_sync->_stateChange.set_stateinfo(0);
-	_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
-
-	Engine::Application::GetNetworkManager()->SaveSendData(
-		(short)PacketID::StateChange,
-		_sync->_msgBuffer,
-		_sync->_stateChange.ByteSizeLong(),
-		_sync->GetSerialNumber()
-	);
-
 	// _rigid->_controller->SetDirection(Engine::Math::Vector3::Zero);
 	//_movement->SetDirection(Engine::Math::Vector3::Zero);
 }
@@ -257,14 +247,18 @@ void Player::JumpStarted()
 	_bitFlag->OnFlag(StateFlag::Jump | StateFlag::Jump_Started);
 	_animator->ChangeAnimation("rig|Anim_Jump_start");
 	_animator->SetAnimationSpeed(1.5f);
+	SendStateMessage(StateFlag::Jump);
+}
 
-	_sync->_jump.set_power(10.f);
-	_sync->_jump.SerializeToString(&_sync->_msgBuffer);
+void Player::SendStateMessage(unsigned long long state)
+{
+	_sync->_stateChange.set_stateinfo(state);
+	_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
 
 	Engine::Application::GetNetworkManager()->SaveSendData(
-		(short)PacketID::Jump,
+		(short)PacketID::StateChange,
 		_sync->_msgBuffer,
-		_sync->_jump.ByteSizeLong(),
+		_sync->_stateChange.ByteSizeLong(),
 		_sync->GetSerialNumber()
 	);
 }
@@ -274,16 +268,27 @@ void Player::UpdateState()
 	// Jump
 	if (_bitFlag->IsOnFlag(StateFlag::Jump_Started))
 	{
-		if (_animator->IsLastFrame(0.1f))
+		if (_animator->IsLastFrame(0.9f))
 		{
 			if (!_bitFlag->IsOnFlag(StateFlag::Jump_Triggered))
 			{
+				_sync->_jump.set_power(15.f);
+				_sync->_jump.SerializeToString(&_sync->_msgBuffer);
+
+				Engine::Application::GetNetworkManager()->SaveSendData(
+					(short)PacketID::Jump,
+					_sync->_msgBuffer,
+					_sync->_jump.ByteSizeLong(),
+					_sync->GetSerialNumber()
+				);
+
 				_bitFlag->OnFlag(StateFlag::Jump_Triggered);
 				_animator->ChangeAnimation("rig|Anim_Jump_loop");
 				_animator->SetAnimationSpeed(1.f);
-				goto out_jump;
 			}
-
+		}
+		if (_animator->IsLastFrame(0.3f))
+		{
 			if (_bitFlag->IsOnFlag(StateFlag::Jump_Triggered))
 			{
 				_bitFlag->OffFlag(StateFlag::Jump | StateFlag::Jump_Started | StateFlag::Jump_Triggered);
@@ -292,12 +297,12 @@ void Player::UpdateState()
 		}
 	}
 
-out_jump:;
 	if (!_bitFlag->IsOnFlag(StateFlag::Walk | StateFlag::Jump | StateFlag::Interact))
 	{
 		if (_animator->IsLastFrame(0.1f))
 		{
 			_animator->ChangeAnimation("rig|Anim_Idle");
+			SendStateMessage(StateFlag::Idle);
 		}
 	}
 }

@@ -35,6 +35,9 @@ private:
 
 	void JumpStarted();
 
+private:
+	void SendStateMessage(unsigned long long state);
+
 protected:
 	std::filesystem::path _meshPath;
 	Engine::Math::Matrix _worldMatrix;

@@ -134,9 +134,9 @@ void TestWorld::EnterAccept(const ConnectMsg::AddObject* msg) {
 	}
 	else if (msg->grantnumber() == 2) {
 		// TODO: 여기에 리브의 오브젝트를 생성하는 코드를 넣어야 합니다.
-		_remote = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Ray>(this);
+		_ray = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Ray>(this);
 		playerSerialNum = msg->grantnumber();
-		_remote->SetSerialNumber(msg->grantnumber());
+		_ray->SetSerialNumber(msg->grantnumber());
 	}
 }
 void TestWorld::CreatePlayer(const ConnectMsg::AddObject* msg) {
@@ -144,15 +144,15 @@ void TestWorld::CreatePlayer(const ConnectMsg::AddObject* msg) {
 		return;
 	}
 	if (msg->grantnumber() == 1) {
-		_ray = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Ray>(this);
-		_ray->SetSerialNumber(msg->grantnumber());
-		_ray->SetRemoteState();
+		_remote = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<RemoteRay>(this);
+		_remote->SetSerialNumber(msg->grantnumber());
+		//_ray->SetRemoteState();
 	}
 	else if (msg->grantnumber() == 2) {
 		// TODO: 여기에 리브의 오브젝트를 생성하는 코드를 넣어야 합니다.
-		_remote = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Ray>(this);
+		_remote = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<RemoteRay>(this);
 		_remote->SetSerialNumber(msg->grantnumber());
-		_remote->SetRemoteState();
+		//_remote->SetRemoteState();
 	}
 }
 void TestWorld::CreateStaticObject(const ConnectMsg::AddObject* msg) {

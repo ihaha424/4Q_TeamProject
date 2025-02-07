@@ -1,7 +1,7 @@
 #include "pch.h"
-#include "Ray.h"
+#include "RemoteRay.h"
 
-Ray::Ray(std::filesystem::path&& meshPath)
+RemoteRay::RemoteRay(std::filesystem::path&& meshPath)
 {
 	_meshPath = std::forward<std::filesystem::path>(meshPath);
 }

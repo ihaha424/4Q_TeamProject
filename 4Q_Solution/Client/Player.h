@@ -35,6 +35,9 @@ private:
 
 	void JumpStarted();
 
+	void InteractStarted();
+	void InteractTriggered();
+	void InteractCompleted();
 private:
 	void SendStateMessage();
 

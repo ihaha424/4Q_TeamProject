@@ -60,7 +60,6 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	_fixedArm->SetRotationSpeed(Engine::Math::Vector2{ 0.02f, 0.04f });
 	_fixedArm->SetFollowSpeed(0.01f);
 
-
 	_remote->SetTarget(&_transform);
 
 	const auto inputManager = Engine::Application::GetInputManager();
@@ -92,6 +91,7 @@ void Player::PreInitialize(const Engine::Modules& modules)
 		{
 			//_transform.position.y -= 100.f;
 		});
+
 	auto PhysicsManager = Engine::Application::GetPhysicsManager();
 
 	Engine::Physics::ControllerDesc cd;
@@ -229,6 +229,18 @@ void Player::JumpStarted()
 	SendStateMessage();
 }
 
+void Player::InteractStarted()
+{
+}
+
+void Player::InteractTriggered()
+{
+}
+
+void Player::InteractCompleted()
+{
+}
+
 void Player::SendStateMessage()
 {
 	_sync->_stateChange.set_stateinfo(_bitFlag->GetCurrentFlag());
@@ -252,9 +264,11 @@ void Player::UpdateState()
 			if (!_bitFlag->IsOnFlag(StateFlag::Jump_Triggered))
 			{
 				_remote->SetSpeed(_speed * 0.5f);
+				_remote->SetDirection(Engine::Math::Vector3(0.f, 1.f, 0.f));
 
 				_sync->_jump.set_power(15.f);
 				_sync->_jump.SerializeToString(&_sync->_msgBuffer);
+				
 
 				Engine::Application::GetNetworkManager()->SaveSendData(
 					(short)PacketID::Jump,
@@ -274,6 +288,7 @@ void Player::UpdateState()
 			{
 				_bitFlag->OffFlag(StateFlag::Jump | StateFlag::Jump_Started | StateFlag::Jump_Triggered);
 				_animator->ChangeAnimation("rig|Anim_Jump_end");
+				_remote->SetDirection(Engine::Math::Vector3::Zero);
 			}
 		}
 	}

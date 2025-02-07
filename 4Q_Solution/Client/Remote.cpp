@@ -167,6 +167,9 @@ const int Remote::GetSerialNumber() const
 void Remote::StateChange(const MoveMsg::StateChange* msg)
 {
 	unsigned long long flag = msg->stateinfo();
+	
+	if (flag == _bitFlag->GetCurrentFlag())
+		return;
 
 	if (!_bitFlag->IsOnFlag(StateFlag::Jump))
 	{

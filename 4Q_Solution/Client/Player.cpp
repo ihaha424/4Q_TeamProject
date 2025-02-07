@@ -73,24 +73,19 @@ void Player::PreInitialize(const Engine::Modules& modules)
 
 	Engine::Input::IAction* moveAction = nullptr;
 	mappingContext->GetAction(L"Move", &moveAction);
-	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
-		{ MoveStarted(); });
-	moveAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
-		{ MoveTriggered(value); });
-	moveAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
-		{ MoveCompleted(); });
+	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) { MoveStarted(); });
+	moveAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value) { MoveTriggered(value); });
+	moveAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value) { MoveCompleted(); });
 
 	Engine::Input::IAction* jumpAction = nullptr;
 	mappingContext->GetAction(L"Jump", &jumpAction);
-	jumpAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
-		{ JumpStarted(); });
+	jumpAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) { JumpStarted(); });
 
 	Engine::Input::IAction* interactAction = nullptr;
 	mappingContext->GetAction(L"Interact", &interactAction);
-	interactAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
-		{
-			//_transform.position.y -= 100.f;
-		});
+	interactAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) { InteractStarted(); });
+	interactAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value) { InteractTriggered(); });
+	interactAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value) { InteractCompleted(); });
 
 	auto PhysicsManager = Engine::Application::GetPhysicsManager();
 
@@ -231,14 +226,33 @@ void Player::JumpStarted()
 
 void Player::InteractStarted()
 {
+	if (_bitFlag->IsOnFlag(StateFlag::Interact))
+		return;
+
+	_bitFlag->OnFlag(StateFlag::Interact | StateFlag::Interact_Started);
+	_animator->ChangeAnimation("rig|Anim_Interaction_start");
+	SendStateMessage();
 }
 
 void Player::InteractTriggered()
 {
+	if (_bitFlag->IsOnFlag(StateFlag::Interact_Started))
+	{
+		if (_animator->IsLastFrame(0.1f))
+		{
+			_bitFlag->OffFlag(StateFlag::Interact_Started);
+			_bitFlag->OnFlag(StateFlag::Interact_Triggered);
+			_animator->ChangeAnimation("rig|Anim_Interaction_loop");
+			SendStateMessage();
+		}
+	}
 }
 
 void Player::InteractCompleted()
 {
+	_animator->ChangeAnimation("rig|Anim_Interaction_end");
+	_bitFlag->OffFlag(StateFlag::Interact | StateFlag::Interact_Started | StateFlag::Interact_Triggered);
+	SendStateMessage();
 }
 
 void Player::SendStateMessage()
@@ -299,7 +313,6 @@ void Player::UpdateState()
 		{
 			_animator->ChangeAnimation("rig|Anim_Idle");
 			_remote->SetSpeed(_speed);
-			// SendStateMessage();
 		}
 	}
 }

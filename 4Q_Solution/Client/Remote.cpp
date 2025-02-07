@@ -187,6 +187,30 @@ void Remote::StateChange(const MoveMsg::StateChange* msg)
 			_animator->ChangeAnimation("rig|Anim_Jump_start");
 			_animator->SetAnimationSpeed(1.5f);
 		}
+
+		if (!_bitFlag->IsOnFlag(StateFlag::Interact))
+		{
+			if (flag & StateFlag::Interact_Started)
+			{
+				_animator->ChangeAnimation("rig|Anim_Interaction_start");
+			}
+		}
+	}
+
+	if (_bitFlag->IsOnFlag(StateFlag::Interact))
+	{
+		if (flag & StateFlag::Interact_Triggered)
+		{
+			_animator->ChangeAnimation("rig|Anim_Interaction_loop");
+		}
+
+		unsigned long long checkFlag = flag & (StateFlag::Interact | 
+											   StateFlag::Interact_Started | 
+											   StateFlag::Interact_Triggered);
+		if (0 == flag)
+		{
+			_animator->ChangeAnimation("rig|Anim_Interaction_end");
+		}
 	}
 
 	_bitFlag->SetFlag(flag);

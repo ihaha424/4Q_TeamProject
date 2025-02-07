@@ -20,7 +20,7 @@ namespace Engine::Physics
 		virtual void ClearVelocity() = 0;
 		virtual void SetMass(float mass) = 0;
 		virtual float GetMass() = 0;
-
+		virtual bool IsJump() = 0;
 
 		/***********************************
 					Controller

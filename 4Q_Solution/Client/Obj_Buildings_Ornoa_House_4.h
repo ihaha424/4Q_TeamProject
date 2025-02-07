@@ -5,5 +5,6 @@ class Obj_Buildings_Ornoa_House_4 : public StaticObject
 {
 public:
 	explicit Obj_Buildings_Ornoa_House_4(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
+	virtual ~Obj_Buildings_Ornoa_House_4() = default;
 };
 

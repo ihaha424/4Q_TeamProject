@@ -73,6 +73,7 @@ void Remote::PreInitialize(const Engine::Modules& modules)
 
 	_sync->AddCallback((short)PacketID::MoveSync, &Remote::SyncMove, this);
 	_sync->AddCallback((short)PacketID::DataRemote, &Remote::SetLocation, this);
+	_sync->AddCallback((short)PacketID::StateChange, &Remote::StateChange, this);
 }
 
 void Remote::PostInitialize(const Engine::Modules& modules)

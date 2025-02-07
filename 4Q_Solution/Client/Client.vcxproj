@@ -181,6 +181,8 @@
     <ClInclude Include="Obj_Puzzle_Shinave_Stone_5.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="Remote.h" />
+    <ClInclude Include="RemoteLive.h" />
     <ClInclude Include="RemoteMove.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SceneFillter.h" />
@@ -227,6 +229,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="Remote.cpp" />
+    <ClCompile Include="RemoteLive.cpp" />
     <ClCompile Include="RemoteMove.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="StaticObject.cpp" />

@@ -8,7 +8,7 @@ namespace Engine::UGameState
 		Manager();
 
 		void RegisterSubManager(IManager* _subManager) override;
-		void AttachEvent(std::wstring _event) override;
+		void AttachEvent(std::wstring _event, const notifiy& _callback) override;
 
 
 		void Initialize() override;

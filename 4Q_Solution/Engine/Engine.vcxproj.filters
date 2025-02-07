@@ -457,6 +457,9 @@
     <Filter Include="Components\FixedArm">
       <UniqueIdentifier>{b744d9ce-45b5-4f42-912c-bdfafc0cfe21}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\BitFlag">
+      <UniqueIdentifier>{a9b1ab56-ebfb-4e46-85be-a8f1bcd6eb80}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -893,6 +896,9 @@
     </ClInclude>
     <ClInclude Include="FixedArm.h">
       <Filter>Components\FixedArm</Filter>
+    </ClInclude>
+    <ClInclude Include="BitFlag.h">
+      <Filter>Components\BitFlag</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

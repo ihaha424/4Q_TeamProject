@@ -4,8 +4,8 @@
 
 void ToneMapping::Initialize()
 {
-	_psToneMapping = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/ToneMappingPS.cso");
-	_psLuminance = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/ToneMappingPS_Lum.cso");
+	_psToneMapping = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/ToneMappingPS.cso");
+	_psLuminance = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/ToneMappingPS_Lum.cso");
 }
 
 void ToneMapping::Render()

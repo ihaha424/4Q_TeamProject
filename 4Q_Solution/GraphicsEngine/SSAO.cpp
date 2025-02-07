@@ -34,11 +34,11 @@ void SSAO::Initialize()
         _kernel.emplace_back(sample);
     }
 
-    _texture = g_pResourceMgr->LoadResource<Texture>(L"../Resources/Textures/AO_Noise.png");
-    _psSSAO[Sample] = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/SSAOPS_Sampling.cso");
-    _psSSAO[Blend] = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/SSAOPS_Blend.cso");
-    _psGaussianBlur[X] = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/GaussianBlurPS_X.cso");
-    _psGaussianBlur[Y] = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/GaussianBlurPS_Y.cso");
+    _texture = g_pResourceMgr->LoadResource<Texture>(L"Assets/Textures/AO_Noise.png");
+    _psSSAO[Sample] = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/SSAOPS_Sampling.cso");
+    _psSSAO[Blend] = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/SSAOPS_Blend.cso");
+    _psGaussianBlur[X] = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/GaussianBlurPS_X.cso");
+    _psGaussianBlur[Y] = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/GaussianBlurPS_Y.cso");
 }
 
 void SSAO::Render()

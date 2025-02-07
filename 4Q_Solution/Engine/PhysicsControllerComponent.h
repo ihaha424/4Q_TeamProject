@@ -22,7 +22,6 @@ namespace Engine::Physics
 		virtual float GetMass() = 0;
 
 
-
 		/***********************************
 					Controller
 		************************************/

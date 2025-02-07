@@ -36,7 +36,7 @@ void Quad::Initialize()
 
 	_pVIBuffer->Initialize(info);
 	_pDeviceContext = g_pGraphicDevice->GetDeviceContext();
-	_vsQuad = g_pResourceMgr->LoadResource<VertexShader>(L"../Resources/Shaders/QuadVS.cso");
+	_vsQuad = g_pResourceMgr->LoadResource<VertexShader>(L"Assets/Shaders/QuadVS.cso");
 }
 
 void Quad::Render()

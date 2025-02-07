@@ -1,7 +1,7 @@
 #include "pch.h"
-#include "Building1.h"
+#include "Obj_BG_Mountain.h"
 
-Building1::Building1(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath)
+Obj_BG_Mountain::Obj_BG_Mountain(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath)
 	: StaticObject(std::forward<std::filesystem::path>(meshPath), std::forward<std::filesystem::path>(physicsPath))
 {
 }

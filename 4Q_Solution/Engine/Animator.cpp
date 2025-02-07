@@ -43,9 +43,9 @@ void Engine::Component::Animator::ChangeAnimation(const char* animation, const u
 	_geAnimator->ChangeAnimation(animation, id);
 }
 
-bool Engine::Component::Animator::IsLastFrame(const float interval) const
+bool Engine::Component::Animator::IsLastFrame(float interval, const unsigned int id) const
 {
-	return _geAnimator->IsLastFrame(interval);
+	return _geAnimator->IsLastFrame(interval, id);
 }
 
 void Engine::Component::Animator::SetUpSplitBone(const unsigned int maxSplit) const
@@ -56,4 +56,9 @@ void Engine::Component::Animator::SetUpSplitBone(const unsigned int maxSplit) co
 void Engine::Component::Animator::SplitBone(const unsigned int id, const char* boneName) const
 {
 	_geAnimator->SplitBone(id, boneName);
+}
+
+void Engine::Component::Animator::SetAnimationSpeed(float speed) const
+{
+	_geAnimator->SetAnimationSpeed(speed);
 }

@@ -32,8 +32,7 @@ void Animator::Update(const float deltaTime)
 	{
 		const Animation::Channel& animation = _animation->_animations[_controllers[i].animation];
 
-		_controllers[i].playTime += animation.ticksPerSecond * deltaTime;
-		_controllers[i].playTime = fmod(_controllers[i].playTime, animation.duration);
+		_controllers[i].playTime += _speed * deltaTime;
 	
 		if (_controllers[i].playTime >= animation.lastTime)
 		{
@@ -51,8 +50,7 @@ void Animator::Update(const float deltaTime)
 		if (_blendInfo.isBlending)
 		{
 			/*const Animation::Channel& prevAnimation = _animation->_animations[_blendInfo.prevAnimation];
-			_blendInfo.prevPlayTime += prevAnimation.ticksPerSecond * deltaTime;
-			_blendInfo.prevPlayTime = fmod(_blendInfo.prevPlayTime, prevAnimation.duration);
+			_blendInfo.prevPlayTime += _speed * deltaTime;
 
 			if (_blendInfo.prevPlayTime > prevAnimation.lastTime)
 				_blendInfo.prevPlayTime = 0.f;*/
@@ -94,14 +92,14 @@ void Animator::Release()
 
 void Animator::ChangeAnimation(const char* animation)
 {
-	if (_animation->_animations.find(animation) == _animation->_animations.end())
+	auto iter = _animation->_animations.find(animation);
+	if (iter == _animation->_animations.end())
 		return;
 
 	if (!strcmp(_controllers[0].animation, animation))
 		return;
 
 	memcpy(_blendInfo.prevAnimation.data(), _controllers[0].animation, strlen(_controllers[0].animation));
-	//_blendInfo.prevAnimation = _controllers[0].animation;
 	_blendInfo.prevPlayTime = _controllers[0].playTime;
 	_blendInfo.blendTime = 0.f;
 	_blendInfo.isBlending = true;
@@ -111,6 +109,7 @@ void Animator::ChangeAnimation(const char* animation)
 	{
 		controller.animation = animation;
 		controller.playTime = 0.f;
+		controller.lastTime = iter->second.lastTime;
 	}
 }
 
@@ -133,10 +132,9 @@ void Animator::ChangeAnimation(const char* animation, const unsigned int ID)
 	_controllers[ID].playTime = 0.f;
 }
 
-bool Animator::IsLastFrame(float interval) const
+bool Animator::IsLastFrame(float interval, const unsigned int ID) const
 {
-	//_controller[Lower].playTime + interval > _controller[Lower].lastTime;
-	return false;
+	return _controllers[ID].playTime + interval > _controllers[ID].lastTime;
 }
 
 void Animator::SetUpSplitBone(const unsigned int maxSplit)
@@ -158,6 +156,11 @@ void Animator::SplitBone(const unsigned int ID, const char* boneName)
 
 	_pSkeleton->SplitBone(ID, boneName);
 	BoneMasking(_pSkeleton->GetBone(ID), ID);
+}
+
+void Animator::SetAnimationSpeed(float speed)
+{
+	_speed = speed;
 }
 
 void Animator::UpdateAnimationTransform(const Bone& skeletion,

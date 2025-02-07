@@ -32,7 +32,7 @@ bool ServerLogic::Initialize()
     //  Load JSON Data
     //============================
     printf("Start Loading MapData.json...\n");
-    _mapData = _jsonLoader.DeSerialize("../Resources/JSONTest/MapData.json");
+    _mapData = _jsonLoader.DeSerialize("Assets/Test/MapData.json");
     printf("MapData.json Load Complete.\n");
     LoadBuilding();
     LoadSudium();
@@ -312,7 +312,7 @@ void ServerLogic::JumpProcess(const Packet& packet)
 {
     _jump.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
     int playerIdx = packet._serialNumber - 1;
-    _playerSlot[playerIdx]._controller->Jump(_jump.power());
+    _playerSlot[playerIdx]._controller->Jump(_jump.power() * 5);
 }
 void ServerLogic::StateChangeProcess(const Packet& packet)
 {
@@ -441,7 +441,12 @@ void ServerLogic::LoadBuilding()
         );
         obj->_serialNumber = _staticObjectSerialNumber++;
         _buildings.push_back(obj);
-        //RegistStaticPhysics(*obj);
+        RegistStaticPhysics(*obj);
+        Engine::Transform transform{};
+        transform.position = obj->_position;
+        transform.rotation = obj->_rotation;
+
+        obj->_staticRigid->SetTransform(transform);
     }
     printf("Building Data Load Complete.\n");
 }
@@ -471,7 +476,13 @@ void ServerLogic::LoadSudium()
         );
         obj->_serialNumber = _staticObjectSerialNumber++;
         _sudiums.push_back(obj);
-        //RegistStaticPhysics(*obj);
+        RegistStaticPhysics(*obj);
+        Engine::Transform transform{};
+        transform.position = obj->_position;
+        transform.rotation = obj->_rotation;
+
+        obj->_staticRigid->SetTransform(transform);
+
         printf("Sudium Create Complete. SerialNumber : %d\n", obj->_serialNumber);
     }
     printf("Sudium Data Load Complete.\n");
@@ -501,7 +512,7 @@ void ServerLogic::RegistStaticPhysics(Object& obj)
 {
     Engine::Physics::RigidComponentDesc rcd;
     rcd.rigidType = Engine::Physics::RigidBodyType::Static;
-    rcd.shapeDesc.geometryDesc.type = Engine::Physics::GeometryShape::Capsule;
+    rcd.shapeDesc.geometryDesc.type = Engine::Physics::GeometryShape::Box;
     rcd.shapeDesc.geometryDesc.data = { 100.f, 100.f, 100.f };
     rcd.shapeDesc.isExclusive = true;
     rcd.shapeDesc.materialDesc.data = { 0.5f, 0.5f, 0.5f };
@@ -515,10 +526,10 @@ void ServerLogic::RegistStaticPhysics(Object& obj)
 void ServerLogic::RegistPlayer(Player* player)
 {
     Engine::Physics::ControllerDesc cd;
-    cd.position = Engine::Math::Vector3(0, 0, 0);
+    cd.position = Engine::Math::Vector3(100, 100, 100);
     cd.height = 10.f;
     cd.radius = 2.f;
-    //cd.gravity = { 0.f, -9.8f, 0.f };
+    cd.gravity = { 0.f, -9.8f * 10, 0.f };
     cd.contactOffset = 0.001f;
     cd.stepOffset = 1.f;
     cd.slopeLimit = 0.707f;
@@ -528,21 +539,23 @@ void ServerLogic::RegistPlayer(Player* player)
     player->_controller->SetBottomPosition({0,10,0});
     player->_controller->SetOwner(&player);
     player->_controller->Initialize();
-    player->_controller->SetPosition(Engine::Math::Vector3(0, 0, 0));
 }
 
 void ServerLogic::RegistGround(Ground& ground)
 {
     Engine::Physics::GeometryDesc geometryDesc;
     geometryDesc.data = { 100, 100, 100 };
-    _physicsManager->LoadHeightMap(geometryDesc, "terrain", "../Resources/Terrain/testTest.png");
+    //_physicsManager->LoadHeightMap(geometryDesc, "terrain", "Assets/Test/testHeight.png");
+    _physicsManager->LoadTriangleMesh(geometryDesc, "terrain", "Assets/Test/Landscape03.fbx");
 
     Engine::Transform transform{};
     Engine::Physics::IRigidStaticComponent* staticrigid;
     _physicsManager->CreateTriangleStatic(&staticrigid, "terrain", { {0.f,0.f,0.f } }, transform);
     ground._staticRigid = static_cast<Engine::Physics::RigidStaticComponent*>(staticrigid);
     _mainScene->AddActor(ground._staticRigid);
-    ground._staticRigid->SetTranslate({ -1000.f, -200.f, 1000.f });
+    //ground._staticRigid->SetTranslate({ -1000.f * geometryDesc.data.x, -200.f * geometryDesc.data.y, 1000.f * geometryDesc.data.z });
+    ground._staticRigid->SetTranslate({ 0.f, -1000.f, 0.f });
+    ground._staticRigid->SetRotation(Engine::Math::Quaternion::CreateFromYawPitchRoll(3.14f, 0.f, 0.f));
 
     ground._staticRigid->SetOwner(&ground);
     ground._staticRigid->Initialize();

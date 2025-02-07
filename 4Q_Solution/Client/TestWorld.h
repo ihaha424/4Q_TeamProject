@@ -1,4 +1,5 @@
 #pragma once
+#include "Application.h"
 #include "GlobalLight.h"
 #include "Terrain.h"
 #include "SkyBox.h"
@@ -42,5 +43,25 @@ public:
 	void CreatePlayer(const ConnectMsg::AddObject* msg);
 	void CreateStaticObject(const ConnectMsg::AddObject* msg);
 	void RequestData(const ConnectMsg::AddObject* msg);
+
+private:
+	template<typename T>
+	void helpPrepare(const std::wstring& name, Engine::Content::Factory::Object* objectFactory)
+	{
+		auto object = GameClient::Application::GetLoadManager()->GetObjectCloneData(name);
+		for (auto& data : object)
+		{
+			auto building = objectFactory->Clone<T>(this);
+			building->SetisDynamic(data.GetProperty<bool>(L"isDynamic").value());
+			building->SetIsPublic(data.GetProperty<bool>(L"isPublic").value());
+			building->SetHasMesh(data.GetProperty<bool>(L"hasMesh").value());
+			building->SetTransform({
+					data.GetProperty<Engine::Math::Vector3>(L"position").value(),
+					data.GetProperty<Engine::Math::Quaternion>(L"rotation").value(),
+					data.GetProperty<Engine::Math::Vector3>(L"scale").value()
+				});
+			building->SetBoxScale(data.GetProperty<Engine::Math::Vector3>(L"boxScale").value());
+		}
+	}
 };
 

@@ -155,6 +155,7 @@ void Engine::Application::Register(Content::IManager* contentManager, Load::IMan
 	componentFactory->Register<Component::ChractorController>();
 	componentFactory->Register<Component::Synchronize>();
 	componentFactory->Register<Component::FixedArm>();
+	componentFactory->Register<Component::BitFlag>();
 	// TODO: Register other components.
 }
 
@@ -192,7 +193,7 @@ void Engine::Application::LoadGameData()
 
 	const auto configData = _loadManager->GetGameConfigData();
 	_title = configData.GetProperty<std::wstring>(L"Title").value_or(L"Game");
-	_size = configData.GetProperty<Math::Size>(L"Size").value_or(Math::Size{ 1920, 1080 });
+	_size = configData.GetProperty<Math::Size>(L"Size").value_or(Math::Size{ 1600, 900 });
 }
 
 void Engine::Application::FinalizeManagers()

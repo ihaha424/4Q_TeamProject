@@ -4,8 +4,8 @@
 
 void Bloom::Initialize()
 {
-	_psBloomCurve = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/BloomCurvePS.cso");
-	_psSampling = g_pResourceMgr->LoadResource<PixelShader>(L"../Resources/Shaders/SamplingPS.cso");
+	_psBloomCurve = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/BloomCurvePS.cso");
+	_psSampling = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/SamplingPS.cso");
 
 	_desc =
 	{

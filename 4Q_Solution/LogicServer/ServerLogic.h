@@ -24,7 +24,7 @@ class ServerLogic
 		int _serialNumber;
 		std::string _resourceId{ "" };
 		Engine::Math::Vector3 _position;
-		Engine::Math::Vector4 _rotation;
+		Engine::Math::Quaternion _rotation;
 		Engine::Math::Vector3 _scale;
 		bool _public;
 		bool _meshCollider;
@@ -51,6 +51,7 @@ class ServerLogic
 	struct Player {
 		int _serialNumber;
 		Engine::Math::Vector3 _position;
+		Engine::Math::Quaternion _rotation;
 		std::string _resourceId;
 		Engine::Math::Vector3 _direction;
 		int _state;

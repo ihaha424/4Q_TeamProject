@@ -49,3 +49,13 @@ Engine::Math::Vector3 Engine::Transform::GetDown() const
 {
 	return Math::Vector3::Transform(Math::Vector3::Down, rotation);
 }
+
+Engine::Math::Matrix Engine::Transform::GetMatrix()
+{
+	Engine::Math::Matrix matrix;
+
+	matrix = Engine::Math::Matrix::CreateScale(scale)
+		* Engine::Math::Matrix::CreateFromQuaternion(rotation)
+		* Engine::Math::Matrix::CreateTranslation(position);
+	return matrix;
+}

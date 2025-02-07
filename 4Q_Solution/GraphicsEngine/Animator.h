@@ -41,9 +41,10 @@ public:
 	void Release() override;
 	void ChangeAnimation(const char* animation) override;
 	void ChangeAnimation(const char* animation, const unsigned int ID) override;
-	bool IsLastFrame(float interval) const override;
+	bool IsLastFrame(float interval, const unsigned int ID) const override;
 	void SetUpSplitBone(const unsigned int maxSplit) override;
 	void SplitBone(const unsigned int ID, const char* boneName) override;
+	void SetAnimationSpeed(float speed) override;
 
 private:
 	void UpdateAnimationTransform(const Bone& skeletion, const XMMATRIX& parentTransform, Controller* controller);
@@ -79,4 +80,5 @@ private:
 	static unsigned int						_globalID;
 	unsigned int							_ID{ 0 };
 	unsigned int							_maxSplit{ 0 };
+	float									_speed{ 1.f };
 };

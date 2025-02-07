@@ -5,6 +5,7 @@
 #include "State.h"
 #include "FiniteStateMachine.h"
 #include "FixedArm.h"
+#include "BitFlag.h"
 
 // Graphics
 #include "GraphicsComponent.h"

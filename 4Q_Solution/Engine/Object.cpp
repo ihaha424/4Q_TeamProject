@@ -86,3 +86,13 @@ Engine::World* Engine::Object::GetOwner() const
 {
 	return _owner;
 }
+
+void Engine::Object::SetTransform(const Engine::Transform& transform)
+{
+	_transform = transform;
+}
+
+Engine::Transform Engine::Object::GetTransform() const
+{
+	return _transform;
+}

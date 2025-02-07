@@ -16,8 +16,9 @@ namespace GE
 	public:
 		virtual void ChangeAnimation(const char* animation) = 0;
 		virtual void ChangeAnimation(const char* animation, const unsigned int ID) = 0;
-		virtual bool IsLastFrame(float interval) const = 0;
+		virtual bool IsLastFrame(float interval, const unsigned int ID) const = 0;
 		virtual void SetUpSplitBone(const unsigned int maxSplit) = 0;
 		virtual void SplitBone(const unsigned int ID, const char* boneName) = 0;
+		virtual void SetAnimationSpeed(float speed) = 0;
 	};
 }

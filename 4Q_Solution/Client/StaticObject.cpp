@@ -19,9 +19,19 @@ void StaticObject::DisposeComponents()
 	_rigidStatc->Dispose();
 }
 
-void StaticObject::SetMeshData(bool meshData)
+void StaticObject::SetIsPublic(bool isPublic)
 {
-	_meshData = meshData;
+	_isPublic = isPublic;
+}
+
+void StaticObject::SetisDynamic(bool isDynamic)
+{
+	_isDynamic = isDynamic;
+}
+
+void StaticObject::SetHasMesh(bool hasMesh)
+{
+	_hasMesh = hasMesh;
 }
 
 void StaticObject::SetBoxScale(Engine::Math::Vector3 boxScale)
@@ -33,10 +43,11 @@ void StaticObject::PreInitialize(const Engine::Modules& modules)
 {
 	Object::PreInitialize(modules);
 	_staticMesh->SetFilePath(_meshPath);
+	_matrix = _transform.GetMatrix();
 	_staticMesh->SetMatrix(&_matrix);
 	
 	auto PhysicsManager = Engine::Application::GetPhysicsManager();
-	if (_meshData)
+	if (_hasMesh)
 	{
 		Engine::Physics::GeometryDesc geometryDesc;
 		Engine::Transform shapeTransform{};
@@ -47,7 +58,15 @@ void StaticObject::PreInitialize(const Engine::Modules& modules)
 	}
 	else
 	{
-		PhysicsManager->CreateStaticBoundBoxActor(&_rigidStatc->_boundBox, _boxScale, _transform);
+		Engine::Physics::RigidComponentDesc desc;
+		desc.rigidType = Engine::Physics::RigidBodyType::Static;
+		desc.shapeDesc.geometryDesc.type = Engine::Physics::GeometryShape::Box;
+		desc.shapeDesc.geometryDesc.data = { _boxScale.x, _boxScale.y, _boxScale.z, 0 };
+		desc.shapeDesc.isExclusive = true;
+		desc.shapeDesc.materialDesc.data = { 0.5f,0.5f,0.f };
+
+		Engine::Transform shapeTransform{};
+		PhysicsManager->CreateStatic(&_rigidStatc->_rigidbody, desc, _transform, shapeTransform);
 		_rigidStatc->_rigidbody->SetOwner(this);
 	}
 	PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::mainScene))->AddActor(_rigidStatc->_rigidbody);

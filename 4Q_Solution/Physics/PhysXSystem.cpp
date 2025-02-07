@@ -150,6 +150,8 @@ namespace PhysicsEngineAPI
 		if (nullptr == pxScene)
 			return false;
 		pxScene->setName(name);
+		/*pxScene->setVisualizationParameter(physx::PxVisualizationParameter::eSCALE, 1.0);
+		pxScene->setVisualizationParameter(physx::PxVisualizationParameter::eCOLLISION_SHAPES, 1.0);*/
 		newScene->SetScene(pxScene);
 		if (nullptr == newScene)
 			return false;

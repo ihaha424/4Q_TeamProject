@@ -23,15 +23,14 @@ void SkyBox::PreInitialize(const Engine::Modules& modules)
 
 	_skyBox->SetFilePath(_meshPath);
 	_skyBox->SetMatrix(&_worldMatrix);
-	
+	_worldMatrix = Engine::Math::Matrix::CreateScale(5.f);
 }
 
 void SkyBox::PostInitialize(const Engine::Modules& modules)
 {
-	_skyBox->SetSkyBoxTexture(L"../Resources/IBL/EnvHDR.dds");
-	_skyBox->SetDiffuseTexture(L"../Resources/IBL/DiffuseHDR.dds");
-	_skyBox->SetBRDFTexture(L"../Resources/IBL/Brdf.dds");
-	_skyBox->SetSpecularTexture(L"../Resources/IBL/SpecularHDR.dds");
-	
+	_skyBox->SetSkyBoxTexture(L"Assets/Textures/EnvHDR.dds");
+	_skyBox->SetDiffuseTexture(L"Assets/Textures/DiffuseHDR.dds");
+	_skyBox->SetBRDFTexture(L"Assets/Textures/Brdf.dds");
+	_skyBox->SetSpecularTexture(L"Assets/Textures/SpecularHDR.dds");	
 	_skyBox->SetPostEffectFlag(1);
 }

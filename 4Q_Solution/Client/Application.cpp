@@ -9,8 +9,8 @@ GameClient::Application::Application(const HINSTANCE instanceHandle) : Engine::A
 
 void GameClient::Application::LoadData(Engine::Load::IManager* loadManager)
 {
-	loadManager->LoadRegisterData(L"../Resources/JSONTest/MapData.json");
-	loadManager->LoadCloneData(L"../Resources/JSONTest/MapData.json");
+	loadManager->LoadRegisterData(L"Assets/Test/MapData.json");
+	loadManager->LoadCloneData(L"Assets/Test/MapData.json");
 }
 
 void GameClient::Application::DeclareInputActions(Engine::Input::IManager* inputManager)
@@ -33,27 +33,46 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	worldFactory->Register<TestWorld>();
 
 	const auto objectFactory = contentManager->GetObjectFactory();
-	objectFactory->Register<Ray>(L"../Resources/Test/Ray.fbx");
 	objectFactory->Register<GlobalLight>();
-	objectFactory->Register<Terrain>(L"../Resources/Level/Level.fbx", "../Resources/Terrain/testTest.png");
-	objectFactory->Register<SkyBox>(L"../Resources/IBL/skybox.fbx");
+	objectFactory->Register<Ray>(L"Assets/Models/Ray.fbx");
+	objectFactory->Register<SkyBox>(L"Assets/Models/skybox.fbx");
 
 
+	/*
+		Static Object
+	*/
+	objectFactory->Register<Terrain>("Assets/Test/Landscape03.fbx", L"Assets/Test/HeightMap.png");
 
+	// RegisterHelp<Obj_BG_Tree_1>(L"Obj_BG_Tree_1", loadManager, objectFactory);
+	// RegisterHelp<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", loadManager, objectFactory);
+	// RegisterHelp<Obj_BG_Mountain>(L"Obj_BG_Mountain", loadManager, objectFactory);
 
-	objectFactory->Register<Building1>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
-	objectFactory->Register<Building2>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
-	objectFactory->Register<Building3>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
-	objectFactory->Register<Building4>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
-	objectFactory->Register<Building5>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
-	objectFactory->Register<Building6>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
-	objectFactory->Register<Building7>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
-	objectFactory->Register<Building8>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
-	objectFactory->Register<Building9>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
-	objectFactory->Register<Building10>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
-	objectFactory->Register<SudiumBlue>(L"../Resources/TestObject/sphere.fbx", L"../Resources/TestObject/sphere.fbx");
+	RegisterHelp<Obj_Props_Fence>(L"Obj_Props_Fence", loadManager, objectFactory);
 
+	RegisterHelp<Obj_Buildings_Shinave>(L"Obj_Buildings_Shinave", loadManager, objectFactory);
+	// RegisterHelp<Obj_Buildings_Bermiore_Atelier_1>(L"Obj_Buildings_Bermiore_Atelier_1", loadManager, objectFactory);
+	// RegisterHelp<Obj_Buildings_Bermiore_Atelier_2>(L"Obj_Buildings_Bermiore_Atelier_2", loadManager, objectFactory);
+	// RegisterHelp<Obj_Buildings_Bermiore_Atelier_3>(L"Obj_Buildings_Bermiore_Atelier_3", loadManager, objectFactory);
 
+	// RegisterHelp<Obj_Props_Bermiore_Loom_1>(L"Obj_Props_Bermiore_Loom_1", loadManager, objectFactory);
+	// RegisterHelp<Obj_Props_Bermiore_Loom_2>(L"Obj_Props_Bermiore_Loom_2", loadManager, objectFactory);
+	// RegisterHelp<Obj_Props_Bermiore_Cloth_1>(L"Obj_Props_Bermiore_Cloth_1", loadManager, objectFactory);
+	// RegisterHelp<Obj_Props_Bermiore_Cloth_2>(L"Obj_Props_Bermiore_Cloth_2", loadManager, objectFactory);
+
+	// RegisterHelp<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", loadManager, objectFactory);
+
+	RegisterHelp<Obj_Buildings_Hide_House_1>(L"Obj_Buildings_Hide_House_1", loadManager, objectFactory);
+	RegisterHelp<Obj_Buildings_Hide_House_2>(L"Obj_Buildings_Hide_House_2", loadManager, objectFactory);
+	RegisterHelp<Obj_Buildings_Hide_House_3>(L"Obj_Buildings_Hide_House_3", loadManager, objectFactory);
+	RegisterHelp<Obj_Buildings_Hide_House_4>(L"Obj_Buildings_Hide_House_4", loadManager, objectFactory);
+
+	RegisterHelp<Obj_Buildings_Ornoa_House_1>(L"Obj_Buildings_Ornoa_House_1", loadManager, objectFactory);
+	RegisterHelp<Obj_Buildings_Ornoa_House_2>(L"Obj_Buildings_Ornoa_House_2", loadManager, objectFactory);
+	// RegisterHelp<Obj_Buildings_Ornoa_House_3>(L"Obj_Buildings_Ornoa_House_3", loadManager, objectFactory);
+	// RegisterHelp<Obj_Buildings_Ornoa_House_4>(L"Obj_Buildings_Ornoa_House_4", loadManager, objectFactory);
+
+	const auto componentFactory = contentManager->GetComponentFactory();
+	componentFactory->Register<RemoteMove>();
 }
 
 void GameClient::Application::PrepareInitialWorld(Engine::Content::Factory::World* worldFactory)
@@ -68,55 +87,88 @@ void GameClient::Application::DeclareMoveAction(Engine::Input::IManager* inputMa
 	Engine::Input::Modifier::ISwizzleAxis* swizzleAxis = nullptr;
 	inputManager->GetModifier(Engine::Input::Modifier::ISwizzleAxis::Type::ZXY, &swizzleAxis);
 
-	Engine::Input::IAction* action = nullptr;
-	mappingContext->GetAction(L"Move", &action);
-
 	Engine::Input::Device::IKeyboard* keyboard = nullptr;
 	inputManager->GetDevice(&keyboard);
 
+	Engine::Input::Device::IController* controller = nullptr;
+	inputManager->GetDevice(&controller);
+
+	// Move
+	Engine::Input::IAction* moveAction = nullptr;
+	mappingContext->GetAction(L"Move", &moveAction);
+
 	Engine::Input::Trigger::IDown* leftTrigger = nullptr;
-	action->GetTrigger(&leftTrigger);
+	moveAction->GetTrigger(&leftTrigger);
 	Engine::Input::Component::IButtonComponent* left = nullptr;
 	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::A, &left);
 	leftTrigger->AddModifier(negative);
 	leftTrigger->SetComponent(left);
 
 	Engine::Input::Trigger::IDown* rightTrigger = nullptr;
-	action->GetTrigger(&rightTrigger);
+	moveAction->GetTrigger(&rightTrigger);
 	Engine::Input::Component::IButtonComponent* right = nullptr;
 	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::D, &right);
 	rightTrigger->SetComponent(right);
 
 	Engine::Input::Trigger::IDown* forwardTrigger = nullptr;
-	action->GetTrigger(&forwardTrigger);
+	moveAction->GetTrigger(&forwardTrigger);
 	Engine::Input::Component::IButtonComponent* up = nullptr;
 	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::W, &up);
 	forwardTrigger->AddModifier(swizzleAxis);
 	forwardTrigger->SetComponent(up);
 
 	Engine::Input::Trigger::IDown* backwardTrigger = nullptr;
-	action->GetTrigger(&backwardTrigger);
+	moveAction->GetTrigger(&backwardTrigger);
 	Engine::Input::Component::IButtonComponent* down = nullptr;
 	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::S, &down);
 	backwardTrigger->AddModifier(swizzleAxis);
 	backwardTrigger->AddModifier(negative);
 	backwardTrigger->SetComponent(down);
 
-	Engine::Input::Device::IController* controller = nullptr;
-	inputManager->GetDevice(&controller);
-
 	Engine::Input::Trigger::IDown* leftStickXTrigger = nullptr;
-	action->GetTrigger(&leftStickXTrigger);
+	moveAction->GetTrigger(&leftStickXTrigger);
 	Engine::Input::Component::IAxisComponent* leftStickX = nullptr;
 	controller->GetComponent(Engine::Input::Device::IController::Thumb::LeftX, &leftStickX);
 	leftStickXTrigger->SetComponent(leftStickX);
 
 	Engine::Input::Trigger::IDown* leftStickYTrigger = nullptr;
-	action->GetTrigger(&leftStickYTrigger);
+	moveAction->GetTrigger(&leftStickYTrigger);
 	Engine::Input::Component::IAxisComponent* leftStickY = nullptr;
 	controller->GetComponent(Engine::Input::Device::IController::Thumb::LeftY, &leftStickY);
 	leftStickYTrigger->SetComponent(leftStickY);
 	leftStickYTrigger->AddModifier(swizzleAxis);
+
+	// Jump
+	Engine::Input::IAction* jumpAction = nullptr;
+	mappingContext->GetAction(L"Jump", &jumpAction);
+
+	Engine::Input::Trigger::IDown* keyTrigger = nullptr;
+	jumpAction->GetTrigger(&keyTrigger);
+	Engine::Input::Component::IButtonComponent* space = nullptr;
+	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::Space, &space);
+	keyTrigger->SetComponent(space);
+
+	Engine::Input::Trigger::IDown* buttonTrigger = nullptr;
+	jumpAction->GetTrigger(&buttonTrigger);
+	Engine::Input::Component::IButtonComponent* aButton = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Button::A, &aButton);
+	buttonTrigger->SetComponent(aButton);
+
+	// Temp
+	Engine::Input::IAction* interactAction = nullptr;
+	mappingContext->GetAction(L"Interact", &interactAction);
+
+	Engine::Input::Trigger::IDown* eButtonTrigger = nullptr;
+	interactAction->GetTrigger(&eButtonTrigger);
+	Engine::Input::Component::IButtonComponent* E = nullptr;
+	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::E, &E);
+	eButtonTrigger->SetComponent(E);
+
+	Engine::Input::Trigger::IDown* xButtonTrigger = nullptr;
+	interactAction->GetTrigger(&xButtonTrigger);
+	Engine::Input::Component::IButtonComponent* xButton = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Button::X, &xButton);
+	xButtonTrigger->SetComponent(xButton);
 }
 
 void GameClient::Application::DeclareCameraAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext)
@@ -240,3 +292,4 @@ void GameClient::Application::DeclareSystemAction(Engine::Input::IManager* input
 		mouse->HideCursor();
 		});
 }
+

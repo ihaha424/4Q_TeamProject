@@ -38,6 +38,8 @@ void Engine::DSHLoad::Manager::LoadCloneData(const std::filesystem::path& path)
 			objectClassName.assign(objectClassNameData.begin(), objectClassNameData.end());
 
 			bool isPublic = modelData["publicObject"].get<bool>();
+			bool hasMesh = modelData["meshObject"].get<bool>();
+			bool isDynamic = modelData["dynamicObject"].get<bool>();
 
 			const auto& position = modelData["transformData"]["position"];
 			Math::Vector3 positionData = { position["x"].get<float>(), position["y"].get<float>(), position["z"].get<float>() };
@@ -48,12 +50,19 @@ void Engine::DSHLoad::Manager::LoadCloneData(const std::filesystem::path& path)
 			const auto& scale = modelData["transformData"]["scale"];
 			Math::Vector3 scaleData = { scale["x"].get<float>(), scale["y"].get<float>(), scale["z"].get<float>() };
 
+			const auto& boxscale = modelData["boxScale"];
+			Math::Vector3 boxScaleData = { boxscale["x"].get<float>(), boxscale["y"].get<float>(), boxscale["z"].get<float>() };
+			boxScaleData *= 10;
+
 			Properties cloneData
 			{
 				std::pair<const std::wstring, std::any>{L"isPublic", isPublic},
+				std::pair<const std::wstring, std::any>{L"hasMesh", hasMesh},
+				std::pair<const std::wstring, std::any>{L"isDynamic", isDynamic},
 				std::pair<const std::wstring, std::any>{L"position", positionData},
 				std::pair<const std::wstring, std::any>{L"rotation", rotationData},
-				std::pair<const std::wstring, std::any>{L"scale", scaleData}
+				std::pair<const std::wstring, std::any>{L"scale", scaleData},
+				std::pair<const std::wstring, std::any>{L"boxScale", boxScaleData}
 			};
 			_objectCloneData[objectClassName].push_back(cloneData);
 		}

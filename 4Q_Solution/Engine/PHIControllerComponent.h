@@ -36,7 +36,6 @@ namespace Engine::PHI
 		
 		void SetMinDistancet(float minDistance) override;
 		float GetMinDistance() const override;
-		
 
 		/***********************************
 					Controller
@@ -117,6 +116,7 @@ namespace Engine::PHI
 		Engine::Math::Vector3 force;
 		Engine::Math::Vector3 gravity;
 		
+		bool gravityFlag = true;
 		bool jumpFlag = false;
 		float jumpMax;
 
@@ -126,6 +126,6 @@ namespace Engine::PHI
 		float minDistance;
 
 		friend class Manager;
-};
+	};
 }
 

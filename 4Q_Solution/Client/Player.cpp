@@ -243,7 +243,6 @@ void Player::InteractTriggered()
 			_bitFlag->OffFlag(StateFlag::Interact_Started);
 			_bitFlag->OnFlag(StateFlag::Interact_Triggered);
 			_animator->ChangeAnimation("rig|Anim_Interaction_loop");
-			SendStateMessage();
 		}
 	}
 }

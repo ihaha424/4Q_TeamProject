@@ -4,8 +4,9 @@
 #include "Helper.h"
 
 DSH::Audio::Sound3D::Sound3D(FMOD::System* system, FMOD::ChannelGroup* group, const std::filesystem::path& path,
-                             const bool isLoop) :
-	_referenceCount(1), _system(system), _channel(nullptr), _sound(nullptr), _group(group), _rate(0)
+	const bool isLoop) :
+	_referenceCount(1), _system(system), _channel(nullptr), _sound(nullptr), _group(group),
+	_rate(0), _minDistance(1), _maxDistance(10000)
 {
 	_system->createSound(path.string().c_str(), isLoop ? FMOD_LOOP_NORMAL : FMOD_DEFAULT | FMOD_3D, nullptr, &_sound);
 	_system->getSoftwareFormat(&_rate, nullptr, nullptr);
@@ -21,7 +22,8 @@ DSH::Audio::Sound3D::~Sound3D()
 HRESULT DSH::Audio::Sound3D::QueryInterface(const IID& riid, void** ppvObject)
 {
 	if (ppvObject == nullptr) return E_INVALIDARG;
-	if (riid != IID_ISound &&
+	if (riid != IID_ISound3D &&
+		riid != IID_ISound &&
 		riid != IID_IUnknown) return E_NOINTERFACE;
 	*ppvObject = this;
 	return S_OK;
@@ -166,6 +168,18 @@ HRESULT DSH::Audio::Sound3D::SetVelocity(const Vector& velocity)
 {
 	_velocity = velocity;
 	return Helper::FmodResultToHResult()(_channel->set3DAttributes(&_position, &_velocity));
+}
+
+HRESULT DSH::Audio::Sound3D::SetMinDistance(const float minDistance)
+{
+	_minDistance = minDistance;
+	return Helper::FmodResultToHResult()(_channel->set3DMinMaxDistance(_minDistance, _maxDistance));
+}
+
+HRESULT DSH::Audio::Sound3D::SetMaxDistance(const float maxDistance)
+{
+	_maxDistance = maxDistance;
+	return Helper::FmodResultToHResult()(_channel->set3DMinMaxDistance(_minDistance, _maxDistance));
 }
 
 unsigned long long DSH::Audio::Sound3D::GetDspClock() const

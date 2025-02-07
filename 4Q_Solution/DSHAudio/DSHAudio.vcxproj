@@ -171,10 +171,12 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Functions.h" />
     <ClInclude Include="Helper.h" />
+    <ClInclude Include="IListener.h" />
     <ClInclude Include="ISound3D.h" />
     <ClInclude Include="Interfaces.h" />
     <ClInclude Include="ISound.h" />
     <ClInclude Include="ISystem.h" />
+    <ClInclude Include="Listener.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Requires.h" />
     <ClInclude Include="Audio.h" />
@@ -189,9 +191,11 @@
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="Helper.cpp" />
+    <ClCompile Include="IListener.cpp" />
     <ClCompile Include="ISound3D.cpp" />
     <ClCompile Include="ISound.cpp" />
     <ClCompile Include="ISystem.cpp" />
+    <ClCompile Include="Listener.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

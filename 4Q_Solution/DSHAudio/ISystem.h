@@ -39,6 +39,10 @@ namespace DSH::Audio
 			/* [annotation][out] */
 			_Out_ ISound3D** ppSound) = 0;
 
+		virtual HRESULT CreateListener(
+			/* [annotation][out] */
+			_Out_ IListener** ppListener) = 0;
+
 		virtual HRESULT Pause() = 0;
 
 		virtual HRESULT Pause(

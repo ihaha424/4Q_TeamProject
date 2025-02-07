@@ -152,6 +152,15 @@ void Remote::UpdateState()
 			_animator->ChangeAnimation("rig|Anim_Idle");
 		}
 	}
+
+	if (_bitFlag->IsOnFlag(StateFlag::Interact_Started))
+	{
+		if (_animator->IsLastFrame(0.1f))
+		{
+			_animator->ChangeAnimation("rig|Anim_Interaction_loop");
+			_bitFlag->OffFlag(StateFlag::Interact_Started);
+		}
+	}
 }
 
 void Remote::SetSerialNumber(int num)
@@ -173,19 +182,32 @@ void Remote::StateChange(const MoveMsg::StateChange* msg)
 
 	if (!_bitFlag->IsOnFlag(StateFlag::Jump))
 	{
-		if (flag & StateFlag::Walk)
+		if (_bitFlag->IsOnFlag(StateFlag::Interact))
 		{
-			_animator->ChangeAnimation("rig|Anim_Walk");
+			unsigned long long checkFlag = flag & (StateFlag::Interact | 
+												   StateFlag::Interact_Started | 
+												   StateFlag::Interact_Triggered);
+			if (0 == flag)
+			{
+				_animator->ChangeAnimation("rig|Anim_Interaction_end");
+			}
 		}
 		else
-		{
-			_animator->ChangeAnimation("rig|Anim_Idle");
-		}
+		{			
+			if (flag & StateFlag::Walk)
+			{
+				_animator->ChangeAnimation("rig|Anim_Walk");
+			}
+			else
+			{
+				_animator->ChangeAnimation("rig|Anim_Idle");
+			}
 
-		if (flag & StateFlag::Jump_Started)
-		{
-			_animator->ChangeAnimation("rig|Anim_Jump_start");
-			_animator->SetAnimationSpeed(1.5f);
+			if (flag & StateFlag::Jump_Started)
+			{
+				_animator->ChangeAnimation("rig|Anim_Jump_start");
+				_animator->SetAnimationSpeed(1.5f);
+			}
 		}
 
 		if (!_bitFlag->IsOnFlag(StateFlag::Interact))
@@ -193,25 +215,10 @@ void Remote::StateChange(const MoveMsg::StateChange* msg)
 			if (flag & StateFlag::Interact_Started)
 			{
 				_animator->ChangeAnimation("rig|Anim_Interaction_start");
+				printf("interaction_start\n");
 			}
 		}
-	}
-
-	if (_bitFlag->IsOnFlag(StateFlag::Interact))
-	{
-		if (flag & StateFlag::Interact_Triggered)
-		{
-			_animator->ChangeAnimation("rig|Anim_Interaction_loop");
-		}
-
-		unsigned long long checkFlag = flag & (StateFlag::Interact | 
-											   StateFlag::Interact_Started | 
-											   StateFlag::Interact_Triggered);
-		if (0 == flag)
-		{
-			_animator->ChangeAnimation("rig|Anim_Interaction_end");
-		}
-	}
+	}	
 
 	_bitFlag->SetFlag(flag);
 }

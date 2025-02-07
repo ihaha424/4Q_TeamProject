@@ -5,5 +5,6 @@ class Obj_BG_Mountain : public StaticObject
 {
 public:
 	explicit Obj_BG_Mountain(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
+	virtual ~Obj_BG_Mountain() = default;
 };
 

@@ -26,7 +26,7 @@ HRESULT Texture::LoadResource(const std::filesystem::path& filePath)
     }
     else
     {
-        FAILED_CHECK_BREAK(DirectX::LoadFromWICFile(filePath.c_str(), DirectX::WIC_FLAGS_NONE, &metadata, image));
+        FAILED_CHECK_BREAK(DirectX::LoadFromWICFile(filePath.c_str(), DirectX::WIC_FLAGS_IGNORE_SRGB, &metadata, image));
     }
 
     FAILED_CHECK_BREAK(DirectX::CreateShaderResourceView(pDevice, image.GetImages(), image.GetImageCount(), metadata, &_pTexture));

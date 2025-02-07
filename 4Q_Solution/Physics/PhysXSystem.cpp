@@ -838,6 +838,9 @@ namespace PhysicsEngineAPI
 			return false;
 
 		physx::PxCookingParams params(physics->getTolerancesScale());
+		params.meshPreprocessParams = physx::PxMeshPreprocessingFlags(0);
+		params.meshWeldTolerance = 0.001f;
+		params.buildTriangleAdjacencies = true;
 		physx::PxDefaultMemoryOutputStream writeBuffer;
 		physx::PxTriangleMeshCookingResult::Enum result;
 		bool status = PxCookTriangleMesh(params, description, writeBuffer, &result);

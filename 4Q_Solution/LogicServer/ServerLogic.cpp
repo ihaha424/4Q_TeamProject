@@ -152,11 +152,11 @@ void ServerLogic::UpdateObject(float deltaTime)
         _playerSlot[i]._flag = _playerSlot[i]._controller->GetCollisionFlag();
         _playerSlot[i]._controller->FixedUpdate();
 
-        if (_playerSlot[i]._controller->IsJump() == false) {
-            _stateChange.set_stateinfo(1);
-            _stateChange.SerializeToString(&_msgBuffer);
-            Server::BroadCast(_msgBuffer, (short)PacketID::StateChange, _stateChange.ByteSizeLong(), _playerSlot[i]._serialNumber);
-        }
+        //if (_playerSlot[i]._state & (1 << 4) && _playerSlot[i]._controller->IsJump() == false) {
+        //    _stateChange.set_stateinfo(1);
+        //    _stateChange.SerializeToString(&_msgBuffer);
+        //    Server::BroadCast(_msgBuffer, (short)PacketID::StateChange, _stateChange.ByteSizeLong(), _playerSlot[i]._serialNumber);
+        //}
     } // for end
     _physicsManager->Update(deltaTime);
     _physicsManager->FetchScene();
@@ -169,7 +169,7 @@ void ServerLogic::SendPositionData()
         } // if end
         Engine::Math::Vector3 position = _playerSlot[i]._controller->GetPosition();
         Engine::Math::Quaternion rotation = _playerSlot[i]._rotation;
-        printf("Player%d Position : (%f, %f, %f)\n", i + 1, position.x, position.y, position.z);
+        //printf("Player%d Position : (%f, %f, %f)\n", i + 1, position.x, position.y, position.z);
         _moveSync.set_x(position.x);
         _moveSync.set_y(position.y);
         _moveSync.set_z(position.z);
@@ -323,7 +323,7 @@ void ServerLogic::StateChangeProcess(const Packet& packet)
 {
     _stateChange.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
 
-    _playerSlot[packet._serialNumber - 1]._state = _stateChange.stateinfo();
+    _playerSlot[packet._serialNumber - 1]._state ^= _stateChange.stateinfo();
     printf("Player%d State Changed. CurrentState : %d\n", packet._serialNumber, _stateChange.stateinfo());
     _stateChange.SerializeToString(&_msgBuffer);
     Server::BroadCast(_msgBuffer, (short)PacketID::StateChange, _stateChange.ByteSizeLong(), packet._serialNumber);
@@ -549,18 +549,18 @@ void ServerLogic::RegistPlayer(Player* player)
 void ServerLogic::RegistGround(Ground& ground)
 {
     Engine::Physics::GeometryDesc geometryDesc;
-    geometryDesc.data = { 100, 100, 100 };
-    //_physicsManager->LoadHeightMap(geometryDesc, "terrain", "Assets/Test/testHeight.png");
-    _physicsManager->LoadTriangleMesh(geometryDesc, "terrain", "Assets/Test/Landscape03.fbx");
+    geometryDesc.data = { 5, 5, 5 };
+    _physicsManager->LoadHeightMap(geometryDesc, "terrain", "Assets/Test/test3.png");
+    //_physicsManager->LoadTriangleMesh(geometryDesc, "terrain", "Assets/Test/Landscape03.fbx");
 
     Engine::Transform transform{};
     Engine::Physics::IRigidStaticComponent* staticrigid;
     _physicsManager->CreateTriangleStatic(&staticrigid, "terrain", { {0.f,0.f,0.f } }, transform);
     ground._staticRigid = static_cast<Engine::Physics::RigidStaticComponent*>(staticrigid);
     _mainScene->AddActor(ground._staticRigid);
-    //ground._staticRigid->SetTranslate({ -1000.f * geometryDesc.data.x, -200.f * geometryDesc.data.y, 1000.f * geometryDesc.data.z });
-    ground._staticRigid->SetTranslate({ 0.f, -1000.f, 0.f });
-    ground._staticRigid->SetRotation(Engine::Math::Quaternion::CreateFromYawPitchRoll(3.14f, 0.f, 0.f));
+    ground._staticRigid->SetTranslate({ -1000.f * geometryDesc.data.x, -200.f * geometryDesc.data.y, 1000.f * geometryDesc.data.z });
+    //ground._staticRigid->SetTranslate({ 0.f, -1000.f, 0.f });
+    //ground._staticRigid->SetRotation(Engine::Math::Quaternion::CreateFromYawPitchRoll(3.14f, 0.f, 0.f));
 
     ground._staticRigid->SetOwner(&ground);
     ground._staticRigid->Initialize();

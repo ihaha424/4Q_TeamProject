@@ -13,3 +13,5 @@
 #include "Player.h"
 #include "Remote.h"
 #include "RemoteRay.h"
+#include "Live.h"
+#include "RemoteLive.h"

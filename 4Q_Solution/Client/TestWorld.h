@@ -26,8 +26,9 @@ protected:
 
 private:
 	Ray* _ray;
-	//Live* _live;
-	RemoteRay* _remote;
+	RemoteRay* _remoteRay;
+	Live* _live;
+	RemoteLive* _remoteLive;
 	GlobalLight* _light;
 	Terrain* _terrain;
 	SkyBox* _skyBox;

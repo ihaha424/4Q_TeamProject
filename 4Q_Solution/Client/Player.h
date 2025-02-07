@@ -35,8 +35,11 @@ private:
 
 	void JumpStarted();
 
+	void InteractStarted();
+	void InteractTriggered();
+	void InteractCompleted();
 private:
-	void SendStateMessage(unsigned long long state);
+	void SendStateMessage();
 
 protected:
 	std::filesystem::path _meshPath;
@@ -57,6 +60,7 @@ protected:
 protected:
 	Engine::Math::Vector3 _capsuleScale;
 	Engine::Math::Quaternion _offset;
+	float _speed;
 
 private:
 	// State Test

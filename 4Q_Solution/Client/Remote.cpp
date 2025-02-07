@@ -152,6 +152,15 @@ void Remote::UpdateState()
 			_animator->ChangeAnimation("rig|Anim_Idle");
 		}
 	}
+
+	if (_bitFlag->IsOnFlag(StateFlag::Interact_Started))
+	{
+		if (_animator->IsLastFrame(0.1f))
+		{
+			_animator->ChangeAnimation("rig|Anim_Interaction_loop");
+			_bitFlag->OffFlag(StateFlag::Interact_Started);
+		}
+	}
 }
 
 void Remote::SetSerialNumber(int num)
@@ -166,7 +175,52 @@ const int Remote::GetSerialNumber() const
 
 void Remote::StateChange(const MoveMsg::StateChange* msg)
 {
-	_bitFlag->OnFlag(msg->stateinfo());
+	unsigned long long flag = msg->stateinfo();
+	
+	if (flag == _bitFlag->GetCurrentFlag())
+		return;
+
+	if (!_bitFlag->IsOnFlag(StateFlag::Jump))
+	{
+		if (_bitFlag->IsOnFlag(StateFlag::Interact))
+		{
+			unsigned long long checkFlag = flag & (StateFlag::Interact | 
+												   StateFlag::Interact_Started | 
+												   StateFlag::Interact_Triggered);
+			if (0 == flag)
+			{
+				_animator->ChangeAnimation("rig|Anim_Interaction_end");
+			}
+		}
+		else
+		{			
+			if (flag & StateFlag::Walk)
+			{
+				_animator->ChangeAnimation("rig|Anim_Walk");
+			}
+			else
+			{
+				_animator->ChangeAnimation("rig|Anim_Idle");
+			}
+
+			if (flag & StateFlag::Jump_Started)
+			{
+				_animator->ChangeAnimation("rig|Anim_Jump_start");
+				_animator->SetAnimationSpeed(1.5f);
+			}
+		}
+
+		if (!_bitFlag->IsOnFlag(StateFlag::Interact))
+		{
+			if (flag & StateFlag::Interact_Started)
+			{
+				_animator->ChangeAnimation("rig|Anim_Interaction_start");
+				printf("interaction_start\n");
+			}
+		}
+	}	
+
+	_bitFlag->SetFlag(flag);
 }
 
 void Remote::SyncMove(const MoveMsg::MoveSync* msg)
@@ -176,6 +230,12 @@ void Remote::SyncMove(const MoveMsg::MoveSync* msg)
 	float z = msg->z();
 	Engine::Math::Vector3 nextLocation(x, y, z);
 	_remote->SetNextLocation(nextLocation);
+	const auto& rot = msg->rotation();
+	x = *(rot.begin());
+	y = *(rot.begin() + 1);
+	z = *(rot.begin() + 2);
+	float w = *(rot.begin() + 3);
+	_transform.rotation = Engine::Math::Quaternion(x, y, z, w);
 }
 
 void Remote::SetLocation(const MoveMsg::MoveSync* msg)

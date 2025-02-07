@@ -123,7 +123,8 @@ void Player::PostInitialize(const Engine::Modules& modules)
 {
 	Object::PostInitialize(modules);
 	//_movement->SetSpeed(100.f);
-	_remote->SetSpeed(100.f);
+	_speed = 100.f;
+	_remote->SetSpeed(_speed);
 
 	//_skeltalMesh.SetRenderLayer(0);
 	/*_animator.SetUpSplitBone(2);
@@ -153,23 +154,12 @@ void Player::PostAttach()
 {
 	Object::PostAttach();
 	_camera->Activate();
-
 }
 
 void Player::MoveStarted()
 {
 	_bitFlag->OnFlag(StateFlag::Walk);
-
 	SendStateMessage();
-	/*_sync->_stateChange.set_stateinfo(_bitFlag->GetCurrentFlag());
-	_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
-
-	Engine::Application::GetNetworkManager()->SaveSendData(
-		(short)PacketID::StateChange,
-		_sync->_msgBuffer,
-		_sync->_stateChange.ByteSizeLong(),
-		_sync->GetSerialNumber()
-	);*/
 }
 
 void Player::MoveTriggered(Engine::Math::Vector3 value)
@@ -177,7 +167,6 @@ void Player::MoveTriggered(Engine::Math::Vector3 value)
 	if (!_bitFlag->IsOnFlag(StateFlag::Jump))
 		_animator->ChangeAnimation("rig|Anim_Walk");
 
-	//_movement->SetDirection(_fixedArm->GetTransformDirection(value));
 	_remote->SetDirection(_fixedArm->GetTransformDirection(value));
 	_transform.rotation = _fixedArm->GetRotation(value, _transform.rotation);
 	//_fixedArm->FollowDirection(value);
@@ -201,15 +190,6 @@ void Player::MoveTriggered(Engine::Math::Vector3 value)
 		_sync->GetSerialNumber()
 	);
 	_sync->_move.Clear();
-
-
-	//Engine::Math::Vector3 direction = value;
-	//direction = Engine::Math::Vector3::TransformNormal(direction, _cameraParentMatrix);
-	//direction.y = 0.f;
-	//direction.Normalize();
-	//_transform.rotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(Engine::Math::Vector3(0.f, _cameraRotation.y + 3.14f, 0.f));
-	//_rigid->_controller->SetDirection(direction);
-	//// _movement->SetDirection(direction);
 }
 
 void Player::MoveCompleted()
@@ -219,7 +199,6 @@ void Player::MoveCompleted()
 
 	_bitFlag->OffFlag(StateFlag::Walk);
 
-	//_movement->SetDirection(Engine::Math::Vector3::Zero);
 	_remote->SetDirection(Engine::Math::Vector3::Zero);
 
 	_sync->_move.set_x(0);
@@ -235,9 +214,8 @@ void Player::MoveCompleted()
 		_sync->_move.ByteSizeLong(),
 		_sync->GetSerialNumber()
 	);
+
 	SendStateMessage();
-	// _rigid->_controller->SetDirection(Engine::Math::Vector3::Zero);
-	//_movement->SetDirection(Engine::Math::Vector3::Zero);
 }
 
 void Player::JumpStarted()
@@ -273,6 +251,8 @@ void Player::UpdateState()
 		{
 			if (!_bitFlag->IsOnFlag(StateFlag::Jump_Triggered))
 			{
+				_remote->SetSpeed(_speed * 0.5f);
+
 				_sync->_jump.set_power(15.f);
 				_sync->_jump.SerializeToString(&_sync->_msgBuffer);
 
@@ -303,7 +283,8 @@ void Player::UpdateState()
 		if (_animator->IsLastFrame(0.1f))
 		{
 			_animator->ChangeAnimation("rig|Anim_Idle");
-			SendStateMessage();
+			_remote->SetSpeed(_speed);
+			// SendStateMessage();
 		}
 	}
 }

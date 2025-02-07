@@ -166,7 +166,27 @@ const int Remote::GetSerialNumber() const
 
 void Remote::StateChange(const MoveMsg::StateChange* msg)
 {
-	_bitFlag->SetFlag(msg->stateinfo());
+	unsigned long long flag = msg->stateinfo();
+
+	if (!_bitFlag->IsOnFlag(StateFlag::Jump))
+	{
+		if (flag & StateFlag::Walk)
+		{
+			_animator->ChangeAnimation("rig|Anim_Walk");
+		}
+		else
+		{
+			_animator->ChangeAnimation("rig|Anim_Idle");
+		}
+
+		if (flag & StateFlag::Jump_Started)
+		{
+			_animator->ChangeAnimation("rig|Anim_Jump_start");
+			_animator->SetAnimationSpeed(1.5f);
+		}
+	}
+
+	_bitFlag->SetFlag(flag);
 }
 
 void Remote::SyncMove(const MoveMsg::MoveSync* msg)

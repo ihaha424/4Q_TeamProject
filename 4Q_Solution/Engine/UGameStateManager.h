@@ -15,6 +15,8 @@ namespace Engine::UGameState
 		void Update(float deltaTime) override;
 		void Finalize() override;
 
+	private:
+		
 	};
 }
 

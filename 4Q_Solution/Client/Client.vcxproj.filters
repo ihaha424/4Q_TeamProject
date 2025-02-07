@@ -64,6 +64,9 @@
     <Filter Include="Object\Puzzle\00. Tutorial">
       <UniqueIdentifier>{8e5988fe-feba-4e44-9030-43c00a84b5de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Test">
+      <UniqueIdentifier>{9fcd4a94-c428-45ff-9419-2867518ce9c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -207,6 +210,9 @@
     <ClInclude Include="BaseStone.h">
       <Filter>Object\Puzzle\00. Tutorial</Filter>
     </ClInclude>
+    <ClInclude Include="PickingObject.h">
+      <Filter>Object\Test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -337,6 +343,9 @@
     </ClCompile>
     <ClCompile Include="BaseStone.cpp">
       <Filter>Object\Puzzle\00. Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="PickingObject.cpp">
+      <Filter>Object\Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

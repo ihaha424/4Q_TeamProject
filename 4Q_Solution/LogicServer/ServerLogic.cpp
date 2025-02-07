@@ -152,6 +152,11 @@ void ServerLogic::UpdateObject(float deltaTime)
         _playerSlot[i]._flag = _playerSlot[i]._controller->GetCollisionFlag();
         _playerSlot[i]._controller->FixedUpdate();
 
+        if (_playerSlot[i]._controller->IsJump() == false) {
+            _stateChange.set_stateinfo(1);
+            _stateChange.SerializeToString(&_msgBuffer);
+            Server::BroadCast(_msgBuffer, (short)PacketID::StateChange, _stateChange.ByteSizeLong(), _playerSlot[i]._serialNumber);
+        }
     } // for end
     _physicsManager->Update(deltaTime);
     _physicsManager->FetchScene();

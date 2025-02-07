@@ -37,6 +37,8 @@ namespace Engine::PHI
 		void SetMinDistancet(float minDistance) override;
 		float GetMinDistance() const override;
 
+		bool IsJump() override;
+
 		/***********************************
 					Controller
 		************************************/
@@ -126,6 +128,6 @@ namespace Engine::PHI
 		float minDistance;
 
 		friend class Manager;
-	};
+};
 }
 

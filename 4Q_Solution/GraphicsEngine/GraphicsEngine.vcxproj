@@ -206,8 +206,10 @@
     <ClInclude Include="includes\IBlur.h" />
     <ClInclude Include="includes\IFilter.h" />
     <ClInclude Include="includes\IBloom.h" />
+    <ClInclude Include="includes\ICustomRenderer.h" />
     <ClInclude Include="includes\IPostProcessSystem.h" />
     <ClInclude Include="includes\Matrix4x4.h" />
+    <ClInclude Include="CustomRenderer.h" />
     <ClInclude Include="PostProcessSystem.h" />
     <ClInclude Include="Quad.h" />
     <ClInclude Include="SSAO.h" />
@@ -272,6 +274,7 @@
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Bloom.cpp" />
+    <ClCompile Include="CustomRenderer.cpp" />
     <ClCompile Include="PostProcessSystem.cpp" />
     <ClCompile Include="Quad.cpp" />
     <ClCompile Include="SSAO.cpp" />

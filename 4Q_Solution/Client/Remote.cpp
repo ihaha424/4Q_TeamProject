@@ -73,6 +73,7 @@ void Remote::PreInitialize(const Engine::Modules& modules)
 
 	_sync->AddCallback((short)PacketID::MoveSync, &Remote::SyncMove, this);
 	_sync->AddCallback((short)PacketID::DataRemote, &Remote::SetLocation, this);
+	_sync->AddCallback((short)PacketID::StateChange, &Remote::StateChange, this);
 }
 
 void Remote::PostInitialize(const Engine::Modules& modules)
@@ -108,7 +109,6 @@ void Remote::PostUpdate(float deltaTime)
 void Remote::PostAttach()
 {
 	Object::PostAttach();
-
 }
 
 void Remote::UpdateState()
@@ -116,16 +116,27 @@ void Remote::UpdateState()
 	// Jump
 	if (_bitFlag->IsOnFlag(StateFlag::Jump_Started))
 	{
-		if (_animator->IsLastFrame(0.1f))
+		if (_animator->IsLastFrame(0.9f))
 		{
 			if (!_bitFlag->IsOnFlag(StateFlag::Jump_Triggered))
 			{
+				_sync->_jump.set_power(15.f);
+				_sync->_jump.SerializeToString(&_sync->_msgBuffer);
+
+				Engine::Application::GetNetworkManager()->SaveSendData(
+					(short)PacketID::Jump,
+					_sync->_msgBuffer,
+					_sync->_jump.ByteSizeLong(),
+					_sync->GetSerialNumber()
+				);
+
 				_bitFlag->OnFlag(StateFlag::Jump_Triggered);
 				_animator->ChangeAnimation("rig|Anim_Jump_loop");
 				_animator->SetAnimationSpeed(1.f);
-				goto out_jump;
 			}
-
+		}
+		if (_animator->IsLastFrame(0.3f))
+		{
 			if (_bitFlag->IsOnFlag(StateFlag::Jump_Triggered))
 			{
 				_bitFlag->OffFlag(StateFlag::Jump | StateFlag::Jump_Started | StateFlag::Jump_Triggered);
@@ -134,16 +145,12 @@ void Remote::UpdateState()
 		}
 	}
 
-out_jump:;
 	if (!_bitFlag->IsOnFlag(StateFlag::Walk | StateFlag::Jump | StateFlag::Interact))
 	{
 		if (_animator->IsLastFrame(0.1f))
 		{
 			_animator->ChangeAnimation("rig|Anim_Idle");
 		}
-	}
-	else if (_bitFlag->IsOnFlag(StateFlag::Walk)) {
-		_animator->ChangeAnimation("rig|Anim_Walk");
 	}
 }
 

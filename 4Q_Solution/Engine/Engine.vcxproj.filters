@@ -460,6 +460,18 @@
     <Filter Include="Components\BitFlag">
       <UniqueIdentifier>{a9b1ab56-ebfb-4e46-85be-a8f1bcd6eb80}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Interfaces\GameState">
+      <UniqueIdentifier>{6ee73fe3-2c2a-4643-8975-62baa9b26890}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\GameState\Manager">
+      <UniqueIdentifier>{5ea5fac9-05a6-44db-8809-1bea88f94b5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\UGameState">
+      <UniqueIdentifier>{191b2924-0ab4-405d-9719-258a07a46b61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\UGameState\Manager">
+      <UniqueIdentifier>{a9f5fa70-42c6-4e6b-be88-ab102f1fcca9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -900,6 +912,15 @@
     <ClInclude Include="BitFlag.h">
       <Filter>Components\BitFlag</Filter>
     </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Modules\Interfaces\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateManager.h">
+      <Filter>Modules\Interfaces\GameState\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="UGameStateManager.h">
+      <Filter>Modules\Difinition\UGameState\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1264,6 +1285,12 @@
     </ClCompile>
     <ClCompile Include="FixedArm.cpp">
       <Filter>Components\FixedArm</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateManager.cpp">
+      <Filter>Modules\Interfaces\GameState\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="UGameStateManager.cpp">
+      <Filter>Modules\Difinition\UGameState\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

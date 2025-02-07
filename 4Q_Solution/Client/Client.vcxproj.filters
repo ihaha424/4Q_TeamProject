@@ -58,6 +58,12 @@
     <Filter Include="Object\Player\Ray">
       <UniqueIdentifier>{bbb5e833-c6ee-427d-876b-dce243b96d31}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Puzzle">
+      <UniqueIdentifier>{0ea2e0f4-0d9a-4e8e-91ec-bd0b0a1d6fd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\00. Tutorial">
+      <UniqueIdentifier>{8e5988fe-feba-4e44-9030-43c00a84b5de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -183,6 +189,24 @@
     <ClInclude Include="RemoteLive.h">
       <Filter>Object\Remote\Live</Filter>
     </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Shinave_Stone_1.h">
+      <Filter>Object\Puzzle\00. Tutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Shinave_Stone_2.h">
+      <Filter>Object\Puzzle\00. Tutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Shinave_Stone_3.h">
+      <Filter>Object\Puzzle\00. Tutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Shinave_Stone_4.h">
+      <Filter>Object\Puzzle\00. Tutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Shinave_Stone_5.h">
+      <Filter>Object\Puzzle\00. Tutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseStone.h">
+      <Filter>Object\Puzzle\00. Tutorial</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -295,6 +319,24 @@
     </ClCompile>
     <ClCompile Include="RemoteLive.cpp">
       <Filter>Object\Remote\Live</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Shinave_Stone_1.cpp">
+      <Filter>Object\Puzzle\00. Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Shinave_Stone_2.cpp">
+      <Filter>Object\Puzzle\00. Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Shinave_Stone_3.cpp">
+      <Filter>Object\Puzzle\00. Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Shinave_Stone_4.cpp">
+      <Filter>Object\Puzzle\00. Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Shinave_Stone_5.cpp">
+      <Filter>Object\Puzzle\00. Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseStone.cpp">
+      <Filter>Object\Puzzle\00. Tutorial</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

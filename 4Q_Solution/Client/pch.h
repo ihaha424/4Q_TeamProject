@@ -10,3 +10,6 @@
 #include "SceneFillter.h"
 
 #include "RemoteMove.h"
+#include "Player.h"
+#include "Remote.h"
+#include "RemoteRay.h"

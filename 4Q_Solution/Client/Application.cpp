@@ -35,6 +35,7 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	const auto objectFactory = contentManager->GetObjectFactory();
 	objectFactory->Register<GlobalLight>();
 	objectFactory->Register<Ray>(L"Assets/Models/Ray.fbx");
+	objectFactory->Register<RemoteRay>(L"Assets/Models/Ray.fbx");
 	objectFactory->Register<SkyBox>(L"Assets/Models/skybox.fbx");
 
 

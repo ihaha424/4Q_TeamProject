@@ -9,7 +9,7 @@ void Engine::UGameState::Manager::RegisterSubManager(IManager* _subManager)
 {
 }
 
-void Engine::UGameState::Manager::AttachEvent(std::wstring _event)
+void Engine::UGameState::Manager::AttachEvent(std::wstring _event, const notifiy& _callback)
 {
 }
 

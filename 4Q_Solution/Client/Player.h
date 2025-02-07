@@ -36,7 +36,7 @@ private:
 	void JumpStarted();
 
 private:
-	void SendStateMessage(unsigned long long state);
+	void SendStateMessage();
 
 protected:
 	std::filesystem::path _meshPath;

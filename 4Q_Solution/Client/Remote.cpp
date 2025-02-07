@@ -166,7 +166,7 @@ const int Remote::GetSerialNumber() const
 
 void Remote::StateChange(const MoveMsg::StateChange* msg)
 {
-	_bitFlag->OnFlag(msg->stateinfo());
+	_bitFlag->SetFlag(msg->stateinfo());
 }
 
 void Remote::SyncMove(const MoveMsg::MoveSync* msg)
@@ -176,6 +176,12 @@ void Remote::SyncMove(const MoveMsg::MoveSync* msg)
 	float z = msg->z();
 	Engine::Math::Vector3 nextLocation(x, y, z);
 	_remote->SetNextLocation(nextLocation);
+	const auto& rot = msg->rotation();
+	x = *(rot.begin());
+	y = *(rot.begin() + 1);
+	z = *(rot.begin() + 2);
+	float w = *(rot.begin() + 3);
+	_transform.rotation = Engine::Math::Quaternion(x, y, z, w);
 }
 
 void Remote::SetLocation(const MoveMsg::MoveSync* msg)

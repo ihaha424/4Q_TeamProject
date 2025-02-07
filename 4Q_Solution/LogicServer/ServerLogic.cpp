@@ -152,7 +152,7 @@ void ServerLogic::UpdateObject(float deltaTime)
         _playerSlot[i]._flag = _playerSlot[i]._controller->GetCollisionFlag();
         _playerSlot[i]._controller->FixedUpdate();
 
-        if (_playerSlot[i]._controller->IsJump() == false) {
+        if (_playerSlot[i]._state & (1 << 4) && _playerSlot[i]._controller->IsJump() == false) {
             _stateChange.set_stateinfo(1);
             _stateChange.SerializeToString(&_msgBuffer);
             Server::BroadCast(_msgBuffer, (short)PacketID::StateChange, _stateChange.ByteSizeLong(), _playerSlot[i]._serialNumber);
@@ -169,7 +169,7 @@ void ServerLogic::SendPositionData()
         } // if end
         Engine::Math::Vector3 position = _playerSlot[i]._controller->GetPosition();
         Engine::Math::Quaternion rotation = _playerSlot[i]._rotation;
-        printf("Player%d Position : (%f, %f, %f)\n", i + 1, position.x, position.y, position.z);
+        //printf("Player%d Position : (%f, %f, %f)\n", i + 1, position.x, position.y, position.z);
         _moveSync.set_x(position.x);
         _moveSync.set_y(position.y);
         _moveSync.set_z(position.z);
@@ -323,7 +323,7 @@ void ServerLogic::StateChangeProcess(const Packet& packet)
 {
     _stateChange.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
 
-    _playerSlot[packet._serialNumber - 1]._state = _stateChange.stateinfo();
+    _playerSlot[packet._serialNumber - 1]._state ^= _stateChange.stateinfo();
     printf("Player%d State Changed. CurrentState : %d\n", packet._serialNumber, _stateChange.stateinfo());
     _stateChange.SerializeToString(&_msgBuffer);
     Server::BroadCast(_msgBuffer, (short)PacketID::StateChange, _stateChange.ByteSizeLong(), packet._serialNumber);

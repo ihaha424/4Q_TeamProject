@@ -160,7 +160,8 @@ void Player::MoveStarted()
 {
 	_bitFlag->OnFlag(StateFlag::Walk);
 
-	_sync->_stateChange.set_stateinfo(StateFlag::Walk);
+	SendStateMessage();
+	/*_sync->_stateChange.set_stateinfo(_bitFlag->GetCurrentFlag());
 	_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
 
 	Engine::Application::GetNetworkManager()->SaveSendData(
@@ -168,7 +169,7 @@ void Player::MoveStarted()
 		_sync->_msgBuffer,
 		_sync->_stateChange.ByteSizeLong(),
 		_sync->GetSerialNumber()
-	);
+	);*/
 }
 
 void Player::MoveTriggered(Engine::Math::Vector3 value)
@@ -234,7 +235,7 @@ void Player::MoveCompleted()
 		_sync->_move.ByteSizeLong(),
 		_sync->GetSerialNumber()
 	);
-
+	SendStateMessage();
 	// _rigid->_controller->SetDirection(Engine::Math::Vector3::Zero);
 	//_movement->SetDirection(Engine::Math::Vector3::Zero);
 }
@@ -247,12 +248,12 @@ void Player::JumpStarted()
 	_bitFlag->OnFlag(StateFlag::Jump | StateFlag::Jump_Started);
 	_animator->ChangeAnimation("rig|Anim_Jump_start");
 	_animator->SetAnimationSpeed(1.5f);
-	SendStateMessage(StateFlag::Jump);
+	SendStateMessage();
 }
 
-void Player::SendStateMessage(unsigned long long state)
+void Player::SendStateMessage()
 {
-	_sync->_stateChange.set_stateinfo(state);
+	_sync->_stateChange.set_stateinfo(_bitFlag->GetCurrentFlag());
 	_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
 
 	Engine::Application::GetNetworkManager()->SaveSendData(
@@ -302,7 +303,7 @@ void Player::UpdateState()
 		if (_animator->IsLastFrame(0.1f))
 		{
 			_animator->ChangeAnimation("rig|Anim_Idle");
-			SendStateMessage(StateFlag::Idle);
+			SendStateMessage();
 		}
 	}
 }

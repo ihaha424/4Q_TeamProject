@@ -130,14 +130,12 @@ private:
 	void ObjectPutProcess(const Packet& packet);
 
 private:
-	short _dynamicObjectSerialNumber = 100;
-	short _staticObjectSerialNumber = 1000;
-
-private:
 	// =============================
 	// JSON Method, Variable Area
 	// =============================
 
+	short _dynamicObjectSerialNumber = 100;
+	short _staticObjectSerialNumber = 1000;
 	JSONLoad _jsonLoader;
 	json _mapData;
 
@@ -156,5 +154,45 @@ private:
 	void RegistPlayer(Player* player);
 	void RegistGround(Ground& ground);
 	void RegistTrigerBox(TriggerBox& triggerBox);
+
+private:
+	// =============================
+	// In Game Logic Area
+	// =============================
+
+	enum class QuestState {
+		None,
+		InProgress,
+		Complete
+	};
+
+	using QuestID = int;
+	using QuestCompleteTable = std::unordered_map<QuestID, QuestState>;
+	using QuestRequireID = std::unordered_map<QuestID, QuestID>;
+	using QuestNextID = std::unordered_map<QuestID, QuestID>;
+
+	QuestCompleteTable _questClearTable;
+	QuestRequireID _questRequireTable;
+	QuestNextID _questNextTable;
+
+	void LoadQuestData();
+	const bool CheckNextID(QuestID qid) const;
+	const QuestID GetNextQuestID() const;
+	const QuestID GetRequireQuestID() const;
+	const QuestState GetCurrentQuestState(QuestID qid) const;
+
+	// =============================
+
+	// =============================
+	// Puzzle Area
+	// =============================
+	
+	
+	
+	
+	
+	// =============================
+
+	
 };
 

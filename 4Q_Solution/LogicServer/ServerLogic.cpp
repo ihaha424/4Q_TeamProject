@@ -512,7 +512,6 @@ void ServerLogic::RegistDynamicPhysics(Object& obj)
     _physicsManager->CreateDynamic(&obj._dynamicRigid, rcd, tf, 1);
     _mainScene->AddActor(obj._dynamicRigid);
 }
-
 void ServerLogic::RegistStaticPhysics(Object& obj)
 {
     Engine::Physics::RigidComponentDesc rcd;
@@ -527,7 +526,6 @@ void ServerLogic::RegistStaticPhysics(Object& obj)
     _physicsManager->CreateStatic(&obj._staticRigid, rcd, tf);
     _mainScene->AddActor(obj._staticRigid);
 }
-
 void ServerLogic::RegistPlayer(Player* player)
 {
     Engine::Physics::ControllerDesc cd;
@@ -545,7 +543,6 @@ void ServerLogic::RegistPlayer(Player* player)
     player->_controller->SetOwner(&player);
     player->_controller->Initialize();
 }
-
 void ServerLogic::RegistGround(Ground& ground)
 {
     Engine::Physics::GeometryDesc geometryDesc;
@@ -565,7 +562,6 @@ void ServerLogic::RegistGround(Ground& ground)
     ground._staticRigid->SetOwner(&ground);
     ground._staticRigid->Initialize();
 }
-
 void ServerLogic::RegistTrigerBox(TriggerBox& triggerBox)
 {
     Engine::Physics::RigidComponentDesc rcd;

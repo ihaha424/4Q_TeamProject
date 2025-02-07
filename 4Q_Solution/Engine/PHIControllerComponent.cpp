@@ -204,6 +204,11 @@ namespace Engine::PHI
 		owner = _owner;
 	}
 
+	bool Controller::IsJump()
+	{
+		return jumpFlag;
+	}
+
 	unsigned short Controller::GetCollisionFlag()
 	{
 		return controllerCollisionFlag;

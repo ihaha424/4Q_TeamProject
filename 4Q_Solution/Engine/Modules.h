@@ -9,6 +9,7 @@
 #include "Load.h"
 #include "Content.h"
 #include "Logger.h"
+#include "GameState.h"
 
 namespace Engine
 {

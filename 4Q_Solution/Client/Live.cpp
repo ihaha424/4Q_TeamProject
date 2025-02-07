@@ -1,17 +1,17 @@
 #include "pch.h"
-#include "Ray.h"
+#include "Live.h"
 
-Ray::Ray(std::filesystem::path&& meshPath)
+Live::Live(std::filesystem::path&& meshPath)
 	: _meshPath(std::forward<std::filesystem::path>(meshPath))
-	  //, _movement(nullptr)
-	  , _camera(nullptr)
-	  , _skeletalMesh(nullptr)
-	  , _animator(nullptr), _fixedArm(nullptr), _rigid(nullptr), _bitFlag(nullptr)
-	  , _offset(Engine::Math::Quaternion::CreateFromYawPitchRoll(std::numbers::pi_v<float>,0, 0))
+	//, _movement(nullptr)
+	, _camera(nullptr)
+	, _skeletalMesh(nullptr)
+	, _animator(nullptr), _fixedArm(nullptr), _rigid(nullptr), _bitFlag(nullptr)
+	, _offset(Engine::Math::Quaternion::CreateFromYawPitchRoll(std::numbers::pi_v<float>, 0, 0))
 {
 }
 
-void Ray::Prepare(Engine::Content::Factory::Component* componentFactory)
+void Live::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
 	//_movement = componentFactory->Clone<Engine::Component::Movement>(this);
 	_camera = componentFactory->Clone<Engine::Component::Camera>(this);
@@ -24,12 +24,12 @@ void Ray::Prepare(Engine::Content::Factory::Component* componentFactory)
 	_bitFlag = componentFactory->Clone<Engine::Component::BitFlag>(this);
 }
 
-void Ray::SetCapsuleScale(Engine::Math::Vector3 capsuleScale)
+void Live::SetCapsuleScale(Engine::Math::Vector3 capsuleScale)
 {
 	_capsuleScale = capsuleScale;
 }
 
-void Ray::DisposeComponents()
+void Live::DisposeComponents()
 {
 	_camera->Dispose();
 	//_movement->Dispose();
@@ -42,29 +42,24 @@ void Ray::DisposeComponents()
 	_bitFlag->Dispose();
 }
 
-void Ray::PreInitialize(const Engine::Modules& modules)
+void Live::PreInitialize(const Engine::Modules& modules)
 {
 	Object::PreInitialize(modules);
 
-	if (_isRemote) {
-		_camera->SetName(L"MainCamera");
-	}
+	_camera->SetName(L"MainCamera");
 	//_movement->SetTarget(&_transform);
 
 	_skeletalMesh->SetFilePath(_meshPath);
 	_skeletalMesh->SetMatrix(&_worldMatrix);
 	_animator->SetSkeletalMesh(_skeletalMesh);
 
-	if (_isRemote) {
-		// FixedArm
-		_fixedArm->SetTarget(&_transform);
-		_fixedArm->SetCameraComponent(_camera);
-		_fixedArm->SetDistance(150.f);
-		_fixedArm->SetCameraPosition(Engine::Math::Vector2{ 0.f, 60.f });
-		_fixedArm->SetRotationSpeed(Engine::Math::Vector2{ 0.02f, 0.04f });
-		_fixedArm->SetFollowSpeed(0.01f);
-	}
-
+	// FixedArm
+	_fixedArm->SetTarget(&_transform);
+	_fixedArm->SetCameraComponent(_camera);
+	_fixedArm->SetDistance(150.f);
+	_fixedArm->SetCameraPosition(Engine::Math::Vector2{ 0.f, 60.f });
+	_fixedArm->SetRotationSpeed(Engine::Math::Vector2{ 0.02f, 0.04f });
+	_fixedArm->SetFollowSpeed(0.01f);
 
 	_remote->SetTarget(&_transform);
 
@@ -72,33 +67,32 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 	Engine::Input::IMappingContext* mappingContext = nullptr;
 	inputManager->GetMappingContext(L"Default", &mappingContext);
 
-	if (_isRemote) {
-		Engine::Input::IAction* cameraAction = nullptr;
-		mappingContext->GetAction(L"Camera", &cameraAction);
-		cameraAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](Engine::Math::Vector3 value)
-			{ _fixedArm->Rotate(value); });
+	Engine::Input::IAction* cameraAction = nullptr;
+	mappingContext->GetAction(L"Camera", &cameraAction);
+	cameraAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](Engine::Math::Vector3 value)
+		{ _fixedArm->Rotate(value); });
 
-		Engine::Input::IAction* moveAction = nullptr;
-		mappingContext->GetAction(L"Move", &moveAction);
-		moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
-			{ MoveStarted(); });
-		moveAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
-			{ MoveTriggered(value); });
-		moveAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
-			{ MoveCompleted(); });
+	Engine::Input::IAction* moveAction = nullptr;
+	mappingContext->GetAction(L"Move", &moveAction);
+	moveAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
+		{ MoveStarted(); });
+	moveAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value)
+		{ MoveTriggered(value); });
+	moveAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value)
+		{ MoveCompleted(); });
 
-		Engine::Input::IAction* jumpAction = nullptr;
-		mappingContext->GetAction(L"Jump", &jumpAction);
-		jumpAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
-			{ JumpStarted(); });
+	Engine::Input::IAction* jumpAction = nullptr;
+	mappingContext->GetAction(L"Jump", &jumpAction);
+	jumpAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
+		{ JumpStarted(); });
 
-		Engine::Input::IAction* interactAction = nullptr;
-		mappingContext->GetAction(L"Interact", &interactAction);
-		interactAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
-			{
-				//_transform.position.y -= 100.f;
-			});
-	}
+	Engine::Input::IAction* interactAction = nullptr;
+	mappingContext->GetAction(L"Interact", &interactAction);
+	interactAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
+		{
+			//_transform.position.y -= 100.f;
+		});
+
 	auto PhysicsManager = Engine::Application::GetPhysicsManager();
 
 	Engine::Physics::ControllerDesc cd;
@@ -122,11 +116,11 @@ void Ray::PreInitialize(const Engine::Modules& modules)
 
 	// TODO: Camera Scene¿¡ Ãß°¡
 
-	_sync->AddCallback((short)PacketID::MoveSync, &Ray::SyncMove, this);
-	_sync->AddCallback((short)PacketID::DataRemote, &Ray::SetLocation, this);
+	_sync->AddCallback((short)PacketID::MoveSync, &Live::SyncMove, this);
+	_sync->AddCallback((short)PacketID::DataRemote, &Live::SetLocation, this);
 }
 
-void Ray::PostInitialize(const Engine::Modules& modules)
+void Live::PostInitialize(const Engine::Modules& modules)
 {
 	Object::PostInitialize(modules);
 	//_movement->SetSpeed(100.f);
@@ -143,30 +137,27 @@ void Ray::PostInitialize(const Engine::Modules& modules)
 }
 
 
-void Ray::PostUpdate(float deltaTime)
+void Live::PostUpdate(float deltaTime)
 {
 	Object::PostUpdate(deltaTime);
 
 	Engine::Math::Quaternion q = Engine::Math::Quaternion::Concatenate(_transform.rotation, _offset);
-	
+
 	_worldMatrix = Engine::Math::Matrix::CreateScale(0.4f)
-			     * Engine::Math::Matrix::CreateFromQuaternion(q)
-				 * Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
+		* Engine::Math::Matrix::CreateFromQuaternion(q)
+		* Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
 
 	UpdateState();
 }
 
-void Ray::PostAttach()
+void Live::PostAttach()
 {
 	Object::PostAttach();
-	if (_isRemote) {
-		_camera->Activate();
-	}
-
+	_camera->Activate();
 }
 
-void Ray::MoveStarted()
-{	
+void Live::MoveStarted()
+{
 	_bitFlag->OnFlag(StateFlag::Walk);
 
 	_sync->_stateChange.set_stateinfo(1);
@@ -180,7 +171,7 @@ void Ray::MoveStarted()
 	);
 }
 
-void Ray::MoveTriggered(Engine::Math::Vector3 value)
+void Live::MoveTriggered(Engine::Math::Vector3 value)
 {
 	if (!_bitFlag->IsOnFlag(StateFlag::Jump))
 		_animator->ChangeAnimation("rig|Anim_Walk");
@@ -220,7 +211,7 @@ void Ray::MoveTriggered(Engine::Math::Vector3 value)
 	//// _movement->SetDirection(direction);
 }
 
-void Ray::MoveCompleted()
+void Live::MoveCompleted()
 {
 	if (!_bitFlag->IsOnFlag(StateFlag::Jump | StateFlag::Interact))
 		_animator->ChangeAnimation("rig|Anim_Idle");
@@ -258,7 +249,7 @@ void Ray::MoveCompleted()
 	//_movement->SetDirection(Engine::Math::Vector3::Zero);
 }
 
-void Ray::JumpStarted()
+void Live::JumpStarted()
 {
 	if (_bitFlag->IsOnFlag(StateFlag::Jump))
 		return;
@@ -278,11 +269,11 @@ void Ray::JumpStarted()
 	);
 }
 
-void Ray::UpdateState()
+void Live::UpdateState()
 {
 	// Jump
 	if (_bitFlag->IsOnFlag(StateFlag::Jump_Started))
-	{		
+	{
 		if (_animator->IsLastFrame(0.1f))
 		{
 			if (!_bitFlag->IsOnFlag(StateFlag::Jump_Triggered))
@@ -300,7 +291,7 @@ void Ray::UpdateState()
 			}
 		}
 	}
-	
+
 out_jump:;
 	if (!_bitFlag->IsOnFlag(StateFlag::Walk | StateFlag::Jump | StateFlag::Interact))
 	{
@@ -311,27 +302,27 @@ out_jump:;
 	}
 }
 
-void Ray::SetSerialNumber(int num)
+void Live::SetSerialNumber(int num)
 {
 	_sync->SetSerialNumber(num);
 }
 
-const int Ray::GetSerialNumber() const
+const int Live::GetSerialNumber() const
 {
 	return _sync->GetSerialNumber();
 }
 
-void Ray::SetRemoteState()
+void Live::SetRemoteState()
 {
 	_isRemote = true;
 }
 
-const bool Ray::GetRemoteState() const
+const bool Live::GetRemoteState() const
 {
 	return _isRemote;
 }
 
-void Ray::SyncMove(const MoveMsg::MoveSync* msg)
+void Live::SyncMove(const MoveMsg::MoveSync* msg)
 {
 	float x = msg->x();
 	float y = msg->y();
@@ -349,7 +340,7 @@ void Ray::SyncMove(const MoveMsg::MoveSync* msg)
 	}
 }
 
-void Ray::SetLocation(const MoveMsg::MoveSync* msg)
+void Live::SetLocation(const MoveMsg::MoveSync* msg)
 {
 	float x = msg->x();
 	float y = msg->y();

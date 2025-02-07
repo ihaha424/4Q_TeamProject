@@ -14,10 +14,6 @@ message PutObject {
 	optional int32 targetserialnumber = 1;
 }
 
-message SoundPlay {
-	optional int32 soundid = 1;
-}
-
 message InteractDialog {
 	optional int32 dialogid = 1;
 	optional int32 buttonid = 2;

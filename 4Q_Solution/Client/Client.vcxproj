@@ -151,6 +151,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Live.h" />
     <ClInclude Include="Obj_Buildings_Ornoa_House_3.h" />
     <ClInclude Include="Obj_Props_Bermiore_Cloth_2.h" />
     <ClInclude Include="Obj_Buildings_Sudium.h" />
@@ -189,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Live.cpp" />
     <ClCompile Include="Obj_Buildings_Ornoa_House_3.cpp" />
     <ClCompile Include="Obj_Props_Bermiore_Cloth_2.cpp" />
     <ClCompile Include="Obj_Buildings_Sudium.cpp" />

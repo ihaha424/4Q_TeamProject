@@ -156,6 +156,9 @@
     <ClInclude Include="TriggerBox.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="Live.h">
+      <Filter>Object\Live</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -253,6 +256,9 @@
     </ClCompile>
     <ClCompile Include="TriggerBox.cpp">
       <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Live.cpp">
+      <Filter>Object\Live</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

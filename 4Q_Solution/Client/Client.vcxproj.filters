@@ -180,6 +180,9 @@
     <ClInclude Include="Remote.h">
       <Filter>Object\Remote</Filter>
     </ClInclude>
+    <ClInclude Include="RemoteLive.h">
+      <Filter>Object\Remote\Live</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -289,6 +292,9 @@
     </ClCompile>
     <ClCompile Include="Remote.cpp">
       <Filter>Object\Remote</Filter>
+    </ClCompile>
+    <ClCompile Include="RemoteLive.cpp">
+      <Filter>Object\Remote\Live</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

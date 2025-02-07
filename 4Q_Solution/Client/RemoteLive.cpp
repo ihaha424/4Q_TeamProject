@@ -1,7 +1,7 @@
 #include "pch.h"
-#include "Live.h"
+#include "RemoteLive.h"
 
-Live::Live(std::filesystem::path&& meshPath)
+RemoteLive::RemoteLive(std::filesystem::path&& meshPath)
 {
 	_meshPath = std::forward<std::filesystem::path>(meshPath);
 }

@@ -57,6 +57,7 @@ protected:
 protected:
 	Engine::Math::Vector3 _capsuleScale;
 	Engine::Math::Quaternion _offset;
+	float _speed;
 
 private:
 	// State Test

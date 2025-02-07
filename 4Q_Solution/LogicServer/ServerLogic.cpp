@@ -152,6 +152,11 @@ void ServerLogic::UpdateObject(float deltaTime)
         _playerSlot[i]._flag = _playerSlot[i]._controller->GetCollisionFlag();
         _playerSlot[i]._controller->FixedUpdate();
 
+        //if (_playerSlot[i]._state & (1 << 4) && _playerSlot[i]._controller->IsJump() == false) {
+        //    _stateChange.set_stateinfo(1);
+        //    _stateChange.SerializeToString(&_msgBuffer);
+        //    Server::BroadCast(_msgBuffer, (short)PacketID::StateChange, _stateChange.ByteSizeLong(), _playerSlot[i]._serialNumber);
+        //}
     } // for end
     _physicsManager->Update(deltaTime);
     _physicsManager->FetchScene();
@@ -164,7 +169,7 @@ void ServerLogic::SendPositionData()
         } // if end
         Engine::Math::Vector3 position = _playerSlot[i]._controller->GetPosition();
         Engine::Math::Quaternion rotation = _playerSlot[i]._rotation;
-        printf("Player%d Position : (%f, %f, %f)\n", i + 1, position.x, position.y, position.z);
+        //printf("Player%d Position : (%f, %f, %f)\n", i + 1, position.x, position.y, position.z);
         _moveSync.set_x(position.x);
         _moveSync.set_y(position.y);
         _moveSync.set_z(position.z);
@@ -217,7 +222,10 @@ void ServerLogic::EnterProcess(const Packet& packet)
             } // if end
 
             // TODO: 나중에 플레이어 class 타입이 나오면 그 때 수정해야 합니다.
-            Server::BroadCast("", (short)PacketID::Sync, 0, _playerSlot[i]._serialNumber);
+            _addObject.set_grantnumber(_playerSlot[i]._serialNumber);
+            _addObject.SerializeToString(&_msgBuffer);
+
+            Server::BroadCast(_msgBuffer, (short)PacketID::Sync, _addObject.ByteSizeLong(), _playerSlot[i]._serialNumber);
 
         }  // for end
         for (int i = 0; i < _buildings.size(); i++) {
@@ -315,7 +323,7 @@ void ServerLogic::StateChangeProcess(const Packet& packet)
 {
     _stateChange.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
 
-    _playerSlot[packet._serialNumber - 1]._state = _stateChange.stateinfo();
+    _playerSlot[packet._serialNumber - 1]._state ^= _stateChange.stateinfo();
     printf("Player%d State Changed. CurrentState : %d\n", packet._serialNumber, _stateChange.stateinfo());
     _stateChange.SerializeToString(&_msgBuffer);
     Server::BroadCast(_msgBuffer, (short)PacketID::StateChange, _stateChange.ByteSizeLong(), packet._serialNumber);

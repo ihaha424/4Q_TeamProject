@@ -154,6 +154,9 @@
     <Filter Include="08. DX11\PostProcess\AO\SSAO">
       <UniqueIdentifier>{94a2fc78-d00d-401f-ae87-2b2b1c3ff935}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00. Common\Component\CustomRenderer">
+      <UniqueIdentifier>{db816617-141e-4c76-968d-12ae1067d37a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -366,6 +369,12 @@
     <ClInclude Include="AO.h">
       <Filter>08. DX11\PostProcess\AO</Filter>
     </ClInclude>
+    <ClInclude Include="CustomRenderer.h">
+      <Filter>00. Common\Component\CustomRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\ICustomRenderer.h">
+      <Filter>97. Include\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp">
@@ -493,6 +502,9 @@
     </ClCompile>
     <ClCompile Include="ToneMapping.cpp">
       <Filter>08. DX11\PostProcess\ToneMapping</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomRenderer.cpp">
+      <Filter>00. Common\Component\CustomRenderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

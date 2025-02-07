@@ -22,12 +22,6 @@
     <Filter Include="World">
       <UniqueIdentifier>{b91d8580-9a65-44c2-be84-b723c4a01858}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Ray">
-      <UniqueIdentifier>{bbb5e833-c6ee-427d-876b-dce243b96d31}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Live">
-      <UniqueIdentifier>{23bbc462-2c98-4e15-9a65-b2a852c3430d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\Light">
       <UniqueIdentifier>{23c4e8d4-35c7-4ea6-9018-a439026c241b}</UniqueIdentifier>
     </Filter>
@@ -45,6 +39,24 @@
     </Filter>
     <Filter Include="Components">
       <UniqueIdentifier>{6002622e-1893-4355-8300-4951bd7c774d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Remote">
+      <UniqueIdentifier>{15c433d8-3199-4e34-94a2-9266f2d84052}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Remote\Live">
+      <UniqueIdentifier>{35af8c96-5b91-4ff8-ad8b-ab9d53002993}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Remote\Ray">
+      <UniqueIdentifier>{6e80180e-9b88-490c-99b9-62be1be66f6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Player">
+      <UniqueIdentifier>{c6212cad-b30b-43b7-af01-bf46c550d968}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Player\Live">
+      <UniqueIdentifier>{23bbc462-2c98-4e15-9a65-b2a852c3430d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Player\Ray">
+      <UniqueIdentifier>{bbb5e833-c6ee-427d-876b-dce243b96d31}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -64,7 +76,7 @@
       <Filter>Application</Filter>
     </ClInclude>
     <ClInclude Include="Ray.h">
-      <Filter>Object\Ray</Filter>
+      <Filter>Object\Player\Ray</Filter>
     </ClInclude>
     <ClInclude Include="Terrain.h">
       <Filter>Object</Filter>
@@ -156,6 +168,18 @@
     <ClInclude Include="TriggerBox.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="Live.h">
+      <Filter>Object\Player\Live</Filter>
+    </ClInclude>
+    <ClInclude Include="RemoteRay.h">
+      <Filter>Object\Remote\Ray</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Remote.h">
+      <Filter>Object\Remote</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -168,7 +192,7 @@
       <Filter>Application</Filter>
     </ClCompile>
     <ClCompile Include="Ray.cpp">
-      <Filter>Object\Ray</Filter>
+      <Filter>Object\Player\Ray</Filter>
     </ClCompile>
     <ClCompile Include="Terrain.cpp">
       <Filter>Object</Filter>
@@ -253,6 +277,18 @@
     </ClCompile>
     <ClCompile Include="TriggerBox.cpp">
       <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Live.cpp">
+      <Filter>Object\Player\Live</Filter>
+    </ClCompile>
+    <ClCompile Include="RemoteRay.cpp">
+      <Filter>Object\Remote\Ray</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Remote.cpp">
+      <Filter>Object\Remote</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

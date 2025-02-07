@@ -151,6 +151,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Live.h" />
     <ClInclude Include="Obj_Buildings_Ornoa_House_3.h" />
     <ClInclude Include="Obj_Props_Bermiore_Cloth_2.h" />
     <ClInclude Include="Obj_Buildings_Sudium.h" />
@@ -175,7 +177,9 @@
     <ClInclude Include="GlobalLight.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="Remote.h" />
     <ClInclude Include="RemoteMove.h" />
+    <ClInclude Include="RemoteRay.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SceneFillter.h" />
     <ClInclude Include="SkyBox.h" />
@@ -189,6 +193,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Live.cpp" />
     <ClCompile Include="Obj_Buildings_Ornoa_House_3.cpp" />
     <ClCompile Include="Obj_Props_Bermiore_Cloth_2.cpp" />
     <ClCompile Include="Obj_Buildings_Sudium.cpp" />
@@ -215,7 +221,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="Remote.cpp" />
     <ClCompile Include="RemoteMove.cpp" />
+    <ClCompile Include="RemoteRay.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="StaticObject.cpp" />
     <ClCompile Include="Obj_Props_Bermiore_Cloth_1.cpp" />

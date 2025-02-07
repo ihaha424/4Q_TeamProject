@@ -126,12 +126,18 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>.\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PreLinkEvent>
+      <Command>xcopy /y /d "$(ProjectDir)dll\*dll" "$(OutDir)"</Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -143,6 +149,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>.\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -150,13 +157,19 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PreLinkEvent>
+      <Command>xcopy /y /d "$(ProjectDir)dll\*dll" "$(OutDir)"</Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Declare.h" />
     <ClInclude Include="Exports.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Functions.h" />
+    <ClInclude Include="Helper.h" />
     <ClInclude Include="Interfaces.h" />
     <ClInclude Include="ISound.h" />
     <ClInclude Include="ISystem.h" />
@@ -170,6 +183,7 @@
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Functions.cpp" />
+    <ClCompile Include="Helper.cpp" />
     <ClCompile Include="ISound.cpp" />
     <ClCompile Include="ISystem.cpp" />
     <ClCompile Include="pch.cpp">

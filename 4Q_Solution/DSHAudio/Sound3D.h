@@ -2,11 +2,11 @@
 
 namespace DSH::Audio
 {
-	class Sound final : public ISound
+	class Sound3D final : public ISound3D
 	{
 	public:
-		Sound(FMOD::System* system, FMOD::ChannelGroup* group, const std::filesystem::path& path, bool isLoop);
-		~Sound() override;
+		Sound3D(FMOD::System* system, FMOD::ChannelGroup* group, const std::filesystem::path& path, bool isLoop);
+		~Sound3D() override;
 
 		HRESULT QueryInterface(const IID& riid, void** ppvObject) override;
 		ULONG AddRef() override;
@@ -34,6 +34,12 @@ namespace DSH::Audio
 
 		[[nodiscard]] float GetLength() const override;
 
+		HRESULT SetPosition(const Vector& position) override;
+		HRESULT SetVelocity(const Vector& velocity) override;
+
+		HRESULT SetMinDistance(float minDistance) override;
+		HRESULT SetMaxDistance(float maxDistance) override;
+
 	private:
 		[[nodiscard]] unsigned long long GetDspClock() const;
 		[[nodiscard]] unsigned long long GetSampleRateTime(float time) const;
@@ -46,5 +52,11 @@ namespace DSH::Audio
 		FMOD::Sound* _sound;
 		FMOD::ChannelGroup* _group;
 		int _rate;
+
+		Vector _position;
+		Vector _velocity;
+
+		float _minDistance;
+		float _maxDistance;
 	};
 }

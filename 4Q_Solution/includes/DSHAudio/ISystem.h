@@ -3,6 +3,7 @@
 namespace DSH::Audio
 {
 	struct ISound;
+	struct ISound3D;
 
 	EXTERN_C const IID IID_ISystem;
 
@@ -27,6 +28,20 @@ namespace DSH::Audio
 			_In_ bool isLoop,
 			/* [annotation][out] */
 			_Out_ ISound** ppSound) = 0;
+
+		virtual HRESULT CreateSound(
+			/* [annotation][in] */
+			_In_ const std::filesystem::path& path,
+			/* [annotation][in] */
+			_In_ ChannelGroupType group,
+			/* [annotation][in] */
+			_In_ bool isLoop,
+			/* [annotation][out] */
+			_Out_ ISound3D** ppSound) = 0;
+
+		virtual HRESULT CreateListener(
+			/* [annotation][out] */
+			_Out_ IListener** ppListener) = 0;
 
 		virtual HRESULT Pause() = 0;
 

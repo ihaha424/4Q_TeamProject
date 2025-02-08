@@ -24,8 +24,8 @@ bool ServerLogic::Initialize()
     _physicsManager->CreateScene(&_mainScene, sceneDesc);
     _physicsManager->AttachUpdateScene(_mainScene);
     _physicsManager->CreateControllerManager(_mainScene);
-    RegistGround(_ground);
-    RegistTrigerBox(_triggerBox);
+    //RegistGround(_ground);
+    //RegistTrigerBox(_triggerBox);
     //============================
 
     //============================
@@ -36,6 +36,8 @@ bool ServerLogic::Initialize()
     printf("MapData.json Load Complete.\n");
     LoadBuilding();
     LoadSudium();
+    LoadQuestData();
+    LoadDialogData();
     //============================
 
     return true;
@@ -66,6 +68,12 @@ void ServerLogic::Update()
 
 void ServerLogic::Finalize()
 {
+    for (int i = 0; i < 2; i++) {
+        _playerSlot->_controller->Finalize();
+    }
+    _ground._staticRigid->Finalize();
+    _physicsManager->DetachUpdateScene(_mainScene);
+
     delete _timer;
     Server::Finalize();
     _physicsManager->Finalize();
@@ -118,6 +126,16 @@ void ServerLogic::MessageDispatch()
         case PacketID::PutObject:
         {
             ObjectPutProcess(packet);
+            break;
+        }
+        case PacketID::InteractObject:
+        {
+            ObjectInteractProcess(packet);
+            break;
+        }
+        case PacketID::InteraceDialog:
+        {
+            DialogInteractProcess(packet);
             break;
         }
         case PacketID::DataRequest:
@@ -179,7 +197,7 @@ void ServerLogic::SendPositionData()
         _moveSync.add_rotation(rotation.w);
 
         _moveSync.SerializeToString(&_msgBuffer);
-        Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), _playerSlot[i]._serialNumber);
+        //Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), _playerSlot[i]._serialNumber);
         _moveSync.Clear();
     } // for end
 
@@ -281,7 +299,7 @@ void ServerLogic::ExitProcess(const Packet& packet)
 }
 void ServerLogic::MoveProcess(const Packet& packet)
 {
-    _move.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+    _move.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
 
     int serialNum = packet._serialNumber - 1;
 
@@ -315,13 +333,13 @@ void ServerLogic::MoveProcess(const Packet& packet)
 }
 void ServerLogic::JumpProcess(const Packet& packet)
 {
-    _jump.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+    _jump.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
     int playerIdx = packet._serialNumber - 1;
     _playerSlot[playerIdx]._controller->Jump(_jump.power() * 5);
 }
 void ServerLogic::StateChangeProcess(const Packet& packet)
 {
-    _stateChange.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+    _stateChange.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
 
     _playerSlot[packet._serialNumber - 1]._state ^= _stateChange.stateinfo();
     printf("Player%d State Changed. CurrentState : %d\n", packet._serialNumber, _stateChange.stateinfo());
@@ -330,6 +348,7 @@ void ServerLogic::StateChangeProcess(const Packet& packet)
 }
 void ServerLogic::DataRequestProcess(const Packet& packet)
 {
+    printf("Start Send Data.\n");
     for (int i = 0; i < 2; i++) {
         if (_playerSlot[i]._serialNumber == 0) {
             continue;
@@ -390,7 +409,7 @@ void ServerLogic::DataRequestProcess(const Packet& packet)
 }
 void ServerLogic::ObjectPickProcess(const Packet& packet)
 {
-    _pickObject.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+    _pickObject.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
     // TODO: Dynamic Object를 찾아서 위치 업데이트를 시작하기 위해 상태를 변경해줘야 합니다.
 
     _pickObject.SerializeToString(&_msgBuffer);
@@ -403,7 +422,7 @@ void ServerLogic::ObjectPickProcess(const Packet& packet)
 }
 void ServerLogic::ObjectPutProcess(const Packet& packet)
 {
-    _putObject.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+    _putObject.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
     // TODO: Dynamic Object를 찾아서 위치 업데이트를 종료하기 위해 상태를 변경해줘야 합니다.
 
     _putObject.SerializeToString(&_msgBuffer);
@@ -413,6 +432,36 @@ void ServerLogic::ObjectPutProcess(const Packet& packet)
         _putObject.ByteSizeLong(),
         _putObject.targetserialnumber()
     );
+}
+void ServerLogic::ObjectInteractProcess(const Packet& packet)
+{
+    // TODO: 여기서는 오브젝트의 ID에 따라 잡기를 진행하는 부분과 퀘스트 완료와 다이얼로그 시작 로직을 사용해야 합니다.
+    _interactObject.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
+    int objectNum = _interactObject.objectserialnumber();
+    printf("Object Interact Message. Sender Id : %d, Interact Object Id : %d\n", packet._serialNumber, objectNum);
+    if (objectNum == 1200 && _currentQuestID_Ray == 1201) {
+        PlayDialog(1);
+
+    }
+}
+void ServerLogic::DialogInteractProcess(const Packet& packet)
+{
+    // TODO: 다이얼로그의 현재 ID를 체크하여 다음 다이얼로그로 넘어가거나, 퀘스트의 시작을 알리면 됩니다.
+    _interactDialog.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
+    int dialogId = _interactDialog.currentdialogid();
+    int nextId = _dialogTable[dialogId];
+    printf("Dialog Next. current : %d, next : %d\n", dialogId, nextId);
+    if (nextId == 999) {
+        if (packet._serialNumber == 1) {
+            QuestProcess(_currentQuestID_Ray);
+        }
+        else {
+            QuestProcess(_currentQuestID_Live);
+        }
+    }
+    else {
+        PlayDialog(nextId);
+    }
 }
 // =============================
 
@@ -582,5 +631,121 @@ void ServerLogic::RegistTrigerBox(TriggerBox& triggerBox)
 
     triggerBox._staticRigid->SetOwner(&triggerBox);
     triggerBox._staticRigid->Initialize();
+}
+// =============================
+
+// =============================
+// Quest Logic Area
+// =============================
+// 퀘스트의 완료 조건
+// 1. NPC와의 대화 종료
+// 2. 특정 오브젝트와 상호작용
+// 
+// 퍼즐은 특정 ID의 퀘스트를 받았을 때 활성화 되기 시작함.
+// protobuf의 메시지에 퀘스트의 타입을 넣을까?
+// 아니면 그냥 퀘스트를 전달하고, 대화창을 띄우거나 퍼즐을 활성화 하라고 메시지를 보낼까?
+// 
+// 퀘스트의 완료를 클라이언트가 전송.
+// 다이얼로그가 종료됐을 때 추가로 퀘스트 넘기기 메시지를 전송
+// 오브젝트를 활성화 했을 때 특정 오브젝트의 id를 넘기고 퀘스트 넘기기 메시지를 전송
+// 
+// 다이얼로그를 넘길 때 현재 다이얼로그 ID를 클라이언트가 전송해서 다음 다이얼로그의 ID를 요청
+// 
+// 다음 퀘스트를 전달받는 조건은 상호작용을 했을 때.
+// 퍼즐 완료 체크를 언제 하는게 좋을지
+// 퀘스트를 진행하고 있을 때만 특정 오브젝트가 상호작용이 된다고 단정 짓고 하자.
+// 특정 오브젝트를 상호작용 했다는 것은 퀘스트를 확정적으로 완료할 수 있고
+// 특정 다이얼로그를 봤다는 것은 퀘스트를 완료할 수 있다는 것이기 때문에
+// 그냥 퀘스트 완료를 했다고 클라에 보내야 할까?
+// 퀘스트 완료를 보내고, 바로 다음 퀘스트를 보낸다.
+// 
+
+void ServerLogic::LoadQuestData()
+{
+    printf("Start Load QuestData...\n");
+    // TODO: 여기서 json을 통해 퀘스트 데이터를 로드해야 합니다.
+    json questData = _jsonLoader.DeSerialize("Assets/Test/QuestData.json");
+    const auto& questList = questData["QuestData"];
+    for (const auto& quest : questList) {
+        int requireId = quest["RequireQuestID"];
+        int currentId = quest["QuestID"];
+        if (requireId == -1) {
+            if (saveId == 1) {
+                _currentQuestID_Ray = currentId;
+            }
+            else {
+                _currentQuestID_Live = currentId;
+            }
+        }
+        else {
+            if (saveId == 1) {
+                _questTable_Ray.insert({ requireId, currentId });
+            }
+            else {
+                _questTable_Live.insert({ requireId, currentId });
+            }
+        }
+    }
+    printf("QuestData Load Complete.\n");
+}
+void ServerLogic::LoadDialogData()
+{
+    printf("Start Load DialogData...\n");
+    json dialogData = _jsonLoader.DeSerialize("Assets/Test/TestDialog.json");
+    const auto& dialogList = dialogData["DialogData"];
+    for (const auto& dialog : dialogList) {
+        int dialogId = dialog["DialogID"];
+        int nextDialogId = dialog["NextDialogID"];
+        _dialogTable.insert({ dialogId, nextDialogId });
+    }
+    printf("DialogData Load Complete.\n");
+}
+void ServerLogic::QuestProcess(int questId)
+{
+    Server::BroadCast("", (short)PacketID::QuestClear, 0, 0);
+    int nextQuestId = _questTable_Ray[questId];
+    _questStart.set_questid(nextQuestId);
+    _questStart.SerializeToString(&_msgBuffer);
+    Server::BroadCast(_msgBuffer, (short)PacketID::QuestStart, _questStart.ByteSizeLong(), 0);
+}
+void ServerLogic::PlayDialog(int dialogId)
+{
+    _dialogProgress.set_nextdialogid(dialogId);
+    _dialogProgress.SerializeToString(&_msgBuffer);
+    Server::BroadCast(_msgBuffer, (short)PacketID::PlayDialog, _dialogProgress.ByteSizeLong(), 1);
+    printf("Dialog Play Message Send. Dialog Id : %d\n", dialogId);
+}
+// =============================
+
+// =============================
+// Puzzle Area
+// =============================
+
+void ServerLogic::PuzzleProcess()
+{
+}
+
+void ServerLogic::PuzzleTutorial()
+{
+}
+
+void ServerLogic::Puzzle1()
+{
+}
+
+void ServerLogic::Puzzle2()
+{
+}
+
+void ServerLogic::Puzzle3()
+{
+}
+
+void ServerLogic::Puzzle4()
+{
+}
+
+void ServerLogic::Puzzle5()
+{
 }
 // =============================

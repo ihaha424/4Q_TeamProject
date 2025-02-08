@@ -67,8 +67,12 @@ namespace Engine::Component
 		PlayMsg::PutObject _putObject;
 		PlayMsg::SoundPlay _soundPlay;
 
-		PlayMsg::InteractDialog _interactDialog;
+		PlayMsg::QuestStart _questStart;
+		PlayMsg::QuestEnd _questEnd;
 		PlayMsg::DialogProgress _dialogProgress;
+		PlayMsg::InteractObject _interactObject;
+		PlayMsg::InteractDialog _interactDialog;
+		PlayMsg::PuzzleStart _puzzleStart;
 	};
 
 }

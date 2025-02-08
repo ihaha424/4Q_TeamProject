@@ -100,8 +100,13 @@ private:
 	PlayMsg::PutObject _putObject;
 	PlayMsg::SoundPlay _soundPlay;
 
-	PlayMsg::InteractDialog _interactDialog;
+	PlayMsg::QuestStart _questStart;
+	PlayMsg::QuestEnd _questEnd;
 	PlayMsg::DialogProgress _dialogProgress;
+	PlayMsg::InteractObject _interactObject;
+	PlayMsg::InteractDialog _interactDialog;
+	PlayMsg::PuzzleStart _puzzleStart;
+
 
 	std::string _msgBuffer = std::string(256, '\0');
 
@@ -128,6 +133,8 @@ private:
 	void DataRequestProcess(const Packet& packet);
 	void ObjectPickProcess(const Packet& packet);
 	void ObjectPutProcess(const Packet& packet);
+	void ObjectInteractProcess(const Packet& packet);
+	void DialogInteractProcess(const Packet& packet);
 
 private:
 	// =============================
@@ -167,26 +174,40 @@ private:
 	};
 
 	using QuestID = int;
-	using QuestCompleteTable = std::unordered_map<QuestID, QuestState>;
-	using QuestRequireID = std::unordered_map<QuestID, QuestID>;
-	using QuestNextID = std::unordered_map<QuestID, QuestID>;
+	using QuestNextTable = std::unordered_map<QuestID, QuestID>;
+	using DialogID = int;
+	using DialogNextTable = std::unordered_map<DialogID, DialogID>;
 
-	QuestCompleteTable _questClearTable;
-	QuestRequireID _questRequireTable;
-	QuestNextID _questNextTable;
+	DialogNextTable _dialogTable;
+	QuestNextTable _questTable_Ray;
+	QuestNextTable _questTable_Live;
+	QuestID _currentQuestID_Ray = -1;
+	QuestID _currentQuestID_Live = -1;
+	int saveId = 1;
+
+#define DialogMod 10000
+#define DialogDiv 1000
 
 	void LoadQuestData();
-	const bool CheckNextID(QuestID qid) const;
-	const QuestID GetNextQuestID() const;
-	const QuestID GetRequireQuestID() const;
-	const QuestState GetCurrentQuestState(QuestID qid) const;
-
+	void LoadDialogData();
+	void QuestProcess(int questId);
+	void PlayDialog(int dialogId);
 	// =============================
 
 	// =============================
 	// Puzzle Area
 	// =============================
 	
+	int _currentPuzzleNumber = -1;
+
+
+	void PuzzleProcess();
+	void PuzzleTutorial();
+	void Puzzle1();
+	void Puzzle2();
+	void Puzzle3();
+	void Puzzle4();
+	void Puzzle5();
 	
 	
 	

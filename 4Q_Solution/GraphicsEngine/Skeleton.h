@@ -8,6 +8,9 @@ struct Bone
 	std::string name;
 	std::vector<Bone> children;
 	int id;
+	//Matrix anim;
+	//Bone* parent = nullptr;
+	//Matrix* parentAnim = nullptr;
 };
 
 class Skeleton : public Base
@@ -17,12 +20,13 @@ public:
 	virtual ~Skeleton() = default;
 
 public:
-	Bone* GetBone(const unsigned int ID) const { return _bones[ID]; }
+	Bone* GetBone(const unsigned int ID = 0) const { return _bones[ID]; }
 
 public:
 	void Initialize(const aiScene* paiScene, std::unordered_map<std::string, std::pair<unsigned int, Matrix>>& boneInfo);
 	void SetUpSplitBone(const unsigned int maxSplit);
 	void SplitBone(const unsigned int ID, const char* boneName);
+	void MakeParent(const char* parent, const char* child);
 
 private:
 	bool LoadSkeleton(Bone& bone, aiNode* paiNode, std::unordered_map<std::string, std::pair<unsigned int, Matrix>>& boneInfo);

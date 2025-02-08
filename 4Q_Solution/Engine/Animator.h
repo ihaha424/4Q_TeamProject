@@ -23,6 +23,7 @@ namespace Engine::Component
         void SetUpSplitBone(const unsigned int maxSplit) const;
         void SplitBone(const unsigned int id, const char* boneName) const;
         void SetAnimationSpeed(float speed) const;
+        void MakeParent(const char* parent, const char* child) const;
 
     private:
         SkeletalMesh* _skeletalMesh;

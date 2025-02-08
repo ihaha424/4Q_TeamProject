@@ -62,3 +62,8 @@ void Engine::Component::Animator::SetAnimationSpeed(float speed) const
 {
 	_geAnimator->SetAnimationSpeed(speed);
 }
+
+void Engine::Component::Animator::MakeParent(const char* parent, const char* child) const
+{
+	_geAnimator->MakeParent(parent, child);
+}

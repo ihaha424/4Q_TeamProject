@@ -14,6 +14,7 @@ class Player : public Engine::Object
 		Interact_Triggered = 1 << 7,
 	};
 
+	enum SplitType { Lower, Upper, End };
 public:
 	Player();
 
@@ -38,6 +39,9 @@ private:
 	void InteractStarted();
 	void InteractTriggered();
 	void InteractCompleted();
+
+	void ChangeSplitAnimation(const char* animation, StateFlag flag, SplitType type);
+
 private:
 	void SendStateMessage();
 

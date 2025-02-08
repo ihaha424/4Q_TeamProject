@@ -42,46 +42,46 @@ void Animator::Update(const float deltaTime)
 
 		/*XMMATRIX prevRoot = _root;*/
 
-		UpdateAnimationTransform(*_pSkeleton->GetBone(i), identity, _controllers.data());
-
-		/*XMVECTOR deltaPosition = XMVectorSubtract(_root.Translation(), prevRoot.r[3]);
-		deltaPosition.m128_f32[1] = 0.f;*/
-
-		if (_blendInfo.isBlending)
-		{
-			/*const Animation::Channel& prevAnimation = _animation->_animations[_blendInfo.prevAnimation];
-			_blendInfo.prevPlayTime += _speed * deltaTime;
-
-			if (_blendInfo.prevPlayTime > prevAnimation.lastTime)
-				_blendInfo.prevPlayTime = 0.f;*/
-
-			if (1.f <= _blendInfo.blendTime)
-			{
-				_blendInfo.blendTime = 0.f;
-				_blendInfo.isBlending = false;
-			}
-			else
-			{
-				memcpy(_blendTransform.data(), _animationTransforms.data(), sizeof(Matrix) * MAX_BONE_MATRIX);
-				UpdateAnimationTransform(*_pSkeleton->GetBone(i), identity, _prevControllers.data());
-
-				//float cubic = sqrt(1 - powf(_blendInfo.blendTime - 1.f, 2));
-				float easing = 1 - (1 - _blendInfo.blendTime) * (1 - _blendInfo.blendTime);
-
-				for (size_t i = 0; i < MAX_BONE_MATRIX; i++)
-				{
-					//_animationTransforms[i] = Matrix::Lerp(_animationTransforms[i], _blendTransform[i], easing);
-					_animationTransforms[i] = BlendAnimation(_animationTransforms[i], _blendTransform[i], easing);
-				}
-			}
-
-			_blendInfo.blendTime += deltaTime * 5.f;
-		}
 
 		/*if (5.f >= XMVector3Length(deltaPosition).m128_f32[0])
 		{
 			_pTransform->_position += XMVector3TransformCoord(deltaPosition, XMMatrixRotationY(_pTransform->_rotation.y + XM_PIDIV2));
 		}*/
+	}
+
+	UpdateAnimationTransform(*_pSkeleton->GetBone(), identity, _controllers.data());
+
+	/*XMVECTOR deltaPosition = XMVectorSubtract(_root.Translation(), prevRoot.r[3]);
+	deltaPosition.m128_f32[1] = 0.f;*/
+
+	if (_blendInfo.isBlending)
+	{
+		/*const Animation::Channel& prevAnimation = _animation->_animations[_blendInfo.prevAnimation];
+		_blendInfo.prevPlayTime += _speed * deltaTime;
+
+		if (_blendInfo.prevPlayTime > prevAnimation.lastTime)
+			_blendInfo.prevPlayTime = 0.f;*/
+
+		if (1.f <= _blendInfo.blendTime)
+		{
+			_blendInfo.blendTime = 0.f;
+			_blendInfo.isBlending = false;
+		}
+		else
+		{
+			memcpy(_blendTransform.data(), _animationTransforms.data(), sizeof(Matrix) * MAX_BONE_MATRIX);
+			UpdateAnimationTransform(*_pSkeleton->GetBone(), identity, _prevControllers.data());
+
+			//float cubic = sqrt(1 - powf(_blendInfo.blendTime - 1.f, 2));
+			float easing = 1 - (1 - _blendInfo.blendTime) * (1 - _blendInfo.blendTime);
+
+			for (size_t i = 0; i < MAX_BONE_MATRIX; i++)
+			{
+				_animationTransforms[i] = BlendAnimation(_animationTransforms[i], _blendTransform[i], easing);
+			}
+		}
+
+		_blendInfo.blendTime += deltaTime * 5.f;
 	}
 }
 
@@ -163,7 +163,12 @@ void Animator::SetAnimationSpeed(float speed)
 	_speed = speed;
 }
 
-void Animator::UpdateAnimationTransform(const Bone& skeletion,
+void Animator::MakeParent(const char* parent, const char* child)
+{
+	_pSkeleton->MakeParent(parent, child);
+}
+
+void Animator::UpdateAnimationTransform(Bone& skeletion,
 										const XMMATRIX& parentTransform,
 										Controller* pController)
 {
@@ -181,6 +186,7 @@ void Animator::UpdateAnimationTransform(const Bone& skeletion,
 		XMMATRIX position = XMMatrixTranslationFromVector(InterpolationVector3(keyFrame.positions, current.playTime));
 
 		localTransform = scale * rotation * position;
+		// skeletion.anim = localTransform;
 
 		//// Root Motion
 		//if (skeletion.name == "Dummy_root")
@@ -195,12 +201,15 @@ void Animator::UpdateAnimationTransform(const Bone& skeletion,
 
 	XMMATRIX globalTransform = localTransform * parentTransform;
 
+	/*if (skeletion.parentAnim)
+		globalTransform *= *skeletion.parentAnim;*/
+
 	if (-1 != skeletion.id)
 	{
 		_animationTransforms[skeletion.id] = XMMatrixTranspose(skeletion.offset * globalTransform);
 	}
 
-	for (const Bone& child : skeletion.children)
+	for (Bone& child : skeletion.children)
 	{
 		UpdateAnimationTransform(child, globalTransform, pController);
 	}

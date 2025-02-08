@@ -45,9 +45,10 @@ public:
 	void SetUpSplitBone(const unsigned int maxSplit) override;
 	void SplitBone(const unsigned int ID, const char* boneName) override;
 	void SetAnimationSpeed(float speed) override;
+	void MakeParent(const char* parent, const char* child) override;
 
 private:
-	void UpdateAnimationTransform(const Bone& skeletion, const XMMATRIX& parentTransform, Controller* controller);
+	void UpdateAnimationTransform(Bone& skeletion, const XMMATRIX& parentTransform, Controller* controller);
 	XMVECTOR InterpolationVector3(const std::vector<std::pair<float, Vector3>>& v, const float t);
 	XMVECTOR InterpolationVector4(const std::vector<std::pair<float, Vector4>>& v, const float t);
 	XMMATRIX BlendAnimation(const Matrix& m0, const Matrix& m1, const float t);

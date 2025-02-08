@@ -20,5 +20,6 @@ namespace GE
 		virtual void SetUpSplitBone(const unsigned int maxSplit) = 0;
 		virtual void SplitBone(const unsigned int ID, const char* boneName) = 0;
 		virtual void SetAnimationSpeed(float speed) = 0;
+		virtual void MakeParent(const char* parent, const char* child) = 0;
 	};
 }

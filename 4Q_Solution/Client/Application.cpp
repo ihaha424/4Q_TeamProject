@@ -39,7 +39,7 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	objectFactory->Register<Live>(L"Assets/Models/Live.fbx");
 	objectFactory->Register<RemoteLive>(L"Assets/Models/Live.fbx");
 	objectFactory->Register<SkyBox>(L"Assets/Models/skybox.fbx");
-
+	objectFactory->Register<TestSprite>();
 
 	/*
 		Static Object

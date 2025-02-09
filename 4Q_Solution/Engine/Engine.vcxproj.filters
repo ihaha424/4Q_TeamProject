@@ -529,6 +529,9 @@
     <Filter Include="UserInterfaces\Wrappers\Wrapper">
       <UniqueIdentifier>{a09aed04-5622-4ed9-83b9-021ea389c75f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UserInterfaces\Wrappers\Image">
+      <UniqueIdentifier>{d69b3814-9edd-4949-a519-b5149db09277}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -1032,6 +1035,9 @@
     <ClInclude Include="Panels.h">
       <Filter>UserInterfaces\Panels</Filter>
     </ClInclude>
+    <ClInclude Include="ImageWrapper.h">
+      <Filter>UserInterfaces\Wrappers\Image</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1444,6 +1450,9 @@
     </ClCompile>
     <ClCompile Include="Wrapper.cpp">
       <Filter>UserInterfaces\Wrappers\Wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageWrapper.cpp">
+      <Filter>UserInterfaces\Wrappers\Image</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -13,6 +13,7 @@ int curDialogId;
 
 int curQuestId1;
 int curQuestId2;
+int curPuzzle = 0;
 
 struct TestObject {
     void Initialize(int num) {
@@ -35,6 +36,12 @@ struct TestObject {
     void DialogPlay(const PlayMsg::DialogProgress* msg) {
         printf("Dialog Start. Dialog ID : %d\n", msg->nextdialogid());
         curDialogId = msg->nextdialogid();
+    }
+    void PuzzleStart(const PlayMsg::PuzzleStart* msg) {
+        printf("Puzzle Start. Puzzle Num : %d\n", msg->puzzleid());
+    }
+    void PuzzleProcess(const PlayMsg::ObjectActive* msg) {
+        printf("Object Actived. Object ID : %d\n", msg->objectserialnumber());
     }
     void InteractDialog() {
         if (curDialogId == -1) {
@@ -88,7 +95,7 @@ int main()
                         _obj2->InteractObject(id);
                     }
                 }
-                else if (order == "dialog") {
+                else if (order == "dialognext") {
                     std::cin >> objectName;
                     if (objectName == "ray") {
                         _obj1->InteractDialog();
@@ -96,6 +103,9 @@ int main()
                     else if (objectName == "live") {
                         _obj2->InteractDialog();
                     }
+                }
+                else if (order == "curpuzzle") {
+                    printf("CurPuzzle : %d\n", curPuzzle);
                 }
             }
         }

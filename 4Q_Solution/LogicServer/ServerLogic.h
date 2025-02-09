@@ -50,9 +50,9 @@ class ServerLogic
 
 	struct Player {
 		int _serialNumber;
+		std::string _resourceId;
 		Engine::Math::Vector3 _position;
 		Engine::Math::Quaternion _rotation;
-		std::string _resourceId;
 		Engine::Math::Vector3 _direction;
 		int _state;
 		float _speed;
@@ -106,6 +106,7 @@ private:
 	PlayMsg::InteractObject _interactObject;
 	PlayMsg::InteractDialog _interactDialog;
 	PlayMsg::PuzzleStart _puzzleStart;
+	PlayMsg::ObjectActive _objectActive;
 
 
 	std::string _msgBuffer = std::string(256, '\0');
@@ -183,14 +184,14 @@ private:
 	QuestNextTable _questTable_Live;
 	QuestID _currentQuestID_Ray = -1;
 	QuestID _currentQuestID_Live = -1;
-	int saveId = 1;
+	int saveId = 0;
 
 #define DialogMod 10000
 #define DialogDiv 1000
 
 	void LoadQuestData();
 	void LoadDialogData();
-	void QuestProcess(int questId);
+	void QuestProcess(int& questId);
 	void PlayDialog(int dialogId);
 	// =============================
 
@@ -199,15 +200,20 @@ private:
 	// =============================
 	
 	int _currentPuzzleNumber = -1;
+	// 오브젝트를 상호작용 할 때마다 갱신해줘야함. 
+	int _currentInteractObject = -1;
 
+	// Puzzle 2
+	std::vector<int> _balls	{ 1, 1, 1, 1, 1, 1 };
+	std::vector<int> _dir	{ 1, 1, 1, 1, 1, 1 };
 
-	void PuzzleProcess();
-	void PuzzleTutorial();
-	void Puzzle1();
-	void Puzzle2();
+	void PuzzleProcess(int objectId);
+	void Puzzle1(int objectId);
+	void Puzzle2(int objectId);
 	void Puzzle3();
 	void Puzzle4();
 	void Puzzle5();
+	void Puzzle6();
 	
 	
 	

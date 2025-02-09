@@ -73,6 +73,7 @@ namespace Engine::Component
 		PlayMsg::InteractObject _interactObject;
 		PlayMsg::InteractDialog _interactDialog;
 		PlayMsg::PuzzleStart _puzzleStart;
+		PlayMsg::ObjectActive _objectActive;
 	};
 
 }

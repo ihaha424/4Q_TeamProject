@@ -41,7 +41,14 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	objectFactory->Register<SkyBox>(L"Assets/Models/skybox.fbx");
 
 	//Test PickingObejct
-	objectFactory->Register<GrabbedObject>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");
+	{
+		objectFactory->Register<GrabbedObject>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");
+	}
+
+	//Test TriggerArea
+	{
+		objectFactory->Register<TriggerArea>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");
+	}
 	
 	//Puzzle01
 	{
@@ -88,6 +95,7 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 
 	const auto componentFactory = contentManager->GetComponentFactory();
 	componentFactory->Register<RemoteMove>();
+	componentFactory->Register<TriggerBox>();
 }
 
 void GameClient::Application::PrepareInitialWorld(Engine::Content::Factory::World* worldFactory)

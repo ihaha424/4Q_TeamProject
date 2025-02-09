@@ -6,7 +6,9 @@
 
 #include "Ray.h"
 
+//Test
 #include "GrabbedObject.h"
+#include "TriggerArea.h"
 
 #include "MapData.h"
 

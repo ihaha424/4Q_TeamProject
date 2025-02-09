@@ -10,13 +10,22 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	_light = objectFactory->Clone<GlobalLight>(this);
 	_skyBox = objectFactory->Clone<SkyBox>(this);
 
-	//Test Grabbed Object Code -> Load File Data
+	//Test Grabbed Object Code -> Make and Load File Data
 	{
 		GrabbedObject* building = objectFactory->Clone<GrabbedObject>(this);
 		Engine::Transform tempTransform{};
 		tempTransform.position = { 200.f, 0.f, 0 };
 		building->SetTransform(tempTransform);
 		building->SetBoxScale({ 100, 100, 100 });
+	}
+
+	//Test Trigger Area Code -> Make and Load File Data
+	{
+		TriggerArea* puzzle = objectFactory->Clone<TriggerArea>(this);
+		Engine::Transform tempTransform{};
+		tempTransform.position = { 0.f, 0.f, 200.f };
+		puzzle->SetTransform(tempTransform);
+		puzzle->SetBoxScale({ 100, 100, 100 });
 	}
 
 	//Test Puzzle_00 Object Code -> Load File Data

@@ -40,11 +40,15 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	objectFactory->Register<RemoteLive>(L"Assets/Models/Live.fbx");
 	objectFactory->Register<SkyBox>(L"Assets/Models/skybox.fbx");
 
+	//Test PickingObejct
+	objectFactory->Register<GrabbedObject>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");
+	
+
 
 	/*
 		Static Object
 	*/
-	objectFactory->Register<Terrain>("Assets/Test/Landscape03.fbx", L"Assets/Test/HeightMap.png");
+	objectFactory->Register<Terrain>("Assets/Test/Landscape03.fbx", L"Assets/Test/H_Clamp_Out2.png");
 
 	// RegisterHelp<Obj_BG_Tree_1>(L"Obj_BG_Tree_1", loadManager, objectFactory);
 	// RegisterHelp<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", loadManager, objectFactory);

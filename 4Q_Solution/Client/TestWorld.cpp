@@ -3,11 +3,18 @@
 
 #include "Application.h"
 
+
 void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 {
 	//_ray = objectFactory->Clone<Ray>(this);
 	_light = objectFactory->Clone<GlobalLight>(this);
 	_skyBox = objectFactory->Clone<SkyBox>(this);
+
+	GrabbedObject* building = objectFactory->Clone<GrabbedObject>(this);
+	Engine::Transform tempTransform{};
+	tempTransform.position = { 200.f, 0.f, 0 };
+	building->SetTransform(tempTransform);
+	building->SetBoxScale({ 100, 100, 100 });
 
 	helpPrepare<Terrain>(L"Terrain", objectFactory);
 
@@ -162,4 +169,34 @@ void TestWorld::RequestData(const ConnectMsg::AddObject* msg) {
 		Engine::Application::GetNetworkManager()->SaveSendData((short)PacketID::DataRequest, data, 0, 0);
 		_dataLoad = true;
 	}
+}
+
+void TestWorld::InitializeGameStateManager(const Engine::Modules& moduels)
+{
+	auto gameStateManager = moduels.gameStateManager;
+
+	auto puzzle_00 = gameStateManager->NewSubManager();
+	gameStateManager->RegisterSubManager(L"puzzle_00", puzzle_00);
+	puzzle_00->RegisterData(L"Data", Puzzle_00{});
+
+	auto puzzle_01 = gameStateManager->NewSubManager();
+	gameStateManager->RegisterSubManager(L"puzzle_01", puzzle_01);
+	puzzle_01->RegisterData(L"Data", Puzzle_01{});
+
+	auto puzzle_02 = gameStateManager->NewSubManager();
+	gameStateManager->RegisterSubManager(L"puzzle_02", puzzle_02);
+	puzzle_02->RegisterData(L"Data", Puzzle_02{});
+
+	auto puzzle_mini = gameStateManager->NewSubManager();
+	gameStateManager->RegisterSubManager(L"puzzle_mini", puzzle_mini);
+	puzzle_mini->RegisterData(L"Data", Puzzle_Mini{});
+
+	auto puzzle_03 = gameStateManager->NewSubManager();
+	gameStateManager->RegisterSubManager(L"puzzle_03", puzzle_03);
+	puzzle_03->RegisterData(L"Data", Puzzle_03{});
+
+	auto puzzle_04 = gameStateManager->NewSubManager();
+	gameStateManager->RegisterSubManager(L"puzzle_04", puzzle_04);
+	puzzle_04->RegisterData(L"Data", Puzzle_04{});
+
 }

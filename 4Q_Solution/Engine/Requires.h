@@ -42,7 +42,7 @@
 	#define PhysicsDebuger true
 #endif
 
-//#define LEFT_HANDED_COORDINATE_SYSTEM
+#define LEFT_HANDED_COORDINATE_SYSTEM
 
 // If you want to left haned coirdinate system, Define This Flag.
 #ifdef LEFT_HANDED_COORDINATE_SYSTEM

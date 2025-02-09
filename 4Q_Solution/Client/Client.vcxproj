@@ -157,7 +157,7 @@
     <ClInclude Include="Obj_Puzzle_Shinave_Stone_3.h" />
     <ClInclude Include="Obj_Puzzle_Shinave_Stone_4.h" />
     <ClInclude Include="Obj_Puzzle_Shinave_Stone_5.h" />
-    <ClInclude Include="PickingObject.h" />
+    <ClInclude Include="GrabbedObject.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Live.h" />
     <ClInclude Include="Obj_Buildings_Ornoa_House_3.h" />
@@ -184,6 +184,7 @@
     <ClInclude Include="GlobalLight.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="RayComponent.h" />
     <ClInclude Include="Remote.h" />
     <ClInclude Include="RemoteLive.h" />
     <ClInclude Include="RemoteMove.h" />
@@ -207,7 +208,7 @@
     <ClCompile Include="Obj_Puzzle_Shinave_Stone_3.cpp" />
     <ClCompile Include="Obj_Puzzle_Shinave_Stone_4.cpp" />
     <ClCompile Include="Obj_Puzzle_Shinave_Stone_5.cpp" />
-    <ClCompile Include="PickingObject.cpp" />
+    <ClCompile Include="GrabbedObject.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Live.cpp" />
     <ClCompile Include="Obj_Buildings_Ornoa_House_3.cpp" />
@@ -236,6 +237,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="RayComponent.cpp" />
     <ClCompile Include="Remote.cpp" />
     <ClCompile Include="RemoteLive.cpp" />
     <ClCompile Include="RemoteMove.cpp" />

@@ -8,7 +8,10 @@ public:
 	explicit Obj_Puzzle_Shinave_Stone_1(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
 	virtual ~Obj_Puzzle_Shinave_Stone_1() = default;
 
-	void PostInitialize(const Engine::Modules& modules) override;
+	// BaseStone을(를) 통해 상속됨
+	void InteractObject() override;
 
+	// BaseStone을(를) 통해 상속됨
+	void DataChangeCallBack(const std::wstring& name, const std::any& value) override;
 };
 

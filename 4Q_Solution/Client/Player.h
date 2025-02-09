@@ -1,5 +1,7 @@
 #pragma once
 
+class GrabbedObject;
+
 class Player : public Engine::Object
 {
 	enum StateFlag : unsigned long long
@@ -61,6 +63,9 @@ protected:
 	Engine::Math::Vector3 _capsuleScale;
 	Engine::Math::Quaternion _offset;
 	float _speed;
+
+
+	GrabbedObject* grabbedObject;
 
 private:
 	// State Test

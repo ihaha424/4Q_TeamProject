@@ -2,29 +2,32 @@
 #include "BaseStone.h"
 
 BaseStone::BaseStone(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath)\
-	: StaticObject(std::forward<std::filesystem::path>(meshPath), std::forward<std::filesystem::path>(physicsPath))
+	: InteractObejct(std::forward<std::filesystem::path>(meshPath), std::forward<std::filesystem::path>(physicsPath))
+	, myManager{}
 {
 }
 
 void BaseStone::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
-	StaticObject::Prepare(componentFactory);
-	_trigger = componentFactory->Clone<TriggerBox>(this);
+	InteractObejct::Prepare(componentFactory);
 }
 
 void BaseStone::DisposeComponents()
 {
-	StaticObject::DisposeComponents();
-	_trigger->Dispose();
+	InteractObejct::DisposeComponents();
 }
 
 void BaseStone::PreInitialize(const Engine::Modules& modules)
 {
-	StaticObject::PreInitialize(modules);
+	InteractObejct::PreInitialize(modules);
+	myManager = Engine::Application::GetGameStateManager();
 
-	auto PhysicsManager = Engine::Application::GetPhysicsManager();
-	PhysicsManager->CreateStaticBoundBoxActor(&_trigger->_triggerBox, _boxScale, _transform);
-	_rigidStatc->_boundBox->SetOwner(this);
-	PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::mainScene))->AddActor(_trigger->_triggerBox);
+	auto managerPuzzle_01 = myManager->FindSubManager(L"puzzle_00");
+	managerPuzzle_01->Subscribe(L"Data", [this](const std::wstring& name, const std::any& value) 
+										{
+											DataChangeCallBack(name, value);
+										}
+	, this);
 }
+
 

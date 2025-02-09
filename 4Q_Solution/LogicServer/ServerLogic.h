@@ -151,8 +151,8 @@ private:
 	Engine::Physics::Manager* _physicsManager = nullptr;
 	Engine::Physics::IScene* _mainScene = nullptr;
 
-	void RegistDynamicPhysics(Object& obj);
-	void RegistStaticPhysics(Object& obj);
+	void RegistDynamicPhysics(Object& obj, Engine::Math::Vector3 scale);
+	void RegistStaticPhysics(Object& obj, Engine::Math::Vector3 scale);
 	void RegistPlayer(Player* player);
 	void RegistGround(Ground& ground);
 	void RegistTrigerBox(TriggerBox& triggerBox);

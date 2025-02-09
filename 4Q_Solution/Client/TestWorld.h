@@ -6,9 +6,10 @@
 
 #include "Ray.h"
 
-
+#include "GrabbedObject.h"
 #include "StaticObject.h"
 #include "MapData.h"
+#include "PuzzleData.h"
 
 
 class TestWorld : public Engine::World
@@ -64,5 +65,7 @@ private:
 			building->SetBoxScale(data.GetProperty<Engine::Math::Vector3>(L"boxScale").value());
 		}
 	}
+
+	void InitializeGameStateManager(const Engine::Modules& moduels);
 };
 

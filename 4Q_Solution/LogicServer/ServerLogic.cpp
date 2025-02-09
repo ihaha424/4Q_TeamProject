@@ -15,7 +15,8 @@ bool ServerLogic::Initialize()
     delete _system;
 
     _physicsManager = new Engine::PHI::Manager();
-    _physicsManager->Initialize();
+    //_physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, true);
+    _physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, false);
 
     //============================
     //  Create Physics Scene
@@ -446,11 +447,13 @@ void ServerLogic::LoadBuilding()
         );
         obj->_serialNumber = _staticObjectSerialNumber++;
         _buildings.push_back(obj);
-        RegistStaticPhysics(*obj);
+        RegistStaticPhysics(*obj, obj->_scale);
         Engine::Transform transform{};
         transform.position = obj->_position;
         transform.rotation = obj->_rotation;
-
+       /* transform.position.y += -10000.f;
+        transform.position.y += 287.f * 7;*/
+        transform.position /= 10;
         obj->_staticRigid->SetTransform(transform);
     }
     printf("Building Data Load Complete.\n");
@@ -481,11 +484,13 @@ void ServerLogic::LoadSudium()
         );
         obj->_serialNumber = _staticObjectSerialNumber++;
         _sudiums.push_back(obj);
-        RegistStaticPhysics(*obj);
+        RegistStaticPhysics(*obj, obj->_scale);
         Engine::Transform transform{};
         transform.position = obj->_position;
         transform.rotation = obj->_rotation;
-
+        /*transform.position.y += -10000.f;
+        transform.position.y += 287.f * 7;*/
+        transform.position /= 10;
         obj->_staticRigid->SetTransform(transform);
 
         printf("Sudium Create Complete. SerialNumber : %d\n", obj->_serialNumber);
@@ -498,12 +503,12 @@ void ServerLogic::LoadSudium()
 // Physics Area
 // ==============================
 
-void ServerLogic::RegistDynamicPhysics(Object& obj)
+void ServerLogic::RegistDynamicPhysics(Object& obj, Engine::Math::Vector3 scale)
 {
     Engine::Physics::RigidComponentDesc rcd;
     rcd.rigidType = Engine::Physics::RigidBodyType::Dynamic;
     rcd.shapeDesc.geometryDesc.type = Engine::Physics::GeometryShape::Capsule;
-    rcd.shapeDesc.geometryDesc.data = { 100.f, 100.f, 100.f };
+    rcd.shapeDesc.geometryDesc.data = { scale.x, scale.y, scale.z, 0 };
     rcd.shapeDesc.isExclusive = true;
     rcd.shapeDesc.materialDesc.data = { 0.5f, 0.5f, 0.5f };
 
@@ -513,12 +518,12 @@ void ServerLogic::RegistDynamicPhysics(Object& obj)
     _mainScene->AddActor(obj._dynamicRigid);
 }
 
-void ServerLogic::RegistStaticPhysics(Object& obj)
+void ServerLogic::RegistStaticPhysics(Object& obj, Engine::Math::Vector3 scale)
 {
     Engine::Physics::RigidComponentDesc rcd;
     rcd.rigidType = Engine::Physics::RigidBodyType::Static;
     rcd.shapeDesc.geometryDesc.type = Engine::Physics::GeometryShape::Box;
-    rcd.shapeDesc.geometryDesc.data = { 100.f, 100.f, 100.f };
+    rcd.shapeDesc.geometryDesc.data = { scale.x, scale.y, scale.z, 0 };
     rcd.shapeDesc.isExclusive = true;
     rcd.shapeDesc.materialDesc.data = { 0.5f, 0.5f, 0.5f };
 
@@ -531,11 +536,11 @@ void ServerLogic::RegistStaticPhysics(Object& obj)
 void ServerLogic::RegistPlayer(Player* player)
 {
     Engine::Physics::ControllerDesc cd;
-    cd.position = Engine::Math::Vector3(0, 100, 0);
-    cd.height = 10.f;
-    cd.radius = 2.f;
-    cd.gravity = { 0.f, -9.8f * 10, 0.f };
-    cd.contactOffset = 0.1f;
+    cd.position = Engine::Math::Vector3(0, 0, 0);
+    cd.height = 100.f;
+    cd.radius = 20.f;
+    //cd.gravity = { 0.f, -9.8f * 10, 0.f };
+    cd.contactOffset = 0.001f;
     cd.stepOffset = 1.f;
     cd.slopeLimit = 0.707f;
     Engine::Physics::IController* controller = player->_controller;
@@ -559,9 +564,9 @@ void ServerLogic::RegistGround(Ground& ground)
     _physicsManager->CreateTriangleStatic(&staticrigid, "terrain", { {0.f,0.f,0.f } }, transform);
     ground._staticRigid = static_cast<Engine::Physics::RigidStaticComponent*>(staticrigid);
     _mainScene->AddActor(ground._staticRigid);
-    ground._staticRigid->SetLocalTranslate({ -500.f * geometryDesc.data.x, -287.f * geometryDesc.data.z, -500.f * geometryDesc.data.y});
+    ground._staticRigid->SetLocalTranslate({ -500.f * geometryDesc.data.x, -287.f * geometryDesc.data.z, 500.f * geometryDesc.data.y});
     //ground._staticRigid->SetTranslate({ 0.f, -1000.f, 0.f });
-    ground._staticRigid->SetRotation(Engine::Math::Quaternion::CreateFromYawPitchRoll(3.14f, 0.f, 0.f));
+    //ground._staticRigid->SetRotation(Engine::Math::Quaternion::CreateFromYawPitchRoll(3.14f, 0.f, 0.f));
 
     ground._staticRigid->SetOwner(&ground);
     ground._staticRigid->Initialize();

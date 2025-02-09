@@ -210,8 +210,11 @@
     <ClInclude Include="BaseStone.h">
       <Filter>Object\Puzzle\00. Tutorial</Filter>
     </ClInclude>
-    <ClInclude Include="PickingObject.h">
+    <ClInclude Include="GrabbedObject.h">
       <Filter>Object\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="RayComponent.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -344,8 +347,11 @@
     <ClCompile Include="BaseStone.cpp">
       <Filter>Object\Puzzle\00. Tutorial</Filter>
     </ClCompile>
-    <ClCompile Include="PickingObject.cpp">
+    <ClCompile Include="GrabbedObject.cpp">
       <Filter>Object\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="RayComponent.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

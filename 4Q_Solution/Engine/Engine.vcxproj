@@ -182,10 +182,12 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="..\Packet\Play.pb.h" />
     <ClInclude Include="..\Packet\ProtoInclude.h" />
     <ClInclude Include="Action.h" />
+    <ClInclude Include="AnchorPanel.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="BackgroundMusicComponent.h" />
     <ClInclude Include="BitFlag.h" />
+    <ClInclude Include="ButtonWrapper.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="ChractorController.h" />
     <ClInclude Include="Camera.h" />
@@ -337,6 +339,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="WindowManager.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="WorldFactory.h" />
+    <ClInclude Include="Wrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Packet\Connect.pb.cc">
@@ -352,9 +355,11 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Action.cpp" />
+    <ClCompile Include="AnchorPanel.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="BackgroundMusicComponent.cpp" />
+    <ClCompile Include="ButtonWrapper.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="ChractorController.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -487,6 +492,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="WindowManager.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="WorldFactory.cpp" />
+    <ClCompile Include="Wrapper.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -31,7 +31,7 @@ void Engine::UI::UserInterface::Detach()
 {
 }
 
-void Engine::UI::UserInterface::Finalize() const
+void Engine::UI::UserInterface::Finalize()
 {
 }
 

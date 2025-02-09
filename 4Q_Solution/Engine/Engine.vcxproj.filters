@@ -514,6 +514,21 @@
     <Filter Include="Math\LTRB">
       <UniqueIdentifier>{4e956724-037d-4d5d-ab57-544450745b48}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UserInterfaces\Panels">
+      <UniqueIdentifier>{e71cef2c-7438-47a5-b41b-493f937c6e76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterfaces\Panels\Anchor">
+      <UniqueIdentifier>{fe11b073-8c10-49c7-abdc-aa84c4f256a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterfaces\Wrappers">
+      <UniqueIdentifier>{7934c75b-dce8-409b-bc3e-051ca7dbd4d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterfaces\Wrappers\Button">
+      <UniqueIdentifier>{10285e38-c5a5-416d-89fe-761417ae048a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterfaces\Wrappers\Wrapper">
+      <UniqueIdentifier>{a09aed04-5622-4ed9-83b9-021ea389c75f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -1002,6 +1017,15 @@
     <ClInclude Include="UserInterfaces.h">
       <Filter>UserInterfaces</Filter>
     </ClInclude>
+    <ClInclude Include="AnchorPanel.h">
+      <Filter>UserInterfaces\Panels\Anchor</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonWrapper.h">
+      <Filter>UserInterfaces\Wrappers\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="Wrapper.h">
+      <Filter>UserInterfaces\Wrappers\Wrapper</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1405,6 +1429,15 @@
     </ClCompile>
     <ClCompile Include="LTRB.cpp">
       <Filter>Math\LTRB</Filter>
+    </ClCompile>
+    <ClCompile Include="AnchorPanel.cpp">
+      <Filter>UserInterfaces\Panels\Anchor</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonWrapper.cpp">
+      <Filter>UserInterfaces\Wrappers\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="Wrapper.cpp">
+      <Filter>UserInterfaces\Wrappers\Wrapper</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -70,4 +70,7 @@
 #include "Object.h"
 #include "World.h"
 
+#include "UserInterfaces.h"
+#include "Canvas.h"
+
 #include "Application.h"

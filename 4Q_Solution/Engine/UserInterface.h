@@ -4,15 +4,21 @@ namespace Engine::UI
 {
 	class UserInterface
 	{
-    public:
-        explicit UserInterface(Math::Rect* rect);
+	public:
+		explicit UserInterface(Math::Rect* rect);
+		UserInterface(const UserInterface& other) = default;
+		UserInterface(UserInterface&& other) noexcept = default;
+		UserInterface& operator=(const UserInterface& other) = default;
+		UserInterface& operator=(UserInterface&& other) noexcept = default;
+		virtual ~UserInterface() = default;
 
-        void Initialize();
-		void Attach();
-		void Update(float deltaGameTime);
-		void FixedUpdate();
-		void Detach();
-		void Finalize() const;
+
+        virtual void Initialize();
+		virtual void Attach();
+		virtual void Update(float deltaGameTime);
+		virtual void FixedUpdate();
+		virtual void Detach();
+		virtual void Finalize();
 
         void SetPadding(const Math::Padding& padding);
         void SetMargin(const Math::Margin& margin);

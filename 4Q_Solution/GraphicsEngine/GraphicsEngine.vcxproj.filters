@@ -85,9 +85,6 @@
     <Filter Include="97. Include\Component">
       <UniqueIdentifier>{1e093da5-e765-4630-bf6b-87d3ac4dece3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00. Common\Component\CustomRenderer">
-      <UniqueIdentifier>{db816617-141e-4c76-968d-12ae1067d37a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00. Common\Component\SpriteRenderer">
       <UniqueIdentifier>{63c70b7b-ae4b-47a7-bcd3-d41ea03398a0}</UniqueIdentifier>
     </Filter>
@@ -165,6 +162,9 @@
     </Filter>
     <Filter Include="08. SpriteSystem">
       <UniqueIdentifier>{c81014eb-b1f6-4e6b-b98e-6a58c9287662}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Common\Component\LineRenderer">
+      <UniqueIdentifier>{db816617-141e-4c76-968d-12ae1067d37a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -378,10 +378,10 @@
     <ClInclude Include="AO.h">
       <Filter>09. DX11\PostProcess\AO</Filter>
     </ClInclude>
-    <ClInclude Include="CustomRenderer.h">
-      <Filter>00. Common\Component\CustomRenderer</Filter>
+    <ClInclude Include="LineRenderer.h">
+      <Filter>00. Common\Component\LineRenderer</Filter>
     </ClInclude>
-    <ClInclude Include="includes\ICustomRenderer.h">
+    <ClInclude Include="includes\ILineRenderer.h">
       <Filter>97. Include\Component</Filter>
     </ClInclude>
     <ClInclude Include="includes\ISpriteRenderer.h">
@@ -530,8 +530,8 @@
     <ClCompile Include="ToneMapping.cpp">
       <Filter>09. DX11\PostProcess\ToneMapping</Filter>
     </ClCompile>
-    <ClCompile Include="CustomRenderer.cpp">
-      <Filter>00. Common\Component\CustomRenderer</Filter>
+    <ClCompile Include="LineRenderer.cpp">
+      <Filter>00. Common\Component\LineRenderer</Filter>
     </ClCompile>
     <ClCompile Include="SpriteRenderer.cpp">
       <Filter>00. Common\Component\SpriteRenderer</Filter>
@@ -610,6 +610,15 @@
       <Filter>00. Common\HLSL</Filter>
     </FxCompile>
     <FxCompile Include="..\Shaders\SpriteVS.hlsl">
+      <Filter>00. Common\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\LineWavePS.hlsl">
+      <Filter>00. Common\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\LineWaveVS.hlsl">
+      <Filter>00. Common\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\LineWaveGS.hlsl">
       <Filter>00. Common\HLSL</Filter>
     </FxCompile>
   </ItemGroup>

@@ -207,12 +207,12 @@
     <ClInclude Include="includes\IBlur.h" />
     <ClInclude Include="includes\IFilter.h" />
     <ClInclude Include="includes\IBloom.h" />
-    <ClInclude Include="includes\ICustomRenderer.h" />
+    <ClInclude Include="includes\ILineRenderer.h" />
     <ClInclude Include="includes\IPostProcessSystem.h" />
     <ClInclude Include="includes\ISpriteRenderer.h" />
     <ClInclude Include="includes\ISpriteSystem.h" />
     <ClInclude Include="includes\Matrix4x4.h" />
-    <ClInclude Include="CustomRenderer.h" />
+    <ClInclude Include="LineRenderer.h" />
     <ClInclude Include="PostProcessSystem.h" />
     <ClInclude Include="Quad.h" />
     <ClInclude Include="Sprite.h" />
@@ -280,7 +280,7 @@
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Bloom.cpp" />
-    <ClCompile Include="CustomRenderer.cpp" />
+    <ClCompile Include="LineRenderer.cpp" />
     <ClCompile Include="PostProcessSystem.cpp" />
     <ClCompile Include="Quad.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -366,6 +366,24 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\LineWaveGS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Geometry</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Geometry</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\LineWavePS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\LineWaveVS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
     <FxCompile Include="..\Shaders\MeshVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>

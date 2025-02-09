@@ -16,7 +16,7 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		Engine::Transform tempTransform{};
 		tempTransform.position = { 200.f, 0.f, 0 };
 		building->SetTransform(tempTransform);
-		building->SetBoxScale({ 100, 100, 100 });
+		building->SetBoxScale({ 100, 500, 100 });
 	}
 
 	//Test Trigger Area Code -> Make and Load File Data

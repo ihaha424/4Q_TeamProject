@@ -15,6 +15,7 @@ void Obj_Puzzle_Shinave_Stone_1::Interact()
 		auto data = std::any_cast<Puzzle_00>(*stateOpt);
 		data.flag[index] = true;
 		myManager->SetData(L"Data", data);
+		std::cout << "Obj_Puzzle_Shinave_Stone_1: Set Data Test Log\n";
 	}
 }
 

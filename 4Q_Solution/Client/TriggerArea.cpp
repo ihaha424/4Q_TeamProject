@@ -44,7 +44,7 @@ void TriggerArea::PreInitialize(const Engine::Modules& modules)
 			std::cout << "TriggerBegine!\n";
 		});
 	_trigger->BindEndInteraction([]() {
-		std::cout << "TriggerEnd!\n";
+			std::cout << "TriggerEnd!\n";
 		});
 }
 

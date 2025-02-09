@@ -113,6 +113,10 @@ void GrabbedObject::PreInitialize(const Engine::Modules& modules)
 	_rigidKinematic->_rigidbody->SetOwner(this);
 
 	PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::mainScene))->AddActor(_rigidKinematic->_rigidbody);
+	_rigidKinematic->_rigidbody->SetFlag(Engine::Physics::CollisionType::Collision, false);
+	_rigidKinematic->_rigidbody->SetFlag(Engine::Physics::CollisionType::Trigger, false);
+	_rigidKinematic->_rigidbody->SetFlag(Engine::Physics::CollisionType::Scene_Query, true);
+
 
 
 	PhysicsManager->CreateStaticBoundBoxActor(&_rigidKinematic->_boundBox, _boxScale, _transform);

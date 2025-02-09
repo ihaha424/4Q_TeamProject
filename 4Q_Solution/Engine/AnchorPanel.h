@@ -40,8 +40,8 @@ namespace Engine::UI::Panel
         class Child
         {
         public:
-            enum class HorizontalAnchoring;
-            enum class VerticalAnchoring;
+            enum class HorizontalAnchoring : unsigned char;
+            enum class VerticalAnchoring : unsigned char;
             explicit Child(UserInterface* child);
 
             void Initialize() const;

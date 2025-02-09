@@ -31,6 +31,8 @@ HRESULT Texture::LoadResource(const std::filesystem::path& filePath)
 
     FAILED_CHECK_BREAK(DirectX::CreateShaderResourceView(pDevice, image.GetImages(), image.GetImageCount(), metadata, &_pTexture));
 
+    _size = { (float)metadata.width, (float)metadata.height };
+
     return S_OK;
 }
 

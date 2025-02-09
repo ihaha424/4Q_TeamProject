@@ -46,3 +46,10 @@ void SpriteRenderer::SetDesc(const GE::SpriteDescription* in)
 {
 	_description = (*in);
 }
+
+void SpriteRenderer::GetImageSize(float* outWidth, float* outHeight)
+{
+	auto [width, height] = _texture->GetSize();
+	(*outWidth) = width;
+	(*outHeight) = height;
+}

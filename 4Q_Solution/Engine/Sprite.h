@@ -8,7 +8,9 @@ namespace Engine::Component
 		Sprite();
 
 	public:
+		void Initialize(const Modules& modules) override;
 		void Attach() override;
+		void Update(float deltaTime) override;
 		void Detach() override;
 		void Finalize() override;
 
@@ -18,9 +20,12 @@ namespace Engine::Component
 		void SetActiveDraw(bool isActive);
 
 	private:
-		std::filesystem::path _filePath;
-		GE::ISpriteRenderer* _geSpriteRenderer;
-		GE::SpriteDescription _geSpriteDescription;
-		GE::Matrix4x4* _geMatrix;
+		GE::Matrix4x4			_geWorld;
+		std::filesystem::path	_filePath;
+		GE::ISpriteRenderer*	_geSpriteRenderer;
+		GE::SpriteDescription	_geSpriteDescription;
+		GE::Matrix4x4*			_geMatrix;
+		float					_width;
+		float					_height;
 	};
 }

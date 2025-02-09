@@ -27,6 +27,7 @@ public:
 	void Release() override;
 	void GetDesc(GE::SpriteDescription* out) override;
 	void SetDesc(const GE::SpriteDescription* in) override;
+	void GetImageSize(float* outWidth, float* outHeight) override;
 
 private:
 	GE::SpriteDescription _description;

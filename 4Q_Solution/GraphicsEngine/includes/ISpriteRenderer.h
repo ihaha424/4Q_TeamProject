@@ -23,5 +23,6 @@ namespace GE
 	public:
 		virtual void GetDesc(SpriteDescription* out) = 0;
 		virtual void SetDesc(const SpriteDescription* in) = 0;
+		virtual void GetImageSize(float* outWidth, float* outHeight) = 0;
 	};
 }

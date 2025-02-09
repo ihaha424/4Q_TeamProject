@@ -9,6 +9,8 @@
 #include "Load.h"
 #include "Content.h"
 #include "Logger.h"
+#include "GameState.h"
+#include "Audio.h"
 
 namespace Engine
 {
@@ -27,10 +29,16 @@ namespace Engine
 		struct Manager;
 	}
 
+	namespace DSHAudio
+	{
+		class Manager;
+	}
+
 	struct Modules
 	{
 		GEGraphics::Manager* graphicsManager;
 		Physics::Manager* physicsManager;
 		Load::IManager* loadManager;
+		DSHAudio::Manager* audioManager;
 	};
 }

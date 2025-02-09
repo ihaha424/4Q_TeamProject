@@ -53,6 +53,7 @@ namespace Engine
 	    static Load::IManager* GetLoadManager();
 		static Content::IManager* GetContentManager();
 		static Logger::IManager* GetLoggerManager();
+		static Audio::IManager* GetSoundManager();
 
 	private:
 		static void CreateTimeManager(Time::Manager** timeManager);
@@ -64,6 +65,7 @@ namespace Engine
 	    static void CreateLoadManager(Load::Manager** loadManager);
 		static void CreateContentManager(Content::Manager** contentManager);
 		static void CreateLoggerManager(Logger::Manager** loggerManager);
+		static void CreateSoundManager(DSHAudio::Manager** soundManager);
 
 		static Time::Manager* _timeManager;
 		static Window::Manager* _windowManager;
@@ -74,6 +76,7 @@ namespace Engine
 	    static Load::Manager* _loadManager;
 		static Content::Manager* _contentManager;
 		static Logger::Manager* _loggerManager;
+		static DSHAudio::Manager* _soundManager;
 	};
 }
 

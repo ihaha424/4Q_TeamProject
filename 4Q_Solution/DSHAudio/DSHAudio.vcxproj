@@ -136,7 +136,9 @@
       <AdditionalLibraryDirectories>.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreLinkEvent>
-      <Command>xcopy /y /d "$(ProjectDir)dll\*dll" "$(OutDir)"</Command>
+      <Command>xcopy /y /d "$(ProjectDir)dll\*dll" "$(OutDir)"
+xcopy /y /d "$(ProjectDir)includes\*.h" "$(SolutionDir)includes\$(ProjectName)\"
+xcopy /y /d "$(ProjectDir)includes\*.hpp" "$(SolutionDir)includes\$(ProjectName)\"</Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -161,31 +163,43 @@
       <AdditionalLibraryDirectories>.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreLinkEvent>
-      <Command>xcopy /y /d "$(ProjectDir)dll\*dll" "$(OutDir)"</Command>
+      <Command>xcopy /y /d "$(ProjectDir)dll\*dll" "$(OutDir)"
+xcopy /y /d "$(ProjectDir)includes\*.h" "$(SolutionDir)includes\$(ProjectName)\"
+xcopy /y /d "$(ProjectDir)includes\*.hpp" "$(SolutionDir)includes\$(ProjectName)\"</Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ChannelGroupType.h" />
     <ClInclude Include="Declare.h" />
     <ClInclude Include="Exports.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Functions.h" />
     <ClInclude Include="Helper.h" />
+    <ClInclude Include="IListener.h" />
+    <ClInclude Include="ISound3D.h" />
     <ClInclude Include="Interfaces.h" />
     <ClInclude Include="ISound.h" />
     <ClInclude Include="ISystem.h" />
+    <ClInclude Include="Listener.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Requires.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="Sound.h" />
+    <ClInclude Include="Sound3D.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Utilities.h" />
+    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ChannelGroupType.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="Helper.cpp" />
+    <ClCompile Include="IListener.cpp" />
+    <ClCompile Include="ISound3D.cpp" />
     <ClCompile Include="ISound.cpp" />
     <ClCompile Include="ISystem.cpp" />
+    <ClCompile Include="Listener.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -193,7 +207,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="Sound3D.cpp" />
     <ClCompile Include="System.cpp" />
+    <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

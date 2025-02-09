@@ -4,7 +4,7 @@ class StaticObject : public Engine::Object
 {
 public:
 	explicit StaticObject(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
-
+	virtual ~StaticObject() = default;
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
 
 	/**

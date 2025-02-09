@@ -11,6 +11,13 @@ DSH::Audio::Sound::Sound(FMOD::System* system, FMOD::ChannelGroup* group, const 
 	_system->getSoftwareFormat(&_rate, nullptr, nullptr);
 }
 
+DSH::Audio::Sound::~Sound()
+{
+	[[maybe_unused]] auto result = Stop();
+	_sound->release();
+	_sound = nullptr;
+}
+
 HRESULT DSH::Audio::Sound::QueryInterface(const IID& riid, void** ppvObject)
 {
 	if (ppvObject == nullptr) return E_INVALIDARG;

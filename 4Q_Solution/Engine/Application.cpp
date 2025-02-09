@@ -5,6 +5,7 @@
 #include "DSHInputManager.h"
 #include "DSHLoadManager.h"
 #include "DSHLoggerManager.h"
+#include "DSHAudioManager.h"
 #include "DSHTimeManager.h"
 #include "DSHWindowManager.h"
 #include "GEGraphicsManager.h"
@@ -20,6 +21,7 @@ Engine::Content::Manager* Engine::Application::_contentManager = nullptr;
 Engine::Network::Manager* Engine::Application::_networkManager = nullptr;
 Engine::Physics::Manager* Engine::Application::_physicsManager = nullptr;
 Engine::Logger::Manager* Engine::Application::_loggerManager = nullptr;
+Engine::DSHAudio::Manager* Engine::Application::_soundManager = nullptr;
 
 Engine::Application::Application(const HINSTANCE instanceHandle):
 	_instanceHandle(instanceHandle), _size(Math::Size::Zero)
@@ -65,7 +67,8 @@ void Engine::Application::Run(const int showCommand)
 			_contentManager->Contraction(Modules{ 
 				.graphicsManager = _graphicsManager,
 				.physicsManager = _physicsManager,
-                .loadManager = _loadManager
+                .loadManager = _loadManager,
+				.audioManager = _soundManager
 			});
 			_networkManager->DispatchPacket();
 
@@ -81,10 +84,15 @@ void Engine::Application::Run(const int showCommand)
 
 			_contentManager->Relaxation();
 
+			_soundManager->Update();
+
 			_graphicsManager->PostUpdate(deltaTime);
 			_graphicsManager->Render();
+
 			_inputManager->Reset();
+
 			_networkManager->Send();
+
 			_loggerManager->Flush();
 		}
 	}
@@ -137,6 +145,11 @@ Engine::Logger::IManager* Engine::Application::GetLoggerManager()
 	return _loggerManager;
 }
 
+Engine::Audio::IManager* Engine::Application::GetSoundManager()
+{
+	return _soundManager;
+}
+
 void Engine::Application::Register(Content::IManager* contentManager, Load::IManager* loadManager)
 {
 	const auto componentFactory = contentManager->GetComponentFactory();
@@ -156,6 +169,10 @@ void Engine::Application::Register(Content::IManager* contentManager, Load::IMan
 	componentFactory->Register<Component::Synchronize>();
 	componentFactory->Register<Component::FixedArm>();
 	componentFactory->Register<Component::BitFlag>();
+	componentFactory->Register<Component::EffectSound>();
+	componentFactory->Register<Component::Effect3DSound>();
+	componentFactory->Register<Component::BackgroundMusic>();
+	componentFactory->Register<Component::Listener>();
 	// TODO: Register other components.
 }
 
@@ -170,6 +187,7 @@ void Engine::Application::CreateManagers()
     CreateContentManager(&_contentManager);	
     CreateNetworkManager(&_networkManager);
     CreatePhysicsManager(&_physicsManager);
+	CreateSoundManager(&_soundManager);
 }
 
 void Engine::Application::InitializeManagers() const
@@ -184,6 +202,7 @@ void Engine::Application::InitializeManagers() const
 	_contentManager->Initialize();
     _networkManager->Initialize();
     _physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, false);
+	_soundManager->Initialize();
 }
 
 void Engine::Application::LoadGameData()
@@ -198,6 +217,7 @@ void Engine::Application::LoadGameData()
 
 void Engine::Application::FinalizeManagers()
 {
+	_soundManager->Finalize();
 	_contentManager->Finalize();
 	_loadManager->Finalize();
 	_graphicsManager->Finalize();
@@ -220,6 +240,7 @@ void Engine::Application::DeleteManagers()
 	deleter(&_contentManager);
     deleter(&_networkManager);
     deleter(&_physicsManager);
+	deleter(&_loggerManager);
 }
 
 void Engine::Application::CreateTimeManager(Time::Manager** timeManager)
@@ -327,5 +348,17 @@ void Engine::Application::CreateLoggerManager(Logger::Manager** loggerManager)
 		Logger::Manager* manager = new DSHLogger::Manager();
 		if (manager == nullptr) thrower(E_OUTOFMEMORY);
 		*loggerManager = manager;
+	}
+}
+
+void Engine::Application::CreateSoundManager(DSHAudio::Manager** soundManager)
+{
+	constexpr Utility::ThrowIfFailed thrower;
+	if (soundManager == nullptr) thrower(E_INVALIDARG);
+	else
+	{
+		DSHAudio::Manager* manager = new DSHAudio::Manager();
+		if (manager == nullptr) thrower(E_OUTOFMEMORY);
+		*soundManager = manager;
 	}
 }

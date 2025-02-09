@@ -19,6 +19,8 @@ namespace DSH::Audio
 		void Update() override;
 
 		HRESULT CreateSound(const std::filesystem::path& path, ChannelGroupType group, bool isLoop, ISound** ppSound) override;
+		HRESULT CreateSound(const std::filesystem::path& path, ChannelGroupType group, bool isLoop, ISound3D** ppSound) override;
+		HRESULT CreateListener(IListener** ppListener) override;
 
 		HRESULT Pause() override;
 		HRESULT Pause(ChannelGroupType group) override;
@@ -44,5 +46,7 @@ namespace DSH::Audio
 		FMOD::System* _system;
 		FMOD::ChannelGroup* _masterGroup;
 		std::unordered_map<ChannelGroupType, FMOD::ChannelGroup*> _channelGroups;
+
+		int _numOfListeners;
 	};
 }

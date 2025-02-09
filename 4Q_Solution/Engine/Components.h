@@ -7,6 +7,13 @@
 #include "FixedArm.h"
 #include "BitFlag.h"
 
+// Sound
+#include "SoundComponent.h"
+#include "EffectSoundComponent.h"
+#include "BackgroundMusicComponent.h"
+#include "Effect3DSoundComponent.h"
+#include "ListenerComponent.h"
+
 // Graphics
 #include "GraphicsComponent.h"
 #include "Camera.h"

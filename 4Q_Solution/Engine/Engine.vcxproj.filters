@@ -472,6 +472,33 @@
     <Filter Include="Modules\Difinition\UGameState\Manager">
       <UniqueIdentifier>{a9f5fa70-42c6-4e6b-be88-ab102f1fcca9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Sound">
+      <UniqueIdentifier>{d461dda8-632b-4a7f-9339-3442feb3cffc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Audio">
+      <UniqueIdentifier>{d0714025-420c-46c0-81f6-ceb5ccfcd124}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Interfaces\Audio\Manager">
+      <UniqueIdentifier>{70faaeb0-76f0-43e6-9ff7-e3c474439c42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHAudio">
+      <UniqueIdentifier>{52684347-6f0f-4857-8942-c911d0934cf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHAudio\Manager">
+      <UniqueIdentifier>{9c85753d-dc8c-4d81-8b8a-baf375c1f48c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Sound\BackgroundMusicComponent">
+      <UniqueIdentifier>{08dbed0e-0aea-42c1-9223-c2e0b53e66db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Sound\EffectSound">
+      <UniqueIdentifier>{6db13457-43cc-4d57-9121-438e08d87622}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Sound\Effect3DSound">
+      <UniqueIdentifier>{8baed855-943d-42b4-9876-52e45c5e7e02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Listener">
+      <UniqueIdentifier>{df805026-f75d-45bc-82e8-17beecbf57d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -921,6 +948,30 @@
     <ClInclude Include="UGameStateManager.h">
       <Filter>Modules\Difinition\UGameState\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="Audio.h">
+      <Filter>Modules\Interfaces\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Modules\Interfaces\Audio\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="DSHAudioManager.h">
+      <Filter>Modules\Difinition\DSHAudio\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectSoundComponent.h">
+      <Filter>Components\Sound\EffectSound</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundComponent.h">
+      <Filter>Components\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundMusicComponent.h">
+      <Filter>Components\Sound\BackgroundMusicComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect3DSoundComponent.h">
+      <Filter>Components\Sound\Effect3DSound</Filter>
+    </ClInclude>
+    <ClInclude Include="ListenerComponent.h">
+      <Filter>Components\Listener</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1291,6 +1342,27 @@
     </ClCompile>
     <ClCompile Include="UGameStateManager.cpp">
       <Filter>Modules\Difinition\UGameState\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Modules\Interfaces\Audio\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHAudioManager.cpp">
+      <Filter>Modules\Difinition\DSHAudio\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundComponent.cpp">
+      <Filter>Components\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectSoundComponent.cpp">
+      <Filter>Components\Sound\EffectSound</Filter>
+    </ClCompile>
+    <ClCompile Include="BackgroundMusicComponent.cpp">
+      <Filter>Components\Sound\BackgroundMusicComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect3DSoundComponent.cpp">
+      <Filter>Components\Sound\Effect3DSound</Filter>
+    </ClCompile>
+    <ClCompile Include="ListenerComponent.cpp">
+      <Filter>Components\Listener</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

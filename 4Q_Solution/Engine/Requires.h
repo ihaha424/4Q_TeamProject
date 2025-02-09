@@ -17,6 +17,7 @@
 #include "DSHWindow/Window.h"
 #include "DSHInput/Input.h"
 #include "DSHLogger/Logger.h"
+#include "DSHAudio/Audio.h"
 #include "GraphicsEngine/IGraphicsSystem.h"
 #include "GraphicsEngine/ICameraSystem.h"
 #include "GraphicsEngine/IRenderSystem.h"

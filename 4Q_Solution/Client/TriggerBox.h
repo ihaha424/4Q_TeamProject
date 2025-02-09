@@ -12,7 +12,6 @@ public:
 	void BindInteraction(const InteractionFunction& callback);
 
 	void Initialize(const Engine::Modules& modules) override;
-	void Update(float deltaTime) override;
 	void FixedUpdate() override;
 	void Finalize()override;
 

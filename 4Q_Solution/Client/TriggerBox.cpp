@@ -31,10 +31,6 @@ void TriggerBox::Initialize(const Engine::Modules& modules)
 	_triggerBox->SetFlag(Engine::Physics::CollisionType::Trigger, true);
 	_triggerBox->SetFlag(Engine::Physics::CollisionType::Scene_Query, false);
 }
-void TriggerBox::Update(float deltaTime)
-{
-	Component::Update(deltaTime);
-}
 
 void TriggerBox::FixedUpdate()
 {

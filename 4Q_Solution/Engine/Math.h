@@ -8,3 +8,5 @@
 #include "DotTween.h"
 #include "Matrix.h"
 #include "Size.h"
+#include "Rect.h"
+#include "LTRB.h"

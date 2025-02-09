@@ -186,6 +186,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Application.h" />
     <ClInclude Include="BackgroundMusicComponent.h" />
     <ClInclude Include="BitFlag.h" />
+    <ClInclude Include="Canvas.h" />
     <ClInclude Include="ChractorController.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DSHLoggerManager.h" />
@@ -198,6 +199,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Logger.h" />
     <ClInclude Include="LoggerManager.h" />
     <ClInclude Include="LogLevel.h" />
+    <ClInclude Include="LTRB.h" />
     <ClInclude Include="PHICoordinateConvert.h" />
     <ClInclude Include="FiniteStateMachine.h" />
     <ClInclude Include="PHICollision.h" />
@@ -292,6 +294,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="PacketFilter.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Quaternion.h" />
+    <ClInclude Include="Rect.h" />
     <ClInclude Include="RigidComponent.h" />
     <ClInclude Include="RigidDynamicComponent.h" />
     <ClInclude Include="RigidKinematicComponent.h" />
@@ -323,6 +326,8 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Transform.h" />
     <ClInclude Include="ITrigger.h" />
     <ClInclude Include="UGameStateManager.h" />
+    <ClInclude Include="UserInterface.h" />
+    <ClInclude Include="UserInterfaces.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="Value.h" />
     <ClInclude Include="Vector2.h" />
@@ -350,6 +355,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="BackgroundMusicComponent.cpp" />
+    <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="ChractorController.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DSHLoggerManager.cpp" />
@@ -360,6 +366,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="ListenerComponent.cpp" />
     <ClCompile Include="LoggerManager.cpp" />
     <ClCompile Include="LogLevel.cpp" />
+    <ClCompile Include="LTRB.cpp" />
     <ClCompile Include="PHICoordinateConvert.cpp" />
     <ClCompile Include="FiniteStateMachine.cpp" />
     <ClCompile Include="PHICollision.cpp" />
@@ -439,6 +446,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="PacketFilter.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Quaternion.cpp" />
+    <ClCompile Include="Rect.cpp" />
     <ClCompile Include="RigidComponent.cpp" />
     <ClCompile Include="RigidDynamicComponent.cpp" />
     <ClCompile Include="RigidKinematicComponent.cpp" />
@@ -471,6 +479,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="ITrigger.cpp" />
     <ClCompile Include="UGameStateManager.cpp" />
+    <ClCompile Include="UserInterface.cpp" />
     <ClCompile Include="Value.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector3.cpp" />

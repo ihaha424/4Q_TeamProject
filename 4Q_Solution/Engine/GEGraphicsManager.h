@@ -6,7 +6,7 @@ namespace Engine::GEGraphics
 	{
 		using CreateInstanceFunction = HRESULT(__stdcall*)(void* ppv);
 	public:
-		Manager() = default;
+		Manager();
 
 		void Initialize(HWND windowHandle, const std::filesystem::path& shaderRootPath, SIZE screenSize,
 			bool isFullScreen, UINT animationThreadCount) override;
@@ -27,6 +27,7 @@ namespace Engine::GEGraphics
 		GE::ILightSystem* GetLightSystem() const  { return _lightSystem; }
 		GE::ITextSystem* GetTextSystem() const  { return _textSystem; }
 		GE::IPostProcessSystem* GetPostProcessSystem() const { return _postprocessSystem; }
+		GE::ISpriteSystem* GetSpriteSystem() const { return _spriteSystem; }
 
 	private:
 		HMODULE _dll;
@@ -40,6 +41,6 @@ namespace Engine::GEGraphics
 		GE::ILightSystem* _lightSystem;
 		GE::ITextSystem* _textSystem;
 		GE::IPostProcessSystem* _postprocessSystem;
-		
+		GE::ISpriteSystem* _spriteSystem;
 	};
 }

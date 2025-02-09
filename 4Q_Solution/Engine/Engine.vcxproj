@@ -307,12 +307,13 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="EffectSoundComponent.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="SoundComponent.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StaticMesh.h" />
     <ClInclude Include="SwizzleAxis.h" />
     <ClInclude Include="Synchronize.h" />
     <ClInclude Include="Terminal.h" />
-    <ClInclude Include="TextRenderer.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Requires.h" />
@@ -453,6 +454,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="EffectSoundComponent.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="SoundComponent.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StaticMesh.cpp" />
     <ClCompile Include="SwizzleAxis.cpp" />
@@ -465,7 +467,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="SafeRelease.cpp" />
     <ClCompile Include="Synchronize.cpp" />
     <ClCompile Include="Terminal.cpp" />
-    <ClCompile Include="TextRenderer.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="ThrowIfFailed.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Transform.cpp" />

@@ -23,6 +23,6 @@ namespace Engine::Component
         std::filesystem::path   _filePath;
         GE::Matrix4x4*          _geMatrix;
         GE::IMeshRenderer*      _geMeshRenderer;
-        GE::MeshDescription     _meshDescription;
+        GE::MeshDescription     _geMeshDescription;
     };
 }

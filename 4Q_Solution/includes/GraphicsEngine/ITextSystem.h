@@ -14,7 +14,7 @@ namespace GE
         ITextSystem& operator=(ITextSystem&&) = delete;
 
     public:      
-        virtual void CreateTextRenderer(ITextRenderer** ppTextRenderer) = 0;
+        virtual void CreateTextRenderer(ITextRenderer** ppComponent) = 0;
         virtual void RegisterRenderQueue(ITextRenderer* pComponent) = 0;
         virtual void UnRegisterRenderQueue(ITextRenderer* pComponent) = 0;
     };

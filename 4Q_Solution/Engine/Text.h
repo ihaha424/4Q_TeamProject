@@ -2,10 +2,10 @@
 
 namespace Engine::Component
 {
-	class TextRenderer : public GraphicsComponent
+	class Text : public GraphicsComponent
 	{
 	public:
-		TextRenderer() = default;
+		Text();
 
 	public:
 		void SetFontPath(const std::filesystem::path& fontPath);
@@ -26,6 +26,6 @@ namespace Engine::Component
 
 	private:
 		GE::ITextRenderer* _geTextRenderer;
-		std::filesystem::path _font;
+		std::filesystem::path _fontPath;
 	};
 }

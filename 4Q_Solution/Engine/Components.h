@@ -22,8 +22,9 @@
 #include "SkeletalMesh.h"
 #include "Animator.h"
 #include "Light.h"
-#include "TextRenderer.h"
+#include "Text.h"
 #include "SkyBox.h"
+#include "Sprite.h"
 
 // Network
 #include "Synchronize.h"

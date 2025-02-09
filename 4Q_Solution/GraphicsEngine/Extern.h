@@ -19,6 +19,7 @@ class StructuredBuffer;
 class Sampler;
 class ViewManagement;
 class Quad;
+class Sprite;
 class RenderGroup;
 
 extern GraphicDevice*		g_pGraphicDevice;
@@ -27,4 +28,5 @@ extern StructuredBuffer*	g_pStructuredBuffer;
 extern Sampler*				g_pSampler;
 extern ViewManagement*		g_pViewManagement;
 extern Quad*				g_pQuad;
+extern Sprite*				g_pSprite;
 extern RenderGroup*			g_pRenderGroup;

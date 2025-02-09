@@ -23,6 +23,7 @@ Quad*				g_pQuad;
 Sprite*				g_pSprite;
 float				g_width;
 float				g_height;
+XMMATRIX			g_orthoGraphic;
 
 void RenderSystem::Initialize(const GE::RENDERER_DESC* pDesc)
 {
@@ -150,6 +151,9 @@ void RenderSystem::InitializeDX11(HWND hWnd, bool isFullScreen, const unsigned i
 	g_pPostProcessSystem->Initialize();
 
 	_pSpriteSystem = new SpriteSystem;
+	_pSpriteSystem->Initialize();
+
+	g_orthoGraphic = XMMatrixTranspose(XMMatrixOrthographicLH(g_width, g_height, 1.f, 100.f));
 }
 
 void RenderSystem::InitializeDX12()

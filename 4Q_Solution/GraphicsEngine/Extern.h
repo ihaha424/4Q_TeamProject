@@ -12,6 +12,7 @@ extern PostProcessSystem*	g_pPostProcessSystem;
 extern std::wstring			g_shaderRootPath;
 extern float				g_width;
 extern float				g_height;
+extern XMMATRIX				g_orthoGraphic;
 
 class GraphicDevice;
 class ConstantBuffer;

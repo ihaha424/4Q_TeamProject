@@ -17,14 +17,13 @@ void Engine::Component::Sprite::Initialize(const Modules& modules)
 
 	auto spriteSystem = _graphicsManager->GetSpriteSystem();
 	spriteSystem->CreateTextRenderer(&_geSpriteRenderer, _filePath.c_str());
-
 	_geSpriteRenderer->GetImageSize(&_width, &_height);
 }
 
 void Engine::Component::Sprite::Attach()
 {
 	Component::Attach();
-	_geSpriteRenderer->SetDesc(&_geSpriteDescription);
+	_geSpriteRenderer->SetDesc(&_geSpriteDescription);	
 	auto spriteSystem = _graphicsManager->GetSpriteSystem();
 	spriteSystem->RegisterRenderQueue(_geSpriteRenderer, &_geWorld);
 }

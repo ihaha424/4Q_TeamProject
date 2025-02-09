@@ -6,6 +6,7 @@
 void SpriteSystem::CreateTextRenderer(GE::ISpriteRenderer** ppComponent, const wchar_t* filePath)
 {
 	SpriteRenderer* pComponent = new SpriteRenderer;
+	pComponent->Initialize(filePath);
 	(*ppComponent) = pComponent;
 }
 

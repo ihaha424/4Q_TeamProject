@@ -10,14 +10,12 @@ struct VS_OUTPUT
     float2 uv            : TEXCOORD0;
 };
 
-#ifdef D3D
 cbuffer CameraData
 {
     matrix view;
     matrix projection;
     float3 cameraPosition;
 };
-#endif
 
 cbuffer World
 {
@@ -36,15 +34,15 @@ float4 ComputeBillboard(float3 position)
                                    rightDir.z, upDir.z, lookAtDir.z, 0.0f,
                                    0.0f, 0.0f, 0.0f, 1.0f);
     
-    return mul(position, rotationMatrix);
+    return mul(float4(position, 1), rotationMatrix);
 }
 #endif
 
 VS_OUTPUT main(VS_INPUT input)
 {
     VS_OUTPUT output = (VS_OUTPUT)0;    
-    
-    float4 position = float4(input.position.xy, world._33, 1);
+
+    float4 position = float4(input.position.xy, 1, 1);
     output.position = mul(position, world);
     
 #ifdef D3D
@@ -53,9 +51,9 @@ VS_OUTPUT main(VS_INPUT input)
 #else
     output.position = mul(output.position, view);
 #endif
-    output.position = mul(output.position, projection);
 #endif
     
+    output.position = mul(output.position, projection);
     output.uv = input.uv;
     
     return output;

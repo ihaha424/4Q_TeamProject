@@ -14,19 +14,23 @@ void SpriteRenderer::Render(ID3D11DeviceContext* pDeviceContext)
 {
 	if (!_description.activeDraw) return;
 
+	Camera* pCamera = g_pCameraSystem->GetCurrentCamera();
+	if (nullptr == pCamera)
+		return;
+
+	CameraData data
+	{
+		.view = pCamera->GetViewMatrix().Transpose(),
+		.projection = g_orthoGraphic,
+		.cameraPosition = pCamera->GetPosition()
+	};
+	
 	if (GE::SpriteDescription::D2D != _description.type)
 	{
-		Camera* pCamera = g_pCameraSystem->GetCurrentCamera();
-		CameraData data
-		{
-			.view = pCamera->GetViewMatrix().Transpose(),
-			.projection = pCamera->GetProjectionMatrix().Transpose(),
-			.cameraPosition = pCamera->GetPosition()
-		};
-
-		g_pConstantBuffer->UpdateConstantBuffer(L"CameraData", &data);
+		data.projection = pCamera->GetProjectionMatrix().Transpose();
 	}
 
+	g_pConstantBuffer->UpdateConstantBuffer(L"CameraData", &data);
 	auto* pSRV = _texture->Get();
 	pDeviceContext->PSSetShaderResources(0, 1, &pSRV);
 	g_pSprite->Render(_description.type);

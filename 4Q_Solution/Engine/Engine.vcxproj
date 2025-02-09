@@ -202,6 +202,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="LoggerManager.h" />
     <ClInclude Include="LogLevel.h" />
     <ClInclude Include="LTRB.h" />
+    <ClInclude Include="Panels.h" />
     <ClInclude Include="PHICoordinateConvert.h" />
     <ClInclude Include="FiniteStateMachine.h" />
     <ClInclude Include="PHICollision.h" />
@@ -340,6 +341,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="World.h" />
     <ClInclude Include="WorldFactory.h" />
     <ClInclude Include="Wrapper.h" />
+    <ClInclude Include="Wrappers.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Packet\Connect.pb.cc">

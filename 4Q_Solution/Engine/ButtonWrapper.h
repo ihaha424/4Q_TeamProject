@@ -2,7 +2,8 @@
 
 namespace Engine::UI::Wrapper
 {
-	class Button :
+	class Button : public Wrapper
 	{
-	}
+
+	};
 }

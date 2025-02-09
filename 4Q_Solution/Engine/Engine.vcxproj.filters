@@ -1026,6 +1026,12 @@
     <ClInclude Include="Wrapper.h">
       <Filter>UserInterfaces\Wrappers\Wrapper</Filter>
     </ClInclude>
+    <ClInclude Include="Wrappers.h">
+      <Filter>UserInterfaces\Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Panels.h">
+      <Filter>UserInterfaces\Panels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

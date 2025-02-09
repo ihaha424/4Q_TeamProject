@@ -1,4 +1,5 @@
 #pragma once
 
 #include "UserInterface.h"
-#include "Panel.h"
+#include "Wrappers.h"
+#include "AnchorPanel.h"

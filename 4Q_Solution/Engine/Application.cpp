@@ -10,6 +10,7 @@
 #include "GEGraphicsManager.h"
 #include "ServerNetworkManager.h"
 #include "PHIManager.h"
+#include "UGameStateManager.h"
 
 Engine::Time::Manager* Engine::Application::_timeManager = nullptr;
 Engine::Window::Manager* Engine::Application::_windowManager = nullptr;
@@ -20,6 +21,7 @@ Engine::Content::Manager* Engine::Application::_contentManager = nullptr;
 Engine::Network::Manager* Engine::Application::_networkManager = nullptr;
 Engine::Physics::Manager* Engine::Application::_physicsManager = nullptr;
 Engine::Logger::Manager* Engine::Application::_loggerManager = nullptr;
+Engine::GameState::Manager* Engine::Application::_gameStateManager = nullptr;
 
 Engine::Application::Application(const HINSTANCE instanceHandle):
 	_instanceHandle(instanceHandle), _size(Math::Size::Zero)
@@ -62,10 +64,11 @@ void Engine::Application::Run(const int showCommand)
 			_inputManager->Update(metaTime);
 			_graphicsManager->PreUpdate(deltaTime);
 			
-			_contentManager->Contraction(Modules{ 
+			_contentManager->Contraction(Modules{
 				.graphicsManager = _graphicsManager,
 				.physicsManager = _physicsManager,
-                .loadManager = _loadManager
+				.loadManager = _loadManager,
+				.gameStateManager = _gameStateManager
 			});
 			_networkManager->DispatchPacket();
 
@@ -137,6 +140,11 @@ Engine::Logger::IManager* Engine::Application::GetLoggerManager()
 	return _loggerManager;
 }
 
+Engine::GameState::IManager* Engine::Application::GetGameStateManager()
+{
+	return _gameStateManager;
+}
+
 void Engine::Application::Register(Content::IManager* contentManager, Load::IManager* loadManager)
 {
 	const auto componentFactory = contentManager->GetComponentFactory();
@@ -170,6 +178,7 @@ void Engine::Application::CreateManagers()
     CreateContentManager(&_contentManager);	
     CreateNetworkManager(&_networkManager);
     CreatePhysicsManager(&_physicsManager);
+	CreateGameStateManager(&_gameStateManager);
 }
 
 void Engine::Application::InitializeManagers() const
@@ -183,7 +192,8 @@ void Engine::Application::InitializeManagers() const
 	_graphicsManager->Initialize(_windowManager->GetHandle(), L"../Shaders/", _size, false, 1);
 	_contentManager->Initialize();
     _networkManager->Initialize();
-    _physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, false);
+    _physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, true);
+	_gameStateManager->Initialize();
 }
 
 void Engine::Application::LoadGameData()
@@ -207,6 +217,7 @@ void Engine::Application::FinalizeManagers()
     _networkManager->Finalize();
     _physicsManager->Finalize();
 	_loggerManager->Finalize();
+	_gameStateManager->Finalize();
 }
 
 void Engine::Application::DeleteManagers()
@@ -220,6 +231,7 @@ void Engine::Application::DeleteManagers()
 	deleter(&_contentManager);
     deleter(&_networkManager);
     deleter(&_physicsManager);
+	deleter(&_gameStateManager);
 }
 
 void Engine::Application::CreateTimeManager(Time::Manager** timeManager)
@@ -327,5 +339,17 @@ void Engine::Application::CreateLoggerManager(Logger::Manager** loggerManager)
 		Logger::Manager* manager = new DSHLogger::Manager();
 		if (manager == nullptr) thrower(E_OUTOFMEMORY);
 		*loggerManager = manager;
+	}
+}
+
+void Engine::Application::CreateGameStateManager(GameState::Manager** gameStateManager)
+{
+	constexpr Utility::ThrowIfFailed thrower;
+	if (gameStateManager == nullptr) thrower(E_INVALIDARG);
+	else
+	{
+		GameState::Manager* manager = new UGameState::Manager();
+		if (manager == nullptr) thrower(E_OUTOFMEMORY);
+		*gameStateManager = manager;
 	}
 }

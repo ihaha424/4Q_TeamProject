@@ -532,6 +532,12 @@
     <Filter Include="UserInterfaces\Wrappers\Image">
       <UniqueIdentifier>{d69b3814-9edd-4949-a519-b5149db09277}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UserInterfaces\Elements">
+      <UniqueIdentifier>{838a5ccd-23c9-42bc-8b7b-2f3a4e6ad26c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterfaces\Elements\Text">
+      <UniqueIdentifier>{0215ed10-0cc5-43bb-a382-26b596df08d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -1038,6 +1044,12 @@
     <ClInclude Include="ImageWrapper.h">
       <Filter>UserInterfaces\Wrappers\Image</Filter>
     </ClInclude>
+    <ClInclude Include="Elements.h">
+      <Filter>UserInterfaces\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="TextElement.h">
+      <Filter>UserInterfaces\Elements\Text</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1453,6 +1465,9 @@
     </ClCompile>
     <ClCompile Include="ImageWrapper.cpp">
       <Filter>UserInterfaces\Wrappers\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="TextElement.cpp">
+      <Filter>UserInterfaces\Elements\Text</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -194,6 +194,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="DSHLoggerManager.h" />
     <ClInclude Include="DSHAudioManager.h" />
     <ClInclude Include="Effect3DSoundComponent.h" />
+    <ClInclude Include="Elements.h" />
     <ClInclude Include="FixedArm.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateManager.h" />
@@ -319,6 +320,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="SwizzleAxis.h" />
     <ClInclude Include="Synchronize.h" />
     <ClInclude Include="Terminal.h" />
+    <ClInclude Include="TextElement.h" />
     <ClInclude Include="TextRenderer.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="pch.h" />
@@ -482,6 +484,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="SafeRelease.cpp" />
     <ClCompile Include="Synchronize.cpp" />
     <ClCompile Include="Terminal.cpp" />
+    <ClCompile Include="TextElement.cpp" />
     <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="ThrowIfFailed.cpp" />
     <ClCompile Include="TimeManager.cpp" />

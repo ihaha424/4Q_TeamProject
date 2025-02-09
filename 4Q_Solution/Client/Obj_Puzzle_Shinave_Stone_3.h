@@ -10,7 +10,7 @@ public:
 
 
 	// BaseStone을(를) 통해 상속됨
-	void InteractObject() override;
+	void Interact() override;
 
 	void DataChangeCallBack(const std::wstring& name, const std::any& value) override;
 

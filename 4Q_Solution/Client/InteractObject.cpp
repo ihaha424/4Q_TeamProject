@@ -1,25 +1,25 @@
 #include "pch.h"
-#include "InteractObejct.h"
+#include "InteractObject.h"
 
-InteractObejct::InteractObejct(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath)
+InteractObject::InteractObject(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath)
 	: _staticMesh(nullptr), _meshPath(std::forward<std::filesystem::path>(meshPath))
 	, _rigidStatic{ nullptr }, _physicsPath{ std::forward<std::filesystem::path>(physicsPath) }
 {
 }
 
-void InteractObejct::Prepare(Engine::Content::Factory::Component* componentFactory)
+void InteractObject::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
 	_staticMesh = componentFactory->Clone<Engine::Component::StaticMesh>(this);
-	_rigidStatic = componentFactory->Clone<Engine::Component::RigidKinematic>(this);
+	_rigidStatic = componentFactory->Clone<Engine::Component::RigidStatic>(this);
 }
 
-void InteractObejct::DisposeComponents()
+void InteractObject::DisposeComponents()
 {
 	_staticMesh->Dispose();
 	_rigidStatic->Dispose();
 }
 
-void InteractObejct::PreInitialize(const Engine::Modules& modules)
+void InteractObject::PreInitialize(const Engine::Modules& modules)
 {
 	Object::PreInitialize(modules);
 	_staticMesh->SetFilePath(_meshPath);
@@ -45,32 +45,24 @@ void InteractObejct::PreInitialize(const Engine::Modules& modules)
 	PhysicsManager->CreateStaticBoundBoxActor(&_rigidStatic->_boundBox, _boxScale, _transform);
 	_rigidStatic->_boundBox->SetOwner(this);
 	PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::cameraScene))->AddActor(_rigidStatic->_boundBox);
-
-
-	/*
-		GameStateManagerSetting
-	*/
-	modules.gameStateManager->Subscribe;
-
-
 }
 
-void InteractObejct::SetIsPublic(bool isPublic)
+void InteractObject::SetIsPublic(bool isPublic)
 {
 	_isPublic = isPublic;
 }
 
-void InteractObejct::SetisDynamic(bool isDynamic)
+void InteractObject::SetisDynamic(bool isDynamic)
 {
 	_isDynamic = isDynamic;
 }
 
-void InteractObejct::SetHasMesh(bool hasMesh)
+void InteractObject::SetHasMesh(bool hasMesh)
 {
 	_hasMesh = hasMesh;
 }
 
-void InteractObejct::SetBoxScale(Engine::Math::Vector3 boxScale)
+void InteractObject::SetBoxScale(Engine::Math::Vector3 boxScale)
 {
 	_boxScale = boxScale;
 }

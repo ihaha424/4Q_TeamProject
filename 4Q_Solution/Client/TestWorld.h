@@ -7,9 +7,11 @@
 #include "Ray.h"
 
 #include "GrabbedObject.h"
-#include "StaticObject.h"
+
 #include "MapData.h"
+
 #include "PuzzleData.h"
+
 
 
 class TestWorld : public Engine::World
@@ -66,6 +68,6 @@ private:
 		}
 	}
 
-	void InitializeGameStateManager(const Engine::Modules& moduels);
+	void InitializeGameStateManager(const Engine::Modules& modules);
 };
 

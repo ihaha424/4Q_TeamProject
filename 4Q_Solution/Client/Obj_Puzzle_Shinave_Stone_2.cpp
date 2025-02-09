@@ -7,14 +7,14 @@ Obj_Puzzle_Shinave_Stone_2::Obj_Puzzle_Shinave_Stone_2(std::filesystem::path&& m
 	index = 1;
 }
 
-void Obj_Puzzle_Shinave_Stone_2::InteractObject()
+void Obj_Puzzle_Shinave_Stone_2::Interact()
 {
-	auto stateOpt = myManager->GetData(L"puzzle_00");
+	auto stateOpt = myManager->GetData(L"Data");
 	if (stateOpt)
 	{
 		auto data = std::any_cast<Puzzle_00>(*stateOpt);
 		data.flag[index] = true;
-		myManager->SetData(L"puzzle_00", data);
+		myManager->SetData(L"Data", data);
 	}
 }
 

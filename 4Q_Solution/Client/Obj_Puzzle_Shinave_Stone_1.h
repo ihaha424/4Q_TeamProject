@@ -9,7 +9,7 @@ public:
 	virtual ~Obj_Puzzle_Shinave_Stone_1() = default;
 
 	// BaseStone을(를) 통해 상속됨
-	void InteractObject() override;
+	void Interact() override;
 
 	// BaseStone을(를) 통해 상속됨
 	void DataChangeCallBack(const std::wstring& name, const std::any& value) override;

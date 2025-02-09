@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Player.h"
 #include "GrabbedObject.h"
+#include "InteractObject.h"
 
 Player::Player() : 
 	//, _movement(nullptr)
@@ -231,7 +232,6 @@ void Player::InteractStarted()
 		return;
 
 	/*Raycast*/
-	//Picking
 	{
 		Engine::Physics::AdditionalQueryData queryData;
 		auto PhysicsManager = Engine::Application::GetPhysicsManager();
@@ -244,11 +244,18 @@ void Player::InteractStarted()
 			for (size_t i = 0; i < queryData.num; i++)
 			{
 				Engine::Object* obj = static_cast<Engine::Object*>(queryData.UserDatas[i]->GetOwner());
+				auto interactObject = dynamic_cast<InteractObject*>(obj);
+				if (nullptr != interactObject)
+				{
+					interactObject->Interact();
+				}
+				//Picking
 				auto checkGrabbedObject = dynamic_cast<GrabbedObject*>(obj);
 				if (nullptr != checkGrabbedObject)
 				{
 					bool isGrab = checkGrabbedObject->Grabbed(&_transform);
 					grabbedObject = checkGrabbedObject;
+					continue;
 				}
 			}
 		}

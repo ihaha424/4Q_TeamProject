@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="BaseStone.h" />
+    <ClInclude Include="InteractObject.h" />
     <ClInclude Include="Obj_Puzzle_Shinave_Stone_1.h" />
     <ClInclude Include="Obj_Puzzle_Shinave_Stone_2.h" />
     <ClInclude Include="Obj_Puzzle_Shinave_Stone_3.h" />
@@ -183,6 +184,14 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="GlobalLight.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PuzzleData.h" />
+    <ClInclude Include="Puzzle_00.h" />
+    <ClInclude Include="Puzzle_00_ObjectData.h" />
+    <ClInclude Include="Puzzle_02.h" />
+    <ClInclude Include="Puzzle_01.h" />
+    <ClInclude Include="Puzzle_03.h" />
+    <ClInclude Include="Puzzle_04.h" />
+    <ClInclude Include="Puzzle_Mini.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="RayComponent.h" />
     <ClInclude Include="Remote.h" />
@@ -198,11 +207,13 @@
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TestWorld.h" />
     <ClInclude Include="MapData.h" />
+    <ClInclude Include="TriggerArea.h" />
     <ClInclude Include="TriggerBox.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="BaseStone.cpp" />
+    <ClCompile Include="InteractObject.cpp" />
     <ClCompile Include="Obj_Puzzle_Shinave_Stone_1.cpp" />
     <ClCompile Include="Obj_Puzzle_Shinave_Stone_2.cpp" />
     <ClCompile Include="Obj_Puzzle_Shinave_Stone_3.cpp" />
@@ -236,6 +247,12 @@
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Puzzle_00.cpp" />
+    <ClCompile Include="Puzzle_02.cpp" />
+    <ClCompile Include="Puzzle_01.cpp" />
+    <ClCompile Include="Puzzle_03.cpp" />
+    <ClCompile Include="Puzzle_04.cpp" />
+    <ClCompile Include="Puzzle_Mini.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RayComponent.cpp" />
     <ClCompile Include="Remote.cpp" />
@@ -247,6 +264,7 @@
     <ClCompile Include="Obj_Props_Bermiore_Cloth_1.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TestWorld.cpp" />
+    <ClCompile Include="TriggerArea.cpp" />
     <ClCompile Include="TriggerBox.cpp" />
   </ItemGroup>
   <ItemGroup>

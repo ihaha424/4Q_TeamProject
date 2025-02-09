@@ -43,6 +43,14 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	//Test PickingObejct
 	objectFactory->Register<GrabbedObject>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");
 	
+	//Puzzle01
+	{
+		objectFactory->Register<Obj_Puzzle_Shinave_Stone_1>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
+		objectFactory->Register<Obj_Puzzle_Shinave_Stone_2>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
+		objectFactory->Register<Obj_Puzzle_Shinave_Stone_3>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
+		objectFactory->Register<Obj_Puzzle_Shinave_Stone_4>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
+		objectFactory->Register<Obj_Puzzle_Shinave_Stone_5>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
+	}
 
 
 	/*
@@ -299,4 +307,3 @@ void GameClient::Application::DeclareSystemAction(Engine::Input::IManager* input
 		mouse->HideCursor();
 		});
 }
-

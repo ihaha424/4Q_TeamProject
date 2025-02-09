@@ -1,10 +1,10 @@
 #pragma once
-class InteractObejct
+class InteractObject
 	: public Engine::Object
 {
 public:
-	explicit InteractObejct(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
-	virtual ~InteractObejct() = default;
+	explicit InteractObject(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
+	virtual ~InteractObject() = default;
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
 
 	/**
@@ -16,7 +16,7 @@ public:
 	void SetBoxScale(Engine::Math::Vector3 boxScale);
 
 	// 상호작용시 호출할 함수
-	virtual void InteractObject() = 0;
+	virtual void Interact() = 0;
 
 	// 데이터 변화시 호출할 함수
 	virtual void DataChangeCallBack(const std::wstring& name, const std::any& value) = 0;

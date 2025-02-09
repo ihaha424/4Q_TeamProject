@@ -4,14 +4,15 @@ class Player : public Engine::Object
 {
 	enum StateFlag : unsigned long long
 	{
-		Idle = 1 << 0,
-		Walk = 1 << 1,
-		Jump = 1 << 2,
-		Interact = 1 << 3,
-		Jump_Started = 1 << 4,
-		Jump_Triggered = 1 << 5,
-		Interact_Started = 1 << 6,
-		Interact_Triggered = 1 << 7,
+		Idle				= 1 << 0,
+		Walk				= 1 << 1,
+		Jump				= 1 << 2,
+		Interact			= 1 << 3,
+		Jump_Started		= 1 << 4,
+		Jump_Triggered		= 1 << 5,
+		Interact_Started	= 1 << 6,
+		Interact_Triggered	= 1 << 7,
+		Interact_Completed	= 1 << 8
 	};
 
 	enum SplitType { Lower, Upper, End };
@@ -41,7 +42,7 @@ private:
 	void InteractCompleted();
 
 	void ChangeSplitAnimation(const char* animation, StateFlag flag, SplitType type);
-
+	void SyncPatialAnimation(const char* animation, StateFlag flag, SplitType parent, SplitType child);
 private:
 	void SendStateMessage();
 

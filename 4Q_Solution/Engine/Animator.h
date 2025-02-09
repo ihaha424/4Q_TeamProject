@@ -18,10 +18,11 @@ namespace Engine::Component
 		void SetSkeletalMesh(SkeletalMesh* skeletalMesh);
 
         void ChangeAnimation(const char* animation) const;
-        void ChangeAnimation(const char* animation, const unsigned int id) const;
-        bool IsLastFrame(float interval, const unsigned int id = 0) const;
-        void SetUpSplitBone(const unsigned int maxSplit) const;
-        void SplitBone(const unsigned int id, const char* boneName) const;
+        void ChangeAnimation(const char* animation, unsigned int id) const;
+        void SyncPartialAnimation(unsigned int parentID, unsigned int childID) const;
+        bool IsLastFrame(float interval, unsigned int id = 0) const;
+        void SetUpSplitBone(unsigned int maxSplit) const;
+        void SplitBone(unsigned int id, const char* boneName) const;
         void SetAnimationSpeed(float speed) const;
         void MakeParent(const char* parent, const char* child) const;
 

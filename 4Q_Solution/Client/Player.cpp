@@ -157,16 +157,17 @@ void Player::PostAttach()
 void Player::MoveStarted()
 {
 	_bitFlag->OnFlag(StateFlag::Walk);
+
+	if (!_bitFlag->IsOnFlag(StateFlag::Jump))
+	{
+		ChangeSplitAnimation("rig|Anim_Walk", StateFlag::Interact, Lower);
+	}
+
 	SendStateMessage();
 }
 
 void Player::MoveTriggered(Engine::Math::Vector3 value)
 {	
-	if (!_bitFlag->IsOnFlag(StateFlag::Jump))
-	{
-		ChangeSplitAnimation("rig|Anim_Walk", StateFlag::Interact, Lower);
-	}
-	
 	_remote->SetDirection(_fixedArm->GetTransformDirection(value));
 	_transform.rotation = _fixedArm->GetRotation(value, _transform.rotation);
 	//_fixedArm->FollowDirection(value);
@@ -194,8 +195,8 @@ void Player::MoveTriggered(Engine::Math::Vector3 value)
 
 void Player::MoveCompleted()
 {
-	if (StateFlag::Interact == _bitFlag->IsOnFlag(StateFlag::Jump | StateFlag::Interact))
-		_animator->ChangeAnimation("rig|Anim_Idle");
+	if (!_bitFlag->IsOnFlag(StateFlag::Jump))
+		SyncPatialAnimation("rig|Anim_Idle", StateFlag::Interact, Upper, Lower);
 
 	_bitFlag->OffFlag(StateFlag::Walk);
 
@@ -235,6 +236,7 @@ void Player::InteractStarted()
 		return;
 
 	_bitFlag->OnFlag(StateFlag::Interact | StateFlag::Interact_Started);
+	_bitFlag->OffFlag(StateFlag::Interact_Completed);
 
 	ChangeSplitAnimation("rig|Anim_Interaction_start", StateFlag::Walk, Upper);
 	SendStateMessage();
@@ -257,6 +259,7 @@ void Player::InteractTriggered()
 
 void Player::InteractCompleted()
 {
+	_bitFlag->OnFlag(StateFlag::Interact_Completed);
 	_bitFlag->OffFlag(StateFlag::Interact | StateFlag::Interact_Started | StateFlag::Interact_Triggered);
 
 	ChangeSplitAnimation("rig|Anim_Interaction_end", StateFlag::Walk, Upper);
@@ -268,6 +271,18 @@ void Player::ChangeSplitAnimation(const char* animation, StateFlag flag, SplitTy
 	if (_bitFlag->IsOnFlag(flag))
 	{
 		_animator->ChangeAnimation(animation, type);
+	}
+	else
+	{
+		_animator->ChangeAnimation(animation);
+	}
+}
+
+void Player::SyncPatialAnimation(const char* animation, StateFlag flag, SplitType parent, SplitType child)
+{
+	if (_bitFlag->IsOnFlag(flag))
+	{
+		_animator->SyncPartialAnimation(parent, child);
 	}
 	else
 	{
@@ -324,6 +339,17 @@ void Player::UpdateState()
 				_animator->ChangeAnimation("rig|Anim_Jump_end");
 				_remote->SetDirection(Engine::Math::Vector3::Zero);
 			}
+		}
+	}
+
+	if (_bitFlag->IsOnFlag(StateFlag::Interact_Completed))
+	{
+		if (_animator->IsLastFrame(0.1f, Upper))
+		{
+			_bitFlag->OffFlag(StateFlag::Interact_Completed);
+
+			if (_bitFlag->IsOnFlag(StateFlag::Walk))
+				_animator->SyncPartialAnimation(Lower, Upper);
 		}
 	}
 

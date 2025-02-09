@@ -21,6 +21,7 @@ public:
 
 public:
 	Bone* GetBone(const unsigned int ID = 0) const { return _bones[ID]; }
+	Bone& GetRootBone() { return _rootBone; }
 
 public:
 	void Initialize(const aiScene* paiScene, std::unordered_map<std::string, std::pair<unsigned int, Matrix>>& boneInfo);

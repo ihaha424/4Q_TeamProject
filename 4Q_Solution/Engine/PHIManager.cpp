@@ -395,7 +395,7 @@ namespace Engine::PHI
 
 		RigidComponent* destComponment = new RigidComponent();
 		
-		PhysicsEngineAPI::Utils::Math::Vector3 boxExtents = { 1,1,1 }; // TODO Refactor this
+		PhysicsEngineAPI::Utils::Math::Vector3 boxExtents = { _boxExtents.x, _boxExtents.y, _boxExtents.z }; // TODO Refactor this
 		PhysicsEngineAPI::Utils::Transform transform = TransformToPhysicsTransform(_transform);
 		thrower(BoolToHRESULT(system->CreateStaticBoundBoxActor(&destComponment->object, boxExtents, transform)));
 		*object = destComponment;
@@ -559,6 +559,68 @@ namespace Engine::PHI
 		thrower(BoolToHRESULT(system->CreateShape(&destComponment->shape, destComponment->geometry, destComponment->material, isExclusive)));
 
 		thrower(BoolToHRESULT(system->CreateStatic(&destComponment->object, transform, destComponment->shape)));
+
+		destComponment->SetLocalTransform(shapeOffset);
+		*_destObject = destComponment;
+	}
+	void Manager::CreateTriangleDynamic(
+		Engine::Physics::IRigidDynamicComponent** _destObject,
+		const char* geomtryName,
+		const Engine::Physics::MaterialDesc& _materialDesc,
+		const Engine::Transform& _transform,
+		const Engine::Transform& shapeOffset,
+		bool isExclusive
+	)
+	{
+		constexpr Utility::ThrowIfFailed thrower;
+
+		auto iter = geometryMap.find(geomtryName);
+		if (iter == geometryMap.end())
+			thrower(S_FALSE);
+		RigidDynamicComponent* destComponment = new RigidDynamicComponent();
+		destComponment->geometry = iter->second;
+
+		PhysicsEngineAPI::Utils::Math::Transform transform = TransformToPhysicsTransform(_transform);
+
+		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc{};
+		auto& initialMeterialData = _materialDesc.data;
+		materialDesc.data = { initialMeterialData.x, initialMeterialData.y, initialMeterialData.z };
+		thrower(BoolToHRESULT(system->CreateMaterial(&destComponment->material, materialDesc)));
+
+		thrower(BoolToHRESULT(system->CreateShape(&destComponment->shape, destComponment->geometry, destComponment->material, isExclusive)));
+
+		thrower(BoolToHRESULT(system->CreateDynamic(&destComponment->object, transform, destComponment->shape, 1)));
+
+		destComponment->SetLocalTransform(shapeOffset);
+		*_destObject = destComponment;
+	}
+	void Manager::CreateTriangleKinematic(
+		Engine::Physics::IRigidKinematicComponent** _destObject,
+		const char* geomtryName,
+		const Engine::Physics::MaterialDesc& _materialDesc,
+		const Engine::Transform& _transform,
+		const Engine::Transform& shapeOffset,
+		bool isExclusive
+	)
+	{
+		constexpr Utility::ThrowIfFailed thrower;
+
+		auto iter = geometryMap.find(geomtryName);
+		if (iter == geometryMap.end())
+			thrower(S_FALSE);
+		RigidKinematicComponent* destComponment = new RigidKinematicComponent();
+		destComponment->geometry = iter->second;
+
+		PhysicsEngineAPI::Utils::Math::Transform transform = TransformToPhysicsTransform(_transform);
+
+		PhysicsEngineAPI::Utils::Description::MaterialDesc materialDesc{};
+		auto& initialMeterialData = _materialDesc.data;
+		materialDesc.data = { initialMeterialData.x, initialMeterialData.y, initialMeterialData.z };
+		thrower(BoolToHRESULT(system->CreateMaterial(&destComponment->material, materialDesc)));
+
+		thrower(BoolToHRESULT(system->CreateShape(&destComponment->shape, destComponment->geometry, destComponment->material, isExclusive)));
+
+		thrower(BoolToHRESULT(system->CreateKinematic(&destComponment->object, transform, destComponment->shape, 1)));
 
 		destComponment->SetLocalTransform(shapeOffset);
 		*_destObject = destComponment;

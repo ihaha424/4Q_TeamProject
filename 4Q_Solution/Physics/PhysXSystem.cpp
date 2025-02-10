@@ -770,7 +770,6 @@ namespace PhysicsEngineAPI
 		controller->hitReportCallback = new PhysXReportCallback();
 		controller->behaviorCallback = new PhysXBehaviorCallback();
 
-
 		physx::PxCapsuleControllerDesc desc;
 		desc.position = Vector3ToPxExtendedVec3(_desc.position);
 		desc.upDirection = Vector3ToPxVec3(_desc.upDirection);
@@ -780,7 +779,7 @@ namespace PhysicsEngineAPI
 		desc.contactOffset = _desc.contactOffset;
 		desc.stepOffset = _desc.stepOffset;
 		desc.density = 10.f;
-		desc.scaleCoeff = 0.8f;
+		desc.scaleCoeff = 1.f;
 		desc.volumeGrowth = 1.5f;
 		desc.reportCallback = controller->hitReportCallback;
 		desc.behaviorCallback = controller->behaviorCallback;
@@ -887,7 +886,7 @@ namespace PhysicsEngineAPI
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				physx::PxHeightFieldSample& sample = samples[y * width + x];
-				sample.height = heightmap[y * width + x];
+				sample.height = static_cast<physx::PxI16>(heightmap[y * width + x]);
 				sample.materialIndex0 = 0;
 				sample.materialIndex1 = 0;
 			}

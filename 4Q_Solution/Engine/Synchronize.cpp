@@ -26,43 +26,43 @@ void Engine::Component::Synchronize::InvokeMessage(const Packet& packet)
 	switch ((PacketID)packet._packetId) {
 	case PacketID::EnterAccept:
 	{
-		_enterAccept.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+		_enterAccept.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
 		_callbackMap[packet._packetId]->Invoke(&_enterAccept);
 		break;
 	}
 	case PacketID::Sync:
 	{
-		_syncPlayer.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+		_syncPlayer.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
 		_callbackMap[packet._packetId]->Invoke(&_syncPlayer);
 		break;
 	}
 	case PacketID::ObjectSync:
 	{
-		_syncObject.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+		_syncObject.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
 		_callbackMap[packet._packetId]->Invoke(&_syncObject);
 		break;
 	}
 	case PacketID::MoveSync:
 	{
-		_moveSync.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+		_moveSync.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
 		_callbackMap[packet._packetId]->Invoke(&_moveSync);
 		break;
 	}
 	case PacketID::ObjectMove:
 	{
-		_objectMove.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+		_objectMove.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
 		_callbackMap[packet._packetId]->Invoke(&_objectMove);
 		break;
 	}
 	case PacketID::PickObject:
 	{
-		_pickObject.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+		_pickObject.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
 		_callbackMap[packet._packetId]->Invoke(&_pickObject);
 		break;
 	}
 	case PacketID::PutObject:
 	{
-		_putObject.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+		_putObject.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
 		_callbackMap[packet._packetId]->Invoke(&_putObject);
 		break;
 	}
@@ -73,25 +73,49 @@ void Engine::Component::Synchronize::InvokeMessage(const Packet& packet)
 	}
 	case PacketID::SoundPlay:
 	{
-		_soundPlay.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+		_soundPlay.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
 		_callbackMap[packet._packetId]->Invoke(&_soundPlay);
+		break;
+	}
+	case PacketID::PlayDialog:
+	{
+		_dialogProgress.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
+		_callbackMap[packet._packetId]->Invoke(&_dialogProgress);
+		break;
+	}
+	case PacketID::QuestStart:
+	{
+		_questStart.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
+		_callbackMap[packet._packetId]->Invoke(&_questStart);
+		break;
+	}
+	case PacketID::QuestClear:
+	{
+		_questEnd.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
+		_callbackMap[packet._packetId]->Invoke(&_questEnd);
+		break;
+	}
+	case PacketID::InteractObject:
+	{
+		_interactObject.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
+		_callbackMap[packet._packetId]->Invoke(&_interactObject);
 		break;
 	}
 	case PacketID::StateChange:
 	{
-		_stateChange.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+		_stateChange.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
 		_callbackMap[packet._packetId]->Invoke(&_stateChange);
 		break;
 	}
 	case PacketID::DataRemote:
 	{
-		_syncPlayer.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+		_syncPlayer.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
 		_callbackMap[packet._packetId]->Invoke(&_syncPlayer);
 		break;
 	}
 	case PacketID::DataObject:
 	{
-		_syncObject.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+		_syncObject.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
 		_callbackMap[packet._packetId]->Invoke(&_syncObject);
 		break;
 	}

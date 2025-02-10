@@ -22,8 +22,17 @@ enum class PacketID : short {
 	ObjectMove,
 	PickObject,
 	PutObject,
+	PuzzleStart,
+	PuzzleProcess,
 	PuzzleSuccess,
 	SoundPlay,
+	InteractObject,
+	PlayDialog,
+	InteraceDialog,
+	QuestStart,
+	QuestClear,
+	ObjectActive,
+	ObjectDisable,
 
 	// Data Transfer
 	DataSendComplete,

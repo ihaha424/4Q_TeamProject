@@ -64,6 +64,21 @@
     <Filter Include="Object\Puzzle\00. Tutorial">
       <UniqueIdentifier>{8e5988fe-feba-4e44-9030-43c00a84b5de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\GrabbedObject">
+      <UniqueIdentifier>{9fcd4a94-c428-45ff-9419-2867518ce9c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\InteractObejct">
+      <UniqueIdentifier>{bee2063c-394d-4c06-beab-04bcb218dade}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\TriggerArea">
+      <UniqueIdentifier>{6d5f98b7-192f-45fe-8cfb-4cd4cf3fc364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\00. Tutorial\Object">
+      <UniqueIdentifier>{871110c1-40ff-477c-97c1-b19d6d00d461}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\Data">
+      <UniqueIdentifier>{1a650c37-524f-4877-806b-d00c051bbd95}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Object\Terrain">
       <UniqueIdentifier>{f7cdfb76-fa75-4d68-8ef4-7d7595b34822}</UniqueIdentifier>
     </Filter>
@@ -192,23 +207,59 @@
     <ClInclude Include="RemoteLive.h">
       <Filter>Object\Remote\Live</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Shinave_Stone_1.h">
-      <Filter>Object\Puzzle\00. Tutorial</Filter>
+    <ClInclude Include="GrabbedObject.h">
+      <Filter>Object\GrabbedObject</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Shinave_Stone_2.h">
-      <Filter>Object\Puzzle\00. Tutorial</Filter>
+    <ClInclude Include="RayComponent.h">
+      <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Shinave_Stone_3.h">
-      <Filter>Object\Puzzle\00. Tutorial</Filter>
+    <ClInclude Include="InteractObject.h">
+      <Filter>Object\InteractObejct</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Shinave_Stone_4.h">
-      <Filter>Object\Puzzle\00. Tutorial</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Shinave_Stone_5.h">
-      <Filter>Object\Puzzle\00. Tutorial</Filter>
+    <ClInclude Include="TriggerArea.h">
+      <Filter>Object\TriggerArea</Filter>
     </ClInclude>
     <ClInclude Include="BaseStone.h">
-      <Filter>Object\Puzzle\00. Tutorial</Filter>
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Shinave_Stone_1.h">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Shinave_Stone_2.h">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Shinave_Stone_3.h">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Shinave_Stone_4.h">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Shinave_Stone_5.h">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzle_00.h">
+      <Filter>Object\Puzzle\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzle_Mini.h">
+      <Filter>Object\Puzzle\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzle_01.h">
+      <Filter>Object\Puzzle\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzle_02.h">
+      <Filter>Object\Puzzle\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzle_03.h">
+      <Filter>Object\Puzzle\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzle_04.h">
+      <Filter>Object\Puzzle\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="PuzzleData.h">
+      <Filter>Object\Puzzle\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzle_00_ObjectData.h">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
     </ClInclude>
     <ClInclude Include="Terrain.h">
       <Filter>Object\Terrain</Filter>
@@ -326,23 +377,53 @@
     <ClCompile Include="RemoteLive.cpp">
       <Filter>Object\Remote\Live</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Shinave_Stone_1.cpp">
-      <Filter>Object\Puzzle\00. Tutorial</Filter>
+    <ClCompile Include="GrabbedObject.cpp">
+      <Filter>Object\GrabbedObject</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Shinave_Stone_2.cpp">
-      <Filter>Object\Puzzle\00. Tutorial</Filter>
+    <ClCompile Include="RayComponent.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Shinave_Stone_3.cpp">
-      <Filter>Object\Puzzle\00. Tutorial</Filter>
+    <ClCompile Include="InteractObject.cpp">
+      <Filter>Object\InteractObejct</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Shinave_Stone_4.cpp">
-      <Filter>Object\Puzzle\00. Tutorial</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Shinave_Stone_5.cpp">
-      <Filter>Object\Puzzle\00. Tutorial</Filter>
+    <ClCompile Include="TriggerArea.cpp">
+      <Filter>Object\TriggerArea</Filter>
     </ClCompile>
     <ClCompile Include="BaseStone.cpp">
-      <Filter>Object\Puzzle\00. Tutorial</Filter>
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Shinave_Stone_1.cpp">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Shinave_Stone_2.cpp">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Shinave_Stone_3.cpp">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Shinave_Stone_4.cpp">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Shinave_Stone_5.cpp">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Puzzle_00.cpp">
+      <Filter>Object\Puzzle\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Puzzle_Mini.cpp">
+      <Filter>Object\Puzzle\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Puzzle_01.cpp">
+      <Filter>Object\Puzzle\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Puzzle_02.cpp">
+      <Filter>Object\Puzzle\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Puzzle_03.cpp">
+      <Filter>Object\Puzzle\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Puzzle_04.cpp">
+      <Filter>Object\Puzzle\Data</Filter>
     </ClCompile>
     <ClCompile Include="Terrain.cpp">
       <Filter>Object\Terrain</Filter>

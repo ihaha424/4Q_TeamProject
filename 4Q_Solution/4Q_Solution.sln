@@ -52,6 +52,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DSHLogger", "DSHLogger\DSHL
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DSHAudio", "DSHAudio\DSHAudio.vcxproj", "{9B9DCDE4-1F54-43BB-B975-AD55A1B7C6C0}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QuestTest", "QuestTest\QuestTest.vcxproj", "{9E62CB2A-E0BF-4492-914D-3AA18C54AF2D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -170,6 +172,14 @@ Global
 		{9B9DCDE4-1F54-43BB-B975-AD55A1B7C6C0}.Release|x64.Build.0 = Release|x64
 		{9B9DCDE4-1F54-43BB-B975-AD55A1B7C6C0}.Release|x86.ActiveCfg = Release|Win32
 		{9B9DCDE4-1F54-43BB-B975-AD55A1B7C6C0}.Release|x86.Build.0 = Release|Win32
+		{9E62CB2A-E0BF-4492-914D-3AA18C54AF2D}.Debug|x64.ActiveCfg = Debug|x64
+		{9E62CB2A-E0BF-4492-914D-3AA18C54AF2D}.Debug|x64.Build.0 = Debug|x64
+		{9E62CB2A-E0BF-4492-914D-3AA18C54AF2D}.Debug|x86.ActiveCfg = Debug|Win32
+		{9E62CB2A-E0BF-4492-914D-3AA18C54AF2D}.Debug|x86.Build.0 = Debug|Win32
+		{9E62CB2A-E0BF-4492-914D-3AA18C54AF2D}.Release|x64.ActiveCfg = Release|x64
+		{9E62CB2A-E0BF-4492-914D-3AA18C54AF2D}.Release|x64.Build.0 = Release|x64
+		{9E62CB2A-E0BF-4492-914D-3AA18C54AF2D}.Release|x86.ActiveCfg = Release|Win32
+		{9E62CB2A-E0BF-4492-914D-3AA18C54AF2D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

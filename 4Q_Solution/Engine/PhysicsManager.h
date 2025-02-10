@@ -51,6 +51,22 @@ namespace Engine::Physics
 			const Engine::Transform& shapeOffset = Engine::Transform(),
 			bool isExclusive = true
 		) = 0;
+		virtual void CreateTriangleDynamic(
+			Engine::Physics::IRigidDynamicComponent** destObject,
+			const char* geomtryName,
+			const Engine::Physics::MaterialDesc& materialDesc,
+			const Engine::Transform& transform,
+			const Engine::Transform& shapeOffset,
+			bool isExclusive
+		) = 0;
+		virtual void CreateTriangleKinematic(
+			Engine::Physics::IRigidKinematicComponent** destObject,
+			const char* geomtryName,
+			const Engine::Physics::MaterialDesc& materialDesc,
+			const Engine::Transform& transform,
+			const Engine::Transform& shapeOffset,
+			bool isExclusive
+		) = 0;
 	};
 
 	// Engine Interface

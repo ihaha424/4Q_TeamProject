@@ -58,6 +58,10 @@ namespace PhysicsEngineAPI
 		physx::PxScene* scene;
 		physx::PxControllerManager* controllerManager;
 
+		physx::PxRaycastHit* hitRaycast;
+		physx::PxOverlapHit* hitOverlap;
+		physx::PxSweepHit* hitSweep;
+
 		friend class PhysXSystem;
 	};
 }

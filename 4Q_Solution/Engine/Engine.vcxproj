@@ -143,6 +143,7 @@
     </Link>
     <Lib>
       <AdditionalDependencies>DSHInput_d.lib;DSHTime_d.lib;DSHAudio_d.lib;DSHWindow_d.lib;DSHLogger_d.lib;Physics_d.lib;Server_d.lib;libprotobufd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/IGNORE:4006 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
     <PreBuildEvent>
       <Command>xcopy /y /d "..\dll\*.dll" "$(OutDir)"
@@ -169,6 +170,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     </Link>
     <Lib>
       <AdditionalDependencies>DSHInput.lib;DSHTime.lib;DSHAudio.lib;DSHWindow.lib;DSHLogger.lib;Physics.lib;Server.lib;libprotobuf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/IGNORE:4006 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
     <PreBuildEvent>
       <Command>

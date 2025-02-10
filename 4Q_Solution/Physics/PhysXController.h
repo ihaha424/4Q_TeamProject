@@ -65,7 +65,7 @@ namespace PhysicsEngineAPI
 		float GetRadius() const override;
 		void SetHeight(float offset) override;
 		float GetHeight() const override;
-		void SetClimbingMode(const const Utils::DataStructure::CapsuleClimbingMode mode) override;
+		void SetClimbingMode(const Utils::DataStructure::CapsuleClimbingMode mode) override;
 		Utils::DataStructure::CapsuleClimbingMode GetClimbingMode() const override;
 
 	private:

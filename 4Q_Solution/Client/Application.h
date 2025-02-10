@@ -27,6 +27,5 @@ namespace GameClient
 
 			objectFactory->Register<T>(buildingProperty.wstring(), buildingProperty.wstring());
 		};
-	
 	};
 }

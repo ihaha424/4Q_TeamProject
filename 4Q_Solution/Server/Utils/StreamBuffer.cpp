@@ -10,7 +10,7 @@
 //	_buffer = new char[bufferSize];
 //}
 
-StreamBuffer::StreamBuffer(unsigned long long size) : _bufferSize(size)
+StreamBuffer::StreamBuffer(unsigned long long size) : _bufferSize(static_cast<int>(size))
 {
 	_buffer = new char[size];
 }

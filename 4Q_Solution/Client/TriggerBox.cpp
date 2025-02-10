@@ -10,14 +10,14 @@ TriggerBox::~TriggerBox()
 {
 }
 
-void TriggerBox::Interaction()
+void TriggerBox::BindBeginInteraction(const InteractionFunction& callback)
 {
-	_function();
+	_begineFunction = callback;
 }
 
-void TriggerBox::BindInteraction(const InteractionFunction& callback)
+void TriggerBox::BindEndInteraction(const InteractionFunction& callback)
 {
-	_function = callback;
+	_endFunction = callback;
 }
 
 void TriggerBox::Initialize(const Engine::Modules& modules)
@@ -30,10 +30,19 @@ void TriggerBox::Initialize(const Engine::Modules& modules)
 	_triggerBox->SetFlag(Engine::Physics::CollisionType::Collision, false);
 	_triggerBox->SetFlag(Engine::Physics::CollisionType::Trigger, true);
 	_triggerBox->SetFlag(Engine::Physics::CollisionType::Scene_Query, false);
-}
-void TriggerBox::Update(float deltaTime)
-{
-	Component::Update(deltaTime);
+	_triggerBox->BindCollision([this](Engine::Physics::TriggerEvent event)
+			{
+				if(_begineFunction)
+					_begineFunction();
+			}
+		, Engine::Physics::TriggerType::OnOverlapBegin);
+	_triggerBox->BindCollision([this](Engine::Physics::TriggerEvent event)
+			{
+				if (_endFunction)
+					_endFunction();
+			}
+		, Engine::Physics::TriggerType::OnOverlapEnd);
+
 }
 
 void TriggerBox::FixedUpdate()

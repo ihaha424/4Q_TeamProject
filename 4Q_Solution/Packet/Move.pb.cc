@@ -78,11 +78,9 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 
 inline constexpr MoveSync::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : _cached_size_{0},
+      : position_{},
         rotation_{},
-        x_{0},
-        y_{0},
-        z_{0} {}
+        _cached_size_{0} {}
 
 template <typename>
 PROTOBUF_CONSTEXPR MoveSync::MoveSync(::_pbi::ConstantInitialized)
@@ -203,7 +201,7 @@ const ::uint32_t
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::MoveMsg::StateChange, _impl_.stateinfo_),
         0,
-        PROTOBUF_FIELD_OFFSET(::MoveMsg::MoveSync, _impl_._has_bits_),
+        ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::MoveMsg::MoveSync, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
@@ -211,14 +209,8 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::MoveMsg::MoveSync, _impl_.x_),
-        PROTOBUF_FIELD_OFFSET(::MoveMsg::MoveSync, _impl_.y_),
-        PROTOBUF_FIELD_OFFSET(::MoveMsg::MoveSync, _impl_.z_),
+        PROTOBUF_FIELD_OFFSET(::MoveMsg::MoveSync, _impl_.position_),
         PROTOBUF_FIELD_OFFSET(::MoveMsg::MoveSync, _impl_.rotation_),
-        0,
-        1,
-        2,
-        ~0u,
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::MoveMsg::ObjectMove, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -235,8 +227,8 @@ static const ::_pbi::MigrationSchema
         {0, 13, -1, sizeof(::MoveMsg::Move)},
         {18, 27, -1, sizeof(::MoveMsg::Jump)},
         {28, 37, -1, sizeof(::MoveMsg::StateChange)},
-        {38, 50, -1, sizeof(::MoveMsg::MoveSync)},
-        {54, -1, -1, sizeof(::MoveMsg::ObjectMove)},
+        {38, -1, -1, sizeof(::MoveMsg::MoveSync)},
+        {48, -1, -1, sizeof(::MoveMsg::ObjectMove)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::MoveMsg::_Move_default_instance_._instance,
@@ -252,17 +244,16 @@ const char descriptor_table_protodef_Move_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIA
     "\010rotation\030\004 \003(\002\022\022\n\005speed\030\005 \001(\002H\003\210\001\001B\004\n\002_"
     "xB\004\n\002_yB\004\n\002_zB\010\n\006_speed\"$\n\004Jump\022\022\n\005power"
     "\030\001 \001(\002H\000\210\001\001B\010\n\006_power\"3\n\013StateChange\022\026\n\t"
-    "stateinfo\030\001 \001(\005H\000\210\001\001B\014\n\n_stateinfo\"^\n\010Mo"
-    "veSync\022\016\n\001x\030\001 \001(\002H\000\210\001\001\022\016\n\001y\030\002 \001(\002H\001\210\001\001\022\016"
-    "\n\001z\030\003 \001(\002H\002\210\001\001\022\020\n\010rotation\030\004 \003(\002B\004\n\002_xB\004"
-    "\n\002_yB\004\n\002_z\"\036\n\nObjectMove\022\020\n\010position\030\001 \003"
-    "(\002b\006proto3"
+    "stateinfo\030\001 \001(\005H\000\210\001\001B\014\n\n_stateinfo\".\n\010Mo"
+    "veSync\022\020\n\010position\030\001 \003(\002\022\020\n\010rotation\030\002 \003"
+    "(\002\"\036\n\nObjectMove\022\020\n\010position\030\001 \003(\002b\006prot"
+    "o3"
 };
 static ::absl::once_flag descriptor_table_Move_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_Move_2eproto = {
     false,
     false,
-    370,
+    322,
     descriptor_table_protodef_Move_2eproto,
     "Move.proto",
     &descriptor_table_Move_2eproto_once,
@@ -1074,10 +1065,6 @@ void StateChange::InternalSwap(StateChange* PROTOBUF_RESTRICT other) {
 
 class MoveSync::_Internal {
  public:
-  using HasBits =
-      decltype(std::declval<MoveSync>()._impl_._has_bits_);
-  static constexpr ::int32_t kHasBitsOffset =
-      8 * PROTOBUF_FIELD_OFFSET(MoveSync, _impl_._has_bits_);
 };
 
 MoveSync::MoveSync(::google::protobuf::Arena* arena)
@@ -1092,9 +1079,9 @@ MoveSync::MoveSync(::google::protobuf::Arena* arena)
 inline PROTOBUF_NDEBUG_INLINE MoveSync::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
     const Impl_& from, const ::MoveMsg::MoveSync& from_msg)
-      : _has_bits_{from._has_bits_},
-        _cached_size_{0},
-        rotation_{visibility, arena, from.rotation_} {}
+      : position_{visibility, arena, from.position_},
+        rotation_{visibility, arena, from.rotation_},
+        _cached_size_{0} {}
 
 MoveSync::MoveSync(
     ::google::protobuf::Arena* arena,
@@ -1109,30 +1096,18 @@ MoveSync::MoveSync(
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-  ::memcpy(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, x_),
-           reinterpret_cast<const char *>(&from._impl_) +
-               offsetof(Impl_, x_),
-           offsetof(Impl_, z_) -
-               offsetof(Impl_, x_) +
-               sizeof(Impl_::z_));
 
   // @@protoc_insertion_point(copy_constructor:MoveMsg.MoveSync)
 }
 inline PROTOBUF_NDEBUG_INLINE MoveSync::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
-      : _cached_size_{0},
-        rotation_{visibility, arena} {}
+      : position_{visibility, arena},
+        rotation_{visibility, arena},
+        _cached_size_{0} {}
 
 inline void MoveSync::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  ::memset(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, x_),
-           0,
-           offsetof(Impl_, z_) -
-               offsetof(Impl_, x_) +
-               sizeof(Impl_::z_));
 }
 MoveSync::~MoveSync() {
   // @@protoc_insertion_point(destructor:MoveMsg.MoveSync)
@@ -1151,6 +1126,10 @@ inline void* MoveSync::PlacementNew_(const void*, void* mem,
 }
 constexpr auto MoveSync::InternalNewImpl_() {
   constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
+      PROTOBUF_FIELD_OFFSET(MoveSync, _impl_.position_) +
+          decltype(MoveSync::_impl_.position_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
       PROTOBUF_FIELD_OFFSET(MoveSync, _impl_.rotation_) +
           decltype(MoveSync::_impl_.rotation_)::
               InternalGetArenaOffset(
@@ -1193,15 +1172,15 @@ const ::google::protobuf::internal::ClassData* MoveSync::GetClassData() const {
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 4, 0, 0, 2> MoveSync::_table_ = {
+const ::_pbi::TcParseTable<1, 2, 0, 0, 2> MoveSync::_table_ = {
   {
-    PROTOBUF_FIELD_OFFSET(MoveSync, _impl_._has_bits_),
+    0,  // no _has_bits_
     0, // no _extensions_
-    4, 24,  // max_field_number, fast_idx_mask
+    2, 8,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967280,  // skipmap
+    4294967292,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    4,  // num_field_entries
+    2,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
@@ -1211,32 +1190,20 @@ const ::_pbi::TcParseTable<2, 4, 0, 0, 2> MoveSync::_table_ = {
     ::_pbi::TcParser::GetTable<::MoveMsg::MoveSync>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // repeated float rotation = 4;
+    // repeated float rotation = 2;
     {::_pbi::TcParser::FastF32P1,
-     {34, 63, 0, PROTOBUF_FIELD_OFFSET(MoveSync, _impl_.rotation_)}},
-    // optional float x = 1;
-    {::_pbi::TcParser::FastF32S1,
-     {13, 0, 0, PROTOBUF_FIELD_OFFSET(MoveSync, _impl_.x_)}},
-    // optional float y = 2;
-    {::_pbi::TcParser::FastF32S1,
-     {21, 1, 0, PROTOBUF_FIELD_OFFSET(MoveSync, _impl_.y_)}},
-    // optional float z = 3;
-    {::_pbi::TcParser::FastF32S1,
-     {29, 2, 0, PROTOBUF_FIELD_OFFSET(MoveSync, _impl_.z_)}},
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(MoveSync, _impl_.rotation_)}},
+    // repeated float position = 1;
+    {::_pbi::TcParser::FastF32P1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(MoveSync, _impl_.position_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // optional float x = 1;
-    {PROTOBUF_FIELD_OFFSET(MoveSync, _impl_.x_), _Internal::kHasBitsOffset + 0, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // optional float y = 2;
-    {PROTOBUF_FIELD_OFFSET(MoveSync, _impl_.y_), _Internal::kHasBitsOffset + 1, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // optional float z = 3;
-    {PROTOBUF_FIELD_OFFSET(MoveSync, _impl_.z_), _Internal::kHasBitsOffset + 2, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // repeated float rotation = 4;
-    {PROTOBUF_FIELD_OFFSET(MoveSync, _impl_.rotation_), -1, 0,
+    // repeated float position = 1;
+    {PROTOBUF_FIELD_OFFSET(MoveSync, _impl_.position_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kPackedFloat)},
+    // repeated float rotation = 2;
+    {PROTOBUF_FIELD_OFFSET(MoveSync, _impl_.rotation_), 0, 0,
     (0 | ::_fl::kFcRepeated | ::_fl::kPackedFloat)},
   }},
   // no aux_entries
@@ -1251,14 +1218,8 @@ PROTOBUF_NOINLINE void MoveSync::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  _impl_.position_.Clear();
   _impl_.rotation_.Clear();
-  cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
-    ::memset(&_impl_.x_, 0, static_cast<::size_t>(
-        reinterpret_cast<char*>(&_impl_.z_) -
-        reinterpret_cast<char*>(&_impl_.x_)) + sizeof(_impl_.z_));
-  }
-  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -1277,31 +1238,14 @@ PROTOBUF_NOINLINE void MoveSync::Clear() {
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
-          cached_has_bits = this_._impl_._has_bits_[0];
-          // optional float x = 1;
-          if (cached_has_bits & 0x00000001u) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteFloatToArray(
-                1, this_._internal_x(), target);
+          // repeated float position = 1;
+          if (this_._internal_position_size() > 0) {
+            target = stream->WriteFixedPacked(1, this_._internal_position(), target);
           }
 
-          // optional float y = 2;
-          if (cached_has_bits & 0x00000002u) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteFloatToArray(
-                2, this_._internal_y(), target);
-          }
-
-          // optional float z = 3;
-          if (cached_has_bits & 0x00000004u) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteFloatToArray(
-                3, this_._internal_z(), target);
-          }
-
-          // repeated float rotation = 4;
+          // repeated float rotation = 2;
           if (this_._internal_rotation_size() > 0) {
-            target = stream->WriteFixedPacked(4, this_._internal_rotation(), target);
+            target = stream->WriteFixedPacked(2, this_._internal_rotation(), target);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -1329,7 +1273,17 @@ PROTOBUF_NOINLINE void MoveSync::Clear() {
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
            {
-            // repeated float rotation = 4;
+            // repeated float position = 1;
+            {
+              std::size_t data_size = std::size_t{4} *
+                  ::_pbi::FromIntSize(this_._internal_position_size());
+              std::size_t tag_size = data_size == 0
+                  ? 0
+                  : 1 + ::_pbi::WireFormatLite::Int32Size(
+                                      static_cast<int32_t>(data_size));
+              total_size += tag_size + data_size;
+            }
+            // repeated float rotation = 2;
             {
               std::size_t data_size = std::size_t{4} *
                   ::_pbi::FromIntSize(this_._internal_rotation_size());
@@ -1338,21 +1292,6 @@ PROTOBUF_NOINLINE void MoveSync::Clear() {
                   : 1 + ::_pbi::WireFormatLite::Int32Size(
                                       static_cast<int32_t>(data_size));
               total_size += tag_size + data_size;
-            }
-          }
-          cached_has_bits = this_._impl_._has_bits_[0];
-          if (cached_has_bits & 0x00000007u) {
-            // optional float x = 1;
-            if (cached_has_bits & 0x00000001u) {
-              total_size += 5;
-            }
-            // optional float y = 2;
-            if (cached_has_bits & 0x00000002u) {
-              total_size += 5;
-            }
-            // optional float z = 3;
-            if (cached_has_bits & 0x00000004u) {
-              total_size += 5;
             }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
@@ -1367,20 +1306,8 @@ void MoveSync::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  _this->_internal_mutable_position()->MergeFrom(from._internal_position());
   _this->_internal_mutable_rotation()->MergeFrom(from._internal_rotation());
-  cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
-    if (cached_has_bits & 0x00000001u) {
-      _this->_impl_.x_ = from._impl_.x_;
-    }
-    if (cached_has_bits & 0x00000002u) {
-      _this->_impl_.y_ = from._impl_.y_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      _this->_impl_.z_ = from._impl_.z_;
-    }
-  }
-  _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -1395,14 +1322,8 @@ void MoveSync::CopyFrom(const MoveSync& from) {
 void MoveSync::InternalSwap(MoveSync* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  _impl_.position_.InternalSwap(&other->_impl_.position_);
   _impl_.rotation_.InternalSwap(&other->_impl_.rotation_);
-  ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(MoveSync, _impl_.z_)
-      + sizeof(MoveSync::_impl_.z_)
-      - PROTOBUF_FIELD_OFFSET(MoveSync, _impl_.x_)>(
-          reinterpret_cast<char*>(&_impl_.x_),
-          reinterpret_cast<char*>(&other->_impl_.x_));
 }
 
 ::google::protobuf::Metadata MoveSync::GetMetadata() const {

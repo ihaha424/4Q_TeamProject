@@ -76,7 +76,7 @@ void Engine::ServerNetwork::Manager::DispatchPacket()
 			_msgContainer->pop();
 
 			if (_worldCallback.find(packet._packetId) != _worldCallback.end()) {
-				_addObject.ParseFromArray(packet._data, packet._packetSize - sizeof(PacketHeader));
+				_addObject.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
 				_worldCallback[packet._packetId](&_addObject);
 			}
 

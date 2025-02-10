@@ -36,7 +36,7 @@ using Lock = std::lock_guard<std::mutex>;
 // ============ Macro ============
 
 #define PtrCast(type, data) reinterpret_cast<type>(data)
-
+#define PacketDataSize(packetSize) packetSize - sizeof(PacketHeader)
 
 // ============ Const Data ============
 // 초기 설정 값이 들어있습니다.

@@ -616,12 +616,28 @@ class MoveSync final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kRotationFieldNumber = 4,
-    kXFieldNumber = 1,
-    kYFieldNumber = 2,
-    kZFieldNumber = 3,
+    kPositionFieldNumber = 1,
+    kRotationFieldNumber = 2,
   };
-  // repeated float rotation = 4;
+  // repeated float position = 1;
+  int position_size() const;
+  private:
+  int _internal_position_size() const;
+
+  public:
+  void clear_position() ;
+  float position(int index) const;
+  void set_position(int index, float value);
+  void add_position(float value);
+  const ::google::protobuf::RepeatedField<float>& position() const;
+  ::google::protobuf::RepeatedField<float>* mutable_position();
+
+  private:
+  const ::google::protobuf::RepeatedField<float>& _internal_position() const;
+  ::google::protobuf::RepeatedField<float>* _internal_mutable_position();
+
+  public:
+  // repeated float rotation = 2;
   int rotation_size() const;
   private:
   int _internal_rotation_size() const;
@@ -639,45 +655,12 @@ class MoveSync final : public ::google::protobuf::Message
   ::google::protobuf::RepeatedField<float>* _internal_mutable_rotation();
 
   public:
-  // optional float x = 1;
-  bool has_x() const;
-  void clear_x() ;
-  float x() const;
-  void set_x(float value);
-
-  private:
-  float _internal_x() const;
-  void _internal_set_x(float value);
-
-  public:
-  // optional float y = 2;
-  bool has_y() const;
-  void clear_y() ;
-  float y() const;
-  void set_y(float value);
-
-  private:
-  float _internal_y() const;
-  void _internal_set_y(float value);
-
-  public:
-  // optional float z = 3;
-  bool has_z() const;
-  void clear_z() ;
-  float z() const;
-  void set_z(float value);
-
-  private:
-  float _internal_z() const;
-  void _internal_set_z(float value);
-
-  public:
   // @@protoc_insertion_point(class_scope:MoveMsg.MoveSync)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      2, 4, 0,
+      1, 2, 0,
       0, 2>
       _table_;
 
@@ -695,12 +678,9 @@ class MoveSync final : public ::google::protobuf::Message
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const MoveSync& from_msg);
-    ::google::protobuf::internal::HasBits<1> _has_bits_;
-    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::RepeatedField<float> position_;
     ::google::protobuf::RepeatedField<float> rotation_;
-    float x_;
-    float y_;
-    float z_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -1391,91 +1371,52 @@ inline void StateChange::_internal_set_stateinfo(::int32_t value) {
 
 // MoveSync
 
-// optional float x = 1;
-inline bool MoveSync::has_x() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  return value;
+// repeated float position = 1;
+inline int MoveSync::_internal_position_size() const {
+  return _internal_position().size();
 }
-inline void MoveSync::clear_x() {
+inline int MoveSync::position_size() const {
+  return _internal_position_size();
+}
+inline void MoveSync::clear_position() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.x_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000001u;
+  _impl_.position_.Clear();
 }
-inline float MoveSync::x() const {
-  // @@protoc_insertion_point(field_get:MoveMsg.MoveSync.x)
-  return _internal_x();
+inline float MoveSync::position(int index) const {
+  // @@protoc_insertion_point(field_get:MoveMsg.MoveSync.position)
+  return _internal_position().Get(index);
 }
-inline void MoveSync::set_x(float value) {
-  _internal_set_x(value);
-  _impl_._has_bits_[0] |= 0x00000001u;
-  // @@protoc_insertion_point(field_set:MoveMsg.MoveSync.x)
+inline void MoveSync::set_position(int index, float value) {
+  _internal_mutable_position()->Set(index, value);
+  // @@protoc_insertion_point(field_set:MoveMsg.MoveSync.position)
 }
-inline float MoveSync::_internal_x() const {
+inline void MoveSync::add_position(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _internal_mutable_position()->Add(value);
+  // @@protoc_insertion_point(field_add:MoveMsg.MoveSync.position)
+}
+inline const ::google::protobuf::RepeatedField<float>& MoveSync::position() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:MoveMsg.MoveSync.position)
+  return _internal_position();
+}
+inline ::google::protobuf::RepeatedField<float>* MoveSync::mutable_position()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:MoveMsg.MoveSync.position)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_position();
+}
+inline const ::google::protobuf::RepeatedField<float>&
+MoveSync::_internal_position() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.x_;
+  return _impl_.position_;
 }
-inline void MoveSync::_internal_set_x(float value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.x_ = value;
+inline ::google::protobuf::RepeatedField<float>* MoveSync::_internal_mutable_position() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.position_;
 }
 
-// optional float y = 2;
-inline bool MoveSync::has_y() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline void MoveSync::clear_y() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.y_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000002u;
-}
-inline float MoveSync::y() const {
-  // @@protoc_insertion_point(field_get:MoveMsg.MoveSync.y)
-  return _internal_y();
-}
-inline void MoveSync::set_y(float value) {
-  _internal_set_y(value);
-  _impl_._has_bits_[0] |= 0x00000002u;
-  // @@protoc_insertion_point(field_set:MoveMsg.MoveSync.y)
-}
-inline float MoveSync::_internal_y() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.y_;
-}
-inline void MoveSync::_internal_set_y(float value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.y_ = value;
-}
-
-// optional float z = 3;
-inline bool MoveSync::has_z() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline void MoveSync::clear_z() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.z_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000004u;
-}
-inline float MoveSync::z() const {
-  // @@protoc_insertion_point(field_get:MoveMsg.MoveSync.z)
-  return _internal_z();
-}
-inline void MoveSync::set_z(float value) {
-  _internal_set_z(value);
-  _impl_._has_bits_[0] |= 0x00000004u;
-  // @@protoc_insertion_point(field_set:MoveMsg.MoveSync.z)
-}
-inline float MoveSync::_internal_z() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.z_;
-}
-inline void MoveSync::_internal_set_z(float value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.z_ = value;
-}
-
-// repeated float rotation = 4;
+// repeated float rotation = 2;
 inline int MoveSync::_internal_rotation_size() const {
   return _internal_rotation().size();
 }

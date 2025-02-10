@@ -50,9 +50,9 @@ class ServerLogic
 
 	struct Player {
 		int _serialNumber;
+		std::string _resourceId;
 		Engine::Math::Vector3 _position;
 		Engine::Math::Quaternion _rotation;
-		std::string _resourceId;
 		Engine::Math::Vector3 _direction;
 		int _state;
 		float _speed;
@@ -100,8 +100,15 @@ private:
 	PlayMsg::PutObject _putObject;
 	PlayMsg::SoundPlay _soundPlay;
 
-	PlayMsg::InteractDialog _interactDialog;
+	PlayMsg::QuestStart _questStart;
+	PlayMsg::QuestEnd _questEnd;
 	PlayMsg::DialogProgress _dialogProgress;
+	PlayMsg::InteractObject _interactObject;
+	PlayMsg::InteractDialog _interactDialog;
+	PlayMsg::PuzzleStart _puzzleStart;
+	PlayMsg::ObjectActive _objectActive;
+	PlayMsg::ObjectDisable _objectDisable;
+
 
 	std::string _msgBuffer = std::string(256, '\0');
 
@@ -128,16 +135,16 @@ private:
 	void DataRequestProcess(const Packet& packet);
 	void ObjectPickProcess(const Packet& packet);
 	void ObjectPutProcess(const Packet& packet);
-
-private:
-	short _dynamicObjectSerialNumber = 100;
-	short _staticObjectSerialNumber = 1000;
+	void ObjectInteractProcess(const Packet& packet);
+	void DialogInteractProcess(const Packet& packet);
 
 private:
 	// =============================
 	// JSON Method, Variable Area
 	// =============================
 
+	short _dynamicObjectSerialNumber = 100;
+	short _staticObjectSerialNumber = 1000;
 	JSONLoad _jsonLoader;
 	json _mapData;
 
@@ -156,5 +163,74 @@ private:
 	void RegistPlayer(Player* player);
 	void RegistGround(Ground& ground);
 	void RegistTrigerBox(TriggerBox& triggerBox);
+
+private:
+	// =============================
+	// In Game Logic Area
+	// =============================
+
+	enum class QuestState {
+		None,
+		InProgress,
+		Complete
+	};
+
+	using QuestID = int;
+	using QuestNextTable = std::unordered_map<QuestID, QuestID>;
+	using DialogID = int;
+	using DialogNextTable = std::unordered_map<DialogID, DialogID>;
+
+	DialogNextTable _dialogTable;
+	QuestNextTable _questTable;
+	QuestID _currentQuestID = -1;
+
+	bool _rayRead = false;
+	bool _liveRead = false;
+	bool _puzzle5Clear = false;
+	bool _puzzle6Clear = false;
+
+#define DialogMod 10000
+#define DialogDiv 1000
+
+	void LoadQuestData();
+	void LoadDialogData();
+	void QuestProcess(int& questId);
+	void PlayDialog(int dialogId);
+	void PlayDialog(int dialogId, int targetSessionId);
+	// =============================
+
+	// =============================
+	// Puzzle Area
+	// =============================
+	
+	int _currentPuzzleNumber = 0;
+	// 오브젝트를 상호작용 할 때마다 갱신해줘야함. 
+	int _currentInteractObject = -1;
+
+	// Puzzle 2
+
+	std::vector<int> _balls	{ 1, 1, 1, 1, 1, 1 };
+	std::vector<int> _dir	{ 1, 1, 1, 1, 1, 1 };
+
+	// Puzzle 4
+
+	std::vector<int> _interactSequence{ 14104, 14102, 14106, 14105, 14103 };
+	int _currentInteractIndex = 0;
+
+
+	void PuzzleProcess(int objectId);
+	void Puzzle1(int objectId);
+	void Puzzle2(int objectId);
+	void Puzzle3(int objectId);
+	void Puzzle4(int objectId);
+	void Puzzle5(int objectId);
+	void Puzzle6(int objectId);
+	
+	
+	
+	
+	// =============================
+
+	
 };
 

@@ -5,34 +5,13 @@ namespace Engine
 	class CameraRail : public Object
 	{
 	public:
-		enum class Type
-		{
-			Linear,
-			Bezier,
-			CatmullRom,
-			CubicSpline,
-			Lagrange
-		};
+		enum class Type : unsigned char;
 
-		enum class Mode
-		{
-			Once,
-			Loop,
-			PingPong
-		};
+		enum class Mode : unsigned char;
 
-		enum class State
-		{
-			Playing,
-			Paused,
-			Stopped
-		};
+		enum class State : unsigned char;
 
-		enum class Direction
-		{
-			Forward,
-			Backward
-		};
+		enum class Direction : unsigned char;
 
 	private:
 		struct ControlPoint;
@@ -41,16 +20,29 @@ namespace Engine
 
 		void Prepare(Content::Factory::Component* componentFactory) override;
 		void PreInitialize(const Modules& modules) override;
+		void PostInitialize(const Modules& modules) override;
 		void PreUpdate(float deltaTime) override;
 
-		void AddControlPoint(Math::Vector3 position, Math::Vector3 rotation, float duration);
-		void AddControlPoint(Math::Vector3 position, Math::Quaternion rotation, float duration);
+		void AddControlPoint(const Math::Vector3& position, const Math::Vector3& rotation, float duration);
+		void AddControlPoint(const Math::Vector3& position, const Math::Quaternion& rotation, float duration);
+
+		void SetDuration(float duration);
+
+		void Play();
+		void Pause();
+		void Stop();
 
 	protected:
 		void DisposeComponents() override;
 
 	private:
+		void Linear(float deltaTime);
+		void CatmullRom(float deltaTime);
+
 		Component::Camera* _camera;
+
+		Math::Vector3 _position;
+		Math::Quaternion _rotation;
 		Math::Matrix _matrix;
 
 		Type _type;
@@ -58,18 +50,58 @@ namespace Engine
 		State _state;
 		Direction _direction;
 
+		float _elapsedTime;
+		float _duration;
+
 		std::vector<ControlPoint> _controlPoints;
 
+	public:
+		enum class Type : unsigned char
+		{
+			Linear,
+			CatmullRom
+		};
+
+		enum class Mode : unsigned char
+		{
+			Once,
+			Loop,
+			PingPong
+		};
+
+		enum class State : unsigned char
+		{
+			Playing,
+			Paused,
+			Stopped
+		};
+
+		enum class Direction : unsigned char
+		{
+			Forward,
+			Backward
+		};
+
+	private:
 		struct ControlPoint
 		{
 			ControlPoint(const Math::Vector3 position, const Math::Quaternion rotation, const float duration):
-				 duration(duration)
+				position(position), rotation(rotation), duration(duration)
 			{
-				matrix = Math::Matrix::CreateFromQuaternion(rotation);
-				matrix.Translation(position);
 			}
-			Math::Matrix matrix;
+			Math::Vector3 position;
+			Math::Quaternion rotation;
 			float duration;
 		};
 	};
+
+	inline void CameraRail::Pause()
+	{
+		_state = State::Paused;
+	}
+
+	inline void CameraRail::Play()
+	{
+		_state = State::Playing;
+	}
 }

@@ -36,8 +36,8 @@ namespace Engine
 		void DisposeComponents() override;
 
 	private:
-		void Linear(float deltaTime);
-		void CatmullRom(float deltaTime);
+		static Math::Vector3 Linear(const Math::Vector3& p0, const Math::Vector3& p1, float deltaTime);
+		static Math::Vector3 CatmullRom(const Math::Vector3& p0, const Math::Vector3& p1, const Math::Vector3& p2, const Math::Vector3& p3, float deltaTime);
 
 		Component::Camera* _camera;
 
@@ -51,7 +51,7 @@ namespace Engine
 		Direction _direction;
 
 		float _elapsedTime;
-		float _duration;
+		float _totalDuration;
 
 		std::vector<ControlPoint> _controlPoints;
 

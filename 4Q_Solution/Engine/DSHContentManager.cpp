@@ -62,6 +62,15 @@ void Engine::DSHContent::Manager::Update(float deltaTime)
 	_world->PostUpdate(deltaTime);
 }
 
+void Engine::DSHContent::Manager::LazyUpdate(float deltaTime)
+{
+	_world->PreLazyUpdate(deltaTime);
+	std::ranges::for_each(_objects, [deltaTime](Object* object) { object->PreLazyUpdate(deltaTime); });
+	std::ranges::for_each(_components, [deltaTime](Component::Component* component) { component->LateUpdate(deltaTime); });
+	std::ranges::for_each(_objects, [deltaTime](Object* object) { object->PostLazyUpdate(deltaTime); });
+	_world->PostLazyUpdate(deltaTime);
+}
+
 void Engine::DSHContent::Manager::FixedUpdate()
 {
 	_world->PreFixedUpdate();

@@ -18,6 +18,7 @@ namespace Engine::Component
 		virtual void Initialize(const Modules& modules);
 		virtual void Attach();
 		virtual void Update(float deltaTime);
+		virtual void LateUpdate(float deltaTime);
 		virtual void FixedUpdate();
 		virtual void Detach();
 		virtual void Finalize();

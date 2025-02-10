@@ -23,6 +23,10 @@ void Engine::Component::Component::Update(float deltaTime)
 {
 }
 
+void Engine::Component::Component::LateUpdate(float deltaTime)
+{
+}
+
 void Engine::Component::Component::FixedUpdate()
 {
 }

@@ -25,7 +25,7 @@ Engine::Logger::Manager* Engine::Application::_loggerManager = nullptr;
 Engine::GameState::Manager* Engine::Application::_gameStateManager = nullptr;
 Engine::DSHAudio::Manager* Engine::Application::_soundManager = nullptr;
 
-Engine::Application::Application(const HINSTANCE instanceHandle):
+Engine::Application::Application(const HINSTANCE instanceHandle) :
 	_instanceHandle(instanceHandle), _size(Math::Size::Zero)
 {
 }
@@ -65,25 +65,26 @@ void Engine::Application::Run(const int showCommand)
 			_timeManager->Tick();
 			_inputManager->Update(metaTime);
 			_graphicsManager->PreUpdate(deltaTime);
-			
+
 			_contentManager->Contraction(Modules{
 				.graphicsManager = _graphicsManager,
 				.physicsManager = _physicsManager,
 				.loadManager = _loadManager,
 				.gameStateManager = _gameStateManager,
 				.audioManager = _soundManager
-			});
+				});
 			_networkManager->DispatchPacket();
 
-		    _physicsManager->Update(deltaTime);
-		    _physicsManager->FetchScene(true);
-		
-			_contentManager->Update(deltaTime);
+			_physicsManager->Update(deltaTime);
+			_physicsManager->FetchScene(true);
 
 			while (_timeManager->IsFixedUpdate())
 			{
 				_contentManager->FixedUpdate();
 			}
+
+			_contentManager->Update(deltaTime);
+			_contentManager->LazyUpdate(deltaTime);
 
 			_contentManager->Relaxation();
 
@@ -125,12 +126,12 @@ Engine::Graphics::IManager* Engine::Application::GetGraphicsManager()
 
 Engine::Network::IManager* Engine::Application::GetNetworkManager()
 {
-    return _networkManager;
+	return _networkManager;
 }
 
 Engine::Physics::IManager* Engine::Application::GetPhysicsManager()
 {
-    return _physicsManager;
+	return _physicsManager;
 }
 
 Engine::Load::IManager* Engine::Application::GetLoadManager()
@@ -193,9 +194,9 @@ void Engine::Application::CreateManagers()
 	CreateInputManager(&_inputManager);
 	CreateGraphicsManager(&_graphicsManager);
 	CreateLoadManager(&_loadManager);
-    CreateContentManager(&_contentManager);	
-    CreateNetworkManager(&_networkManager);
-    CreatePhysicsManager(&_physicsManager);
+	CreateContentManager(&_contentManager);
+	CreateNetworkManager(&_networkManager);
+	CreatePhysicsManager(&_physicsManager);
 	CreateGameStateManager(&_gameStateManager);
 	CreateSoundManager(&_soundManager);
 }
@@ -235,9 +236,9 @@ void Engine::Application::FinalizeManagers()
 	_graphicsManager->Finalize();
 	_inputManager->Finalize();
 	_windowManager->Finalize();
-    _timeManager->Finalize();
-    _networkManager->Finalize();
-    _physicsManager->Finalize();
+	_timeManager->Finalize();
+	_networkManager->Finalize();
+	_physicsManager->Finalize();
 	_loggerManager->Finalize();
 	_gameStateManager->Finalize();
 }
@@ -251,8 +252,8 @@ void Engine::Application::DeleteManagers()
 	deleter(&_graphicsManager);
 	deleter(&_loadManager);
 	deleter(&_contentManager);
-    deleter(&_networkManager);
-    deleter(&_physicsManager);
+	deleter(&_networkManager);
+	deleter(&_physicsManager);
 	deleter(&_loggerManager);
 	deleter(&_gameStateManager);
 	deleter(&_soundManager);
@@ -308,26 +309,26 @@ void Engine::Application::CreateGraphicsManager(GEGraphics::Manager** graphicsMa
 
 void Engine::Application::CreateNetworkManager(Network::Manager** networkManager)
 {
-    constexpr Utility::ThrowIfFailed thrower;
-    if (networkManager == nullptr) thrower(E_INVALIDARG);
-    else
-    {
-        ServerNetwork::Manager* manager = new ServerNetwork::Manager();
-        if (manager == nullptr) thrower(E_OUTOFMEMORY);
-        *networkManager = manager;
-    }
+	constexpr Utility::ThrowIfFailed thrower;
+	if (networkManager == nullptr) thrower(E_INVALIDARG);
+	else
+	{
+		ServerNetwork::Manager* manager = new ServerNetwork::Manager();
+		if (manager == nullptr) thrower(E_OUTOFMEMORY);
+		*networkManager = manager;
+	}
 }
 
 void Engine::Application::CreatePhysicsManager(Physics::Manager** physicsManager)
 {
-    constexpr Utility::ThrowIfFailed thrower;
-    if (physicsManager == nullptr) thrower(E_INVALIDARG);
-    else
-    {
-        Physics::Manager* manager = new PHI::Manager();
-        if (manager == nullptr) thrower(E_OUTOFMEMORY);
-        *physicsManager = manager;
-    }
+	constexpr Utility::ThrowIfFailed thrower;
+	if (physicsManager == nullptr) thrower(E_INVALIDARG);
+	else
+	{
+		Physics::Manager* manager = new PHI::Manager();
+		if (manager == nullptr) thrower(E_OUTOFMEMORY);
+		*physicsManager = manager;
+	}
 }
 
 void Engine::Application::CreateLoadManager(Load::Manager** loadManager)

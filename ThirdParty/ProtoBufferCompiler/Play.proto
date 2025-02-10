@@ -12,6 +12,15 @@ message PickObject {
 
 message PutObject {
 	optional int32 targetserialnumber = 1;
+	repeated float position = 2;
+}
+
+message SoundPlay {
+	optional int32 soundid = 1;
+}
+
+message InteractObject {
+	optional int32 objectserialnumber = 1;
 }
 
 message SoundPlay {
@@ -44,4 +53,8 @@ message PuzzleStart {
 
 message ObjectActive {
 	optional int32 objectserialnumber = 1;
+}
+
+message ObjectDisable {
+	repeated int32 objectserialnumber = 1;
 }

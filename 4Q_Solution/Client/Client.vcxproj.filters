@@ -351,6 +351,9 @@
     <ClInclude Include="Obj_Bermiore_Hanger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Obj_Bermiore_Fabric.h">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -577,6 +580,9 @@
     </ClCompile>
     <ClCompile Include="Obj_Bermiore_Hanger.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Bermiore_Fabric.cpp">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -175,6 +175,7 @@
     <ClInclude Include="Obj_Shinave_Stone_3.h" />
     <ClInclude Include="Obj_Shinave_Stone_4.h" />
     <ClInclude Include="Obj_Shinave_Stone_5.h" />
+    <ClInclude Include="Obj_Bermiore_Fabric.h" />
     <ClInclude Include="GrabbedObject.h" />
     <ClInclude Include="Obj_Shinave_Bermiore.h" />
     <ClInclude Include="Obj_Shinave_Platform_Set.h" />
@@ -259,6 +260,7 @@
     <ClCompile Include="Obj_Shinave_Stone_3.cpp" />
     <ClCompile Include="Obj_Shinave_Stone_4.cpp" />
     <ClCompile Include="Obj_Shinave_Stone_5.cpp" />
+    <ClCompile Include="Obj_Bermiore_Fabric.cpp" />
     <ClCompile Include="GrabbedObject.cpp" />
     <ClCompile Include="Obj_Shinave_Bermiore.cpp" />
     <ClCompile Include="Obj_Shinave_Platform_Set.cpp" />

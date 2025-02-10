@@ -11,6 +11,10 @@ namespace PhysicsEngineAPI
 	PhysXScene::PhysXScene()
 		: scene{ nullptr }
 	{
+		int maxObject = 4096;
+		hitRaycast = new PxRaycastHit[maxObject];
+		hitOverlap = new PxOverlapHit[maxObject];
+		hitSweep = new physx::PxSweepHit[maxObject];
 	}
 
 	PhysXScene::~PhysXScene() { Release(); }
@@ -19,6 +23,9 @@ namespace PhysicsEngineAPI
 	{ 
 		SAFE_RELEASE(controllerManager); 
 		SAFE_RELEASE(scene); 
+		SAFE_DELETE(hitRaycast);
+		SAFE_DELETE(hitOverlap);
+		SAFE_DELETE(hitSweep);
 	}
 
 	void PhysXScene::ReleaseAdditionalQueryData(Utils::DataStructure::AdditionalQueryData& sweepInfo)
@@ -59,26 +66,31 @@ namespace PhysicsEngineAPI
 		float distance, 
 		size_t maxObject)
 	{
-		PxRaycastBuffer HitBuffer;
 		physx::PxVec3 pos = Vector3ToPxVec3(startPosition);
 		physx::PxVec3 dir = Vector3ToPxVec3(direction);
 		dir.normalize();
 		physx::PxReal maxDistance = distance;
 
+		physx::PxSceneQueryFlags flag = PxHitFlag::ePOSITION | PxHitFlag::eNORMAL | PxHitFlag::eMESH_MULTIPLE;
 		raycastInfo.flag = QueryData::Raycast;
-		bool status = scene->raycast(pos, dir, maxDistance, HitBuffer);
-		if (status)
+		bool blockHit = false;
+
+		int howMany = PxSceneQueryExt::raycastMultiple(*scene, pos, dir, maxDistance, flag, hitRaycast, maxObject, blockHit);
+		if (howMany)
 		{
-			raycastInfo.num = 1;
-			physx::PxRaycastHit hitInfo = HitBuffer.block;
-			raycastInfo.UserDatas.reserve(raycastInfo.num);
-			if (raycastInfo.num < raycastInfo.UserDatas.size())
-				raycastInfo.UserDatas[0] = static_cast<ICollision*>(hitInfo.actor->userData);
-			else
-				raycastInfo.UserDatas.push_back(static_cast<ICollision*>(hitInfo.actor->userData));
-			raycastInfo.normal = PxVec3ToVector3(hitInfo.normal);
-			raycastInfo.position = PxVec3ToVector3(hitInfo.position);
-			raycastInfo.distance = hitInfo.distance;
+			raycastInfo.num = howMany;
+			for (size_t i = 0; i < howMany; i++)
+			{
+				physx::PxRaycastHit hitInfo = hitRaycast[i];
+				raycastInfo.UserDatas.reserve(raycastInfo.num);
+				if (raycastInfo.num < raycastInfo.UserDatas.size())
+					raycastInfo.UserDatas[i] = static_cast<ICollision*>(hitInfo.actor->userData);
+				else
+					raycastInfo.UserDatas.push_back(static_cast<ICollision*>(hitInfo.actor->userData));
+				raycastInfo.normal = PxVec3ToVector3(hitInfo.normal);
+				raycastInfo.position = PxVec3ToVector3(hitInfo.position);
+				raycastInfo.distance = hitInfo.distance;
+			}
 		}
 		else
 		{
@@ -100,15 +112,14 @@ namespace PhysicsEngineAPI
 		if (nullptr == geometry)
 			return false;
 
-		physx::PxOverlapHit* hitOv = new PxOverlapHit[maxObject];
-		int howMany = PxSceneQueryExt::overlapMultiple(*scene, *geometry->geometry, transform, hitOv, 4096);
+		int howMany = PxSceneQueryExt::overlapMultiple(*scene, *geometry->geometry, transform, hitOverlap, 4096);
 		if (howMany)
 		{
 			overlapInfo.num = howMany;
 			overlapInfo.UserDatas.reserve(overlapInfo.num);
 			for (size_t i = 0; i < howMany; i++)
 			{
-				const PxOverlapHit& hitInfo = hitOv[i];
+				const PxOverlapHit& hitInfo = hitOverlap[i];
 				if (i < overlapInfo.UserDatas.size())
 					overlapInfo.UserDatas[i] = static_cast<ICollision*>(hitInfo.actor->userData);
 				else
@@ -117,7 +128,6 @@ namespace PhysicsEngineAPI
 		}
 		else
 			overlapInfo.num = 0;
-		delete[] hitOv;
 		return true;
 	}
 
@@ -139,18 +149,17 @@ namespace PhysicsEngineAPI
 		if (nullptr == geometry)
 			return false;
 
-		physx::PxSweepHit* hitOv = new physx::PxSweepHit[maxObject];
 		physx::PxSceneQueryFlags outputFlags;
 		bool blockingHit;
 		outputFlags.isSet(PxSceneQueryFlag::Enum::eDEFAULT);
-		int howMany = PxSceneQueryExt::sweepMultiple(*scene, *geometry->geometry, transform, dir, distance, outputFlags, hitOv, 4096, blockingHit);
+		int howMany = PxSceneQueryExt::sweepMultiple(*scene, *geometry->geometry, transform, dir, distance, outputFlags, hitSweep, maxObject, blockingHit);
 		if (howMany)
 		{
 			sweepInfo.num = howMany;
 			sweepInfo.UserDatas.reserve(howMany);
 			for (size_t i = 0; i < sweepInfo.num; ++i)
 			{
-				const PxSweepHit& hitInfo = hitOv[i];
+				const PxSweepHit& hitInfo = hitSweep[i];
 				
 				if (i < sweepInfo.UserDatas.size())
 					sweepInfo.UserDatas[i] = static_cast<ICollision*>(hitInfo.actor->userData);
@@ -163,7 +172,7 @@ namespace PhysicsEngineAPI
 		}
 		else
 			sweepInfo.num = 0;
-		delete[] hitOv;
+
 		return true;
 	}
 

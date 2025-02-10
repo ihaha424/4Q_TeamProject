@@ -84,6 +84,24 @@ namespace Engine::PHI
 			bool isExclusive
 		) override;
 
+		void CreateTriangleDynamic(
+			Engine::Physics::IRigidDynamicComponent** destObject,
+			const char* geomtryName,
+			const Engine::Physics::MaterialDesc& materialDesc,
+			const Engine::Transform& transform,
+			const Engine::Transform& shapeOffset,
+			bool isExclusive
+		) override;
+
+		void CreateTriangleKinematic(
+			Engine::Physics::IRigidKinematicComponent** destObject,
+			const char* geomtryName,
+			const Engine::Physics::MaterialDesc& materialDesc,
+			const Engine::Transform& transform,
+			const Engine::Transform& shapeOffset,
+			bool isExclusive
+		) override;
+
 	public:
 		PhysicsEngineAPI::IGeometry* FindGeometry(const std::string& name);
 	private:

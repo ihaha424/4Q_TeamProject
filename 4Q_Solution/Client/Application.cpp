@@ -39,12 +39,33 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	objectFactory->Register<Live>(L"Assets/Models/Live.fbx");
 	objectFactory->Register<RemoteLive>(L"Assets/Models/Live.fbx");
 	objectFactory->Register<SkyBox>(L"Assets/Models/skybox.fbx");
+
+	//Test PickingObejct
+	{
+		objectFactory->Register<GrabbedObject>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");
+	}
+
+	//Test TriggerArea
+	{
+		objectFactory->Register<TriggerArea>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");
+	}
+	
+	//Puzzle01
+	{
+		objectFactory->Register<Obj_Puzzle_Shinave_Stone_1>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
+		objectFactory->Register<Obj_Puzzle_Shinave_Stone_2>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
+		objectFactory->Register<Obj_Puzzle_Shinave_Stone_3>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
+		objectFactory->Register<Obj_Puzzle_Shinave_Stone_4>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
+		objectFactory->Register<Obj_Puzzle_Shinave_Stone_5>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
+	}
+
+
 	objectFactory->Register<TestSprite>();
 
 	/*
 		Static Object
 	*/
-	objectFactory->Register<Terrain>("Assets/Test/Landscape03.fbx", L"Assets/Test/HeightMap.png");
+	objectFactory->Register<Terrain>("Assets/Test/Landscape03.fbx", L"Assets/Test/H_Clamp_Out2.png");
 
 	// RegisterHelp<Obj_BG_Tree_1>(L"Obj_BG_Tree_1", loadManager, objectFactory);
 	// RegisterHelp<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", loadManager, objectFactory);
@@ -76,6 +97,7 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 
 	const auto componentFactory = contentManager->GetComponentFactory();
 	componentFactory->Register<RemoteMove>();
+	componentFactory->Register<TriggerBox>();
 }
 
 void GameClient::Application::PrepareInitialWorld(Engine::Content::Factory::World* worldFactory)
@@ -295,4 +317,3 @@ void GameClient::Application::DeclareSystemAction(Engine::Input::IManager* input
 		mouse->HideCursor();
 		});
 }
-

@@ -1,9 +1,10 @@
 #pragma once
-#include "StaticObject.h"
+#include "InteractObject.h"
 #include "TriggerBox.h"
+#include "Puzzle_00.h"
 
 class BaseStone
-	:public StaticObject
+	:public InteractObject
 {
 public:
 	explicit BaseStone(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
@@ -16,6 +17,7 @@ protected:
 	void PreInitialize(const Engine::Modules& modules) override;
 
 protected:
-	TriggerBox* _trigger;
+	Engine::GameState::IManager* myManager;
+	unsigned int index;
 };
 

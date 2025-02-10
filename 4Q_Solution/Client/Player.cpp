@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "Player.h"
+#include "GrabbedObject.h"
+#include "InteractObject.h"
 
 Player::Player() : 
 	//, _movement(nullptr)
@@ -90,11 +92,11 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	auto PhysicsManager = Engine::Application::GetPhysicsManager();
 
 	Engine::Physics::ControllerDesc cd;
-	cd.position = Engine::Math::Vector3(1115.f, 674.f, -872.f);
-	cd.height = 10.f;
-	cd.radius = 2.f;
+	cd.position = Engine::Math::Vector3(0.f, 0.f, 0.f);
+	cd.height = 100.f;
+	cd.radius = 20.f;
 	// TODO: Player Gravity
-	cd.gravity = { 0.f, -9.8f, 0.f };
+	//cd.gravity = { 0.f, -9.8f, 0.f };
 	cd.contactOffset = 0.1f;
 	cd.stepOffset = 1.f;
 	cd.slopeLimit = 0.707f;
@@ -235,6 +237,36 @@ void Player::InteractStarted()
 	if (_bitFlag->IsOnFlag(StateFlag::Interact))
 		return;
 
+	/*Raycast*/
+	{
+		Engine::Physics::AdditionalQueryData queryData;
+		auto PhysicsManager = Engine::Application::GetPhysicsManager();
+		auto raycastScene = PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::mainScene));
+		auto rayDirection = _transform.GetForward();	// WHy????????? I don't konw Why flip the X-axis
+		rayDirection.x *= -1;
+		raycastScene->Raycast(queryData, _transform.position, rayDirection, 1000.f);
+		if (queryData.num > 0)
+		{
+			for (size_t i = 0; i < queryData.num; i++)
+			{
+				Engine::Object* obj = static_cast<Engine::Object*>(queryData.UserDatas[i]->GetOwner());
+				auto interactObject = dynamic_cast<InteractObject*>(obj);
+				if (nullptr != interactObject)
+				{
+					interactObject->Interact();
+				}
+				//Picking
+				auto checkGrabbedObject = dynamic_cast<GrabbedObject*>(obj);
+				if (nullptr != checkGrabbedObject)
+				{
+					bool isGrab = checkGrabbedObject->Grabbed(&_transform);
+					grabbedObject = checkGrabbedObject;
+					continue;
+				}
+			}
+		}
+	}
+
 	_bitFlag->OnFlag(StateFlag::Interact | StateFlag::Interact_Started);
 	_bitFlag->OffFlag(StateFlag::Interact_Completed);
 
@@ -264,6 +296,15 @@ void Player::InteractCompleted()
 
 	ChangeSplitAnimation("rig|Anim_Interaction_end", StateFlag::Walk, Upper);
 	SendStateMessage();
+
+	// Put
+	{
+		if (nullptr != grabbedObject)
+		{
+			grabbedObject->PutThis();
+			grabbedObject = nullptr;
+		}
+	}
 }
 
 void Player::ChangeSplitAnimation(const char* animation, StateFlag flag, SplitType type)

@@ -10,17 +10,16 @@ void Terrain::PreInitialize(const Engine::Modules& modules)
 {
 	Object::PreInitialize(modules);
 	_staticMesh->SetFilePath(_meshPath);
-	_transform.Translate({ 0.f, -1000.f, 0.f });
+	_transform.position = { 0.f, -1000.f, 0.f };
 	_matrix = _transform.GetMatrix();
 	_staticMesh->SetMatrix(&_matrix);
-
 
 
 	auto PhysicsManager = Engine::Application::GetPhysicsManager();
 
 	Engine::Physics::GeometryDesc geometryDesc;
 	geometryDesc.data = { _transform.scale.x, _transform.scale.y,  _transform.scale.z };
-	PhysicsManager->LoadHeightMap(geometryDesc, "terrain", "Assets/Test/HeightMap.png");
+	PhysicsManager->LoadHeightMap(geometryDesc, "terrain", _physicsPath.string().c_str());
 
 	Engine::Transform transform{};
 	PhysicsManager->CreateTriangleStatic(&_rigidStatc->_rigidbody, "terrain", { {0.3f,0.f,0.f } }, transform);

@@ -6,11 +6,17 @@
 
 #include "Ray.h"
 
+//Test
+#include "GrabbedObject.h"
+#include "TriggerArea.h"
 
-#include "StaticObject.h"
 #include "MapData.h"
 
+#include "PuzzleData.h"
+
 #include "TestSprite.h"
+
+
 
 class TestWorld : public Engine::World
 {
@@ -66,5 +72,7 @@ private:
 			building->SetBoxScale(data.GetProperty<Engine::Math::Vector3>(L"boxScale").value());
 		}
 	}
+
+	void InitializeGameStateManager(const Engine::Modules& modules);
 };
 

@@ -72,14 +72,14 @@ namespace PhysicsEngineAPI
 			{
 				struct VerticesDesc
 				{
-					unsigned long long	count = -1;
-					unsigned char		stride = -1;
+					unsigned long long	count = 0;
+					unsigned char		stride = 0;
 					void*				data = nullptr;
 				};
 				struct IndicesDesc
 				{
-					unsigned long long	count = -1;
-					unsigned char		stride = -1;
+					unsigned long long	count = 0;
+					unsigned char		stride = 0;
 					void*				data = nullptr;
 				};
 				VerticesDesc	vertices;

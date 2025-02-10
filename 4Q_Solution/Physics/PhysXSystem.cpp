@@ -887,7 +887,7 @@ namespace PhysicsEngineAPI
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				physx::PxHeightFieldSample& sample = samples[y * width + x];
-				sample.height = heightmap[y * width + x];
+				sample.height = static_cast<physx::PxI16>(heightmap[y * width + x]);
 				sample.materialIndex0 = 0;
 				sample.materialIndex1 = 0;
 			}

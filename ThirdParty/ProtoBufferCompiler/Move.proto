@@ -18,7 +18,6 @@ message StateChange {
 }
 
 message MoveSync {
-	optional float x = 1;
-	optional float y = 2;
-	optional float z = 3;
+	repeated float position = 1;
+	repeated float rotation = 2;
 }

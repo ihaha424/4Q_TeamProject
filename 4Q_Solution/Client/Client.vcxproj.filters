@@ -100,6 +100,30 @@
     <Filter Include="Object\Puzzle\02. Bermiore\Object">
       <UniqueIdentifier>{71312da0-df52-4f7b-ad3c-74e414e9402c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Puzzle\03. Sudium">
+      <UniqueIdentifier>{e1e4bbe7-4388-452b-9a30-f549be239500}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\03. Sudium\Object">
+      <UniqueIdentifier>{c0f2e539-d743-4a58-a9c7-471c5dc28ee3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\04. Hide">
+      <UniqueIdentifier>{133e573b-acf7-4d97-ae83-5969a91d56f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\Mini. Mini">
+      <UniqueIdentifier>{df63a570-4cdf-46d0-8d2b-202eb45545e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\Mini. Mini\Object">
+      <UniqueIdentifier>{17d63543-fd1d-459e-a48f-2f5590d678e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\04. Hide\Object">
+      <UniqueIdentifier>{2d29a6f2-2152-4207-bf00-7a5140042499}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\05. Ornoa">
+      <UniqueIdentifier>{42bc4e58-6810-487e-9c08-990c23fff733}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\05. Ornoa\Object">
+      <UniqueIdentifier>{9bb4e4a8-bb59-4420-aedd-0bb4c54470fb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -145,9 +169,6 @@
       <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Props_Fence.h">
-      <Filter>Object\MapData</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Buildings_Shinave.h">
       <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Buildings_Bermiore_Atelier_1.h">
@@ -351,6 +372,54 @@
     <ClInclude Include="Obj_Bermiore_Hanger.h">
       <Filter>Object\Puzzle\02. Bermiore\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Obj_Sudium_bouquet.h">
+      <Filter>Object\Puzzle\03. Sudium\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzle_03_ObjectData.h">
+      <Filter>Object\Puzzle\03. Sudium</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzle_Mini_ObjectData.h">
+      <Filter>Object\Puzzle\Mini. Mini</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Buildings_Shinave.h">
+      <Filter>Object\Puzzle\Mini. Mini\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Mini_Stone_5.h">
+      <Filter>Object\Puzzle\Mini. Mini\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Mini_Platform.h">
+      <Filter>Object\Puzzle\Mini. Mini\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Mini_Stone_1.h">
+      <Filter>Object\Puzzle\Mini. Mini\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Mini_Stone_2.h">
+      <Filter>Object\Puzzle\Mini. Mini\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Mini_Stone_3.h">
+      <Filter>Object\Puzzle\Mini. Mini\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Mini_Stone_4.h">
+      <Filter>Object\Puzzle\Mini. Mini\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzle_04_ObjectData.h">
+      <Filter>Object\Puzzle\04. Hide</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Hide_Potion.h">
+      <Filter>Object\Puzzle\04. Hide\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Hide_Box_1.h">
+      <Filter>Object\Puzzle\04. Hide\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Hide_Box_2.h">
+      <Filter>Object\Puzzle\04. Hide\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzle_05_ObjectData.h">
+      <Filter>Object\Puzzle\05. Ornoa</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Ornoa_Soundblock_1.h">
+      <Filter>Object\Puzzle\05. Ornoa\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -387,9 +456,6 @@
       <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Props_Fence.cpp">
-      <Filter>Object\MapData</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Buildings_Shinave.cpp">
       <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Buildings_Bermiore_Atelier_1.cpp">
@@ -577,6 +643,42 @@
     </ClCompile>
     <ClCompile Include="Obj_Bermiore_Hanger.cpp">
       <Filter>Object\Puzzle\02. Bermiore\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Sudium_bouquet.cpp">
+      <Filter>Object\Puzzle\03. Sudium\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Buildings_Shinave.cpp">
+      <Filter>Object\Puzzle\Mini. Mini\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Mini_Stone_5.cpp">
+      <Filter>Object\Puzzle\Mini. Mini\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Mini_Platform.cpp">
+      <Filter>Object\Puzzle\Mini. Mini\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Mini_Stone_1.cpp">
+      <Filter>Object\Puzzle\Mini. Mini\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Mini_Stone_2.cpp">
+      <Filter>Object\Puzzle\Mini. Mini\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Mini_Stone_3.cpp">
+      <Filter>Object\Puzzle\Mini. Mini\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Mini_Stone_4.cpp">
+      <Filter>Object\Puzzle\Mini. Mini\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Hide_Potion.cpp">
+      <Filter>Object\Puzzle\04. Hide\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Hide_Box_1.cpp">
+      <Filter>Object\Puzzle\04. Hide\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Hide_Box_2.cpp">
+      <Filter>Object\Puzzle\04. Hide\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Ornoa_Soundblock_1.cpp">
+      <Filter>Object\Puzzle\05. Ornoa\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

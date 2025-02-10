@@ -189,7 +189,7 @@ void Player::MoveTriggered(Engine::Math::Vector3 value)
 	Engine::Application::GetNetworkManager()->SaveSendData(
 		(short)PacketID::Move,
 		_sync->_msgBuffer,
-		_sync->_move.ByteSizeLong(),
+		static_cast<long>(_sync->_move.ByteSizeLong()),
 		_sync->GetSerialNumber()
 	);
 	_sync->_move.Clear();
@@ -214,7 +214,7 @@ void Player::MoveCompleted()
 	Engine::Application::GetNetworkManager()->SaveSendData(
 		(short)PacketID::Move,
 		_sync->_msgBuffer,
-		_sync->_move.ByteSizeLong(),
+		static_cast<long>(_sync->_move.ByteSizeLong()),
 		_sync->GetSerialNumber()
 	);
 
@@ -333,13 +333,13 @@ void Player::SyncPatialAnimation(const char* animation, StateFlag flag, SplitTyp
 
 void Player::SendStateMessage()
 {
-	_sync->_stateChange.set_stateinfo(_bitFlag->GetCurrentFlag());
+	_sync->_stateChange.set_stateinfo(static_cast<int32_t>(_bitFlag->GetCurrentFlag()));
 	_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
 
 	Engine::Application::GetNetworkManager()->SaveSendData(
 		(short)PacketID::StateChange,
 		_sync->_msgBuffer,
-		_sync->_stateChange.ByteSizeLong(),
+		static_cast<long>(_sync->_stateChange.ByteSizeLong()),
 		_sync->GetSerialNumber()
 	);
 }
@@ -363,7 +363,7 @@ void Player::UpdateState()
 				Engine::Application::GetNetworkManager()->SaveSendData(
 					(short)PacketID::Jump,
 					_sync->_msgBuffer,
-					_sync->_jump.ByteSizeLong(),
+					static_cast<long>(_sync->_jump.ByteSizeLong()),
 					_sync->GetSerialNumber()
 				);
 

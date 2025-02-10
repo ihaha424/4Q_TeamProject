@@ -50,7 +50,7 @@ bool NetworkMain::Initialize()
 	printf("[Initialize] WSAStartup Success.\n");
 
 	_serverAddr.sin_family = AF_INET;
-	_serverAddr.sin_port = htons(_serverPort);
+	_serverAddr.sin_port = htons(static_cast<u_short>(_serverPort));
 	_serverAddr.sin_addr.s_addr = htonl(INADDR_ANY);
 
 	_listen = new Socket();
@@ -85,7 +85,7 @@ bool NetworkMain::Initialize()
 
 	printf("[Initialize] Make Pending Accept Session Success.\n");
 
-	HANDLE completionPort = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, 0, _threadCount);
+	HANDLE completionPort = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, 0, static_cast<DWORD>(_threadCount));
 	if (completionPort == INVALID_HANDLE_VALUE) {
 		printf("[Initialize] Completion Port Create Failed. Code : %d\n", GetLastError());
 	}

@@ -126,7 +126,7 @@ void Remote::UpdateState()
 				Engine::Application::GetNetworkManager()->SaveSendData(
 					(short)PacketID::Jump,
 					_sync->_msgBuffer,
-					_sync->_jump.ByteSizeLong(),
+					static_cast<long>(_sync->_jump.ByteSizeLong()),
 					_sync->GetSerialNumber()
 				);
 

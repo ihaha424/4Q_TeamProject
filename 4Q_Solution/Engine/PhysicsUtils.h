@@ -79,7 +79,7 @@ namespace Engine::Physics
 	 * @brief		: QueryData
 	 * @UserDatas	: Actor's UserData
 	 */
-	class Component;
+	struct Component;
 	struct QueryData
 	{
 		enum QueryFlag
@@ -251,7 +251,7 @@ namespace Engine::Physics
 	/**
 	 * @brief CollisionEventData
 	 */
-	class Component;
+	struct Component;
 	struct TriggerEvent
 	{
 		Component* myCollision;

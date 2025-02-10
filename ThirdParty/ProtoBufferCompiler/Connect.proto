@@ -10,34 +10,16 @@ message SyncPlayer {
 	optional float x = 1;
 	optional float y = 2;
 	optional float z = 3;
-	optional string resource = 4;
 }
 
 message SyncObject {
-	optional float positionx = 1;
-	optional float positiony = 2;
-	optional float positionz = 3;
-	optional float rotationx = 4;
-	optional float rotationy = 5;
-	optional float rotationz = 6;
-	optional float rotationw = 7;
-	optional float scalex = 8;
-	optional float scaley = 9;
-	optional float scalez = 10;
-	optional bool public = 11;
-}
-
-message SyncObjectTest {
-	repeated float position = 1;
-	repeated float rotation = 2;
-	repeated float scale = 3;
-}
-
-message AddRemote {
-	optional int32 grantnumber = 1;
+	optional bool public = 1;
+	repeated float position = 2;
+	repeated float rotation = 3;
+	repeated float scale = 4;
 }
 
 message AddObject {
 	optional int32 grantnumber = 1;
-	optional string resourceid = 2;
+	optional string classid = 2;
 }

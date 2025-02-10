@@ -70,8 +70,7 @@ void Engine::Application::Run(const int showCommand)
 				.graphicsManager = _graphicsManager,
 				.physicsManager = _physicsManager,
 				.loadManager = _loadManager,
-				.gameStateManager = _gameStateManager
-                .loadManager = _loadManager,
+				.gameStateManager = _gameStateManager,
 				.audioManager = _soundManager
 			});
 			_networkManager->DispatchPacket();

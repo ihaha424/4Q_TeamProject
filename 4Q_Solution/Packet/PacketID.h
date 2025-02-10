@@ -32,6 +32,7 @@ enum class PacketID : short {
 	QuestStart,
 	QuestClear,
 	ObjectActive,
+	ObjectDisable,
 
 	// Data Transfer
 	DataSendComplete,

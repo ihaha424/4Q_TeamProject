@@ -107,6 +107,7 @@ private:
 	PlayMsg::InteractDialog _interactDialog;
 	PlayMsg::PuzzleStart _puzzleStart;
 	PlayMsg::ObjectActive _objectActive;
+	PlayMsg::ObjectDisable _objectDisable;
 
 
 	std::string _msgBuffer = std::string(256, '\0');
@@ -180,11 +181,13 @@ private:
 	using DialogNextTable = std::unordered_map<DialogID, DialogID>;
 
 	DialogNextTable _dialogTable;
-	QuestNextTable _questTable_Ray;
-	QuestNextTable _questTable_Live;
-	QuestID _currentQuestID_Ray = -1;
-	QuestID _currentQuestID_Live = -1;
-	int saveId = 0;
+	QuestNextTable _questTable;
+	QuestID _currentQuestID = -1;
+
+	bool _rayRead = false;
+	bool _liveRead = false;
+	bool _puzzle5Clear = false;
+	bool _puzzle6Clear = false;
 
 #define DialogMod 10000
 #define DialogDiv 1000
@@ -193,27 +196,35 @@ private:
 	void LoadDialogData();
 	void QuestProcess(int& questId);
 	void PlayDialog(int dialogId);
+	void PlayDialog(int dialogId, int targetSessionId);
 	// =============================
 
 	// =============================
 	// Puzzle Area
 	// =============================
 	
-	int _currentPuzzleNumber = -1;
+	int _currentPuzzleNumber = 0;
 	// 오브젝트를 상호작용 할 때마다 갱신해줘야함. 
 	int _currentInteractObject = -1;
 
 	// Puzzle 2
+
 	std::vector<int> _balls	{ 1, 1, 1, 1, 1, 1 };
 	std::vector<int> _dir	{ 1, 1, 1, 1, 1, 1 };
+
+	// Puzzle 4
+
+	std::vector<int> _interactSequence{ 14104, 14102, 14106, 14105, 14103 };
+	int _currentInteractIndex = 0;
+
 
 	void PuzzleProcess(int objectId);
 	void Puzzle1(int objectId);
 	void Puzzle2(int objectId);
-	void Puzzle3();
-	void Puzzle4();
-	void Puzzle5();
-	void Puzzle6();
+	void Puzzle3(int objectId);
+	void Puzzle4(int objectId);
+	void Puzzle5(int objectId);
+	void Puzzle6(int objectId);
 	
 	
 	

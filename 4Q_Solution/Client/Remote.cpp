@@ -241,8 +241,9 @@ void Remote::SyncMove(const MoveMsg::MoveSync* msg)
 
 void Remote::SetLocation(const MoveMsg::MoveSync* msg)
 {
-	float x = msg->x();
-	float y = msg->y();
-	float z = msg->z();
+	const auto& pos = msg->position();
+	float x = *(pos.begin());
+	float y = *(pos.begin() + 1);
+	float z = *(pos.begin() + 2);
 	_transform.position = Engine::Math::Vector3(x, y, z);
 }

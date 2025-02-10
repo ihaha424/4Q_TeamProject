@@ -2,12 +2,14 @@
 #include "System.h"
 
 #include "Helper.h"
+#include "Listener.h"
 #include "Sound.h"
+#include "Sound3D.h"
 
 DSH::Audio::System::System():
-_referenceCount(1)
+	_referenceCount(1), _numOfListeners(0)
 {
-    // TODO: Use FMOD_RESULT
+	// TODO: Use FMOD_RESULT
 	System_Create(&_system);
 	int channelNumber;
 	_system->getSoftwareChannels(&channelNumber);
@@ -65,6 +67,27 @@ HRESULT DSH::Audio::System::CreateSound(const std::filesystem::path& path, const
 	Sound* pTickTimer = new Sound(_system, _channelGroups[group], path, isLoop);
 	if (pTickTimer == nullptr) return E_OUTOFMEMORY;
 	*ppSound = pTickTimer;
+	return S_OK;
+}
+
+HRESULT DSH::Audio::System::CreateSound(const std::filesystem::path& path, ChannelGroupType group, bool isLoop,
+	ISound3D** ppSound)
+{
+	if (ppSound == nullptr) return E_INVALIDARG;
+	Sound3D* pTickTimer = new Sound3D(_system, _channelGroups[group], path, isLoop);
+	if (pTickTimer == nullptr) return E_OUTOFMEMORY;
+	*ppSound = pTickTimer;
+	return S_OK;
+}
+
+HRESULT DSH::Audio::System::CreateListener(IListener** ppListener)
+{
+	if (_numOfListeners == FMOD_MAX_LISTENERS - 1) return E_ABORT;
+	if (ppListener == nullptr) return E_INVALIDARG;
+	Listener* pListener = new Listener(_system, _numOfListeners);
+	if (pListener == nullptr) return E_OUTOFMEMORY;
+	_system->set3DNumListeners(++_numOfListeners);
+	*ppListener = pListener;
 	return S_OK;
 }
 

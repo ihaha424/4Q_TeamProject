@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "Player.h"
+#include "GrabbedObject.h"
+#include "InteractObject.h"
 
 Player::Player() : 
 	//, _movement(nullptr)
@@ -90,11 +92,11 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	auto PhysicsManager = Engine::Application::GetPhysicsManager();
 
 	Engine::Physics::ControllerDesc cd;
-	cd.position = Engine::Math::Vector3(1115.f, 674.f, -872.f);
-	cd.height = 10.f;
-	cd.radius = 2.f;
+	cd.position = Engine::Math::Vector3(0.f, 0.f, 0.f);
+	cd.height = 100.f;
+	cd.radius = 20.f;
 	// TODO: Player Gravity
-	cd.gravity = { 0.f, -9.8f, 0.f };
+	//cd.gravity = { 0.f, -9.8f, 0.f };
 	cd.contactOffset = 0.1f;
 	cd.stepOffset = 1.f;
 	cd.slopeLimit = 0.707f;
@@ -121,16 +123,19 @@ void Player::PostInitialize(const Engine::Modules& modules)
 	_speed = 100.f;
 	_remote->SetSpeed(_speed);
 
-	//_skeltalMesh.SetRenderLayer(0);
-	/*_animator.SetUpSplitBone(2);
-	_animator.SplitBone(0, "Dummy_root");
-	_animator.SplitBone(1, "Bip01-Spine1");
-	_animator.ChangeAnimation("Wait");*/
+	_animator->SetUpSplitBone(End);
+	_animator->SplitBone(Lower, "RootNode"); // 하체
+	_animator->SplitBone(Upper, "c_spine_02.x"); // 상체
+	_animator->SplitBone(Upper, "arm_stretch.l");
+	_animator->SplitBone(Upper, "arm_stretch.r");
+	_animator->SplitBone(Upper, "forearm_stretch.l");
+	_animator->SplitBone(Upper, "forearm_stretch.r");
+	_animator->SplitBone(Upper, "forearm.l");
+	_animator->SplitBone(Upper, "forearm.r");
 
 	//_skeletalMesh->SetActiveShadow(false);
 	_skeletalMesh->SetPostEffectFlag(1);
 }
-
 
 void Player::PostUpdate(float deltaTime)
 {
@@ -154,14 +159,17 @@ void Player::PostAttach()
 void Player::MoveStarted()
 {
 	_bitFlag->OnFlag(StateFlag::Walk);
+
+	if (!_bitFlag->IsOnFlag(StateFlag::Jump))
+	{
+		ChangeSplitAnimation("rig|Anim_Walk", StateFlag::Interact, Lower);
+	}
+
 	SendStateMessage();
 }
 
 void Player::MoveTriggered(Engine::Math::Vector3 value)
-{
-	if (!_bitFlag->IsOnFlag(StateFlag::Jump))
-		_animator->ChangeAnimation("rig|Anim_Walk");
-
+{	
 	_remote->SetDirection(_fixedArm->GetTransformDirection(value));
 	_transform.rotation = _fixedArm->GetRotation(value, _transform.rotation);
 	//_fixedArm->FollowDirection(value);
@@ -181,7 +189,7 @@ void Player::MoveTriggered(Engine::Math::Vector3 value)
 	Engine::Application::GetNetworkManager()->SaveSendData(
 		(short)PacketID::Move,
 		_sync->_msgBuffer,
-		_sync->_move.ByteSizeLong(),
+		static_cast<long>(_sync->_move.ByteSizeLong()),
 		_sync->GetSerialNumber()
 	);
 	_sync->_move.Clear();
@@ -189,8 +197,8 @@ void Player::MoveTriggered(Engine::Math::Vector3 value)
 
 void Player::MoveCompleted()
 {
-	if (!_bitFlag->IsOnFlag(StateFlag::Jump | StateFlag::Interact))
-		_animator->ChangeAnimation("rig|Anim_Idle");
+	if (!_bitFlag->IsOnFlag(StateFlag::Jump))
+		SyncPatialAnimation("rig|Anim_Idle", StateFlag::Interact, Upper, Lower);
 
 	_bitFlag->OffFlag(StateFlag::Walk);
 
@@ -206,7 +214,7 @@ void Player::MoveCompleted()
 	Engine::Application::GetNetworkManager()->SaveSendData(
 		(short)PacketID::Move,
 		_sync->_msgBuffer,
-		_sync->_move.ByteSizeLong(),
+		static_cast<long>(_sync->_move.ByteSizeLong()),
 		_sync->GetSerialNumber()
 	);
 
@@ -229,8 +237,40 @@ void Player::InteractStarted()
 	if (_bitFlag->IsOnFlag(StateFlag::Interact))
 		return;
 
+	/*Raycast*/
+	{
+		Engine::Physics::AdditionalQueryData queryData;
+		auto PhysicsManager = Engine::Application::GetPhysicsManager();
+		auto raycastScene = PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::mainScene));
+		auto rayDirection = _transform.GetForward();	// WHy????????? I don't konw Why flip the X-axis
+		rayDirection.x *= -1;
+		raycastScene->Raycast(queryData, _transform.position, rayDirection, 1000.f);
+		if (queryData.num > 0)
+		{
+			for (size_t i = 0; i < queryData.num; i++)
+			{
+				Engine::Object* obj = static_cast<Engine::Object*>(queryData.UserDatas[i]->GetOwner());
+				auto interactObject = dynamic_cast<InteractObject*>(obj);
+				if (nullptr != interactObject)
+				{
+					interactObject->Interact();
+				}
+				//Picking
+				auto checkGrabbedObject = dynamic_cast<GrabbedObject*>(obj);
+				if (nullptr != checkGrabbedObject)
+				{
+					bool isGrab = checkGrabbedObject->Grabbed(&_transform);
+					grabbedObject = checkGrabbedObject;
+					continue;
+				}
+			}
+		}
+	}
+
 	_bitFlag->OnFlag(StateFlag::Interact | StateFlag::Interact_Started);
-	_animator->ChangeAnimation("rig|Anim_Interaction_start");
+	_bitFlag->OffFlag(StateFlag::Interact_Completed);
+
+	ChangeSplitAnimation("rig|Anim_Interaction_start", StateFlag::Walk, Upper);
 	SendStateMessage();
 }
 
@@ -238,31 +278,68 @@ void Player::InteractTriggered()
 {
 	if (_bitFlag->IsOnFlag(StateFlag::Interact_Started))
 	{
-		if (_animator->IsLastFrame(0.1f))
+		if (_animator->IsLastFrame(0.1f, Upper))
 		{
 			_bitFlag->OffFlag(StateFlag::Interact_Started);
 			_bitFlag->OnFlag(StateFlag::Interact_Triggered);
-			_animator->ChangeAnimation("rig|Anim_Interaction_loop");
+
+			ChangeSplitAnimation("rig|Anim_Interaction_loop", StateFlag::Walk, Upper);
+			SendStateMessage();
 		}
 	}
 }
 
 void Player::InteractCompleted()
 {
-	_animator->ChangeAnimation("rig|Anim_Interaction_end");
+	_bitFlag->OnFlag(StateFlag::Interact_Completed);
 	_bitFlag->OffFlag(StateFlag::Interact | StateFlag::Interact_Started | StateFlag::Interact_Triggered);
+
+	ChangeSplitAnimation("rig|Anim_Interaction_end", StateFlag::Walk, Upper);
 	SendStateMessage();
+
+	// Put
+	{
+		if (nullptr != grabbedObject)
+		{
+			grabbedObject->PutThis();
+			grabbedObject = nullptr;
+		}
+	}
+}
+
+void Player::ChangeSplitAnimation(const char* animation, StateFlag flag, SplitType type)
+{
+	if (_bitFlag->IsOnFlag(flag))
+	{
+		_animator->ChangeAnimation(animation, type);
+	}
+	else
+	{
+		_animator->ChangeAnimation(animation);
+	}
+}
+
+void Player::SyncPatialAnimation(const char* animation, StateFlag flag, SplitType parent, SplitType child)
+{
+	if (_bitFlag->IsOnFlag(flag))
+	{
+		_animator->SyncPartialAnimation(parent, child);
+	}
+	else
+	{
+		_animator->ChangeAnimation(animation);
+	}
 }
 
 void Player::SendStateMessage()
 {
-	_sync->_stateChange.set_stateinfo(_bitFlag->GetCurrentFlag());
+	_sync->_stateChange.set_stateinfo(static_cast<int32_t>(_bitFlag->GetCurrentFlag()));
 	_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
 
 	Engine::Application::GetNetworkManager()->SaveSendData(
 		(short)PacketID::StateChange,
 		_sync->_msgBuffer,
-		_sync->_stateChange.ByteSizeLong(),
+		static_cast<long>(_sync->_stateChange.ByteSizeLong()),
 		_sync->GetSerialNumber()
 	);
 }
@@ -279,14 +356,14 @@ void Player::UpdateState()
 				_remote->SetSpeed(_speed * 0.5f);
 				_remote->SetDirection(Engine::Math::Vector3(0.f, 1.f, 0.f));
 
-				_sync->_jump.set_power(15.f);
+				_sync->_jump.set_power(20.f);
 				_sync->_jump.SerializeToString(&_sync->_msgBuffer);
 				
 
 				Engine::Application::GetNetworkManager()->SaveSendData(
 					(short)PacketID::Jump,
 					_sync->_msgBuffer,
-					_sync->_jump.ByteSizeLong(),
+					static_cast<long>(_sync->_jump.ByteSizeLong()),
 					_sync->GetSerialNumber()
 				);
 
@@ -303,6 +380,17 @@ void Player::UpdateState()
 				_animator->ChangeAnimation("rig|Anim_Jump_end");
 				_remote->SetDirection(Engine::Math::Vector3::Zero);
 			}
+		}
+	}
+
+	if (_bitFlag->IsOnFlag(StateFlag::Interact_Completed))
+	{
+		if (_animator->IsLastFrame(0.1f, Upper))
+		{
+			_bitFlag->OffFlag(StateFlag::Interact_Completed);
+
+			if (_bitFlag->IsOnFlag(StateFlag::Walk))
+				_animator->SyncPartialAnimation(Lower, Upper);
 		}
 	}
 

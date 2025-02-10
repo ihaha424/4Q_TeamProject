@@ -52,7 +52,9 @@ void Engine::DSHLoad::Manager::LoadCloneData(const std::filesystem::path& path)
 
 			const auto& boxscale = modelData["boxScale"];
 			Math::Vector3 boxScaleData = { boxscale["x"].get<float>(), boxscale["y"].get<float>(), boxscale["z"].get<float>() };
-			boxScaleData *= 10;
+			//boxScaleData *= 10;
+			//positionData /= 10;
+			positionData.y -= 10000.f;
 
 			Properties cloneData
 			{

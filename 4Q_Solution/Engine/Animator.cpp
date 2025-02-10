@@ -38,22 +38,27 @@ void Engine::Component::Animator::ChangeAnimation(const char* animation) const
 	_geAnimator->ChangeAnimation(animation);
 }
 
-void Engine::Component::Animator::ChangeAnimation(const char* animation, const unsigned int id) const
+void Engine::Component::Animator::ChangeAnimation(const char* animation, unsigned int id) const
 {
 	_geAnimator->ChangeAnimation(animation, id);
 }
 
-bool Engine::Component::Animator::IsLastFrame(float interval, const unsigned int id) const
+void Engine::Component::Animator::SyncPartialAnimation(unsigned int parentID, unsigned int childID) const
+{
+	_geAnimator->SyncPartialAnimation(parentID, childID);
+}
+
+bool Engine::Component::Animator::IsLastFrame(float interval, unsigned int id) const
 {
 	return _geAnimator->IsLastFrame(interval, id);
 }
 
-void Engine::Component::Animator::SetUpSplitBone(const unsigned int maxSplit) const
+void Engine::Component::Animator::SetUpSplitBone(unsigned int maxSplit) const
 {
 	_geAnimator->SetUpSplitBone(maxSplit);
 }
 
-void Engine::Component::Animator::SplitBone(const unsigned int id, const char* boneName) const
+void Engine::Component::Animator::SplitBone(unsigned int id, const char* boneName) const
 {
 	_geAnimator->SplitBone(id, boneName);
 }
@@ -61,4 +66,9 @@ void Engine::Component::Animator::SplitBone(const unsigned int id, const char* b
 void Engine::Component::Animator::SetAnimationSpeed(float speed) const
 {
 	_geAnimator->SetAnimationSpeed(speed);
+}
+
+void Engine::Component::Animator::MakeParent(const char* parent, const char* child) const
+{
+	_geAnimator->MakeParent(parent, child);
 }

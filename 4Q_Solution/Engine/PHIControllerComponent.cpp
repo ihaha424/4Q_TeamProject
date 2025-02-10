@@ -16,7 +16,7 @@ namespace Engine::PHI
 		, jumpMax{ 1000 }
 		, direction{}
 		, moveSpeed{ 1.f }
-		, minDistance{ 0.001 }
+		, minDistance{ 0.001f }
 		, owner{ nullptr }
 	{
 		collision = new Collision<Controller>{ this };

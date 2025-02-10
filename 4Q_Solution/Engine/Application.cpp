@@ -5,11 +5,13 @@
 #include "DSHInputManager.h"
 #include "DSHLoadManager.h"
 #include "DSHLoggerManager.h"
+#include "DSHAudioManager.h"
 #include "DSHTimeManager.h"
 #include "DSHWindowManager.h"
 #include "GEGraphicsManager.h"
 #include "ServerNetworkManager.h"
 #include "PHIManager.h"
+#include "UGameStateManager.h"
 
 Engine::Time::Manager* Engine::Application::_timeManager = nullptr;
 Engine::Window::Manager* Engine::Application::_windowManager = nullptr;
@@ -20,6 +22,8 @@ Engine::Content::Manager* Engine::Application::_contentManager = nullptr;
 Engine::Network::Manager* Engine::Application::_networkManager = nullptr;
 Engine::Physics::Manager* Engine::Application::_physicsManager = nullptr;
 Engine::Logger::Manager* Engine::Application::_loggerManager = nullptr;
+Engine::GameState::Manager* Engine::Application::_gameStateManager = nullptr;
+Engine::DSHAudio::Manager* Engine::Application::_soundManager = nullptr;
 
 Engine::Application::Application(const HINSTANCE instanceHandle):
 	_instanceHandle(instanceHandle), _size(Math::Size::Zero)
@@ -62,10 +66,12 @@ void Engine::Application::Run(const int showCommand)
 			_inputManager->Update(metaTime);
 			_graphicsManager->PreUpdate(deltaTime);
 			
-			_contentManager->Contraction(Modules{ 
+			_contentManager->Contraction(Modules{
 				.graphicsManager = _graphicsManager,
 				.physicsManager = _physicsManager,
-                .loadManager = _loadManager
+				.loadManager = _loadManager,
+				.gameStateManager = _gameStateManager,
+				.audioManager = _soundManager
 			});
 			_networkManager->DispatchPacket();
 
@@ -81,10 +87,15 @@ void Engine::Application::Run(const int showCommand)
 
 			_contentManager->Relaxation();
 
+			_soundManager->Update();
+
 			_graphicsManager->PostUpdate(deltaTime);
 			_graphicsManager->Render();
+
 			_inputManager->Reset();
+
 			_networkManager->Send();
+
 			_loggerManager->Flush();
 		}
 	}
@@ -137,6 +148,16 @@ Engine::Logger::IManager* Engine::Application::GetLoggerManager()
 	return _loggerManager;
 }
 
+Engine::GameState::IManager* Engine::Application::GetGameStateManager()
+{
+	return _gameStateManager;
+}
+
+Engine::Audio::IManager* Engine::Application::GetSoundManager()
+{
+	return _soundManager;
+}
+
 void Engine::Application::Register(Content::IManager* contentManager, Load::IManager* loadManager)
 {
 	const auto componentFactory = contentManager->GetComponentFactory();
@@ -144,7 +165,7 @@ void Engine::Application::Register(Content::IManager* contentManager, Load::IMan
 	componentFactory->Register<Component::Light>();
 	componentFactory->Register<Component::StaticMesh>();
 	componentFactory->Register<Component::Camera>(30.f, 5000.f, _size, std::numbers::pi_v<float> / 4);
-	componentFactory->Register<Component::TextRenderer>();
+	componentFactory->Register<Component::Text>();
 	componentFactory->Register<Component::SkeletalMesh>();
 	componentFactory->Register<Component::Animator>();
 	componentFactory->Register<Component::SkyBox>();
@@ -156,6 +177,11 @@ void Engine::Application::Register(Content::IManager* contentManager, Load::IMan
 	componentFactory->Register<Component::Synchronize>();
 	componentFactory->Register<Component::FixedArm>();
 	componentFactory->Register<Component::BitFlag>();
+	componentFactory->Register<Component::EffectSound>();
+	componentFactory->Register<Component::Effect3DSound>();
+	componentFactory->Register<Component::BackgroundMusic>();
+	componentFactory->Register<Component::Listener>();
+	componentFactory->Register<Component::Sprite>();
 	// TODO: Register other components.
 }
 
@@ -170,6 +196,8 @@ void Engine::Application::CreateManagers()
     CreateContentManager(&_contentManager);	
     CreateNetworkManager(&_networkManager);
     CreatePhysicsManager(&_physicsManager);
+	CreateGameStateManager(&_gameStateManager);
+	CreateSoundManager(&_soundManager);
 }
 
 void Engine::Application::InitializeManagers() const
@@ -183,7 +211,10 @@ void Engine::Application::InitializeManagers() const
 	_graphicsManager->Initialize(_windowManager->GetHandle(), L"../Shaders/", _size, false, 1);
 	_contentManager->Initialize();
     _networkManager->Initialize();
-    _physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, false);
+    _physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, true);
+    //_physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, false);
+	_gameStateManager->Initialize();
+	_soundManager->Initialize();
 }
 
 void Engine::Application::LoadGameData()
@@ -198,6 +229,7 @@ void Engine::Application::LoadGameData()
 
 void Engine::Application::FinalizeManagers()
 {
+	_soundManager->Finalize();
 	_contentManager->Finalize();
 	_loadManager->Finalize();
 	_graphicsManager->Finalize();
@@ -207,6 +239,7 @@ void Engine::Application::FinalizeManagers()
     _networkManager->Finalize();
     _physicsManager->Finalize();
 	_loggerManager->Finalize();
+	_gameStateManager->Finalize();
 }
 
 void Engine::Application::DeleteManagers()
@@ -220,6 +253,9 @@ void Engine::Application::DeleteManagers()
 	deleter(&_contentManager);
     deleter(&_networkManager);
     deleter(&_physicsManager);
+	deleter(&_loggerManager);
+	deleter(&_gameStateManager);
+	deleter(&_soundManager);
 }
 
 void Engine::Application::CreateTimeManager(Time::Manager** timeManager)
@@ -327,5 +363,29 @@ void Engine::Application::CreateLoggerManager(Logger::Manager** loggerManager)
 		Logger::Manager* manager = new DSHLogger::Manager();
 		if (manager == nullptr) thrower(E_OUTOFMEMORY);
 		*loggerManager = manager;
+	}
+}
+
+void Engine::Application::CreateGameStateManager(GameState::Manager** gameStateManager)
+{
+	constexpr Utility::ThrowIfFailed thrower;
+	if (gameStateManager == nullptr) thrower(E_INVALIDARG);
+	else
+	{
+		GameState::Manager* manager = new UGameState::Manager();
+		if (manager == nullptr) thrower(E_OUTOFMEMORY);
+		*gameStateManager = manager;
+	}
+}
+
+void Engine::Application::CreateSoundManager(DSHAudio::Manager** soundManager)
+{
+	constexpr Utility::ThrowIfFailed thrower;
+	if (soundManager == nullptr) thrower(E_INVALIDARG);
+	else
+	{
+		DSHAudio::Manager* manager = new DSHAudio::Manager();
+		if (manager == nullptr) thrower(E_OUTOFMEMORY);
+		*soundManager = manager;
 	}
 }

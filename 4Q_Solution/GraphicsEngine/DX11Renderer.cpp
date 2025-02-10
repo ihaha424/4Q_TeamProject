@@ -85,7 +85,7 @@ void DX11Renderer::Render()
 		case MeshType::Skeletal:
 		{
 			Animator* pAnimator = static_cast<SkeletalMeshRenderer*>(component)->GetAnimator();
-			memcpy(&_boneMatrices[ID * MAX_BONE_MATRIX], pAnimator->GetAnimationTransform().data(), sizeof(Matrix) * MAX_BONE_MATRIX);
+			memcpy(&_boneMatrices[ID * MAX_BONE_MATRIX], pAnimator->GetAnimationTransform(), sizeof(Matrix) * MAX_BONE_MATRIX);
 			break;
 		}
 		case MeshType::SkyBox:

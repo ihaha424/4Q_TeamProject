@@ -30,15 +30,15 @@ void TextSystem::RegisterFont(const wchar_t* filePath)
 	_fonts[filePath] = pFont;
 }
 
-void TextSystem::CreateTextRenderer(GE::ITextRenderer** ppTextRenderer)
+void TextSystem::CreateTextRenderer(GE::ITextRenderer** ppComponent)
 {
-	(*ppTextRenderer) = new TextRenderer(this);
+	(*ppComponent) = new TextRenderer(this);
 }
 
-void TextSystem::RegisterRenderQueue(GE::ITextRenderer* pTextRenderer)
+void TextSystem::RegisterRenderQueue(GE::ITextRenderer* pComponent)
 {
-	auto compare = [pTextRenderer](const auto* pComponent)
-		{ return static_cast<TextRenderer*>(pTextRenderer)->GetID() == pComponent->GetID();};
+	auto compare = [pComponent](const auto* component)
+		{ return static_cast<TextRenderer*>(pComponent)->GetID() == component->GetID();};
 
 	if (std::ranges::any_of(_components, compare))
 	{
@@ -46,13 +46,13 @@ void TextSystem::RegisterRenderQueue(GE::ITextRenderer* pTextRenderer)
 		return;
 	}
 
-	_components.push_back(static_cast<TextRenderer*>(pTextRenderer));
+	_components.push_back(static_cast<TextRenderer*>(pComponent));
 }
 
-void TextSystem::UnRegisterRenderQueue(GE::ITextRenderer* pTextRenderer)
+void TextSystem::UnRegisterRenderQueue(GE::ITextRenderer* pComponent)
 {
-	std::erase_if(_components, [pTextRenderer](const auto* pComponent)
-		{ return static_cast<TextRenderer*>(pTextRenderer)->GetID() == pComponent->GetID(); });
+	std::erase_if(_components, [pComponent](const auto* component)
+		{ return static_cast<TextRenderer*>(pComponent)->GetID() == component->GetID(); });
 }
 
 void TextSystem::Initialize()
@@ -62,7 +62,7 @@ void TextSystem::Initialize()
 
 void TextSystem::Render()
 {
-	_pSpriteBatch->Begin(/*SpriteSortMode_Deferred, nullptr, nullptr, nullptr, nullptr, nullptr, XMMatrixIdentity()*/);
+	_pSpriteBatch->Begin(SpriteSortMode_FrontToBack);
 
 	for (auto& component : _components)
 	{

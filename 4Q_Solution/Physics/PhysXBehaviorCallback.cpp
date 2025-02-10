@@ -6,7 +6,7 @@ namespace PhysicsEngineAPI
 {
 	physx::PxControllerBehaviorFlags PhysXBehaviorCallback::getBehaviorFlags(const physx::PxShape& shape, const physx::PxActor& actor)
 	{
-		return physx::PxControllerBehaviorFlags();
+		return physx::PxControllerBehaviorFlag::eCCT_CAN_RIDE_ON_OBJECT;
 	}
 	physx::PxControllerBehaviorFlags PhysXBehaviorCallback::getBehaviorFlags(const physx::PxController& controller)
 	{

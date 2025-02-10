@@ -19,6 +19,8 @@ namespace Engine::Component
 	void ChractorController::Update(float deltaTime)
 	{
 		Component::Update(deltaTime);
+		auto transform = GetOwner()->GetTransform();
+		_controller->SetPosition(transform.position);
 		static_cast<Engine::Physics::Controller*>(_controller)->Update(deltaTime);
 		/*auto transform = GetOwner()->GetTransform();
 		transform.position = _controller->GetPosition();

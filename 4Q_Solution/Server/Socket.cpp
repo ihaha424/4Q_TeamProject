@@ -90,7 +90,7 @@ bool Socket::AcceptExtend(AcceptOverlapped& overlapped)
 bool Socket::Recv(RecvOverlapped& overlapped)
 {
 	_recv.buf = overlapped._buffer;
-	_recv.len = overlapped._bufferSize;
+	_recv.len = static_cast<ULONG>(overlapped._bufferSize);
 
 	DWORD flg = 0;
 
@@ -115,7 +115,7 @@ bool Socket::Recv(RecvOverlapped& overlapped)
 bool Socket::Send(SendOverlapped& overlapped)
 {
 	_send.buf = overlapped._buffer;
-	_send.len = overlapped._dataSize;
+	_send.len = static_cast<ULONG>(overlapped._dataSize);
 
 	int res = WSASend(
 		_socket,
@@ -134,7 +134,7 @@ bool Socket::Send(SendOverlapped& overlapped)
 	}
 
 	overlapped._dataSize -= overlapped.InternalHigh;
-	overlapped._byteSend -= overlapped.InternalHigh;
+	overlapped._byteSend -= static_cast<DWORD>(overlapped.InternalHigh);
 	memset(overlapped._buffer, 0, BufferSize);
 
 	return true;

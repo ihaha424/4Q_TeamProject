@@ -2,10 +2,11 @@
 
 namespace DSH::Audio
 {
-	class Sound final: public ISound
+	class Sound final : public ISound
 	{
 	public:
 		Sound(FMOD::System* system, FMOD::ChannelGroup* group, const std::filesystem::path& path, bool isLoop);
+		~Sound() override;
 
 		HRESULT QueryInterface(const IID& riid, void** ppvObject) override;
 		ULONG AddRef() override;
@@ -28,6 +29,7 @@ namespace DSH::Audio
 
 		HRESULT FadeIn(float fadeTime) override;
 		HRESULT FadeOut(float fadeTime) override;
+
 		HRESULT SetDelay(float delayTime) override;
 
 		[[nodiscard]] float GetLength() const override;

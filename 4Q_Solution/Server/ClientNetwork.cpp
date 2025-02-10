@@ -6,6 +6,7 @@
 
 #include <Shlwapi.h>
 #pragma comment(lib, "Shlwapi.lib")
+#pragma warning(disable:4244)
 
 bool ClientNetwork::Initialize()
 {
@@ -51,7 +52,7 @@ bool ClientNetwork::Initialize()
 	printf("[Initialize] WSAStartup Success.\n");
 
 	_serverAddr.sin_family = AF_INET;
-	_serverAddr.sin_port = htons(_serverPort);
+	_serverAddr.sin_port = htons(static_cast<u_short>(_serverPort));
 	if (inet_pton(AF_INET, serverIp.c_str(), &(_serverAddr.sin_addr)) != 1) {
 		return false;
 	}

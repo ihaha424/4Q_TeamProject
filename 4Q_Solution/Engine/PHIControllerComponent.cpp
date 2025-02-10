@@ -170,7 +170,7 @@ namespace Engine::PHI
 		velocity.z = velo.z;
 
 
-		velocity += gravity * deltaTime * gravityFlag;
+		velocity += gravity * deltaTime * (gravityFlag ? 1 : 0);
 
 		controllerCollisionFlag = controller->Move(Vector3ToPhysicsVector3(velocity * deltaTime), minDistance, deltaTime);
 		if (controllerCollisionFlag & 0x04 || controllerCollisionFlag & 0x01)

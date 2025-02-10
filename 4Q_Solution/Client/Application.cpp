@@ -67,33 +67,33 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	*/
 	objectFactory->Register<Terrain>("Assets/Test/Landscape03.fbx", L"Assets/Test/H_Clamp_Out2.png");
 
-	// RegisterHelp<Obj_BG_Tree_1>(L"Obj_BG_Tree_1", loadManager, objectFactory);
-	// RegisterHelp<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", loadManager, objectFactory);
-	// RegisterHelp<Obj_BG_Mountain>(L"Obj_BG_Mountain", loadManager, objectFactory);
+	RegisterHelp<Obj_BG_Tree_1>(L"Obj_BG_Tree_1", loadManager, objectFactory);
+	RegisterHelp<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", loadManager, objectFactory);
+	//RegisterHelp<Obj_BG_Mountain>(L"Obj_BG_Mountain", loadManager, objectFactory);
 
 	RegisterHelp<Obj_Props_Fence>(L"Obj_Props_Fence", loadManager, objectFactory);
 
 	//RegisterHelp<Obj_Buildings_Shinave>(L"Obj_Buildings_Shinave", loadManager, objectFactory);
-	// RegisterHelp<Obj_Buildings_Bermiore_Atelier_1>(L"Obj_Buildings_Bermiore_Atelier_1", loadManager, objectFactory);
-	// RegisterHelp<Obj_Buildings_Bermiore_Atelier_2>(L"Obj_Buildings_Bermiore_Atelier_2", loadManager, objectFactory);
-	// RegisterHelp<Obj_Buildings_Bermiore_Atelier_3>(L"Obj_Buildings_Bermiore_Atelier_3", loadManager, objectFactory);
+	RegisterHelp<Obj_Buildings_Bermiore_Atelier_1>(L"Obj_Buildings_Bermiore_Atelier_1", loadManager, objectFactory);
+	RegisterHelp<Obj_Buildings_Bermiore_Atelier_2>(L"Obj_Buildings_Bermiore_Atelier_2", loadManager, objectFactory);
+	RegisterHelp<Obj_Buildings_Bermiore_Atelier_3>(L"Obj_Buildings_Bermiore_Atelier_3", loadManager, objectFactory);
 
-	// RegisterHelp<Obj_Props_Bermiore_Loom_1>(L"Obj_Props_Bermiore_Loom_1", loadManager, objectFactory);
-	// RegisterHelp<Obj_Props_Bermiore_Loom_2>(L"Obj_Props_Bermiore_Loom_2", loadManager, objectFactory);
-	// RegisterHelp<Obj_Props_Bermiore_Cloth_1>(L"Obj_Props_Bermiore_Cloth_1", loadManager, objectFactory);
-	// RegisterHelp<Obj_Props_Bermiore_Cloth_2>(L"Obj_Props_Bermiore_Cloth_2", loadManager, objectFactory);
+	//RegisterHelp<Obj_Props_Bermiore_Loom_1>(L"Obj_Props_Bermiore_Loom_1", loadManager, objectFactory);
+	//RegisterHelp<Obj_Props_Bermiore_Loom_2>(L"Obj_Props_Bermiore_Loom_2", loadManager, objectFactory);
+	//RegisterHelp<Obj_Props_Bermiore_Cloth_1>(L"Obj_Props_Bermiore_Cloth_1", loadManager, objectFactory);
+	//RegisterHelp<Obj_Props_Bermiore_Cloth_2>(L"Obj_Props_Bermiore_Cloth_2", loadManager, objectFactory);
 
-	// RegisterHelp<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", loadManager, objectFactory);
+	//RegisterHelp<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", loadManager, objectFactory);
 
-	//RegisterHelp<Obj_Buildings_Hide_House_1>(L"Obj_Buildings_Hide_House_1", loadManager, objectFactory);
-	//RegisterHelp<Obj_Buildings_Hide_House_2>(L"Obj_Buildings_Hide_House_2", loadManager, objectFactory);
-	////RegisterHelp<Obj_Buildings_Hide_House_3>(L"Obj_Buildings_Hide_House_3", loadManager, objectFactory);
-	//RegisterHelp<Obj_Buildings_Hide_House_4>(L"Obj_Buildings_Hide_House_4", loadManager, objectFactory);
+	RegisterHelp<Obj_Buildings_Hide_House_1>(L"Obj_Buildings_Hide_House_1", loadManager, objectFactory);
+	RegisterHelp<Obj_Buildings_Hide_House_2>(L"Obj_Buildings_Hide_House_2", loadManager, objectFactory);
+	RegisterHelp<Obj_Buildings_Hide_House_3>(L"Obj_Buildings_Hide_House_3", loadManager, objectFactory);
+	RegisterHelp<Obj_Buildings_Hide_House_4>(L"Obj_Buildings_Hide_House_4", loadManager, objectFactory);
 
-	//RegisterHelp<Obj_Buildings_Ornoa_House_1>(L"Obj_Buildings_Ornoa_House_1", loadManager, objectFactory);
-	//RegisterHelp<Obj_Buildings_Ornoa_House_2>(L"Obj_Buildings_Ornoa_House_2", loadManager, objectFactory);
-	// RegisterHelp<Obj_Buildings_Ornoa_House_3>(L"Obj_Buildings_Ornoa_House_3", loadManager, objectFactory);
-	// RegisterHelp<Obj_Buildings_Ornoa_House_4>(L"Obj_Buildings_Ornoa_House_4", loadManager, objectFactory);
+	RegisterHelp<Obj_Buildings_Ornoa_House_1>(L"Obj_Buildings_Ornoa_House_1", loadManager, objectFactory);
+	RegisterHelp<Obj_Buildings_Ornoa_House_2>(L"Obj_Buildings_Ornoa_House_2", loadManager, objectFactory);
+	//RegisterHelp<Obj_Buildings_Ornoa_House_3>(L"Obj_Buildings_Ornoa_House_3", loadManager, objectFactory);
+	//RegisterHelp<Obj_Buildings_Ornoa_House_4>(L"Obj_Buildings_Ornoa_House_4", loadManager, objectFactory);
 
 	const auto componentFactory = contentManager->GetComponentFactory();
 	componentFactory->Register<RemoteMove>();

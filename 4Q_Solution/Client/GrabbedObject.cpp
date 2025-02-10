@@ -35,6 +35,11 @@ void GrabbedObject::SetBoxScale(Engine::Math::Vector3 boxScale)
 	_boxScale = boxScale;
 }
 
+void GrabbedObject::SetBoxPosition(Engine::Math::Vector3 boxPosition)
+{
+	_boxPosition = boxPosition;
+}
+
 bool GrabbedObject::Grabbed(Engine::Transform* ownerTransform)
 {
 	auto direction = _transform.position - ownerTransform->position;

@@ -39,6 +39,11 @@ void StaticObject::SetBoxScale(Engine::Math::Vector3 boxScale)
 	_boxScale = boxScale;
 }
 
+void StaticObject::SetBoxPosition(Engine::Math::Vector3 boxPosition)
+{
+	_boxPosition = boxPosition;
+}
+
 void StaticObject::PreInitialize(const Engine::Modules& modules)
 {
 	Object::PreInitialize(modules);
@@ -66,6 +71,7 @@ void StaticObject::PreInitialize(const Engine::Modules& modules)
 		desc.shapeDesc.materialDesc.data = { 0.5f,0.5f,0.f };
 
 		Engine::Transform shapeTransform{};
+		shapeTransform.position = _boxPosition;
 		PhysicsManager->CreateStatic(&_rigidStatc->_rigidbody, desc, _transform, shapeTransform);
 		_rigidStatc->_rigidbody->SetOwner(this);
 	}

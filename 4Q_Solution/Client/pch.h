@@ -15,3 +15,5 @@
 #include "RemoteRay.h"
 #include "Live.h"
 #include "RemoteLive.h"
+#include "MapData.h"
+#include "PuzzleData.h"

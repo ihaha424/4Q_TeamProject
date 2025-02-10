@@ -25,7 +25,7 @@ bool ServerLogic::Initialize()
     _physicsManager->CreateScene(&_mainScene, sceneDesc);
     _physicsManager->AttachUpdateScene(_mainScene);
     _physicsManager->CreateControllerManager(_mainScene);
-    //RegistGround(_ground);
+    RegistGround(_ground);
     //RegistTrigerBox(_triggerBox);
     //============================
 
@@ -703,7 +703,7 @@ void ServerLogic::RegistPlayer(Player* player)
     player->_controller->SetBottomPosition({0,10,0});
     player->_controller->SetOwner(&player);
     player->_controller->Initialize();
-    player->_controller->SetPosition(Engine::Math::Vector3(0, 200, 0));
+    player->_controller->SetPosition(Engine::Math::Vector3(0, 300, 0));
 }
 
 void ServerLogic::RegistGround(Ground& ground)

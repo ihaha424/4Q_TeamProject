@@ -343,16 +343,13 @@
       <Filter>Object\Puzzle\02. Bermiore</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Bermiore_Fabric.h">
-      <Filter>Header Files</Filter>
+      <Filter>Object\Puzzle\02. Bermiore\Object</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Bermiore_Woolball_1.h">
-      <Filter>Header Files</Filter>
+      <Filter>Object\Puzzle\02. Bermiore\Object</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Bermiore_Hanger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Bermiore_Fabric.h">
-      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+      <Filter>Object\Puzzle\02. Bermiore\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -573,16 +570,13 @@
       <Filter>Object\Puzzle\01. Tutorial\Object</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Bermiore_Fabric.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Object\Puzzle\02. Bermiore\Object</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Bermiore_Woolball_1.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Object\Puzzle\02. Bermiore\Object</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Bermiore_Hanger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Bermiore_Fabric.cpp">
-      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+      <Filter>Object\Puzzle\02. Bermiore\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

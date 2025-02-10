@@ -22,6 +22,8 @@ namespace Engine
 		virtual void PostAttach();
 		virtual void PreUpdate(float deltaTime);
 		virtual void PostUpdate(float deltaTime);
+		virtual void PreLazyUpdate(float deltaTime);
+		virtual void PostLazyUpdate(float deltaTime);
 		virtual void PreFixedUpdate();
 		virtual void PostFixedUpdate();
 		virtual void PreDetach();

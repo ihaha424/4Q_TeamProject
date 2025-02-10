@@ -33,6 +33,7 @@ namespace Engine
 
 			virtual void Contraction(const Modules& modules) = 0;
 			virtual void Update(float deltaTime) = 0;
+			virtual void LazyUpdate(float deltaTime) = 0;
 			virtual void FixedUpdate() = 0;
 			virtual void Relaxation() = 0;
 		};

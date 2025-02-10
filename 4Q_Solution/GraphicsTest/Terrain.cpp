@@ -1,30 +1,30 @@
 #include "pch.h"
-#include "Terrain.h"
+#include "BG_Terrain.h"
 
 
-Terrain::Terrain(std::filesystem::path&& meshPath) :
+BG_Terrain::BG_Terrain(std::filesystem::path&& meshPath) :
 	_staticMesh(nullptr), _meshPath(std::forward<std::filesystem::path>(meshPath))
 {
 }
 
-void Terrain::Prepare(Engine::Content::Factory::Component* componentFactory)
+void BG_Terrain::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
 	_staticMesh = componentFactory->Clone<Engine::Component::StaticMesh>(this);
 }
 
-void Terrain::DisposeComponents()
+void BG_Terrain::DisposeComponents()
 {
 	_staticMesh->Dispose();
 }
 
-void Terrain::PreInitialize(const Engine::Modules& modules)
+void BG_Terrain::PreInitialize(const Engine::Modules& modules)
 {
 	Object::PreInitialize(modules);
 	_staticMesh->SetFilePath(_meshPath);
 	_staticMesh->SetMatrix(&_matrix);
 }
 
-void Terrain::PostInitialize(const Engine::Modules& modules)
+void BG_Terrain::PostInitialize(const Engine::Modules& modules)
 {
 	Object::PostInitialize(modules);
 	_matrix = Engine::Math::Matrix::CreateTranslation(0.f, 0.f, 100.f);

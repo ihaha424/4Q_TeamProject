@@ -44,7 +44,10 @@ namespace Engine::PHI
 	{
 		return PhysicsTransformToTransform(object->GetTransform());
 	}
-
+	 Engine::Math::Vector3 RigidDynamicComponent::GetBounds()const
+	 {
+		 return PhysicsVector3ToVector3(object->GetBounds());
+	 }
 
 
 	/********************************

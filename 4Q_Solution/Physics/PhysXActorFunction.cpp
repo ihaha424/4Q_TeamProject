@@ -46,6 +46,11 @@ namespace PhysicsEngineAPI
 		return Utils::Math::Transform({ transform.p.x, transform.p.y, transform.p.z }, { transform.q.x, transform.q.y, transform.q.z, transform.q.w });
 	}
 
+	 Utils::Math::Vector3 PhysXActorFunction::GetBounds(physx::PxRigidActor* actor) const
+	 {
+		 return PxVec3ToVector3(actor->getWorldBounds().getExtents());
+	 }
+
 	void PhysXActorFunction::SetName(const char* name, physx::PxRigidActor* actor)
 	{
 		actor->setName(name);

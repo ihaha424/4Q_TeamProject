@@ -1,4 +1,5 @@
 #pragma once
+#include "numbers"
 #include "Server/ServerEntrance.h"
 #include "directxtk/SimpleMath.h"
 #include "DSHTime/Time.h"
@@ -28,6 +29,7 @@ class ServerLogic
 		Engine::Math::Vector3 _scale;
 		bool _public;
 		bool _meshCollider;
+		Engine::Math::Vector3 _boxScale;
 		Engine::Physics::IRigidStaticComponent* _staticRigid = nullptr;
 		Engine::Physics::IRigidDynamicComponent* _dynamicRigid = nullptr;
 	};

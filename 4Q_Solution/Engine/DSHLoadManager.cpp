@@ -52,13 +52,20 @@ void Engine::DSHLoad::Manager::LoadCloneData(const std::filesystem::path& path)
 
 			const auto& boxscale = modelData["boxScale"];
 			Math::Vector3 boxScaleData = { boxscale["x"].get<float>(), boxscale["y"].get<float>(), boxscale["z"].get<float>() };
-			//boxScaleData *= 10;
-			//positionData /= 10;
-			positionData.y -= 10000.f;
 
 			const auto& boxPosition = modelData["boxPosition"];
 			Math::Vector3 boxPositionData = { boxPosition["x"].get<float>(), boxPosition["y"].get<float>(), boxPosition["z"].get<float>() };
-			boxPositionData.y -= 10000.f;
+
+			positionData *= 10;
+			scaleData /= 10;
+			boxScaleData = boxScaleData.Split(scaleData) * 50.f;
+
+
+			//boxScaleData *= 10;
+			//boxPositionData *= 10;
+			boxPositionData = Math::Vector3::Zero;
+			//boxPositionData /= 10;
+
 			Properties cloneData
 			{
 				std::pair<const std::wstring, std::any>{L"isPublic", isPublic},

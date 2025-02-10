@@ -12,6 +12,10 @@ namespace PhysicsEngineAPI
 	/*******************************************************************
 	PhysXDynamic
 	*********************************************************************/
+	Utils::Math::Vector3 PhysXDynamicActor::GetBounds() const
+	{
+		return function.GetBounds(actor);
+	}
 	void PhysXDynamicActor::SetVelocity(const Utils::Math::Vector3& velocity) 
 	{
 		function.SetVelocity(velocity, actor);

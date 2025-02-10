@@ -45,7 +45,7 @@ void GameApplication::Register(Engine::Content::IManager* contentManager, Engine
 	objectFactory->Register<Player>(L"../Resources/Player/Player.X", L"../Resources/Font/Gungseo12.sfont");
 	objectFactory->Register<RemotePlayer>(L"../Resources/Player/Player.X");
 	objectFactory->Register<GlobalLight>();
-	objectFactory->Register<Terrain>(L"../Resources/Level/Level.fbx");
+	objectFactory->Register<BG_Terrain>(L"../Resources/Level/Level.fbx");
 	objectFactory->Register<Cube>(L"../Resources/TestObject/BG_Hide_House_1.fbx");
 	//objectFactory->Register<Sphere>(L"../Resources/TestObject/sphere.fbx");
 	const auto componentFactory = contentManager->GetComponentFactory();

@@ -52,11 +52,11 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	
 	//Puzzle01
 	{
-		objectFactory->Register<Obj_Puzzle_Shinave_Stone_1>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
-		objectFactory->Register<Obj_Puzzle_Shinave_Stone_2>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
-		objectFactory->Register<Obj_Puzzle_Shinave_Stone_3>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
-		objectFactory->Register<Obj_Puzzle_Shinave_Stone_4>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
-		objectFactory->Register<Obj_Puzzle_Shinave_Stone_5>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
+		objectFactory->Register<Obj_Shinave_Stone_1>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
+		objectFactory->Register<Obj_Shinave_Stone_2>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
+		objectFactory->Register<Obj_Shinave_Stone_3>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
+		objectFactory->Register<Obj_Shinave_Stone_4>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
+		objectFactory->Register<Obj_Shinave_Stone_5>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
 	}
 
 
@@ -65,13 +65,13 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	/*
 		Static Object
 	*/
-	objectFactory->Register<Terrain>("Assets/Test/Landscape03.fbx", L"Assets/Test/H_Clamp_Out2.png");
+	objectFactory->Register<BG_Terrain>("Assets/Test/Landscape03.fbx", L"Assets/Test/H_Clamp_Out2.png");
 
 	RegisterHelp<Obj_BG_Tree_1>(L"Obj_BG_Tree_1", loadManager, objectFactory);
 	RegisterHelp<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", loadManager, objectFactory);
 	//RegisterHelp<Obj_BG_Mountain>(L"Obj_BG_Mountain", loadManager, objectFactory);
 
-	RegisterHelp<Obj_Props_Fence>(L"Obj_Props_Fence", loadManager, objectFactory);
+	//RegisterHelp<Obj_Props_Fence>(L"Obj_Props_Fence", loadManager, objectFactory);
 
 	//RegisterHelp<Obj_Buildings_Shinave>(L"Obj_Buildings_Shinave", loadManager, objectFactory);
 	RegisterHelp<Obj_Buildings_Bermiore_Atelier_1>(L"Obj_Buildings_Bermiore_Atelier_1", loadManager, objectFactory);

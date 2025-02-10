@@ -29,7 +29,7 @@ void GameApplication::Register(Engine::Content::IManager* contentManager)
 	const auto objectFactory = contentManager->GetObjectFactory();
 	objectFactory->Register<Player>(L"../Resources/Test/Live.fbx", L"../Resources/Font/Gungseo12.sfont");
 	objectFactory->Register<GlobalLight>();
-	objectFactory->Register<Terrain>(L"../Resources/Level/Level.fbx");
+	objectFactory->Register<BG_Terrain>(L"../Resources/Level/Level.fbx");
 	objectFactory->Register<SkyBox>(L"../Resources/IBL/skybox.fbx");
 }
 

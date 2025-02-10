@@ -91,6 +91,30 @@
     <Filter Include="Object\Puzzle\01. Puzzle\Object">
       <UniqueIdentifier>{906d7f7c-543b-4eee-8b5f-43c9e64dc7f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Puzzle\02. Puzzle">
+      <UniqueIdentifier>{17d244c5-aedd-4cfc-bc83-e9d7c8e4f6ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\03. Puzzle">
+      <UniqueIdentifier>{4dd68af5-aaf4-477b-8c44-c2cb5d954819}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\04. Puzzle">
+      <UniqueIdentifier>{2b0ade47-c22b-41bf-937e-b3990b9dedef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\05. Puzzle">
+      <UniqueIdentifier>{2c542d34-2ca7-43af-b569-c5774cc36325}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\02. Puzzle\Object">
+      <UniqueIdentifier>{28591df6-7c0a-4f34-9f11-3b7b659fd868}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\03. Puzzle\Object">
+      <UniqueIdentifier>{4aa2f1e0-0640-4f39-8105-12d63476f48e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\04. Puzzle\Object">
+      <UniqueIdentifier>{4fad12f0-a8b9-4655-9254-138c855a2a3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\05. Puzzle\Object">
+      <UniqueIdentifier>{bfa48522-0738-4de6-835f-d91ce8d6b663}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -276,6 +300,51 @@
     <ClInclude Include="Obj_Bermiore_Fabric.h">
       <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Obj_Bermiore_Hanger.h">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Bermiore_Woolball_1.h">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Bermiore_Woolball_2.h">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Bermiore_Woolball_3.h">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Bermiore_Woolball_4.h">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Bermiore_Woolball_5.h">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Bermiore_Woolball_6.h">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseWoolball.h">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Sudium_bouquet.h">
+      <Filter>Object\Puzzle\02. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseMiniStone.h">
+      <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Mini_Stone_1.h">
+      <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Mini_Stone_2.h">
+      <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Mini_Stone_3.h">
+      <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Mini_Stone_4.h">
+      <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Mini_Stone_5.h">
+      <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -442,6 +511,51 @@
     </ClCompile>
     <ClCompile Include="Obj_Bermiore_Fabric.cpp">
       <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Bermiore_Hanger.cpp">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Bermiore_Woolball_1.cpp">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Bermiore_Woolball_2.cpp">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Bermiore_Woolball_3.cpp">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Bermiore_Woolball_4.cpp">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Bermiore_Woolball_5.cpp">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Bermiore_Woolball_6.cpp">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseWoolball.cpp">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Sudium_bouquet.cpp">
+      <Filter>Object\Puzzle\02. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseMiniStone.cpp">
+      <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Mini_Stone_1.cpp">
+      <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Mini_Stone_2.cpp">
+      <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Mini_Stone_3.cpp">
+      <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Mini_Stone_4.cpp">
+      <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Mini_Stone_5.cpp">
+      <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

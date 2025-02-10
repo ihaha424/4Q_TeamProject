@@ -225,9 +225,10 @@ void Remote::StateChange(const MoveMsg::StateChange* msg)
 
 void Remote::SyncMove(const MoveMsg::MoveSync* msg)
 {
-	float x = msg->x();
-	float y = msg->y();
-	float z = msg->z();
+	const auto& pos = msg->position();
+	float x = *(pos.begin());
+	float y = *(pos.begin() + 1);
+	float z = *(pos.begin() + 2);
 	Engine::Math::Vector3 nextLocation(x, y, z);
 	_remote->SetNextLocation(nextLocation);
 	const auto& rot = msg->rotation();

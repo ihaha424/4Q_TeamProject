@@ -14,14 +14,15 @@ Animator::Animator()
 void Animator::Initialize(const wchar_t* filePath, Skeleton* pSkeleton)
 {
 	_animation = g_pResourceMgr->LoadResource<Animation>(filePath);
-	_animationTransforms.resize(MAX_BONE_MATRIX);
-	_blendTransform.resize(MAX_BONE_MATRIX);
-	_blendInfo.prevAnimation.resize(64);
-
-	_pSkeleton = pSkeleton;	
-
+	_pSkeleton = pSkeleton;
 	_controllers.resize(1);
 	_prevControllers.resize(1);
+	_blends.resize(1);
+
+	_animationTransforms.resize(MAX_BONE_MATRIX);
+	_currTransforms.resize(MAX_BONE_MATRIX);
+	_prevTransforms.resize(MAX_BONE_MATRIX);
+	_blendMatrixMask.resize(MAX_BONE_MATRIX);
 }
 
 void Animator::Update(const float deltaTime)
@@ -31,57 +32,57 @@ void Animator::Update(const float deltaTime)
 	for (unsigned int i = 0; i < _maxSplit; i++)
 	{
 		const Animation::Channel& animation = _animation->_animations[_controllers[i].animation];
-
 		_controllers[i].playTime += _speed * deltaTime;
 	
 		if (_controllers[i].playTime >= animation.lastTime)
 		{
-			_controllers[i].playTime = 0.f;
-			//_root = XMMatrixIdentity();
+			_controllers[i].playTime = fmod(_controllers[i].playTime, animation.lastTime);
 		}
+	}
 
-		/*XMMATRIX prevRoot = _root;*/
+	UpdateAnimationTransform(_pSkeleton->GetRootBone(), identity, _controllers, _animationTransforms);
 
-		UpdateAnimationTransform(*_pSkeleton->GetBone(i), identity, _controllers.data());
+	if (_isBlending)
+	{
+		memcpy(_currTransforms.data(), _animationTransforms.data(), sizeof(Matrix) * MAX_BONE_MATRIX);
+		UpdateAnimationTransform(_pSkeleton->GetRootBone(), identity, _prevControllers, _prevTransforms);
 
-		/*XMVECTOR deltaPosition = XMVectorSubtract(_root.Translation(), prevRoot.r[3]);
-		deltaPosition.m128_f32[1] = 0.f;*/
-
-		if (_blendInfo.isBlending)
+		unsigned int count = 0;
+		for (unsigned int i = 0; i < _maxSplit; i++)
 		{
-			/*const Animation::Channel& prevAnimation = _animation->_animations[_blendInfo.prevAnimation];
-			_blendInfo.prevPlayTime += _speed * deltaTime;
-
-			if (_blendInfo.prevPlayTime > prevAnimation.lastTime)
-				_blendInfo.prevPlayTime = 0.f;*/
-
-			if (1.f <= _blendInfo.blendTime)
+			if (_blends[i].isBlending)
 			{
-				_blendInfo.blendTime = 0.f;
-				_blendInfo.isBlending = false;
-			}
-			else
-			{
-				memcpy(_blendTransform.data(), _animationTransforms.data(), sizeof(Matrix) * MAX_BONE_MATRIX);
-				UpdateAnimationTransform(*_pSkeleton->GetBone(i), identity, _prevControllers.data());
-
-				//float cubic = sqrt(1 - powf(_blendInfo.blendTime - 1.f, 2));
-				float easing = 1 - (1 - _blendInfo.blendTime) * (1 - _blendInfo.blendTime);
-
-				for (size_t i = 0; i < MAX_BONE_MATRIX; i++)
+				if (1.f <= _blends[i].blendTime)
 				{
-					//_animationTransforms[i] = Matrix::Lerp(_animationTransforms[i], _blendTransform[i], easing);
-					_animationTransforms[i] = BlendAnimation(_animationTransforms[i], _blendTransform[i], easing);
+					_blends[i].blendTime = 0.f;
+					_blends[i].isBlending = false;
+				}
+				else
+				{
+					float t = 1 - (1 - _blends[i].blendTime) * (1 - _blends[i].blendTime);
+
+					for (size_t j = 0; j < MAX_BONE_MATRIX; j++)
+					{
+						if (i != _blendMatrixMask[j])
+						{
+							//_animationTransforms[j] = _currTransforms[j];
+						}
+						else
+						{
+							_animationTransforms[j] = BlendAnimation(_prevTransforms[j], _currTransforms[j], t);
+						}
+					}
+
+					_blends[i].blendTime += deltaTime * 5.f;
 				}
 			}
 
-			_blendInfo.blendTime += deltaTime * 5.f;
+			if (!_blends[i].isBlending)
+				count++;
 		}
 
-		/*if (5.f >= XMVector3Length(deltaPosition).m128_f32[0])
-		{
-			_pTransform->_position += XMVector3TransformCoord(deltaPosition, XMMatrixRotationY(_pTransform->_rotation.y + XM_PIDIV2));
-		}*/
+		if (count == _maxSplit)
+			_isBlending = false;
 	}
 }
 
@@ -92,44 +93,41 @@ void Animator::Release()
 
 void Animator::ChangeAnimation(const char* animation)
 {
-	auto iter = _animation->_animations.find(animation);
-	if (iter == _animation->_animations.end())
-		return;
-
-	if (!strcmp(_controllers[0].animation, animation))
-		return;
-
-	memcpy(_blendInfo.prevAnimation.data(), _controllers[0].animation, strlen(_controllers[0].animation));
-	_blendInfo.prevPlayTime = _controllers[0].playTime;
-	_blendInfo.blendTime = 0.f;
-	_blendInfo.isBlending = true;
-	memcpy(_prevControllers.data(), _controllers.data(), sizeof(Controller) * _controllers.size());
-
-	for (auto& controller : _controllers)
-	{
-		controller.animation = animation;
-		controller.playTime = 0.f;
-		controller.lastTime = iter->second.lastTime;
-	}
+	for (unsigned int i = 0; i < _maxSplit; i++)
+		ChangeAnimation(animation, i);
 }
 
 void Animator::ChangeAnimation(const char* animation, const unsigned int ID)
 {
-	if (_animation->_animations.find(animation) == _animation->_animations.end())
+	auto iter = _animation->_animations.find(animation);
+	if (iter == _animation->_animations.end())
 		return;
 
 	if (!strcmp(_controllers[ID].animation, animation))
 		return;
 
-	memcpy(_blendInfo.prevAnimation.data(), _controllers[ID].animation, strlen(_controllers[ID].animation) + 1);
-	_blendInfo.prevPlayTime = _controllers[ID].playTime;
-	_blendInfo.blendTime = 0.f;
-	_blendInfo.isBlending = true;
-	//memcpy(_prevControllers.data(), _controllers.data(), sizeof(Controller) * _controllers.size());
+	_isBlending = true;
+	_blends[ID].blendTime = 0.f;
+	_blends[ID].isBlending = true;
+
 	_prevControllers[ID] = _controllers[ID];
-	
 	_controllers[ID].animation = animation;
 	_controllers[ID].playTime = 0.f;
+	_controllers[ID].lastTime = iter->second.lastTime;
+}
+
+void Animator::SyncPartialAnimation(unsigned int parentID, unsigned int childID)
+{
+	if (parentID >= _maxSplit || childID >= _maxSplit)
+		return;
+
+	_isBlending = true;
+	_blends[childID].blendTime = 0.f;
+	_blends[childID].isBlending = true;
+
+	_prevControllers[childID] = _controllers[childID];
+	//_prevControllers[parentID] = _controllers[parentID];
+	_controllers[childID] = _controllers[parentID];
 }
 
 bool Animator::IsLastFrame(float interval, const unsigned int ID) const
@@ -144,6 +142,7 @@ void Animator::SetUpSplitBone(const unsigned int maxSplit)
 
 	_controllers.resize(maxSplit);
 	_prevControllers.resize(maxSplit);
+	_blends.resize(maxSplit);
 }
 
 void Animator::SplitBone(const unsigned int ID, const char* boneName)
@@ -163,11 +162,17 @@ void Animator::SetAnimationSpeed(float speed)
 	_speed = speed;
 }
 
-void Animator::UpdateAnimationTransform(const Bone& skeletion,
-										const XMMATRIX& parentTransform,
-										Controller* pController)
+void Animator::MakeParent(const char* parent, const char* child)
 {
-	Controller& current = pController[_boneMask[skeletion.name]];
+	_pSkeleton->MakeParent(parent, child);
+}
+
+void Animator::UpdateAnimationTransform(Bone& skeletion, 
+										const XMMATRIX& parentTransform, 
+										std::vector<Controller>& controllers, 
+										std::vector<Matrix>& transforms)
+{
+	Controller& current = controllers[_boneMask[skeletion.name]];
 	auto iter = _animation->_animations[current.animation].boneTransforms.find(skeletion.name);
 	
 	XMMATRIX localTransform = skeletion.local;
@@ -181,28 +186,18 @@ void Animator::UpdateAnimationTransform(const Bone& skeletion,
 		XMMATRIX position = XMMatrixTranslationFromVector(InterpolationVector3(keyFrame.positions, current.playTime));
 
 		localTransform = scale * rotation * position;
-
-		//// Root Motion
-		//if (skeletion.name == "Dummy_root")
-		//{
-		//	if (pController == _controller)
-		//		_root = localTransform;
-
-		//	localTransform.r[3].m128_f32[0] = 0.f;
-		//	localTransform.r[3].m128_f32[2] = 0.f;
-		//}
 	}
 
 	XMMATRIX globalTransform = localTransform * parentTransform;
 
 	if (-1 != skeletion.id)
 	{
-		_animationTransforms[skeletion.id] = XMMatrixTranspose(skeletion.offset * globalTransform);
+		transforms[skeletion.id] = XMMatrixTranspose(skeletion.offset * globalTransform);
 	}
 
-	for (const Bone& child : skeletion.children)
+	for (Bone& child : skeletion.children)
 	{
-		UpdateAnimationTransform(child, globalTransform, pController);
+		UpdateAnimationTransform(child, globalTransform, controllers, transforms);
 	}
 }
 
@@ -263,8 +258,9 @@ XMMATRIX Animator::BlendAnimation(const Matrix& m0, const Matrix& m1, const floa
 }
 
 void Animator::BoneMasking(const Bone* bone, int mask)
-{
+{	
 	_boneMask[bone->name] = mask;
+	if (-1 != bone->id) _blendMatrixMask[bone->id] = mask;
 
 	for (auto& child : bone->children)
 		BoneMasking(&child, mask);

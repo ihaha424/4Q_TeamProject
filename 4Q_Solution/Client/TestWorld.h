@@ -14,6 +14,8 @@
 
 #include "PuzzleData.h"
 
+#include "TestSprite.h"
+
 
 
 class TestWorld : public Engine::World
@@ -37,6 +39,7 @@ private:
 	GlobalLight* _light;
 	Terrain* _terrain;
 	SkyBox* _skyBox;
+	TestSprite* _testSprite;
 
 	int playerSerialNum = 0;
 	bool _dataLoad = false;

@@ -136,7 +136,9 @@
       <AdditionalLibraryDirectories>.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreLinkEvent>
-      <Command>xcopy /y /d "$(ProjectDir)dll\*dll" "$(OutDir)"</Command>
+      <Command>xcopy /y /d "$(ProjectDir)dll\*dll" "$(OutDir)"
+xcopy /y /d "$(ProjectDir)includes\*.h" "$(SolutionDir)includes\$(ProjectName)\"
+xcopy /y /d "$(ProjectDir)includes\*.hpp" "$(SolutionDir)includes\$(ProjectName)\"</Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -161,7 +163,9 @@
       <AdditionalLibraryDirectories>.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreLinkEvent>
-      <Command>xcopy /y /d "$(ProjectDir)dll\*dll" "$(OutDir)"</Command>
+      <Command>xcopy /y /d "$(ProjectDir)dll\*dll" "$(OutDir)"
+xcopy /y /d "$(ProjectDir)includes\*.h" "$(SolutionDir)includes\$(ProjectName)\"
+xcopy /y /d "$(ProjectDir)includes\*.hpp" "$(SolutionDir)includes\$(ProjectName)\"</Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

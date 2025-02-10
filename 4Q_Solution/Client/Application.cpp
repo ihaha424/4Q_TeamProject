@@ -60,6 +60,8 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	}
 
 
+	objectFactory->Register<TestSprite>();
+
 	/*
 		Static Object
 	*/

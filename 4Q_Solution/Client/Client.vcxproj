@@ -205,6 +205,7 @@
     <ClInclude Include="Obj_Props_Bermiore_Cloth_1.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Terrain.h" />
+    <ClInclude Include="TestSprite.h" />
     <ClInclude Include="TestWorld.h" />
     <ClInclude Include="MapData.h" />
     <ClInclude Include="TriggerArea.h" />
@@ -263,6 +264,7 @@
     <ClCompile Include="StaticObject.cpp" />
     <ClCompile Include="Obj_Props_Bermiore_Cloth_1.cpp" />
     <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="TestSprite.cpp" />
     <ClCompile Include="TestWorld.cpp" />
     <ClCompile Include="TriggerArea.cpp" />
     <ClCompile Include="TriggerBox.cpp" />

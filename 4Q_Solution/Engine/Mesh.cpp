@@ -6,15 +6,15 @@ Engine::Component::Mesh::Mesh()
 	: _geMatrix(nullptr)
 	, _geMeshRenderer(nullptr)
 {
-	_meshDescription.activeDraw = true;
-	_meshDescription.activeShadow = true;
-	_meshDescription.postEffectFlag = 0;
+	_geMeshDescription.activeDraw = true;
+	_geMeshDescription.activeShadow = true;
+	_geMeshDescription.postEffectFlag = 0;
 }
 
 void Engine::Component::Mesh::Attach()
 {
 	Component::Attach();
-	_geMeshRenderer->SetDesc(&_meshDescription);
+	_geMeshRenderer->SetDesc(&_geMeshDescription);
 	_graphicsManager->GetRenderSystem()->RegisterRenderQueue(_geMeshRenderer, _geMatrix);
 }
 
@@ -31,8 +31,8 @@ void Engine::Component::Mesh::Finalize()
 
 void Engine::Component::Mesh::SetPostEffectFlag(const unsigned int flag)
 {
-	_meshDescription.postEffectFlag = flag;
-	_geMeshRenderer->SetDesc(&_meshDescription);
+	_geMeshDescription.postEffectFlag = flag;
+	_geMeshRenderer->SetDesc(&_geMeshDescription);
 }
 
 void Engine::Component::Mesh::SetMatrix(Math::Matrix* matrix)
@@ -47,12 +47,12 @@ void Engine::Component::Mesh::SetFilePath(const std::filesystem::path& filePath)
 
 void Engine::Component::Mesh::SetActiveDraw(bool isActive)
 {
-	_meshDescription.activeDraw = isActive;
-	_geMeshRenderer->SetDesc(&_meshDescription);
+	_geMeshDescription.activeDraw = isActive;
+	_geMeshRenderer->SetDesc(&_geMeshDescription);
 }
 
 void Engine::Component::Mesh::SetActiveShadow(bool isActive)
 {
-	_meshDescription.activeShadow = isActive;
-	_geMeshRenderer->SetDesc(&_meshDescription);
+	_geMeshDescription.activeShadow = isActive;
+	_geMeshRenderer->SetDesc(&_geMeshDescription);
 }

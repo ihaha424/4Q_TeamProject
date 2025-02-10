@@ -15,6 +15,11 @@ namespace PhysicsEngineAPI::Utils::Math
 	union Vector3;
 }
 
+namespace DSH::Audio
+{
+	struct Vector;
+}
+
 namespace Engine::Math
 {
 	struct Vector3 : DirectX::SimpleMath::Vector3
@@ -28,10 +33,14 @@ namespace Engine::Math
 		Vector3(DirectX::SimpleMath::Vector3 vector) noexcept;
 		Vector3(const Input::Value& value) noexcept;
 		Vector3(const PhysicsEngineAPI::Utils::Math::Vector3& value) noexcept;
+		Vector3(const DSH::Audio::Vector& value) noexcept;
 		
 		Vector3& operator=(const DirectX::SimpleMath::Vector3& vector) noexcept;
 		Vector3& operator=(const Input::Value& value) noexcept;
 		Vector3& operator=(const PhysicsEngineAPI::Utils::Math::Vector3& value) noexcept;
+		Vector3& operator=(const DSH::Audio::Vector& value) noexcept;
+
+		operator DSH::Audio::Vector() const;
 
 		Vector3 Split(const Vector3& v) const;
 		Vector3 Split(const Vector2& v) const;

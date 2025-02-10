@@ -79,6 +79,12 @@
     <Filter Include="Object\Puzzle\Data">
       <UniqueIdentifier>{1a650c37-524f-4877-806b-d00c051bbd95}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Terrain">
+      <UniqueIdentifier>{f7cdfb76-fa75-4d68-8ef4-7d7595b34822}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\TestSprite">
+      <UniqueIdentifier>{8b02677d-b163-46dd-af68-0da4794edaf3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -98,9 +104,6 @@
     </ClInclude>
     <ClInclude Include="Ray.h">
       <Filter>Object\Player\Ray</Filter>
-    </ClInclude>
-    <ClInclude Include="Terrain.h">
-      <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="TestWorld.h">
       <Filter>World</Filter>
@@ -258,6 +261,12 @@
     <ClInclude Include="Puzzle_00_ObjectData.h">
       <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>Object\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="TestSprite.h">
+      <Filter>Object\TestSprite</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -271,9 +280,6 @@
     </ClCompile>
     <ClCompile Include="Ray.cpp">
       <Filter>Object\Player\Ray</Filter>
-    </ClCompile>
-    <ClCompile Include="Terrain.cpp">
-      <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="TestWorld.cpp">
       <Filter>World</Filter>
@@ -418,6 +424,12 @@
     </ClCompile>
     <ClCompile Include="Puzzle_04.cpp">
       <Filter>Object\Puzzle\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>Object\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="TestSprite.cpp">
+      <Filter>Object\TestSprite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

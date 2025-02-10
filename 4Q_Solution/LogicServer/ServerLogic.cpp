@@ -171,11 +171,11 @@ void ServerLogic::UpdateObject(float deltaTime)
         _playerSlot[i]._flag = _playerSlot[i]._controller->GetCollisionFlag();
         _playerSlot[i]._controller->FixedUpdate();
 
-        //if (_playerSlot[i]._state & (1 << 4) && _playerSlot[i]._controller->IsJump() == false) {
-        //    _stateChange.set_stateinfo(1);
-        //    _stateChange.SerializeToString(&_msgBuffer);
-        //    Server::BroadCast(_msgBuffer, (short)PacketID::StateChange, _stateChange.ByteSizeLong(), _playerSlot[i]._serialNumber);
-        //}
+        if (_playerSlot[i]._state & (1 << 4) && _playerSlot[i]._controller->IsJump() == false) {
+            _stateChange.set_stateinfo(1);
+            _stateChange.SerializeToString(&_msgBuffer);
+            Server::BroadCast(_msgBuffer, (short)PacketID::StateChange, _stateChange.ByteSizeLong(), _playerSlot[i]._serialNumber);
+        }
     } // for end
     _physicsManager->Update(deltaTime);
     _physicsManager->FetchScene();
@@ -198,7 +198,7 @@ void ServerLogic::SendPositionData()
         _moveSync.add_rotation(rotation.w);
 
         _moveSync.SerializeToString(&_msgBuffer);
-        //Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), _playerSlot[i]._serialNumber);
+        Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), _playerSlot[i]._serialNumber);
         _moveSync.Clear();
     } // for end
 
@@ -232,6 +232,7 @@ void ServerLogic::EnterProcess(const Packet& packet)
         _playerSlot[grantNum]._sessionId = packet.sessionId;
         // 물리 환경에 등록
         RegistPlayer(&_playerSlot[grantNum]);
+        
 
         printf("[MessageDispatch] Player Enter Accepted. Grant Num : %d\n", grantNum + 1);
 
@@ -247,33 +248,33 @@ void ServerLogic::EnterProcess(const Packet& packet)
             Server::BroadCast(_msgBuffer, (short)PacketID::Sync, _addObject.ByteSizeLong(), _playerSlot[i]._serialNumber);
 
         }  // for end
-        for (int i = 0; i < _buildings.size(); i++) {
-            _addObject.set_grantnumber(_buildings[i]->_serialNumber);
-            _addObject.set_classid(_buildings[i]->_resourceId);
-            _addObject.SerializeToString(&_msgBuffer);
-            Server::SavePacketData(
-                _msgBuffer,
-                packet.sessionId,
-                (short)PacketID::ObjectSync,
-                _addObject.ByteSizeLong(),
-                _buildings[i]->_serialNumber
-            );
-        }
-        for (int i = 0; i < _sudiums.size(); i++) {
-            _addObject.set_grantnumber(_sudiums[i]->_serialNumber);
-            _addObject.set_classid(_sudiums[i]->_resourceId);
-            _addObject.SerializeToString(&_msgBuffer);
-            Server::SavePacketData(
-                _msgBuffer,
-                packet.sessionId,
-                (short)PacketID::ObjectSync,
-                _addObject.ByteSizeLong(),
-                _sudiums[i]->_serialNumber
-            );
-        }
-        // TODO: 여기서 AddObject에 추가할 오브젝트의 id를 보내는 작업을 수행합니다.
-        //
-        Server::BroadCast("", (short)PacketID::DataSendComplete, 0, 0);
+        //for (int i = 0; i < _buildings.size(); i++) {
+        //    _addObject.set_grantnumber(_buildings[i]->_serialNumber);
+        //    _addObject.set_classid(_buildings[i]->_resourceId);
+        //    _addObject.SerializeToString(&_msgBuffer);
+        //    Server::SavePacketData(
+        //        _msgBuffer,
+        //        packet.sessionId,
+        //        (short)PacketID::ObjectSync,
+        //        _addObject.ByteSizeLong(),
+        //        _buildings[i]->_serialNumber
+        //    );
+        //}
+        //for (int i = 0; i < _sudiums.size(); i++) {
+        //    _addObject.set_grantnumber(_sudiums[i]->_serialNumber);
+        //    _addObject.set_classid(_sudiums[i]->_resourceId);
+        //    _addObject.SerializeToString(&_msgBuffer);
+        //    Server::SavePacketData(
+        //        _msgBuffer,
+        //        packet.sessionId,
+        //        (short)PacketID::ObjectSync,
+        //        _addObject.ByteSizeLong(),
+        //        _sudiums[i]->_serialNumber
+        //    );
+        //}
+        //// TODO: 여기서 AddObject에 추가할 오브젝트의 id를 보내는 작업을 수행합니다.
+        ////
+        //Server::BroadCast("", (short)PacketID::DataSendComplete, 0, 0);
     } // else end
 }
 void ServerLogic::ExitProcess(const Packet& packet)
@@ -495,7 +496,7 @@ void ServerLogic::ObjectInteractProcess(const Packet& packet)
     // ====================
     // Puzzle Play Area
     // ====================
-
+    if (_currentPuzzleNumber == 6) return;
     PuzzleProcess(objectNum);
     // ====================
 }
@@ -696,6 +697,7 @@ void ServerLogic::RegistPlayer(Player* player)
     player->_controller->SetOwner(&player);
     player->_controller->Initialize();
     //player->_controller->SetPosition(Engine::Math::Vector3(0, 3000, 0));
+    
 }
 void ServerLogic::RegistGround(Ground& ground)
 {
@@ -716,7 +718,7 @@ void ServerLogic::RegistGround(Ground& ground)
     ground._staticRigid->SetOwner(&ground);
     ground._staticRigid->Initialize();
 }
-void ServerLogic::RegistTrigerBox(TriggerBox& triggerBox)
+void ServerLogic::RegistTriggerBox(TriggerBox& triggerBox)
 {
     Engine::Physics::RigidComponentDesc rcd;
     rcd.rigidType = Engine::Physics::RigidBodyType::Static;
@@ -726,7 +728,7 @@ void ServerLogic::RegistTrigerBox(TriggerBox& triggerBox)
     rcd.shapeDesc.materialDesc.data = { 0.5f, 0.5f, 0.5f };
 
     Engine::Transform tf{};
-    tf.position = { 500, -100.f, 500 };
+    tf.position = { 100, 0.f, 100 };
     Engine::Physics::IRigidStaticComponent* staticRigid;
     _physicsManager->CreateStatic(&staticRigid, rcd, tf);
     triggerBox._staticRigid = static_cast<Engine::Physics::RigidStaticComponent*>(staticRigid);
@@ -865,7 +867,6 @@ void ServerLogic::PuzzleProcess(int objectId)
         break;
     }
 }
-
 void ServerLogic::Puzzle1(int objectId)
 {
     static int curCorrectCount = 0;
@@ -945,3 +946,5 @@ void ServerLogic::Puzzle6(int objectId)
     );
 }
 // =============================
+
+

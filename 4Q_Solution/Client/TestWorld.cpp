@@ -12,31 +12,31 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	_testSprite = objectFactory->Clone<TestSprite>(this);
 
 	//Test Grabbed Object Code -> Make and Load File Data
-	{
-		GrabbedObject* building = objectFactory->Clone<GrabbedObject>(this);
-		Engine::Transform tempTransform{};
-		tempTransform.position = { 200.f, 0.f, 0 };
-		building->SetTransform(tempTransform);
-		building->SetBoxScale({ 100, 500, 100 });
-	}
+	//{
+	//	GrabbedObject* building = objectFactory->Clone<GrabbedObject>(this);
+	//	Engine::Transform tempTransform{};
+	//	tempTransform.position = { 200.f, 0.f, 0 };
+	//	building->SetTransform(tempTransform);
+	//	building->SetBoxScale({ 100, 500, 100 });
+	//}
 
 	//Test Trigger Area Code -> Make and Load File Data
 	{
 		TriggerArea* puzzle = objectFactory->Clone<TriggerArea>(this);
 		Engine::Transform tempTransform{};
-		tempTransform.position = { 0.f, 0.f, 200.f };
+		tempTransform.position = { 100.f, 0.f, 100.f };
 		puzzle->SetTransform(tempTransform);
 		puzzle->SetBoxScale({ 100, 100, 100 });
 	}
 
 	//Test Puzzle_00 Object Code -> Load File Data
-	{
-		Obj_Puzzle_Shinave_Stone_1* puzzle = objectFactory->Clone<Obj_Puzzle_Shinave_Stone_1>(this);
-		Engine::Transform tempTransform{};
-		tempTransform.position = { -200.f, 0.f, 0 };
-		puzzle->SetTransform(tempTransform);
-		puzzle->SetBoxScale({ 100, 100, 100 });
-	}
+	//{
+	//	Obj_Puzzle_Shinave_Stone_1* puzzle = objectFactory->Clone<Obj_Puzzle_Shinave_Stone_1>(this);
+	//	Engine::Transform tempTransform{};
+	//	tempTransform.position = { -200.f, 0.f, 0 };
+	//	puzzle->SetTransform(tempTransform);
+	//	puzzle->SetBoxScale({ 100, 100, 100 });
+	//}
 
 	helpPrepare<Terrain>(L"Terrain", objectFactory);
 
@@ -44,7 +44,7 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	// helpPrepare<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", objectFactory);
 	// helpPrepare<Obj_BG_Mountain>(L"Obj_BG_Mountain", objectFactory);
 
-	helpPrepare<Obj_Props_Fence>(L"Obj_Props_Fence", objectFactory);
+	//helpPrepare<Obj_Props_Fence>(L"Obj_Props_Fence", objectFactory);
 
 	//helpPrepare<Obj_Buildings_Shinave>(L"Obj_Buildings_Shinave", objectFactory);
 	//// helpPrepare<Obj_Buildings_Bermiore_Atelier_1>(L"Obj_Buildings_Bermiore_Atelier_1", objectFactory);

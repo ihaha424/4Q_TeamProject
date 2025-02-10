@@ -85,6 +85,12 @@
     <Filter Include="Object\TestSprite">
       <UniqueIdentifier>{8b02677d-b163-46dd-af68-0da4794edaf3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Puzzle\01. Puzzle">
+      <UniqueIdentifier>{8fc508c6-0f99-4b5a-8e4e-d6042bf4ec40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\01. Puzzle\Object">
+      <UniqueIdentifier>{906d7f7c-543b-4eee-8b5f-43c9e64dc7f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -267,6 +273,9 @@
     <ClInclude Include="TestSprite.h">
       <Filter>Object\TestSprite</Filter>
     </ClInclude>
+    <ClInclude Include="Obj_Bermiore_Fabric.h">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -430,6 +439,9 @@
     </ClCompile>
     <ClCompile Include="TestSprite.cpp">
       <Filter>Object\TestSprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Bermiore_Fabric.cpp">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

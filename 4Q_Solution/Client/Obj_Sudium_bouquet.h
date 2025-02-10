@@ -17,7 +17,7 @@ protected:
 	Engine::GameState::IManager* _gameStateManager;
 	unsigned int _index;
 
-
+	Engine::Component::Synchronize* _sync;
 
 };
 

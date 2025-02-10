@@ -10,6 +10,7 @@ public:
 
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
 
+	void SendInteractToServer();
 protected:
 	void DisposeComponents() override;
 	void PreInitialize(const Engine::Modules& modules) override;
@@ -17,6 +18,7 @@ protected:
 	Engine::GameState::IManager* _gameStateManager;
 	unsigned int _index;
 
+	Engine::Component::Synchronize* _sync;
 };
 
 

@@ -7,4 +7,5 @@ Obj_Puzzle_Mini_Stone_2::Obj_Puzzle_Mini_Stone_2(std::filesystem::path&& meshPat
 
 void Obj_Puzzle_Mini_Stone_2::Interact()
 {
+	SendInteractToServer();
 }

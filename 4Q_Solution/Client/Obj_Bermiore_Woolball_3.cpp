@@ -9,4 +9,5 @@ Obj_Bermiore_Woolball_3::Obj_Bermiore_Woolball_3(std::filesystem::path&& meshPat
 
 void Obj_Bermiore_Woolball_3::Interact()
 {
+	SendInteractToServer();
 }

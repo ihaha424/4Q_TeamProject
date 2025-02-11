@@ -25,6 +25,11 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_Shinave_SteppedSudium>(L"Obj_Shinave_SteppedSudium", objectFactory);
 	}
 
+	// Obj_Ornoa_Print
+	{
+		helpPrepare<Obj_Ornoa_Print>(L"Obj_Ornoa_Print", objectFactory);
+	}
+
 	////Test Grabbed Object Code -> Make and Load File Data
 	//{
 	//	GrabbedObject* building = objectFactory->Clone<GrabbedObject>(this);

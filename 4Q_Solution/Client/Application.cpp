@@ -61,6 +61,13 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_Shinave_SteppedSudium>(buildingProperty, buildingProperty);
 	}
 
+	// Obj_Ornoa_Print
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Ornoa_Print").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Ornoa_Print>(buildingProperty, buildingProperty);
+	}
+
 	//Test PickingObejct
 	{
 		objectFactory->Register<GrabbedObject>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");

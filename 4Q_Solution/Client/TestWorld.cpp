@@ -224,6 +224,11 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_Shinave_Stone_5>(L"Obj_Shinave_Stone_5", objectFactory);
 	}
 
+	// Obj_Shinave_Platform_Set
+	{
+		helpPrepare<Obj_Shinave_Platform_Set>(L"Obj_Shinave_Platform_Set", objectFactory);
+	}
+
 
 
 
@@ -248,7 +253,6 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	//Test Puzzle_01 Object Code -> Load File Data
 	//{
 	//	helpPrepare<Obj_Shinave_Bermiore>(L"Obj_Shinave_Bermiore", objectFactory);
-	//	helpPrepare<Obj_Shinave_Platform_Set>(L"Obj_Shinave_Platform_Set", objectFactory);
 	//	helpPrepare<Obj_Shinave_Platform_Spawn_1>(L"Obj_Shinave_Platform_Spawn1", objectFactory);
 	//	helpPrepare<Obj_Shinave_Platform_Spawn_2>(L"Obj_Shinave_Platform_Spawn2", objectFactory);
 	//	helpPrepare<Obj_Shinave_Platform_Spawn_3>(L"Obj_Shinave_Platform_Spawn3", objectFactory);

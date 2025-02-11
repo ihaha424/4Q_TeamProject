@@ -199,6 +199,11 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_BG_Tree_1_Active>(L"Obj_BG_Tree_1_Active", objectFactory);
 	}
 
+	// Obj_Shinave_Stone_1
+	{
+		helpPrepare<Obj_Shinave_Stone_1>(L"Obj_Shinave_Stone_1", objectFactory);
+	}
+
 
 
 
@@ -223,7 +228,6 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 
 	//Test Puzzle_01 Object Code -> Load File Data
 	//{
-	//	helpPrepare<Obj_Shinave_Stone_1>(L"Obj_Shinave_Stone_1", objectFactory);
 	//	helpPrepare<Obj_Shinave_Stone_2>(L"Obj_Shinave_Stone_2", objectFactory);
 	//	helpPrepare<Obj_Shinave_Stone_3>(L"Obj_Shinave_Stone_3", objectFactory);
 	//	helpPrepare<Obj_Shinave_Stone_4>(L"Obj_Shinave_Stone_4", objectFactory);

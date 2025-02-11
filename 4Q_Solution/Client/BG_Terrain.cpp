@@ -34,10 +34,6 @@ void BG_Terrain::PreInitialize(const Engine::Modules& modules)
 	_rigidStatc->_rigidbody->SetRotation(tempRotation);
 }
 
-void BG_Terrain::SetIsSphere(bool isShpere)
-{
-}
-
 void BG_Terrain::PreUpdate(float deltaTime)
 {
 	//Engine::Input::Device::IKeyboard* keyboard = nullptr;

@@ -9,7 +9,7 @@ class BaseStone
 	:public InteractObject
 {
 public:
-	explicit BaseStone(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
+	BaseStone(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath);
 	virtual ~BaseStone() = default;
 
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;

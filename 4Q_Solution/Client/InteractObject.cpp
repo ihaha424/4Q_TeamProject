@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "InteractObject.h"
 
-InteractObject::InteractObject(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath)
-	: _staticMesh(nullptr), _meshPath(std::forward<std::filesystem::path>(meshPath))
-	, _rigidStatic{ nullptr }, _physicsPath{ std::forward<std::filesystem::path>(physicsPath) }
+InteractObject::InteractObject(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath)
+	: _staticMesh(nullptr), _meshPath(meshPath)
+	, _rigidStatic{ nullptr }, _physicsPath{physicsPath}
 {
 }
 

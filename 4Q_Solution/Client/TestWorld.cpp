@@ -20,6 +20,11 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_Bermiore_Hanger>(L"Obj_Bermiore_Hanger", objectFactory);
 	}
 
+	// Obj_Shinave_SteppedSudium
+	{
+		helpPrepare<Obj_Shinave_SteppedSudium>(L"Obj_Shinave_SteppedSudium", objectFactory);
+	}
+
 	////Test Grabbed Object Code -> Make and Load File Data
 	//{
 	//	GrabbedObject* building = objectFactory->Clone<GrabbedObject>(this);

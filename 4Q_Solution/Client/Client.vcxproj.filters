@@ -121,6 +121,12 @@
     <Filter Include="Object\MapData">
       <UniqueIdentifier>{06860741-d122-4ccb-b2f6-f6c41542ea4e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Puzzle\06. NotPuzzel">
+      <UniqueIdentifier>{fb9fefb3-6232-4bee-afb5-50991951df92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\06. NotPuzzel\Obj_Shinave_SteppedSudium">
+      <UniqueIdentifier>{e10eb36e-1a41-4a71-ac25-337dac61fb2a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -438,6 +444,12 @@
     <ClInclude Include="Puzzle_03_ObjectData.h">
       <Filter>Object\Puzzle\03. Puzzle</Filter>
     </ClInclude>
+    <ClInclude Include="Obj_Shinave_SteppedSudium.h">
+      <Filter>Object\Puzzle\06. NotPuzzel\Obj_Shinave_SteppedSudium</Filter>
+    </ClInclude>
+    <ClInclude Include="Not_Puzzle_ObjectData.h">
+      <Filter>Object\Puzzle\06. NotPuzzel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -718,6 +730,9 @@
     </ClCompile>
     <ClCompile Include="BG_Terrain.cpp">
       <Filter>Object\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Shinave_SteppedSudium.cpp">
+      <Filter>Object\Puzzle\06. NotPuzzel\Obj_Shinave_SteppedSudium</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

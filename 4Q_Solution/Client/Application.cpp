@@ -54,6 +54,13 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_Bermiore_Hanger>(buildingProperty, buildingProperty);
 	}
 
+	// Obj_Shinave_SteppedSudium
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_SteppedSudium").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_SteppedSudium>(buildingProperty, buildingProperty);
+	}
+
 	//Test PickingObejct
 	{
 		objectFactory->Register<GrabbedObject>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");

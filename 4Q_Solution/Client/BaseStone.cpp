@@ -3,7 +3,6 @@
 
 BaseStone::BaseStone(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath)\
 	: InteractObject(std::forward<std::filesystem::path>(meshPath), std::forward<std::filesystem::path>(physicsPath))
-	, myManager{}
 {
 }
 
@@ -29,6 +28,7 @@ void BaseStone::PreInitialize(const Engine::Modules& modules)
 									DataChangeCallBack(name, value);
 								}
 	, this);
+
 }
 
 void BaseStone::SendInteractToServer()

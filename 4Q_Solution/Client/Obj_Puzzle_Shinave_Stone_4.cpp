@@ -9,14 +9,19 @@ Obj_Puzzle_Shinave_Stone_4::Obj_Puzzle_Shinave_Stone_4(std::filesystem::path&& m
 
 void Obj_Puzzle_Shinave_Stone_4::Interact()
 {
-	auto stateOpt = myManager->GetData(L"Data");
-	if (stateOpt)
+	auto data = std::any_cast<GameCoreData>(GameClient::Application::GetGameStateManager()->GetData(L"GameCoreData"));
+	player = data.player;
+	if (player == 2)
 	{
-		auto data = std::any_cast<Puzzle_00>(*stateOpt);
-		data.flag[index] = true;
-		myManager->SetData(L"Data", data);
+		auto stateOpt = myManager->GetData(L"Data");
+		if (stateOpt)
+		{
+			auto data = std::any_cast<Puzzle_00>(*stateOpt);
+			data.flag[index] = true;
+			myManager->SetData(L"Data", data);
+		}
+		SendInteractToServer();
 	}
-	SendInteractToServer();
 }
 
 void Obj_Puzzle_Shinave_Stone_4::DataChangeCallBack(const std::wstring& name, const std::any& value)

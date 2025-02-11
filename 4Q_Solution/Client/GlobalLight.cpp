@@ -12,8 +12,9 @@ void GlobalLight::Prepare(Engine::Content::Factory::Component* componentFactory)
 {	
 	_globalLight = componentFactory->Clone<Engine::Component::Light>(this);
 	
-	/*for (int i = 0; i < maxLight; i++)
-		_pointLights.push_back(componentFactory->Clone<Engine::Component::Light>(this));*/
+	//for (int i = 0; i < maxLight; i++)
+
+	_pointLights.push_back(componentFactory->Clone<Engine::Component::Light>(this));
 }
 
 void GlobalLight::DisposeComponents()
@@ -31,9 +32,17 @@ void GlobalLight::PostInitialize(const Engine::Modules& modules)
 	_globalLight->SetDiffuse(1.f, 1.f, 1.f, 1.f);
 	_globalLight->SetSpecular(1.f, 1.f, 1.f, 1.f);
 	_globalLight->SetAmbient(0.2f, 0.2f, 0.2f, 0.2f);
-	_globalLight->SetDirection(0.f, 0.f, 1.f);
+	_globalLight->SetDirection(0.f, 1.f, 1.f);
 	_globalLight->SetIntensity(1.f);
 	_globalLight->SetMainLight();
+
+	_pointLights[0]->SetType(Engine::Component::Light::Type::Point);
+	_pointLights[0]->SetDiffuse(5.f, 0.f, 0.f, 1.f);
+	_pointLights[0]->SetSpecular(1.f, 1.f, 1.f, 1.f);
+	_pointLights[0]->SetAmbient(0.2f, 0.2f, 0.2f, 0.2f);
+	_pointLights[0]->SetPosition(-1252.f, 120.f, -609.f);
+	_pointLights[0]->SetRange(100.f);
+	_pointLights[0]->SetIntensity(10.f);
 
 	/*for (int i = 0; i < maxLight; i++)
 	{

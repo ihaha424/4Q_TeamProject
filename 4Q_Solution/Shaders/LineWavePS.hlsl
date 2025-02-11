@@ -26,12 +26,12 @@ float random(float2 uv)
 float4 main(PS_INPUT input) : SV_Target
 {
     float base = txBase.Sample(samLinear_wrap, input.uv + float2(waveTime, 0)).r;
-    float mask = txMask.Sample(samLinear_wrap, input.uv).r;
+    float3 mask = txMask.Sample(samLinear_wrap, input.uv).rgb;
     float noise = random(input.uv * waveTime * 10.0);
     
     float3 baseColor = txGradient.Sample(samLinear_wrap, input.uv).rgb;
-    float4 color = float4(baseColor * base + baseColor, 1);
-    color.a = mask;
+    float4 color = float4(baseColor * mask + baseColor, 1);
+    color.a = base;
     
     return color;
 }

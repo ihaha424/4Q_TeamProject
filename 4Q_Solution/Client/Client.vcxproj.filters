@@ -148,6 +148,9 @@
     <Filter Include="Object\Puzzle\06. NotPuzzel\Obj_BG_Tree_3_Active">
       <UniqueIdentifier>{ed348349-9713-496a-bdec-571b111b716d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Puzzle\06. NotPuzzel\Obj_BG_Tree_1_Active">
+      <UniqueIdentifier>{a937881a-9679-4914-9cd3-565767f6e8fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -489,6 +492,9 @@
     <ClInclude Include="Obj_BG_Tree_3_Active.h">
       <Filter>Object\Puzzle\06. NotPuzzel\Obj_BG_Tree_3_Active</Filter>
     </ClInclude>
+    <ClInclude Include="Obj_BG_Tree_1_Active.h">
+      <Filter>Object\Puzzle\06. NotPuzzel\Obj_BG_Tree_1_Active</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -790,6 +796,9 @@
     </ClCompile>
     <ClCompile Include="Obj_BG_Tree_3_Active.cpp">
       <Filter>Object\Puzzle\06. NotPuzzel\Obj_BG_Tree_3_Active</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_BG_Tree_1_Active.cpp">
+      <Filter>Object\Puzzle\06. NotPuzzel\Obj_BG_Tree_1_Active</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

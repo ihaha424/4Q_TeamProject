@@ -225,6 +225,13 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_BG_Tree_3_Active>(buildingProperty, buildingProperty);
 	}
 
+	// Obj_BG_Tree_1_Active
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_BG_Tree_1_Active").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_BG_Tree_1_Active>(buildingProperty, buildingProperty);
+	}
+
 
 
 

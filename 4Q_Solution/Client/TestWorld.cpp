@@ -194,6 +194,15 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_BG_Tree_3_Active>(L"Obj_BG_Tree_3_Active", objectFactory);
 	}
 
+	// Obj_BG_Tree_1_Active
+	{
+		helpPrepare<Obj_BG_Tree_1_Active>(L"Obj_BG_Tree_1_Active", objectFactory);
+	}
+
+
+
+
+
 	////Test Grabbed Object Code -> Make and Load File Data
 	//{
 	//	GrabbedObject* building = objectFactory->Clone<GrabbedObject>(this);

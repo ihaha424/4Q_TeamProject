@@ -251,6 +251,7 @@ class TriggerObject final : public ::google::protobuf::Message
   // accessors -------------------------------------------------------
   enum : int {
     kObjectserialnumberFieldNumber = 1,
+    kTriggerboxidFieldNumber = 2,
   };
   // optional int32 objectserialnumber = 1;
   bool has_objectserialnumber() const;
@@ -263,12 +264,23 @@ class TriggerObject final : public ::google::protobuf::Message
   void _internal_set_objectserialnumber(::int32_t value);
 
   public:
+  // optional int32 triggerboxid = 2;
+  bool has_triggerboxid() const;
+  void clear_triggerboxid() ;
+  ::int32_t triggerboxid() const;
+  void set_triggerboxid(::int32_t value);
+
+  private:
+  ::int32_t _internal_triggerboxid() const;
+  void _internal_set_triggerboxid(::int32_t value);
+
+  public:
   // @@protoc_insertion_point(class_scope:PlayMsg.TriggerObject)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 0,
+      1, 2, 0,
       0, 2>
       _table_;
 
@@ -289,6 +301,7 @@ class TriggerObject final : public ::google::protobuf::Message
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::int32_t objectserialnumber_;
+    ::int32_t triggerboxid_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -2937,6 +2950,34 @@ inline ::int32_t TriggerObject::_internal_objectserialnumber() const {
 inline void TriggerObject::_internal_set_objectserialnumber(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.objectserialnumber_ = value;
+}
+
+// optional int32 triggerboxid = 2;
+inline bool TriggerObject::has_triggerboxid() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline void TriggerObject::clear_triggerboxid() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.triggerboxid_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline ::int32_t TriggerObject::triggerboxid() const {
+  // @@protoc_insertion_point(field_get:PlayMsg.TriggerObject.triggerboxid)
+  return _internal_triggerboxid();
+}
+inline void TriggerObject::set_triggerboxid(::int32_t value) {
+  _internal_set_triggerboxid(value);
+  _impl_._has_bits_[0] |= 0x00000002u;
+  // @@protoc_insertion_point(field_set:PlayMsg.TriggerObject.triggerboxid)
+}
+inline ::int32_t TriggerObject::_internal_triggerboxid() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.triggerboxid_;
+}
+inline void TriggerObject::_internal_set_triggerboxid(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.triggerboxid_ = value;
 }
 
 // -------------------------------------------------------------------

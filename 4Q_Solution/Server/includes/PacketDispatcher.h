@@ -37,5 +37,7 @@ public:
 private:
 	std::mutex _recvMtx;
 	std::mutex _sendMtx;
+
+	friend class NetworkMain;
 };
 

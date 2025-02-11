@@ -134,7 +134,7 @@ void ServerLogic::MessageDispatch()
             ObjectInteractProcess(packet);
             break;
         }
-        case PacketID::InteraceDialog:
+        case PacketID::InteractDialog:
         {
             DialogInteractProcess(packet);
             break;
@@ -288,14 +288,16 @@ void ServerLogic::ExitProcess(const Packet& packet)
         _playerSlot[0]._state = 0;
         _playerSlot[0]._controller->Finalize();
         _playerSlot[0]._controller = nullptr;
+        _playerSlot[0]._sessionId = 0;
     }
-    else {
+    else if(exitSessionId == _playerSlot[1]._sessionId) {
         Server::BroadCast("", (short)PacketID::Exit, 0, _playerSlot[1]._serialNumber);
         _playerSlot[1]._serialNumber = 0;
         _playerSlot[1]._position = Engine::Math::Vector3(0.0f, 0.0f, 0.0f);
         _playerSlot[1]._state = 0;
         _playerSlot[1]._controller->Finalize();
         _playerSlot[1]._controller = nullptr;
+        _playerSlot[1]._sessionId = 0;
     }
     Server::DeleteSession(packet.sessionId);
 }
@@ -471,23 +473,23 @@ void ServerLogic::ObjectInteractProcess(const Packet& packet)
         PlayDialog(41301);
     }
     else if (objectNum == 10002 && _currentQuestID == 3105) {
-        PlayDialog(41204);
+        PlayDialog(41204); // 리브 레이 대화
     }
-    else if (objectNum == 10002 && _currentQuestID == 4101) {
+    else if (objectNum == 10004 && _currentQuestID == 1999) {
         PlayDialog(51501);
     }
-    else if (objectNum == 10002 && _currentQuestID == 4102) {
+    else if (objectNum == 10005 && _currentQuestID == 4102) {
         PlayDialog(51705);
     }
-    else if (objectNum == 10002 && _currentQuestID == 5101) {
+    else if (objectNum == 10002 && _currentQuestID == 1999) {
         PlayDialog(61401);
     }
-    else if (objectNum == 10002 && _currentQuestID == 5103) {
+    else if (objectNum == 10003 && _currentQuestID == 5103) {
         PlayDialog(61605);
     }
-    else if (objectNum == 10002 && _currentQuestID == 1103) {
-        PlayDialog(71601);
-    }
+    //else if (objectNum == 10002 && _currentQuestID == 1103) {
+    //    PlayDialog(71601);
+    //}
     // ====================
 
     // ====================
@@ -598,6 +600,14 @@ void ServerLogic::DialogInteractProcess(const Packet& packet)
         _currentPuzzleNumber = 6;
         printf("[DialogProgress] Puzzle Start. PuzzleNum : %d\n", _currentPuzzleNumber);
     }
+}
+void ServerLogic::ObjectTriggerProcess(const Packet& packet)
+{
+    _triggerObject.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
+    int triggerboxId = _triggerObject.triggerboxid();
+    int targetObjectId = _triggerObject.objectserialnumber();
+
+
 }
 // =============================
 
@@ -915,9 +925,9 @@ void ServerLogic::Puzzle1(int objectId)
     if (objectId == 11105 || objectId == 11106 || objectId == 11107) {
         curCorrectCount++;
         // send puzzleSuccess.
-        _objectActive.set_objectserialnumber(activeObjectId);
-        _objectActive.SerializeToString(&_msgBuffer);
-        Server::BroadCast(_msgBuffer, (short)PacketID::ObjectActive, _objectActive.ByteSizeLong(), 1);
+        //_objectActive.set_objectserialnumber(activeObjectId);
+        //_objectActive.SerializeToString(&_msgBuffer);
+        Server::BroadCast("", (short)PacketID::ObjectActive, 0, activeObjectId++);
         printf("[Puzzle 1] Puzzle Process. curCorrectPuzzle : %d\n", curCorrectCount);
     }
 }
@@ -932,16 +942,16 @@ void ServerLogic::Puzzle2(int objectId)
     printf("[Puzzle 2] Cur State  : (%d, %d, %d, %d, %d, %d)\n", _balls[0], _balls[1], _balls[2], _balls[3], _balls[4], _balls[5]);
     _interactObject.set_objectserialnumber(objectId);
     _interactObject.SerializeToString(&_msgBuffer);
-    Server::BroadCast(_msgBuffer, (short)PacketID::InteractObject, _interactObject.ByteSizeLong(), 1);
+    Server::BroadCast(_msgBuffer, (short)PacketID::InteractObject, _interactObject.ByteSizeLong(), objectId);
 
     if (_balls[index] >= 3 || _balls[index] <= 1) {
         _dir[index] *= -1;
     }
 
     if (_balls[0] == 1 && _balls[1] == 2 && _balls[2] == 2 && _balls[3] == 3 && _balls[4] == 2 && _balls[5] == 1) {
-        _objectActive.set_objectserialnumber(12101);
-        _objectActive.SerializeToString(&_msgBuffer);
-        Server::BroadCast(_msgBuffer, (short)PacketID::ObjectActive, _objectActive.ByteSizeLong(), 1);
+        //_objectActive.set_objectserialnumber(12101);
+        //_objectActive.SerializeToString(&_msgBuffer);
+        Server::BroadCast("", (short)PacketID::ObjectActive, 0, 12101);
         printf("[Puzzle 2] Puzzle Clear Object Activated.\n");
     }
 }
@@ -951,21 +961,21 @@ void ServerLogic::Puzzle3(int objectId)
 }
 void ServerLogic::Puzzle4(int objectId)
 {
-    // 발판 Id : 14102, 14103, 14104, 14106, 14105
-    static int activeObjectId = 14101;
+    // 돌 Id : 14102, 14103, 14104, 14106, 14105
+    static int activeObjectId = 14201;
     if (objectId == _interactSequence[_currentInteractIndex]) {
         printf("Object Active. Object Num : %d.\n", objectId);
-        _objectActive.set_objectserialnumber(activeObjectId);
-        _objectActive.SerializeToString(&_msgBuffer);
-        Server::BroadCast(_msgBuffer, (short)PacketID::ObjectActive, _objectActive.ByteSizeLong(), 1);
+        //_objectActive.set_objectserialnumber(activeObjectId);
+        //_objectActive.SerializeToString(&_msgBuffer);
+        Server::BroadCast("", (short)PacketID::ObjectActive, 0, activeObjectId++);
     }
     else {
         printf("Puzzle Failed. Reset Object.\n");
-        for (int i = 0; i < _currentInteractIndex; i++) {
-            _objectDisable.add_objectserialnumber(activeObjectId);
-        }
-        _objectDisable.SerializeToString(&_msgBuffer);
-        Server::BroadCast(_msgBuffer, (short)PacketID::ObjectDisable, _objectDisable.ByteSizeLong(), 1);
+        //for (int i = 0; i < _currentInteractIndex; i++) {
+        //    _objectDisable.add_objectserialnumber(activeObjectId);
+        //}
+        //_objectDisable.SerializeToString(&_msgBuffer);
+        Server::BroadCast("", (short)PacketID::ObjectDisable, 0, --activeObjectId);
     }
 }
 void ServerLogic::Puzzle5(int objectId)

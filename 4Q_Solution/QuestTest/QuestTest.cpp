@@ -50,7 +50,7 @@ struct TestObject {
         }
         _sync->_interactDialog.set_currentdialogid(curDialogId);
         _sync->_interactDialog.SerializeToString(&_sync->_msgBuffer);
-        _serverManager->SaveSendData((short)PacketID::InteraceDialog, _sync->_msgBuffer, _sync->_interactDialog.ByteSizeLong(), _sync->GetSerialNumber());
+        _serverManager->SaveSendData((short)PacketID::InteractDialog, _sync->_msgBuffer, _sync->_interactDialog.ByteSizeLong(), _sync->GetSerialNumber());
     }
     void InteractObject(int id) {
         _sync->_interactObject.set_objectserialnumber(id);

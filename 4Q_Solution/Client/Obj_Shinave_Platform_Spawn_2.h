@@ -5,7 +5,7 @@ class Obj_Shinave_Platform_Spawn_2
 	: public StaticObject
 {
 public:
-	explicit Obj_Shinave_Platform_Spawn_2(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath);
+	Obj_Shinave_Platform_Spawn_2(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath);
 	virtual ~Obj_Shinave_Platform_Spawn_2() = default;
 
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;

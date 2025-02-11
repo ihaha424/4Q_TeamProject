@@ -1,6 +1,11 @@
 #include "pch.h"
 #include "Shader.h"
 
+Shader::Shader()
+{
+	_pDeviceContext = g_pGraphicDevice->GetDeviceContext();
+}
+
 void Shader::CompileShader(std::vector<uint8_t>& output, const std::filesystem::path& filePath, const char* entry, const char* model)
 {	
 	std::string path = filePath.string();

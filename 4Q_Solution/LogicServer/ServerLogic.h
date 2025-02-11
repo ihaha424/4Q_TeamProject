@@ -232,7 +232,8 @@ private:
 
 	// Puzzle 6
 
-	std::vector<int> _currentWeight{ 0, 0, 0, 0, 0 };
+	std::vector<int> _currentWeight	{ 0, 0, 0, 0, 0 };
+	std::vector<int> _puzzle6Box	{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
 	void PuzzleProcess(int objectId);
 	void Puzzle1(int objectId);
@@ -240,7 +241,7 @@ private:
 	void Puzzle3(int objectId);
 	void Puzzle4(int objectId);
 	void Puzzle5(int objectId);
-	void Puzzle6(int objectId);
+	void Puzzle6(int objectId, int triggerboxId);
 	
 	
 	

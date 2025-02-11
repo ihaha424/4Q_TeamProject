@@ -5,7 +5,7 @@ class Obj_Shinave_Stone_5
 	: public BaseStone
 {
 public:
-	explicit Obj_Shinave_Stone_5(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
+	Obj_Shinave_Stone_5(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath);
 	virtual ~Obj_Shinave_Stone_5() = default;
 
 	void Interact() override;

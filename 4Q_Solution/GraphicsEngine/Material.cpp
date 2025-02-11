@@ -16,7 +16,7 @@ void Material::SetParameters(std::shared_ptr<PixelShader>& pixelShader)
 		ID3D11ShaderResourceView* pTexture = nullptr;
 
 		if (_textureMaps[i].get())
-			pTexture = _textureMaps[i]->Get();
+			pTexture = *_textureMaps[i]->Get();
 
 		pixelShader->SetShaderResource((TextureType)i, pTexture);
 	}

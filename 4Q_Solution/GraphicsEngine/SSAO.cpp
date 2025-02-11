@@ -45,14 +45,13 @@ void SSAO::Render()
 {
     auto* pDSSRV = g_pViewManagement->GetShaderResourceView(L"DefaultDepth");
     auto* pNormalSRV = g_pViewManagement->GetShaderResourceView(L"Normal");
-    auto* noise = _texture->Get();
 
     // SSAO ÃßÃâ
     _pDeviceContext->OMSetRenderTargets(1, &_pPostRTV, nullptr);
     _pDeviceContext->ClearRenderTargetView(_pPostRTV, COLOR_ZERO);
     _pDeviceContext->PSSetShaderResources(2, 1, &pDSSRV);
     _pDeviceContext->PSSetShaderResources(3, 1, &pNormalSRV);
-    _pDeviceContext->PSSetShaderResources(4, 1, &noise);
+    _pDeviceContext->PSSetShaderResources(4, 1, _texture->Get());
 
     _psSSAO[Sample]->SetPixelShader();
     g_pQuad->Render();

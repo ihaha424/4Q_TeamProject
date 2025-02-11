@@ -6,8 +6,7 @@ class Obj_Shinave_Bermiore
 	:public InteractObject
 {
 public:
-	explicit Obj_Shinave_Bermiore(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
-	virtual ~Obj_Shinave_Bermiore() = default;
+	Obj_Shinave_Bermiore(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath);
 
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
 	void PreInitialize(const Engine::Modules& modules) override;

@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "BaseStone.h"
 
-BaseStone::BaseStone(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath)\
-	: InteractObject(std::forward<std::filesystem::path>(meshPath), std::forward<std::filesystem::path>(physicsPath))
+BaseStone::BaseStone(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath)
+	: InteractObject(meshPath, physicsPath)
 {
 }
 

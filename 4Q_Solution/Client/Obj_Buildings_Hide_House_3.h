@@ -4,7 +4,6 @@
 class Obj_Buildings_Hide_House_3 : public StaticObject
 {
 public:
-	explicit Obj_Buildings_Hide_House_3(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
-	virtual ~Obj_Buildings_Hide_House_3() = default;
+	Obj_Buildings_Hide_House_3(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath);
 };
 

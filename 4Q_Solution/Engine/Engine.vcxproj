@@ -197,6 +197,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="FixedArm.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateManager.h" />
+    <ClInclude Include="LineWave.h" />
     <ClInclude Include="ListenerComponent.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="LoggerManager.h" />
@@ -301,6 +302,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="RigidStaticComponent.h" />
     <ClInclude Include="SafeDelete.h" />
     <ClInclude Include="SafeFinalize.h" />
+    <ClInclude Include="ShadowCamera.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="PhysicsScene.h" />
     <ClInclude Include="ServerNetworkManager.h" />
@@ -361,6 +363,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Effect3DSoundComponent.cpp" />
     <ClCompile Include="FixedArm.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
+    <ClCompile Include="LineWave.cpp" />
     <ClCompile Include="ListenerComponent.cpp" />
     <ClCompile Include="LoggerManager.cpp" />
     <ClCompile Include="LogLevel.cpp" />
@@ -450,6 +453,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="RigidStaticComponent.cpp" />
     <ClCompile Include="SafeDelete.cpp" />
     <ClCompile Include="SafeFinalize.cpp" />
+    <ClCompile Include="ShadowCamera.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="PhysicsScene.cpp" />
     <ClCompile Include="ServerNetworkManager.cpp" />

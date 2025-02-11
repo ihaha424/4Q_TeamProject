@@ -8,7 +8,8 @@ Player::Player() :
 	//, _movement(nullptr)
 	_camera(nullptr)
 	, _skeletalMesh(nullptr)
-	, _animator(nullptr), _fixedArm(nullptr), _rigid(nullptr), _bitFlag(nullptr)
+	, _animator(nullptr), _fixedArm(nullptr), _rigid(nullptr), _bitFlag(nullptr), _leftLineWave(nullptr), _rightLineWave(nullptr)
+	, _leftHand(nullptr), _rightHand(nullptr), _shadowCamera(nullptr)
 	, _offset(Engine::Math::Quaternion::CreateFromYawPitchRoll(std::numbers::pi_v<float>, 0, 0))
 {
 }
@@ -24,6 +25,9 @@ void Player::Prepare(Engine::Content::Factory::Component* componentFactory)
 	_remote = componentFactory->Clone<RemoteMove>(this);
 	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
 	_bitFlag = componentFactory->Clone<Engine::Component::BitFlag>(this);
+	_leftLineWave = componentFactory->Clone<Engine::Component::LineWave>(this);
+	_rightLineWave = componentFactory->Clone<Engine::Component::LineWave>(this);
+	_shadowCamera = componentFactory->Clone<Engine::Component::ShadowCamera>(this);
 }
 
 void Player::SetCapsuleScale(Engine::Math::Vector3 capsuleScale)
@@ -34,6 +38,7 @@ void Player::SetCapsuleScale(Engine::Math::Vector3 capsuleScale)
 void Player::DisposeComponents()
 {
 	_camera->Dispose();
+	_shadowCamera->Dispose();
 	//_movement->Dispose();
 	_animator->Dispose();
 	_skeletalMesh->Dispose();
@@ -42,11 +47,22 @@ void Player::DisposeComponents()
 	_remote->Dispose();
 	_sync->Dispose();
 	_bitFlag->Dispose();
+	_leftLineWave->Dispose();
+	_rightLineWave->Dispose();
 }
 
 void Player::PreInitialize(const Engine::Modules& modules)
 {
 	Object::PreInitialize(modules);
+
+	// Test
+	_leftLineWave->SetBaseTexturePath(L"Assets/Textures/main.png");
+	_leftLineWave->SetMaskTexturePath(L"Assets/Textures/mask.png");
+	_leftLineWave->SetGradientTexturePath(L"Assets/Textures/basecolor_ray.png");
+
+	_rightLineWave->SetBaseTexturePath(L"Assets/Textures/main.png");
+	_rightLineWave->SetMaskTexturePath(L"Assets/Textures/mask.png");
+	_rightLineWave->SetGradientTexturePath(L"Assets/Textures/basecolor_ray.png");
 
 	_camera->SetName(L"MainCamera");
 	//_movement->SetTarget(&_transform);
@@ -58,11 +74,11 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	// FixedArm
 	_fixedArm->SetTarget(&_transform);
 	_fixedArm->SetCameraComponent(_camera);
-	_fixedArm->SetDistance(150.f);
-	_fixedArm->SetCameraPosition(Engine::Math::Vector2{ 0.f, 60.f });
+	_fixedArm->SetDistance(50.f);
+	_fixedArm->SetCameraPosition(Engine::Math::Vector2{ 0.f, 20.f });
 	_fixedArm->SetRotationSpeed(Engine::Math::Vector2{ 0.02f, 0.04f });
 	_fixedArm->SetFollowSpeed(0.01f);
-
+	
 	_remote->SetTarget(&_transform);
 
 	const auto inputManager = Engine::Application::GetInputManager();
@@ -114,7 +130,7 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	// TODO: Camera Scene¿¡ Ãß°¡
 
 	_sync->AddCallback((short)PacketID::MoveSync, &Player::SyncMove, this);
-	_sync->AddCallback((short)PacketID::DataRemote, &Player::SetLocation, this);
+	_sync->AddCallback((short)PacketID::DataRemote, &Player::SetLocation, this);	
 }
 
 void Player::PostInitialize(const Engine::Modules& modules)
@@ -136,6 +152,16 @@ void Player::PostInitialize(const Engine::Modules& modules)
 
 	//_skeletalMesh->SetActiveShadow(false);
 	_skeletalMesh->SetPostEffectFlag(1);
+
+	_leftLineWave->SetSourcePosition(&_leftSrc);
+	_leftLineWave->SetDestinationPosition(&_leftDst);
+	_leftLineWave->SetSegment(0);
+	_rightLineWave->SetSourcePosition(&_rightSrc);
+	_rightLineWave->SetDestinationPosition(&_rightDst);
+	_rightLineWave->SetSegment(0);
+
+	_animator->GetSkeletonMatrix("hand.l", &_leftHand);
+	_animator->GetSkeletonMatrix("hand.r", &_rightHand);
 }
 
 void Player::PostUpdate(float deltaTime)
@@ -148,13 +174,26 @@ void Player::PostUpdate(float deltaTime)
 		* Engine::Math::Matrix::CreateFromQuaternion(q)
 		* Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
 
-	UpdateState();	
+	_leftSrc = (*_leftHand * _worldMatrix).Translation();
+	_leftDst = _leftSrc + _worldMatrix.Forward() * 100.f;
+
+	_rightSrc = (*_rightHand * _worldMatrix).Translation();
+	_rightDst = _rightSrc + _worldMatrix.Forward() * 100.f;
+
+	Engine::Math::Vector3 shadowCameraPosition = _worldMatrix.Translation();
+	shadowCameraPosition.y += 100.f;
+	_shadowCamera->SetPosition(shadowCameraPosition);
+
+	_camera->SetPerspective(1.f, 5000.f, std::numbers::pi_v<float> / 5.f);
+
+	UpdateState();
 }
 
 void Player::PostAttach()
 {
 	Object::PostAttach();
 	_camera->Activate();
+	_shadowCamera->Activate();
 }
 
 void Player::MoveStarted()

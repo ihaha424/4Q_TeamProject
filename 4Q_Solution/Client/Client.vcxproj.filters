@@ -136,6 +136,24 @@
     <Filter Include="Object\Puzzle\06. NotPuzzel\BG_Ornoa_Cloth_1">
       <UniqueIdentifier>{a3d322d4-a35c-4a8f-ae66-7c64b06078bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Puzzle\06. NotPuzzel\BG_Props_Fence">
+      <UniqueIdentifier>{80d4ebdb-a78b-487e-832f-3f1947255510}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\03. Puzzle\Object\Obj_Mini_Platform_Spawn">
+      <UniqueIdentifier>{9f24f3a1-65f0-407c-abea-27b41a462b10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\03. Puzzle\Object\Obj_Mini_Platform_Set">
+      <UniqueIdentifier>{8a79c7aa-0b9b-4f81-a692-20f5309c7185}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\06. NotPuzzel\Obj_BG_Tree_3_Active">
+      <UniqueIdentifier>{ed348349-9713-496a-bdec-571b111b716d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\06. NotPuzzel\Obj_BG_Tree_1_Active">
+      <UniqueIdentifier>{a937881a-9679-4914-9cd3-565767f6e8fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\01. Puzzle\Object\Obj_Bermiore_Soundblock">
+      <UniqueIdentifier>{02638d8d-b82b-49e1-b8aa-d45d79477395}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -327,13 +345,13 @@
     <ClInclude Include="BaseMiniStone.h">
       <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Mini_Stone_1.h">
+    <ClInclude Include="Obj_Mini_Stone_1.h">
       <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Mini_Stone_2.h">
+    <ClInclude Include="Obj_Mini_Stone_2.h">
       <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Mini_Stone_3.h">
+    <ClInclude Include="Obj_Mini_Stone_3.h">
       <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Puzzle_Mini_Stone_4.h">
@@ -386,9 +404,6 @@
     </ClInclude>
     <ClInclude Include="Obj_Ornoa_Soundblock_1.h">
       <Filter>Object\Puzzle\05. Puzzle\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Mini_Platform.h">
-      <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Sudium_red.h">
       <Filter>Object\MapData</Filter>
@@ -467,6 +482,24 @@
     </ClInclude>
     <ClInclude Include="Obj_Shinave_Platform_Spawn_3.h">
       <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BG_Props_Fence.h">
+      <Filter>Object\Puzzle\06. NotPuzzel\BG_Props_Fence</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Mini_Platform_Set.h">
+      <Filter>Object\Puzzle\03. Puzzle\Object\Obj_Mini_Platform_Set</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Mini_Platform_Spawn.h">
+      <Filter>Object\Puzzle\03. Puzzle\Object\Obj_Mini_Platform_Spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_BG_Tree_3_Active.h">
+      <Filter>Object\Puzzle\06. NotPuzzel\Obj_BG_Tree_3_Active</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_BG_Tree_1_Active.h">
+      <Filter>Object\Puzzle\06. NotPuzzel\Obj_BG_Tree_1_Active</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Bermiore_Soundblock.h">
+      <Filter>Object\Puzzle\01. Puzzle\Object\Obj_Bermiore_Soundblock</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Bermiore_Soundblock.h">
       <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
@@ -644,13 +677,13 @@
     <ClCompile Include="BaseMiniStone.cpp">
       <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Mini_Stone_1.cpp">
+    <ClCompile Include="Obj_Mini_Stone_1.cpp">
       <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Mini_Stone_2.cpp">
+    <ClCompile Include="Obj_Mini_Stone_2.cpp">
       <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Mini_Stone_3.cpp">
+    <ClCompile Include="Obj_Mini_Stone_3.cpp">
       <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Puzzle_Mini_Stone_4.cpp">
@@ -731,9 +764,6 @@
     <ClCompile Include="Obj_Ornoa_Soundblock_1.cpp">
       <Filter>Object\Puzzle\05. Puzzle\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Mini_Platform.cpp">
-      <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Obj_BG_Tree_3.cpp">
       <Filter>Object\MapData</Filter>
     </ClCompile>
@@ -790,6 +820,24 @@
     </ClCompile>
     <ClCompile Include="Obj_Hide_Plant.cpp">
       <Filter>Object\Puzzle\04. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="BG_Props_Fence.cpp">
+      <Filter>Object\Puzzle\06. NotPuzzel\BG_Props_Fence</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Mini_Platform_Set.cpp">
+      <Filter>Object\Puzzle\03. Puzzle\Object\Obj_Mini_Platform_Set</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Mini_Platform_Spawn.cpp">
+      <Filter>Object\Puzzle\03. Puzzle\Object\Obj_Mini_Platform_Spawn</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_BG_Tree_3_Active.cpp">
+      <Filter>Object\Puzzle\06. NotPuzzel\Obj_BG_Tree_3_Active</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_BG_Tree_1_Active.cpp">
+      <Filter>Object\Puzzle\06. NotPuzzel\Obj_BG_Tree_1_Active</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Bermiore_Soundblock.cpp">
+      <Filter>Object\Puzzle\01. Puzzle\Object\Obj_Bermiore_Soundblock</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

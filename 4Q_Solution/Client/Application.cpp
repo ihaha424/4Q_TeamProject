@@ -103,68 +103,296 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_BG_Tree_3>(buildingProperty, buildingProperty);
 	}
 
-	//Test PickingObejct
+	// Obj_BG_Tree_2
 	{
-		objectFactory->Register<GrabbedObject>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_BG_Tree_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_BG_Tree_2>(buildingProperty, buildingProperty);
 	}
 
-	//Test TriggerArea
+	// Obj_BG_Tree_1
 	{
-		objectFactory->Register<TriggerArea>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");
-	}
-	
-	//Puzzle01
-	{
-		RegisterHelp<Obj_Shinave_Stone_1>(L"Obj_Shinave_Stone_1", loadManager, objectFactory);
-		RegisterHelp<Obj_Shinave_Stone_2>(L"Obj_Shinave_Stone_2", loadManager, objectFactory);
-		RegisterHelp<Obj_Shinave_Stone_3>(L"Obj_Shinave_Stone_3", loadManager, objectFactory);
-		RegisterHelp<Obj_Shinave_Stone_4>(L"Obj_Shinave_Stone_4", loadManager, objectFactory);
-		RegisterHelp<Obj_Shinave_Stone_5>(L"Obj_Shinave_Stone_5", loadManager, objectFactory);
-		RegisterHelp<Obj_Shinave_Bermiore>(L"Obj_Shinave_Bermiore", loadManager, objectFactory);
-		RegisterHelp<Obj_Shinave_Platform_Set>(L"Obj_Shinave_Platform_Set", loadManager, objectFactory);
-		RegisterHelp<Obj_Shinave_Platform_Spawn_1>(L"Obj_Shinave_Platform_Spawn_1", loadManager, objectFactory);
-		RegisterHelp<Obj_Shinave_Platform_Spawn_2>(L"Obj_Shinave_Platform_Spawn_2", loadManager, objectFactory);
-		RegisterHelp<Obj_Shinave_Platform_Spawn_3>(L"Obj_Shinave_Platform_Spawn_3", loadManager, objectFactory);
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_BG_Tree_1").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_BG_Tree_1>(buildingProperty, buildingProperty);
 	}
 
+	// Obj_Buildings_Ornoa_House_1
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Ornoa_House_1").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Ornoa_House_1>(buildingProperty, buildingProperty);
+	}
 
-	objectFactory->Register<TestSprite>();
+	// Obj_Buildings_Ornoa_House_2
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Ornoa_House_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Ornoa_House_2>(buildingProperty, buildingProperty);
+	}
 
-	/*
-		Static Object
-	*/
+	// BG_Props_Fence
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"BG_Props_Fence").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<BG_Props_Fence>(buildingProperty, buildingProperty);
+	}
 
-	RegisterHelp<Obj_BG_Tree_1>(L"Obj_BG_Tree_1", loadManager, objectFactory);
-	RegisterHelp<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", loadManager, objectFactory);
-	//RegisterHelp<Obj_BG_Mountain>(L"Obj_BG_Mountain", loadManager, objectFactory);
+	// Obj_Buildings_Sudium
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Sudium").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Sudium>(buildingProperty, buildingProperty);
+	}
 
-	//RegisterHelp<Obj_Props_Fence>(L"Obj_Props_Fence", loadManager, objectFactory);
+	// Obj_Buildings_Hide_House_5
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Hide_House_5").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Hide_House_5>(buildingProperty, buildingProperty);
+	}
 
-	//RegisterHelp<Obj_Buildings_Shinave>(L"Obj_Buildings_Shinave", loadManager, objectFactory);
-	RegisterHelp<Obj_Buildings_Bermiore_Atelier_1>(L"Obj_Buildings_Bermiore_Atelier_1", loadManager, objectFactory);
-	RegisterHelp<Obj_Buildings_Bermiore_Atelier_2>(L"Obj_Buildings_Bermiore_Atelier_2", loadManager, objectFactory);
-	RegisterHelp<Obj_Buildings_Bermiore_Atelier_3>(L"Obj_Buildings_Bermiore_Atelier_3", loadManager, objectFactory);
+	// Obj_Buildings_Hide_House_4
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Hide_House_4").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Hide_House_4>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Hide_House_3
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Hide_House_3").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Hide_House_3>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Hide_House_2
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Hide_House_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Hide_House_2>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Hide_House_1
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Hide_House_1").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Hide_House_1>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Hide_Xylophone
+	{
+		// TODO: Hide_Xylophone
+	}
+
+	// Obj_Hide_Plant
+	{
+		// TODO: Hide_Plant
+	}
+
+	// Obj_Sudium_blue
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Sudium_blue").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Sudium_blue>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Sudium_red
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Sudium_red").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Sudium_red>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Mini_Platform_Set
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Mini_Platform_Set").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Mini_Platform_Set>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Mini_Platform_Spawn
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Mini_Platform_Spawn").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Mini_Platform_Spawn>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_BG_Tree_3_Active
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_BG_Tree_3_Active").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_BG_Tree_3_Active>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_BG_Tree_1_Active
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_BG_Tree_1_Active").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_BG_Tree_1_Active>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_Stone_1
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Stone_1").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Stone_1>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_Stone_2
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Stone_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Stone_2>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_Stone_3
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Stone_3").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Stone_3>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_Stone_4
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Stone_4").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Stone_4>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_Stone_5
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Stone_5").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Stone_5>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_Platform_Set
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Platform_Set").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Platform_Set>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_Platform_Spawn_1
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Platform_Spawn_1").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Platform_Spawn_1>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_Platform_Spawn_2
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Platform_Spawn_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Platform_Spawn_2>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_Platform_Spawn_3
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Platform_Spawn_3").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Platform_Spawn_3>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Props_Rock
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Props_Rock").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Props_Rock>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Bermiore_Woolball_inBox
+	{
+		// TODO: Bermiore_Woolball_inBox
+	}
+
+	// TODO: Wool Series
+	// TODO: Wool ball Series
+
+	// Obj_Buildings_Bermiore_Atelier_1
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Bermiore_Atelier_1").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Bermiore_Atelier_1>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Bermiore_Atelier_2
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Bermiore_Atelier_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Bermiore_Atelier_2>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Bermiore_Atelier_3
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Bermiore_Atelier_3").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Bermiore_Atelier_3>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Hide_Potion
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Hide_Potion").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Hide_Potion>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_Bermiore
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Bermiore").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Bermiore>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Bermiore_Soundblock
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Soundblock").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Bermiore_Soundblock>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Mini_Stone_1
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Mini_Stone_1").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Mini_Stone_1>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Mini_Stone_2
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Mini_Stone_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Mini_Stone_2>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Mini_Stone_3
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Mini_Stone_3").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Mini_Stone_3>(buildingProperty, buildingProperty);
+	}
+
+
+
+
+
+	//Test
+	{
+		//objectFactory->Register<GrabbedObject>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");
+		//objectFactory->Register<TriggerArea>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");
+		//objectFactory->Register<TestSprite>();
+	}
 
 	//RegisterHelp<Obj_Props_Bermiore_Loom_1>(L"Obj_Props_Bermiore_Loom_1", loadManager, objectFactory);
 	//RegisterHelp<Obj_Props_Bermiore_Loom_2>(L"Obj_Props_Bermiore_Loom_2", loadManager, objectFactory);
-	//RegisterHelp<Obj_Props_Bermiore_Cloth_1>(L"Obj_Props_Bermiore_Cloth_1", loadManager, objectFactory);
-	//RegisterHelp<Obj_Props_Bermiore_Cloth_2>(L"Obj_Props_Bermiore_Cloth_2", loadManager, objectFactory);
 
-	//RegisterHelp<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", loadManager, objectFactory);
-
-	RegisterHelp<Obj_Buildings_Hide_House_1>(L"Obj_Buildings_Hide_House_1", loadManager, objectFactory);
-	RegisterHelp<Obj_Buildings_Hide_House_2>(L"Obj_Buildings_Hide_House_2", loadManager, objectFactory);
-	RegisterHelp<Obj_Buildings_Hide_House_3>(L"Obj_Buildings_Hide_House_3", loadManager, objectFactory);
-	RegisterHelp<Obj_Buildings_Hide_House_4>(L"Obj_Buildings_Hide_House_4", loadManager, objectFactory);
-
-	RegisterHelp<Obj_Buildings_Ornoa_House_1>(L"Obj_Buildings_Ornoa_House_1", loadManager, objectFactory);
-	RegisterHelp<Obj_Buildings_Ornoa_House_2>(L"Obj_Buildings_Ornoa_House_2", loadManager, objectFactory);
-	//RegisterHelp<Obj_Buildings_Ornoa_House_3>(L"Obj_Buildings_Ornoa_House_3", loadManager, objectFactory);
-	//RegisterHelp<Obj_Buildings_Ornoa_House_4>(L"Obj_Buildings_Ornoa_House_4", loadManager, objectFactory);
-
-	const auto componentFactory = contentManager->GetComponentFactory();
-	componentFactory->Register<RemoteMove>();
-	componentFactory->Register<TriggerBox>();
+	// Components
+	{
+		const auto componentFactory = contentManager->GetComponentFactory();
+		componentFactory->Register<RemoteMove>();
+		componentFactory->Register<TriggerBox>();
+	}
 }
 
 void GameClient::Application::PrepareInitialWorld(Engine::Content::Factory::World* worldFactory)

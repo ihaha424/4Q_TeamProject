@@ -165,7 +165,8 @@ void Engine::Application::Register(Content::IManager* contentManager, Load::IMan
 	componentFactory->Register<Component::Movement>();
 	componentFactory->Register<Component::Light>();
 	componentFactory->Register<Component::StaticMesh>();
-	componentFactory->Register<Component::Camera>(30.f, 5000.f, _size, std::numbers::pi_v<float> / 4);
+	componentFactory->Register<Component::Camera>(1.f, 5000.f, _size, std::numbers::pi_v<float> / 4);
+	componentFactory->Register<Component::ShadowCamera>(500.f, 20000.f, _size, std::numbers::pi_v<float> / 4);
 	componentFactory->Register<Component::Text>();
 	componentFactory->Register<Component::SkeletalMesh>();
 	componentFactory->Register<Component::Animator>();
@@ -183,6 +184,7 @@ void Engine::Application::Register(Content::IManager* contentManager, Load::IMan
 	componentFactory->Register<Component::BackgroundMusic>();
 	componentFactory->Register<Component::Listener>();
 	componentFactory->Register<Component::Sprite>();
+	componentFactory->Register<Component::LineWave>();
 	// TODO: Register other components.
 }
 

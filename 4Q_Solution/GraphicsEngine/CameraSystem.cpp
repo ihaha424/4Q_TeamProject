@@ -14,6 +14,17 @@ void CameraSystem::SetCurrentCamera(const wchar_t* name)
 	_pCurrentCamera = _cameras[name];
 }
 
+void CameraSystem::SetShadowCamera(const wchar_t* name)
+{
+	if (_cameras.find(name) == _cameras.end())
+	{
+		ASSERT(false, L"No cameras were found with that name.");
+		return;
+	}
+
+	_pShadowCamera = _cameras[name];
+}
+
 void CameraSystem::Release()
 {
 	delete this;
@@ -26,13 +37,17 @@ void CameraSystem::CreateCamera(GE::ICamera** ppCamera)
 
 void CameraSystem::Update()
 {
-	if (nullptr == _pCurrentCamera)
+	if (_pCurrentCamera)
 	{
+		_pCurrentCamera->Update();
 		// ASSERT(false, L"No cameras are currently set up.");
-		return;
+		// return;
 	}
 
-	_pCurrentCamera->Update();
+	if (_pShadowCamera)
+	{
+		_pShadowCamera->Update();
+	}
 }
 
 void CameraSystem::RegisterCamera(const wchar_t* name, GE::ICamera* pCaemra)

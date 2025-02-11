@@ -15,12 +15,11 @@ cbuffer ViewProjection
     matrix shadowVP;
 }
 
-cbuffer CameraData
+cbuffer CameraDesc : register(b1)
 {
-    matrix view;
-    matrix projection;
+    matrix viewprojInv;
     float3 cameraPosition;
-};
+}
 
 [maxvertexcount(4)]
 void main(line VS_INPUT input[2], inout TriangleStream<VS_OUTPUT> triStream)

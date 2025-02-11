@@ -179,10 +179,10 @@ void DX11Renderer::ShadowPass()
 		shadowPosition = pShadowCamera->GetPosition();
 	}
 
-	float distance = 500.f;
+	float distance = 1000.f;
 
 	XMVECTOR direction = XMVector3Normalize(-pMainLight->_lightData.data);
-	XMVECTOR lightPosition = direction * distance + XMVectorSet(0.f, distance, 0.f, 0.f);
+	XMVECTOR lightPosition = direction * distance * 4 + XMVectorSet(0.f, distance * 4, 0.f, 0.f);
 	XMVECTOR lightTarget = XMVectorZero();
 	XMVECTOR lightUp = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 
@@ -191,14 +191,14 @@ void DX11Renderer::ShadowPass()
 	float viewWidth = SHADOW_WIDTH;
 	float viewHeight = SHADOW_HEIGHT;
 	float nearPlane = distance;
-	float farPlane = 20000.f;
+	float farPlane = 7500.f;
 	
 	ViewProjection vp{};
 	CameraDesc cameraDesc{};
 
 	//XMMATRIX shadowProjection = XMMatrixPerspectiveFovLH(XM_PIDIV4, 1, nearPlane, farPlane);
 	XMMATRIX shadowProjection = XMMatrixOrthographicLH(SHADOW_WIDTH, SHADOW_HEIGHT, nearPlane, farPlane);
-
+	
 	vp.shadowVP = XMMatrixTranspose(shadowView * shadowProjection);
 	if (pCamera)
 	{
@@ -206,8 +206,8 @@ void DX11Renderer::ShadowPass()
 		cameraDesc.cameraPosition = pCamera->GetPosition();
 	}
 	
-	vp.vp = XMMatrixTranspose(vp.vp);
 	cameraDesc.vpInvers = XMMatrixTranspose(XMMatrixInverse(nullptr, vp.vp));
+	vp.vp = XMMatrixTranspose(vp.vp);
 
 	g_pConstantBuffer->UpdateConstantBuffer(L"ViewProjection", &vp);
 	g_pConstantBuffer->UpdateConstantBuffer(L"CameraDesc", &cameraDesc);

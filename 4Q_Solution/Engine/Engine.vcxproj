@@ -302,6 +302,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="RigidStaticComponent.h" />
     <ClInclude Include="SafeDelete.h" />
     <ClInclude Include="SafeFinalize.h" />
+    <ClInclude Include="ShadowCamera.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="PhysicsScene.h" />
     <ClInclude Include="ServerNetworkManager.h" />
@@ -452,6 +453,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="RigidStaticComponent.cpp" />
     <ClCompile Include="SafeDelete.cpp" />
     <ClCompile Include="SafeFinalize.cpp" />
+    <ClCompile Include="ShadowCamera.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="PhysicsScene.cpp" />
     <ClCompile Include="ServerNetworkManager.cpp" />

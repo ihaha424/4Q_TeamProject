@@ -91,7 +91,7 @@ void LineRenderer::Update(float deltaTime)
 {
     ID3D11DeviceContext* pDeviceContext = g_pGraphicDevice->GetDeviceContext();
     D3D11_MAPPED_SUBRESOURCE mappedResource;
-    HRESULT hr = pDeviceContext->Map(_pVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);    
+    HRESULT hr = pDeviceContext->Map(_pVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 
     Line* vertices = reinterpret_cast<Line*>(mappedResource.pData);
     vertices[0].position = Vector4(*_pSrcPosition);

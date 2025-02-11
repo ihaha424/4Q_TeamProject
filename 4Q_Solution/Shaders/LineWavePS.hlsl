@@ -29,7 +29,7 @@ float4 main(PS_INPUT input) : SV_Target
     float mask = txMask.Sample(samLinear_wrap, input.uv).r;
     float noise = random(input.uv * waveTime * 10.0);
     
-    float3 baseColor = float3(0, 0.5, 1) * txGradient.Sample(samLinear_wrap, input.uv).r;    
+    float3 baseColor = txGradient.Sample(samLinear_wrap, input.uv).rgb;
     float4 color = float4(baseColor * base + baseColor, 1);
     color.a = mask;
     

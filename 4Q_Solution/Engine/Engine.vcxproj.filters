@@ -990,6 +990,9 @@
     <ClInclude Include="LineWave.h">
       <Filter>Components\LineWave</Filter>
     </ClInclude>
+    <ClInclude Include="ShadowCamera.h">
+      <Filter>Components\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1390,6 +1393,9 @@
     </ClCompile>
     <ClCompile Include="CameraRail.cpp">
       <Filter>Object\CameraRail</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowCamera.cpp">
+      <Filter>Components\Camera</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

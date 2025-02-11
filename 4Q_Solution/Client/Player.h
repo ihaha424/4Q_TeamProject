@@ -57,6 +57,7 @@ protected:
 	Engine::Component::SkeletalMesh* _skeletalMesh;
 	Engine::Component::Animator* _animator;
 	Engine::Component::FixedArm* _fixedArm;
+	Engine::Component::ShadowCamera* _shadowCamera;
 
 	Engine::Component::ChractorController* _rigid;
 	Engine::Component::Synchronize* _sync;

@@ -75,6 +75,13 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<BG_Ornoa_Cloth_3>(buildingProperty, buildingProperty);
 	}
 
+	// BG_Ornoa_Cloth_2
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"BG_Ornoa_Cloth_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<BG_Ornoa_Cloth_2>(buildingProperty, buildingProperty);
+	}
+
 	//Test PickingObejct
 	{
 		objectFactory->Register<GrabbedObject>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");

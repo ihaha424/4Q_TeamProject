@@ -5,29 +5,48 @@
 
 void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 {
+	//auto object = GameClient::Application::GetLoadManager()->GetObjectCloneData(L"BG_Ornoa_Cloth_2");
+	//for (auto& data : object)
+	//{
+	//	auto building = objectFactory->Clone<BG_Ornoa_Cloth_2>(this);
+	//	building->SetisDynamic(data.GetProperty<bool>(L"isDynamic").value());
+	//	building->SetIsPublic(data.GetProperty<bool>(L"isPublic").value());
+	//	building->SetHasMesh(data.GetProperty<bool>(L"hasMesh").value());
+	//	building->SetTransform({
+	//			data.GetProperty<Engine::Math::Vector3>(L"position").value(),
+	//			data.GetProperty<Engine::Math::Quaternion>(L"rotation").value(),
+	//			data.GetProperty<Engine::Math::Vector3>(L"scale").value() * 100.
+	//		});
+	//	building->SetBoxPosition({ data.GetProperty<Engine::Math::Vector3>(L"boxPosition").value() });
+	//	building->SetBoxScale(data.GetProperty<Engine::Math::Vector3>(L"boxScale").value());
+	//}
+
 	//_ray = objectFactory->Clone<Ray>(this);
 	_light = objectFactory->Clone<GlobalLight>(this);
 	_skyBox = objectFactory->Clone<SkyBox>(this);
 	_testSprite = objectFactory->Clone<TestSprite>(this);
 
-	helpPrepare<BG_Terrain>(L"BG_Terrain", objectFactory);
+	// BG_Terrain
+	{
+		helpPrepare<BG_Terrain>(L"BG_Terrain", objectFactory);
+	}
 
-	//// Obj_Bermiore_Fabric
+	// Obj_Bermiore_Fabric
 	{
 		helpPrepare<Obj_Bermiore_Fabric>(L"Obj_Bermiore_Fabric", objectFactory);
 	}
 
-	//// Obj_Bermiore_Hanger
+	// Obj_Bermiore_Hanger
 	{
 		helpPrepare<Obj_Bermiore_Hanger>(L"Obj_Bermiore_Hanger", objectFactory);
 	}
 
-	//// Obj_Shinave_SteppedSudium
+	// Obj_Shinave_SteppedSudium
 	{
 		helpPrepare<Obj_Shinave_SteppedSudium>(L"Obj_Shinave_SteppedSudium", objectFactory);
 	}
 
-	//// Obj_Ornoa_Print
+	// Obj_Ornoa_Print
 	{
 		helpPrepare<Obj_Ornoa_Print>(L"Obj_Ornoa_Print", objectFactory);
 	}
@@ -35,6 +54,11 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	// BG_Ornoa_Cloth_3
 	{
 		helpPrepare<BG_Ornoa_Cloth_3>(L"BG_Ornoa_Cloth_3", objectFactory);
+	}
+
+	// BG_Ornoa_Cloth_2
+	{
+		helpPrepare<BG_Ornoa_Cloth_2>(L"BG_Ornoa_Cloth_2", objectFactory);
 	}
 
 	////Test Grabbed Object Code -> Make and Load File Data

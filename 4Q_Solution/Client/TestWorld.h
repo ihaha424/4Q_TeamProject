@@ -1,7 +1,7 @@
 #pragma once
 #include "Application.h"
 #include "GlobalLight.h"
-#include "Terrain.h"
+#include "BG_Terrain.h"
 #include "SkyBox.h"
 
 #include "Ray.h"
@@ -15,6 +15,7 @@
 #include "PuzzleData.h"
 
 #include "TestSprite.h"
+#include "GameCoreData.h"
 
 
 
@@ -37,7 +38,7 @@ private:
 	Live* _live;
 	RemoteLive* _remoteLive;
 	GlobalLight* _light;
-	Terrain* _terrain;
+	BG_Terrain* _terrain;
 	SkyBox* _skyBox;
 	TestSprite* _testSprite;
 
@@ -69,6 +70,7 @@ private:
 					data.GetProperty<Engine::Math::Quaternion>(L"rotation").value(),
 					data.GetProperty<Engine::Math::Vector3>(L"scale").value()
 				});
+			building->SetBoxPosition({ data.GetProperty<Engine::Math::Vector3>(L"boxPosition").value() });
 			building->SetBoxScale(data.GetProperty<Engine::Math::Vector3>(L"boxScale").value());
 		}
 	}

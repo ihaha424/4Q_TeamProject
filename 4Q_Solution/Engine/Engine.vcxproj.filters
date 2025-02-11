@@ -502,6 +502,9 @@
     <Filter Include="Components\Sprite">
       <UniqueIdentifier>{8a626a3c-9442-4b0d-b783-1c6c0988859e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\CameraRail">
+      <UniqueIdentifier>{a95f88e6-af49-42f3-8695-1ec12b734902}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Components\LineWave">
       <UniqueIdentifier>{d40712da-0a65-47bd-9ab1-07f6cbe62826}</UniqueIdentifier>
     </Filter>
@@ -981,6 +984,9 @@
     <ClInclude Include="Sprite.h">
       <Filter>Components\Sprite</Filter>
     </ClInclude>
+    <ClInclude Include="CameraRail.h">
+      <Filter>Object\CameraRail</Filter>
+    </ClInclude>
     <ClInclude Include="LineWave.h">
       <Filter>Components\LineWave</Filter>
     </ClInclude>
@@ -1381,6 +1387,9 @@
     </ClCompile>
     <ClCompile Include="LineWave.cpp">
       <Filter>Components\LineWave</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraRail.cpp">
+      <Filter>Object\CameraRail</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

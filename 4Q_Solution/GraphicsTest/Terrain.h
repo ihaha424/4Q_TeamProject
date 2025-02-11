@@ -1,9 +1,9 @@
 #pragma once
 
-class Terrain : public Engine::Object
+class BG_Terrain : public Engine::Object
 {
 public:
-	explicit Terrain(std::filesystem::path&& meshPath);
+	explicit BG_Terrain(std::filesystem::path&& meshPath);
 
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
 

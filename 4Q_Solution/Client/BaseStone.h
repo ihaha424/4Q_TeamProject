@@ -1,7 +1,7 @@
 #pragma once
 #include "InteractObject.h"
 #include "TriggerBox.h"
-#include "Puzzle_00.h"
+#include "Puzzle_01.h"
 
 class BaseStone
 	:public InteractObject

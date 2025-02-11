@@ -14,6 +14,7 @@ public:
 	void SetisDynamic(bool isDynamic);
 	void SetHasMesh(bool hasMesh);
 	void SetBoxScale(Engine::Math::Vector3 boxScale);
+	void SetBoxPosition(Engine::Math::Vector3 boxPosition);
 
 protected:
 	void DisposeComponents() override;
@@ -34,5 +35,6 @@ protected:
 	bool _isDynamic;
 	bool _hasMesh;
 	Engine::Math::Vector3 _boxScale;
+	Engine::Math::Vector3 _boxPosition;
 };
 

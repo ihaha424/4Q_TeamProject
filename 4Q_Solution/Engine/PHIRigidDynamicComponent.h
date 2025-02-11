@@ -19,6 +19,7 @@ namespace Engine::PHI
 		 Math::Quaternion GetRotation() const override;
 		void SetTransform(const Transform& transform) override;
 		 Transform GetTransform() const override;
+		 Engine::Math::Vector3 GetBounds()const override;
 
 		/********************************
 				Rigid Dynamic

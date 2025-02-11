@@ -188,6 +188,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Application.h" />
     <ClInclude Include="BackgroundMusicComponent.h" />
     <ClInclude Include="BitFlag.h" />
+    <ClInclude Include="CameraRail.h" />
     <ClInclude Include="ChractorController.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DSHLoggerManager.h" />
@@ -444,6 +445,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="PacketFilter.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Quaternion.cpp" />
+    <ClCompile Include="CameraRail.cpp" />
     <ClCompile Include="RigidComponent.cpp" />
     <ClCompile Include="RigidDynamicComponent.cpp" />
     <ClCompile Include="RigidKinematicComponent.cpp" />

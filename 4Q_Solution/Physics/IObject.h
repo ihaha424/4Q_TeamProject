@@ -30,6 +30,8 @@ namespace PhysicsEngineAPI
 		virtual void	SetTransform(const Utils::Math::Transform& transform)	= 0;
 		virtual 	Utils::Math::Transform GetTransform() const				= 0;
 
+		virtual Utils::Math::Vector3 GetBounds() const = 0;
+
 		virtual void*	GetPhysicsObject() = 0;
 	public:
 		// Todo:

@@ -12,9 +12,9 @@ namespace Engine::Component
 	{
 		Component::Initialize(modules);
 		static_cast<Physics::RigidStaticComponent*>(_rigidbody)->Initialize();
-		static_cast<Physics::RigidComponent*>(_boundBox)->Initialize();
+		//static_cast<Physics::RigidComponent*>(_boundBox)->Initialize();
 		_rigidbody->SetOwner(GetOwner());
-		_boundBox->SetOwner(GetOwner());
+		//_boundBox->SetOwner(GetOwner());
 	}
 
 	void RigidStatic::Attach()
@@ -39,6 +39,6 @@ namespace Engine::Component
 	{
 		Component::Finalize();
 		static_cast<Engine::Physics::RigidStaticComponent*>(_rigidbody)->Finalize();
-		static_cast<Engine::Physics::RigidComponent*>(_boundBox)->Finalize();
+		//static_cast<Engine::Physics::RigidComponent*>(_boundBox)->Finalize();
 	}
 }

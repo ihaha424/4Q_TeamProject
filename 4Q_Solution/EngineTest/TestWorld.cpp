@@ -20,7 +20,7 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	//_player = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Player>(this);
 	_player = objectFactory->Clone<Player>(this);
 	_light = objectFactory->Clone<GlobalLight>(this);
-	_terrain = objectFactory->Clone<Terrain>(this);
+	_terrain = objectFactory->Clone<BG_Terrain>(this);
 }
 
 void TestWorld::PreInitialize(const Engine::Modules& modules)

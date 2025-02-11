@@ -11,6 +11,11 @@ namespace PhysicsEngineAPI
 	PhysXActor::~PhysXActor() { Release(); }
 	void PhysXActor::Release() { function.Release(actor); }
 
+	Utils::Math::Vector3 PhysXActor::GetBounds() const
+	{
+		return function.GetBounds(actor);
+	}
+
 	void* PhysXActor::GetPhysicsObject()
 	{
 		return actor;

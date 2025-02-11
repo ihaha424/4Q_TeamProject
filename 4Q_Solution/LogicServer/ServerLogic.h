@@ -1,4 +1,5 @@
 #pragma once
+#include "numbers"
 #include "Server/ServerEntrance.h"
 #include "directxtk/SimpleMath.h"
 #include "DSHTime/Time.h"
@@ -28,6 +29,7 @@ class ServerLogic
 		Engine::Math::Vector3 _scale;
 		bool _public;
 		bool _meshCollider;
+		Engine::Math::Vector3 _boxScale;
 		Engine::Physics::IRigidStaticComponent* _staticRigid = nullptr;
 		Engine::Physics::IRigidDynamicComponent* _dynamicRigid = nullptr;
 	};
@@ -44,7 +46,7 @@ class ServerLogic
 		Engine::Physics::RigidStaticComponent* _staticRigid = nullptr;
 	};
 
-	struct TriggerBox : public Object {
+	struct TriggerBox {
 		Engine::Physics::RigidStaticComponent* _staticRigid = nullptr;
 	};
 
@@ -70,14 +72,15 @@ public:
 	void Finalize();
 
 
+
 private:
 	DSH::Time::ISystem* _system = nullptr;
 	DSH::Time::ITickTimer* _timer = nullptr;
 
 	PacketQueue* _messageContainer = nullptr;
 
-	Player _playerSlot[2]{};
 	Engine::Math::Vector3 _lastSendPosition[2]{};
+	Player _playerSlot[2]{};
 	Object _objs[3]{};
 	Ground _ground{};
 	std::vector<Object*> _buildings;
@@ -108,7 +111,6 @@ private:
 	PlayMsg::PuzzleStart _puzzleStart;
 	PlayMsg::ObjectActive _objectActive;
 	PlayMsg::ObjectDisable _objectDisable;
-
 
 	std::string _msgBuffer = std::string(256, '\0');
 
@@ -162,7 +164,7 @@ private:
 	void RegistStaticPhysics(Object& obj, Engine::Math::Vector3 scale);
 	void RegistPlayer(Player* player);
 	void RegistGround(Ground& ground);
-	void RegistTrigerBox(TriggerBox& triggerBox);
+	void RegistTriggerBox(TriggerBox& triggerBox);
 
 private:
 	// =============================
@@ -207,15 +209,27 @@ private:
 	// 오브젝트를 상호작용 할 때마다 갱신해줘야함. 
 	int _currentInteractObject = -1;
 
+
+
+	// Puzzle 1
+
 	// Puzzle 2
 
 	std::vector<int> _balls	{ 1, 1, 1, 1, 1, 1 };
 	std::vector<int> _dir	{ 1, 1, 1, 1, 1, 1 };
 
+	// Puzzle 3
+
+	//미로가 나오면 오브젝트 트리거 배치.
+
 	// Puzzle 4
 
 	std::vector<int> _interactSequence{ 14104, 14102, 14106, 14105, 14103 };
 	int _currentInteractIndex = 0;
+
+	// Puzzle 5
+
+	// Puzzle 6
 
 
 	void PuzzleProcess(int objectId);
@@ -231,6 +245,6 @@ private:
 	
 	// =============================
 
-	
+
 };
 

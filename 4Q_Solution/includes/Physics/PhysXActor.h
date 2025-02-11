@@ -22,6 +22,8 @@ namespace PhysicsEngineAPI
 		void	SetTransform(const Utils::Math::Transform& transform)	override;
 			Utils::Math::Transform GetTransform() const				override;
 
+			Utils::Math::Vector3 GetBounds() const override;
+
 		void SetName(const char* name)	override;
 		const char* GetName() const		override;
 

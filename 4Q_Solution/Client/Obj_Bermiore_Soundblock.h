@@ -2,25 +2,20 @@
 #include "InteractObject.h"
 #include "Puzzle_01.h"
 
-class BaseWoolball : public InteractObject
+class Obj_Bermiore_Soundblock : public InteractObject
 {
 public:
-	explicit BaseWoolball(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath);
-	virtual ~BaseWoolball() = default;
+	explicit Obj_Bermiore_Soundblock(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath);
+	virtual ~Obj_Bermiore_Soundblock() = default;
 
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
 
 	void SendInteractToServer();
+	void PlaySound();
 protected:
 	void DisposeComponents() override;
 	void PreInitialize(const Engine::Modules& modules) override;
 
 	Engine::Component::Synchronize* _sync;
-
-	int _pos[3];
-	int _index;
-	int direction;
-	bool _activate;
 };
-
 

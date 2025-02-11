@@ -1,19 +1,18 @@
 #include "pch.h"
-#include "BaseWoolball.h"
+#include "Obj_Bermiore_Soundblock.h"
 
-BaseWoolball::BaseWoolball(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath) :
-	InteractObject(meshPath, meshPath),
-	_pos{ 0, -30, -60 }, _index{ 0 }, _activate{ false }, direction{ 1 }
+Obj_Bermiore_Soundblock::Obj_Bermiore_Soundblock(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath)
+	: InteractObject(meshPath, meshPath), _sync{ nullptr }
 {
 }
 
-void BaseWoolball::Prepare(Engine::Content::Factory::Component* componentFactory)
+void Obj_Bermiore_Soundblock::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
 	InteractObject::Prepare(componentFactory);
 	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
 }
 
-void BaseWoolball::SendInteractToServer()
+void Obj_Bermiore_Soundblock::SendInteractToServer()
 {
 	_sync->_interactObject.set_objectserialnumber(_sync->GetSerialNumber());
 	_sync->_interactObject.SerializeToString(&_sync->_msgBuffer);
@@ -25,13 +24,18 @@ void BaseWoolball::SendInteractToServer()
 	);
 }
 
-void BaseWoolball::DisposeComponents()
+void Obj_Bermiore_Soundblock::PlaySound()
+{
+
+}
+
+void Obj_Bermiore_Soundblock::DisposeComponents()
 {
 	InteractObject::DisposeComponents();
 	_sync->Dispose();
 }
 
-void BaseWoolball::PreInitialize(const Engine::Modules& modules)
+void Obj_Bermiore_Soundblock::PreInitialize(const Engine::Modules& modules)
 {
 	InteractObject::PreInitialize(modules);
 	myManager = modules.gameStateManager->FindSubManager(L"puzzle_01");
@@ -40,4 +44,6 @@ void BaseWoolball::PreInitialize(const Engine::Modules& modules)
 			DataChangeCallBack(name, value);
 		}
 	, this);
+	_sync->AddCallback((short)PacketID::ObjectActive, &Obj_Bermiore_Soundblock::PlaySound, this);
+	_sync->SetSerialNumber(12108);
 }

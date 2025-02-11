@@ -474,6 +474,9 @@
     <ClInclude Include="Obj_Shinave_Platform_Spawn_3.h">
       <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Obj_Bermiore_Soundblock.h">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -772,6 +775,9 @@
     </ClCompile>
     <ClCompile Include="Obj_Shinave_Platform_Spawn_3.cpp">
       <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Bermiore_Soundblock.cpp">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

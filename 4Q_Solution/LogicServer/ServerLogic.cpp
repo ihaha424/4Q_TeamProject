@@ -694,13 +694,14 @@ void ServerLogic::RegistPlayer(Player* player)
     cd.height = 10.f;
     cd.radius = 2.f;
     cd.gravity = { 0.f, -9.8f * 10, 0.f };
-    cd.contactOffset = 0.001f;
+    cd.contactOffset = 0.2f;
     cd.stepOffset = 10.f;
-    cd.slopeLimit = 0.707f;
+    cd.slopeLimit = 0.1f;
     Engine::Physics::IController* controller = player->_controller;
     _physicsManager->CreatePlayerController(&controller, _mainScene, cd);
     player->_controller = static_cast<Engine::Physics::Controller*>(controller);
     player->_controller->SetOwner(&player);
+    player->_controller->SetBottomPosition(Engine::Math::Vector3(0.f, 10.f, 0.f));
     player->_controller->Initialize();
     player->_controller->SetPosition(Engine::Math::Vector3(0, 300, 0));
 }
@@ -709,7 +710,7 @@ void ServerLogic::RegistGround(Ground& ground)
 {
     Engine::Physics::GeometryDesc geometryDesc;
     geometryDesc.data = { 2.5f, 2.5f, 6.5f };
-    _physicsManager->LoadHeightMap(geometryDesc, "terrain", "Assets/Models/Height_Map.png");
+    _physicsManager->LoadHeightMap(geometryDesc, "terrain", "Assets/Models/Smoothed_Height_Map.png");
     //_physicsManager->LoadTriangleMesh(geometryDesc, "terrain", "Assets/Test/Landscape03.fbx");
 
     Engine::Transform transform{};
@@ -717,7 +718,7 @@ void ServerLogic::RegistGround(Ground& ground)
     _physicsManager->CreateTriangleStatic(&staticrigid, "terrain", { {0.3f,0.f,0.f } }, transform);
     ground._staticRigid = static_cast<Engine::Physics::RigidStaticComponent*>(staticrigid);
     _mainScene->AddActor(ground._staticRigid);
-    ground._staticRigid->SetTranslate({ -2560.f, -1450.f, -2560.f });
+    ground._staticRigid->SetTranslate({ -2560.f, -1420.f, -2560.f });
     auto tempRotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(-std::numbers::pi_v<float> * 0.5f, 0.f, 0.f);
     ground._staticRigid->SetRotation(tempRotation);
 

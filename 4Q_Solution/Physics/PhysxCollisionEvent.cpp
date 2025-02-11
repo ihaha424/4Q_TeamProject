@@ -42,8 +42,8 @@ namespace PhysicsEngineAPI
 
 		//TODO: 일단 접촉된 한 지점의 pos와 normal값만 가져옴 나중에 배열로 받을 수 있도록 수정 필요
 		Utils::DataStructure::ContactEvent contactEvent{};
-		if(nullptr != pairs[0].contactImpulses)
-			contactEvent.impulse = *pairs[0].contactImpulses;
+		//if(nullptr != pairs[0].contactImpulses)
+		//	contactEvent.impulse = *pairs[0].contactImpulses;
 		ICollision* actor1 = static_cast<ICollision*>(pairHeader.actors[0]->userData);
 		ICollision* actor2 = static_cast<ICollision*>(pairHeader.actors[1]->userData);
 

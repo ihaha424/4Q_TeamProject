@@ -239,6 +239,13 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_Shinave_Stone_1>(buildingProperty, buildingProperty);
 	}
 
+	// Obj_Shinave_Stone_2
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Stone_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Stone_2>(buildingProperty, buildingProperty);
+	}
+
 
 
 
@@ -256,7 +263,6 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	
 	//Puzzle01
 	{
-		RegisterHelp<Obj_Shinave_Stone_2>(L"Obj_Shinave_Stone_2", loadManager, objectFactory);
 		RegisterHelp<Obj_Shinave_Stone_3>(L"Obj_Shinave_Stone_3", loadManager, objectFactory);
 		RegisterHelp<Obj_Shinave_Stone_4>(L"Obj_Shinave_Stone_4", loadManager, objectFactory);
 		RegisterHelp<Obj_Shinave_Stone_5>(L"Obj_Shinave_Stone_5", loadManager, objectFactory);

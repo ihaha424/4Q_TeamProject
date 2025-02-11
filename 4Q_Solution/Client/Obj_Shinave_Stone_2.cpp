@@ -1,8 +1,9 @@
 #include "pch.h"
 #include "Obj_Shinave_Stone_2.h"
 
-Obj_Shinave_Stone_2::Obj_Shinave_Stone_2(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath)
-	: BaseStone(std::forward<std::filesystem::path>(meshPath), std::forward<std::filesystem::path>(physicsPath))
+Obj_Shinave_Stone_2::Obj_Shinave_Stone_2(const std::filesystem::path& meshPath,
+	const std::filesystem::path& physicsPath):
+	BaseStone(meshPath, physicsPath)
 {
 	index = 1;
 }

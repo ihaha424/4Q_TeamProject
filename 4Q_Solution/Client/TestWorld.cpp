@@ -239,6 +239,10 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_Shinave_Platform_Spawn_2>(L"Obj_Shinave_Platform_Spawn_2", objectFactory);
 	}
 
+	// Obj_Shinave_Platform_Spawn_3
+	{
+		helpPrepare<Obj_Shinave_Platform_Spawn_3>(L"Obj_Shinave_Platform_Spawn_3", objectFactory);
+	}
 
 
 	////Test Grabbed Object Code -> Make and Load File Data

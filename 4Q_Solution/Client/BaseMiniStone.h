@@ -1,15 +1,16 @@
 #pragma once
 #include "InteractObject.h"
 
-class Obj_Bermiore_Fabric : public StaticObject
+class BaseMiniStone : public InteractObject
 {
 public:
-	explicit Obj_Bermiore_Fabric(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath);
+	explicit BaseMiniStone(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
+	virtual ~BaseMiniStone() = default;
 
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
 
-	void Interact() override;
-private:
+	void SendInteractToServer();
+protected:
 	void DisposeComponents() override;
 	void PreInitialize(const Engine::Modules& modules) override;
 

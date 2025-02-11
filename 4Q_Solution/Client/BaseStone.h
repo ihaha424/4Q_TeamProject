@@ -16,8 +16,11 @@ protected:
 	void DisposeComponents() override;
 	void PreInitialize(const Engine::Modules& modules) override;
 
+	void SendInteractToServer();
 protected:
 	Engine::GameState::IManager* myManager;
 	unsigned int index;
+
+	Engine::Component::Synchronize* _sync;
 };
 

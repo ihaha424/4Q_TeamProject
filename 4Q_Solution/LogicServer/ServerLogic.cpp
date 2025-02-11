@@ -691,16 +691,15 @@ void ServerLogic::RegistPlayer(Player* player)
 {
     Engine::Physics::ControllerDesc cd;
     cd.position = Engine::Math::Vector3(0, 0, 0);
-    cd.height = 100.f;
-    cd.radius = 20.f;
+    cd.height = 10.f;
+    cd.radius = 2.f;
     cd.gravity = { 0.f, -9.8f * 10, 0.f };
     cd.contactOffset = 0.001f;
-    cd.stepOffset = 1.f;
+    cd.stepOffset = 10.f;
     cd.slopeLimit = 0.707f;
     Engine::Physics::IController* controller = player->_controller;
     _physicsManager->CreatePlayerController(&controller, _mainScene, cd);
     player->_controller = static_cast<Engine::Physics::Controller*>(controller);
-    player->_controller->SetBottomPosition({0,10,0});
     player->_controller->SetOwner(&player);
     player->_controller->Initialize();
     player->_controller->SetPosition(Engine::Math::Vector3(0, 300, 0));
@@ -719,7 +718,7 @@ void ServerLogic::RegistGround(Ground& ground)
     ground._staticRigid = static_cast<Engine::Physics::RigidStaticComponent*>(staticrigid);
     _mainScene->AddActor(ground._staticRigid);
     ground._staticRigid->SetTranslate({ -2560.f, -1450.f, -2560.f });
-    auto tempRotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(-std::numbers::pi_v<float> *0.5f, 0.f, 0.f);
+    auto tempRotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(-std::numbers::pi_v<float> * 0.5f, 0.f, 0.f);
     ground._staticRigid->SetRotation(tempRotation);
 
     ground._staticRigid->SetOwner(&ground);

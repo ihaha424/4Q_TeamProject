@@ -1,15 +1,16 @@
 #pragma once
 #include "InteractObject.h"
 
-class Obj_Bermiore_Fabric : public StaticObject
+class Obj_Sudium_bouquet : public InteractObject
 {
 public:
-	explicit Obj_Bermiore_Fabric(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath);
+	explicit Obj_Sudium_bouquet(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
+
+	virtual ~Obj_Sudium_bouquet() = default;
 
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
-
 	void Interact() override;
-private:
+protected:
 	void DisposeComponents() override;
 	void PreInitialize(const Engine::Modules& modules) override;
 
@@ -17,5 +18,6 @@ private:
 	unsigned int _index;
 
 	Engine::Component::Synchronize* _sync;
+
 };
 

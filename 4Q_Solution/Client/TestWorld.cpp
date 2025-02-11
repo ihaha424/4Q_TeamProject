@@ -267,6 +267,10 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_Buildings_Bermiore_Atelier_2>(L"Obj_Buildings_Bermiore_Atelier_2", objectFactory);
 	}
 
+	// Obj_Buildings_Bermiore_Atelier_3
+	{
+		helpPrepare<Obj_Buildings_Bermiore_Atelier_3>(L"Obj_Buildings_Bermiore_Atelier_3", objectFactory);
+	}
 
 
 }

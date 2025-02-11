@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "TriggerArea.h"
 
-TriggerArea::TriggerArea(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath)\
-	: StaticObject(std::forward<std::filesystem::path>(meshPath), std::forward<std::filesystem::path>(physicsPath))
+TriggerArea::TriggerArea(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath)
+	: StaticObject(meshPath, physicsPath)
 {
 }
 
@@ -40,11 +40,11 @@ void TriggerArea::PreInitialize(const Engine::Modules& modules)
 
 	// TODO Bind Trigger(상속받은 오브젝트가 PreInitialize단계에서 트리거를 바인딩 하면 됨)
 	// TestCode TODO: Delete
-	_trigger->BindBeginInteraction([]() {
-			std::cout << "TriggerBegine!\n";
-		});
-	_trigger->BindEndInteraction([]() {
-			std::cout << "TriggerEnd!\n";
-		});
+	//_trigger->BindBeginInteraction([]() {
+	//		std::cout << "TriggerBegine!\n";
+	//	});
+	//_trigger->BindEndInteraction([]() {
+	//		std::cout << "TriggerEnd!\n";
+	//	});
 }
 

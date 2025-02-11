@@ -3,7 +3,7 @@ class InteractObject
 	: public Engine::Object
 {
 public:
-	InteractObject(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath);
+	explicit InteractObject(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath);
 	virtual ~InteractObject() = default;
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
 

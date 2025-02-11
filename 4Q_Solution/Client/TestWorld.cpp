@@ -61,6 +61,11 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<BG_Ornoa_Cloth_2>(L"BG_Ornoa_Cloth_2", objectFactory);
 	}
 
+	// BG_Ornoa_Cloth_1
+	{
+		helpPrepare<BG_Ornoa_Cloth_1>(L"BG_Ornoa_Cloth_1", objectFactory);
+	}
+
 	////Test Grabbed Object Code -> Make and Load File Data
 	//{
 	//	GrabbedObject* building = objectFactory->Clone<GrabbedObject>(this);

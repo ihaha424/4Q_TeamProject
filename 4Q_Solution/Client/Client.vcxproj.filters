@@ -133,6 +133,9 @@
     <Filter Include="Object\Puzzle\06. NotPuzzel\BG_Ornoa_Cloth_2">
       <UniqueIdentifier>{56f9495e-1aa3-4676-bd9c-3d3a11e9307e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Puzzle\06. NotPuzzel\BG_Ornoa_Cloth_1">
+      <UniqueIdentifier>{a3d322d4-a35c-4a8f-ae66-7c64b06078bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -462,6 +465,9 @@
     <ClInclude Include="BG_Ornoa_Cloth_2.h">
       <Filter>Object\Puzzle\06. NotPuzzel\BG_Ornoa_Cloth_2</Filter>
     </ClInclude>
+    <ClInclude Include="BG_Ornoa_Cloth_1.h">
+      <Filter>Object\Puzzle\06. NotPuzzel\BG_Ornoa_Cloth_1</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -751,6 +757,9 @@
     </ClCompile>
     <ClCompile Include="BG_Ornoa_Cloth_2.cpp">
       <Filter>Object\Puzzle\06. NotPuzzel\BG_Ornoa_Cloth_2</Filter>
+    </ClCompile>
+    <ClCompile Include="BG_Ornoa_Cloth_1.cpp">
+      <Filter>Object\Puzzle\06. NotPuzzel\BG_Ornoa_Cloth_1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

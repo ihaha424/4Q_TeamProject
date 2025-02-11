@@ -107,6 +107,11 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_Buildings_Hide_House_5>(L"Obj_Buildings_Hide_House_5", objectFactory);
 	}
 
+	// Obj_Buildings_Hide_House_4
+	{
+		helpPrepare<Obj_Buildings_Hide_House_4>(L"Obj_Buildings_Hide_House_4", objectFactory);
+	}
+
 	////Test Grabbed Object Code -> Make and Load File Data
 	//{
 	//	GrabbedObject* building = objectFactory->Clone<GrabbedObject>(this);

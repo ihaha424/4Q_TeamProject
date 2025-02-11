@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Application.h"
 
+#include "Obj_Bermiore_Fabric.h"
+#include "Obj_Bermiore_Hanger.h"
 #include "TestWorld.h"
 
 GameClient::Application::Application(const HINSTANCE instanceHandle) : Engine::Application(instanceHandle)
@@ -39,6 +41,20 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	objectFactory->Register<Live>(L"Assets/Models/Live.fbx");
 	objectFactory->Register<RemoteLive>(L"Assets/Models/Live.fbx");
 	objectFactory->Register<SkyBox>(L"Assets/Models/skybox.fbx");
+
+	// Obj_Bermiore_Fabric
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Fabric").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Bermiore_Fabric>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Bermiore_Hanger
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Hanger").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Bermiore_Hanger>(buildingProperty, buildingProperty);
+	}
 
 	//Test PickingObejct
 	{

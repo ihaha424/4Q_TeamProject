@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "StaticObject.h"
 
-StaticObject::StaticObject(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath)
-	: _staticMesh(nullptr), _meshPath(std::forward<std::filesystem::path>(meshPath))
-	, _rigidStatc{ nullptr }, _physicsPath{ std::forward<std::filesystem::path>(physicsPath) }
+StaticObject::StaticObject(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath)
+	: _staticMesh(nullptr), _meshPath(meshPath)
+	, _rigidStatc{ nullptr }, _physicsPath{ physicsPath }
 {
 }
 
@@ -50,7 +50,7 @@ void StaticObject::PreInitialize(const Engine::Modules& modules)
 	_staticMesh->SetFilePath(_meshPath);
 	_matrix = _transform.GetMatrix();
 	_staticMesh->SetMatrix(&_matrix);
-	
+
 	auto PhysicsManager = Engine::Application::GetPhysicsManager();
 	if (_hasMesh)
 	{

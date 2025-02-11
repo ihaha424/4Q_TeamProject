@@ -354,7 +354,7 @@
     <ClInclude Include="Obj_Mini_Stone_3.h">
       <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Mini_Stone_4.h">
+    <ClInclude Include="Obj_Mini_Stone_4.h">
       <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Puzzle_Mini_Stone_5.h">
@@ -677,7 +677,7 @@
     <ClCompile Include="Obj_Mini_Stone_3.cpp">
       <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Mini_Stone_4.cpp">
+    <ClCompile Include="Obj_Mini_Stone_4.cpp">
       <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Puzzle_Mini_Stone_5.cpp">

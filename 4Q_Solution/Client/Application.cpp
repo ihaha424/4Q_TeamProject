@@ -373,6 +373,12 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_Mini_Stone_3>(buildingProperty, buildingProperty);
 	}
 
+	// Obj_Mini_Stone_4
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Mini_Stone_4").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Mini_Stone_4>(buildingProperty, buildingProperty);
+	}
 
 
 

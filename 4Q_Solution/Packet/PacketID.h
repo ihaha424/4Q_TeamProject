@@ -8,7 +8,6 @@ enum class PacketID : short {
 	EnterAccept,
 	EnterReject,
 	Exit,
-	ExitOk,
 
 	// Sync To Client
 	Sync,
@@ -23,12 +22,12 @@ enum class PacketID : short {
 	PickObject,
 	PutObject,
 	PuzzleStart,
-	PuzzleProcess,
 	PuzzleSuccess,
 	SoundPlay,
 	InteractObject,
+	TriggerObject,
 	PlayDialog,
-	InteraceDialog,
+	InteractDialog,
 	QuestStart,
 	QuestClear,
 	ObjectActive,

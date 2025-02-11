@@ -102,6 +102,11 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		// TODO: Sudium Change
 	}
 
+	// Obj_Buildings_Hide_House_5
+	{
+		helpPrepare<Obj_Buildings_Hide_House_5>(L"Obj_Buildings_Hide_House_5", objectFactory);
+	}
+
 	////Test Grabbed Object Code -> Make and Load File Data
 	//{
 	//	GrabbedObject* building = objectFactory->Clone<GrabbedObject>(this);

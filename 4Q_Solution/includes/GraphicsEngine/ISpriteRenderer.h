@@ -6,8 +6,9 @@ namespace GE
 	struct SpriteDescription
 	{
 		enum Type { D2D, D3D, D3D_Billboard };
-		Type			type;
-		bool			activeDraw;
+		Type	type;
+		float	alpha;
+		bool	activeDraw;
 	};
 
 	class ISpriteRenderer : public IBase

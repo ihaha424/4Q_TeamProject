@@ -7,7 +7,6 @@ class VertexShader;
 class PixelShader;
 class Mesh;
 class SkyBoxRenderer;
-class ToneMapping;
 class AO;
 class DX11Renderer : public IRenderer
 {
@@ -31,12 +30,11 @@ private:
 
 	void ShadowPass();
 	void GBufferPass(std::list<DrawData>& noneAlphaMeshes);
-	void LigthingPass(SkyBoxRenderer* pSkyBox, std::list<DrawData>& alphaMeshes);
+	void LigthingPass(SkyBoxRenderer* pSkyBox, std::list<DrawData>& alphaMeshes, std::list<std::pair<unsigned int, SkyBoxRenderer*>>& skyBoxes);
 	void SkyBoxPass(std::list<std::pair<unsigned int, SkyBoxRenderer*>>& skyBoxes);
-	void PostProcessPass();
 	void DeferredLighting();
 	void ForwardLigthing(std::list<DrawData>& alphaMeshes);
-	void Blending(ID3D11RenderTargetView* pRTV, ID3D11ShaderResourceView* pSRV);
+	void AmbientOcclusion();
 	void RenderMesh(std::list<DrawData>& renderData, std::shared_ptr<PixelShader>& pixelShader);
 
 private:
@@ -61,15 +59,14 @@ private:
 	std::vector<Vector3>				_kernel;
 	D3D11_VIEWPORT						_viewport{};
 
-	// Filters
-	ToneMapping*						_pToneMapping{ nullptr };
+	// Filters	
+	AO*									_pSSAO{ nullptr };
 
 	// Shaders
 	std::shared_ptr<VertexShader>		_vsShadow[MeshType::End];
 	std::shared_ptr<PixelShader>		_psGBuffer;
 	std::shared_ptr<PixelShader>		_psDeferredLighting;
-	std::shared_ptr<PixelShader>		_psForwardLighting;
-	std::shared_ptr<PixelShader>		_psBlend;
+	std::shared_ptr<PixelShader>		_psForwardLighting;	
 
 	// Textures
 	std::shared_ptr<Texture>			_aoNoiseTexture{ nullptr };
@@ -84,8 +81,7 @@ private:
 	ID3D11ShaderResourceView*			_pShadowSRV{ nullptr };
 
 	// State
-	ID3D11BlendState*					_pDeferredBlendState{ nullptr };
-	ID3D11BlendState*					_pForwardBlendState{ nullptr };
+	
 	ID3D11RasterizerState*				_pRSSkyBoxState{ nullptr };
 	ID3D11DepthStencilState*			_pAlphaDepthState{ nullptr };
 };

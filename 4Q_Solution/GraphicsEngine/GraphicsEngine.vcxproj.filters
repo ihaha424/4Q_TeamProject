@@ -10,9 +10,6 @@
     <Filter Include="97. Include">
       <UniqueIdentifier>{a97467d8-ace0-4b6e-b8d2-a1ecd54cb9be}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. GraphicsSystem">
-      <UniqueIdentifier>{6e749ea3-408b-4e80-907f-75c2c39cf652}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. RenderSystem">
       <UniqueIdentifier>{8bd32af2-020e-45ea-9d95-035b7fc115e7}</UniqueIdentifier>
     </Filter>
@@ -75,9 +72,6 @@
     </Filter>
     <Filter Include="00. Common\HLSL\PostProcess">
       <UniqueIdentifier>{1ee5dd36-7358-4c3f-9efc-b15363fe9739}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. PostProcessSystem">
-      <UniqueIdentifier>{a4723174-8b6b-44ef-9d38-c30f6294bcb7}</UniqueIdentifier>
     </Filter>
     <Filter Include="97. Include\System">
       <UniqueIdentifier>{634cdd85-721e-463d-b34d-49add38af7a3}</UniqueIdentifier>
@@ -171,6 +165,15 @@
     </Filter>
     <Filter Include="00. Common\Component\UnlitRenderer">
       <UniqueIdentifier>{16fecbb7-d85a-43ee-a4ac-d6c0f7aa5b80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. PostProcessSystem">
+      <UniqueIdentifier>{a4723174-8b6b-44ef-9d38-c30f6294bcb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. GraphicsSystem">
+      <UniqueIdentifier>{6e749ea3-408b-4e80-907f-75c2c39cf652}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\StateManagement">
+      <UniqueIdentifier>{a3095088-6698-485f-a4ad-4e4430befa8b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -423,6 +426,9 @@
     <ClInclude Include="UnlitRenderer.h">
       <Filter>00. Common\Component\UnlitRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="StateManagement.h">
+      <Filter>10. DX11\StateManagement</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp">
@@ -571,6 +577,9 @@
     </ClCompile>
     <ClCompile Include="UnlitRenderer.cpp">
       <Filter>00. Common\Component\UnlitRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="StateManagement.cpp">
+      <Filter>10. DX11\StateManagement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

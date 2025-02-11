@@ -5,6 +5,7 @@ class IRenderer;
 class TextSystem;
 class SpriteSystem;
 class UnlitSystem;
+class PostProcessSystem;
 class RenderSystem : public GE::IRenderSystem
 {
 public:
@@ -34,6 +35,7 @@ private:
 	IRenderer*			_pRenderer{ nullptr };
 	TextSystem*			_pTextSystem{ nullptr };
 	SpriteSystem*		_pSpriteSystem{ nullptr };
+	PostProcessSystem*	_pPostProcessSystem{ nullptr };
 	UnlitSystem*		_pUnlitSystem{ nullptr };
 	IDXGISwapChain*		_pSwapChain{ nullptr };
 };

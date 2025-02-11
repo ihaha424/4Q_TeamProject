@@ -61,15 +61,25 @@ void UnlitSystem::Initialize()
 
 void UnlitSystem::Render()
 {
-	auto* pBackBuffer = g_pGraphicDevice->GetBackBuffer();
+	/*auto* pBackBuffer = g_pGraphicDevice->GetBackBuffer();
 	auto* pDepth = g_pViewManagement->GetDepthStencilView(L"DefaultDepth");
 
-	_pDeviceContext->OMSetRenderTargets(1, &pBackBuffer, pDepth);
+	_pDeviceContext->OMSetRenderTargets(1, &pBackBuffer, pDepth);*/
+
+	auto* pBlendState = g_pStateManagement->GetBlendState(L"AlphaBlend");
+
 	_pDeviceContext->RSSetState(_pRSState);
+	_pDeviceContext->OMSetBlendState(pBlendState, nullptr, 1);
 
 	for (auto& [component, matrix] : _components)
-		dynamic_cast<UnlitRenderer*>(component)->Render();
+	{
+		UnlitRenderer* unlitRenderer = dynamic_cast<UnlitRenderer*>(component);
+		unsigned int mask = unlitRenderer->GetLayer();
+		g_pConstantBuffer->UpdateConstantBuffer(L"LayerMask", &mask);
+		unlitRenderer->Render();
+	}
 
+	_pDeviceContext->OMSetBlendState(nullptr, nullptr, 1);
 	_pDeviceContext->RSSetState(nullptr);
 }
 

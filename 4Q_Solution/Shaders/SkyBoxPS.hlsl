@@ -7,7 +7,7 @@ struct PS_INPUT
 struct PS_OUTPUT
 {
     float4 color        : SV_Target0;
-    uint   layerMask    : SV_target1;
+    uint   layerMask    : SV_target3;
     float depth         : SV_Depth;
 };
 

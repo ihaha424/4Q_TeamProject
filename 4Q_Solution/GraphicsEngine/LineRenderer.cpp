@@ -118,11 +118,6 @@ void LineRenderer::Update(float deltaTime)
     }
 }
 
-void LineRenderer::Querry(void** pointer)
-{
-    (*pointer) = this;
-}
-
 void LineRenderer::Render()
 {    
     _vs->SetVertexShader();
@@ -137,4 +132,9 @@ void LineRenderer::Render()
     _pDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
     _pDeviceContext->Draw(2, 0);
     _pDeviceContext->GSSetShader(nullptr, nullptr, 0);
+}
+
+void LineRenderer::SetPostEffectLayer(unsigned int layer)
+{
+    UnlitRenderer::SetPostEffectLayer(layer);
 }

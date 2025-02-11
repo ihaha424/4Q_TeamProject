@@ -324,6 +324,11 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_Mini_Stone_1>(L"Obj_Mini_Stone_1", objectFactory);
 	}
 
+	// Obj_Mini_Stone_2
+	{
+		helpPrepare<Obj_Mini_Stone_2>(L"Obj_Mini_Stone_2", objectFactory);
+	}
+
 }
 
 void TestWorld::PreInitialize(const Engine::Modules& modules)

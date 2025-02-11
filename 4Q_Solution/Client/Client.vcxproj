@@ -182,7 +182,7 @@
     <ClInclude Include="Obj_BG_Tree_3_Active.h" />
     <ClInclude Include="Obj_Mini_Platform_Spawn.h" />
     <ClInclude Include="Obj_Mini_Stone_1.h" />
-    <ClInclude Include="Obj_Puzzle_Mini_Stone_2.h" />
+    <ClInclude Include="Obj_Mini_Stone_2.h" />
     <ClInclude Include="Obj_Puzzle_Mini_Stone_3.h" />
     <ClInclude Include="Obj_Puzzle_Mini_Stone_4.h" />
     <ClInclude Include="Obj_Puzzle_Mini_Stone_5.h" />
@@ -311,7 +311,7 @@
     <ClCompile Include="Obj_Props_Rock.cpp" />
     <ClCompile Include="Obj_Mini_Platform_Set.cpp" />
     <ClCompile Include="Obj_Mini_Stone_1.cpp" />
-    <ClCompile Include="Obj_Puzzle_Mini_Stone_2.cpp" />
+    <ClCompile Include="Obj_Mini_Stone_2.cpp" />
     <ClCompile Include="Obj_Puzzle_Mini_Stone_3.cpp" />
     <ClCompile Include="Obj_Puzzle_Mini_Stone_4.cpp" />
     <ClCompile Include="Obj_Puzzle_Mini_Stone_5.cpp" />

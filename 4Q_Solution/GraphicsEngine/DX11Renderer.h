@@ -87,4 +87,5 @@ private:
 	ID3D11BlendState*					_pDeferredBlendState{ nullptr };
 	ID3D11BlendState*					_pForwardBlendState{ nullptr };
 	ID3D11RasterizerState*				_pRSSkyBoxState{ nullptr };
+	ID3D11DepthStencilState*			_pAlphaDepthState{ nullptr };
 };

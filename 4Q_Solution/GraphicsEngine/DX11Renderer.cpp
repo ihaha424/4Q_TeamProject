@@ -110,10 +110,18 @@ void DX11Renderer::Render()
 		ID++;
 	}
 
-	// Alpha Sort
-	// meshes[RenderType::Alpha].sort();
-	// NoneAlpha Sort
-	// meshes[RenderType::NoneAlpha].sort();
+	Camera* pCamera = g_pCameraSystem->GetCurrentCamera();
+	XMMATRIX view = XMMatrixIdentity();
+
+	if (nullptr != pCamera)
+		view = pCamera->GetViewMatrix();
+
+	alphaMeshes.sort([this, view](const DrawData& data0, const DrawData& data1)
+		{
+			Matrix m0 = _matrices[data0.modelID] * view;
+			Matrix m1 = _matrices[data1.modelID] * view;
+			return m0.Translation().z > m1.Translation().z;
+		});
 
 	auto& lights = g_pLightSystem->GetLights();
 	unsigned int numLight[GE::ILight::End]{};
@@ -287,6 +295,11 @@ void DX11Renderer::SkyBoxPass(std::list<std::pair<unsigned int, SkyBoxRenderer*>
 	Camera* pCamera = g_pCameraSystem->GetCurrentCamera();
 	if (nullptr == pCamera) return;
 	
+	//auto& [RTVs, SRVs] = g_pViewManagement->GetRenderTargetGroup(L"Forward");
+	//_pDeviceContext->OMSetRenderTargets((unsigned int)RTVs.size(), RTVs.data(), nullptr);
+	//_pDeviceContext->OMSetDepthStencilState(_pAlphaDepthState, 0);
+	//for (size_t i = 0; i < RTVs.size(); i++) _pDeviceContext->ClearRenderTargetView(RTVs[i], COLOR_ZERO);
+
 	Matrix view = pCamera->GetViewMatrix();
 	
 	view.m[3][0] = 0.f;
@@ -310,6 +323,7 @@ void DX11Renderer::SkyBoxPass(std::list<std::pair<unsigned int, SkyBoxRenderer*>
 	}
 
 	_pDeviceContext->RSSetState(nullptr);
+	//_pDeviceContext->OMSetDepthStencilState(nullptr, 0);
 }
 
 void DX11Renderer::PostProcessPass()
@@ -378,8 +392,9 @@ void DX11Renderer::ForwardLigthing(std::list<DrawData>& alphaMeshes)
 	auto& [RTVs, SRVs] = g_pViewManagement->GetRenderTargetGroup(L"Forward");
 
 	_pDeviceContext->OMSetRenderTargets((unsigned int)RTVs.size(), RTVs.data(), _pDefaultDSV);
-	_pDeviceContext->OMSetBlendState(_pForwardBlendState, blendFactor, 0xFFFFFFFF);
+	_pDeviceContext->OMSetBlendState(_pForwardBlendState, blendFactor, 0xFFFFFFFF);	
 	RenderMesh(alphaMeshes, _psForwardLighting);
+	//_pDeviceContext->OMSetBlendState(nullptr, nullptr, 0xFFFFFFFF);
 }
 
 void DX11Renderer::Blending(ID3D11RenderTargetView* pRTV, ID3D11ShaderResourceView* pSRV)
@@ -424,10 +439,10 @@ void DX11Renderer::InitState()
 		.SrcBlend = D3D11_BLEND_SRC_ALPHA,
 		.DestBlend = D3D11_BLEND_INV_SRC_ALPHA,
 		.BlendOp = D3D11_BLEND_OP_ADD,
-		.SrcBlendAlpha = D3D11_BLEND_ONE,
-		.DestBlendAlpha = D3D11_BLEND_ZERO,
+		.SrcBlendAlpha = D3D11_BLEND_SRC_ALPHA,
+		.DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA,
 		.BlendOpAlpha = D3D11_BLEND_OP_ADD,
-		.RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL
+		.RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL,
 	};
 
 	D3D11_RENDER_TARGET_BLEND_DESC disableRTBD
@@ -468,6 +483,13 @@ void DX11Renderer::InitState()
 	};
 
 	pDevice->CreateRasterizerState(&rsDesc, &_pRSSkyBoxState);
+
+	D3D11_DEPTH_STENCIL_DESC desc = {};
+	desc.DepthEnable = true;  // 깊이 테스트 활성화
+	desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO; // 깊이 버퍼 기록 OFF
+	desc.DepthFunc = D3D11_COMPARISON_LESS; // 기본적으로 가까운 것 우선
+
+	pDevice->CreateDepthStencilState(&desc, &_pAlphaDepthState);
 }
 
 void DX11Renderer::InitOptional()
@@ -584,4 +606,5 @@ void DX11Renderer::Free()
 	SafeRelease(_pDeferredBlendState);
 	SafeRelease(_pForwardBlendState);
 	SafeRelease(_pToneMapping);
+	SafeRelease(_pAlphaDepthState);
 }

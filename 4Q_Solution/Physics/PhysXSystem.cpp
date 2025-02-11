@@ -728,7 +728,6 @@ namespace PhysicsEngineAPI
 		const Utils::Math::Vector3& normal, 
 		IMaterial* _material)
 	{
-		physx::PxMaterial* mMaterial = physics->createMaterial(0.5f, 0.5f, 0.6f);
 		physx::PxRigidActor* actor = nullptr;
 		const PhysXMaterial* material = dynamic_cast<const PhysXMaterial*>(_material);
 		if (nullptr == material)

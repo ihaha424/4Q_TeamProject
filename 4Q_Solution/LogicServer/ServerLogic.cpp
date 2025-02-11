@@ -732,7 +732,7 @@ void ServerLogic::RegistPlayer(Player* player)
     cd.position = Engine::Math::Vector3(0, 0, 0);
     cd.height = 10.f;
     cd.radius = 2.f;
-    //cd.gravity = { 0.f, -9.8f * 10, 0.f };
+    cd.gravity = { 0.f, -9.8f * 10, 0.f };
     cd.contactOffset = 0.2f;
     cd.stepOffset = 10.f;
     cd.slopeLimit = 0.1f;
@@ -751,11 +751,10 @@ void ServerLogic::RegistGround(Ground& ground)
     geometryDesc.data = { 2.5f, 2.5f, 6.32f };
     //geometryDesc.data = { 2.5f, 2.5f, 5.f };
     _physicsManager->LoadHeightMap(geometryDesc, "terrain", "Assets/Models/Smoothed_Height_Map.png");
-    //_physicsManager->LoadTriangleMesh(geometryDesc, "terrain", "Assets/Test/Landscape03.fbx");
-
+   
     Engine::Transform transform{};
     Engine::Physics::IRigidStaticComponent* staticrigid;
-    _physicsManager->CreateTriangleStatic(&staticrigid, "terrain", { {0.3f,0.f,0.f } }, transform);
+    _physicsManager->CreateTriangleStatic(&staticrigid, "terrain", { {0.0f,0.f,0.f } }, transform);
     ground._staticRigid = static_cast<Engine::Physics::RigidStaticComponent*>(staticrigid);
     _mainScene->AddActor(ground._staticRigid);
     ground._staticRigid->SetTranslate({ -2560.f, -1400.f, -2560.f });
@@ -765,6 +764,10 @@ void ServerLogic::RegistGround(Ground& ground)
 
     ground._staticRigid->SetOwner(&ground);
     ground._staticRigid->Initialize();
+
+    Engine::Physics::IRigidComponent* rigid;
+    _physicsManager->CreatePlane(&rigid, Engine::Math::Vector3{ 0.f,-100.f, 0 }, Engine::Math::Vector3{ 0.f,1.f, 0 }, { {0.f,0.f,0.f} });
+    _mainScene->AddActor(rigid);
 }
 void ServerLogic::RegistTriggerBox(TriggerBox& triggerBox)
 {

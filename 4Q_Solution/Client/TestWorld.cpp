@@ -90,66 +90,18 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	//}
 
 	//Test Puzzle_01 Object Code -> Load File Data
-	{
-		helpPrepare<Obj_Shinave_Stone_1>(L"Obj_Shinave_Stone_1", objectFactory);
-		helpPrepare<Obj_Shinave_Stone_2>(L"Obj_Shinave_Stone_2", objectFactory);
-		helpPrepare<Obj_Shinave_Stone_3>(L"Obj_Shinave_Stone_3", objectFactory);
-		helpPrepare<Obj_Shinave_Stone_4>(L"Obj_Shinave_Stone_4", objectFactory);
-		helpPrepare<Obj_Shinave_Stone_5>(L"Obj_Shinave_Stone_5", objectFactory);
-		helpPrepare<Obj_Shinave_Bermiore>(L"Obj_Shinave_Bermiore", objectFactory);
-		helpPrepare<Obj_Shinave_Platform_Set>(L"Obj_Shinave_Platform_Set", objectFactory);
-		helpPrepare<Obj_Shinave_Platform_Spawn_1>(L"Obj_Shinave_Platform_Spawn1", objectFactory);
-		helpPrepare<Obj_Shinave_Platform_Spawn_2>(L"Obj_Shinave_Platform_Spawn2", objectFactory);
-		helpPrepare<Obj_Shinave_Platform_Spawn_3>(L"Obj_Shinave_Platform_Spawn3", objectFactory);
-
-
-		int i = 1;
-		auto puzzle1 = objectFactory->Clone<Obj_Shinave_Stone_1>(this);
-		Engine::Transform tempTransform{};
-		tempTransform.position = { 0.f, 500.f + 0.f,  -1000.f + 200.f * i++ };
-		puzzle1->SetTransform(tempTransform);
-		puzzle1->SetBoxScale({ 1, 200, 100 });
-		auto puzzle2 = objectFactory->Clone<Obj_Shinave_Stone_2>(this);
-		tempTransform.position = { 0.f, 500.f + 0.f,  -1000.f + 200.f * i++ };
-		puzzle2->SetTransform(tempTransform);
-		puzzle2->SetBoxScale({ 1, 200, 100 });
-		auto puzzle3 = objectFactory->Clone<Obj_Shinave_Stone_3>(this);
-		tempTransform.position = { 0.f, 500.f + 0.f,  -1000.f + 200.f * i++ };
-		puzzle3->SetTransform(tempTransform);
-		puzzle3->SetBoxScale({ 1, 200, 100 });
-		auto puzzle4 = objectFactory->Clone<Obj_Shinave_Stone_4>(this);
-		tempTransform.position = { 0.f, 500.f + 0.f,  -1000.f + 200.f * i++ };
-		puzzle4->SetTransform(tempTransform);
-		puzzle4->SetBoxScale({ 1, 200, 100 });
-		auto puzzle5 = objectFactory->Clone<Obj_Shinave_Stone_5>(this);
-		tempTransform.position = { 0.f, 500.f + 0.f,  -1000.f + 200.f * i++ };
-		puzzle5->SetTransform(tempTransform);
-		puzzle5->SetBoxScale({ 1, 200, 100 });
-
-		auto puzzle6 = objectFactory->Clone<Obj_Shinave_Bermiore>(this);
-		tempTransform.position = { 0.f, 500.f + 0.f,  -1000.f + 200.f * i++ };
-		puzzle6->SetTransform(tempTransform);
-		puzzle6->SetBoxScale({ 100, 100, 100 });
-
-		i = 1;
-		auto puzzle10 = objectFactory->Clone<Obj_Shinave_Platform_Set>(this);
-		tempTransform.position = { 0.f, 500.f + 100.f * i++, 200.f};
-		puzzle10->SetTransform(tempTransform);
-		puzzle10->SetBoxScale({ 100, 1, 100 });
-		auto puzzle7 = objectFactory->Clone<Obj_Shinave_Platform_Spawn_1>(this);
-		tempTransform.position = { 0.f, 500.f + 100.f * i++, 200.f};
-		puzzle7->SetTransform(tempTransform);
-		puzzle7->SetBoxScale({ 100, 1, 100 });
-		auto puzzle8 = objectFactory->Clone<Obj_Shinave_Platform_Spawn_2>(this);
-		tempTransform.position = { 0.f, 500.f + 100.f * i++, 200.f};
-		puzzle8->SetTransform(tempTransform);
-		puzzle8->SetBoxScale({ 100, 1, 100 });
-		auto puzzle9 = objectFactory->Clone<Obj_Shinave_Platform_Spawn_3>(this);
-		tempTransform.position = { 0.f, 500.f + 100.f * i++, 200.f};
-		puzzle9->SetTransform(tempTransform);
-		puzzle9->SetBoxScale({ 100, 1, 100 });
-	}
-
+	//{
+	//	helpPrepare<Obj_Shinave_Stone_1>(L"Obj_Shinave_Stone_1", objectFactory);
+	//	helpPrepare<Obj_Shinave_Stone_2>(L"Obj_Shinave_Stone_2", objectFactory);
+	//	helpPrepare<Obj_Shinave_Stone_3>(L"Obj_Shinave_Stone_3", objectFactory);
+	//	helpPrepare<Obj_Shinave_Stone_4>(L"Obj_Shinave_Stone_4", objectFactory);
+	//	helpPrepare<Obj_Shinave_Stone_5>(L"Obj_Shinave_Stone_5", objectFactory);
+	//	helpPrepare<Obj_Shinave_Bermiore>(L"Obj_Shinave_Bermiore", objectFactory);
+	//	helpPrepare<Obj_Shinave_Platform_Set>(L"Obj_Shinave_Platform_Set", objectFactory);
+	//	helpPrepare<Obj_Shinave_Platform_Spawn_1>(L"Obj_Shinave_Platform_Spawn1", objectFactory);
+	//	helpPrepare<Obj_Shinave_Platform_Spawn_2>(L"Obj_Shinave_Platform_Spawn2", objectFactory);
+	//	helpPrepare<Obj_Shinave_Platform_Spawn_3>(L"Obj_Shinave_Platform_Spawn3", objectFactory);
+	//}
 	////helpPrepare<Obj_BG_Tree_1>(L"Obj_BG_Tree_1", objectFactory);
 	////helpPrepare<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", objectFactory);
 	////helpPrepare<Obj_BG_Mountain>(L"Obj_BG_Mountain", objectFactory);

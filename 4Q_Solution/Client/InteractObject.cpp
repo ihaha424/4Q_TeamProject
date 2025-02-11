@@ -15,6 +15,7 @@ void InteractObject::Prepare(Engine::Content::Factory::Component* componentFacto
 
 void InteractObject::DisposeComponents()
 {
+	Engine::Object::Dispose();
 	_staticMesh->Dispose();
 	_rigidStatic->Dispose();
 }

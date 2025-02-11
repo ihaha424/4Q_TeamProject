@@ -295,6 +295,13 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_Shinave_Platform_Spawn_3>(buildingProperty, buildingProperty);
 	}
 
+	// Obj_Props_Rock
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Props_Rock").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Props_Rock>(buildingProperty, buildingProperty);
+	}
+
 
 
 
@@ -311,7 +318,6 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	//Puzzle01
 	{
 		RegisterHelp<Obj_Shinave_Bermiore>(L"Obj_Shinave_Bermiore", loadManager, objectFactory);
-		RegisterHelp<Obj_Shinave_Platform_Spawn_3>(L"Obj_Shinave_Platform_Spawn_3", loadManager, objectFactory);
 	}
 
 

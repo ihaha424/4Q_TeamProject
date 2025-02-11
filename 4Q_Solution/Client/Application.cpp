@@ -117,6 +117,13 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_BG_Tree_1>(buildingProperty, buildingProperty);
 	}
 
+	// Obj_Buildings_Ornoa_House_1
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Ornoa_House_1").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Ornoa_House_1>(buildingProperty, buildingProperty);
+	}
+
 	//Test PickingObejct
 	{
 		objectFactory->Register<GrabbedObject>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");
@@ -165,11 +172,6 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	RegisterHelp<Obj_Buildings_Hide_House_2>(L"Obj_Buildings_Hide_House_2", loadManager, objectFactory);
 	RegisterHelp<Obj_Buildings_Hide_House_3>(L"Obj_Buildings_Hide_House_3", loadManager, objectFactory);
 	RegisterHelp<Obj_Buildings_Hide_House_4>(L"Obj_Buildings_Hide_House_4", loadManager, objectFactory);
-
-	RegisterHelp<Obj_Buildings_Ornoa_House_1>(L"Obj_Buildings_Ornoa_House_1", loadManager, objectFactory);
-	RegisterHelp<Obj_Buildings_Ornoa_House_2>(L"Obj_Buildings_Ornoa_House_2", loadManager, objectFactory);
-	//RegisterHelp<Obj_Buildings_Ornoa_House_3>(L"Obj_Buildings_Ornoa_House_3", loadManager, objectFactory);
-	//RegisterHelp<Obj_Buildings_Ornoa_House_4>(L"Obj_Buildings_Ornoa_House_4", loadManager, objectFactory);
 
 	const auto componentFactory = contentManager->GetComponentFactory();
 	componentFactory->Register<RemoteMove>();

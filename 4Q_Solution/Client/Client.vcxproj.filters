@@ -366,7 +366,7 @@
     <ClInclude Include="Puzzle_01.h">
       <Filter>Object\Puzzle\Data</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Shinave_Platform_Spawn.h">
+    <ClInclude Include="Obj_Shinave_Platform_Spawn_1.h">
       <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Shinave_Bermiore.h">
@@ -420,19 +420,19 @@
     <ClInclude Include="BG_Terrain.h">
       <Filter>Object\Terrain</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Shinave_Stone_1.h">
+    <ClInclude Include="Obj_Shinave_Stone_1.h">
       <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Shinave_Stone_2.h">
+    <ClInclude Include="Obj_Shinave_Stone_2.h">
       <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Shinave_Stone_3.h">
+    <ClInclude Include="Obj_Shinave_Stone_3.h">
       <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Shinave_Stone_4.h">
+    <ClInclude Include="Obj_Shinave_Stone_4.h">
       <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Shinave_Stone_5.h">
+    <ClInclude Include="Obj_Shinave_Stone_5.h">
       <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
     </ClInclude>
     <ClInclude Include="Puzzle_00_ObjectData.h">
@@ -467,6 +467,12 @@
     </ClInclude>
     <ClInclude Include="BG_Ornoa_Cloth_1.h">
       <Filter>Object\Puzzle\06. NotPuzzel\BG_Ornoa_Cloth_1</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Shinave_Platform_Spawn_2.h">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Shinave_Platform_Spawn_3.h">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -674,19 +680,19 @@
     <ClCompile Include="NPC_OrnoaHide.cpp">
       <Filter>Object\NPC</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Shinave_Stone_1.cpp">
+    <ClCompile Include="Obj_Shinave_Stone_1.cpp">
       <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Shinave_Stone_2.cpp">
+    <ClCompile Include="Obj_Shinave_Stone_2.cpp">
       <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Shinave_Stone_3.cpp">
+    <ClCompile Include="Obj_Shinave_Stone_3.cpp">
       <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Shinave_Stone_4.cpp">
+    <ClCompile Include="Obj_Shinave_Stone_4.cpp">
       <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Shinave_Stone_5.cpp">
+    <ClCompile Include="Obj_Shinave_Stone_5.cpp">
       <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
     </ClCompile>
     <ClCompile Include="GameCoreData.cpp">
@@ -701,7 +707,7 @@
     <ClCompile Include="Obj_Shinave_Platform_Set.cpp">
       <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Shinave_Platform_Spawn.cpp">
+    <ClCompile Include="Obj_Shinave_Platform_Spawn_1.cpp">
       <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Hide_Potion.cpp">
@@ -760,6 +766,12 @@
     </ClCompile>
     <ClCompile Include="BG_Ornoa_Cloth_1.cpp">
       <Filter>Object\Puzzle\06. NotPuzzel\BG_Ornoa_Cloth_1</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Shinave_Platform_Spawn_2.cpp">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Shinave_Platform_Spawn_3.cpp">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -68,7 +68,7 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 
 	// Obj_BG_Tree_3
 	{
-		helpPrepare<Obj_BG_Tree_3>(L"Obj_BG_Tree_3", objectFactory);
+		//helpPrepare<Obj_BG_Tree_3>(L"Obj_BG_Tree_3", objectFactory);
 	}
 
 	////Test Grabbed Object Code -> Make and Load File Data
@@ -89,14 +89,66 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	//	puzzle->SetBoxScale({ 100, 100, 100 });
 	//}
 
-	////Test Puzzle_01 Object Code -> Load File Data
-	//{
-	//	Obj_Shinave_Stone_1* puzzle = objectFactory->Clone<Obj_Shinave_Stone_1>(this);
-	//	Engine::Transform tempTransform{};
-	//	tempTransform.position = { -200.f, 0.f, 0 };
-	//	puzzle->SetTransform(tempTransform);
-	//	puzzle->SetBoxScale({ 100, 100, 100 });
-	//}
+	//Test Puzzle_01 Object Code -> Load File Data
+	{
+		helpPrepare<Obj_Shinave_Stone_1>(L"Obj_Shinave_Stone_1", objectFactory);
+		helpPrepare<Obj_Shinave_Stone_2>(L"Obj_Shinave_Stone_2", objectFactory);
+		helpPrepare<Obj_Shinave_Stone_3>(L"Obj_Shinave_Stone_3", objectFactory);
+		helpPrepare<Obj_Shinave_Stone_4>(L"Obj_Shinave_Stone_4", objectFactory);
+		helpPrepare<Obj_Shinave_Stone_5>(L"Obj_Shinave_Stone_5", objectFactory);
+		helpPrepare<Obj_Shinave_Bermiore>(L"Obj_Shinave_Bermiore", objectFactory);
+		helpPrepare<Obj_Shinave_Platform_Set>(L"Obj_Shinave_Platform_Set", objectFactory);
+		helpPrepare<Obj_Shinave_Platform_Spawn_1>(L"Obj_Shinave_Platform_Spawn1", objectFactory);
+		helpPrepare<Obj_Shinave_Platform_Spawn_2>(L"Obj_Shinave_Platform_Spawn2", objectFactory);
+		helpPrepare<Obj_Shinave_Platform_Spawn_3>(L"Obj_Shinave_Platform_Spawn3", objectFactory);
+
+
+		int i = 1;
+		auto puzzle1 = objectFactory->Clone<Obj_Shinave_Stone_1>(this);
+		Engine::Transform tempTransform{};
+		tempTransform.position = { 0.f, 500.f + 0.f,  -1000.f + 200.f * i++ };
+		puzzle1->SetTransform(tempTransform);
+		puzzle1->SetBoxScale({ 1, 200, 100 });
+		auto puzzle2 = objectFactory->Clone<Obj_Shinave_Stone_2>(this);
+		tempTransform.position = { 0.f, 500.f + 0.f,  -1000.f + 200.f * i++ };
+		puzzle2->SetTransform(tempTransform);
+		puzzle2->SetBoxScale({ 1, 200, 100 });
+		auto puzzle3 = objectFactory->Clone<Obj_Shinave_Stone_3>(this);
+		tempTransform.position = { 0.f, 500.f + 0.f,  -1000.f + 200.f * i++ };
+		puzzle3->SetTransform(tempTransform);
+		puzzle3->SetBoxScale({ 1, 200, 100 });
+		auto puzzle4 = objectFactory->Clone<Obj_Shinave_Stone_4>(this);
+		tempTransform.position = { 0.f, 500.f + 0.f,  -1000.f + 200.f * i++ };
+		puzzle4->SetTransform(tempTransform);
+		puzzle4->SetBoxScale({ 1, 200, 100 });
+		auto puzzle5 = objectFactory->Clone<Obj_Shinave_Stone_5>(this);
+		tempTransform.position = { 0.f, 500.f + 0.f,  -1000.f + 200.f * i++ };
+		puzzle5->SetTransform(tempTransform);
+		puzzle5->SetBoxScale({ 1, 200, 100 });
+
+		auto puzzle6 = objectFactory->Clone<Obj_Shinave_Bermiore>(this);
+		tempTransform.position = { 0.f, 500.f + 0.f,  -1000.f + 200.f * i++ };
+		puzzle6->SetTransform(tempTransform);
+		puzzle6->SetBoxScale({ 100, 100, 100 });
+
+		i = 1;
+		auto puzzle10 = objectFactory->Clone<Obj_Shinave_Platform_Set>(this);
+		tempTransform.position = { 0.f, 500.f + 100.f * i++, 200.f};
+		puzzle10->SetTransform(tempTransform);
+		puzzle10->SetBoxScale({ 100, 1, 100 });
+		auto puzzle7 = objectFactory->Clone<Obj_Shinave_Platform_Spawn_1>(this);
+		tempTransform.position = { 0.f, 500.f + 100.f * i++, 200.f};
+		puzzle7->SetTransform(tempTransform);
+		puzzle7->SetBoxScale({ 100, 1, 100 });
+		auto puzzle8 = objectFactory->Clone<Obj_Shinave_Platform_Spawn_2>(this);
+		tempTransform.position = { 0.f, 500.f + 100.f * i++, 200.f};
+		puzzle8->SetTransform(tempTransform);
+		puzzle8->SetBoxScale({ 100, 1, 100 });
+		auto puzzle9 = objectFactory->Clone<Obj_Shinave_Platform_Spawn_3>(this);
+		tempTransform.position = { 0.f, 500.f + 100.f * i++, 200.f};
+		puzzle9->SetTransform(tempTransform);
+		puzzle9->SetBoxScale({ 100, 1, 100 });
+	}
 
 	////helpPrepare<Obj_BG_Tree_1>(L"Obj_BG_Tree_1", objectFactory);
 	////helpPrepare<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", objectFactory);
@@ -221,12 +273,14 @@ void TestWorld::EnterAccept(const ConnectMsg::AddObject* msg) {
 		_ray = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Ray>(this);
 		playerSerialNum = msg->grantnumber();
 		_ray->SetSerialNumber(msg->grantnumber());
+		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 2 });
 	}
 	else if (msg->grantnumber() == 2) {
 		// TODO: 여기에 리브의 오브젝트를 생성하는 코드를 넣어야 합니다.
 		_live = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Live>(this);
 		playerSerialNum = msg->grantnumber();
 		_live->SetSerialNumber(msg->grantnumber());
+		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 2 });
 	}
 }
 void TestWorld::CreatePlayer(const ConnectMsg::AddObject* msg) {
@@ -257,7 +311,6 @@ void TestWorld::RequestData(const ConnectMsg::AddObject* msg) {
 void TestWorld::InitializeGameStateManager(const Engine::Modules& modules)
 {
 	auto gameStateManager = modules.gameStateManager;
-	gameStateManager->RegisterData(L"GameCoreData", GameCoreData{});
 
 
 	auto puzzle_00 = gameStateManager->NewSubManager();

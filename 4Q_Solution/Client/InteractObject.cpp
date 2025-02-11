@@ -28,23 +28,35 @@ void InteractObject::PreInitialize(const Engine::Modules& modules)
 
 	auto PhysicsManager = modules.physicsManager;
 
-	Engine::Physics::RigidComponentDesc desc;
-	desc.rigidType = Engine::Physics::RigidBodyType::Kinematic;
-	desc.shapeDesc.geometryDesc.type = Engine::Physics::GeometryShape::Box;
-	desc.shapeDesc.geometryDesc.data = { _boxScale.x, _boxScale.y, _boxScale.z, 0 };
-	desc.shapeDesc.isExclusive = true;
-	desc.shapeDesc.materialDesc.data = { 0.f,0.f,0.f };
+	if (!_isSphere)
+	{
+		Engine::Physics::RigidComponentDesc desc;
+		desc.rigidType = Engine::Physics::RigidBodyType::Static;
+		desc.shapeDesc.geometryDesc.type = Engine::Physics::GeometryShape::Box;
+		desc.shapeDesc.geometryDesc.data = { _boxScale.x, _boxScale.y, _boxScale.z, 0.f };
+		desc.shapeDesc.isExclusive = true;
+		desc.shapeDesc.materialDesc.data = { 0.5f,0.5f,0.f };
 
-	Engine::Transform shapeTransform{};
-	PhysicsManager->CreateStatic(&_rigidStatic->_rigidbody, desc, _transform, shapeTransform);
-	_rigidStatic->_rigidbody->SetOwner(this);
+		Engine::Transform shapeTransform{};
+		shapeTransform.position = _boxPosition;
+		PhysicsManager->CreateStatic(&_rigidStatic->_rigidbody, desc, _transform, shapeTransform);
+		_rigidStatic->_rigidbody->SetOwner(this);
+	}
+	else
+	{
+		Engine::Physics::RigidComponentDesc desc;
+		desc.rigidType = Engine::Physics::RigidBodyType::Static;
+		desc.shapeDesc.geometryDesc.type = Engine::Physics::GeometryShape::Sphere;
+		desc.shapeDesc.geometryDesc.data = { _boxScale.x, 0.f, 0.f, 0.f };
+		desc.shapeDesc.isExclusive = true;
+		desc.shapeDesc.materialDesc.data = { 0.5f,0.5f,0.f };
 
+		Engine::Transform shapeTransform{};
+		shapeTransform.position = _boxPosition;
+		PhysicsManager->CreateStatic(&_rigidStatic->_rigidbody, desc, _transform, shapeTransform);
+		_rigidStatic->_rigidbody->SetOwner(this);
+	}
 	PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::mainScene))->AddActor(_rigidStatic->_rigidbody);
-
-
-	PhysicsManager->CreateStaticBoundBoxActor(&_rigidStatic->_boundBox, _boxScale, _transform);
-	_rigidStatic->_boundBox->SetOwner(this);
-	PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::cameraScene))->AddActor(_rigidStatic->_boundBox);
 }
 
 void InteractObject::SetIsPublic(bool isPublic)
@@ -70,4 +82,9 @@ void InteractObject::SetBoxScale(Engine::Math::Vector3 boxScale)
 void InteractObject::SetBoxPosition(Engine::Math::Vector3 boxPosition)
 {
 	_boxPosition = boxPosition;
+}
+
+void InteractObject::SetIsSphere(bool isSphere)
+{
+	_isSphere = isSphere;
 }

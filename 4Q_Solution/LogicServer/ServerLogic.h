@@ -206,7 +206,7 @@ private:
 	// Puzzle Area
 	// =============================
 	
-	int _currentPuzzleNumber = 0;
+	int _currentPuzzleNumber = 1;
 	// 오브젝트를 상호작용 할 때마다 갱신해줘야함. 
 	int _currentInteractObject = -1;
 

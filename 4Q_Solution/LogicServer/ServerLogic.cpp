@@ -732,7 +732,7 @@ void ServerLogic::RegistPlayer(Player* player)
     cd.position = Engine::Math::Vector3(0, 0, 0);
     cd.height = 10.f;
     cd.radius = 2.f;
-    cd.gravity = { 0.f, -9.8f * 10, 0.f };
+    //cd.gravity = { 0.f, -9.8f * 10, 0.f };
     cd.contactOffset = 0.2f;
     cd.stepOffset = 10.f;
     cd.slopeLimit = 0.1f;
@@ -742,7 +742,7 @@ void ServerLogic::RegistPlayer(Player* player)
     player->_controller->SetOwner(&player);
     player->_controller->SetBottomPosition(Engine::Math::Vector3(0.f, 10.f, 0.f));
     player->_controller->Initialize();
-    player->_controller->SetPosition(Engine::Math::Vector3(0, 300, 0));
+    player->_controller->SetPosition(Engine::Math::Vector3(0, 500, 0));
 }
 
 void ServerLogic::RegistGround(Ground& ground)
@@ -924,7 +924,7 @@ void ServerLogic::Puzzle1(int objectId)
     int maxCorrectCount = 3;
     static int activeObjectId = 11103;
     // 리브가 상호작용을 했을 때 이쪽으로 와야함.
-    if (objectId == 11105 || objectId == 11106 || objectId == 11107) {
+    if (objectId == 11107 || objectId == 11108 || objectId == 11109) {
         curCorrectCount++;
         // send puzzleSuccess.
         //_objectActive.set_objectserialnumber(activeObjectId);

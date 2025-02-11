@@ -25,5 +25,6 @@ protected:
 
 	Engine::Component::Synchronize* _sync;
 	int player;
+	bool activate = true;
 };
 

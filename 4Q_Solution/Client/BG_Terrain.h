@@ -5,6 +5,7 @@ class BG_Terrain : public StaticObject
 {
 public:
 	explicit BG_Terrain(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath);
+	void SetIsSphere(bool isShpere);
 
 protected:
 	void PreInitialize(const Engine::Modules& modules) override;

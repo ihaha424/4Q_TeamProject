@@ -12,6 +12,11 @@ void Obj_Shinave_Bermiore::Prepare(Engine::Content::Factory::Component* componen
 	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
 }
 
+void Obj_Shinave_Bermiore::PreInitialize(const Engine::Modules& modules)
+{
+	_sync->SetSerialNumber(11101);
+}
+
 void Obj_Shinave_Bermiore::DisposeComponents()
 {
 	InteractObject::DisposeComponents();

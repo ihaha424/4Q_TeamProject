@@ -115,11 +115,16 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	
 	//Puzzle01
 	{
-		objectFactory->Register<Obj_Puzzle_Shinave_Stone_1>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
-		objectFactory->Register<Obj_Puzzle_Shinave_Stone_2>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
-		objectFactory->Register<Obj_Puzzle_Shinave_Stone_3>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
-		objectFactory->Register<Obj_Puzzle_Shinave_Stone_4>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
-		objectFactory->Register<Obj_Puzzle_Shinave_Stone_5>("Assets/Test/sphere.fbx", L"Assets/Test/cube.fbx");
+		RegisterHelp<Obj_Shinave_Stone_1>(L"Obj_Shinave_Stone_1", loadManager, objectFactory);
+		RegisterHelp<Obj_Shinave_Stone_2>(L"Obj_Shinave_Stone_2", loadManager, objectFactory);
+		RegisterHelp<Obj_Shinave_Stone_3>(L"Obj_Shinave_Stone_3", loadManager, objectFactory);
+		RegisterHelp<Obj_Shinave_Stone_4>(L"Obj_Shinave_Stone_4", loadManager, objectFactory);
+		RegisterHelp<Obj_Shinave_Stone_5>(L"Obj_Shinave_Stone_5", loadManager, objectFactory);
+		RegisterHelp<Obj_Shinave_Bermiore>(L"Obj_Shinave_Bermiore", loadManager, objectFactory);
+		RegisterHelp<Obj_Shinave_Platform_Set>(L"Obj_Shinave_Platform_Set", loadManager, objectFactory);
+		RegisterHelp<Obj_Shinave_Platform_Spawn_1>(L"Obj_Shinave_Platform_Spawn_1", loadManager, objectFactory);
+		RegisterHelp<Obj_Shinave_Platform_Spawn_2>(L"Obj_Shinave_Platform_Spawn_2", loadManager, objectFactory);
+		RegisterHelp<Obj_Shinave_Platform_Spawn_3>(L"Obj_Shinave_Platform_Spawn_3", loadManager, objectFactory);
 	}
 
 

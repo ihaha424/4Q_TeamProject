@@ -10,6 +10,7 @@ public:
 	virtual ~Obj_Shinave_Bermiore() = default;
 
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
+	void PreInitialize(const Engine::Modules& modules) override;
 
 protected:
 	void DisposeComponents() override;

@@ -56,7 +56,7 @@ void Engine::DSHLoad::Manager::LoadCloneData(const std::filesystem::path& path)
 			const auto& boxPosition = modelData["boxPosition"];
 			Math::Vector3 boxPositionData = { boxPosition["x"].get<float>(), boxPosition["y"].get<float>(), boxPosition["z"].get<float>() };
 			
-			const auto& isSphere = modelData["isSphere"];
+			bool isSphere = modelData["isSphere"];
 
 			positionData *= 10;
 			scaleData /= 10;

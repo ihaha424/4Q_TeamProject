@@ -1,9 +1,5 @@
 #pragma once
-#include "Obj_Shinave_Bermiore.h"
-#include "Obj_Shinave_Platform_Set.h"
-#include "Obj_Shinave_Platform_Spawn.h"
-#include "Obj_Shinave_Stone_1.h"
-#include "Obj_Shinave_Stone_2.h"
-#include "Obj_Shinave_Stone_3.h"
-#include "Obj_Shinave_Stone_4.h"
-#include "Obj_Shinave_Stone_5.h"
+
+#include "Obj_Bermiore_Fabric.h"
+#include "Obj_Bermiore_Hanger.h"
+#include "Obj_Bermiore_Woolball_1.h"

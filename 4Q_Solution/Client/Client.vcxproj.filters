@@ -34,9 +34,6 @@
     <Filter Include="Object\StaticObject">
       <UniqueIdentifier>{23283b30-2c80-4ee5-b209-386908918f23}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\StaticObject\MapData">
-      <UniqueIdentifier>{06860741-d122-4ccb-b2f6-f6c41542ea4e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Components">
       <UniqueIdentifier>{6002622e-1893-4355-8300-4951bd7c774d}</UniqueIdentifier>
     </Filter>
@@ -115,6 +112,15 @@
     <Filter Include="Object\Puzzle\05. Puzzle\Object">
       <UniqueIdentifier>{bfa48522-0738-4de6-835f-d91ce8d6b663}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\NPC">
+      <UniqueIdentifier>{db675596-5838-4162-b863-18a0afb9b5e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameCoreData">
+      <UniqueIdentifier>{eb8bebc9-3a17-48fe-a770-7c0657b85a08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\MapData">
+      <UniqueIdentifier>{06860741-d122-4ccb-b2f6-f6c41542ea4e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -145,7 +151,7 @@
       <Filter>Object\SkyBox</Filter>
     </ClInclude>
     <ClInclude Include="Obj_BG_Tree_1.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="SceneFillter.h">
       <Filter>PhysicsSceneFillter</Filter>
@@ -154,67 +160,67 @@
       <Filter>Object\StaticObject</Filter>
     </ClInclude>
     <ClInclude Include="Obj_BG_Tree_2.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="Obj_BG_Mountain.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Props_Fence.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Buildings_Shinave.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Buildings_Bermiore_Atelier_1.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Buildings_Bermiore_Atelier_2.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Buildings_Bermiore_Atelier_3.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Props_Bermiore_Loom_1.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Props_Bermiore_Loom_2.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Props_Bermiore_Cloth_1.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="MapData.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Buildings_Hide_House_1.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Buildings_Hide_House_3.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Buildings_Hide_House_2.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Buildings_Hide_House_4.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Buildings_Ornoa_House_1.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Buildings_Ornoa_House_2.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Buildings_Ornoa_House_3.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Buildings_Ornoa_House_4.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Props_Bermiore_Cloth_2.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Buildings_Sudium.h">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="RemoteMove.h">
       <Filter>Components</Filter>
@@ -252,31 +258,16 @@
     <ClInclude Include="BaseStone.h">
       <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Shinave_Stone_1.h">
-      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Shinave_Stone_2.h">
-      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Shinave_Stone_3.h">
-      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Shinave_Stone_4.h">
-      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Shinave_Stone_5.h">
-      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Puzzle_Mini.h">
+    <ClInclude Include="Puzzle_03.h">
       <Filter>Object\Puzzle\Data</Filter>
     </ClInclude>
-    <ClInclude Include="Puzzle_01.h">
+    <ClInclude Include="Puzzle_00.h">
       <Filter>Object\Puzzle\Data</Filter>
     </ClInclude>
     <ClInclude Include="Puzzle_02.h">
       <Filter>Object\Puzzle\Data</Filter>
     </ClInclude>
-    <ClInclude Include="Puzzle_03.h">
+    <ClInclude Include="Puzzle_05.h">
       <Filter>Object\Puzzle\Data</Filter>
     </ClInclude>
     <ClInclude Include="Puzzle_04.h">
@@ -336,101 +327,116 @@
     <ClInclude Include="Obj_Puzzle_Mini_Stone_5.h">
       <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClInclude>
-    <ClInclude Include="GameCoreData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NPCData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NPC_Hide.h">
-      <Filter>Header Files</Filter>
+      <Filter>Object\NPC</Filter>
     </ClInclude>
     <ClInclude Include="NPC_Hide_Leader.h">
-      <Filter>Header Files</Filter>
+      <Filter>Object\NPC</Filter>
     </ClInclude>
     <ClInclude Include="NPC_Ornoa.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NPC_OrnoaHide.h">
-      <Filter>Header Files</Filter>
+      <Filter>Object\NPC</Filter>
     </ClInclude>
     <ClInclude Include="NPC_Ornoa_Elder.h">
-      <Filter>Header Files</Filter>
+      <Filter>Object\NPC</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_BG_Tree_3.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="NPC_OrnoaHide.h">
+      <Filter>Object\NPC</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Buildings_Hide_House_5.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="NPCData.h">
+      <Filter>Object\NPC</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Hide_Box_1.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="GameCoreData.h">
+      <Filter>GameCoreData</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Hide_Box_2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Hide_Plant.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Hide_Potion.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Hide_Xylophone.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Ornoa_Hint.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Ornoa_Print.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Ornoa_Soundblock_1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Props_Rock.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Mini_Platform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Shinave_Bermiore.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Shinave_Platform_Set.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Puzzle_01.h">
+      <Filter>Object\Puzzle\Data</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Shinave_Platform_Spawn.h">
-      <Filter>Header Files</Filter>
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Sudium_blue.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Obj_Shinave_Bermiore.h">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Shinave_Platform_Set.h">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Hide_Box_2.h">
+      <Filter>Object\Puzzle\04. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Hide_Box_1.h">
+      <Filter>Object\Puzzle\04. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Hide_Potion.h">
+      <Filter>Object\Puzzle\04. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Ornoa_Soundblock_1.h">
+      <Filter>Object\Puzzle\05. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Mini_Platform.h">
+      <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Sudium_red.h">
-      <Filter>Header Files</Filter>
+      <Filter>Object\MapData</Filter>
     </ClInclude>
-    <ClInclude Include="Puzzle_01_ObjectData.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Obj_BG_Tree_3.h">
+      <Filter>Object\MapData</Filter>
     </ClInclude>
-    <ClInclude Include="Puzzle_02_ObjectData.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Obj_Buildings_Hide_House_5.h">
+      <Filter>Object\MapData</Filter>
     </ClInclude>
-    <ClInclude Include="Puzzle_03_ObjectData.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Obj_Hide_Plant.h">
+      <Filter>Object\MapData</Filter>
     </ClInclude>
-    <ClInclude Include="Puzzle_05.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Obj_Hide_Xylophone.h">
+      <Filter>Object\MapData</Filter>
     </ClInclude>
-    <ClInclude Include="Puzzle_04_ObjectData.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Obj_Ornoa_Hint.h">
+      <Filter>Object\MapData</Filter>
     </ClInclude>
-    <ClInclude Include="Puzzle_05_ObjectData.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Obj_Ornoa_Print.h">
+      <Filter>Object\MapData</Filter>
     </ClInclude>
-    <ClInclude Include="Puzzle_Mini_ObjectData.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Obj_Props_Rock.h">
+      <Filter>Object\MapData</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Sudium_blue.h">
+      <Filter>Object\MapData</Filter>
     </ClInclude>
     <ClInclude Include="BG_Terrain.h">
-      <Filter>Header Files</Filter>
+      <Filter>Object\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Shinave_Stone_1.h">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Shinave_Stone_2.h">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Shinave_Stone_3.h">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Shinave_Stone_4.h">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Puzzle_Shinave_Stone_5.h">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzle_00_ObjectData.h">
+      <Filter>Object\Puzzle\00. Tutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzle_01_ObjectData.h">
+      <Filter>Object\Puzzle\01. Puzzle</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzle_02_ObjectData.h">
+      <Filter>Object\Puzzle\02. Puzzle</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzle_05_ObjectData.h">
+      <Filter>Object\Puzzle\05. Puzzle</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzle_04_ObjectData.h">
+      <Filter>Object\Puzzle\04. Puzzle</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzle_03_ObjectData.h">
+      <Filter>Object\Puzzle\03. Puzzle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -456,70 +462,70 @@
       <Filter>Object\SkyBox</Filter>
     </ClCompile>
     <ClCompile Include="Obj_BG_Tree_1.cpp">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="StaticObject.cpp">
       <Filter>Object\StaticObject</Filter>
     </ClCompile>
     <ClCompile Include="Obj_BG_Tree_2.cpp">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="Obj_BG_Mountain.cpp">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Props_Fence.cpp">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Buildings_Shinave.cpp">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Buildings_Bermiore_Atelier_1.cpp">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Buildings_Bermiore_Atelier_2.cpp">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Buildings_Bermiore_Atelier_3.cpp">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Props_Bermiore_Loom_1.cpp">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Props_Bermiore_Loom_2.cpp">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Props_Bermiore_Cloth_1.cpp">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Buildings_Hide_House_3.cpp">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Buildings_Hide_House_2.cpp">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Buildings_Hide_House_4.cpp">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Buildings_Ornoa_House_1.cpp">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Buildings_Ornoa_House_2.cpp">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Buildings_Ornoa_House_3.cpp">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Buildings_Ornoa_House_4.cpp">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Props_Bermiore_Cloth_2.cpp">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Buildings_Sudium.cpp">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Buildings_Hide_House_1.cpp">
-      <Filter>Object\StaticObject\MapData</Filter>
+      <Filter>Object\MapData</Filter>
     </ClCompile>
     <ClCompile Include="RemoteMove.cpp">
       <Filter>Components</Filter>
@@ -557,31 +563,16 @@
     <ClCompile Include="BaseStone.cpp">
       <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Shinave_Stone_1.cpp">
-      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Shinave_Stone_2.cpp">
-      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Shinave_Stone_3.cpp">
-      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Shinave_Stone_4.cpp">
-      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Shinave_Stone_5.cpp">
-      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Puzzle_Mini.cpp">
+    <ClCompile Include="Puzzle_03.cpp">
       <Filter>Object\Puzzle\Data</Filter>
     </ClCompile>
-    <ClCompile Include="Puzzle_01.cpp">
+    <ClCompile Include="Puzzle_00.cpp">
       <Filter>Object\Puzzle\Data</Filter>
     </ClCompile>
     <ClCompile Include="Puzzle_02.cpp">
       <Filter>Object\Puzzle\Data</Filter>
     </ClCompile>
-    <ClCompile Include="Puzzle_03.cpp">
+    <ClCompile Include="Puzzle_05.cpp">
       <Filter>Object\Puzzle\Data</Filter>
     </ClCompile>
     <ClCompile Include="Puzzle_04.cpp">
@@ -623,81 +614,6 @@
     <ClCompile Include="Obj_Puzzle_Mini_Stone_5.cpp">
       <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClCompile>
-    <ClCompile Include="GameCoreData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NPC_Hide.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NPC_Hide_Leader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NPC_Ornoa.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NPC_OrnoaHide.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NPC_Ornoa_Elder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_BG_Tree_3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Buildings_Hide_House_5.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Hide_Box_1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Hide_Box_2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Hide_Plant.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Hide_Potion.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Hide_Xylophone.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Ornoa_Hint.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Ornoa_Print.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Ornoa_Soundblock_1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Props_Rock.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Mini_Platform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Shinave_Bermiore.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Shinave_Platform_Set.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Shinave_Platform_Spawn.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Sudium_blue.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Sudium_red.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Puzzle_05.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BG_Terrain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Obj_Bermiore_Woolball_2.cpp">
       <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
     </ClCompile>
@@ -712,6 +628,96 @@
     </ClCompile>
     <ClCompile Include="Obj_Bermiore_Woolball_6.cpp">
       <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC_Hide.cpp">
+      <Filter>Object\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC_Hide_Leader.cpp">
+      <Filter>Object\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC_Ornoa.cpp">
+      <Filter>Object\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC_Ornoa_Elder.cpp">
+      <Filter>Object\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC_OrnoaHide.cpp">
+      <Filter>Object\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Shinave_Stone_1.cpp">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Shinave_Stone_2.cpp">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Shinave_Stone_3.cpp">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Shinave_Stone_4.cpp">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Shinave_Stone_5.cpp">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCoreData.cpp">
+      <Filter>GameCoreData</Filter>
+    </ClCompile>
+    <ClCompile Include="Puzzle_01.cpp">
+      <Filter>Object\Puzzle\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Shinave_Bermiore.cpp">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Shinave_Platform_Set.cpp">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Shinave_Platform_Spawn.cpp">
+      <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Hide_Potion.cpp">
+      <Filter>Object\Puzzle\04. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Hide_Box_1.cpp">
+      <Filter>Object\Puzzle\04. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Hide_Box_2.cpp">
+      <Filter>Object\Puzzle\04. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Ornoa_Soundblock_1.cpp">
+      <Filter>Object\Puzzle\05. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Puzzle_Mini_Platform.cpp">
+      <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_BG_Tree_3.cpp">
+      <Filter>Object\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Buildings_Hide_House_5.cpp">
+      <Filter>Object\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Hide_Plant.cpp">
+      <Filter>Object\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Hide_Xylophone.cpp">
+      <Filter>Object\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Ornoa_Hint.cpp">
+      <Filter>Object\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Ornoa_Print.cpp">
+      <Filter>Object\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Props_Rock.cpp">
+      <Filter>Object\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Sudium_blue.cpp">
+      <Filter>Object\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Sudium_red.cpp">
+      <Filter>Object\MapData</Filter>
+    </ClCompile>
+    <ClCompile Include="BG_Terrain.cpp">
+      <Filter>Object\Terrain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

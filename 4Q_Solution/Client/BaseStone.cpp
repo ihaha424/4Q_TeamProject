@@ -10,7 +10,7 @@ BaseStone::BaseStone(std::filesystem::path&& meshPath, std::filesystem::path&& p
 void BaseStone::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
 	InteractObject::Prepare(componentFactory);
-	_sync = componentFactory->Clone<Engine::Component::Synchronize>();
+	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
 }
 
 void BaseStone::DisposeComponents()

@@ -9,7 +9,7 @@ Obj_Bermiore_Fabric::Obj_Bermiore_Fabric(std::filesystem::path&& meshPath, std::
 void Obj_Bermiore_Fabric::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
 	InteractObject::Prepare(componentFactory);
-	_sync = componentFactory->Clone<Engine::Component::Synchronize>();
+	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
 }
 
 void Obj_Bermiore_Fabric::Interact()

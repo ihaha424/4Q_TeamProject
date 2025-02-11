@@ -10,7 +10,7 @@ Obj_Sudium_bouquet::Obj_Sudium_bouquet(std::filesystem::path&& meshPath, std::fi
 void Obj_Sudium_bouquet::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
 	InteractObject::Prepare(componentFactory);
-	_sync = componentFactory->Clone<Engine::Component::Synchronize>();
+	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
 }
 
 void Obj_Sudium_bouquet::Interact()

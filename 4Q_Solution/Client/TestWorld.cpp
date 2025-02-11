@@ -29,7 +29,7 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	//	puzzle->SetBoxScale({ 100, 100, 100 });
 	//}
 
-	////Test Puzzle_00 Object Code -> Load File Data
+	////Test Puzzle_01 Object Code -> Load File Data
 	//{
 	//	Obj_Shinave_Stone_1* puzzle = objectFactory->Clone<Obj_Shinave_Stone_1>(this);
 	//	Engine::Transform tempTransform{};
@@ -202,6 +202,10 @@ void TestWorld::InitializeGameStateManager(const Engine::Modules& modules)
 	gameStateManager->RegisterData(L"GameCoreData", GameCoreData{});
 
 
+	auto puzzle_00 = gameStateManager->NewSubManager();
+	gameStateManager->RegisterSubManager(L"puzzle_00", puzzle_00);
+	puzzle_00->RegisterData(L"Data", Puzzle_00{});
+
 	auto puzzle_01 = gameStateManager->NewSubManager();
 	gameStateManager->RegisterSubManager(L"puzzle_01", puzzle_01);
 	puzzle_01->RegisterData(L"Data", Puzzle_01{});
@@ -213,10 +217,6 @@ void TestWorld::InitializeGameStateManager(const Engine::Modules& modules)
 	auto puzzle_03 = gameStateManager->NewSubManager();
 	gameStateManager->RegisterSubManager(L"puzzle_03", puzzle_03);
 	puzzle_03->RegisterData(L"Data", Puzzle_03{});
-
-	auto puzzle_mini = gameStateManager->NewSubManager();
-	gameStateManager->RegisterSubManager(L"puzzle_mini", puzzle_mini);
-	puzzle_mini->RegisterData(L"Data", Puzzle_Mini{});
 
 	auto puzzle_04 = gameStateManager->NewSubManager();
 	gameStateManager->RegisterSubManager(L"puzzle_04", puzzle_04);

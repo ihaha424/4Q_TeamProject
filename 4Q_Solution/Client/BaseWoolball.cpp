@@ -10,7 +10,7 @@ BaseWoolball::BaseWoolball(std::filesystem::path&& meshPath, std::filesystem::pa
 void BaseWoolball::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
 	InteractObject::Prepare(componentFactory);
-	_sync = componentFactory->Clone<Engine::Component::Synchronize>();
+	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
 }
 
 void BaseWoolball::SendInteractToServer()

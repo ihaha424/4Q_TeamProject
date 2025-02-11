@@ -10,7 +10,7 @@ BaseMiniStone::BaseMiniStone(std::filesystem::path&& meshPath, std::filesystem::
 void BaseMiniStone::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
 	InteractObject::Prepare(componentFactory);
-	_sync = componentFactory->Clone<Engine::Component::Synchronize>();
+	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
 }
 
 void BaseMiniStone::SendInteractToServer()

@@ -14,6 +14,7 @@ public:
 	void SetisDynamic(bool isDynamic);
 	void SetHasMesh(bool hasMesh);
 	void SetBoxScale(Engine::Math::Vector3 boxScale);
+	void SetBoxPosition(Engine::Math::Vector3 boxPosition);
 
 	// 상호작용시 호출할 함수
 	virtual void Interact() = 0;
@@ -38,6 +39,7 @@ protected:
 	bool _isDynamic;
 	bool _hasMesh;
 	Engine::Math::Vector3 _boxScale;
+	Engine::Math::Vector3 _boxPosition;
 
 	Engine::GameState::IManager* myManager;
 };

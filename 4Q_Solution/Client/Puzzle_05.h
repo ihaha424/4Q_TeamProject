@@ -1,5 +1,5 @@
 #pragma once
-struct Puzzle_Mini
+struct Puzzle_05
 {
 };
 

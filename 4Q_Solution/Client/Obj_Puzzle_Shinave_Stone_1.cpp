@@ -17,6 +17,8 @@ void Obj_Puzzle_Shinave_Stone_1::Interact()
 		myManager->SetData(L"Data", data);
 		std::cout << "Obj_Puzzle_Shinave_Stone_1: Set Data Test Log\n";
 	}
+
+	SendInteractToServer();
 }
 
 void Obj_Puzzle_Shinave_Stone_1::DataChangeCallBack(const std::wstring& name, const std::any& value)

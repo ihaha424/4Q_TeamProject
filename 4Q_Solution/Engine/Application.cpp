@@ -211,9 +211,9 @@ void Engine::Application::InitializeManagers() const
 	_windowManager->AddProcedure(DSHInput::Manager::Procedure);
 	_graphicsManager->Initialize(_windowManager->GetHandle(), L"../Shaders/", _size, false, 1);
 	_contentManager->Initialize();
-	_networkManager->Initialize();
-	_physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, true);
-	//_physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, false);
+    _networkManager->Initialize();
+    //_physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, true);
+    _physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, false);
 	_gameStateManager->Initialize();
 	_soundManager->Initialize();
 }

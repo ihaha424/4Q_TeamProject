@@ -16,6 +16,7 @@ void Obj_Puzzle_Shinave_Stone_2::Interact()
 		data.flag[index] = true;
 		myManager->SetData(L"Data", data);
 	}
+	SendInteractToServer();
 }
 
 void Obj_Puzzle_Shinave_Stone_2::DataChangeCallBack(const std::wstring& name, const std::any& value)

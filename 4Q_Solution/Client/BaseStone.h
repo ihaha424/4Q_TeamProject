@@ -1,7 +1,7 @@
 #pragma once
 #include "InteractObject.h"
 #include "TriggerBox.h"
-#include "Puzzle_00.h"
+#include "Puzzle_01.h"
 
 class BaseStone
 	:public InteractObject
@@ -16,8 +16,11 @@ protected:
 	void DisposeComponents() override;
 	void PreInitialize(const Engine::Modules& modules) override;
 
+	void SendInteractToServer();
 protected:
 	Engine::GameState::IManager* myManager;
 	unsigned int index;
+
+	Engine::Component::Synchronize* _sync;
 };
 

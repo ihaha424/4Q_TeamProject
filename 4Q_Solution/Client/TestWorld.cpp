@@ -3,7 +3,6 @@
 
 #include "Application.h"
 
-
 void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 {
 	//_ray = objectFactory->Clone<Ray>(this);
@@ -11,7 +10,27 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	_skyBox = objectFactory->Clone<SkyBox>(this);
 	_testSprite = objectFactory->Clone<TestSprite>(this);
 
-	//Test Grabbed Object Code -> Make and Load File Data
+	// Obj_Bermiore_Fabric
+	{
+		helpPrepare<Obj_Bermiore_Fabric>(L"Obj_Bermiore_Fabric", objectFactory);
+	}
+
+	// Obj_Bermiore_Hanger
+	{
+		helpPrepare<Obj_Bermiore_Hanger>(L"Obj_Bermiore_Hanger", objectFactory);
+	}
+
+	// Obj_Shinave_SteppedSudium
+	{
+		helpPrepare<Obj_Shinave_SteppedSudium>(L"Obj_Shinave_SteppedSudium", objectFactory);
+	}
+
+	// Obj_Ornoa_Print
+	{
+		helpPrepare<Obj_Ornoa_Print>(L"Obj_Ornoa_Print", objectFactory);
+	}
+
+	////Test Grabbed Object Code -> Make and Load File Data
 	//{
 	//	GrabbedObject* building = objectFactory->Clone<GrabbedObject>(this);
 	//	Engine::Transform tempTransform{};
@@ -20,53 +39,53 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	//	building->SetBoxScale({ 100, 500, 100 });
 	//}
 
-	//Test Trigger Area Code -> Make and Load File Data
-	{
-		TriggerArea* puzzle = objectFactory->Clone<TriggerArea>(this);
-		Engine::Transform tempTransform{};
-		tempTransform.position = { 100.f, 0.f, 100.f };
-		puzzle->SetTransform(tempTransform);
-		puzzle->SetBoxScale({ 100, 100, 100 });
-	}
-
-	//Test Puzzle_00 Object Code -> Load File Data
+	////Test Trigger Area Code -> Make and Load File Data
 	//{
-	//	Obj_Puzzle_Shinave_Stone_1* puzzle = objectFactory->Clone<Obj_Puzzle_Shinave_Stone_1>(this);
+	//	TriggerArea* puzzle = objectFactory->Clone<TriggerArea>(this);
+	//	Engine::Transform tempTransform{};
+	//	tempTransform.position = { 0.f, 0.f, 200.f };
+	//	puzzle->SetTransform(tempTransform);
+	//	puzzle->SetBoxScale({ 100, 100, 100 });
+	//}
+
+	////Test Puzzle_01 Object Code -> Load File Data
+	//{
+	//	Obj_Shinave_Stone_1* puzzle = objectFactory->Clone<Obj_Shinave_Stone_1>(this);
 	//	Engine::Transform tempTransform{};
 	//	tempTransform.position = { -200.f, 0.f, 0 };
 	//	puzzle->SetTransform(tempTransform);
 	//	puzzle->SetBoxScale({ 100, 100, 100 });
 	//}
 
-	helpPrepare<Terrain>(L"Terrain", objectFactory);
+	helpPrepare<BG_Terrain>(L"BG_Terrain", objectFactory);
 
 	//helpPrepare<Obj_BG_Tree_1>(L"Obj_BG_Tree_1", objectFactory);
-	// helpPrepare<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", objectFactory);
-	// helpPrepare<Obj_BG_Mountain>(L"Obj_BG_Mountain", objectFactory);
+	//helpPrepare<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", objectFactory);
+	//helpPrepare<Obj_BG_Mountain>(L"Obj_BG_Mountain", objectFactory);
 
 	//helpPrepare<Obj_Props_Fence>(L"Obj_Props_Fence", objectFactory);
 
 	//helpPrepare<Obj_Buildings_Shinave>(L"Obj_Buildings_Shinave", objectFactory);
-	//// helpPrepare<Obj_Buildings_Bermiore_Atelier_1>(L"Obj_Buildings_Bermiore_Atelier_1", objectFactory);
-	//// helpPrepare<Obj_Buildings_Bermiore_Atelier_2>(L"Obj_Buildings_Bermiore_Atelier_2", objectFactory);
-	//// helpPrepare<Obj_Buildings_Bermiore_Atelier_3>(L"Obj_Buildings_Bermiore_Atelier_3", objectFactory);
+	helpPrepare<Obj_Buildings_Bermiore_Atelier_1>(L"Obj_Buildings_Bermiore_Atelier_1", objectFactory);
+	helpPrepare<Obj_Buildings_Bermiore_Atelier_2>(L"Obj_Buildings_Bermiore_Atelier_2", objectFactory);
+	helpPrepare<Obj_Buildings_Bermiore_Atelier_3>(L"Obj_Buildings_Bermiore_Atelier_3", objectFactory);
 
-	//// helpPrepare<Obj_Props_Bermiore_Loom_1>(L"Obj_Props_Bermiore_Loom_1", objectFactory);
-	//// helpPrepare<Obj_Props_Bermiore_Loom_2>(L"Obj_Props_Bermiore_Loom_2", objectFactory);
-	//// helpPrepare<Obj_Props_Bermiore_Cloth_1>(L"Obj_Props_Bermiore_Cloth_1", objectFactory);
-	//// helpPrepare<Obj_Props_Bermiore_Cloth_2>(L"Obj_Props_Bermiore_Cloth_2", objectFactory);
+	//helpPrepare<Obj_Props_Bermiore_Loom_1>(L"Obj_Props_Bermiore_Loom_1", objectFactory);
+	//helpPrepare<Obj_Props_Bermiore_Loom_2>(L"Obj_Props_Bermiore_Loom_2", objectFactory);
+	//helpPrepare<Obj_Props_Bermiore_Cloth_1>(L"Obj_Props_Bermiore_Cloth_1", objectFactory);
+	//helpPrepare<Obj_Props_Bermiore_Cloth_2>(L"Obj_Props_Bermiore_Cloth_2", objectFactory);
 
-	//// helpPrepare<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", objectFactory);
+	//helpPrepare<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", objectFactory);
 
-	//helpPrepare<Obj_Buildings_Hide_House_1>(L"Obj_Buildings_Hide_House_1", objectFactory);
-	//helpPrepare<Obj_Buildings_Hide_House_2>(L"Obj_Buildings_Hide_House_2", objectFactory);
-	//helpPrepare<Obj_Buildings_Hide_House_3>(L"Obj_Buildings_Hide_House_3", objectFactory);
-	//helpPrepare<Obj_Buildings_Hide_House_4>(L"Obj_Buildings_Hide_House_4", objectFactory);
+	helpPrepare<Obj_Buildings_Hide_House_1>(L"Obj_Buildings_Hide_House_1", objectFactory);
+	helpPrepare<Obj_Buildings_Hide_House_2>(L"Obj_Buildings_Hide_House_2", objectFactory);
+	helpPrepare<Obj_Buildings_Hide_House_3>(L"Obj_Buildings_Hide_House_3", objectFactory);
+	helpPrepare<Obj_Buildings_Hide_House_4>(L"Obj_Buildings_Hide_House_4", objectFactory);
 
-	//helpPrepare<Obj_Buildings_Ornoa_House_1>(L"Obj_Buildings_Ornoa_House_1", objectFactory);
-	//helpPrepare<Obj_Buildings_Ornoa_House_2>(L"Obj_Buildings_Ornoa_House_2", objectFactory);
-	// helpPrepare<Obj_Buildings_Ornoa_House_3>(L"Obj_Buildings_Ornoa_House_3", objectFactory);
-	// helpPrepare<Obj_Buildings_Ornoa_House_4>(L"Obj_Buildings_Ornoa_House_4", objectFactory);
+	helpPrepare<Obj_Buildings_Ornoa_House_1>(L"Obj_Buildings_Ornoa_House_1", objectFactory);
+	helpPrepare<Obj_Buildings_Ornoa_House_2>(L"Obj_Buildings_Ornoa_House_2", objectFactory);
+	//helpPrepare<Obj_Buildings_Ornoa_House_3>(L"Obj_Buildings_Ornoa_House_3", objectFactory);
+	//helpPrepare<Obj_Buildings_Ornoa_House_4>(L"Obj_Buildings_Ornoa_House_4", objectFactory);
 }
 
 void TestWorld::PreInitialize(const Engine::Modules& modules)
@@ -143,7 +162,7 @@ void TestWorld::PostUpdate(float deltaTime)
 	Engine::Physics::AdditionalQueryData OverlapInfo;
 	// TODO: transform = GetCameraTransform 해서 넣어줘야함
 	Engine::Transform transform{};
-	cameraScene->Overlap(OverlapInfo, "Camera", transform);
+	//cameraScene->Overlap(OverlapInfo, "Camera", transform);
 
 	for (auto& object : OverlapInfo.UserDatas)
 	{
@@ -199,6 +218,8 @@ void TestWorld::RequestData(const ConnectMsg::AddObject* msg) {
 void TestWorld::InitializeGameStateManager(const Engine::Modules& modules)
 {
 	auto gameStateManager = modules.gameStateManager;
+	gameStateManager->RegisterData(L"GameCoreData", GameCoreData{});
+
 
 	auto puzzle_00 = gameStateManager->NewSubManager();
 	gameStateManager->RegisterSubManager(L"puzzle_00", puzzle_00);
@@ -212,10 +233,6 @@ void TestWorld::InitializeGameStateManager(const Engine::Modules& modules)
 	gameStateManager->RegisterSubManager(L"puzzle_02", puzzle_02);
 	puzzle_02->RegisterData(L"Data", Puzzle_02{});
 
-	auto puzzle_mini = gameStateManager->NewSubManager();
-	gameStateManager->RegisterSubManager(L"puzzle_mini", puzzle_mini);
-	puzzle_mini->RegisterData(L"Data", Puzzle_Mini{});
-
 	auto puzzle_03 = gameStateManager->NewSubManager();
 	gameStateManager->RegisterSubManager(L"puzzle_03", puzzle_03);
 	puzzle_03->RegisterData(L"Data", Puzzle_03{});
@@ -223,5 +240,9 @@ void TestWorld::InitializeGameStateManager(const Engine::Modules& modules)
 	auto puzzle_04 = gameStateManager->NewSubManager();
 	gameStateManager->RegisterSubManager(L"puzzle_04", puzzle_04);
 	puzzle_04->RegisterData(L"Data", Puzzle_04{});
+
+	auto puzzle_05 = gameStateManager->NewSubManager();
+	gameStateManager->RegisterSubManager(L"puzzle_05", puzzle_05);
+	puzzle_05->RegisterData(L"Data", Puzzle_05{});
 
 }

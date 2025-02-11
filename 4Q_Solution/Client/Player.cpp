@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "GrabbedObject.h"
 #include "InteractObject.h"
+#include "Application.h"
 
 Player::Player() : 
 	//, _movement(nullptr)
@@ -143,11 +144,11 @@ void Player::PostUpdate(float deltaTime)
 
 	Engine::Math::Quaternion q = Engine::Math::Quaternion::Concatenate(_transform.rotation, _offset);
 
-	_worldMatrix = Engine::Math::Matrix::CreateScale(0.4f)
+	_worldMatrix = Engine::Math::Matrix::CreateScale(0.15f)
 		* Engine::Math::Matrix::CreateFromQuaternion(q)
 		* Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
 
-	UpdateState();
+	UpdateState();	
 }
 
 void Player::PostAttach()

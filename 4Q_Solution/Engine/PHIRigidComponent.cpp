@@ -148,6 +148,11 @@ namespace Engine::PHI
 		return owner;
 	}
 
+	Engine::Math::Vector3 RigidComponent::GetBounds()const
+	{
+		return PhysicsVector3ToVector3(object->GetBounds());
+	}
+
 	void RigidComponent::SetOwner(void* _owner)
 	{
 		owner = _owner;

@@ -1,7 +1,7 @@
 #pragma once
 #include "Player.h"
 #include "GlobalLight.h"
-#include "Terrain.h"
+#include "BG_Terrain.h"
 #include "SkyBox.h"
 
 class TestWorld : public Engine::World
@@ -19,7 +19,7 @@ protected:
 private:
 	Player* _player;
 	GlobalLight* _light;
-	Terrain* _terrain;
+	BG_Terrain* _terrain;
 	SkyBox* _skyBox;
 
 	int playerSerialNum = 0;

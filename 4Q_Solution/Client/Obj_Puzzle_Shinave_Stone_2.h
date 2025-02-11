@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 #include "BaseStone.h"
 
 class Obj_Puzzle_Shinave_Stone_2
@@ -8,11 +8,7 @@ public:
 	explicit Obj_Puzzle_Shinave_Stone_2(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
 	virtual ~Obj_Puzzle_Shinave_Stone_2() = default;
 
-
-	// BaseStone¿ª(∏¶) ≈Î«ÿ ªÛº”µ 
 	void Interact() override;
 
 	void DataChangeCallBack(const std::wstring& name, const std::any& value) override;
-
 };
-

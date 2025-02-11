@@ -45,7 +45,7 @@ namespace PhysicsEngineAPI
 		physx::PxVec3 displacement = Vector3ToPxVec3(_displacement);
 		const physx::PxControllerFilters filters{};
 		const physx::PxObstacleContext* obstacles = NULL;
-		//controller->invalidateCache();
+		controller->invalidateCache();
 		flags = controller->move(displacement, minDistance, deltaTime, filters);
 		return flags;
 	}

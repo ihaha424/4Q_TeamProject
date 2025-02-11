@@ -354,6 +354,6 @@ namespace Engine::Physics
 		Math::Vector3		material{0,0,0};
 		float				radius;
 		float				height;
-		CapsuleClimbingMode	climbinMode{ CapsuleClimbingMode::Constrained };	
+		CapsuleClimbingMode	climbinMode{ CapsuleClimbingMode::Constrained };
 	};
 }

@@ -8,7 +8,7 @@ struct Bone
 	std::string name;
 	std::vector<Bone> children;
 	int id;
-	//Matrix anim;
+	Matrix anim;
 	//Bone* parent = nullptr;
 	//Matrix* parentAnim = nullptr;
 };

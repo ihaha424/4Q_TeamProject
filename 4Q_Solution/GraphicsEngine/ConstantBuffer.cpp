@@ -38,6 +38,12 @@ void ConstantBuffer::SetConstantBuffer(const wchar_t* name, ShaderType type, uns
 	case ShaderType::Pixel:
 		_pDeviceContext->PSSetConstantBuffers(start, numBuffers, &_datas[name].pBuffer);
 		break;
+	case ShaderType::Geometry:
+		_pDeviceContext->GSSetConstantBuffers(start, numBuffers, &_datas[name].pBuffer);
+		break;
+	case ShaderType::Compute:
+		_pDeviceContext->CSSetConstantBuffers(start, numBuffers, &_datas[name].pBuffer);
+		break;
 	}
 }
 

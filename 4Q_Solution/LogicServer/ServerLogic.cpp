@@ -247,33 +247,33 @@ void ServerLogic::EnterProcess(const Packet& packet)
             Server::BroadCast(_msgBuffer, (short)PacketID::Sync, _addObject.ByteSizeLong(), _playerSlot[i]._serialNumber);
 
         }  // for end
-        for (int i = 0; i < _buildings.size(); i++) {
-            _addObject.set_grantnumber(_buildings[i]->_serialNumber);
-            _addObject.set_classid(_buildings[i]->_resourceId);
-            _addObject.SerializeToString(&_msgBuffer);
-            Server::SavePacketData(
-                _msgBuffer,
-                packet.sessionId,
-                (short)PacketID::ObjectSync,
-                _addObject.ByteSizeLong(),
-                _buildings[i]->_serialNumber
-            );
-        }
-        for (int i = 0; i < _sudiums.size(); i++) {
-            _addObject.set_grantnumber(_sudiums[i]->_serialNumber);
-            _addObject.set_classid(_sudiums[i]->_resourceId);
-            _addObject.SerializeToString(&_msgBuffer);
-            Server::SavePacketData(
-                _msgBuffer,
-                packet.sessionId,
-                (short)PacketID::ObjectSync,
-                _addObject.ByteSizeLong(),
-                _sudiums[i]->_serialNumber
-            );
-        }
-        // TODO: 여기서 AddObject에 추가할 오브젝트의 id를 보내는 작업을 수행합니다.
-        //
-        Server::BroadCast("", (short)PacketID::DataSendComplete, 0, 0);
+        //for (int i = 0; i < _buildings.size(); i++) {
+        //    _addObject.set_grantnumber(_buildings[i]->_serialNumber);
+        //    _addObject.set_classid(_buildings[i]->_resourceId);
+        //    _addObject.SerializeToString(&_msgBuffer);
+        //    Server::SavePacketData(
+        //        _msgBuffer,
+        //        packet.sessionId,
+        //        (short)PacketID::ObjectSync,
+        //        _addObject.ByteSizeLong(),
+        //        _buildings[i]->_serialNumber
+        //    );
+        //}
+        //for (int i = 0; i < _sudiums.size(); i++) {
+        //    _addObject.set_grantnumber(_sudiums[i]->_serialNumber);
+        //    _addObject.set_classid(_sudiums[i]->_resourceId);
+        //    _addObject.SerializeToString(&_msgBuffer);
+        //    Server::SavePacketData(
+        //        _msgBuffer,
+        //        packet.sessionId,
+        //        (short)PacketID::ObjectSync,
+        //        _addObject.ByteSizeLong(),
+        //        _sudiums[i]->_serialNumber
+        //    );
+        //}
+        //// TODO: 여기서 AddObject에 추가할 오브젝트의 id를 보내는 작업을 수행합니다.
+        ////
+        //Server::BroadCast("", (short)PacketID::DataSendComplete, 0, 0);
     } // else end
 }
 void ServerLogic::ExitProcess(const Packet& packet)

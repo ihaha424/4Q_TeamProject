@@ -64,6 +64,16 @@ protected:
 
 	Engine::Component::BitFlag* _bitFlag;
 
+	Engine::Component::LineWave* _leftLineWave;
+	Engine::Component::LineWave* _rightLineWave;
+	Engine::Math::Matrix* _leftHand;
+	Engine::Math::Matrix* _rightHand;
+
+	Engine::Math::Vector3 _leftSrc;
+	Engine::Math::Vector3 _leftDst;
+	Engine::Math::Vector3 _rightSrc;
+	Engine::Math::Vector3 _rightDst;
+
 protected:
 	Engine::Math::Vector3 _capsuleScale;
 	Engine::Math::Quaternion _offset;

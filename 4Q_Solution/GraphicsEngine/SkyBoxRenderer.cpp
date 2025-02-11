@@ -36,25 +36,15 @@ void SkyBoxRenderer::SetIBLTextures(ID3D11DeviceContext* pDeviceContext)
 {
 	for (int i = 0; i < End;i++)
 	{
-		ID3D11ShaderResourceView* pSRV = nullptr;
-		
-		if (_textures[i].get())
-			pSRV = _textures[i]->Get();
-
-		pDeviceContext->PSGetShaderResources(11 + i, 1, &pSRV);
+		pDeviceContext->PSGetShaderResources(11 + i, 1, _textures[i]->Get());
 	}
 }
 
 void SkyBoxRenderer::SetParameter(ID3D11DeviceContext* pDeviceContext, unsigned int startSlot)
 {
-	auto* pSRV = _textures[Diffsue]->Get();
-	pDeviceContext->PSSetShaderResources(startSlot, 1, &pSRV);
-
-	pSRV = _textures[Specular]->Get();
-	pDeviceContext->PSSetShaderResources(startSlot + 1, 1, &pSRV);
-
-	pSRV = _textures[BRDF]->Get();
-	pDeviceContext->PSSetShaderResources(startSlot + 2, 1, &pSRV);
+	pDeviceContext->PSSetShaderResources(startSlot, 1, _textures[Diffsue]->Get());
+	pDeviceContext->PSSetShaderResources(startSlot + 1, 1, _textures[Specular]->Get());
+	pDeviceContext->PSSetShaderResources(startSlot + 2, 1, _textures[BRDF]->Get());
 }
 
 void SkyBoxRenderer::Initialize(const wchar_t* filePath)
@@ -70,13 +60,7 @@ void SkyBoxRenderer::Initialize(const wchar_t* filePath)
 
 void SkyBoxRenderer::Render(ID3D11DeviceContext* pDeviceContext)
 {
-	ID3D11ShaderResourceView* pSRV = nullptr;
-
-	if (_skyBox.get())
-		pSRV = _skyBox->Get();
-
-	pDeviceContext->PSSetShaderResources(0, 1, &pSRV);
-
+	pDeviceContext->PSSetShaderResources(0, 1, _skyBox->Get());
 	_vertexShader->SetVertexShader();
 	_pixelShader->SetPixelShader();
 

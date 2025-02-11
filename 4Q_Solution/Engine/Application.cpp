@@ -183,6 +183,7 @@ void Engine::Application::Register(Content::IManager* contentManager, Load::IMan
 	componentFactory->Register<Component::BackgroundMusic>();
 	componentFactory->Register<Component::Listener>();
 	componentFactory->Register<Component::Sprite>();
+	componentFactory->Register<Component::LineWave>();
 	// TODO: Register other components.
 }
 

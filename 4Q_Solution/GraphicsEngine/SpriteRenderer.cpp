@@ -31,8 +31,7 @@ void SpriteRenderer::Render(ID3D11DeviceContext* pDeviceContext)
 	}
 
 	g_pConstantBuffer->UpdateConstantBuffer(L"CameraData", &data);
-	auto* pSRV = _texture->Get();
-	pDeviceContext->PSSetShaderResources(0, 1, &pSRV);
+	pDeviceContext->PSSetShaderResources(0, 1, _texture->Get());
 	g_pSprite->Render(_description.type);
 }
 

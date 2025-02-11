@@ -72,3 +72,8 @@ void Engine::Component::Animator::MakeParent(const char* parent, const char* chi
 {
 	_geAnimator->MakeParent(parent, child);
 }
+
+void Engine::Component::Animator::GetSkeletonMatrix(const char* bone, Engine::Math::Matrix** out) const
+{
+	_geAnimator->GetSkeletonMatrix(bone, (GE::Matrix4x4**)out);
+}

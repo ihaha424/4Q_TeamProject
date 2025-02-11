@@ -174,7 +174,7 @@ void DX11Renderer::ShadowPass()
 
 	float dist = 500.f;
 	XMVECTOR direction = XMVector3Normalize(-pMainLight->_lightData.data);
-	XMVECTOR lightPosition = direction * dist + XMVectorSet(0.f, dist, 0.f, 0.f);
+	XMVECTOR lightPosition = direction * dist + XMVectorSet(0.f, dist, 0.f, 0.f);// +XMVECTOR(pCamera->GetPosition());
 	XMVECTOR lightTarget = direction;
 	XMVECTOR lightUp = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 

@@ -44,7 +44,7 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	// helpPrepare<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", objectFactory);
 	// helpPrepare<Obj_BG_Mountain>(L"Obj_BG_Mountain", objectFactory);
 
-	helpPrepare<Obj_Props_Fence>(L"Obj_Props_Fence", objectFactory);
+	// helpPrepare<Obj_Props_Fence>(L"Obj_Props_Fence", objectFactory);
 
 	//helpPrepare<Obj_Buildings_Shinave>(L"Obj_Buildings_Shinave", objectFactory);
 	//// helpPrepare<Obj_Buildings_Bermiore_Atelier_1>(L"Obj_Buildings_Bermiore_Atelier_1", objectFactory);

@@ -10,6 +10,7 @@
 #include "Sampler.h"
 #include "TextSystem.h"
 #include "SpriteSystem.h"
+#include "UnlitSystem.h"
 #include "StructuredBuffer.h"
 
 StructuredBuffer*	g_pStructuredBuffer;
@@ -45,6 +46,7 @@ void RenderSystem::Initialize(const GE::RENDERER_DESC* pDesc)
 		break;
 	}
 
+
 	_pSwapChain = g_pGraphicDevice->GetSwapChain();
 }
 
@@ -55,6 +57,7 @@ void RenderSystem::Release()
 	SafeRelease(_pRenderer);
 	SafeRelease(_pTextSystem);
 	SafeRelease(_pSpriteSystem);
+	SafeRelease(_pUnlitSystem);
 	SafeRelease(g_pStructuredBuffer);
 	SafeRelease(g_pConstantBuffer);
 	SafeRelease(g_pSampler);
@@ -70,6 +73,7 @@ void RenderSystem::Release()
 void RenderSystem::Render()
 {
 	_pRenderer->Render();
+	_pUnlitSystem->Render();
 	_pSpriteSystem->Render();
 	_pTextSystem->Render();
 	_pSwapChain->Present(0, 0);
@@ -88,6 +92,11 @@ void RenderSystem::GetPostProcessSystem(GE::IPostProcessSystem** ppPostProcessSy
 void RenderSystem::GetSpriteSystem(GE::ISpriteSystem** ppSpriteSystem)
 {
 	(*ppSpriteSystem) = _pSpriteSystem;
+}
+
+void RenderSystem::GetUnlitSystem(GE::IUnlitSystem** ppUnlitSystem)
+{
+	(*ppUnlitSystem) = _pUnlitSystem;
 }
 
 void RenderSystem::CreateMeshRenderer(GE::IMeshRenderer** ppComponent, const GE::MESH_RENDERER_DESC* pDesc)
@@ -152,6 +161,9 @@ void RenderSystem::InitializeDX11(HWND hWnd, bool isFullScreen, const unsigned i
 
 	_pSpriteSystem = new SpriteSystem;
 	_pSpriteSystem->Initialize();
+
+	_pUnlitSystem = new UnlitSystem;
+	_pUnlitSystem->Initialize();
 
 	g_orthoGraphic = XMMatrixTranspose(XMMatrixOrthographicLH(g_width, g_height, 1.f, 100.f));
 }

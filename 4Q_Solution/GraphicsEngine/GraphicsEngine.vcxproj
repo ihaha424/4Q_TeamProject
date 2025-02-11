@@ -203,6 +203,7 @@
     <ClInclude Include="Enum.h" />
     <ClInclude Include="Extern.h" />
     <ClInclude Include="Bloom.h" />
+    <ClInclude Include="GeometryShader.h" />
     <ClInclude Include="includes\GraphicsEngine.h" />
     <ClInclude Include="includes\IBlur.h" />
     <ClInclude Include="includes\IFilter.h" />
@@ -211,6 +212,8 @@
     <ClInclude Include="includes\IPostProcessSystem.h" />
     <ClInclude Include="includes\ISpriteRenderer.h" />
     <ClInclude Include="includes\ISpriteSystem.h" />
+    <ClInclude Include="includes\IUnlitRenderer.h" />
+    <ClInclude Include="includes\IUnlitSystem.h" />
     <ClInclude Include="includes\Matrix4x4.h" />
     <ClInclude Include="LineRenderer.h" />
     <ClInclude Include="PostProcessSystem.h" />
@@ -245,6 +248,8 @@
     <ClInclude Include="SkyBoxRenderer.h" />
     <ClInclude Include="StructuredBuffer.h" />
     <ClInclude Include="ToneMapping.h" />
+    <ClInclude Include="UnlitRenderer.h" />
+    <ClInclude Include="UnlitSystem.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="ViewManagement.h" />
     <ClInclude Include="SkeletalMesh.h" />
@@ -280,6 +285,7 @@
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Bloom.cpp" />
+    <ClCompile Include="GeometryShader.cpp" />
     <ClCompile Include="LineRenderer.cpp" />
     <ClCompile Include="PostProcessSystem.cpp" />
     <ClCompile Include="Quad.cpp" />
@@ -298,6 +304,8 @@
     <ClCompile Include="SkyBoxRenderer.cpp" />
     <ClCompile Include="StructuredBuffer.cpp" />
     <ClCompile Include="ToneMapping.cpp" />
+    <ClCompile Include="UnlitRenderer.cpp" />
+    <ClCompile Include="UnlitSystem.cpp" />
     <ClCompile Include="ViewManagement.cpp" />
     <ClCompile Include="StaticMeshRenderer.cpp" />
     <ClCompile Include="Model.cpp" />

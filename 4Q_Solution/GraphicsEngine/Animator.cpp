@@ -167,6 +167,30 @@ void Animator::MakeParent(const char* parent, const char* child)
 	_pSkeleton->MakeParent(parent, child);
 }
 
+void Animator::GetSkeletonMatrix(const char* bone, GE::Matrix4x4** out)
+{
+	Bone& rootBone = _pSkeleton->GetRootBone();
+
+	std::queue<Bone*> bfs;
+	bfs.push(&rootBone);
+
+	while (!bfs.empty())
+	{
+		Bone* curr = bfs.front();
+		bfs.pop();
+
+		if (curr->name == bone)
+		{
+			(*out) = (GE::Matrix4x4*)&curr->anim;
+			break;
+		}
+		for (auto& child : curr->children)
+		{
+			bfs.push(&child);
+		}
+	}
+}
+
 void Animator::UpdateAnimationTransform(Bone& skeletion, 
 										const XMMATRIX& parentTransform, 
 										std::vector<Controller>& controllers, 
@@ -192,6 +216,7 @@ void Animator::UpdateAnimationTransform(Bone& skeletion,
 
 	if (-1 != skeletion.id)
 	{
+		skeletion.anim = globalTransform;
 		transforms[skeletion.id] = XMMatrixTranspose(skeletion.offset * globalTransform);
 	}
 

@@ -38,7 +38,6 @@ private:
 private:
 	std::vector<Slot>			_inputBindSlot;
 	std::vector<SharedSlot>		_sharedBindSlot;
-	ID3D11DeviceContext*		_pDeviceContext{ nullptr };
-	ID3D11PixelShader*			_pPixelShader{ nullptr };
 	std::shared_ptr<Sampler>	_sampler;
+	ID3D11PixelShader*			_pPixelShader{ nullptr };
 };

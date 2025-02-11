@@ -10,7 +10,7 @@ namespace GE
 		bool			activeDraw;
 	};
 
-	class ISpriteRenderer : virtual public IBase
+	class ISpriteRenderer : public IBase
 	{
 	protected:
 		explicit ISpriteRenderer() = default;

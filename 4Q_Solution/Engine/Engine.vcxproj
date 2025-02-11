@@ -196,6 +196,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="FixedArm.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateManager.h" />
+    <ClInclude Include="LineWave.h" />
     <ClInclude Include="ListenerComponent.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="LoggerManager.h" />
@@ -360,6 +361,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Effect3DSoundComponent.cpp" />
     <ClCompile Include="FixedArm.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
+    <ClCompile Include="LineWave.cpp" />
     <ClCompile Include="ListenerComponent.cpp" />
     <ClCompile Include="LoggerManager.cpp" />
     <ClCompile Include="LogLevel.cpp" />

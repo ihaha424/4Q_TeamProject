@@ -25,6 +25,7 @@
 #include "Text.h"
 #include "SkyBox.h"
 #include "Sprite.h"
+#include "LineWave.h"
 
 // Network
 #include "Synchronize.h"

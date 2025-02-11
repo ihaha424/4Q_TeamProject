@@ -4,15 +4,34 @@ struct PS_INPUT
     float2 uv       : TEXCOORD;
 };
 
-Texture2D txBase : register(t0);
-Texture2D txMask : register(t1);
+cbuffer WaveData
+{
+    float waveTime;
+    float waveAmplitude;
+    float waveFrequency;
+}
+
+Texture2D txBase        : register(t0);
+Texture2D txMask        : register(t1);
+Texture2D txGradient    : register(t2);
 
 SamplerState samLinear_wrap : register(s0);
+SamplerState samLinear_clamp : register(s1);
+
+float random(float2 uv)
+{
+    return frac(sin(dot(uv.xy, float2(12.9898, 78.233))) * 43758.5453);
+}
 
 float4 main(PS_INPUT input) : SV_Target
 {
-    float3 base = txBase.Sample(samLinear_wrap, input.uv).rgb;
-    float  mask = txMask.Sample(samLinear_wrap, input.uv).r;
+    float base = txBase.Sample(samLinear_wrap, input.uv + float2(waveTime, 0)).r;
+    float mask = txMask.Sample(samLinear_wrap, input.uv).r;
+    float noise = random(input.uv * waveTime * 10.0);
     
-    return float4(base * mask, 1);
+    float3 baseColor = float3(0, 0.5, 1) * txGradient.Sample(samLinear_wrap, input.uv).r;    
+    float4 color = float4(baseColor * base + baseColor, 1);
+    color.a = mask;
+    
+    return color;
 }

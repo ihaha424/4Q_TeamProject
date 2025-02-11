@@ -2,6 +2,7 @@
 #include "Socket.h"
 #include "Session.h"
 #include "PacketDispatcher.h"
+#include "Utils/StreamBuffer.h"
 #include <iostream>
 
 #include <Shlwapi.h>
@@ -139,6 +140,9 @@ void NetworkMain::Finalize()
 void NetworkMain::Disconnect(SessionID sid)
 {
 	// TODO: 여기서 session에 대한 종료를 진행해야 합니다.
+	if (_sessionMap.find(sid) == _sessionMap.end()) {
+		return;
+	}
 	_pendingDestroySessions.push_back(_sessionMap[sid]);
 	_sessionMap.erase(sid);
 	_sessionProcessCheck.erase(sid);
@@ -163,6 +167,11 @@ void NetworkMain::IOWork(HANDLE completionPort)
 				_sessionProcessCheck.erase(sid);
 				PacketDispatcher::GetInstance()->SessionDeleted(sid);
 				printf("[IOWork] Session deleted.\n");
+
+				Packet header;
+				header.sessionId = sid;
+				header._packetId = 4;
+				PacketDispatcher::GetInstance()->_saveRecvContainer.push(std::move(header));
 			} // if end
 		} // if end
 		else {

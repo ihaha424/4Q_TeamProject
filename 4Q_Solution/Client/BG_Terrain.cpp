@@ -3,8 +3,8 @@
 #include "Application.h"
 
 
-BG_Terrain::BG_Terrain(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath)
-	: StaticObject(std::forward<std::filesystem::path>(meshPath), std::forward<std::filesystem::path>(physicsPath))
+BG_Terrain::BG_Terrain(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath)
+	: StaticObject(meshPath, physicsPath)
 {}
 
 void BG_Terrain::PreInitialize(const Engine::Modules& modules)
@@ -12,9 +12,9 @@ void BG_Terrain::PreInitialize(const Engine::Modules& modules)
 	Object::PreInitialize(modules);
 	_staticMesh->SetFilePath(_meshPath);
 	auto pos = _transform.position;
-	_transform.scale *= 500;
-	_transform.Translate({0.f, -140.f, 0.f});
-	_transform.rotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(std::numbers::pi_v<float> * 0.5f, 0.f, 0.f);
+	_transform.scale *= 100;
+	_transform.Translate({0.f, 0.f, 0.f});
+	_transform.rotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(std::numbers::pi_v<float>, 0.f, 0.f);
 	_matrix = _transform.GetMatrix();
 	_staticMesh->SetMatrix(&_matrix);
 

@@ -154,6 +154,9 @@
     <Filter Include="Object\Puzzle\01. Puzzle\Object\Obj_Bermiore_Soundblock">
       <UniqueIdentifier>{02638d8d-b82b-49e1-b8aa-d45d79477395}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_5">
+      <UniqueIdentifier>{7881af85-c32c-4ebd-90db-9c8837fb15a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -396,7 +399,7 @@
     <ClInclude Include="Obj_Hide_Box_2.h">
       <Filter>Object\Puzzle\04. Puzzle\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Hide_Box_1.h">
+    <ClInclude Include="Obj_Hide_Box.h">
       <Filter>Object\Puzzle\04. Puzzle\Object</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Hide_Potion.h">
@@ -506,6 +509,9 @@
     </ClInclude>
     <ClInclude Include="Obj_Bermiore_Soundblock.h">
       <Filter>Object\Puzzle\01. Puzzle\Object\Obj_Bermiore_Soundblock</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Ornoa_Soundblock_5.h">
+      <Filter>Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_5</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -746,7 +752,7 @@
     <ClCompile Include="Obj_Hide_Potion.cpp">
       <Filter>Object\Puzzle\04. Puzzle\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Hide_Box_1.cpp">
+    <ClCompile Include="Obj_Hide_Box.cpp">
       <Filter>Object\Puzzle\04. Puzzle\Object</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Hide_Box_2.cpp">
@@ -820,6 +826,9 @@
     </ClCompile>
     <ClCompile Include="Obj_Bermiore_Soundblock.cpp">
       <Filter>Object\Puzzle\01. Puzzle\Object\Obj_Bermiore_Soundblock</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Ornoa_Soundblock_5.cpp">
+      <Filter>Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_5</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -188,7 +188,7 @@
     <ClInclude Include="Obj_Mini_Stone_5.h" />
     <ClInclude Include="Obj_BG_Tree_3.h" />
     <ClInclude Include="Obj_Buildings_Hide_House_5.h" />
-    <ClInclude Include="Obj_Hide_Box_1.h" />
+    <ClInclude Include="Obj_Hide_Box.h" />
     <ClInclude Include="Obj_Hide_Box_2.h" />
     <ClInclude Include="Obj_Hide_Plant.h" />
     <ClInclude Include="Obj_Hide_Potion.h" />
@@ -196,6 +196,7 @@
     <ClInclude Include="Obj_Ornoa_Hint.h" />
     <ClInclude Include="Obj_Ornoa_Print.h" />
     <ClInclude Include="Obj_Ornoa_Soundblock_1.h" />
+    <ClInclude Include="Obj_Ornoa_Soundblock_5.h" />
     <ClInclude Include="Obj_Props_Rock.h" />
     <ClInclude Include="Obj_Mini_Platform_Set.h" />
     <ClInclude Include="GrabbedObject.h" />
@@ -299,7 +300,7 @@
     <ClCompile Include="Obj_BG_Tree_3.cpp" />
     <ClCompile Include="Obj_BG_Tree_3_Active.cpp" />
     <ClCompile Include="Obj_Buildings_Hide_House_5.cpp" />
-    <ClCompile Include="Obj_Hide_Box_1.cpp" />
+    <ClCompile Include="Obj_Hide_Box.cpp" />
     <ClCompile Include="Obj_Hide_Box_2.cpp" />
     <ClCompile Include="Obj_Hide_Plant.cpp" />
     <ClCompile Include="Obj_Hide_Potion.cpp" />
@@ -308,6 +309,7 @@
     <ClCompile Include="Obj_Ornoa_Hint.cpp" />
     <ClCompile Include="Obj_Ornoa_Print.cpp" />
     <ClCompile Include="Obj_Ornoa_Soundblock_1.cpp" />
+    <ClCompile Include="Obj_Ornoa_Soundblock_5.cpp" />
     <ClCompile Include="Obj_Props_Rock.cpp" />
     <ClCompile Include="Obj_Mini_Platform_Set.cpp" />
     <ClCompile Include="Obj_Mini_Stone_1.cpp" />

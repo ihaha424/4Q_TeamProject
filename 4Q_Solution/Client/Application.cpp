@@ -387,6 +387,19 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_Mini_Stone_5>(buildingProperty, buildingProperty);
 	}
 
+	// Obj_Hide_Box
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Hide_Box").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Hide_Box>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Ornoa_Soundblock_5
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Ornoa_Soundblock_5").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Ornoa_Soundblock_5>(buildingProperty, buildingProperty);
+	}
 
 	//Test
 	{

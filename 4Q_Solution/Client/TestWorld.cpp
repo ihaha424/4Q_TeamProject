@@ -3,13 +3,32 @@
 
 #include "Application.h"
 
-
 void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 {
 	//_ray = objectFactory->Clone<Ray>(this);
 	_light = objectFactory->Clone<GlobalLight>(this);
 	_skyBox = objectFactory->Clone<SkyBox>(this);
 	_testSprite = objectFactory->Clone<TestSprite>(this);
+
+	// Obj_Bermiore_Fabric
+	{
+		helpPrepare<Obj_Bermiore_Fabric>(L"Obj_Bermiore_Fabric", objectFactory);
+	}
+
+	// Obj_Bermiore_Hanger
+	{
+		helpPrepare<Obj_Bermiore_Hanger>(L"Obj_Bermiore_Hanger", objectFactory);
+	}
+
+	// Obj_Shinave_SteppedSudium
+	{
+		helpPrepare<Obj_Shinave_SteppedSudium>(L"Obj_Shinave_SteppedSudium", objectFactory);
+	}
+
+	// Obj_Ornoa_Print
+	{
+		helpPrepare<Obj_Ornoa_Print>(L"Obj_Ornoa_Print", objectFactory);
+	}
 
 	////Test Grabbed Object Code -> Make and Load File Data
 	//{

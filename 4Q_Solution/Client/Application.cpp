@@ -124,6 +124,67 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_Buildings_Ornoa_House_1>(buildingProperty, buildingProperty);
 	}
 
+	// Obj_Buildings_Ornoa_House_2
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Ornoa_House_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Ornoa_House_2>(buildingProperty, buildingProperty);
+	}
+
+	// BG_Props_Fence
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"BG_Props_Fence").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<BG_Props_Fence>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Sudium
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Sudium").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Sudium>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Hide_House_5
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Hide_House_5").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Hide_House_5>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Hide_House_4
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Hide_House_4").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Hide_House_4>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Hide_House_3
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Hide_House_3").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Hide_House_3>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Hide_House_2
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Hide_House_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Hide_House_2>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Hide_House_1
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Hide_House_1").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Hide_House_1>(buildingProperty, buildingProperty);
+	}
+
+
+
+
+
+
 	//Test PickingObejct
 	{
 		objectFactory->Register<GrabbedObject>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");

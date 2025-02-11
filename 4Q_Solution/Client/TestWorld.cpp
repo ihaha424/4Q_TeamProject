@@ -86,6 +86,47 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_Buildings_Ornoa_House_1>(L"Obj_Buildings_Ornoa_House_1", objectFactory);
 	}
 
+	// Obj_Buildings_Ornoa_House_2
+	{
+		helpPrepare<Obj_Buildings_Ornoa_House_2>(L"Obj_Buildings_Ornoa_House_2", objectFactory);
+	}
+
+	// BG_Props_Fence
+	{
+		helpPrepare<BG_Props_Fence>(L"BG_Props_Fence", objectFactory);
+	}
+
+	// Obj_Buildings_Sudium
+	{
+		helpPrepare<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", objectFactory);
+		// TODO: Sudium Change
+	}
+
+	// Obj_Buildings_Hide_House_5
+	{
+		helpPrepare<Obj_Buildings_Hide_House_5>(L"Obj_Buildings_Hide_House_5", objectFactory);
+	}
+
+	// Obj_Buildings_Hide_House_4
+	{
+		helpPrepare<Obj_Buildings_Hide_House_4>(L"Obj_Buildings_Hide_House_4", objectFactory);
+	}
+
+	// Obj_Buildings_Hide_House_3
+	{
+		helpPrepare<Obj_Buildings_Hide_House_3>(L"Obj_Buildings_Hide_House_3", objectFactory);
+	}
+
+	// Obj_Buildings_Hide_House_2
+	{
+		helpPrepare<Obj_Buildings_Hide_House_2>(L"Obj_Buildings_Hide_House_2", objectFactory);
+	}
+
+	// Obj_Buildings_Hide_House_1
+	{
+		helpPrepare<Obj_Buildings_Hide_House_1>(L"Obj_Buildings_Hide_House_1", objectFactory);
+	}
+
 	////Test Grabbed Object Code -> Make and Load File Data
 	//{
 	//	GrabbedObject* building = objectFactory->Clone<GrabbedObject>(this);

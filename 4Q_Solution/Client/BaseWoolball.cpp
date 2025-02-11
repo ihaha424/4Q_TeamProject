@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "BaseWoolball.h"
 
-BaseWoolball::BaseWoolball(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath) :
-	InteractObject(std::forward<std::filesystem::path>(meshPath), std::forward<std::filesystem::path>(physicsPath)),
-	_gameStateManager(nullptr)
+BaseWoolball::BaseWoolball(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath) :
+	InteractObject(meshPath, meshPath),
+	_pos{ 0, -30, -60 }, _index{ 0 }, _activate{ false }, direction{ 1 }
 {
 }
 
@@ -34,7 +34,10 @@ void BaseWoolball::DisposeComponents()
 void BaseWoolball::PreInitialize(const Engine::Modules& modules)
 {
 	InteractObject::PreInitialize(modules);
-
-	_gameStateManager = modules.gameStateManager->FindSubManager(L"puzzle_01");
-	
+	myManager = modules.gameStateManager->FindSubManager(L"puzzle_01");
+	myManager->Subscribe(L"Data", [this](const std::wstring& name, const std::any& value)
+		{
+			DataChangeCallBack(name, value);
+		}
+	, this);
 }

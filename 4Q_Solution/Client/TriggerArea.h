@@ -6,7 +6,7 @@ class TriggerArea
 	:public StaticObject
 {
 public:
-	explicit TriggerArea(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
+	explicit TriggerArea(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath);
 	virtual ~TriggerArea() = default;
 
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;

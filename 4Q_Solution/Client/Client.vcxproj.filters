@@ -414,9 +414,6 @@
     <ClInclude Include="Obj_Buildings_Hide_House_5.h">
       <Filter>Object\MapData</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Hide_Plant.h">
-      <Filter>Object\MapData</Filter>
-    </ClInclude>
     <ClInclude Include="Obj_Hide_Xylophone.h">
       <Filter>Object\MapData</Filter>
     </ClInclude>
@@ -449,9 +446,6 @@
     </ClInclude>
     <ClInclude Include="Obj_Shinave_Stone_5.h">
       <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Puzzle_00_ObjectData.h">
-      <Filter>Object\Puzzle\00. Tutorial</Filter>
     </ClInclude>
     <ClInclude Include="Puzzle_01_ObjectData.h">
       <Filter>Object\Puzzle\01. Puzzle</Filter>
@@ -506,6 +500,21 @@
     </ClInclude>
     <ClInclude Include="Obj_Bermiore_Soundblock.h">
       <Filter>Object\Puzzle\01. Puzzle\Object\Obj_Bermiore_Soundblock</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Bermiore_Soundblock.h">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Sudium_SoundTrigger.h">
+      <Filter>Object\Puzzle\02. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzle_00_ObjectData.h">
+      <Filter>Object\Puzzle\04. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Hide_SoundTrigger.h">
+      <Filter>Object\Puzzle\04. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Hide_Plant.h">
+      <Filter>Object\Puzzle\04. Puzzle\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -761,9 +770,6 @@
     <ClCompile Include="Obj_Buildings_Hide_House_5.cpp">
       <Filter>Object\MapData</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Hide_Plant.cpp">
-      <Filter>Object\MapData</Filter>
-    </ClCompile>
     <ClCompile Include="Obj_Hide_Xylophone.cpp">
       <Filter>Object\MapData</Filter>
     </ClCompile>
@@ -802,6 +808,18 @@
     </ClCompile>
     <ClCompile Include="Obj_Shinave_Platform_Spawn_3.cpp">
       <Filter>Object\Puzzle\00. Tutorial\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Bermiore_Soundblock.cpp">
+      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Sudium_SoundTrigger.cpp">
+      <Filter>Object\Puzzle\02. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Hide_SoundTrigger.cpp">
+      <Filter>Object\Puzzle\04. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Hide_Plant.cpp">
+      <Filter>Object\Puzzle\04. Puzzle\Object</Filter>
     </ClCompile>
     <ClCompile Include="BG_Props_Fence.cpp">
       <Filter>Object\Puzzle\06. NotPuzzel\BG_Props_Fence</Filter>

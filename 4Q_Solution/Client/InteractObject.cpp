@@ -3,7 +3,7 @@
 
 InteractObject::InteractObject(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath)
 	: _staticMesh(nullptr), _meshPath(meshPath)
-	, _rigidStatic{ nullptr }, _physicsPath{physicsPath}
+	, _rigidStatic{ nullptr }, _physicsPath{ physicsPath }
 {
 }
 

@@ -161,6 +161,7 @@
     <ClInclude Include="BG_Ornoa_Cloth_3.h" />
     <ClInclude Include="BG_Props_Fence.h" />
     <ClInclude Include="GameCoreData.h" />
+    <ClInclude Include="Hide_SoundTrigger.h" />
     <ClInclude Include="Not_Puzzle_ObjectData.h" />
     <ClInclude Include="NPCData.h" />
     <ClInclude Include="InteractObject.h" />
@@ -262,6 +263,7 @@
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="StaticObject.h" />
     <ClInclude Include="Obj_Props_Bermiore_Cloth_1.h" />
+    <ClInclude Include="Sudium_SoundTrigger.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="BG_Terrain.h" />
     <ClInclude Include="TestSprite.h" />
@@ -280,6 +282,7 @@
     <ClCompile Include="BG_Ornoa_Cloth_3.cpp" />
     <ClCompile Include="BG_Props_Fence.cpp" />
     <ClCompile Include="GameCoreData.cpp" />
+    <ClCompile Include="Hide_SoundTrigger.cpp" />
     <ClCompile Include="InteractObject.cpp" />
     <ClCompile Include="NPC_Hide.cpp" />
     <ClCompile Include="NPC_Hide_Leader.cpp" />
@@ -373,6 +376,7 @@
     <ClCompile Include="StaticObject.cpp" />
     <ClCompile Include="Obj_Props_Bermiore_Cloth_1.cpp" />
     <ClCompile Include="BG_Terrain.cpp" />
+    <ClCompile Include="Sudium_SoundTrigger.cpp" />
     <ClCompile Include="TestSprite.cpp" />
     <ClCompile Include="TestWorld.cpp" />
     <ClCompile Include="TriggerArea.cpp" />

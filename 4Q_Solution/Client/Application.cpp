@@ -40,6 +40,55 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	objectFactory->Register<RemoteLive>(L"Assets/Models/Live.fbx");
 	objectFactory->Register<SkyBox>(L"Assets/Models/skybox.fbx");
 
+	// Obj_Bermiore_Fabric
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Fabric").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Bermiore_Fabric>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Bermiore_Hanger
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Hanger").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Bermiore_Hanger>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_SteppedSudium
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_SteppedSudium").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_SteppedSudium>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Ornoa_Print
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Ornoa_Print").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Ornoa_Print>(buildingProperty, buildingProperty);
+	}
+
+	// BG_Ornoa_Cloth_3
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"BG_Ornoa_Cloth_3").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<BG_Ornoa_Cloth_3>(buildingProperty, buildingProperty);
+	}
+
+	// BG_Ornoa_Cloth_2
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"BG_Ornoa_Cloth_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<BG_Ornoa_Cloth_2>(buildingProperty, buildingProperty);
+	}
+
+	// BG_Ornoa_Cloth_1
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"BG_Ornoa_Cloth_1").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<BG_Ornoa_Cloth_1>(buildingProperty, buildingProperty);
+	}
+
 	//Test PickingObejct
 	{
 		objectFactory->Register<GrabbedObject>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");

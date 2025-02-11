@@ -108,6 +108,7 @@ private:
 	PlayMsg::DialogProgress _dialogProgress;
 	PlayMsg::InteractObject _interactObject;
 	PlayMsg::InteractDialog _interactDialog;
+	PlayMsg::TriggerObject _triggerObject;
 	PlayMsg::PuzzleStart _puzzleStart;
 	PlayMsg::ObjectActive _objectActive;
 	PlayMsg::ObjectDisable _objectDisable;
@@ -139,6 +140,7 @@ private:
 	void ObjectPutProcess(const Packet& packet);
 	void ObjectInteractProcess(const Packet& packet);
 	void DialogInteractProcess(const Packet& packet);
+	void ObjectTriggerProcess(const Packet& packet);
 
 private:
 	// =============================
@@ -231,6 +233,7 @@ private:
 
 	// Puzzle 6
 
+	std::vector<int> _currentWeight{ 0, 0, 0, 0, 0 };
 
 	void PuzzleProcess(int objectId);
 	void Puzzle1(int objectId);

@@ -154,7 +154,11 @@
     <ClInclude Include="BaseMiniStone.h" />
     <ClInclude Include="BaseStone.h" />
     <ClInclude Include="BaseWoolball.h" />
+    <ClInclude Include="BG_Ornoa_Cloth_1.h" />
+    <ClInclude Include="BG_Ornoa_Cloth_2.h" />
+    <ClInclude Include="BG_Ornoa_Cloth_3.h" />
     <ClInclude Include="GameCoreData.h" />
+    <ClInclude Include="Not_Puzzle_ObjectData.h" />
     <ClInclude Include="NPCData.h" />
     <ClInclude Include="InteractObject.h" />
     <ClInclude Include="NPC_Hide.h" />
@@ -196,6 +200,7 @@
     <ClInclude Include="Obj_Shinave_Bermiore.h" />
     <ClInclude Include="Obj_Shinave_Platform_Set.h" />
     <ClInclude Include="Obj_Shinave_Platform_Spawn.h" />
+    <ClInclude Include="Obj_Shinave_SteppedSudium.h" />
     <ClInclude Include="Obj_Sudium_blue.h" />
     <ClInclude Include="Obj_Sudium_bouquet.h" />
     <ClInclude Include="Obj_Sudium_red.h" />
@@ -261,6 +266,9 @@
     <ClCompile Include="BaseMiniStone.cpp" />
     <ClCompile Include="BaseStone.cpp" />
     <ClCompile Include="BaseWoolball.cpp" />
+    <ClCompile Include="BG_Ornoa_Cloth_1.cpp" />
+    <ClCompile Include="BG_Ornoa_Cloth_2.cpp" />
+    <ClCompile Include="BG_Ornoa_Cloth_3.cpp" />
     <ClCompile Include="GameCoreData.cpp" />
     <ClCompile Include="InteractObject.cpp" />
     <ClCompile Include="NPC_Hide.cpp" />
@@ -302,6 +310,7 @@
     <ClCompile Include="Obj_Shinave_Bermiore.cpp" />
     <ClCompile Include="Obj_Shinave_Platform_Set.cpp" />
     <ClCompile Include="Obj_Shinave_Platform_Spawn.cpp" />
+    <ClCompile Include="Obj_Shinave_SteppedSudium.cpp" />
     <ClCompile Include="Obj_Sudium_blue.cpp" />
     <ClCompile Include="Obj_Sudium_red.cpp" />
     <ClCompile Include="Obj_Sudium_bouquet.cpp" />

@@ -96,11 +96,11 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<BG_Props_Fence>(L"BG_Props_Fence", objectFactory);
 	}
 
-	// Obj_Buildings_Sudium
-	{
-		helpPrepare<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", objectFactory);
-		// TODO: Sudium Change
-	}
+	//// Obj_Buildings_Sudium
+	//{
+	//	helpPrepare<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", objectFactory);
+	//	// TODO: Sudium Change
+	//}
 
 	// Obj_Buildings_Hide_House_5
 	{

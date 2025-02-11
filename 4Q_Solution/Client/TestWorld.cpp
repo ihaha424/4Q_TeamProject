@@ -272,6 +272,26 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_Buildings_Bermiore_Atelier_3>(L"Obj_Buildings_Bermiore_Atelier_3", objectFactory);
 	}
 
+	// Obj_Hide_Potion
+	{
+		// TODO: Refactor this.
+		auto object = GameClient::Application::GetLoadManager()->GetObjectCloneData(L"Obj_Hide_Potion");
+		for (auto& data : object)
+		{
+			auto building = objectFactory->Clone<Obj_Hide_Potion>(this);
+			building->SetisDynamic(data.GetProperty<bool>(L"isDynamic").value());
+			building->SetIsPublic(data.GetProperty<bool>(L"isPublic").value());
+			building->SetHasMesh(data.GetProperty<bool>(L"hasMesh").value());
+			building->SetTransform({
+					data.GetProperty<Engine::Math::Vector3>(L"position").value(),
+					data.GetProperty<Engine::Math::Quaternion>(L"rotation").value(),
+					data.GetProperty<Engine::Math::Vector3>(L"scale").value() * 100.
+				});
+			building->SetBoxPosition({ data.GetProperty<Engine::Math::Vector3>(L"boxPosition").value() });
+			building->SetBoxScale(data.GetProperty<Engine::Math::Vector3>(L"boxScale").value());
+		}
+		//helpPrepare<Obj_Hide_Potion>(L"Obj_Hide_Potion", objectFactory);
+	}
 
 }
 

@@ -331,6 +331,13 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_Buildings_Bermiore_Atelier_3>(buildingProperty, buildingProperty);
 	}
 
+	// Obj_Hide_Potion
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Hide_Potion").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Hide_Potion>(buildingProperty, buildingProperty);
+	}
+
 
 
 

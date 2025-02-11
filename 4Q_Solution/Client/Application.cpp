@@ -338,6 +338,12 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_Hide_Potion>(buildingProperty, buildingProperty);
 	}
 
+	// Obj_Shinave_Bermiore
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Bermiore").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Bermiore>(buildingProperty, buildingProperty);
+	}
 
 
 
@@ -351,20 +357,6 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		//objectFactory->Register<TriggerArea>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");
 		//objectFactory->Register<TestSprite>();
 	}
-	
-	//Puzzle01
-	{
-		RegisterHelp<Obj_Shinave_Bermiore>(L"Obj_Shinave_Bermiore", loadManager, objectFactory);
-	}
-
-
-
-	/*
-		Static Object
-	*/
-	//RegisterHelp<Obj_BG_Mountain>(L"Obj_BG_Mountain", loadManager, objectFactory);
-
-	RegisterHelp<Obj_Buildings_Bermiore_Atelier_3>(L"Obj_Buildings_Bermiore_Atelier_3", loadManager, objectFactory);
 
 	//RegisterHelp<Obj_Props_Bermiore_Loom_1>(L"Obj_Props_Bermiore_Loom_1", loadManager, objectFactory);
 	//RegisterHelp<Obj_Props_Bermiore_Loom_2>(L"Obj_Props_Bermiore_Loom_2", loadManager, objectFactory);

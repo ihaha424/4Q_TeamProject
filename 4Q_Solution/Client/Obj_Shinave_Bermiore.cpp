@@ -1,8 +1,9 @@
 #include "pch.h"
 #include "Obj_Shinave_Bermiore.h"
 
-Obj_Shinave_Bermiore::Obj_Shinave_Bermiore(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath)
-	: InteractObject(std::forward<std::filesystem::path>(meshPath), std::forward<std::filesystem::path>(physicsPath))
+Obj_Shinave_Bermiore::Obj_Shinave_Bermiore(const std::filesystem::path& meshPath,
+	const std::filesystem::path& physicsPath):
+	InteractObject(meshPath, physicsPath)
 {
 }
 
@@ -14,6 +15,7 @@ void Obj_Shinave_Bermiore::Prepare(Engine::Content::Factory::Component* componen
 
 void Obj_Shinave_Bermiore::PreInitialize(const Engine::Modules& modules)
 {
+	InteractObject::PreInitialize(modules);
 	_sync->SetSerialNumber(11101);
 }
 

@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "Application.h"
 
-#include "Obj_Bermiore_Fabric.h"
-#include "Obj_Bermiore_Hanger.h"
 #include "TestWorld.h"
 
 GameClient::Application::Application(const HINSTANCE instanceHandle) : Engine::Application(instanceHandle)

@@ -2,9 +2,6 @@
 #include "TestWorld.h"
 
 #include "Application.h"
-#include "Obj_Bermiore_Fabric.h"
-#include "Obj_Bermiore_Hanger.h"
-
 
 void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 {

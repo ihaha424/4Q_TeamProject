@@ -5,10 +5,31 @@
 
 void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 {
+	//auto object = GameClient::Application::GetLoadManager()->GetObjectCloneData(L"BG_Ornoa_Cloth_2");
+	//for (auto& data : object)
+	//{
+	//	auto building = objectFactory->Clone<BG_Ornoa_Cloth_2>(this);
+	//	building->SetisDynamic(data.GetProperty<bool>(L"isDynamic").value());
+	//	building->SetIsPublic(data.GetProperty<bool>(L"isPublic").value());
+	//	building->SetHasMesh(data.GetProperty<bool>(L"hasMesh").value());
+	//	building->SetTransform({
+	//			data.GetProperty<Engine::Math::Vector3>(L"position").value(),
+	//			data.GetProperty<Engine::Math::Quaternion>(L"rotation").value(),
+	//			data.GetProperty<Engine::Math::Vector3>(L"scale").value() * 100.
+	//		});
+	//	building->SetBoxPosition({ data.GetProperty<Engine::Math::Vector3>(L"boxPosition").value() });
+	//	building->SetBoxScale(data.GetProperty<Engine::Math::Vector3>(L"boxScale").value());
+	//}
+
 	//_ray = objectFactory->Clone<Ray>(this);
 	_light = objectFactory->Clone<GlobalLight>(this);
 	_skyBox = objectFactory->Clone<SkyBox>(this);
 	_testSprite = objectFactory->Clone<TestSprite>(this);
+
+	// BG_Terrain
+	{
+		helpPrepare<BG_Terrain>(L"BG_Terrain", objectFactory);
+	}
 
 	// Obj_Bermiore_Fabric
 	{
@@ -28,6 +49,82 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	// Obj_Ornoa_Print
 	{
 		helpPrepare<Obj_Ornoa_Print>(L"Obj_Ornoa_Print", objectFactory);
+	}
+
+	// BG_Ornoa_Cloth_3
+	{
+		helpPrepare<BG_Ornoa_Cloth_3>(L"BG_Ornoa_Cloth_3", objectFactory);
+	}
+
+	// BG_Ornoa_Cloth_2
+	{
+		helpPrepare<BG_Ornoa_Cloth_2>(L"BG_Ornoa_Cloth_2", objectFactory);
+	}
+
+	// BG_Ornoa_Cloth_1
+	{
+		helpPrepare<BG_Ornoa_Cloth_1>(L"BG_Ornoa_Cloth_1", objectFactory);
+	}
+
+	// Obj_BG_Tree_3
+	{
+		helpPrepare<Obj_BG_Tree_3>(L"Obj_BG_Tree_3", objectFactory);
+	}
+
+	// Obj_BG_Tree_2
+	{
+		helpPrepare<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", objectFactory);
+	}
+
+	// Obj_BG_Tree_1
+	{
+		helpPrepare<Obj_BG_Tree_1>(L"Obj_BG_Tree_1", objectFactory);
+	}
+
+	// Obj_Buildings_Ornoa_House_1
+	{
+		helpPrepare<Obj_Buildings_Ornoa_House_1>(L"Obj_Buildings_Ornoa_House_1", objectFactory);
+	}
+
+	// Obj_Buildings_Ornoa_House_2
+	{
+		helpPrepare<Obj_Buildings_Ornoa_House_2>(L"Obj_Buildings_Ornoa_House_2", objectFactory);
+	}
+
+	// BG_Props_Fence
+	{
+		helpPrepare<BG_Props_Fence>(L"BG_Props_Fence", objectFactory);
+	}
+
+	// Obj_Buildings_Sudium
+	{
+		helpPrepare<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", objectFactory);
+		// TODO: Sudium Change
+	}
+
+	// Obj_Buildings_Hide_House_5
+	{
+		helpPrepare<Obj_Buildings_Hide_House_5>(L"Obj_Buildings_Hide_House_5", objectFactory);
+	}
+
+	// Obj_Buildings_Hide_House_4
+	{
+		helpPrepare<Obj_Buildings_Hide_House_4>(L"Obj_Buildings_Hide_House_4", objectFactory);
+	}
+
+	// Obj_Buildings_Hide_House_3
+	{
+		helpPrepare<Obj_Buildings_Hide_House_3>(L"Obj_Buildings_Hide_House_3", objectFactory);
+	}
+
+	// Obj_Buildings_Hide_House_2
+	{
+		helpPrepare<Obj_Buildings_Hide_House_2>(L"Obj_Buildings_Hide_House_2", objectFactory);
+	}
+
+	// Obj_Buildings_Hide_House_1
+	{
+		helpPrepare<Obj_Buildings_Hide_House_1>(L"Obj_Buildings_Hide_House_1", objectFactory);
 	}
 
 	////Test Grabbed Object Code -> Make and Load File Data
@@ -57,35 +154,33 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	//	puzzle->SetBoxScale({ 100, 100, 100 });
 	//}
 
-	helpPrepare<BG_Terrain>(L"BG_Terrain", objectFactory);
+	////helpPrepare<Obj_BG_Tree_1>(L"Obj_BG_Tree_1", objectFactory);
+	////helpPrepare<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", objectFactory);
+	////helpPrepare<Obj_BG_Mountain>(L"Obj_BG_Mountain", objectFactory);
 
-	//helpPrepare<Obj_BG_Tree_1>(L"Obj_BG_Tree_1", objectFactory);
-	//helpPrepare<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", objectFactory);
-	//helpPrepare<Obj_BG_Mountain>(L"Obj_BG_Mountain", objectFactory);
+	////helpPrepare<Obj_Props_Fence>(L"Obj_Props_Fence", objectFactory);
 
-	//helpPrepare<Obj_Props_Fence>(L"Obj_Props_Fence", objectFactory);
+	////helpPrepare<Obj_Buildings_Shinave>(L"Obj_Buildings_Shinave", objectFactory);
+	//helpPrepare<Obj_Buildings_Bermiore_Atelier_1>(L"Obj_Buildings_Bermiore_Atelier_1", objectFactory);
+	//helpPrepare<Obj_Buildings_Bermiore_Atelier_2>(L"Obj_Buildings_Bermiore_Atelier_2", objectFactory);
+	//helpPrepare<Obj_Buildings_Bermiore_Atelier_3>(L"Obj_Buildings_Bermiore_Atelier_3", objectFactory);
 
-	//helpPrepare<Obj_Buildings_Shinave>(L"Obj_Buildings_Shinave", objectFactory);
-	helpPrepare<Obj_Buildings_Bermiore_Atelier_1>(L"Obj_Buildings_Bermiore_Atelier_1", objectFactory);
-	helpPrepare<Obj_Buildings_Bermiore_Atelier_2>(L"Obj_Buildings_Bermiore_Atelier_2", objectFactory);
-	helpPrepare<Obj_Buildings_Bermiore_Atelier_3>(L"Obj_Buildings_Bermiore_Atelier_3", objectFactory);
+	////helpPrepare<Obj_Props_Bermiore_Loom_1>(L"Obj_Props_Bermiore_Loom_1", objectFactory);
+	////helpPrepare<Obj_Props_Bermiore_Loom_2>(L"Obj_Props_Bermiore_Loom_2", objectFactory);
+	////helpPrepare<Obj_Props_Bermiore_Cloth_1>(L"Obj_Props_Bermiore_Cloth_1", objectFactory);
+	////helpPrepare<Obj_Props_Bermiore_Cloth_2>(L"Obj_Props_Bermiore_Cloth_2", objectFactory);
 
-	//helpPrepare<Obj_Props_Bermiore_Loom_1>(L"Obj_Props_Bermiore_Loom_1", objectFactory);
-	//helpPrepare<Obj_Props_Bermiore_Loom_2>(L"Obj_Props_Bermiore_Loom_2", objectFactory);
-	//helpPrepare<Obj_Props_Bermiore_Cloth_1>(L"Obj_Props_Bermiore_Cloth_1", objectFactory);
-	//helpPrepare<Obj_Props_Bermiore_Cloth_2>(L"Obj_Props_Bermiore_Cloth_2", objectFactory);
+	////helpPrepare<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", objectFactory);
 
-	//helpPrepare<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", objectFactory);
+	//helpPrepare<Obj_Buildings_Hide_House_1>(L"Obj_Buildings_Hide_House_1", objectFactory);
+	//helpPrepare<Obj_Buildings_Hide_House_2>(L"Obj_Buildings_Hide_House_2", objectFactory);
+	//helpPrepare<Obj_Buildings_Hide_House_3>(L"Obj_Buildings_Hide_House_3", objectFactory);
+	//helpPrepare<Obj_Buildings_Hide_House_4>(L"Obj_Buildings_Hide_House_4", objectFactory);
 
-	helpPrepare<Obj_Buildings_Hide_House_1>(L"Obj_Buildings_Hide_House_1", objectFactory);
-	helpPrepare<Obj_Buildings_Hide_House_2>(L"Obj_Buildings_Hide_House_2", objectFactory);
-	helpPrepare<Obj_Buildings_Hide_House_3>(L"Obj_Buildings_Hide_House_3", objectFactory);
-	helpPrepare<Obj_Buildings_Hide_House_4>(L"Obj_Buildings_Hide_House_4", objectFactory);
-
-	helpPrepare<Obj_Buildings_Ornoa_House_1>(L"Obj_Buildings_Ornoa_House_1", objectFactory);
-	helpPrepare<Obj_Buildings_Ornoa_House_2>(L"Obj_Buildings_Ornoa_House_2", objectFactory);
-	//helpPrepare<Obj_Buildings_Ornoa_House_3>(L"Obj_Buildings_Ornoa_House_3", objectFactory);
-	//helpPrepare<Obj_Buildings_Ornoa_House_4>(L"Obj_Buildings_Ornoa_House_4", objectFactory);
+	//helpPrepare<Obj_Buildings_Ornoa_House_1>(L"Obj_Buildings_Ornoa_House_1", objectFactory);
+	//helpPrepare<Obj_Buildings_Ornoa_House_2>(L"Obj_Buildings_Ornoa_House_2", objectFactory);
+	////helpPrepare<Obj_Buildings_Ornoa_House_3>(L"Obj_Buildings_Ornoa_House_3", objectFactory);
+	////helpPrepare<Obj_Buildings_Ornoa_House_4>(L"Obj_Buildings_Ornoa_House_4", objectFactory);
 }
 
 void TestWorld::PreInitialize(const Engine::Modules& modules)

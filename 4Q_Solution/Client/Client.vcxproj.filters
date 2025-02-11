@@ -127,6 +127,18 @@
     <Filter Include="Object\Puzzle\06. NotPuzzel\Obj_Shinave_SteppedSudium">
       <UniqueIdentifier>{e10eb36e-1a41-4a71-ac25-337dac61fb2a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Puzzle\06. NotPuzzel\BG_Ornoa_Cloth_3">
+      <UniqueIdentifier>{bc3ce00f-160b-4e48-9956-11b715ec41c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\06. NotPuzzel\BG_Ornoa_Cloth_2">
+      <UniqueIdentifier>{56f9495e-1aa3-4676-bd9c-3d3a11e9307e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\06. NotPuzzel\BG_Ornoa_Cloth_1">
+      <UniqueIdentifier>{a3d322d4-a35c-4a8f-ae66-7c64b06078bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\06. NotPuzzel\BG_Props_Fence">
+      <UniqueIdentifier>{80d4ebdb-a78b-487e-832f-3f1947255510}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -450,6 +462,18 @@
     <ClInclude Include="Not_Puzzle_ObjectData.h">
       <Filter>Object\Puzzle\06. NotPuzzel</Filter>
     </ClInclude>
+    <ClInclude Include="BG_Ornoa_Cloth_3.h">
+      <Filter>Object\Puzzle\06. NotPuzzel\BG_Ornoa_Cloth_3</Filter>
+    </ClInclude>
+    <ClInclude Include="BG_Ornoa_Cloth_2.h">
+      <Filter>Object\Puzzle\06. NotPuzzel\BG_Ornoa_Cloth_2</Filter>
+    </ClInclude>
+    <ClInclude Include="BG_Ornoa_Cloth_1.h">
+      <Filter>Object\Puzzle\06. NotPuzzel\BG_Ornoa_Cloth_1</Filter>
+    </ClInclude>
+    <ClInclude Include="BG_Props_Fence.h">
+      <Filter>Object\Puzzle\06. NotPuzzel\BG_Props_Fence</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -733,6 +757,18 @@
     </ClCompile>
     <ClCompile Include="Obj_Shinave_SteppedSudium.cpp">
       <Filter>Object\Puzzle\06. NotPuzzel\Obj_Shinave_SteppedSudium</Filter>
+    </ClCompile>
+    <ClCompile Include="BG_Ornoa_Cloth_3.cpp">
+      <Filter>Object\Puzzle\06. NotPuzzel\BG_Ornoa_Cloth_3</Filter>
+    </ClCompile>
+    <ClCompile Include="BG_Ornoa_Cloth_2.cpp">
+      <Filter>Object\Puzzle\06. NotPuzzel\BG_Ornoa_Cloth_2</Filter>
+    </ClCompile>
+    <ClCompile Include="BG_Ornoa_Cloth_1.cpp">
+      <Filter>Object\Puzzle\06. NotPuzzel\BG_Ornoa_Cloth_1</Filter>
+    </ClCompile>
+    <ClCompile Include="BG_Props_Fence.cpp">
+      <Filter>Object\Puzzle\06. NotPuzzel\BG_Props_Fence</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

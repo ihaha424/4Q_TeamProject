@@ -357,7 +357,7 @@
     <ClInclude Include="Obj_Mini_Stone_4.h">
       <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Mini_Stone_5.h">
+    <ClInclude Include="Obj_Mini_Stone_5.h">
       <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClInclude>
     <ClInclude Include="NPC_Hide.h">
@@ -680,7 +680,7 @@
     <ClCompile Include="Obj_Mini_Stone_4.cpp">
       <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Mini_Stone_5.cpp">
+    <ClCompile Include="Obj_Mini_Stone_5.cpp">
       <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Bermiore_Woolball_2.cpp">

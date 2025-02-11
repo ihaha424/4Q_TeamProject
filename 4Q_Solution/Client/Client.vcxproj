@@ -185,7 +185,7 @@
     <ClInclude Include="Obj_Mini_Stone_2.h" />
     <ClInclude Include="Obj_Mini_Stone_3.h" />
     <ClInclude Include="Obj_Mini_Stone_4.h" />
-    <ClInclude Include="Obj_Puzzle_Mini_Stone_5.h" />
+    <ClInclude Include="Obj_Mini_Stone_5.h" />
     <ClInclude Include="Obj_BG_Tree_3.h" />
     <ClInclude Include="Obj_Buildings_Hide_House_5.h" />
     <ClInclude Include="Obj_Hide_Box_1.h" />
@@ -314,7 +314,7 @@
     <ClCompile Include="Obj_Mini_Stone_2.cpp" />
     <ClCompile Include="Obj_Mini_Stone_3.cpp" />
     <ClCompile Include="Obj_Mini_Stone_4.cpp" />
-    <ClCompile Include="Obj_Puzzle_Mini_Stone_5.cpp" />
+    <ClCompile Include="Obj_Mini_Stone_5.cpp" />
     <ClCompile Include="GrabbedObject.cpp" />
     <ClCompile Include="Obj_Shinave_Stone_1.cpp" />
     <ClCompile Include="Obj_Shinave_Stone_2.cpp" />

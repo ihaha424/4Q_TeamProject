@@ -229,6 +229,11 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_Shinave_Platform_Set>(L"Obj_Shinave_Platform_Set", objectFactory);
 	}
 
+	// Obj_Shinave_Platform_Spawn_1
+	{
+		helpPrepare<Obj_Shinave_Platform_Spawn_1>(L"Obj_Shinave_Platform_Spawn_1", objectFactory);
+	}
+
 
 
 

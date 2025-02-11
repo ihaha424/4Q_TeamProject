@@ -390,7 +390,7 @@
     <ClInclude Include="Obj_Ornoa_Soundblock_1.h">
       <Filter>Object\Puzzle\05. Puzzle\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Puzzle_Mini_Platform.h">
+    <ClInclude Include="Obj_Mini_Platform_Set.h">
       <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Sudium_red.h">
@@ -722,7 +722,7 @@
     <ClCompile Include="Obj_Ornoa_Soundblock_1.cpp">
       <Filter>Object\Puzzle\05. Puzzle\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Puzzle_Mini_Platform.cpp">
+    <ClCompile Include="Obj_Mini_Platform_Set.cpp">
       <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
     </ClCompile>
     <ClCompile Include="Obj_BG_Tree_3.cpp">

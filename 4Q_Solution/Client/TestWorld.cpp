@@ -146,6 +146,29 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_Sudium_red>(L"Obj_Sudium_red", objectFactory);
 	}
 
+	// Obj_Mini_Platform_Set
+	{
+		// TODO: Refactor this.
+		auto object = GameClient::Application::GetLoadManager()->GetObjectCloneData(L"Obj_Mini_Platform_Set");
+		for (auto& data : object)
+		{
+			auto building = objectFactory->Clone<Obj_Mini_Platform_Set>(this);
+			building->SetisDynamic(data.GetProperty<bool>(L"isDynamic").value());
+			building->SetIsPublic(data.GetProperty<bool>(L"isPublic").value());
+			building->SetHasMesh(data.GetProperty<bool>(L"hasMesh").value());
+			building->SetTransform({
+					data.GetProperty<Engine::Math::Vector3>(L"position").value(),
+					data.GetProperty<Engine::Math::Quaternion>(L"rotation").value(),
+					data.GetProperty<Engine::Math::Vector3>(L"scale").value() * 100.
+				});
+			building->SetBoxPosition({ data.GetProperty<Engine::Math::Vector3>(L"boxPosition").value() });
+			building->SetBoxScale(data.GetProperty<Engine::Math::Vector3>(L"boxScale").value());
+		}
+		//helpPrepare<Obj_Mini_Platform_Set>(L"Obj_Mini_Platform_Set", objectFactory);
+	}
+
+
+
 	////Test Grabbed Object Code -> Make and Load File Data
 	//{
 	//	GrabbedObject* building = objectFactory->Clone<GrabbedObject>(this);
@@ -204,9 +227,9 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 
 void TestWorld::PreInitialize(const Engine::Modules& modules)
 {
-    //NetworkTemp::GetInstance()->AddCallback((short)PacketID::EnterAccept, &TestWorld::EnterAccept, this);
-    //NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &TestWorld::SyncOtherPlayer, this);
-	
+	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::EnterAccept, &TestWorld::EnterAccept, this);
+	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &TestWorld::SyncOtherPlayer, this);
+
 	auto _physicsManager = Engine::Application::GetPhysicsManager();
 
 	// 메인 씬 만들기 - 중력값 설정 필요
@@ -319,7 +342,7 @@ void TestWorld::CreatePlayer(const ConnectMsg::AddObject* msg) {
 	}
 }
 void TestWorld::CreateStaticObject(const ConnectMsg::AddObject* msg) {
-	
+
 }
 void TestWorld::RequestData(const ConnectMsg::AddObject* msg) {
 	if (_dataLoad == false) {

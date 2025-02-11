@@ -204,6 +204,13 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_Sudium_red>(buildingProperty, buildingProperty);
 	}
 
+	// Obj_Mini_Platform_Set
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Mini_Platform_Set").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Mini_Platform_Set>(buildingProperty, buildingProperty);
+	}
+
 
 
 

@@ -193,7 +193,7 @@
     <ClInclude Include="Obj_Ornoa_Print.h" />
     <ClInclude Include="Obj_Ornoa_Soundblock_1.h" />
     <ClInclude Include="Obj_Props_Rock.h" />
-    <ClInclude Include="Obj_Puzzle_Mini_Platform.h" />
+    <ClInclude Include="Obj_Mini_Platform_Set.h" />
     <ClInclude Include="GrabbedObject.h" />
     <ClInclude Include="Obj_Puzzle_Shinave_Stone_1.h" />
     <ClInclude Include="Obj_Puzzle_Shinave_Stone_2.h" />
@@ -299,7 +299,7 @@
     <ClCompile Include="Obj_Ornoa_Print.cpp" />
     <ClCompile Include="Obj_Ornoa_Soundblock_1.cpp" />
     <ClCompile Include="Obj_Props_Rock.cpp" />
-    <ClCompile Include="Obj_Puzzle_Mini_Platform.cpp" />
+    <ClCompile Include="Obj_Mini_Platform_Set.cpp" />
     <ClCompile Include="Obj_Puzzle_Mini_Stone_1.cpp" />
     <ClCompile Include="Obj_Puzzle_Mini_Stone_2.cpp" />
     <ClCompile Include="Obj_Puzzle_Mini_Stone_3.cpp" />

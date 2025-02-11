@@ -157,6 +157,18 @@
     <Filter Include="Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_5">
       <UniqueIdentifier>{7881af85-c32c-4ebd-90db-9c8837fb15a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_4">
+      <UniqueIdentifier>{3e8c904a-4ac5-4ae8-a03a-d0705bfa7928}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_3">
+      <UniqueIdentifier>{6a81b6e5-d51b-402b-9eb8-d8ccc92578d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_2">
+      <UniqueIdentifier>{49e9a62f-3bf0-432f-96c3-e71576ff9cea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_1">
+      <UniqueIdentifier>{86ba4639-df1c-49ab-8d91-7f6f3aed61dc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -405,9 +417,6 @@
     <ClInclude Include="Obj_Hide_Potion.h">
       <Filter>Object\Puzzle\04. Puzzle\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Ornoa_Soundblock_1.h">
-      <Filter>Object\Puzzle\05. Puzzle\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Obj_Sudium_red.h">
       <Filter>Object\MapData</Filter>
     </ClInclude>
@@ -518,6 +527,18 @@
     </ClInclude>
     <ClInclude Include="Obj_Ornoa_Soundblock_5.h">
       <Filter>Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_5</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Ornoa_Soundblock_4.h">
+      <Filter>Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_4</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Ornoa_Soundblock_3.h">
+      <Filter>Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_3</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Ornoa_Soundblock_2.h">
+      <Filter>Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_2</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Ornoa_Soundblock_1.h">
+      <Filter>Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_1</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -764,9 +785,6 @@
     <ClCompile Include="Obj_Hide_Box_2.cpp">
       <Filter>Object\Puzzle\04. Puzzle\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Ornoa_Soundblock_1.cpp">
-      <Filter>Object\Puzzle\05. Puzzle\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Obj_BG_Tree_3.cpp">
       <Filter>Object\MapData</Filter>
     </ClCompile>
@@ -844,6 +862,18 @@
     </ClCompile>
     <ClCompile Include="Obj_Ornoa_Soundblock_5.cpp">
       <Filter>Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_5</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Ornoa_Soundblock_4.cpp">
+      <Filter>Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_4</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Ornoa_Soundblock_3.cpp">
+      <Filter>Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_3</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Ornoa_Soundblock_2.cpp">
+      <Filter>Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_2</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Ornoa_Soundblock_1.cpp">
+      <Filter>Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

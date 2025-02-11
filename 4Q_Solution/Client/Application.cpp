@@ -401,6 +401,34 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_Ornoa_Soundblock_5>(buildingProperty, buildingProperty);
 	}
 
+	// Obj_Ornoa_Soundblock_4
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Ornoa_Soundblock_4").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Ornoa_Soundblock_4>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Ornoa_Soundblock_3
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Ornoa_Soundblock_3").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Ornoa_Soundblock_3>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Ornoa_Soundblock_2
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Ornoa_Soundblock_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Ornoa_Soundblock_2>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Ornoa_Soundblock_1
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Ornoa_Soundblock_1").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Ornoa_Soundblock_1>(buildingProperty, buildingProperty);
+	}
+
 	//Test
 	{
 		//objectFactory->Register<GrabbedObject>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");

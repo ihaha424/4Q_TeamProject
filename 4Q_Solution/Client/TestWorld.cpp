@@ -370,6 +370,25 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_Hide_Box>(L"Obj_Ornoa_Soundblock_5", objectFactory);
 	}
 
+	// Obj_Ornoa_Soundblock_4
+	{
+		helpPrepare<Obj_Ornoa_Soundblock_4>(L"Obj_Ornoa_Soundblock_4", objectFactory);
+	}
+
+	// Obj_Ornoa_Soundblock_3
+	{
+		helpPrepare<Obj_Ornoa_Soundblock_3>(L"Obj_Ornoa_Soundblock_3", objectFactory);
+	}
+
+	// Obj_Ornoa_Soundblock_2
+	{
+		helpPrepare<Obj_Ornoa_Soundblock_2>(L"Obj_Ornoa_Soundblock_2", objectFactory);
+	}
+
+	// Obj_Ornoa_Soundblock_1
+	{
+		helpPrepare<Obj_Ornoa_Soundblock_1>(L"Obj_Ornoa_Soundblock_1", objectFactory);
+	}
 }
 
 void TestWorld::PreInitialize(const Engine::Modules& modules)

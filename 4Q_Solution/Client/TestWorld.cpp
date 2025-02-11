@@ -249,6 +249,18 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_Props_Rock>(L"Obj_Props_Rock", objectFactory);
 	}
 
+	// Obj_Bermiore_Woolball_inBox
+	{
+		// TODO: Bermiore_Woolball_inBox
+	}
+
+	// TODO: Wool Series
+	// TODO: Wool ball Series
+
+	// Obj_Buildings_Bermiore_Atelier_1
+	{
+		helpPrepare<Obj_Buildings_Bermiore_Atelier_1>(L"Obj_Buildings_Bermiore_Atelier_1", objectFactory);
+	}
 
 	////Test Grabbed Object Code -> Make and Load File Data
 	//{

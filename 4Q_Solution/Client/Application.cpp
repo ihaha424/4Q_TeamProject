@@ -302,6 +302,28 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_Props_Rock>(buildingProperty, buildingProperty);
 	}
 
+	// Obj_Bermiore_Woolball_inBox
+	{
+		// TODO: Bermiore_Woolball_inBox
+	}
+
+	// TODO: Wool Series
+	// TODO: Wool ball Series
+
+	// Obj_Buildings_Bermiore_Atelier_1
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Bermiore_Atelier_1").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Bermiore_Atelier_1>(buildingProperty, buildingProperty);
+	}
+
+
+
+
+
+
+
+
 
 
 
@@ -328,7 +350,6 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	*/
 	//RegisterHelp<Obj_BG_Mountain>(L"Obj_BG_Mountain", loadManager, objectFactory);
 
-	RegisterHelp<Obj_Buildings_Bermiore_Atelier_1>(L"Obj_Buildings_Bermiore_Atelier_1", loadManager, objectFactory);
 	RegisterHelp<Obj_Buildings_Bermiore_Atelier_2>(L"Obj_Buildings_Bermiore_Atelier_2", loadManager, objectFactory);
 	RegisterHelp<Obj_Buildings_Bermiore_Atelier_3>(L"Obj_Buildings_Bermiore_Atelier_3", loadManager, objectFactory);
 

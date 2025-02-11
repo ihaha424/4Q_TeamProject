@@ -44,6 +44,11 @@ void StaticObject::SetBoxPosition(Engine::Math::Vector3 boxPosition)
 	_boxPosition = boxPosition;
 }
 
+void StaticObject::SetIsSphere(bool isSphere)
+{
+	_isSphere = isSphere;
+}
+
 void StaticObject::PreInitialize(const Engine::Modules& modules)
 {
 	Object::PreInitialize(modules);
@@ -61,12 +66,26 @@ void StaticObject::PreInitialize(const Engine::Modules& modules)
 		PhysicsManager->CreateTriangleStatic(&_rigidStatc->_rigidbody, _physicsPath.string().c_str(), { {0.f,0.f,0.f } }, _transform, shapeTransform, false);
 		_rigidStatc->_rigidbody->SetOwner(this);
 	}
-	else
+	else if(!_isSphere)
 	{
 		Engine::Physics::RigidComponentDesc desc;
 		desc.rigidType = Engine::Physics::RigidBodyType::Static;
 		desc.shapeDesc.geometryDesc.type = Engine::Physics::GeometryShape::Box;
-		desc.shapeDesc.geometryDesc.data = { _boxScale.x, _boxScale.y, _boxScale.z, 0 };
+		desc.shapeDesc.geometryDesc.data = { _boxScale.x, _boxScale.y, _boxScale.z, 0.f };
+		desc.shapeDesc.isExclusive = true;
+		desc.shapeDesc.materialDesc.data = { 0.5f,0.5f,0.f };
+
+		Engine::Transform shapeTransform{};
+		shapeTransform.position = _boxPosition;
+		PhysicsManager->CreateStatic(&_rigidStatc->_rigidbody, desc, _transform, shapeTransform);
+		_rigidStatc->_rigidbody->SetOwner(this);
+	}
+	else
+	{
+		Engine::Physics::RigidComponentDesc desc;
+		desc.rigidType = Engine::Physics::RigidBodyType::Static;
+		desc.shapeDesc.geometryDesc.type = Engine::Physics::GeometryShape::Sphere;
+		desc.shapeDesc.geometryDesc.data = { _boxScale.x, 0.f, 0.f, 0.f };
 		desc.shapeDesc.isExclusive = true;
 		desc.shapeDesc.materialDesc.data = { 0.5f,0.5f,0.f };
 

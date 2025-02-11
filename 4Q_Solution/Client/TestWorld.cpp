@@ -319,6 +319,11 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_Bermiore_Soundblock>(L"Obj_Bermiore_Soundblock", objectFactory);
 	}
 
+	// Obj_Mini_Stone_1
+	{		
+		helpPrepare<Obj_Mini_Stone_1>(L"Obj_Mini_Stone_1", objectFactory);
+	}
+
 }
 
 void TestWorld::PreInitialize(const Engine::Modules& modules)

@@ -779,7 +779,7 @@ namespace PhysicsEngineAPI
 		desc.contactOffset = _desc.contactOffset;
 		desc.stepOffset = _desc.stepOffset;
 		desc.density = 10.f;
-		desc.scaleCoeff = 1.f;
+		desc.scaleCoeff = 0.8f;
 		desc.volumeGrowth = 1.5f;
 		desc.reportCallback = controller->hitReportCallback;
 		desc.behaviorCallback = controller->behaviorCallback;
@@ -878,7 +878,8 @@ namespace PhysicsEngineAPI
 			for (int x = 0; x < width; x++) {
 				 // heightmap[y * width + x] = (float)image.data[y * width + x] / 255.0f;
 				 // heightmap[y * width + x] = (float)image.data[y * width + x] / 255.f * 25.f;
-				 heightmap[y * width + x] = (float)image.data[y * width + x];
+				  heightmap[y * width + x] = (float)image.data[y * width + x];
+				 // heightmap[y * width + x] = ((float)image.data[y * width + x]) * 128.0f;
 			}
 		}
 
@@ -897,6 +898,7 @@ namespace PhysicsEngineAPI
 		hfDesc.nbColumns = height;
 		hfDesc.nbRows = width;
 		hfDesc.samples.data = samples;
+		hfDesc.convexEdgeThreshold = 0.5f;
 		hfDesc.samples.stride = sizeof(physx::PxHeightFieldSample);
 		hfDesc.flags = physx::PxHeightFieldFlags();
 

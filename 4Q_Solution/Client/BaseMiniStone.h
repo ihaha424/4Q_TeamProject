@@ -1,15 +1,15 @@
 #pragma once
 #include "InteractObject.h"
 
-class Obj_Sudium_bouquet : public InteractObject
+class BaseMiniStone : public InteractObject
 {
 public:
-	explicit Obj_Sudium_bouquet(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
-
-	virtual ~Obj_Sudium_bouquet() = default;
+	explicit BaseMiniStone(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
+	virtual ~BaseMiniStone() = default;
 
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
-	void Interact() override;
+
+	void SendInteractToServer();
 protected:
 	void DisposeComponents() override;
 	void PreInitialize(const Engine::Modules& modules) override;
@@ -18,6 +18,5 @@ protected:
 	unsigned int _index;
 
 	Engine::Component::Synchronize* _sync;
-
 };
 

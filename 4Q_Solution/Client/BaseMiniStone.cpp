@@ -1,19 +1,19 @@
 #include "pch.h"
-#include "Obj_Sudium_bouquet.h"
+#include "BaseMiniStone.h"
 
-Obj_Sudium_bouquet::Obj_Sudium_bouquet(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath) :
+BaseMiniStone::BaseMiniStone(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath) :
 	InteractObject(std::forward<std::filesystem::path>(meshPath), std::forward<std::filesystem::path>(physicsPath)),
 	_gameStateManager(nullptr)
 {
-	_index = 0;
 }
-void Obj_Sudium_bouquet::Prepare(Engine::Content::Factory::Component* componentFactory)
+
+void BaseMiniStone::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
 	InteractObject::Prepare(componentFactory);
 	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
 }
 
-void Obj_Sudium_bouquet::Interact()
+void BaseMiniStone::SendInteractToServer()
 {
 	_sync->_interactObject.set_objectserialnumber(_sync->GetSerialNumber());
 	_sync->_interactObject.SerializeToString(&_sync->_msgBuffer);
@@ -25,13 +25,13 @@ void Obj_Sudium_bouquet::Interact()
 	);
 }
 
-void Obj_Sudium_bouquet::DisposeComponents()
+void BaseMiniStone::DisposeComponents()
 {
 	InteractObject::DisposeComponents();
 	_sync->Dispose();
 }
 
-void Obj_Sudium_bouquet::PreInitialize(const Engine::Modules& modules)
+void BaseMiniStone::PreInitialize(const Engine::Modules& modules)
 {
 	InteractObject::PreInitialize(modules);
 }

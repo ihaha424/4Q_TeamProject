@@ -1,19 +1,19 @@
 #include "pch.h"
-#include "Obj_Sudium_bouquet.h"
+#include "BaseWoolball.h"
 
-Obj_Sudium_bouquet::Obj_Sudium_bouquet(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath) :
+BaseWoolball::BaseWoolball(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath) :
 	InteractObject(std::forward<std::filesystem::path>(meshPath), std::forward<std::filesystem::path>(physicsPath)),
 	_gameStateManager(nullptr)
 {
-	_index = 0;
 }
-void Obj_Sudium_bouquet::Prepare(Engine::Content::Factory::Component* componentFactory)
+
+void BaseWoolball::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
 	InteractObject::Prepare(componentFactory);
 	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
 }
 
-void Obj_Sudium_bouquet::Interact()
+void BaseWoolball::SendInteractToServer()
 {
 	_sync->_interactObject.set_objectserialnumber(_sync->GetSerialNumber());
 	_sync->_interactObject.SerializeToString(&_sync->_msgBuffer);
@@ -25,13 +25,16 @@ void Obj_Sudium_bouquet::Interact()
 	);
 }
 
-void Obj_Sudium_bouquet::DisposeComponents()
+void BaseWoolball::DisposeComponents()
 {
 	InteractObject::DisposeComponents();
 	_sync->Dispose();
 }
 
-void Obj_Sudium_bouquet::PreInitialize(const Engine::Modules& modules)
+void BaseWoolball::PreInitialize(const Engine::Modules& modules)
 {
 	InteractObject::PreInitialize(modules);
+
+	_gameStateManager = modules.gameStateManager->FindSubManager(L"puzzle_01");
+	
 }

@@ -95,7 +95,7 @@ void PacketDispatcher::SaveBroadCastPacket(std::string data, short packetId, lon
 {
 	for (auto& [sid, packetContainer] : _saveSendContainer) {
 		Packet packet;
-		MakePacket(packet, data, sid, packetId, dataSize, serialNum);
+] 		MakePacket(packet, data, sid, packetId, dataSize, serialNum);
 
 		Lock lock(_sendMtx);
 		packetContainer.push(packet);

@@ -168,38 +168,46 @@ void DX11Renderer::SetViewport(float width, float height)
 void DX11Renderer::ShadowPass()
 {
 	Camera* pCamera = g_pCameraSystem->GetCurrentCamera();
-	if (nullptr == pCamera) return;
-
+	Camera* pShadowCamera = g_pCameraSystem->GetShadowCaemra();
+	
 	Light* pMainLight = g_pLightSystem->GetMainLight();
 
-	float dist = 500.f;
+	XMVECTOR shadowPosition{ 0, 0, 1, 0 };
+
+	if (pShadowCamera)
+	{
+		shadowPosition = pShadowCamera->GetPosition();
+	}
+
+	float distance = 500.f;
+
 	XMVECTOR direction = XMVector3Normalize(-pMainLight->_lightData.data);
-	XMVECTOR lightPosition = direction * dist + XMVectorSet(0.f, dist, 0.f, 0.f);// +XMVECTOR(pCamera->GetPosition());
-	XMVECTOR lightTarget = direction;
+	XMVECTOR lightPosition = direction * distance + XMVectorSet(0.f, distance, 0.f, 0.f);
+	XMVECTOR lightTarget = XMVectorZero();
 	XMVECTOR lightUp = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 
-	XMMATRIX view = XMMatrixLookAtLH(lightPosition, lightTarget, lightUp);
+	XMMATRIX shadowView = XMMatrixLookAtLH(lightPosition, lightTarget, lightUp);
 
 	float viewWidth = SHADOW_WIDTH;
 	float viewHeight = SHADOW_HEIGHT;
-	float nearPlane = dist;
-	float farPlane = 10000.0f;
-
-	XMMATRIX proj = XMMatrixPerspectiveFovLH(XM_PIDIV4, 1, nearPlane, farPlane);
+	float nearPlane = distance;
+	float farPlane = 20000.f;
 	
-	ViewProjection vp
-	{
-		.vp = pCamera->GetViewMatrix() * pCamera->GetProjectionMatrix(),
-		.shadowVP = XMMatrixTranspose(view * proj)
-	};
+	ViewProjection vp{};
+	CameraDesc cameraDesc{};
 
-	CameraDesc cameraDesc
-	{
-		.vpInvers = XMMatrixTranspose(XMMatrixInverse(nullptr, vp.vp)),
-		.cameraPosition = pCamera->GetPosition(),
-	};
+	//XMMATRIX shadowProjection = XMMatrixPerspectiveFovLH(XM_PIDIV4, 1, nearPlane, farPlane);
+	XMMATRIX shadowProjection = XMMatrixOrthographicLH(SHADOW_WIDTH, SHADOW_HEIGHT, nearPlane, farPlane);
 
+	vp.shadowVP = XMMatrixTranspose(shadowView * shadowProjection);
+	if (pCamera)
+	{
+		vp.vp = pCamera->GetViewMatrix() * pCamera->GetProjectionMatrix();
+		cameraDesc.cameraPosition = pCamera->GetPosition();
+	}
+	
 	vp.vp = XMMatrixTranspose(vp.vp);
+	cameraDesc.vpInvers = XMMatrixTranspose(XMMatrixInverse(nullptr, vp.vp));
 
 	g_pConstantBuffer->UpdateConstantBuffer(L"ViewProjection", &vp);
 	g_pConstantBuffer->UpdateConstantBuffer(L"CameraDesc", &cameraDesc);

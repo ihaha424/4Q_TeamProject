@@ -16,6 +16,7 @@ namespace GE
 
     public:
         virtual void SetCurrentCamera(const wchar_t* name) = 0;
+        virtual void SetShadowCamera(const wchar_t* name) = 0;
         virtual void CreateCamera(ICamera** ppCamera) = 0;
         virtual void RegisterCamera(const wchar_t* name, ICamera* pCaemra) = 0;
         virtual void UnRegisterCamera(const wchar_t* name) = 0;

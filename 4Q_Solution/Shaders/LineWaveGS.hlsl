@@ -25,7 +25,7 @@ cbuffer CameraData
 [maxvertexcount(4)]
 void main(line VS_INPUT input[2], inout TriangleStream<VS_OUTPUT> triStream)
 {
-    const float lineWidth = 3.f;
+    const float lineWidth = 1.f;
     float3 p0 = input[0].position.xyz;
     float3 p1 = input[1].position.xyz;
 

@@ -19,6 +19,18 @@ static const float3 sample_sphere[SAMPLES] =
     float3(0.0352, -0.0631, 0.5460), float3(-0.4776, 0.2847, -0.0271)
 };
 
+cbuffer CameraDesc
+{
+    matrix viewprojInv;
+    float3 cameraPosition;
+}
+
+cbuffer ViewProjection
+{
+    matrix vp;
+    matrix shadowVP;
+}
+
 float3 GetRandom(float2 uv)
 {
     float2 offsetUV =  screenSize * uv / 4.0f;
@@ -46,6 +58,14 @@ float3 NormalFromDepth(float depth, float2 uv)
    
     return normalize(normal);
 }
+
+float3 ReconstructViewPos(float2 uv)
+{
+    float depth = txDepth.Sample(samLinear_wrap, uv).r;
+    float4 pos = mul(float4(uv * 2.0 - 1.0, depth, 1.0), viewprojInv);
+    return pos.xyz / pos.w;
+}
+
 #else
 Texture2D txSSAO    : register(t2);
 Texture2D txAmbient : register(t3);
@@ -89,11 +109,43 @@ float4 main(PS_INPUT input) : SV_Target
     Ambient = saturate(Ambient + depth * depthWeight);
     
     return float4(Ambient * Ambient, 1.0);
+    
+    //float total_strength = 4.7;
+    //float base = 2.3;
+    //float area = 0.0075;
+    //float falloff = 0.000001;
+    //float threshold = 0;
+    //float radius = 0.01;
+    //float depthWeight = 0.5;
+    //float bias = 0.0001;
+    
+    //float3 pos = ReconstructViewPos(input.uv);
+    //float3 N = txNormal.Sample(samLinear_wrap, input.uv).xyz;
+    
+    //float3 randomVec = normalize(txNoise.Sample(samLinear_wrap, input.uv * 4.0).xyz);
+
+    //float occlusion = 0.0;
+    //for (int i = 0; i < SAMPLES; i++)
+    //{
+    //    float3 sampleOffset = reflect(sample_sphere[i].xyz, randomVec);
+    //    float3 samplePos = pos + sampleOffset * radius;
+        
+    //    float4 offsetPos = mul(float4(samplePos, 1.0), vp);
+    //    float2 offsetUV = offsetPos.xy / offsetPos.w * 0.5 + 0.5;
+
+    //    float sampleDepth = txDepth.Sample(samLinear_wrap, offsetUV).r;
+    //    float3 sampleViewPos = ReconstructViewPos(offsetUV);
+        
+    //    float rangeCheck = smoothstep(0.0, 1.0, radius / abs(pos.z - sampleViewPos.z));
+    //    occlusion += (sampleViewPos.z >= samplePos.z + bias ? 1.0 : 0.0) * rangeCheck;
+    //}
+    
+    //occlusion = 1.0 - (occlusion / 64.0);
+    //return float4(occlusion.xxx, 1);
 #else
     float SSAO = txSSAO.Sample(samLinear_wrap, input.uv).r;
     float4 ambient = txAmbient.Sample(samLinear_wrap, input.uv);
     float4 color = float4(ambient.rgb * ambient.a * SSAO, 1);
     return color;
 #endif
-    
 }

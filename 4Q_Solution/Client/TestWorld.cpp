@@ -167,7 +167,26 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		//helpPrepare<Obj_Mini_Platform_Set>(L"Obj_Mini_Platform_Set", objectFactory);
 	}
 
-
+	// Obj_Mini_Platform_Spawn
+	{
+		// TODO: Refactor this.
+		auto object = GameClient::Application::GetLoadManager()->GetObjectCloneData(L"Obj_Mini_Platform_Spawn");
+		for (auto& data : object)
+		{
+			auto building = objectFactory->Clone<Obj_Mini_Platform_Spawn>(this);
+			building->SetisDynamic(data.GetProperty<bool>(L"isDynamic").value());
+			building->SetIsPublic(data.GetProperty<bool>(L"isPublic").value());
+			building->SetHasMesh(data.GetProperty<bool>(L"hasMesh").value());
+			building->SetTransform({
+					data.GetProperty<Engine::Math::Vector3>(L"position").value(),
+					data.GetProperty<Engine::Math::Quaternion>(L"rotation").value(),
+					data.GetProperty<Engine::Math::Vector3>(L"scale").value() * 100.
+				});
+			building->SetBoxPosition({ data.GetProperty<Engine::Math::Vector3>(L"boxPosition").value() });
+			building->SetBoxScale(data.GetProperty<Engine::Math::Vector3>(L"boxScale").value());
+		}
+		//helpPrepare<Obj_Mini_Platform_Spawn>(L"Obj_Mini_Platform_Spawn", objectFactory);
+	}
 
 	////Test Grabbed Object Code -> Make and Load File Data
 	//{

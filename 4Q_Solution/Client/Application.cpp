@@ -211,6 +211,13 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_Mini_Platform_Set>(buildingProperty, buildingProperty);
 	}
 
+	// Obj_Mini_Platform_Spawn
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Mini_Platform_Spawn").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Mini_Platform_Spawn>(buildingProperty, buildingProperty);
+	}
+
 
 
 

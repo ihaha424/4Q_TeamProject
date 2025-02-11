@@ -139,6 +139,12 @@
     <Filter Include="Object\Puzzle\06. NotPuzzel\BG_Props_Fence">
       <UniqueIdentifier>{80d4ebdb-a78b-487e-832f-3f1947255510}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Puzzle\03. Puzzle\Object\Obj_Mini_Platform_Spawn">
+      <UniqueIdentifier>{9f24f3a1-65f0-407c-abea-27b41a462b10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\03. Puzzle\Object\Obj_Mini_Platform_Set">
+      <UniqueIdentifier>{8a79c7aa-0b9b-4f81-a692-20f5309c7185}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -390,9 +396,6 @@
     <ClInclude Include="Obj_Ornoa_Soundblock_1.h">
       <Filter>Object\Puzzle\05. Puzzle\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Mini_Platform_Set.h">
-      <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Obj_Sudium_red.h">
       <Filter>Object\MapData</Filter>
     </ClInclude>
@@ -473,6 +476,12 @@
     </ClInclude>
     <ClInclude Include="BG_Props_Fence.h">
       <Filter>Object\Puzzle\06. NotPuzzel\BG_Props_Fence</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Mini_Platform_Set.h">
+      <Filter>Object\Puzzle\03. Puzzle\Object\Obj_Mini_Platform_Set</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Mini_Platform_Spawn.h">
+      <Filter>Object\Puzzle\03. Puzzle\Object\Obj_Mini_Platform_Spawn</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -722,9 +731,6 @@
     <ClCompile Include="Obj_Ornoa_Soundblock_1.cpp">
       <Filter>Object\Puzzle\05. Puzzle\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Mini_Platform_Set.cpp">
-      <Filter>Object\Puzzle\03. Puzzle\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Obj_BG_Tree_3.cpp">
       <Filter>Object\MapData</Filter>
     </ClCompile>
@@ -769,6 +775,12 @@
     </ClCompile>
     <ClCompile Include="BG_Props_Fence.cpp">
       <Filter>Object\Puzzle\06. NotPuzzel\BG_Props_Fence</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Mini_Platform_Set.cpp">
+      <Filter>Object\Puzzle\03. Puzzle\Object\Obj_Mini_Platform_Set</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Mini_Platform_Spawn.cpp">
+      <Filter>Object\Puzzle\03. Puzzle\Object\Obj_Mini_Platform_Spawn</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

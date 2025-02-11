@@ -177,6 +177,7 @@
     <ClInclude Include="Obj_Bermiore_Woolball_4.h" />
     <ClInclude Include="Obj_Bermiore_Woolball_5.h" />
     <ClInclude Include="Obj_Bermiore_Woolball_6.h" />
+    <ClInclude Include="Obj_Mini_Platform_Spawn.h" />
     <ClInclude Include="Obj_Puzzle_Mini_Stone_1.h" />
     <ClInclude Include="Obj_Puzzle_Mini_Stone_2.h" />
     <ClInclude Include="Obj_Puzzle_Mini_Stone_3.h" />
@@ -295,6 +296,7 @@
     <ClCompile Include="Obj_Hide_Plant.cpp" />
     <ClCompile Include="Obj_Hide_Potion.cpp" />
     <ClCompile Include="Obj_Hide_Xylophone.cpp" />
+    <ClCompile Include="Obj_Mini_Platform_Spawn.cpp" />
     <ClCompile Include="Obj_Ornoa_Hint.cpp" />
     <ClCompile Include="Obj_Ornoa_Print.cpp" />
     <ClCompile Include="Obj_Ornoa_Soundblock_1.cpp" />

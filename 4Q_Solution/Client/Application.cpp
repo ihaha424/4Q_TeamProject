@@ -197,6 +197,12 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_Sudium_blue>(buildingProperty, buildingProperty);
 	}
 
+	// Obj_Sudium_red
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Sudium_red").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Sudium_red>(buildingProperty, buildingProperty);
+	}
 
 
 

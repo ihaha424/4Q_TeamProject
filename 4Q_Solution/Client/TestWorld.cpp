@@ -141,6 +141,11 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_Sudium_blue>(L"Obj_Sudium_blue", objectFactory);
 	}
 
+	// Obj_Sudium_red
+	{
+		helpPrepare<Obj_Sudium_red>(L"Obj_Sudium_red", objectFactory);
+	}
+
 	////Test Grabbed Object Code -> Make and Load File Data
 	//{
 	//	GrabbedObject* building = objectFactory->Clone<GrabbedObject>(this);

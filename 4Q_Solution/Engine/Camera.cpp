@@ -77,6 +77,15 @@ void Engine::Component::Camera::SetParent(Math::Matrix* matrix) const
 	_geCamera->SetParent(matrix);
 }
 
+void Engine::Component::Camera::SetPerspective(float nearZ, float farZ, float fov)
+{
+	_nearZ = nearZ;
+	_farZ = farZ;
+	_fov = fov;
+
+	_geCamera->SetPerspective(_nearZ, _farZ, (float)_size.cx / (float)_size.cy, fov);
+}
+
 void Engine::Component::Camera::Rotate(Math::Vector3 rotation)
 {
 	// TODO: Implement this function.

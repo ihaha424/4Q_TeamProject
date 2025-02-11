@@ -108,11 +108,14 @@ PS_OUTPUT main(PS_INPUT input)
     color.a = alpha;
         
     float4 opacity = txOpacity.Sample(samLinear_wrap, input.uv);
-    
-    if (length(opacity))
-        color.a = opacity.a;
+   
+    if (1 > opacity.r)
+    {
+        color.a = opacity.r;
+        //ambientIBL.diffuseIBL = opacity.r;
+    }
     else
-        color.a = 1.f;    
+        color.a = 1.f;
     
     color.rgb = LinearToGammaSpace(color.rgb);
     //color.rgb += RimLight(N, V);

@@ -25,6 +25,7 @@ namespace Engine::Component
         void SplitBone(unsigned int id, const char* boneName) const;
         void SetAnimationSpeed(float speed) const;
         void MakeParent(const char* parent, const char* child) const;
+        void GetSkeletonMatrix(const char* bone, Engine::Math::Matrix** out) const;
 
     private:
         SkeletalMesh* _skeletalMesh;

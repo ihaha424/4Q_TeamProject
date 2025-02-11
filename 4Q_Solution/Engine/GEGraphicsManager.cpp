@@ -12,6 +12,7 @@ Engine::GEGraphics::Manager::Manager()
 	, _textSystem(nullptr)
 	, _postprocessSystem(nullptr)
 	, _spriteSystem(nullptr)
+	, _unlitSystem(nullptr)
 {
 }
 
@@ -55,6 +56,7 @@ void Engine::GEGraphics::Manager::Initialize(HWND windowHandle, const std::files
 	_renderSystem->GetTextSystem(&_textSystem);
 	_renderSystem->GetPostProcessSystem(&_postprocessSystem);
 	_renderSystem->GetSpriteSystem(&_spriteSystem);
+	_renderSystem->GetUnlitSystem(&_unlitSystem);
 
 	_graphicsSystem->CreateAnimationSystem(&_animationSystem);
 	_animationSystem->Initialize(animationThreadCount);

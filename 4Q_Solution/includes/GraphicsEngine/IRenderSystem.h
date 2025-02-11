@@ -28,6 +28,7 @@ namespace GE
 	class ITextSystem;
 	class IPostProcessSystem;
 	class ISpriteSystem;
+	class IUnlitSystem;
 	class IRenderSystem : public IBase
 	{
 	protected:
@@ -45,6 +46,7 @@ namespace GE
 		virtual void GetTextSystem(ITextSystem** ppTextSystem) = 0;
 		virtual void GetPostProcessSystem(IPostProcessSystem** ppPostProcessSystem) = 0;
 		virtual void GetSpriteSystem(ISpriteSystem** ppSpriteSystem) = 0;
+		virtual void GetUnlitSystem(IUnlitSystem** ppUnlitSystem) = 0;
 		virtual void CreateMeshRenderer(IMeshRenderer** ppComponent, const MESH_RENDERER_DESC* pDesc) = 0;		
 		virtual void RegisterRenderQueue(IMeshRenderer* pComponent, Matrix4x4* pMatrix) = 0;
 		virtual void UnRegisterRenderQueue(IMeshRenderer* pComponent) = 0;

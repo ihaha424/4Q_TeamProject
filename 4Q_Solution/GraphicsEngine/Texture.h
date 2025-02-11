@@ -9,7 +9,7 @@ public:
 
 public:
     HRESULT LoadResource(const std::filesystem::path& filePath) override;
-    ID3D11ShaderResourceView* Get() const { return _pTexture; }
+    ID3D11ShaderResourceView** Get() { return &_pTexture; }
     Vector2 GetSize() const { return _size; }
 
 private:

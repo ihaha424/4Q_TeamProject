@@ -8,6 +8,7 @@
 #include "ITextSystem.h"
 #include "IPostProcessSystem.h"
 #include "ISpriteSystem.h"
+#include "IUnlitSystem.h"
 
 #include "ICamera.h"
 #include "IAnimator.h"
@@ -17,6 +18,8 @@
 #include "ITextRenderer.h"
 #include "ISkyBoxRenderer.h"
 #include "ISpriteRenderer.h"
+#include "IUnlitRenderer.h"
+#include "ILineRenderer.h"
 
 #include "IBloom.h"
 #include "IBlur.h"

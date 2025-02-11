@@ -4,6 +4,8 @@
 
 class Blur : public Filter, public GE::IBlur
 {
+	enum Type { X, Y, End };
+
 public:
 	explicit Blur() = default;
 	virtual ~Blur() = default;
@@ -20,7 +22,6 @@ public:
 	void Render() override;
 
 private:
-	std::shared_ptr<PixelShader> _psSampling;
+	std::shared_ptr<PixelShader> _psGaussianBlur[End];
 	GE::BLUR_DESC _desc;
-
 };

@@ -85,86 +85,92 @@
     <Filter Include="97. Include\Component">
       <UniqueIdentifier>{1e093da5-e765-4630-bf6b-87d3ac4dece3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00. Common\Component\CustomRenderer">
-      <UniqueIdentifier>{db816617-141e-4c76-968d-12ae1067d37a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00. Common\Component\SpriteRenderer">
       <UniqueIdentifier>{63c70b7b-ae4b-47a7-bcd3-d41ea03398a0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="09. DX11">
-      <UniqueIdentifier>{e00d1ba6-2849-4aa0-937c-0c8d932e05d0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\GraphicDevice">
-      <UniqueIdentifier>{b4e9ee8b-8dcd-4a07-aa01-f114f6e302a6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\Material">
-      <UniqueIdentifier>{87c9ec11-9f10-4fdb-b4d6-554f4d51f4af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\Model">
-      <UniqueIdentifier>{4e789fe2-c7f1-43f5-b050-186ac80e7d82}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\Renderer">
-      <UniqueIdentifier>{4ef321ac-047e-4551-92e2-cd3474c0f4d5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\PostProcess">
-      <UniqueIdentifier>{81c423dd-6dbe-46b1-badc-6d72bb7067f9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\PostProcess\Bloom">
-      <UniqueIdentifier>{a3dc2c18-d957-4325-b10a-65fc36cc6f39}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\PostProcess\Blur">
-      <UniqueIdentifier>{78b43ac8-c765-4a4f-9e00-94ddcd535e15}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\PostProcess\ToneMapping">
-      <UniqueIdentifier>{5a6cd6fd-84e0-4c9a-a3ff-3c0d8972d573}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\PostProcess\AO">
-      <UniqueIdentifier>{2aa33c74-f5e4-493d-83a3-a62f51b332b3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\PostProcess\AO\SSAO">
-      <UniqueIdentifier>{94a2fc78-d00d-401f-ae87-2b2b1c3ff935}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\RenderGroup">
-      <UniqueIdentifier>{407d8039-9b8c-421d-a89c-72ade9a15f68}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\Sampler">
-      <UniqueIdentifier>{c7a24301-1fd8-478c-872d-136c718fdc29}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\Shader">
-      <UniqueIdentifier>{5ffc0473-2bb0-4fba-bca7-72343ed5ab9e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\Texture">
-      <UniqueIdentifier>{14b40006-92ad-4ecc-89da-a56214a2c8d2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\Buffer">
-      <UniqueIdentifier>{0c83dd08-4049-421c-9c06-367520f74a19}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\Buffer\VI">
-      <UniqueIdentifier>{5a7e4169-c567-492a-b5c6-8c43e40a95e0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\Buffer\Constant">
-      <UniqueIdentifier>{d2b48711-398f-4654-95f4-81ee5ff7a949}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\Buffer\Mesh">
-      <UniqueIdentifier>{36d8fd6b-306c-462f-a356-c96741a18887}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\Buffer\Structured">
-      <UniqueIdentifier>{8a967d44-ee8e-4274-9a85-e6fa740bbd0f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\ViewManagement">
-      <UniqueIdentifier>{4bed19cb-be4d-46bf-8313-f57e0264eda2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\Quad">
-      <UniqueIdentifier>{d1fd7023-e6af-4d49-9683-d3fc452b9aa7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="09. DX11\Sprite">
-      <UniqueIdentifier>{ee73300a-fe68-45d5-825e-4ece28c34345}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="10. DX12">
-      <UniqueIdentifier>{5a5dabd3-0269-4509-8a53-a8d5a3da4026}</UniqueIdentifier>
-    </Filter>
     <Filter Include="08. SpriteSystem">
       <UniqueIdentifier>{c81014eb-b1f6-4e6b-b98e-6a58c9287662}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Common\Component\LineRenderer">
+      <UniqueIdentifier>{db816617-141e-4c76-968d-12ae1067d37a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11">
+      <UniqueIdentifier>{e00d1ba6-2849-4aa0-937c-0c8d932e05d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\GraphicDevice">
+      <UniqueIdentifier>{b4e9ee8b-8dcd-4a07-aa01-f114f6e302a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\Material">
+      <UniqueIdentifier>{87c9ec11-9f10-4fdb-b4d6-554f4d51f4af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\Model">
+      <UniqueIdentifier>{4e789fe2-c7f1-43f5-b050-186ac80e7d82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\Renderer">
+      <UniqueIdentifier>{4ef321ac-047e-4551-92e2-cd3474c0f4d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\PostProcess">
+      <UniqueIdentifier>{81c423dd-6dbe-46b1-badc-6d72bb7067f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\PostProcess\Bloom">
+      <UniqueIdentifier>{a3dc2c18-d957-4325-b10a-65fc36cc6f39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\PostProcess\Blur">
+      <UniqueIdentifier>{78b43ac8-c765-4a4f-9e00-94ddcd535e15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\PostProcess\ToneMapping">
+      <UniqueIdentifier>{5a6cd6fd-84e0-4c9a-a3ff-3c0d8972d573}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\PostProcess\AO">
+      <UniqueIdentifier>{2aa33c74-f5e4-493d-83a3-a62f51b332b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\PostProcess\AO\SSAO">
+      <UniqueIdentifier>{94a2fc78-d00d-401f-ae87-2b2b1c3ff935}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\RenderGroup">
+      <UniqueIdentifier>{407d8039-9b8c-421d-a89c-72ade9a15f68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\Sampler">
+      <UniqueIdentifier>{c7a24301-1fd8-478c-872d-136c718fdc29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\Shader">
+      <UniqueIdentifier>{5ffc0473-2bb0-4fba-bca7-72343ed5ab9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\Texture">
+      <UniqueIdentifier>{14b40006-92ad-4ecc-89da-a56214a2c8d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\Buffer">
+      <UniqueIdentifier>{0c83dd08-4049-421c-9c06-367520f74a19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\Buffer\VI">
+      <UniqueIdentifier>{5a7e4169-c567-492a-b5c6-8c43e40a95e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\Buffer\Constant">
+      <UniqueIdentifier>{d2b48711-398f-4654-95f4-81ee5ff7a949}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\Buffer\Mesh">
+      <UniqueIdentifier>{36d8fd6b-306c-462f-a356-c96741a18887}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\Buffer\Structured">
+      <UniqueIdentifier>{8a967d44-ee8e-4274-9a85-e6fa740bbd0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\ViewManagement">
+      <UniqueIdentifier>{4bed19cb-be4d-46bf-8313-f57e0264eda2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\Quad">
+      <UniqueIdentifier>{d1fd7023-e6af-4d49-9683-d3fc452b9aa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10. DX11\Sprite">
+      <UniqueIdentifier>{ee73300a-fe68-45d5-825e-4ece28c34345}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="11. DX12">
+      <UniqueIdentifier>{5a5dabd3-0269-4509-8a53-a8d5a3da4026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. UnlitSystem">
+      <UniqueIdentifier>{f09ab3a4-1c50-4998-abe8-d5cb4a6cf5a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Common\Component\UnlitRenderer">
+      <UniqueIdentifier>{16fecbb7-d85a-43ee-a4ac-d6c0f7aa5b80}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -175,25 +181,25 @@
       <Filter>00. Common\Animation</Filter>
     </ClInclude>
     <ClInclude Include="ConstantBuffer.h">
-      <Filter>09. DX11\Buffer\Constant</Filter>
+      <Filter>10. DX11\Buffer\Constant</Filter>
     </ClInclude>
     <ClInclude Include="VIBuffer.h">
-      <Filter>09. DX11\Buffer\VI</Filter>
+      <Filter>10. DX11\Buffer\VI</Filter>
     </ClInclude>
     <ClInclude Include="PixelShader.h">
-      <Filter>09. DX11\Shader</Filter>
+      <Filter>10. DX11\Shader</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>09. DX11\Shader</Filter>
+      <Filter>10. DX11\Shader</Filter>
     </ClInclude>
     <ClInclude Include="VertexShader.h">
-      <Filter>09. DX11\Shader</Filter>
+      <Filter>10. DX11\Shader</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">
-      <Filter>09. DX11\Material</Filter>
+      <Filter>10. DX11\Material</Filter>
     </ClInclude>
     <ClInclude Include="Sampler.h">
-      <Filter>09. DX11\Sampler</Filter>
+      <Filter>10. DX11\Sampler</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>00. Common\Resource</Filter>
@@ -202,13 +208,13 @@
       <Filter>00. Common\Resource</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
-      <Filter>09. DX11\Model</Filter>
+      <Filter>10. DX11\Model</Filter>
     </ClInclude>
     <ClInclude Include="Skeleton.h">
-      <Filter>09. DX11\Model</Filter>
+      <Filter>10. DX11\Model</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>09. DX11\Texture</Filter>
+      <Filter>10. DX11\Texture</Filter>
     </ClInclude>
     <ClInclude Include="TextRenderer.h">
       <Filter>00. Common\Component\TextRenderer</Filter>
@@ -238,16 +244,16 @@
       <Filter>03. CameraSystem</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
-      <Filter>09. DX11\Buffer\Mesh</Filter>
+      <Filter>10. DX11\Buffer\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="GraphicDevice.h">
-      <Filter>09. DX11\GraphicDevice</Filter>
+      <Filter>10. DX11\GraphicDevice</Filter>
     </ClInclude>
     <ClInclude Include="Filter.h">
-      <Filter>09. DX11\PostProcess</Filter>
+      <Filter>10. DX11\PostProcess</Filter>
     </ClInclude>
     <ClInclude Include="RenderGroup.h">
-      <Filter>09. DX11\RenderGroup</Filter>
+      <Filter>10. DX11\RenderGroup</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsSystem.h">
       <Filter>01. GraphicsSystem</Filter>
@@ -265,13 +271,13 @@
       <Filter>00. Common\Component\MeshRenderer</Filter>
     </ClInclude>
     <ClInclude Include="SkeletalMesh.h">
-      <Filter>09. DX11\Model</Filter>
+      <Filter>10. DX11\Model</Filter>
     </ClInclude>
     <ClInclude Include="StaticMesh.h">
-      <Filter>09. DX11\Model</Filter>
+      <Filter>10. DX11\Model</Filter>
     </ClInclude>
     <ClInclude Include="ViewManagement.h">
-      <Filter>09. DX11\ViewManagement</Filter>
+      <Filter>10. DX11\ViewManagement</Filter>
     </ClInclude>
     <ClInclude Include="AnimationSystem.h">
       <Filter>04. AnimationSystem</Filter>
@@ -280,10 +286,10 @@
       <Filter>96. Interface</Filter>
     </ClInclude>
     <ClInclude Include="DX11Renderer.h">
-      <Filter>09. DX11\Renderer</Filter>
+      <Filter>10. DX11\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="StructuredBuffer.h">
-      <Filter>09. DX11\Buffer\Structured</Filter>
+      <Filter>10. DX11\Buffer\Structured</Filter>
     </ClInclude>
     <ClInclude Include="LightSystem.h">
       <Filter>05. LightSystem</Filter>
@@ -307,7 +313,7 @@
       <Filter>00. Common\Component</Filter>
     </ClInclude>
     <ClInclude Include="Bloom.h">
-      <Filter>09. DX11\PostProcess\Bloom</Filter>
+      <Filter>10. DX11\PostProcess\Bloom</Filter>
     </ClInclude>
     <ClInclude Include="includes\IBloom.h">
       <Filter>97. Include\PostProcess</Filter>
@@ -358,30 +364,30 @@
       <Filter>97. Include\Component</Filter>
     </ClInclude>
     <ClInclude Include="Quad.h">
-      <Filter>09. DX11\Quad</Filter>
+      <Filter>10. DX11\Quad</Filter>
     </ClInclude>
     <ClInclude Include="includes\Matrix4x4.h">
       <Filter>97. Include\Component</Filter>
     </ClInclude>
     <ClInclude Include="Blur.h">
-      <Filter>09. DX11\PostProcess\Blur</Filter>
+      <Filter>10. DX11\PostProcess\Blur</Filter>
     </ClInclude>
     <ClInclude Include="includes\IBlur.h">
       <Filter>97. Include\PostProcess</Filter>
     </ClInclude>
     <ClInclude Include="SSAO.h">
-      <Filter>09. DX11\PostProcess\AO\SSAO</Filter>
+      <Filter>10. DX11\PostProcess\AO\SSAO</Filter>
     </ClInclude>
     <ClInclude Include="ToneMapping.h">
-      <Filter>09. DX11\PostProcess\ToneMapping</Filter>
+      <Filter>10. DX11\PostProcess\ToneMapping</Filter>
     </ClInclude>
     <ClInclude Include="AO.h">
-      <Filter>09. DX11\PostProcess\AO</Filter>
+      <Filter>10. DX11\PostProcess\AO</Filter>
     </ClInclude>
-    <ClInclude Include="CustomRenderer.h">
-      <Filter>00. Common\Component\CustomRenderer</Filter>
+    <ClInclude Include="LineRenderer.h">
+      <Filter>00. Common\Component\LineRenderer</Filter>
     </ClInclude>
-    <ClInclude Include="includes\ICustomRenderer.h">
+    <ClInclude Include="includes\ILineRenderer.h">
       <Filter>97. Include\Component</Filter>
     </ClInclude>
     <ClInclude Include="includes\ISpriteRenderer.h">
@@ -391,7 +397,7 @@
       <Filter>00. Common\Component\SpriteRenderer</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
-      <Filter>09. DX11\Sprite</Filter>
+      <Filter>10. DX11\Sprite</Filter>
     </ClInclude>
     <ClInclude Include="SpriteSystem.h">
       <Filter>08. SpriteSystem</Filter>
@@ -402,6 +408,21 @@
     <ClInclude Include="includes\GraphicsEngine.h">
       <Filter>97. Include</Filter>
     </ClInclude>
+    <ClInclude Include="GeometryShader.h">
+      <Filter>10. DX11\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\IUnlitRenderer.h">
+      <Filter>97. Include\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\IUnlitSystem.h">
+      <Filter>97. Include\System</Filter>
+    </ClInclude>
+    <ClInclude Include="UnlitSystem.h">
+      <Filter>09. UnlitSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="UnlitRenderer.h">
+      <Filter>00. Common\Component\UnlitRenderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp">
@@ -411,31 +432,31 @@
       <Filter>00. Common\Animation</Filter>
     </ClCompile>
     <ClCompile Include="Material.cpp">
-      <Filter>09. DX11\Material</Filter>
+      <Filter>10. DX11\Material</Filter>
     </ClCompile>
     <ClCompile Include="Model.cpp">
-      <Filter>09. DX11\Model</Filter>
+      <Filter>10. DX11\Model</Filter>
     </ClCompile>
     <ClCompile Include="Skeleton.cpp">
-      <Filter>09. DX11\Model</Filter>
+      <Filter>10. DX11\Model</Filter>
     </ClCompile>
     <ClCompile Include="VertexShader.cpp">
-      <Filter>09. DX11\Shader</Filter>
+      <Filter>10. DX11\Shader</Filter>
     </ClCompile>
     <ClCompile Include="PixelShader.cpp">
-      <Filter>09. DX11\Shader</Filter>
+      <Filter>10. DX11\Shader</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
-      <Filter>09. DX11\Shader</Filter>
+      <Filter>10. DX11\Shader</Filter>
     </ClCompile>
     <ClCompile Include="ConstantBuffer.cpp">
-      <Filter>09. DX11\Buffer\Constant</Filter>
+      <Filter>10. DX11\Buffer\Constant</Filter>
     </ClCompile>
     <ClCompile Include="VIBuffer.cpp">
-      <Filter>09. DX11\Buffer\VI</Filter>
+      <Filter>10. DX11\Buffer\VI</Filter>
     </ClCompile>
     <ClCompile Include="Sampler.cpp">
-      <Filter>09. DX11\Sampler</Filter>
+      <Filter>10. DX11\Sampler</Filter>
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>00. Common\Resource</Filter>
@@ -444,7 +465,7 @@
       <Filter>00. Common\Component\TextRenderer</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
-      <Filter>09. DX11\Texture</Filter>
+      <Filter>10. DX11\Texture</Filter>
     </ClCompile>
     <ClCompile Include="dllmain.cpp">
       <Filter>99. Default</Filter>
@@ -459,16 +480,16 @@
       <Filter>03. CameraSystem</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
-      <Filter>09. DX11\Buffer\Mesh</Filter>
+      <Filter>10. DX11\Buffer\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="GraphicDevice.cpp">
-      <Filter>09. DX11\GraphicDevice</Filter>
+      <Filter>10. DX11\GraphicDevice</Filter>
     </ClCompile>
     <ClCompile Include="Filter.cpp">
-      <Filter>09. DX11\PostProcess</Filter>
+      <Filter>10. DX11\PostProcess</Filter>
     </ClCompile>
     <ClCompile Include="RenderGroup.cpp">
-      <Filter>09. DX11\RenderGroup</Filter>
+      <Filter>10. DX11\RenderGroup</Filter>
     </ClCompile>
     <ClCompile Include="GraphicsSystem.cpp">
       <Filter>01. GraphicsSystem</Filter>
@@ -486,16 +507,16 @@
       <Filter>00. Common\Component\MeshRenderer</Filter>
     </ClCompile>
     <ClCompile Include="ViewManagement.cpp">
-      <Filter>09. DX11\ViewManagement</Filter>
+      <Filter>10. DX11\ViewManagement</Filter>
     </ClCompile>
     <ClCompile Include="AnimationSystem.cpp">
       <Filter>04. AnimationSystem</Filter>
     </ClCompile>
     <ClCompile Include="DX11Renderer.cpp">
-      <Filter>09. DX11\Renderer</Filter>
+      <Filter>10. DX11\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="StructuredBuffer.cpp">
-      <Filter>09. DX11\Buffer\Structured</Filter>
+      <Filter>10. DX11\Buffer\Structured</Filter>
     </ClCompile>
     <ClCompile Include="LightSystem.cpp">
       <Filter>05. LightSystem</Filter>
@@ -513,34 +534,43 @@
       <Filter>00. Common\Component</Filter>
     </ClCompile>
     <ClCompile Include="Bloom.cpp">
-      <Filter>09. DX11\PostProcess\Bloom</Filter>
+      <Filter>10. DX11\PostProcess\Bloom</Filter>
     </ClCompile>
     <ClCompile Include="PostProcessSystem.cpp">
       <Filter>07. PostProcessSystem</Filter>
     </ClCompile>
     <ClCompile Include="Quad.cpp">
-      <Filter>09. DX11\Quad</Filter>
+      <Filter>10. DX11\Quad</Filter>
     </ClCompile>
     <ClCompile Include="Blur.cpp">
-      <Filter>09. DX11\PostProcess\Blur</Filter>
+      <Filter>10. DX11\PostProcess\Blur</Filter>
     </ClCompile>
     <ClCompile Include="SSAO.cpp">
-      <Filter>09. DX11\PostProcess\AO\SSAO</Filter>
+      <Filter>10. DX11\PostProcess\AO\SSAO</Filter>
     </ClCompile>
     <ClCompile Include="ToneMapping.cpp">
-      <Filter>09. DX11\PostProcess\ToneMapping</Filter>
+      <Filter>10. DX11\PostProcess\ToneMapping</Filter>
     </ClCompile>
-    <ClCompile Include="CustomRenderer.cpp">
-      <Filter>00. Common\Component\CustomRenderer</Filter>
+    <ClCompile Include="LineRenderer.cpp">
+      <Filter>00. Common\Component\LineRenderer</Filter>
     </ClCompile>
     <ClCompile Include="SpriteRenderer.cpp">
       <Filter>00. Common\Component\SpriteRenderer</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
-      <Filter>09. DX11\Sprite</Filter>
+      <Filter>10. DX11\Sprite</Filter>
     </ClCompile>
     <ClCompile Include="SpriteSystem.cpp">
       <Filter>08. SpriteSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryShader.cpp">
+      <Filter>10. DX11\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="UnlitSystem.cpp">
+      <Filter>09. UnlitSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="UnlitRenderer.cpp">
+      <Filter>00. Common\Component\UnlitRenderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -610,6 +640,15 @@
       <Filter>00. Common\HLSL</Filter>
     </FxCompile>
     <FxCompile Include="..\Shaders\SpriteVS.hlsl">
+      <Filter>00. Common\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\LineWavePS.hlsl">
+      <Filter>00. Common\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\LineWaveVS.hlsl">
+      <Filter>00. Common\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\LineWaveGS.hlsl">
       <Filter>00. Common\HLSL</Filter>
     </FxCompile>
   </ItemGroup>

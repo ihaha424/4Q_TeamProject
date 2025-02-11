@@ -45,6 +45,7 @@ public:
 	void SplitBone(unsigned int ID, const char* boneName) override;
 	void SetAnimationSpeed(float speed) override;
 	void MakeParent(const char* parent, const char* child) override;
+	void GetSkeletonMatrix(const char* bone, GE::Matrix4x4** out) override;
 
 private:
 	void UpdateAnimationTransform(Bone& skeletion, const XMMATRIX& parentTransform, std::vector<Controller>& controllers, std::vector<Matrix>& transforms);

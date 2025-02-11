@@ -10,7 +10,9 @@ public:
 
 public:
 	Camera* GetCurrentCamera() const { return _pCurrentCamera; }
+	Camera* GetShadowCaemra()const { return _pShadowCamera; }
 	void SetCurrentCamera(const wchar_t* name) override;
+	void SetShadowCamera(const wchar_t* name) override;
 
 public:
 	// ICameraSystem을(를) 통해 상속됨
@@ -25,5 +27,5 @@ public:
 private:
 	std::unordered_map<std::wstring, Camera*> _cameras;
 	Camera* _pCurrentCamera{ nullptr };
-
+	Camera* _pShadowCamera{ nullptr };
 };

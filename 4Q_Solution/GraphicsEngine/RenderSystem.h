@@ -4,6 +4,7 @@
 class IRenderer;
 class TextSystem;
 class SpriteSystem;
+class UnlitSystem;
 class RenderSystem : public GE::IRenderSystem
 {
 public:
@@ -19,6 +20,7 @@ public:
 	void GetTextSystem(GE::ITextSystem** ppTextSystem) override;
 	void GetPostProcessSystem(GE::IPostProcessSystem** ppPostProcessSystem) override;
 	void GetSpriteSystem(GE::ISpriteSystem** ppSpriteSystem) override;
+	void GetUnlitSystem(GE::IUnlitSystem** ppUnlitSystem) override;
 	void CreateMeshRenderer(GE::IMeshRenderer** ppComponent, const GE::MESH_RENDERER_DESC* pDesc) override;
 	void RegisterRenderQueue(GE::IMeshRenderer* pComponent, GE::Matrix4x4* pMatrix) override;
 	void UnRegisterRenderQueue(GE::IMeshRenderer* pComponent) override;
@@ -32,5 +34,6 @@ private:
 	IRenderer*			_pRenderer{ nullptr };
 	TextSystem*			_pTextSystem{ nullptr };
 	SpriteSystem*		_pSpriteSystem{ nullptr };
+	UnlitSystem*		_pUnlitSystem{ nullptr };
 	IDXGISwapChain*		_pSwapChain{ nullptr };
 };

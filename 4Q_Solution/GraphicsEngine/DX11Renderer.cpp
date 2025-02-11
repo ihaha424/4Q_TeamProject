@@ -110,10 +110,18 @@ void DX11Renderer::Render()
 		ID++;
 	}
 
-	// Alpha Sort
-	// meshes[RenderType::Alpha].sort();
-	// NoneAlpha Sort
-	// meshes[RenderType::NoneAlpha].sort();
+	Camera* pCamera = g_pCameraSystem->GetCurrentCamera();
+	XMMATRIX view = XMMatrixIdentity();
+
+	if (nullptr != pCamera)
+		view = pCamera->GetViewMatrix();
+
+	alphaMeshes.sort([this, view](const DrawData& data0, const DrawData& data1)
+		{
+			Matrix m0 = _matrices[data0.modelID] * view;
+			Matrix m1 = _matrices[data1.modelID] * view;
+			return m0.Translation().z > m1.Translation().z;
+		});
 
 	auto& lights = g_pLightSystem->GetLights();
 	unsigned int numLight[GE::ILight::End]{};
@@ -168,37 +176,45 @@ void DX11Renderer::SetViewport(float width, float height)
 void DX11Renderer::ShadowPass()
 {
 	Camera* pCamera = g_pCameraSystem->GetCurrentCamera();
-	if (nullptr == pCamera) return;
-
+	Camera* pShadowCamera = g_pCameraSystem->GetShadowCaemra();
+	
 	Light* pMainLight = g_pLightSystem->GetMainLight();
 
-	float dist = 500.f;
+	XMVECTOR shadowPosition{ 0, 0, 1, 0 };
+
+	if (pShadowCamera)
+	{
+		shadowPosition = pShadowCamera->GetPosition();
+	}
+
+	float distance = 1000.f;
+
 	XMVECTOR direction = XMVector3Normalize(-pMainLight->_lightData.data);
-	XMVECTOR lightPosition = direction * dist + XMVectorSet(0.f, dist, 0.f, 0.f);
-	XMVECTOR lightTarget = direction;
+	XMVECTOR lightPosition = direction * distance * 4 + XMVectorSet(0.f, distance * 4, 0.f, 0.f);
+	XMVECTOR lightTarget = XMVectorZero();
 	XMVECTOR lightUp = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 
-	XMMATRIX view = XMMatrixLookAtLH(lightPosition, lightTarget, lightUp);
+	XMMATRIX shadowView = XMMatrixLookAtLH(lightPosition, lightTarget, lightUp);
 
 	float viewWidth = SHADOW_WIDTH;
 	float viewHeight = SHADOW_HEIGHT;
-	float nearPlane = dist;
-	float farPlane = 10000.0f;
-
-	XMMATRIX proj = XMMatrixPerspectiveFovLH(XM_PIDIV4, 1, nearPlane, farPlane);
+	float nearPlane = distance;
+	float farPlane = 7500.f;
 	
-	ViewProjection vp
-	{
-		.vp = pCamera->GetViewMatrix() * pCamera->GetProjectionMatrix(),
-		.shadowVP = XMMatrixTranspose(view * proj)
-	};
+	ViewProjection vp{};
+	CameraDesc cameraDesc{};
 
-	CameraDesc cameraDesc
+	//XMMATRIX shadowProjection = XMMatrixPerspectiveFovLH(XM_PIDIV4, 1, nearPlane, farPlane);
+	XMMATRIX shadowProjection = XMMatrixOrthographicLH(SHADOW_WIDTH, SHADOW_HEIGHT, nearPlane, farPlane);
+	
+	vp.shadowVP = XMMatrixTranspose(shadowView * shadowProjection);
+	if (pCamera)
 	{
-		.vpInvers = XMMatrixTranspose(XMMatrixInverse(nullptr, vp.vp)),
-		.cameraPosition = pCamera->GetPosition(),
-	};
-
+		vp.vp = pCamera->GetViewMatrix() * pCamera->GetProjectionMatrix();
+		cameraDesc.cameraPosition = pCamera->GetPosition();
+	}
+	
+	cameraDesc.vpInvers = XMMatrixTranspose(XMMatrixInverse(nullptr, vp.vp));
 	vp.vp = XMMatrixTranspose(vp.vp);
 
 	g_pConstantBuffer->UpdateConstantBuffer(L"ViewProjection", &vp);
@@ -279,6 +295,11 @@ void DX11Renderer::SkyBoxPass(std::list<std::pair<unsigned int, SkyBoxRenderer*>
 	Camera* pCamera = g_pCameraSystem->GetCurrentCamera();
 	if (nullptr == pCamera) return;
 	
+	//auto& [RTVs, SRVs] = g_pViewManagement->GetRenderTargetGroup(L"Forward");
+	//_pDeviceContext->OMSetRenderTargets((unsigned int)RTVs.size(), RTVs.data(), nullptr);
+	//_pDeviceContext->OMSetDepthStencilState(_pAlphaDepthState, 0);
+	//for (size_t i = 0; i < RTVs.size(); i++) _pDeviceContext->ClearRenderTargetView(RTVs[i], COLOR_ZERO);
+
 	Matrix view = pCamera->GetViewMatrix();
 	
 	view.m[3][0] = 0.f;
@@ -302,6 +323,7 @@ void DX11Renderer::SkyBoxPass(std::list<std::pair<unsigned int, SkyBoxRenderer*>
 	}
 
 	_pDeviceContext->RSSetState(nullptr);
+	//_pDeviceContext->OMSetDepthStencilState(nullptr, 0);
 }
 
 void DX11Renderer::PostProcessPass()
@@ -370,8 +392,9 @@ void DX11Renderer::ForwardLigthing(std::list<DrawData>& alphaMeshes)
 	auto& [RTVs, SRVs] = g_pViewManagement->GetRenderTargetGroup(L"Forward");
 
 	_pDeviceContext->OMSetRenderTargets((unsigned int)RTVs.size(), RTVs.data(), _pDefaultDSV);
-	_pDeviceContext->OMSetBlendState(_pForwardBlendState, blendFactor, 0xFFFFFFFF);
+	_pDeviceContext->OMSetBlendState(_pForwardBlendState, blendFactor, 0xFFFFFFFF);	
 	RenderMesh(alphaMeshes, _psForwardLighting);
+	//_pDeviceContext->OMSetBlendState(nullptr, nullptr, 0xFFFFFFFF);
 }
 
 void DX11Renderer::Blending(ID3D11RenderTargetView* pRTV, ID3D11ShaderResourceView* pSRV)
@@ -416,10 +439,10 @@ void DX11Renderer::InitState()
 		.SrcBlend = D3D11_BLEND_SRC_ALPHA,
 		.DestBlend = D3D11_BLEND_INV_SRC_ALPHA,
 		.BlendOp = D3D11_BLEND_OP_ADD,
-		.SrcBlendAlpha = D3D11_BLEND_ONE,
-		.DestBlendAlpha = D3D11_BLEND_ZERO,
+		.SrcBlendAlpha = D3D11_BLEND_SRC_ALPHA,
+		.DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA,
 		.BlendOpAlpha = D3D11_BLEND_OP_ADD,
-		.RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL
+		.RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL,
 	};
 
 	D3D11_RENDER_TARGET_BLEND_DESC disableRTBD
@@ -460,6 +483,13 @@ void DX11Renderer::InitState()
 	};
 
 	pDevice->CreateRasterizerState(&rsDesc, &_pRSSkyBoxState);
+
+	D3D11_DEPTH_STENCIL_DESC desc = {};
+	desc.DepthEnable = true;  // 깊이 테스트 활성화
+	desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO; // 깊이 버퍼 기록 OFF
+	desc.DepthFunc = D3D11_COMPARISON_LESS; // 기본적으로 가까운 것 우선
+
+	pDevice->CreateDepthStencilState(&desc, &_pAlphaDepthState);
 }
 
 void DX11Renderer::InitOptional()
@@ -576,4 +606,5 @@ void DX11Renderer::Free()
 	SafeRelease(_pDeferredBlendState);
 	SafeRelease(_pForwardBlendState);
 	SafeRelease(_pToneMapping);
+	SafeRelease(_pAlphaDepthState);
 }

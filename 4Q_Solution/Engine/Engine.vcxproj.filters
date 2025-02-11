@@ -505,6 +505,9 @@
     <Filter Include="Object\CameraRail">
       <UniqueIdentifier>{a95f88e6-af49-42f3-8695-1ec12b734902}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\LineWave">
+      <UniqueIdentifier>{d40712da-0a65-47bd-9ab1-07f6cbe62826}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -984,6 +987,12 @@
     <ClInclude Include="CameraRail.h">
       <Filter>Object\CameraRail</Filter>
     </ClInclude>
+    <ClInclude Include="LineWave.h">
+      <Filter>Components\LineWave</Filter>
+    </ClInclude>
+    <ClInclude Include="ShadowCamera.h">
+      <Filter>Components\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1379,8 +1388,14 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>Components\Sprite</Filter>
     </ClCompile>
+    <ClCompile Include="LineWave.cpp">
+      <Filter>Components\LineWave</Filter>
+    </ClCompile>
     <ClCompile Include="CameraRail.cpp">
       <Filter>Object\CameraRail</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowCamera.cpp">
+      <Filter>Components\Camera</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

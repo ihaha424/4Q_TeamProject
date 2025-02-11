@@ -17,6 +17,7 @@
 // Graphics
 #include "GraphicsComponent.h"
 #include "Camera.h"
+#include "ShadowCamera.h"
 #include "Mesh.h"
 #include "StaticMesh.h"
 #include "SkeletalMesh.h"
@@ -25,6 +26,7 @@
 #include "Text.h"
 #include "SkyBox.h"
 #include "Sprite.h"
+#include "LineWave.h"
 
 // Network
 #include "Synchronize.h"

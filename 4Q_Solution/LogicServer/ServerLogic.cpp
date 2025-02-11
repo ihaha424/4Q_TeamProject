@@ -200,8 +200,8 @@ void ServerLogic::SendPositionData()
         _moveSync.add_rotation(rotation.w);
 
         _moveSync.SerializeToString(&_msgBuffer);
-        Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), _playerSlot[i]._serialNumber);
         _moveSync.Clear();
+        Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), _playerSlot[i]._serialNumber);
     } // for end
 
     // TODO: 여기서 업데이트를 진행하는 dynamic object에 대해 위치 정보를 클라이언트로 전송해야 합니다.
@@ -367,51 +367,51 @@ void ServerLogic::DataRequestProcess(const Packet& packet)
 
         Server::BroadCast(_msgBuffer, (short)PacketID::DataRemote, _syncPlayer.ByteSizeLong(), _playerSlot[i]._serialNumber);
     }  // for end
-    for (int i = 0; i < _buildings.size(); i++) {
-        _syncObject.set_public_(_buildings[i]->_public);
-        _syncObject.add_position(_buildings[i]->_position.x);
-        _syncObject.add_position(_buildings[i]->_position.y);
-        _syncObject.add_position(_buildings[i]->_position.z);
-        _syncObject.add_rotation(_buildings[i]->_rotation.x);
-        _syncObject.add_rotation(_buildings[i]->_rotation.y);
-        _syncObject.add_rotation(_buildings[i]->_rotation.z);
-        _syncObject.add_rotation(_buildings[i]->_rotation.w);
-        _syncObject.add_scale(_buildings[i]->_scale.x);
-        _syncObject.add_scale(_buildings[i]->_scale.y);
-        _syncObject.add_scale(_buildings[i]->_scale.z);
-        _syncObject.SerializeToString(&_msgBuffer);
-        Server::BroadCast(
-            _msgBuffer,
-            //packet.sessionId,
-            (short)PacketID::DataObject,
-            _syncObject.ByteSizeLong(),
-            _buildings[i]->_serialNumber
-        );
-        _syncObject.Clear();
-    }
-    for (int i = 0; i < _sudiums.size(); i++) {
-        _syncObject.set_public_(_sudiums[i]->_public);
-        _syncObject.add_position(_sudiums[i]->_position.x);
-        _syncObject.add_position(_sudiums[i]->_position.y);
-        _syncObject.add_position(_sudiums[i]->_position.z);
-        _syncObject.add_rotation(_sudiums[i]->_rotation.x);
-        _syncObject.add_rotation(_sudiums[i]->_rotation.y);
-        _syncObject.add_rotation(_sudiums[i]->_rotation.z);
-        _syncObject.add_rotation(_sudiums[i]->_rotation.w);
-        _syncObject.add_scale(_sudiums[i]->_scale.x);
-        _syncObject.add_scale(_sudiums[i]->_scale.y);
-        _syncObject.add_scale(_sudiums[i]->_scale.z);
-        _syncObject.SerializeToString(&_msgBuffer);
-        Server::BroadCast(
-            _msgBuffer,
-            //packet.sessionId,
-            (short)PacketID::DataObject,
-            _syncObject.ByteSizeLong(),
-            _sudiums[i]->_serialNumber
-        );
-        _syncObject.Clear();
-    }
-    Server::BroadCast("", (short)PacketID::DataSendComplete, 0, 0);
+    //for (int i = 0; i < _buildings.size(); i++) {
+    //    _syncObject.set_public_(_buildings[i]->_public);
+    //    _syncObject.add_position(_buildings[i]->_position.x);
+    //    _syncObject.add_position(_buildings[i]->_position.y);
+    //    _syncObject.add_position(_buildings[i]->_position.z);
+    //    _syncObject.add_rotation(_buildings[i]->_rotation.x);
+    //    _syncObject.add_rotation(_buildings[i]->_rotation.y);
+    //    _syncObject.add_rotation(_buildings[i]->_rotation.z);
+    //    _syncObject.add_rotation(_buildings[i]->_rotation.w);
+    //    _syncObject.add_scale(_buildings[i]->_scale.x);
+    //    _syncObject.add_scale(_buildings[i]->_scale.y);
+    //    _syncObject.add_scale(_buildings[i]->_scale.z);
+    //    _syncObject.SerializeToString(&_msgBuffer);
+    //    Server::BroadCast(
+    //        _msgBuffer,
+    //        //packet.sessionId,
+    //        (short)PacketID::DataObject,
+    //        _syncObject.ByteSizeLong(),
+    //        _buildings[i]->_serialNumber
+    //    );
+    //    _syncObject.Clear();
+    //}
+    //for (int i = 0; i < _sudiums.size(); i++) {
+    //    _syncObject.set_public_(_sudiums[i]->_public);
+    //    _syncObject.add_position(_sudiums[i]->_position.x);
+    //    _syncObject.add_position(_sudiums[i]->_position.y);
+    //    _syncObject.add_position(_sudiums[i]->_position.z);
+    //    _syncObject.add_rotation(_sudiums[i]->_rotation.x);
+    //    _syncObject.add_rotation(_sudiums[i]->_rotation.y);
+    //    _syncObject.add_rotation(_sudiums[i]->_rotation.z);
+    //    _syncObject.add_rotation(_sudiums[i]->_rotation.w);
+    //    _syncObject.add_scale(_sudiums[i]->_scale.x);
+    //    _syncObject.add_scale(_sudiums[i]->_scale.y);
+    //    _syncObject.add_scale(_sudiums[i]->_scale.z);
+    //    _syncObject.SerializeToString(&_msgBuffer);
+    //    Server::BroadCast(
+    //        _msgBuffer,
+    //        //packet.sessionId,
+    //        (short)PacketID::DataObject,
+    //        _syncObject.ByteSizeLong(),
+    //        _sudiums[i]->_serialNumber
+    //    );
+    //    _syncObject.Clear();
+    //}
+    //Server::BroadCast("", (short)PacketID::DataSendComplete, 0, 0);
 }
 void ServerLogic::ObjectPickProcess(const Packet& packet)
 {

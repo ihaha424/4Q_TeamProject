@@ -52,31 +52,6 @@ struct TriggerObjectDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 TriggerObjectDefaultTypeInternal _TriggerObject_default_instance_;
 
-inline constexpr SoundPlay::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : _cached_size_{0},
-        soundid_{0} {}
-
-template <typename>
-PROTOBUF_CONSTEXPR SoundPlay::SoundPlay(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(::_pbi::ConstantInitialized()) {
-}
-struct SoundPlayDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR SoundPlayDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~SoundPlayDefaultTypeInternal() {}
-  union {
-    SoundPlay _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SoundPlayDefaultTypeInternal _SoundPlay_default_instance_;
-
 inline constexpr SelectPart::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
@@ -180,7 +155,6 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 inline constexpr PutObject::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
-        position_{},
         targetserialnumber_{0} {}
 
 template <typename>
@@ -228,32 +202,6 @@ struct PickObjectDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PickObjectDefaultTypeInternal _PickObject_default_instance_;
 
-inline constexpr ObjectDisable::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : objectserialnumber_{},
-        _objectserialnumber_cached_byte_size_{0},
-        _cached_size_{0} {}
-
-template <typename>
-PROTOBUF_CONSTEXPR ObjectDisable::ObjectDisable(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(::_pbi::ConstantInitialized()) {
-}
-struct ObjectDisableDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR ObjectDisableDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~ObjectDisableDefaultTypeInternal() {}
-  union {
-    ObjectDisable _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ObjectDisableDefaultTypeInternal _ObjectDisable_default_instance_;
-
 inline constexpr ObjectActive::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
@@ -278,31 +226,6 @@ struct ObjectActiveDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ObjectActiveDefaultTypeInternal _ObjectActive_default_instance_;
-
-inline constexpr InteractObject::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : _cached_size_{0},
-        objectserialnumber_{0} {}
-
-template <typename>
-PROTOBUF_CONSTEXPR InteractObject::InteractObject(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(::_pbi::ConstantInitialized()) {
-}
-struct InteractObjectDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR InteractObjectDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~InteractObjectDefaultTypeInternal() {}
-  union {
-    InteractObject _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 InteractObjectDefaultTypeInternal _InteractObject_default_instance_;
 
 inline constexpr InteractDialog::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -390,28 +313,6 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::PlayMsg::PutObject, _impl_.targetserialnumber_),
-        PROTOBUF_FIELD_OFFSET(::PlayMsg::PutObject, _impl_.position_),
-        0,
-        ~0u,
-        PROTOBUF_FIELD_OFFSET(::PlayMsg::SoundPlay, _impl_._has_bits_),
-        PROTOBUF_FIELD_OFFSET(::PlayMsg::SoundPlay, _internal_metadata_),
-        ~0u,  // no _extensions_
-        ~0u,  // no _oneof_case_
-        ~0u,  // no _weak_field_map_
-        ~0u,  // no _inlined_string_donated_
-        ~0u,  // no _split_
-        ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::PlayMsg::SoundPlay, _impl_.soundid_),
-        0,
-        PROTOBUF_FIELD_OFFSET(::PlayMsg::InteractObject, _impl_._has_bits_),
-        PROTOBUF_FIELD_OFFSET(::PlayMsg::InteractObject, _internal_metadata_),
-        ~0u,  // no _extensions_
-        ~0u,  // no _oneof_case_
-        ~0u,  // no _weak_field_map_
-        ~0u,  // no _inlined_string_donated_
-        ~0u,  // no _split_
-        ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::PlayMsg::InteractObject, _impl_.objectserialnumber_),
         0,
         PROTOBUF_FIELD_OFFSET(::PlayMsg::InteractDialog, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::PlayMsg::InteractDialog, _internal_metadata_),
@@ -485,39 +386,25 @@ const ::uint32_t
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::PlayMsg::ObjectActive, _impl_.objectserialnumber_),
         0,
-        ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::PlayMsg::ObjectDisable, _internal_metadata_),
-        ~0u,  // no _extensions_
-        ~0u,  // no _oneof_case_
-        ~0u,  // no _weak_field_map_
-        ~0u,  // no _inlined_string_donated_
-        ~0u,  // no _split_
-        ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::PlayMsg::ObjectDisable, _impl_.objectserialnumber_),
 };
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, 9, -1, sizeof(::PlayMsg::SelectPart)},
         {10, 19, -1, sizeof(::PlayMsg::PickObject)},
-        {20, 30, -1, sizeof(::PlayMsg::PutObject)},
-        {32, 41, -1, sizeof(::PlayMsg::SoundPlay)},
-        {42, 51, -1, sizeof(::PlayMsg::InteractObject)},
-        {52, 61, -1, sizeof(::PlayMsg::InteractDialog)},
-        {62, 71, -1, sizeof(::PlayMsg::DialogProgress)},
-        {72, 82, -1, sizeof(::PlayMsg::TriggerObject)},
-        {84, 93, -1, sizeof(::PlayMsg::QuestStart)},
-        {94, 103, -1, sizeof(::PlayMsg::QuestEnd)},
-        {104, 113, -1, sizeof(::PlayMsg::PuzzleStart)},
-        {114, 123, -1, sizeof(::PlayMsg::ObjectActive)},
-        {124, -1, -1, sizeof(::PlayMsg::ObjectDisable)},
+        {20, 29, -1, sizeof(::PlayMsg::PutObject)},
+        {30, 39, -1, sizeof(::PlayMsg::InteractDialog)},
+        {40, 49, -1, sizeof(::PlayMsg::DialogProgress)},
+        {50, 60, -1, sizeof(::PlayMsg::TriggerObject)},
+        {62, 71, -1, sizeof(::PlayMsg::QuestStart)},
+        {72, 81, -1, sizeof(::PlayMsg::QuestEnd)},
+        {82, 91, -1, sizeof(::PlayMsg::PuzzleStart)},
+        {92, 101, -1, sizeof(::PlayMsg::ObjectActive)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::PlayMsg::_SelectPart_default_instance_._instance,
     &::PlayMsg::_PickObject_default_instance_._instance,
     &::PlayMsg::_PutObject_default_instance_._instance,
-    &::PlayMsg::_SoundPlay_default_instance_._instance,
-    &::PlayMsg::_InteractObject_default_instance_._instance,
     &::PlayMsg::_InteractDialog_default_instance_._instance,
     &::PlayMsg::_DialogProgress_default_instance_._instance,
     &::PlayMsg::_TriggerObject_default_instance_._instance,
@@ -525,44 +412,39 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::PlayMsg::_QuestEnd_default_instance_._instance,
     &::PlayMsg::_PuzzleStart_default_instance_._instance,
     &::PlayMsg::_ObjectActive_default_instance_._instance,
-    &::PlayMsg::_ObjectDisable_default_instance_._instance,
 };
 const char descriptor_table_protodef_Play_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\nPlay.proto\022\007PlayMsg\"4\n\nSelectPart\022\027\n\ns"
     "electpart\030\001 \001(\005H\000\210\001\001B\r\n\013_selectpart\"D\n\nP"
     "ickObject\022\037\n\022targetserialnumber\030\001 \001(\005H\000\210"
-    "\001\001B\025\n\023_targetserialnumber\"U\n\tPutObject\022\037"
-    "\n\022targetserialnumber\030\001 \001(\005H\000\210\001\001\022\020\n\010posit"
-    "ion\030\002 \003(\002B\025\n\023_targetserialnumber\"-\n\tSoun"
-    "dPlay\022\024\n\007soundid\030\001 \001(\005H\000\210\001\001B\n\n\010_soundid\""
-    "H\n\016InteractObject\022\037\n\022objectserialnumber\030"
-    "\001 \001(\005H\000\210\001\001B\025\n\023_objectserialnumber\"B\n\016Int"
-    "eractDialog\022\034\n\017currentdialogid\030\001 \001(\005H\000\210\001"
-    "\001B\022\n\020_currentdialogid\"<\n\016DialogProgress\022"
-    "\031\n\014nextdialogid\030\001 \001(\005H\000\210\001\001B\017\n\r_nextdialo"
-    "gid\"s\n\rTriggerObject\022\037\n\022objectserialnumb"
-    "er\030\001 \001(\005H\000\210\001\001\022\031\n\014triggerboxid\030\002 \001(\005H\001\210\001\001"
-    "B\025\n\023_objectserialnumberB\017\n\r_triggerboxid"
-    "\".\n\nQuestStart\022\024\n\007questid\030\001 \001(\005H\000\210\001\001B\n\n\010"
-    "_questid\",\n\010QuestEnd\022\024\n\007questid\030\001 \001(\005H\000\210"
-    "\001\001B\n\n\010_questid\"1\n\013PuzzleStart\022\025\n\010puzzlei"
-    "d\030\001 \001(\005H\000\210\001\001B\013\n\t_puzzleid\"F\n\014ObjectActiv"
-    "e\022\037\n\022objectserialnumber\030\001 \001(\005H\000\210\001\001B\025\n\023_o"
-    "bjectserialnumber\"+\n\rObjectDisable\022\032\n\022ob"
-    "jectserialnumber\030\001 \003(\005b\006proto3"
+    "\001\001B\025\n\023_targetserialnumber\"C\n\tPutObject\022\037"
+    "\n\022targetserialnumber\030\001 \001(\005H\000\210\001\001B\025\n\023_targ"
+    "etserialnumber\"B\n\016InteractDialog\022\034\n\017curr"
+    "entdialogid\030\001 \001(\005H\000\210\001\001B\022\n\020_currentdialog"
+    "id\"<\n\016DialogProgress\022\031\n\014nextdialogid\030\001 \001"
+    "(\005H\000\210\001\001B\017\n\r_nextdialogid\"s\n\rTriggerObjec"
+    "t\022\037\n\022objectserialnumber\030\001 \001(\005H\000\210\001\001\022\031\n\014tr"
+    "iggerboxid\030\002 \001(\005H\001\210\001\001B\025\n\023_objectserialnu"
+    "mberB\017\n\r_triggerboxid\".\n\nQuestStart\022\024\n\007q"
+    "uestid\030\001 \001(\005H\000\210\001\001B\n\n\010_questid\",\n\010QuestEn"
+    "d\022\024\n\007questid\030\001 \001(\005H\000\210\001\001B\n\n\010_questid\"1\n\013P"
+    "uzzleStart\022\025\n\010puzzleid\030\001 \001(\005H\000\210\001\001B\013\n\t_pu"
+    "zzleid\"F\n\014ObjectActive\022\037\n\022objectserialnu"
+    "mber\030\001 \001(\005H\000\210\001\001B\025\n\023_objectserialnumberb\006"
+    "proto3"
 };
 static ::absl::once_flag descriptor_table_Play_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_Play_2eproto = {
     false,
     false,
-    870,
+    686,
     descriptor_table_protodef_Play_2eproto,
     "Play.proto",
     &descriptor_table_Play_2eproto_once,
     nullptr,
     0,
-    13,
+    10,
     schemas,
     file_default_instances,
     TableStruct_Play_2eproto::offsets,
@@ -1023,35 +905,15 @@ PutObject::PutObject(::google::protobuf::Arena* arena)
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:PlayMsg.PutObject)
 }
-inline PROTOBUF_NDEBUG_INLINE PutObject::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::PlayMsg::PutObject& from_msg)
-      : _has_bits_{from._has_bits_},
-        _cached_size_{0},
-        position_{visibility, arena, from.position_} {}
-
 PutObject::PutObject(
-    ::google::protobuf::Arena* arena,
-    const PutObject& from)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  PutObject* const _this = this;
-  (void)_this;
-  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
-      from._internal_metadata_);
-  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-  _impl_.targetserialnumber_ = from._impl_.targetserialnumber_;
-
-  // @@protoc_insertion_point(copy_constructor:PlayMsg.PutObject)
+    ::google::protobuf::Arena* arena, const PutObject& from)
+    : PutObject(arena) {
+  MergeFrom(from);
 }
 inline PROTOBUF_NDEBUG_INLINE PutObject::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
-      : _cached_size_{0},
-        position_{visibility, arena} {}
+      : _cached_size_{0} {}
 
 inline void PutObject::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
@@ -1073,20 +935,8 @@ inline void* PutObject::PlacementNew_(const void*, void* mem,
   return ::new (mem) PutObject(arena);
 }
 constexpr auto PutObject::InternalNewImpl_() {
-  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
-      PROTOBUF_FIELD_OFFSET(PutObject, _impl_.position_) +
-          decltype(PutObject::_impl_.position_)::
-              InternalGetArenaOffset(
-                  ::google::protobuf::Message::internal_visibility()),
-  });
-  if (arena_bits.has_value()) {
-    return ::google::protobuf::internal::MessageCreator::ZeroInit(
-        sizeof(PutObject), alignof(PutObject), *arena_bits);
-  } else {
-    return ::google::protobuf::internal::MessageCreator(&PutObject::PlacementNew_,
-                                 sizeof(PutObject),
-                                 alignof(PutObject));
-  }
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(PutObject),
+                                            alignof(PutObject));
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
@@ -1116,15 +966,15 @@ const ::google::protobuf::internal::ClassData* PutObject::GetClassData() const {
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<1, 2, 0, 0, 2> PutObject::_table_ = {
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> PutObject::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(PutObject, _impl_._has_bits_),
     0, // no _extensions_
-    2, 8,  // max_field_number, fast_idx_mask
+    1, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967292,  // skipmap
+    4294967294,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    2,  // num_field_entries
+    1,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
@@ -1134,9 +984,6 @@ const ::_pbi::TcParseTable<1, 2, 0, 0, 2> PutObject::_table_ = {
     ::_pbi::TcParser::GetTable<::PlayMsg::PutObject>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // repeated float position = 2;
-    {::_pbi::TcParser::FastF32P1,
-     {18, 63, 0, PROTOBUF_FIELD_OFFSET(PutObject, _impl_.position_)}},
     // optional int32 targetserialnumber = 1;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(PutObject, _impl_.targetserialnumber_), 0>(),
      {8, 0, 0, PROTOBUF_FIELD_OFFSET(PutObject, _impl_.targetserialnumber_)}},
@@ -1146,9 +993,6 @@ const ::_pbi::TcParseTable<1, 2, 0, 0, 2> PutObject::_table_ = {
     // optional int32 targetserialnumber = 1;
     {PROTOBUF_FIELD_OFFSET(PutObject, _impl_.targetserialnumber_), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
-    // repeated float position = 2;
-    {PROTOBUF_FIELD_OFFSET(PutObject, _impl_.position_), -1, 0,
-    (0 | ::_fl::kFcRepeated | ::_fl::kPackedFloat)},
   }},
   // no aux_entries
   {{
@@ -1162,7 +1006,6 @@ PROTOBUF_NOINLINE void PutObject::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.position_.Clear();
   _impl_.targetserialnumber_ = 0;
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
@@ -1191,11 +1034,6 @@ PROTOBUF_NOINLINE void PutObject::Clear() {
                     stream, this_._internal_targetserialnumber(), target);
           }
 
-          // repeated float position = 2;
-          if (this_._internal_position_size() > 0) {
-            target = stream->WriteFixedPacked(2, this_._internal_position(), target);
-          }
-
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
             target =
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -1219,19 +1057,6 @@ PROTOBUF_NOINLINE void PutObject::Clear() {
           // Prevent compiler warnings about cached_has_bits being unused
           (void)cached_has_bits;
 
-          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
-           {
-            // repeated float position = 2;
-            {
-              std::size_t data_size = std::size_t{4} *
-                  ::_pbi::FromIntSize(this_._internal_position_size());
-              std::size_t tag_size = data_size == 0
-                  ? 0
-                  : 1 + ::_pbi::WireFormatLite::Int32Size(
-                                      static_cast<int32_t>(data_size));
-              total_size += tag_size + data_size;
-            }
-          }
            {
             // optional int32 targetserialnumber = 1;
             cached_has_bits = this_._impl_._has_bits_[0];
@@ -1252,7 +1077,6 @@ void PutObject::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::googl
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  _this->_internal_mutable_position()->MergeFrom(from._internal_position());
   cached_has_bits = from._impl_._has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
     _this->_impl_.targetserialnumber_ = from._impl_.targetserialnumber_;
@@ -1273,445 +1097,10 @@ void PutObject::InternalSwap(PutObject* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  _impl_.position_.InternalSwap(&other->_impl_.position_);
         swap(_impl_.targetserialnumber_, other->_impl_.targetserialnumber_);
 }
 
 ::google::protobuf::Metadata PutObject::GetMetadata() const {
-  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
-}
-// ===================================================================
-
-class SoundPlay::_Internal {
- public:
-  using HasBits =
-      decltype(std::declval<SoundPlay>()._impl_._has_bits_);
-  static constexpr ::int32_t kHasBitsOffset =
-      8 * PROTOBUF_FIELD_OFFSET(SoundPlay, _impl_._has_bits_);
-};
-
-SoundPlay::SoundPlay(::google::protobuf::Arena* arena)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:PlayMsg.SoundPlay)
-}
-SoundPlay::SoundPlay(
-    ::google::protobuf::Arena* arena, const SoundPlay& from)
-    : SoundPlay(arena) {
-  MergeFrom(from);
-}
-inline PROTOBUF_NDEBUG_INLINE SoundPlay::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility,
-    ::google::protobuf::Arena* arena)
-      : _cached_size_{0} {}
-
-inline void SoundPlay::SharedCtor(::_pb::Arena* arena) {
-  new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.soundid_ = {};
-}
-SoundPlay::~SoundPlay() {
-  // @@protoc_insertion_point(destructor:PlayMsg.SoundPlay)
-  SharedDtor(*this);
-}
-inline void SoundPlay::SharedDtor(MessageLite& self) {
-  SoundPlay& this_ = static_cast<SoundPlay&>(self);
-  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
-  ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.~Impl_();
-}
-
-inline void* SoundPlay::PlacementNew_(const void*, void* mem,
-                                        ::google::protobuf::Arena* arena) {
-  return ::new (mem) SoundPlay(arena);
-}
-constexpr auto SoundPlay::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(SoundPlay),
-                                            alignof(SoundPlay));
-}
-PROTOBUF_CONSTINIT
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull SoundPlay::_class_data_ = {
-    ::google::protobuf::internal::ClassData{
-        &_SoundPlay_default_instance_._instance,
-        &_table_.header,
-        nullptr,  // OnDemandRegisterArenaDtor
-        nullptr,  // IsInitialized
-        &SoundPlay::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<SoundPlay>(),
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        &SoundPlay::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<SoundPlay>(), &SoundPlay::ByteSizeLong,
-            &SoundPlay::_InternalSerialize,
-#endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(SoundPlay, _impl_._cached_size_),
-        false,
-    },
-    &SoundPlay::kDescriptorMethods,
-    &descriptor_table_Play_2eproto,
-    nullptr,  // tracker
-};
-const ::google::protobuf::internal::ClassData* SoundPlay::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
-  return _class_data_.base();
-}
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 0, 2> SoundPlay::_table_ = {
-  {
-    PROTOBUF_FIELD_OFFSET(SoundPlay, _impl_._has_bits_),
-    0, // no _extensions_
-    1, 0,  // max_field_number, fast_idx_mask
-    offsetof(decltype(_table_), field_lookup_table),
-    4294967294,  // skipmap
-    offsetof(decltype(_table_), field_entries),
-    1,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
-    _class_data_.base(),
-    nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
-    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::PlayMsg::SoundPlay>(),  // to_prefetch
-    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
-  }, {{
-    // optional int32 soundid = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SoundPlay, _impl_.soundid_), 0>(),
-     {8, 0, 0, PROTOBUF_FIELD_OFFSET(SoundPlay, _impl_.soundid_)}},
-  }}, {{
-    65535, 65535
-  }}, {{
-    // optional int32 soundid = 1;
-    {PROTOBUF_FIELD_OFFSET(SoundPlay, _impl_.soundid_), _Internal::kHasBitsOffset + 0, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
-  }},
-  // no aux_entries
-  {{
-  }},
-};
-
-PROTOBUF_NOINLINE void SoundPlay::Clear() {
-// @@protoc_insertion_point(message_clear_start:PlayMsg.SoundPlay)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.soundid_ = 0;
-  _impl_._has_bits_.Clear();
-  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
-}
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* SoundPlay::_InternalSerialize(
-            const MessageLite& base, ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const SoundPlay& this_ = static_cast<const SoundPlay&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* SoundPlay::_InternalSerialize(
-            ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const SoundPlay& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:PlayMsg.SoundPlay)
-          ::uint32_t cached_has_bits = 0;
-          (void)cached_has_bits;
-
-          cached_has_bits = this_._impl_._has_bits_[0];
-          // optional int32 soundid = 1;
-          if (cached_has_bits & 0x00000001u) {
-            target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt32ToArrayWithField<1>(
-                    stream, this_._internal_soundid(), target);
-          }
-
-          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-            target =
-                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
-          }
-          // @@protoc_insertion_point(serialize_to_array_end:PlayMsg.SoundPlay)
-          return target;
-        }
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t SoundPlay::ByteSizeLong(const MessageLite& base) {
-          const SoundPlay& this_ = static_cast<const SoundPlay&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t SoundPlay::ByteSizeLong() const {
-          const SoundPlay& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:PlayMsg.SoundPlay)
-          ::size_t total_size = 0;
-
-          ::uint32_t cached_has_bits = 0;
-          // Prevent compiler warnings about cached_has_bits being unused
-          (void)cached_has_bits;
-
-           {
-            // optional int32 soundid = 1;
-            cached_has_bits = this_._impl_._has_bits_[0];
-            if (cached_has_bits & 0x00000001u) {
-              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-                  this_._internal_soundid());
-            }
-          }
-          return this_.MaybeComputeUnknownFieldsSize(total_size,
-                                                     &this_._impl_._cached_size_);
-        }
-
-void SoundPlay::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<SoundPlay*>(&to_msg);
-  auto& from = static_cast<const SoundPlay&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:PlayMsg.SoundPlay)
-  ABSL_DCHECK_NE(&from, _this);
-  ::uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    _this->_impl_.soundid_ = from._impl_.soundid_;
-  }
-  _this->_impl_._has_bits_[0] |= cached_has_bits;
-  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void SoundPlay::CopyFrom(const SoundPlay& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:PlayMsg.SoundPlay)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-
-void SoundPlay::InternalSwap(SoundPlay* PROTOBUF_RESTRICT other) {
-  using std::swap;
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-        swap(_impl_.soundid_, other->_impl_.soundid_);
-}
-
-::google::protobuf::Metadata SoundPlay::GetMetadata() const {
-  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
-}
-// ===================================================================
-
-class InteractObject::_Internal {
- public:
-  using HasBits =
-      decltype(std::declval<InteractObject>()._impl_._has_bits_);
-  static constexpr ::int32_t kHasBitsOffset =
-      8 * PROTOBUF_FIELD_OFFSET(InteractObject, _impl_._has_bits_);
-};
-
-InteractObject::InteractObject(::google::protobuf::Arena* arena)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:PlayMsg.InteractObject)
-}
-InteractObject::InteractObject(
-    ::google::protobuf::Arena* arena, const InteractObject& from)
-    : InteractObject(arena) {
-  MergeFrom(from);
-}
-inline PROTOBUF_NDEBUG_INLINE InteractObject::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility,
-    ::google::protobuf::Arena* arena)
-      : _cached_size_{0} {}
-
-inline void InteractObject::SharedCtor(::_pb::Arena* arena) {
-  new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.objectserialnumber_ = {};
-}
-InteractObject::~InteractObject() {
-  // @@protoc_insertion_point(destructor:PlayMsg.InteractObject)
-  SharedDtor(*this);
-}
-inline void InteractObject::SharedDtor(MessageLite& self) {
-  InteractObject& this_ = static_cast<InteractObject&>(self);
-  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
-  ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.~Impl_();
-}
-
-inline void* InteractObject::PlacementNew_(const void*, void* mem,
-                                        ::google::protobuf::Arena* arena) {
-  return ::new (mem) InteractObject(arena);
-}
-constexpr auto InteractObject::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(InteractObject),
-                                            alignof(InteractObject));
-}
-PROTOBUF_CONSTINIT
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull InteractObject::_class_data_ = {
-    ::google::protobuf::internal::ClassData{
-        &_InteractObject_default_instance_._instance,
-        &_table_.header,
-        nullptr,  // OnDemandRegisterArenaDtor
-        nullptr,  // IsInitialized
-        &InteractObject::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<InteractObject>(),
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        &InteractObject::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<InteractObject>(), &InteractObject::ByteSizeLong,
-            &InteractObject::_InternalSerialize,
-#endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(InteractObject, _impl_._cached_size_),
-        false,
-    },
-    &InteractObject::kDescriptorMethods,
-    &descriptor_table_Play_2eproto,
-    nullptr,  // tracker
-};
-const ::google::protobuf::internal::ClassData* InteractObject::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
-  return _class_data_.base();
-}
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 0, 2> InteractObject::_table_ = {
-  {
-    PROTOBUF_FIELD_OFFSET(InteractObject, _impl_._has_bits_),
-    0, // no _extensions_
-    1, 0,  // max_field_number, fast_idx_mask
-    offsetof(decltype(_table_), field_lookup_table),
-    4294967294,  // skipmap
-    offsetof(decltype(_table_), field_entries),
-    1,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
-    _class_data_.base(),
-    nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
-    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::PlayMsg::InteractObject>(),  // to_prefetch
-    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
-  }, {{
-    // optional int32 objectserialnumber = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(InteractObject, _impl_.objectserialnumber_), 0>(),
-     {8, 0, 0, PROTOBUF_FIELD_OFFSET(InteractObject, _impl_.objectserialnumber_)}},
-  }}, {{
-    65535, 65535
-  }}, {{
-    // optional int32 objectserialnumber = 1;
-    {PROTOBUF_FIELD_OFFSET(InteractObject, _impl_.objectserialnumber_), _Internal::kHasBitsOffset + 0, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
-  }},
-  // no aux_entries
-  {{
-  }},
-};
-
-PROTOBUF_NOINLINE void InteractObject::Clear() {
-// @@protoc_insertion_point(message_clear_start:PlayMsg.InteractObject)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.objectserialnumber_ = 0;
-  _impl_._has_bits_.Clear();
-  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
-}
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* InteractObject::_InternalSerialize(
-            const MessageLite& base, ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const InteractObject& this_ = static_cast<const InteractObject&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* InteractObject::_InternalSerialize(
-            ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const InteractObject& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:PlayMsg.InteractObject)
-          ::uint32_t cached_has_bits = 0;
-          (void)cached_has_bits;
-
-          cached_has_bits = this_._impl_._has_bits_[0];
-          // optional int32 objectserialnumber = 1;
-          if (cached_has_bits & 0x00000001u) {
-            target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt32ToArrayWithField<1>(
-                    stream, this_._internal_objectserialnumber(), target);
-          }
-
-          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-            target =
-                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
-          }
-          // @@protoc_insertion_point(serialize_to_array_end:PlayMsg.InteractObject)
-          return target;
-        }
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t InteractObject::ByteSizeLong(const MessageLite& base) {
-          const InteractObject& this_ = static_cast<const InteractObject&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t InteractObject::ByteSizeLong() const {
-          const InteractObject& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:PlayMsg.InteractObject)
-          ::size_t total_size = 0;
-
-          ::uint32_t cached_has_bits = 0;
-          // Prevent compiler warnings about cached_has_bits being unused
-          (void)cached_has_bits;
-
-           {
-            // optional int32 objectserialnumber = 1;
-            cached_has_bits = this_._impl_._has_bits_[0];
-            if (cached_has_bits & 0x00000001u) {
-              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-                  this_._internal_objectserialnumber());
-            }
-          }
-          return this_.MaybeComputeUnknownFieldsSize(total_size,
-                                                     &this_._impl_._cached_size_);
-        }
-
-void InteractObject::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<InteractObject*>(&to_msg);
-  auto& from = static_cast<const InteractObject&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:PlayMsg.InteractObject)
-  ABSL_DCHECK_NE(&from, _this);
-  ::uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    _this->_impl_.objectserialnumber_ = from._impl_.objectserialnumber_;
-  }
-  _this->_impl_._has_bits_[0] |= cached_has_bits;
-  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void InteractObject::CopyFrom(const InteractObject& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:PlayMsg.InteractObject)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-
-void InteractObject::InternalSwap(InteractObject* PROTOBUF_RESTRICT other) {
-  using std::swap;
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-        swap(_impl_.objectserialnumber_, other->_impl_.objectserialnumber_);
-}
-
-::google::protobuf::Metadata InteractObject::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
@@ -3270,247 +2659,6 @@ void ObjectActive::InternalSwap(ObjectActive* PROTOBUF_RESTRICT other) {
 }
 
 ::google::protobuf::Metadata ObjectActive::GetMetadata() const {
-  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
-}
-// ===================================================================
-
-class ObjectDisable::_Internal {
- public:
-};
-
-ObjectDisable::ObjectDisable(::google::protobuf::Arena* arena)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:PlayMsg.ObjectDisable)
-}
-inline PROTOBUF_NDEBUG_INLINE ObjectDisable::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::PlayMsg::ObjectDisable& from_msg)
-      : objectserialnumber_{visibility, arena, from.objectserialnumber_},
-        _objectserialnumber_cached_byte_size_{0},
-        _cached_size_{0} {}
-
-ObjectDisable::ObjectDisable(
-    ::google::protobuf::Arena* arena,
-    const ObjectDisable& from)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  ObjectDisable* const _this = this;
-  (void)_this;
-  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
-      from._internal_metadata_);
-  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-
-  // @@protoc_insertion_point(copy_constructor:PlayMsg.ObjectDisable)
-}
-inline PROTOBUF_NDEBUG_INLINE ObjectDisable::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility,
-    ::google::protobuf::Arena* arena)
-      : objectserialnumber_{visibility, arena},
-        _objectserialnumber_cached_byte_size_{0},
-        _cached_size_{0} {}
-
-inline void ObjectDisable::SharedCtor(::_pb::Arena* arena) {
-  new (&_impl_) Impl_(internal_visibility(), arena);
-}
-ObjectDisable::~ObjectDisable() {
-  // @@protoc_insertion_point(destructor:PlayMsg.ObjectDisable)
-  SharedDtor(*this);
-}
-inline void ObjectDisable::SharedDtor(MessageLite& self) {
-  ObjectDisable& this_ = static_cast<ObjectDisable&>(self);
-  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
-  ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.~Impl_();
-}
-
-inline void* ObjectDisable::PlacementNew_(const void*, void* mem,
-                                        ::google::protobuf::Arena* arena) {
-  return ::new (mem) ObjectDisable(arena);
-}
-constexpr auto ObjectDisable::InternalNewImpl_() {
-  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
-      PROTOBUF_FIELD_OFFSET(ObjectDisable, _impl_.objectserialnumber_) +
-          decltype(ObjectDisable::_impl_.objectserialnumber_)::
-              InternalGetArenaOffset(
-                  ::google::protobuf::Message::internal_visibility()),
-  });
-  if (arena_bits.has_value()) {
-    return ::google::protobuf::internal::MessageCreator::ZeroInit(
-        sizeof(ObjectDisable), alignof(ObjectDisable), *arena_bits);
-  } else {
-    return ::google::protobuf::internal::MessageCreator(&ObjectDisable::PlacementNew_,
-                                 sizeof(ObjectDisable),
-                                 alignof(ObjectDisable));
-  }
-}
-PROTOBUF_CONSTINIT
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull ObjectDisable::_class_data_ = {
-    ::google::protobuf::internal::ClassData{
-        &_ObjectDisable_default_instance_._instance,
-        &_table_.header,
-        nullptr,  // OnDemandRegisterArenaDtor
-        nullptr,  // IsInitialized
-        &ObjectDisable::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<ObjectDisable>(),
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        &ObjectDisable::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<ObjectDisable>(), &ObjectDisable::ByteSizeLong,
-            &ObjectDisable::_InternalSerialize,
-#endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(ObjectDisable, _impl_._cached_size_),
-        false,
-    },
-    &ObjectDisable::kDescriptorMethods,
-    &descriptor_table_Play_2eproto,
-    nullptr,  // tracker
-};
-const ::google::protobuf::internal::ClassData* ObjectDisable::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
-  return _class_data_.base();
-}
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 0, 2> ObjectDisable::_table_ = {
-  {
-    0,  // no _has_bits_
-    0, // no _extensions_
-    1, 0,  // max_field_number, fast_idx_mask
-    offsetof(decltype(_table_), field_lookup_table),
-    4294967294,  // skipmap
-    offsetof(decltype(_table_), field_entries),
-    1,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
-    _class_data_.base(),
-    nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
-    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::PlayMsg::ObjectDisable>(),  // to_prefetch
-    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
-  }, {{
-    // repeated int32 objectserialnumber = 1;
-    {::_pbi::TcParser::FastV32P1,
-     {10, 63, 0, PROTOBUF_FIELD_OFFSET(ObjectDisable, _impl_.objectserialnumber_)}},
-  }}, {{
-    65535, 65535
-  }}, {{
-    // repeated int32 objectserialnumber = 1;
-    {PROTOBUF_FIELD_OFFSET(ObjectDisable, _impl_.objectserialnumber_), 0, 0,
-    (0 | ::_fl::kFcRepeated | ::_fl::kPackedInt32)},
-  }},
-  // no aux_entries
-  {{
-  }},
-};
-
-PROTOBUF_NOINLINE void ObjectDisable::Clear() {
-// @@protoc_insertion_point(message_clear_start:PlayMsg.ObjectDisable)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.objectserialnumber_.Clear();
-  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
-}
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* ObjectDisable::_InternalSerialize(
-            const MessageLite& base, ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const ObjectDisable& this_ = static_cast<const ObjectDisable&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* ObjectDisable::_InternalSerialize(
-            ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const ObjectDisable& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:PlayMsg.ObjectDisable)
-          ::uint32_t cached_has_bits = 0;
-          (void)cached_has_bits;
-
-          // repeated int32 objectserialnumber = 1;
-          {
-            int byte_size = this_._impl_._objectserialnumber_cached_byte_size_.Get();
-            if (byte_size > 0) {
-              target = stream->WriteInt32Packed(
-                  1, this_._internal_objectserialnumber(), byte_size, target);
-            }
-          }
-
-          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-            target =
-                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
-          }
-          // @@protoc_insertion_point(serialize_to_array_end:PlayMsg.ObjectDisable)
-          return target;
-        }
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t ObjectDisable::ByteSizeLong(const MessageLite& base) {
-          const ObjectDisable& this_ = static_cast<const ObjectDisable&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t ObjectDisable::ByteSizeLong() const {
-          const ObjectDisable& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:PlayMsg.ObjectDisable)
-          ::size_t total_size = 0;
-
-          ::uint32_t cached_has_bits = 0;
-          // Prevent compiler warnings about cached_has_bits being unused
-          (void)cached_has_bits;
-
-          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
-           {
-            // repeated int32 objectserialnumber = 1;
-            {
-              total_size +=
-                  ::_pbi::WireFormatLite::Int32SizeWithPackedTagSize(
-                      this_._internal_objectserialnumber(), 1,
-                      this_._impl_._objectserialnumber_cached_byte_size_);
-            }
-          }
-          return this_.MaybeComputeUnknownFieldsSize(total_size,
-                                                     &this_._impl_._cached_size_);
-        }
-
-void ObjectDisable::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<ObjectDisable*>(&to_msg);
-  auto& from = static_cast<const ObjectDisable&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:PlayMsg.ObjectDisable)
-  ABSL_DCHECK_NE(&from, _this);
-  ::uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  _this->_internal_mutable_objectserialnumber()->MergeFrom(from._internal_objectserialnumber());
-  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void ObjectDisable::CopyFrom(const ObjectDisable& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:PlayMsg.ObjectDisable)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-
-void ObjectDisable::InternalSwap(ObjectDisable* PROTOBUF_RESTRICT other) {
-  using std::swap;
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  _impl_.objectserialnumber_.InternalSwap(&other->_impl_.objectserialnumber_);
-}
-
-::google::protobuf::Metadata ObjectDisable::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)

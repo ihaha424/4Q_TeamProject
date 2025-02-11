@@ -58,15 +58,9 @@ extern DialogProgressDefaultTypeInternal _DialogProgress_default_instance_;
 class InteractDialog;
 struct InteractDialogDefaultTypeInternal;
 extern InteractDialogDefaultTypeInternal _InteractDialog_default_instance_;
-class InteractObject;
-struct InteractObjectDefaultTypeInternal;
-extern InteractObjectDefaultTypeInternal _InteractObject_default_instance_;
 class ObjectActive;
 struct ObjectActiveDefaultTypeInternal;
 extern ObjectActiveDefaultTypeInternal _ObjectActive_default_instance_;
-class ObjectDisable;
-struct ObjectDisableDefaultTypeInternal;
-extern ObjectDisableDefaultTypeInternal _ObjectDisable_default_instance_;
 class PickObject;
 struct PickObjectDefaultTypeInternal;
 extern PickObjectDefaultTypeInternal _PickObject_default_instance_;
@@ -85,9 +79,6 @@ extern QuestStartDefaultTypeInternal _QuestStart_default_instance_;
 class SelectPart;
 struct SelectPartDefaultTypeInternal;
 extern SelectPartDefaultTypeInternal _SelectPart_default_instance_;
-class SoundPlay;
-struct SoundPlayDefaultTypeInternal;
-extern SoundPlayDefaultTypeInternal _SoundPlay_default_instance_;
 class TriggerObject;
 struct TriggerObjectDefaultTypeInternal;
 extern TriggerObjectDefaultTypeInternal _TriggerObject_default_instance_;
@@ -163,7 +154,7 @@ class TriggerObject final : public ::google::protobuf::Message
     return reinterpret_cast<const TriggerObject*>(
         &_TriggerObject_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 7;
+  static constexpr int kIndexInFileMessages = 5;
   friend void swap(TriggerObject& a, TriggerObject& b) { a.Swap(&b); }
   inline void Swap(TriggerObject* other) {
     if (other == this) return;
@@ -302,198 +293,6 @@ class TriggerObject final : public ::google::protobuf::Message
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::int32_t objectserialnumber_;
     ::int32_t triggerboxid_;
-    PROTOBUF_TSAN_DECLARE_MEMBER
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_Play_2eproto;
-};
-// -------------------------------------------------------------------
-
-class SoundPlay final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:PlayMsg.SoundPlay) */ {
- public:
-  inline SoundPlay() : SoundPlay(nullptr) {}
-  ~SoundPlay() PROTOBUF_FINAL;
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(SoundPlay* msg, std::destroying_delete_t) {
-    SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(SoundPlay));
-  }
-#endif
-
-  template <typename = void>
-  explicit PROTOBUF_CONSTEXPR SoundPlay(
-      ::google::protobuf::internal::ConstantInitialized);
-
-  inline SoundPlay(const SoundPlay& from) : SoundPlay(nullptr, from) {}
-  inline SoundPlay(SoundPlay&& from) noexcept
-      : SoundPlay(nullptr, std::move(from)) {}
-  inline SoundPlay& operator=(const SoundPlay& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline SoundPlay& operator=(SoundPlay&& from) noexcept {
-    if (this == &from) return *this;
-    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
-  }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::google::protobuf::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::google::protobuf::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const SoundPlay& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const SoundPlay* internal_default_instance() {
-    return reinterpret_cast<const SoundPlay*>(
-        &_SoundPlay_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages = 3;
-  friend void swap(SoundPlay& a, SoundPlay& b) { a.Swap(&b); }
-  inline void Swap(SoundPlay* other) {
-    if (other == this) return;
-    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
-      InternalSwap(other);
-    } else {
-      ::google::protobuf::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(SoundPlay* other) {
-    if (other == this) return;
-    ABSL_DCHECK(GetArena() == other->GetArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  SoundPlay* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<SoundPlay>(arena);
-  }
-  using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const SoundPlay& from);
-  using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const SoundPlay& from) { SoundPlay::MergeImpl(*this, from); }
-
-  private:
-  static void MergeImpl(
-      ::google::protobuf::MessageLite& to_msg,
-      const ::google::protobuf::MessageLite& from_msg);
-
-  public:
-  bool IsInitialized() const {
-    return true;
-  }
-  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* _InternalSerialize(
-      const MessageLite& msg, ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream);
-
-  public:
-  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-    return _InternalSerialize(*this, target, stream);
-  }
-  #else   // PROTOBUF_CUSTOM_VTABLE
-  ::size_t ByteSizeLong() const final;
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
-  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::google::protobuf::Arena* arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(SoundPlay* other);
- private:
-  template <typename T>
-  friend ::absl::string_view(
-      ::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "PlayMsg.SoundPlay"; }
-
- protected:
-  explicit SoundPlay(::google::protobuf::Arena* arena);
-  SoundPlay(::google::protobuf::Arena* arena, const SoundPlay& from);
-  SoundPlay(::google::protobuf::Arena* arena, SoundPlay&& from) noexcept
-      : SoundPlay(arena) {
-    *this = ::std::move(from);
-  }
-  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
-  static void* PlacementNew_(const void*, void* mem,
-                             ::google::protobuf::Arena* arena);
-  static constexpr auto InternalNewImpl_();
-  static const ::google::protobuf::internal::ClassDataFull _class_data_;
-
- public:
-  ::google::protobuf::Metadata GetMetadata() const;
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-  enum : int {
-    kSoundidFieldNumber = 1,
-  };
-  // optional int32 soundid = 1;
-  bool has_soundid() const;
-  void clear_soundid() ;
-  ::int32_t soundid() const;
-  void set_soundid(::int32_t value);
-
-  private:
-  ::int32_t _internal_soundid() const;
-  void _internal_set_soundid(::int32_t value);
-
-  public:
-  // @@protoc_insertion_point(class_scope:PlayMsg.SoundPlay)
- private:
-  class _Internal;
-  friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 0,
-      0, 2>
-      _table_;
-
-  friend class ::google::protobuf::MessageLite;
-  friend class ::google::protobuf::Arena;
-  template <typename T>
-  friend class ::google::protobuf::Arena::InternalHelper;
-  using InternalArenaConstructable_ = void;
-  using DestructorSkippable_ = void;
-  struct Impl_ {
-    inline explicit constexpr Impl_(
-        ::google::protobuf::internal::ConstantInitialized) noexcept;
-    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                          ::google::protobuf::Arena* arena);
-    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                          ::google::protobuf::Arena* arena, const Impl_& from,
-                          const SoundPlay& from_msg);
-    ::google::protobuf::internal::HasBits<1> _has_bits_;
-    ::google::protobuf::internal::CachedSize _cached_size_;
-    ::int32_t soundid_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -752,7 +551,7 @@ class QuestStart final : public ::google::protobuf::Message
     return reinterpret_cast<const QuestStart*>(
         &_QuestStart_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 8;
+  static constexpr int kIndexInFileMessages = 6;
   friend void swap(QuestStart& a, QuestStart& b) { a.Swap(&b); }
   inline void Swap(QuestStart* other) {
     if (other == this) return;
@@ -944,7 +743,7 @@ class QuestEnd final : public ::google::protobuf::Message
     return reinterpret_cast<const QuestEnd*>(
         &_QuestEnd_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 9;
+  static constexpr int kIndexInFileMessages = 7;
   friend void swap(QuestEnd& a, QuestEnd& b) { a.Swap(&b); }
   inline void Swap(QuestEnd* other) {
     if (other == this) return;
@@ -1136,7 +935,7 @@ class PuzzleStart final : public ::google::protobuf::Message
     return reinterpret_cast<const PuzzleStart*>(
         &_PuzzleStart_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 10;
+  static constexpr int kIndexInFileMessages = 8;
   friend void swap(PuzzleStart& a, PuzzleStart& b) { a.Swap(&b); }
   inline void Swap(PuzzleStart* other) {
     if (other == this) return;
@@ -1415,27 +1214,8 @@ class PutObject final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kPositionFieldNumber = 2,
     kTargetserialnumberFieldNumber = 1,
   };
-  // repeated float position = 2;
-  int position_size() const;
-  private:
-  int _internal_position_size() const;
-
-  public:
-  void clear_position() ;
-  float position(int index) const;
-  void set_position(int index, float value);
-  void add_position(float value);
-  const ::google::protobuf::RepeatedField<float>& position() const;
-  ::google::protobuf::RepeatedField<float>* mutable_position();
-
-  private:
-  const ::google::protobuf::RepeatedField<float>& _internal_position() const;
-  ::google::protobuf::RepeatedField<float>* _internal_mutable_position();
-
-  public:
   // optional int32 targetserialnumber = 1;
   bool has_targetserialnumber() const;
   void clear_targetserialnumber() ;
@@ -1452,7 +1232,7 @@ class PutObject final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      1, 2, 0,
+      0, 1, 0,
       0, 2>
       _table_;
 
@@ -1472,7 +1252,6 @@ class PutObject final : public ::google::protobuf::Message
                           const PutObject& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::google::protobuf::RepeatedField<float> position_;
     ::int32_t targetserialnumber_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -1673,205 +1452,6 @@ class PickObject final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
-class ObjectDisable final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:PlayMsg.ObjectDisable) */ {
- public:
-  inline ObjectDisable() : ObjectDisable(nullptr) {}
-  ~ObjectDisable() PROTOBUF_FINAL;
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(ObjectDisable* msg, std::destroying_delete_t) {
-    SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(ObjectDisable));
-  }
-#endif
-
-  template <typename = void>
-  explicit PROTOBUF_CONSTEXPR ObjectDisable(
-      ::google::protobuf::internal::ConstantInitialized);
-
-  inline ObjectDisable(const ObjectDisable& from) : ObjectDisable(nullptr, from) {}
-  inline ObjectDisable(ObjectDisable&& from) noexcept
-      : ObjectDisable(nullptr, std::move(from)) {}
-  inline ObjectDisable& operator=(const ObjectDisable& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline ObjectDisable& operator=(ObjectDisable&& from) noexcept {
-    if (this == &from) return *this;
-    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
-  }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::google::protobuf::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::google::protobuf::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const ObjectDisable& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const ObjectDisable* internal_default_instance() {
-    return reinterpret_cast<const ObjectDisable*>(
-        &_ObjectDisable_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages = 12;
-  friend void swap(ObjectDisable& a, ObjectDisable& b) { a.Swap(&b); }
-  inline void Swap(ObjectDisable* other) {
-    if (other == this) return;
-    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
-      InternalSwap(other);
-    } else {
-      ::google::protobuf::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(ObjectDisable* other) {
-    if (other == this) return;
-    ABSL_DCHECK(GetArena() == other->GetArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  ObjectDisable* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<ObjectDisable>(arena);
-  }
-  using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const ObjectDisable& from);
-  using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const ObjectDisable& from) { ObjectDisable::MergeImpl(*this, from); }
-
-  private:
-  static void MergeImpl(
-      ::google::protobuf::MessageLite& to_msg,
-      const ::google::protobuf::MessageLite& from_msg);
-
-  public:
-  bool IsInitialized() const {
-    return true;
-  }
-  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* _InternalSerialize(
-      const MessageLite& msg, ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream);
-
-  public:
-  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-    return _InternalSerialize(*this, target, stream);
-  }
-  #else   // PROTOBUF_CUSTOM_VTABLE
-  ::size_t ByteSizeLong() const final;
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
-  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::google::protobuf::Arena* arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(ObjectDisable* other);
- private:
-  template <typename T>
-  friend ::absl::string_view(
-      ::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "PlayMsg.ObjectDisable"; }
-
- protected:
-  explicit ObjectDisable(::google::protobuf::Arena* arena);
-  ObjectDisable(::google::protobuf::Arena* arena, const ObjectDisable& from);
-  ObjectDisable(::google::protobuf::Arena* arena, ObjectDisable&& from) noexcept
-      : ObjectDisable(arena) {
-    *this = ::std::move(from);
-  }
-  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
-  static void* PlacementNew_(const void*, void* mem,
-                             ::google::protobuf::Arena* arena);
-  static constexpr auto InternalNewImpl_();
-  static const ::google::protobuf::internal::ClassDataFull _class_data_;
-
- public:
-  ::google::protobuf::Metadata GetMetadata() const;
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-  enum : int {
-    kObjectserialnumberFieldNumber = 1,
-  };
-  // repeated int32 objectserialnumber = 1;
-  int objectserialnumber_size() const;
-  private:
-  int _internal_objectserialnumber_size() const;
-
-  public:
-  void clear_objectserialnumber() ;
-  ::int32_t objectserialnumber(int index) const;
-  void set_objectserialnumber(int index, ::int32_t value);
-  void add_objectserialnumber(::int32_t value);
-  const ::google::protobuf::RepeatedField<::int32_t>& objectserialnumber() const;
-  ::google::protobuf::RepeatedField<::int32_t>* mutable_objectserialnumber();
-
-  private:
-  const ::google::protobuf::RepeatedField<::int32_t>& _internal_objectserialnumber() const;
-  ::google::protobuf::RepeatedField<::int32_t>* _internal_mutable_objectserialnumber();
-
-  public:
-  // @@protoc_insertion_point(class_scope:PlayMsg.ObjectDisable)
- private:
-  class _Internal;
-  friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 0,
-      0, 2>
-      _table_;
-
-  friend class ::google::protobuf::MessageLite;
-  friend class ::google::protobuf::Arena;
-  template <typename T>
-  friend class ::google::protobuf::Arena::InternalHelper;
-  using InternalArenaConstructable_ = void;
-  using DestructorSkippable_ = void;
-  struct Impl_ {
-    inline explicit constexpr Impl_(
-        ::google::protobuf::internal::ConstantInitialized) noexcept;
-    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                          ::google::protobuf::Arena* arena);
-    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                          ::google::protobuf::Arena* arena, const Impl_& from,
-                          const ObjectDisable& from_msg);
-    ::google::protobuf::RepeatedField<::int32_t> objectserialnumber_;
-    ::google::protobuf::internal::CachedSize _objectserialnumber_cached_byte_size_;
-    ::google::protobuf::internal::CachedSize _cached_size_;
-    PROTOBUF_TSAN_DECLARE_MEMBER
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_Play_2eproto;
-};
-// -------------------------------------------------------------------
-
 class ObjectActive final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:PlayMsg.ObjectActive) */ {
  public:
@@ -1931,7 +1511,7 @@ class ObjectActive final : public ::google::protobuf::Message
     return reinterpret_cast<const ObjectActive*>(
         &_ObjectActive_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 11;
+  static constexpr int kIndexInFileMessages = 9;
   friend void swap(ObjectActive& a, ObjectActive& b) { a.Swap(&b); }
   inline void Swap(ObjectActive* other) {
     if (other == this) return;
@@ -2064,198 +1644,6 @@ class ObjectActive final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
-class InteractObject final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:PlayMsg.InteractObject) */ {
- public:
-  inline InteractObject() : InteractObject(nullptr) {}
-  ~InteractObject() PROTOBUF_FINAL;
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(InteractObject* msg, std::destroying_delete_t) {
-    SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(InteractObject));
-  }
-#endif
-
-  template <typename = void>
-  explicit PROTOBUF_CONSTEXPR InteractObject(
-      ::google::protobuf::internal::ConstantInitialized);
-
-  inline InteractObject(const InteractObject& from) : InteractObject(nullptr, from) {}
-  inline InteractObject(InteractObject&& from) noexcept
-      : InteractObject(nullptr, std::move(from)) {}
-  inline InteractObject& operator=(const InteractObject& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline InteractObject& operator=(InteractObject&& from) noexcept {
-    if (this == &from) return *this;
-    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
-  }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::google::protobuf::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::google::protobuf::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const InteractObject& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const InteractObject* internal_default_instance() {
-    return reinterpret_cast<const InteractObject*>(
-        &_InteractObject_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages = 4;
-  friend void swap(InteractObject& a, InteractObject& b) { a.Swap(&b); }
-  inline void Swap(InteractObject* other) {
-    if (other == this) return;
-    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
-      InternalSwap(other);
-    } else {
-      ::google::protobuf::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(InteractObject* other) {
-    if (other == this) return;
-    ABSL_DCHECK(GetArena() == other->GetArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  InteractObject* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<InteractObject>(arena);
-  }
-  using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const InteractObject& from);
-  using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const InteractObject& from) { InteractObject::MergeImpl(*this, from); }
-
-  private:
-  static void MergeImpl(
-      ::google::protobuf::MessageLite& to_msg,
-      const ::google::protobuf::MessageLite& from_msg);
-
-  public:
-  bool IsInitialized() const {
-    return true;
-  }
-  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* _InternalSerialize(
-      const MessageLite& msg, ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream);
-
-  public:
-  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-    return _InternalSerialize(*this, target, stream);
-  }
-  #else   // PROTOBUF_CUSTOM_VTABLE
-  ::size_t ByteSizeLong() const final;
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
-  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::google::protobuf::Arena* arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(InteractObject* other);
- private:
-  template <typename T>
-  friend ::absl::string_view(
-      ::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "PlayMsg.InteractObject"; }
-
- protected:
-  explicit InteractObject(::google::protobuf::Arena* arena);
-  InteractObject(::google::protobuf::Arena* arena, const InteractObject& from);
-  InteractObject(::google::protobuf::Arena* arena, InteractObject&& from) noexcept
-      : InteractObject(arena) {
-    *this = ::std::move(from);
-  }
-  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
-  static void* PlacementNew_(const void*, void* mem,
-                             ::google::protobuf::Arena* arena);
-  static constexpr auto InternalNewImpl_();
-  static const ::google::protobuf::internal::ClassDataFull _class_data_;
-
- public:
-  ::google::protobuf::Metadata GetMetadata() const;
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-  enum : int {
-    kObjectserialnumberFieldNumber = 1,
-  };
-  // optional int32 objectserialnumber = 1;
-  bool has_objectserialnumber() const;
-  void clear_objectserialnumber() ;
-  ::int32_t objectserialnumber() const;
-  void set_objectserialnumber(::int32_t value);
-
-  private:
-  ::int32_t _internal_objectserialnumber() const;
-  void _internal_set_objectserialnumber(::int32_t value);
-
-  public:
-  // @@protoc_insertion_point(class_scope:PlayMsg.InteractObject)
- private:
-  class _Internal;
-  friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 0,
-      0, 2>
-      _table_;
-
-  friend class ::google::protobuf::MessageLite;
-  friend class ::google::protobuf::Arena;
-  template <typename T>
-  friend class ::google::protobuf::Arena::InternalHelper;
-  using InternalArenaConstructable_ = void;
-  using DestructorSkippable_ = void;
-  struct Impl_ {
-    inline explicit constexpr Impl_(
-        ::google::protobuf::internal::ConstantInitialized) noexcept;
-    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                          ::google::protobuf::Arena* arena);
-    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                          ::google::protobuf::Arena* arena, const Impl_& from,
-                          const InteractObject& from_msg);
-    ::google::protobuf::internal::HasBits<1> _has_bits_;
-    ::google::protobuf::internal::CachedSize _cached_size_;
-    ::int32_t objectserialnumber_;
-    PROTOBUF_TSAN_DECLARE_MEMBER
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_Play_2eproto;
-};
-// -------------------------------------------------------------------
-
 class InteractDialog final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:PlayMsg.InteractDialog) */ {
  public:
@@ -2315,7 +1703,7 @@ class InteractDialog final : public ::google::protobuf::Message
     return reinterpret_cast<const InteractDialog*>(
         &_InteractDialog_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 5;
+  static constexpr int kIndexInFileMessages = 3;
   friend void swap(InteractDialog& a, InteractDialog& b) { a.Swap(&b); }
   inline void Swap(InteractDialog* other) {
     if (other == this) return;
@@ -2507,7 +1895,7 @@ class DialogProgress final : public ::google::protobuf::Message
     return reinterpret_cast<const DialogProgress*>(
         &_DialogProgress_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 6;
+  static constexpr int kIndexInFileMessages = 4;
   friend void swap(DialogProgress& a, DialogProgress& b) { a.Swap(&b); }
   inline void Swap(DialogProgress* other) {
     if (other == this) return;
@@ -2745,115 +2133,6 @@ inline ::int32_t PutObject::_internal_targetserialnumber() const {
 inline void PutObject::_internal_set_targetserialnumber(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.targetserialnumber_ = value;
-}
-
-// repeated float position = 2;
-inline int PutObject::_internal_position_size() const {
-  return _internal_position().size();
-}
-inline int PutObject::position_size() const {
-  return _internal_position_size();
-}
-inline void PutObject::clear_position() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.position_.Clear();
-}
-inline float PutObject::position(int index) const {
-  // @@protoc_insertion_point(field_get:PlayMsg.PutObject.position)
-  return _internal_position().Get(index);
-}
-inline void PutObject::set_position(int index, float value) {
-  _internal_mutable_position()->Set(index, value);
-  // @@protoc_insertion_point(field_set:PlayMsg.PutObject.position)
-}
-inline void PutObject::add_position(float value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _internal_mutable_position()->Add(value);
-  // @@protoc_insertion_point(field_add:PlayMsg.PutObject.position)
-}
-inline const ::google::protobuf::RepeatedField<float>& PutObject::position() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_list:PlayMsg.PutObject.position)
-  return _internal_position();
-}
-inline ::google::protobuf::RepeatedField<float>* PutObject::mutable_position()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable_list:PlayMsg.PutObject.position)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _internal_mutable_position();
-}
-inline const ::google::protobuf::RepeatedField<float>&
-PutObject::_internal_position() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.position_;
-}
-inline ::google::protobuf::RepeatedField<float>* PutObject::_internal_mutable_position() {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return &_impl_.position_;
-}
-
-// -------------------------------------------------------------------
-
-// SoundPlay
-
-// optional int32 soundid = 1;
-inline bool SoundPlay::has_soundid() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline void SoundPlay::clear_soundid() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.soundid_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000001u;
-}
-inline ::int32_t SoundPlay::soundid() const {
-  // @@protoc_insertion_point(field_get:PlayMsg.SoundPlay.soundid)
-  return _internal_soundid();
-}
-inline void SoundPlay::set_soundid(::int32_t value) {
-  _internal_set_soundid(value);
-  _impl_._has_bits_[0] |= 0x00000001u;
-  // @@protoc_insertion_point(field_set:PlayMsg.SoundPlay.soundid)
-}
-inline ::int32_t SoundPlay::_internal_soundid() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.soundid_;
-}
-inline void SoundPlay::_internal_set_soundid(::int32_t value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.soundid_ = value;
-}
-
-// -------------------------------------------------------------------
-
-// InteractObject
-
-// optional int32 objectserialnumber = 1;
-inline bool InteractObject::has_objectserialnumber() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline void InteractObject::clear_objectserialnumber() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.objectserialnumber_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000001u;
-}
-inline ::int32_t InteractObject::objectserialnumber() const {
-  // @@protoc_insertion_point(field_get:PlayMsg.InteractObject.objectserialnumber)
-  return _internal_objectserialnumber();
-}
-inline void InteractObject::set_objectserialnumber(::int32_t value) {
-  _internal_set_objectserialnumber(value);
-  _impl_._has_bits_[0] |= 0x00000001u;
-  // @@protoc_insertion_point(field_set:PlayMsg.InteractObject.objectserialnumber)
-}
-inline ::int32_t InteractObject::_internal_objectserialnumber() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.objectserialnumber_;
-}
-inline void InteractObject::_internal_set_objectserialnumber(::int32_t value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.objectserialnumber_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -3106,55 +2385,6 @@ inline ::int32_t ObjectActive::_internal_objectserialnumber() const {
 inline void ObjectActive::_internal_set_objectserialnumber(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.objectserialnumber_ = value;
-}
-
-// -------------------------------------------------------------------
-
-// ObjectDisable
-
-// repeated int32 objectserialnumber = 1;
-inline int ObjectDisable::_internal_objectserialnumber_size() const {
-  return _internal_objectserialnumber().size();
-}
-inline int ObjectDisable::objectserialnumber_size() const {
-  return _internal_objectserialnumber_size();
-}
-inline void ObjectDisable::clear_objectserialnumber() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.objectserialnumber_.Clear();
-}
-inline ::int32_t ObjectDisable::objectserialnumber(int index) const {
-  // @@protoc_insertion_point(field_get:PlayMsg.ObjectDisable.objectserialnumber)
-  return _internal_objectserialnumber().Get(index);
-}
-inline void ObjectDisable::set_objectserialnumber(int index, ::int32_t value) {
-  _internal_mutable_objectserialnumber()->Set(index, value);
-  // @@protoc_insertion_point(field_set:PlayMsg.ObjectDisable.objectserialnumber)
-}
-inline void ObjectDisable::add_objectserialnumber(::int32_t value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _internal_mutable_objectserialnumber()->Add(value);
-  // @@protoc_insertion_point(field_add:PlayMsg.ObjectDisable.objectserialnumber)
-}
-inline const ::google::protobuf::RepeatedField<::int32_t>& ObjectDisable::objectserialnumber() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_list:PlayMsg.ObjectDisable.objectserialnumber)
-  return _internal_objectserialnumber();
-}
-inline ::google::protobuf::RepeatedField<::int32_t>* ObjectDisable::mutable_objectserialnumber()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable_list:PlayMsg.ObjectDisable.objectserialnumber)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _internal_mutable_objectserialnumber();
-}
-inline const ::google::protobuf::RepeatedField<::int32_t>&
-ObjectDisable::_internal_objectserialnumber() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.objectserialnumber_;
-}
-inline ::google::protobuf::RepeatedField<::int32_t>* ObjectDisable::_internal_mutable_objectserialnumber() {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return &_impl_.objectserialnumber_;
 }
 
 #ifdef __GNUC__

@@ -138,6 +138,13 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<BG_Props_Fence>(buildingProperty, buildingProperty);
 	}
 
+	// Obj_Buildings_Sudium
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Sudium").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Sudium>(buildingProperty, buildingProperty);
+	}
+
 
 
 

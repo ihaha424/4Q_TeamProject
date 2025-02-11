@@ -96,6 +96,12 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<BG_Props_Fence>(L"BG_Props_Fence", objectFactory);
 	}
 
+	// Obj_Buildings_Sudium
+	{
+		helpPrepare<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", objectFactory);
+		// TODO: Sudium Change
+	}
+
 	////Test Grabbed Object Code -> Make and Load File Data
 	//{
 	//	GrabbedObject* building = objectFactory->Clone<GrabbedObject>(this);

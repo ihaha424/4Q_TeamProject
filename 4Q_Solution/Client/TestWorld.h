@@ -72,6 +72,7 @@ private:
 				});
 			building->SetBoxPosition({ data.GetProperty<Engine::Math::Vector3>(L"boxPosition").value() });
 			building->SetBoxScale(data.GetProperty<Engine::Math::Vector3>(L"boxScale").value());
+			building->SetIsSphere(data.GetProperty<bool>(L"isSphere").value());
 		}
 	}
 

@@ -2,12 +2,14 @@
 #include "InteractObject.h"
 #include "TriggerBox.h"
 #include "Puzzle_01.h"
+#include "GameCoreData.h"
+#include "Application.h"
 
 class BaseStone
 	:public InteractObject
 {
 public:
-	explicit BaseStone(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
+	BaseStone(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath);
 	virtual ~BaseStone() = default;
 
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
@@ -22,5 +24,7 @@ protected:
 	unsigned int index;
 
 	Engine::Component::Synchronize* _sync;
+	int player;
+	bool activate = true;
 };
 

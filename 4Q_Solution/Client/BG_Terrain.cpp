@@ -12,7 +12,7 @@ void BG_Terrain::PreInitialize(const Engine::Modules& modules)
 	Object::PreInitialize(modules);
 	_staticMesh->SetFilePath(_meshPath);
 	auto pos = _transform.position;
-	_transform.scale *= 100;
+	_transform.scale *= 10;
 	_transform.Translate({0.f, 0.f, 0.f});
 	_transform.rotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(std::numbers::pi_v<float>, 0.f, 0.f);
 	_matrix = _transform.GetMatrix();

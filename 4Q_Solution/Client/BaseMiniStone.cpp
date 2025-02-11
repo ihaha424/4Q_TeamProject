@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "BaseMiniStone.h"
 
-BaseMiniStone::BaseMiniStone(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath) :
-	InteractObject(std::forward<std::filesystem::path>(meshPath), std::forward<std::filesystem::path>(physicsPath)),
+BaseMiniStone::BaseMiniStone(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath):
+	InteractObject(meshPath, physicsPath),
 	_gameStateManager(nullptr)
 {
 }

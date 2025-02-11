@@ -4,10 +4,28 @@
 Obj_Bermiore_Woolball_5::Obj_Bermiore_Woolball_5(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath) :
 	BaseWoolball(std::forward<std::filesystem::path>(meshPath), std::forward<std::filesystem::path>(physicsPath))
 {
-	_index = 0;
 }
 
 void Obj_Bermiore_Woolball_5::Interact()
 {
-	SendInteractToServer();
+	if (_activate)
+	{
+		_index += direction;
+		if (_index == 2 || _index == 0)
+			direction *= -1;
+		SendInteractToServer();
+	}
+}
+
+void Obj_Bermiore_Woolball_5::PreInitialize(const Engine::Modules& modules)
+{
+	BaseWoolball::PreInitialize(modules);
+	_sync->SetSerialNumber(12106);
+}
+
+void Obj_Bermiore_Woolball_5::DataChangeCallBack(const std::wstring& name, const std::any& value)
+{
+	auto data = std::any_cast<Puzzle_01>(value);
+	if (data.isFinish)
+		_activate = false;
 }

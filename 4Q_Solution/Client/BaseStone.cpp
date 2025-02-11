@@ -1,9 +1,8 @@
 #include "pch.h"
 #include "BaseStone.h"
 
-BaseStone::BaseStone(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath)\
-	: InteractObject(std::forward<std::filesystem::path>(meshPath), std::forward<std::filesystem::path>(physicsPath))
-	, myManager{}
+BaseStone::BaseStone(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath)
+	: InteractObject(meshPath, physicsPath)
 {
 }
 
@@ -29,6 +28,7 @@ void BaseStone::PreInitialize(const Engine::Modules& modules)
 									DataChangeCallBack(name, value);
 								}
 	, this);
+
 }
 
 void BaseStone::SendInteractToServer()

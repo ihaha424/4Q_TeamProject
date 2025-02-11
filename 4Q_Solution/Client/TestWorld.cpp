@@ -28,7 +28,8 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 
 	// BG_Terrain
 	{
-		helpPrepare<BG_Terrain>(L"BG_Terrain", objectFactory);
+		objectFactory->Clone<BG_Terrain>(this);
+		//helpPrepare<BG_Terrain>(L"BG_Terrain", objectFactory);
 	}
 
 	// Obj_Bermiore_Fabric
@@ -68,7 +69,7 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 
 	// Obj_BG_Tree_3
 	{
-		helpPrepare<Obj_BG_Tree_3>(L"Obj_BG_Tree_3", objectFactory);
+		//helpPrepare<Obj_BG_Tree_3>(L"Obj_BG_Tree_3", objectFactory);
 	}
 
 	// Obj_BG_Tree_2
@@ -96,11 +97,10 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<BG_Props_Fence>(L"BG_Props_Fence", objectFactory);
 	}
 
-	//// Obj_Buildings_Sudium
-	//{
-	//	helpPrepare<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", objectFactory);
-	//	// TODO: Sudium Change
-	//}
+	// Obj_Buildings_Sudium
+	{
+		helpPrepare<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", objectFactory);
+	}
 
 	// Obj_Buildings_Hide_House_5
 	{
@@ -127,67 +127,256 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_Buildings_Hide_House_1>(L"Obj_Buildings_Hide_House_1", objectFactory);
 	}
 
-	////Test Grabbed Object Code -> Make and Load File Data
-	//{
-	//	GrabbedObject* building = objectFactory->Clone<GrabbedObject>(this);
-	//	Engine::Transform tempTransform{};
-	//	tempTransform.position = { 200.f, 0.f, 0 };
-	//	building->SetTransform(tempTransform);
-	//	building->SetBoxScale({ 100, 500, 100 });
-	//}
+	// 	// Obj_Hide_Xylophone
+	{
+		// TODO: Hide_Xylophone
+	}
 
-	////Test Trigger Area Code -> Make and Load File Data
-	//{
-	//	TriggerArea* puzzle = objectFactory->Clone<TriggerArea>(this);
-	//	Engine::Transform tempTransform{};
-	//	tempTransform.position = { 0.f, 0.f, 200.f };
-	//	puzzle->SetTransform(tempTransform);
-	//	puzzle->SetBoxScale({ 100, 100, 100 });
-	//}
+	// Obj_Hide_Plant
+	{
+		// TODO: Hide_Plant
+	}
 
-	////Test Puzzle_01 Object Code -> Load File Data
-	//{
-	//	Obj_Shinave_Stone_1* puzzle = objectFactory->Clone<Obj_Shinave_Stone_1>(this);
-	//	Engine::Transform tempTransform{};
-	//	tempTransform.position = { -200.f, 0.f, 0 };
-	//	puzzle->SetTransform(tempTransform);
-	//	puzzle->SetBoxScale({ 100, 100, 100 });
-	//}
+	// Obj_Sudium_blue
+	{
+		helpPrepare<Obj_Sudium_blue>(L"Obj_Sudium_blue", objectFactory);
+	}
 
-	////helpPrepare<Obj_BG_Tree_1>(L"Obj_BG_Tree_1", objectFactory);
-	////helpPrepare<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", objectFactory);
-	////helpPrepare<Obj_BG_Mountain>(L"Obj_BG_Mountain", objectFactory);
+	// Obj_Sudium_red
+	{
+		helpPrepare<Obj_Sudium_red>(L"Obj_Sudium_red", objectFactory);
+	}
 
-	////helpPrepare<Obj_Props_Fence>(L"Obj_Props_Fence", objectFactory);
+	// Obj_Mini_Platform_Set
+	{
+		// TODO: Refactor this.
+		auto object = GameClient::Application::GetLoadManager()->GetObjectCloneData(L"Obj_Mini_Platform_Set");
+		for (auto& data : object)
+		{
+			auto building = objectFactory->Clone<Obj_Mini_Platform_Set>(this);
+			building->SetisDynamic(data.GetProperty<bool>(L"isDynamic").value());
+			building->SetIsPublic(data.GetProperty<bool>(L"isPublic").value());
+			building->SetHasMesh(data.GetProperty<bool>(L"hasMesh").value());
+			building->SetTransform({
+					data.GetProperty<Engine::Math::Vector3>(L"position").value(),
+					data.GetProperty<Engine::Math::Quaternion>(L"rotation").value(),
+					data.GetProperty<Engine::Math::Vector3>(L"scale").value() * 100.
+				});
+			building->SetBoxPosition({ data.GetProperty<Engine::Math::Vector3>(L"boxPosition").value() });
+			building->SetBoxScale(data.GetProperty<Engine::Math::Vector3>(L"boxScale").value());
+		}
+		//helpPrepare<Obj_Mini_Platform_Set>(L"Obj_Mini_Platform_Set", objectFactory);
+	}
 
-	////helpPrepare<Obj_Buildings_Shinave>(L"Obj_Buildings_Shinave", objectFactory);
-	//helpPrepare<Obj_Buildings_Bermiore_Atelier_1>(L"Obj_Buildings_Bermiore_Atelier_1", objectFactory);
-	//helpPrepare<Obj_Buildings_Bermiore_Atelier_2>(L"Obj_Buildings_Bermiore_Atelier_2", objectFactory);
-	//helpPrepare<Obj_Buildings_Bermiore_Atelier_3>(L"Obj_Buildings_Bermiore_Atelier_3", objectFactory);
+	// Obj_Mini_Platform_Spawn
+	{
+		// TODO: Refactor this.
+		auto object = GameClient::Application::GetLoadManager()->GetObjectCloneData(L"Obj_Mini_Platform_Spawn");
+		for (auto& data : object)
+		{
+			auto building = objectFactory->Clone<Obj_Mini_Platform_Spawn>(this);
+			building->SetisDynamic(data.GetProperty<bool>(L"isDynamic").value());
+			building->SetIsPublic(data.GetProperty<bool>(L"isPublic").value());
+			building->SetHasMesh(data.GetProperty<bool>(L"hasMesh").value());
+			building->SetTransform({
+					data.GetProperty<Engine::Math::Vector3>(L"position").value(),
+					data.GetProperty<Engine::Math::Quaternion>(L"rotation").value(),
+					data.GetProperty<Engine::Math::Vector3>(L"scale").value() * 100.
+				});
+			building->SetBoxPosition({ data.GetProperty<Engine::Math::Vector3>(L"boxPosition").value() });
+			building->SetBoxScale(data.GetProperty<Engine::Math::Vector3>(L"boxScale").value());
+		}
+		//helpPrepare<Obj_Mini_Platform_Spawn>(L"Obj_Mini_Platform_Spawn", objectFactory);
+	}
 
-	////helpPrepare<Obj_Props_Bermiore_Loom_1>(L"Obj_Props_Bermiore_Loom_1", objectFactory);
-	////helpPrepare<Obj_Props_Bermiore_Loom_2>(L"Obj_Props_Bermiore_Loom_2", objectFactory);
-	////helpPrepare<Obj_Props_Bermiore_Cloth_1>(L"Obj_Props_Bermiore_Cloth_1", objectFactory);
-	////helpPrepare<Obj_Props_Bermiore_Cloth_2>(L"Obj_Props_Bermiore_Cloth_2", objectFactory);
+	// Obj_BG_Tree_3_Active
+	{
+		helpPrepare<Obj_BG_Tree_3_Active>(L"Obj_BG_Tree_3_Active", objectFactory);
+	}
 
-	////helpPrepare<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", objectFactory);
+	// Obj_BG_Tree_1_Active
+	{
+		helpPrepare<Obj_BG_Tree_1_Active>(L"Obj_BG_Tree_1_Active", objectFactory);
+	}
 
-	//helpPrepare<Obj_Buildings_Hide_House_1>(L"Obj_Buildings_Hide_House_1", objectFactory);
-	//helpPrepare<Obj_Buildings_Hide_House_2>(L"Obj_Buildings_Hide_House_2", objectFactory);
-	//helpPrepare<Obj_Buildings_Hide_House_3>(L"Obj_Buildings_Hide_House_3", objectFactory);
-	//helpPrepare<Obj_Buildings_Hide_House_4>(L"Obj_Buildings_Hide_House_4", objectFactory);
+	// Obj_Shinave_Stone_1
+	{
+		helpPrepare<Obj_Shinave_Stone_1>(L"Obj_Shinave_Stone_1", objectFactory);
+	}
 
-	//helpPrepare<Obj_Buildings_Ornoa_House_1>(L"Obj_Buildings_Ornoa_House_1", objectFactory);
-	//helpPrepare<Obj_Buildings_Ornoa_House_2>(L"Obj_Buildings_Ornoa_House_2", objectFactory);
-	////helpPrepare<Obj_Buildings_Ornoa_House_3>(L"Obj_Buildings_Ornoa_House_3", objectFactory);
-	////helpPrepare<Obj_Buildings_Ornoa_House_4>(L"Obj_Buildings_Ornoa_House_4", objectFactory);
+	// Obj_Shinave_Stone_2
+	{
+		helpPrepare<Obj_Shinave_Stone_2>(L"Obj_Shinave_Stone_2", objectFactory);
+	}
+
+	// Obj_Shinave_Stone_3
+	{
+		helpPrepare<Obj_Shinave_Stone_3>(L"Obj_Shinave_Stone_3", objectFactory);
+	}
+
+	//	Obj_Shinave_Stone_4
+	{
+		helpPrepare<Obj_Shinave_Stone_4>(L"Obj_Shinave_Stone_4", objectFactory);
+	}
+
+	// Obj_Shinave_Stone_5
+	{
+		helpPrepare<Obj_Shinave_Stone_5>(L"Obj_Shinave_Stone_5", objectFactory);
+	}
+
+	// Obj_Shinave_Platform_Set
+	{
+		helpPrepare<Obj_Shinave_Platform_Set>(L"Obj_Shinave_Platform_Set", objectFactory);
+	}
+
+	// Obj_Shinave_Platform_Spawn_1
+	{
+		helpPrepare<Obj_Shinave_Platform_Spawn_1>(L"Obj_Shinave_Platform_Spawn_1", objectFactory);
+	}
+
+	// Obj_Shinave_Platform_Spawn_2
+	{
+		helpPrepare<Obj_Shinave_Platform_Spawn_2>(L"Obj_Shinave_Platform_Spawn_2", objectFactory);
+	}
+
+	// Obj_Shinave_Platform_Spawn_3
+	{
+		helpPrepare<Obj_Shinave_Platform_Spawn_3>(L"Obj_Shinave_Platform_Spawn_3", objectFactory);
+	}
+
+	// Obj_Props_Rock
+	{
+		helpPrepare<Obj_Props_Rock>(L"Obj_Props_Rock", objectFactory);
+	}
+
+	// Obj_Bermiore_Woolball_inBox
+	{
+		// TODO: Bermiore_Woolball_inBox
+	}
+
+	// TODO: Wool Series
+	// TODO: Wool ball Series
+
+	// Obj_Buildings_Bermiore_Atelier_1
+	{
+		helpPrepare<Obj_Buildings_Bermiore_Atelier_1>(L"Obj_Buildings_Bermiore_Atelier_1", objectFactory);
+	}
+
+	// Obj_Buildings_Bermiore_Atelier_2
+	{
+		helpPrepare<Obj_Buildings_Bermiore_Atelier_2>(L"Obj_Buildings_Bermiore_Atelier_2", objectFactory);
+	}
+
+	// Obj_Buildings_Bermiore_Atelier_3
+	{
+		helpPrepare<Obj_Buildings_Bermiore_Atelier_3>(L"Obj_Buildings_Bermiore_Atelier_3", objectFactory);
+	}
+
+	// Obj_Hide_Potion
+	{
+		// TODO: Refactor this.
+		auto object = GameClient::Application::GetLoadManager()->GetObjectCloneData(L"Obj_Hide_Potion");
+		for (auto& data : object)
+		{
+			auto building = objectFactory->Clone<Obj_Hide_Potion>(this);
+			building->SetisDynamic(data.GetProperty<bool>(L"isDynamic").value());
+			building->SetIsPublic(data.GetProperty<bool>(L"isPublic").value());
+			building->SetHasMesh(data.GetProperty<bool>(L"hasMesh").value());
+			building->SetTransform({
+					data.GetProperty<Engine::Math::Vector3>(L"position").value(),
+					data.GetProperty<Engine::Math::Quaternion>(L"rotation").value(),
+					data.GetProperty<Engine::Math::Vector3>(L"scale").value() * 100.
+				});
+			building->SetBoxPosition({ data.GetProperty<Engine::Math::Vector3>(L"boxPosition").value() });
+			building->SetBoxScale(data.GetProperty<Engine::Math::Vector3>(L"boxScale").value());
+		}
+		//helpPrepare<Obj_Hide_Potion>(L"Obj_Hide_Potion", objectFactory);
+	}
+
+	// Obj_Shinave_Bermiore
+	{
+		// TODO: Refactor this.
+		auto object = GameClient::Application::GetLoadManager()->GetObjectCloneData(L"Obj_Shinave_Bermiore");
+		for (auto& data : object)
+		{
+			auto building = objectFactory->Clone<Obj_Shinave_Bermiore>(this);
+			building->SetisDynamic(data.GetProperty<bool>(L"isDynamic").value());
+			building->SetIsPublic(data.GetProperty<bool>(L"isPublic").value());
+			building->SetHasMesh(data.GetProperty<bool>(L"hasMesh").value());
+			building->SetTransform({
+					data.GetProperty<Engine::Math::Vector3>(L"position").value(),
+					data.GetProperty<Engine::Math::Quaternion>(L"rotation").value(),
+					data.GetProperty<Engine::Math::Vector3>(L"scale").value() * 100.
+				});
+			building->SetBoxPosition({ data.GetProperty<Engine::Math::Vector3>(L"boxPosition").value() });
+			building->SetBoxScale(data.GetProperty<Engine::Math::Vector3>(L"boxScale").value());
+		}
+		// helpPrepare<Obj_Shinave_Bermiore>(L"Obj_Shinave_Bermiore", objectFactory);
+	}
+
+	// Obj_Bermiore_Soundblock
+	{
+		helpPrepare<Obj_Bermiore_Soundblock>(L"Obj_Bermiore_Soundblock", objectFactory);
+	}
+
+	// Obj_Mini_Stone_1
+	{		
+		helpPrepare<Obj_Mini_Stone_1>(L"Obj_Mini_Stone_1", objectFactory);
+	}
+
+	// Obj_Mini_Stone_2
+	{
+		helpPrepare<Obj_Mini_Stone_2>(L"Obj_Mini_Stone_2", objectFactory);
+	}
+
+	// Obj_Mini_Stone_3
+	{
+		helpPrepare<Obj_Mini_Stone_3>(L"Obj_Mini_Stone_3", objectFactory);
+	}
+
+	// Obj_Mini_Stone_4
+	{
+		helpPrepare<Obj_Mini_Stone_4>(L"Obj_Mini_Stone_4", objectFactory);
+	}
+
+	// Obj_Mini_Stone_5
+	{
+		helpPrepare<Obj_Mini_Stone_5>(L"Obj_Mini_Stone_5", objectFactory);
+	}
+
+	// Obj_Hide_Box
+	{
+		// TODO: Refactor this.
+		auto object = GameClient::Application::GetLoadManager()->GetObjectCloneData(L"Obj_Hide_Box");
+		for (auto& data : object)
+		{
+			auto building = objectFactory->Clone<Obj_Hide_Box>(this);
+			building->SetisDynamic(data.GetProperty<bool>(L"isDynamic").value());
+			building->SetIsPublic(data.GetProperty<bool>(L"isPublic").value());
+			building->SetHasMesh(data.GetProperty<bool>(L"hasMesh").value());
+			building->SetTransform({
+					data.GetProperty<Engine::Math::Vector3>(L"position").value(),
+					data.GetProperty<Engine::Math::Quaternion>(L"rotation").value(),
+					data.GetProperty<Engine::Math::Vector3>(L"scale").value() * 100.
+				});
+			building->SetBoxPosition({ data.GetProperty<Engine::Math::Vector3>(L"boxPosition").value() });
+			building->SetBoxScale(data.GetProperty<Engine::Math::Vector3>(L"boxScale").value());
+		}
+		//helpPrepare<Obj_Hide_Box>(L"Obj_Hide_Box", objectFactory);
+	}
+
+	// Obj_Ornoa_Soundblock_5
+	{
+		helpPrepare<Obj_Hide_Box>(L"Obj_Ornoa_Soundblock_5", objectFactory);
+	}
+
 }
 
 void TestWorld::PreInitialize(const Engine::Modules& modules)
 {
-    //NetworkTemp::GetInstance()->AddCallback((short)PacketID::EnterAccept, &TestWorld::EnterAccept, this);
-    //NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &TestWorld::SyncOtherPlayer, this);
-	
+	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::EnterAccept, &TestWorld::EnterAccept, this);
+	//NetworkTemp::GetInstance()->AddCallback((short)PacketID::Sync, &TestWorld::SyncOtherPlayer, this);
+
 	auto _physicsManager = Engine::Application::GetPhysicsManager();
 
 	// 메인 씬 만들기 - 중력값 설정 필요
@@ -277,12 +466,14 @@ void TestWorld::EnterAccept(const ConnectMsg::AddObject* msg) {
 		_ray = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Ray>(this);
 		playerSerialNum = msg->grantnumber();
 		_ray->SetSerialNumber(msg->grantnumber());
+		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 2 });
 	}
 	else if (msg->grantnumber() == 2) {
 		// TODO: 여기에 리브의 오브젝트를 생성하는 코드를 넣어야 합니다.
 		_live = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Live>(this);
 		playerSerialNum = msg->grantnumber();
 		_live->SetSerialNumber(msg->grantnumber());
+		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 2 });
 	}
 }
 void TestWorld::CreatePlayer(const ConnectMsg::AddObject* msg) {
@@ -300,7 +491,7 @@ void TestWorld::CreatePlayer(const ConnectMsg::AddObject* msg) {
 	}
 }
 void TestWorld::CreateStaticObject(const ConnectMsg::AddObject* msg) {
-	
+
 }
 void TestWorld::RequestData(const ConnectMsg::AddObject* msg) {
 	if (_dataLoad == false) {
@@ -313,7 +504,6 @@ void TestWorld::RequestData(const ConnectMsg::AddObject* msg) {
 void TestWorld::InitializeGameStateManager(const Engine::Modules& modules)
 {
 	auto gameStateManager = modules.gameStateManager;
-	gameStateManager->RegisterData(L"GameCoreData", GameCoreData{});
 
 
 	auto puzzle_00 = gameStateManager->NewSubManager();

@@ -1,25 +1,25 @@
 #include "pch.h"
-#include "Terrain.h"
+#include "BG_Terrain.h"
 
 
-Terrain::Terrain(std::filesystem::path&& meshPath) :
+BG_Terrain::BG_Terrain(std::filesystem::path&& meshPath) :
 	_staticMesh(nullptr), _meshPath(std::forward<std::filesystem::path>(meshPath))
 {
 }
 
-void Terrain::Prepare(Engine::Content::Factory::Component* componentFactory)
+void BG_Terrain::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
 	_staticMesh = componentFactory->Clone<Engine::Component::StaticMesh>(this);
 	_terrainMesh = componentFactory->Clone<Engine::Component::RigidStatic>(this);
 }
 
-void Terrain::DisposeComponents()
+void BG_Terrain::DisposeComponents()
 {
 	_staticMesh->Dispose();
 	_terrainMesh->Dispose();
 }
 
-void Terrain::PreInitialize(const Engine::Modules& modules)
+void BG_Terrain::PreInitialize(const Engine::Modules& modules)
 {
 	Object::PreInitialize(modules);
 	_staticMesh->SetFilePath(_meshPath);
@@ -39,7 +39,7 @@ void Terrain::PreInitialize(const Engine::Modules& modules)
 	//_terrainMesh->_boundBox->SetTranslate({ -1000.f, -200.f, 1000.f });
 }
 
-void Terrain::PostInitialize(const Engine::Modules& modules)
+void BG_Terrain::PostInitialize(const Engine::Modules& modules)
 {
 	Object::PostInitialize(modules);
 	_matrix = Engine::Math::Matrix::CreateTranslation(-1000.f, -200.f, 1000.f);

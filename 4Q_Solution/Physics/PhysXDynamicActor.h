@@ -27,6 +27,8 @@ namespace PhysicsEngineAPI
 		void	SetMaxAngularVelocity(const float velocity)		override;
 			float GetMaxAngularVelocity() const				override;
 
+			Utils::Math::Vector3 GetBounds() const override;
+
 
 		//TODO: 고쳐야함
 		void	Wakeup()					override;

@@ -1,7 +1,7 @@
 #pragma once
 #include "Player.h"
 #include "GlobalLight.h"
-#include "Terrain.h"
+#include "BG_Terrain.h"
 #include "RemotePlayer.h"
 #include "Cube.h"
 #include "Sphere.h"
@@ -26,7 +26,7 @@ private:
 	Player* _player;
 	RemotePlayer* _remote;
 	GlobalLight* _light;
-	Terrain* _terrain;
+	BG_Terrain* _terrain;
 
 	
 	std::vector<Cube*> _cubes;

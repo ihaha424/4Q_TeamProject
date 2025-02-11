@@ -502,6 +502,9 @@
     <Filter Include="Components\Sprite">
       <UniqueIdentifier>{8a626a3c-9442-4b0d-b783-1c6c0988859e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\CameraRail">
+      <UniqueIdentifier>{a95f88e6-af49-42f3-8695-1ec12b734902}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -978,6 +981,9 @@
     <ClInclude Include="Sprite.h">
       <Filter>Components\Sprite</Filter>
     </ClInclude>
+    <ClInclude Include="CameraRail.h">
+      <Filter>Object\CameraRail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1372,6 +1378,9 @@
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>Components\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraRail.cpp">
+      <Filter>Object\CameraRail</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

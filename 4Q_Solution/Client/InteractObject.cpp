@@ -66,3 +66,8 @@ void InteractObject::SetBoxScale(Engine::Math::Vector3 boxScale)
 {
 	_boxScale = boxScale;
 }
+
+void InteractObject::SetBoxPosition(Engine::Math::Vector3 boxPosition)
+{
+	_boxPosition = boxPosition;
+}

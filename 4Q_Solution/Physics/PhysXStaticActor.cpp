@@ -14,6 +14,10 @@ namespace PhysicsEngineAPI
 	PhysXActor
 	*********************************************************************/
 
+	Utils::Math::Vector3 PhysXStaticActor::GetBounds() const
+	{
+		return function.GetBounds(actor);
+	}
 
 	void PhysXStaticActor::SetTranslate(const Utils::Math::Vector3& position)
 	{

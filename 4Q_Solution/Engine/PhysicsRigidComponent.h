@@ -12,6 +12,7 @@ namespace Engine::Physics
 
 		virtual void	SetRotation(const Engine::Math::Quaternion& Rotation) = 0;
 		virtual 	Engine::Math::Quaternion GetRotation() const = 0;
+		virtual Engine::Math::Vector3 GetBounds() const = 0;
 
 		/**
 		 * @brief				: Internal Transform - Non-existent transform without scale

@@ -345,6 +345,13 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_Shinave_Bermiore>(buildingProperty, buildingProperty);
 	}
 
+	// Obj_Bermiore_Soundblock
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Soundblock").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Bermiore_Soundblock>(buildingProperty, buildingProperty);
+	}
+
 
 
 

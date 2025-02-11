@@ -171,6 +171,7 @@
     <ClInclude Include="NPC_Ornoa_Elder.h" />
     <ClInclude Include="Obj_Bermiore_Fabric.h" />
     <ClInclude Include="Obj_Bermiore_Hanger.h" />
+    <ClInclude Include="Obj_Bermiore_Soundblock.h" />
     <ClInclude Include="Obj_Bermiore_Woolball_1.h" />
     <ClInclude Include="Obj_Bermiore_Woolball_2.h" />
     <ClInclude Include="Obj_Bermiore_Woolball_3.h" />
@@ -287,6 +288,7 @@
     <ClCompile Include="NPC_Ornoa_Elder.cpp" />
     <ClCompile Include="Obj_Bermiore_Fabric.cpp" />
     <ClCompile Include="Obj_Bermiore_Hanger.cpp" />
+    <ClCompile Include="Obj_Bermiore_Soundblock.cpp" />
     <ClCompile Include="Obj_Bermiore_Woolball_2.cpp" />
     <ClCompile Include="Obj_Bermiore_Woolball_3.cpp" />
     <ClCompile Include="Obj_Bermiore_Woolball_4.cpp" />

@@ -314,6 +314,11 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		// helpPrepare<Obj_Shinave_Bermiore>(L"Obj_Shinave_Bermiore", objectFactory);
 	}
 
+	// Obj_Bermiore_Soundblock
+	{
+		helpPrepare<Obj_Bermiore_Soundblock>(L"Obj_Bermiore_Soundblock", objectFactory);
+	}
+
 }
 
 void TestWorld::PreInitialize(const Engine::Modules& modules)

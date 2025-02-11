@@ -131,6 +131,13 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_Buildings_Ornoa_House_2>(buildingProperty, buildingProperty);
 	}
 
+	// BG_Props_Fence
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"BG_Props_Fence").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<BG_Props_Fence>(buildingProperty, buildingProperty);
+	}
+
 
 
 

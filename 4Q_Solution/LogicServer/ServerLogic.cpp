@@ -449,8 +449,44 @@ void ServerLogic::ObjectInteractProcess(const Packet& packet)
     // Dialog Start Area
     // ====================
 
-    if (objectNum == 1200) {
-        PlayDialog(1);
+    if (objectNum == 10001 && _currentQuestID == 1101) {
+        PlayDialog(11501);
+    }
+    else if (objectNum == 10001 && _currentQuestID == 1103) {
+        PlayDialog(11505);
+    }
+    else if (objectNum == 10002 && _currentQuestID == 2101) {
+        PlayDialog(21401);
+    }
+    else if (objectNum == 10003 && _currentQuestID == 2103) {
+        PlayDialog(21605);
+    }//
+    else if (objectNum == 10004 && _currentQuestID == 3101) {
+        PlayDialog(31501);
+    }
+    else if (objectNum == 10002 && _currentQuestID == 3103) {
+        PlayDialog(31306); // 리브 레이 대화
+    }
+    else if (objectNum == 10004 && _currentQuestID == 3104) {
+        PlayDialog(41301);
+    }
+    else if (objectNum == 10002 && _currentQuestID == 3105) {
+        PlayDialog(41204);
+    }
+    else if (objectNum == 10002 && _currentQuestID == 4101) {
+        PlayDialog(51501);
+    }
+    else if (objectNum == 10002 && _currentQuestID == 4102) {
+        PlayDialog(51705);
+    }
+    else if (objectNum == 10002 && _currentQuestID == 5101) {
+        PlayDialog(61401);
+    }
+    else if (objectNum == 10002 && _currentQuestID == 5103) {
+        PlayDialog(61605);
+    }
+    else if (objectNum == 10002 && _currentQuestID == 1103) {
+        PlayDialog(71601);
     }
     // ====================
 
@@ -554,12 +590,12 @@ void ServerLogic::DialogInteractProcess(const Packet& packet)
     }
     else if (_currentQuestID == 4102) {
         Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 1);
-        _currentPuzzleNumber++;
+        _currentPuzzleNumber = 5;
         printf("[DialogProgress] Puzzle Start. PuzzleNum : %d\n", _currentPuzzleNumber);
     }
     else if (_currentQuestID == 5102) {
         Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 1);
-        _currentPuzzleNumber++;
+        _currentPuzzleNumber = 6;
         printf("[DialogProgress] Puzzle Start. PuzzleNum : %d\n", _currentPuzzleNumber);
     }
 }
@@ -803,6 +839,9 @@ void ServerLogic::QuestProcess(int& questId)
     Server::BroadCast("", (short)PacketID::QuestClear, 0, 0);
     printf("[Quest Process] Quest Clear. Quest Number : %d\n", questId);
     int nextQuestId = _questTable[questId];
+    if(questId == 3106 || questId == 4103 || questId == 5103){
+        nextQuestId = 1999;
+    }
     _questStart.set_questid(nextQuestId);
     _questStart.SerializeToString(&_msgBuffer);
     Server::BroadCast(_msgBuffer, (short)PacketID::QuestStart, _questStart.ByteSizeLong(), 1);

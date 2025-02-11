@@ -23,20 +23,16 @@ message InteractObject {
 	optional int32 objectserialnumber = 1;
 }
 
-message SoundPlay {
-	optional int32 soundid = 1;
-}
-
-message InteractObject {
-	optional int32 objectserialnumber = 1;
-}
-
 message InteractDialog {
 	optional int32 currentdialogid = 1;
 }
 
 message DialogProgress {
 	optional int32 nextdialogid = 1;
+}
+
+message TriggerObject {
+	optional int32 objectserialnumber = 1;
 }
 
 message QuestStart {

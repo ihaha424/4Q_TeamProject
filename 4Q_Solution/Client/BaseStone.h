@@ -2,6 +2,8 @@
 #include "InteractObject.h"
 #include "TriggerBox.h"
 #include "Puzzle_01.h"
+#include "GameCoreData.h"
+#include "Application.h"
 
 class BaseStone
 	:public InteractObject
@@ -22,5 +24,7 @@ protected:
 	unsigned int index;
 
 	Engine::Component::Synchronize* _sync;
+	int player;
+	bool activate = true;
 };
 

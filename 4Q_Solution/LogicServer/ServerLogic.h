@@ -83,8 +83,7 @@ private:
 	Player _playerSlot[2]{};
 	Object _objs[3]{};
 	Ground _ground{};
-	std::vector<Object*> _buildings;
-	std::vector<Object*> _sudiums;
+	std::vector<Object*> _staticObejcts;
 	TriggerBox _triggerBox{};
 	
 	ConnectMsg::EnterAccept _enterAccept;
@@ -152,8 +151,7 @@ private:
 	JSONLoad _jsonLoader;
 	json _mapData;
 
-	void LoadBuilding();
-	void LoadSudium();
+	void LoadStatic();
 private:
 	// =============================
 	// Physics Method, Variable Area
@@ -163,7 +161,8 @@ private:
 	Engine::Physics::IScene* _mainScene = nullptr;
 
 	void RegistDynamicPhysics(Object& obj, Engine::Math::Vector3 scale);
-	void RegistStaticPhysics(Object& obj, Engine::Math::Vector3 scale);
+	void RegistStaticPhysicsBox(Object& obj, Engine::Math::Vector3 scale);
+	void RegistStaticPhysicsSphere(Object& obj, Engine::Math::Vector3 scale);
 	void RegistPlayer(Player* player);
 	void RegistGround(Ground& ground);
 	void RegistTriggerBox(TriggerBox& triggerBox);
@@ -207,7 +206,7 @@ private:
 	// Puzzle Area
 	// =============================
 	
-	int _currentPuzzleNumber = 0;
+	int _currentPuzzleNumber = 1;
 	// 오브젝트를 상호작용 할 때마다 갱신해줘야함. 
 	int _currentInteractObject = -1;
 

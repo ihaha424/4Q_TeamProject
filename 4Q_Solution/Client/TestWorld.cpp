@@ -69,7 +69,7 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 
 	// Obj_BG_Tree_3
 	{
-		helpPrepare<Obj_BG_Tree_3>(L"Obj_BG_Tree_3", objectFactory);
+		//helpPrepare<Obj_BG_Tree_3>(L"Obj_BG_Tree_3", objectFactory);
 	}
 
 	// Obj_BG_Tree_2
@@ -221,15 +221,19 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	//	puzzle->SetBoxScale({ 100, 100, 100 });
 	//}
 
-	////Test Puzzle_01 Object Code -> Load File Data
+	//Test Puzzle_01 Object Code -> Load File Data
 	//{
-	//	Obj_Shinave_Stone_1* puzzle = objectFactory->Clone<Obj_Shinave_Stone_1>(this);
-	//	Engine::Transform tempTransform{};
-	//	tempTransform.position = { -200.f, 0.f, 0 };
-	//	puzzle->SetTransform(tempTransform);
-	//	puzzle->SetBoxScale({ 100, 100, 100 });
+	//	helpPrepare<Obj_Shinave_Stone_1>(L"Obj_Shinave_Stone_1", objectFactory);
+	//	helpPrepare<Obj_Shinave_Stone_2>(L"Obj_Shinave_Stone_2", objectFactory);
+	//	helpPrepare<Obj_Shinave_Stone_3>(L"Obj_Shinave_Stone_3", objectFactory);
+	//	helpPrepare<Obj_Shinave_Stone_4>(L"Obj_Shinave_Stone_4", objectFactory);
+	//	helpPrepare<Obj_Shinave_Stone_5>(L"Obj_Shinave_Stone_5", objectFactory);
+	//	helpPrepare<Obj_Shinave_Bermiore>(L"Obj_Shinave_Bermiore", objectFactory);
+	//	helpPrepare<Obj_Shinave_Platform_Set>(L"Obj_Shinave_Platform_Set", objectFactory);
+	//	helpPrepare<Obj_Shinave_Platform_Spawn_1>(L"Obj_Shinave_Platform_Spawn1", objectFactory);
+	//	helpPrepare<Obj_Shinave_Platform_Spawn_2>(L"Obj_Shinave_Platform_Spawn2", objectFactory);
+	//	helpPrepare<Obj_Shinave_Platform_Spawn_3>(L"Obj_Shinave_Platform_Spawn3", objectFactory);
 	//}
-
 	////helpPrepare<Obj_BG_Tree_1>(L"Obj_BG_Tree_1", objectFactory);
 	////helpPrepare<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", objectFactory);
 	////helpPrepare<Obj_BG_Mountain>(L"Obj_BG_Mountain", objectFactory);
@@ -353,12 +357,14 @@ void TestWorld::EnterAccept(const ConnectMsg::AddObject* msg) {
 		_ray = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Ray>(this);
 		playerSerialNum = msg->grantnumber();
 		_ray->SetSerialNumber(msg->grantnumber());
+		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 2 });
 	}
 	else if (msg->grantnumber() == 2) {
 		// TODO: 여기에 리브의 오브젝트를 생성하는 코드를 넣어야 합니다.
 		_live = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Live>(this);
 		playerSerialNum = msg->grantnumber();
 		_live->SetSerialNumber(msg->grantnumber());
+		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 2 });
 	}
 }
 void TestWorld::CreatePlayer(const ConnectMsg::AddObject* msg) {
@@ -389,7 +395,6 @@ void TestWorld::RequestData(const ConnectMsg::AddObject* msg) {
 void TestWorld::InitializeGameStateManager(const Engine::Modules& modules)
 {
 	auto gameStateManager = modules.gameStateManager;
-	gameStateManager->RegisterData(L"GameCoreData", GameCoreData{});
 
 
 	auto puzzle_00 = gameStateManager->NewSubManager();

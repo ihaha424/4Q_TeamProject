@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Hide_SoundTrigger.h"
 
+int Hide_SoundTrigger::_settingIndex = 0;
 Hide_SoundTrigger::Hide_SoundTrigger(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath)
 	: TriggerArea(meshPath, meshPath)
 {

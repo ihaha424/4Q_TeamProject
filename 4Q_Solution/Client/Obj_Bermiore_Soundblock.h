@@ -12,6 +12,9 @@ public:
 
 	void SendInteractToServer();
 	void PlaySound();
+	void Interact() override;
+	void DataChangeCallBack(const std::wstring& name, const std::any& value) override;
+
 protected:
 	void DisposeComponents() override;
 	void PreInitialize(const Engine::Modules& modules) override;

@@ -44,6 +44,15 @@ void Obj_Bermiore_Soundblock::PreInitialize(const Engine::Modules& modules)
 			DataChangeCallBack(name, value);
 		}
 	, this);
-	_sync->AddCallback((short)PacketID::ObjectActive, &Obj_Bermiore_Soundblock::PlaySound, this);
-	_sync->SetSerialNumber(12108);
+	//_sync->AddCallback((short)PacketID::ObjectActive, &Obj_Bermiore_Soundblock::PlaySound, this);
+	//_sync->SetSerialNumber(12108);
+}
+
+void Obj_Bermiore_Soundblock::Interact()
+{
+	SendInteractToServer();
+}
+
+void Obj_Bermiore_Soundblock::DataChangeCallBack(const std::wstring& name, const std::any& value)
+{
 }

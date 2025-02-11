@@ -2,6 +2,7 @@
 #include "Sudium_SoundTrigger.h"
 #include "Application.h"
 
+int Sudium_SoundTrigger::_settingIndex = 0;
 Sudium_SoundTrigger::Sudium_SoundTrigger(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath)
 	: TriggerArea(meshPath, meshPath)
 {

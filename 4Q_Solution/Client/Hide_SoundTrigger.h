@@ -12,7 +12,7 @@ public:
 
 protected:
 	void PreInitialize(const Engine::Modules& modules) override;
-
 	static int _settingIndex;
+
 };
 

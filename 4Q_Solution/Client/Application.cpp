@@ -317,24 +317,26 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_Buildings_Bermiore_Atelier_1>(buildingProperty, buildingProperty);
 	}
 
-
-
-
-
-
-
-
-
-
-
-	//Test PickingObejct
+	// Obj_Buildings_Bermiore_Atelier_2
 	{
-		objectFactory->Register<GrabbedObject>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Bermiore_Atelier_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Bermiore_Atelier_2>(buildingProperty, buildingProperty);
 	}
 
-	//Test TriggerArea
+
+
+
+
+
+
+
+
+	//Test
 	{
-		objectFactory->Register<TriggerArea>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");
+		//objectFactory->Register<GrabbedObject>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");
+		//objectFactory->Register<TriggerArea>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");
+		//objectFactory->Register<TestSprite>();
 	}
 	
 	//Puzzle01
@@ -343,26 +345,23 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	}
 
 
-	objectFactory->Register<TestSprite>();
 
 	/*
 		Static Object
 	*/
 	//RegisterHelp<Obj_BG_Mountain>(L"Obj_BG_Mountain", loadManager, objectFactory);
 
-	RegisterHelp<Obj_Buildings_Bermiore_Atelier_2>(L"Obj_Buildings_Bermiore_Atelier_2", loadManager, objectFactory);
 	RegisterHelp<Obj_Buildings_Bermiore_Atelier_3>(L"Obj_Buildings_Bermiore_Atelier_3", loadManager, objectFactory);
 
 	//RegisterHelp<Obj_Props_Bermiore_Loom_1>(L"Obj_Props_Bermiore_Loom_1", loadManager, objectFactory);
 	//RegisterHelp<Obj_Props_Bermiore_Loom_2>(L"Obj_Props_Bermiore_Loom_2", loadManager, objectFactory);
-	//RegisterHelp<Obj_Props_Bermiore_Cloth_1>(L"Obj_Props_Bermiore_Cloth_1", loadManager, objectFactory);
-	//RegisterHelp<Obj_Props_Bermiore_Cloth_2>(L"Obj_Props_Bermiore_Cloth_2", loadManager, objectFactory);
 
-	//RegisterHelp<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", loadManager, objectFactory);
-
-	const auto componentFactory = contentManager->GetComponentFactory();
-	componentFactory->Register<RemoteMove>();
-	componentFactory->Register<TriggerBox>();
+	// Components
+	{
+		const auto componentFactory = contentManager->GetComponentFactory();
+		componentFactory->Register<RemoteMove>();
+		componentFactory->Register<TriggerBox>();
+	}
 }
 
 void GameClient::Application::PrepareInitialWorld(Engine::Content::Factory::World* worldFactory)

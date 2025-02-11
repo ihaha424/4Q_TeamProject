@@ -262,56 +262,13 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_Buildings_Bermiore_Atelier_1>(L"Obj_Buildings_Bermiore_Atelier_1", objectFactory);
 	}
 
-	////Test Grabbed Object Code -> Make and Load File Data
-	//{
-	//	GrabbedObject* building = objectFactory->Clone<GrabbedObject>(this);
-	//	Engine::Transform tempTransform{};
-	//	tempTransform.position = { 200.f, 0.f, 0 };
-	//	building->SetTransform(tempTransform);
-	//	building->SetBoxScale({ 100, 500, 100 });
-	//}
+	// Obj_Buildings_Bermiore_Atelier_2
+	{
+		helpPrepare<Obj_Buildings_Bermiore_Atelier_2>(L"Obj_Buildings_Bermiore_Atelier_2", objectFactory);
+	}
 
-	////Test Trigger Area Code -> Make and Load File Data
-	//{
-	//	TriggerArea* puzzle = objectFactory->Clone<TriggerArea>(this);
-	//	Engine::Transform tempTransform{};
-	//	tempTransform.position = { 0.f, 0.f, 200.f };
-	//	puzzle->SetTransform(tempTransform);
-	//	puzzle->SetBoxScale({ 100, 100, 100 });
-	//}
 
-	//Test Puzzle_01 Object Code -> Load File Data
-	//{
-	//	helpPrepare<Obj_Shinave_Bermiore>(L"Obj_Shinave_Bermiore", objectFactory);
-	//	helpPrepare<Obj_Shinave_Platform_Spawn_3>(L"Obj_Shinave_Platform_Spawn3", objectFactory);
-	//}
-	////helpPrepare<Obj_BG_Tree_1>(L"Obj_BG_Tree_1", objectFactory);
-	////helpPrepare<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", objectFactory);
-	////helpPrepare<Obj_BG_Mountain>(L"Obj_BG_Mountain", objectFactory);
 
-	////helpPrepare<Obj_Props_Fence>(L"Obj_Props_Fence", objectFactory);
-
-	////helpPrepare<Obj_Buildings_Shinave>(L"Obj_Buildings_Shinave", objectFactory);
-	//helpPrepare<Obj_Buildings_Bermiore_Atelier_1>(L"Obj_Buildings_Bermiore_Atelier_1", objectFactory);
-	//helpPrepare<Obj_Buildings_Bermiore_Atelier_2>(L"Obj_Buildings_Bermiore_Atelier_2", objectFactory);
-	//helpPrepare<Obj_Buildings_Bermiore_Atelier_3>(L"Obj_Buildings_Bermiore_Atelier_3", objectFactory);
-
-	////helpPrepare<Obj_Props_Bermiore_Loom_1>(L"Obj_Props_Bermiore_Loom_1", objectFactory);
-	////helpPrepare<Obj_Props_Bermiore_Loom_2>(L"Obj_Props_Bermiore_Loom_2", objectFactory);
-	////helpPrepare<Obj_Props_Bermiore_Cloth_1>(L"Obj_Props_Bermiore_Cloth_1", objectFactory);
-	////helpPrepare<Obj_Props_Bermiore_Cloth_2>(L"Obj_Props_Bermiore_Cloth_2", objectFactory);
-
-	////helpPrepare<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", objectFactory);
-
-	//helpPrepare<Obj_Buildings_Hide_House_1>(L"Obj_Buildings_Hide_House_1", objectFactory);
-	//helpPrepare<Obj_Buildings_Hide_House_2>(L"Obj_Buildings_Hide_House_2", objectFactory);
-	//helpPrepare<Obj_Buildings_Hide_House_3>(L"Obj_Buildings_Hide_House_3", objectFactory);
-	//helpPrepare<Obj_Buildings_Hide_House_4>(L"Obj_Buildings_Hide_House_4", objectFactory);
-
-	//helpPrepare<Obj_Buildings_Ornoa_House_1>(L"Obj_Buildings_Ornoa_House_1", objectFactory);
-	//helpPrepare<Obj_Buildings_Ornoa_House_2>(L"Obj_Buildings_Ornoa_House_2", objectFactory);
-	////helpPrepare<Obj_Buildings_Ornoa_House_3>(L"Obj_Buildings_Ornoa_House_3", objectFactory);
-	////helpPrepare<Obj_Buildings_Ornoa_House_4>(L"Obj_Buildings_Ornoa_House_4", objectFactory);
 }
 
 void TestWorld::PreInitialize(const Engine::Modules& modules)

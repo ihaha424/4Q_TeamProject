@@ -28,7 +28,8 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 
 	// BG_Terrain
 	{
-		helpPrepare<BG_Terrain>(L"BG_Terrain", objectFactory);
+		objectFactory->Clone<BG_Terrain>(this);
+		//helpPrepare<BG_Terrain>(L"BG_Terrain", objectFactory);
 	}
 
 	// Obj_Bermiore_Fabric
@@ -186,6 +187,11 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 			building->SetBoxScale(data.GetProperty<Engine::Math::Vector3>(L"boxScale").value());
 		}
 		//helpPrepare<Obj_Mini_Platform_Spawn>(L"Obj_Mini_Platform_Spawn", objectFactory);
+	}
+
+	// Obj_BG_Tree_3_Active
+	{
+		helpPrepare<Obj_BG_Tree_3_Active>(L"Obj_BG_Tree_3_Active", objectFactory);
 	}
 
 	////Test Grabbed Object Code -> Make and Load File Data

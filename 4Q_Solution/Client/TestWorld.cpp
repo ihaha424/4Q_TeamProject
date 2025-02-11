@@ -99,7 +99,6 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	// Obj_Buildings_Sudium
 	{
 		helpPrepare<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", objectFactory);
-		// TODO: Sudium Change
 	}
 
 	// Obj_Buildings_Hide_House_5
@@ -125,6 +124,21 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	// Obj_Buildings_Hide_House_1
 	{
 		helpPrepare<Obj_Buildings_Hide_House_1>(L"Obj_Buildings_Hide_House_1", objectFactory);
+	}
+
+	// 	// Obj_Hide_Xylophone
+	{
+		// TODO: Hide_Xylophone
+	}
+
+	// Obj_Hide_Plant
+	{
+		// TODO: Hide_Plant
+	}
+
+	// Obj_Sudium_blue
+	{
+		helpPrepare<Obj_Sudium_blue>(L"Obj_Sudium_blue", objectFactory);
 	}
 
 	////Test Grabbed Object Code -> Make and Load File Data

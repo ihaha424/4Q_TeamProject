@@ -180,6 +180,25 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_Buildings_Hide_House_1>(buildingProperty, buildingProperty);
 	}
 
+	// Obj_Hide_Xylophone
+	{
+		// TODO: Hide_Xylophone
+	}
+
+	// Obj_Hide_Plant
+	{
+		// TODO: Hide_Plant
+	}
+
+	// Obj_Sudium_blue
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Sudium_blue").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Sudium_blue>(buildingProperty, buildingProperty);
+	}
+
+
+
 
 
 

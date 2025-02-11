@@ -503,8 +503,6 @@
     </ClInclude>
     <ClInclude Include="Obj_Bermiore_Soundblock.h">
       <Filter>Object\Puzzle\01. Puzzle\Object\Obj_Bermiore_Soundblock</Filter>
-    <ClInclude Include="Obj_Bermiore_Soundblock.h">
-      <Filter>Object\Puzzle\01. Puzzle\Object</Filter>
     </ClInclude>
     <ClInclude Include="Sudium_SoundTrigger.h">
       <Filter>Object\Puzzle\02. Puzzle\Object</Filter>

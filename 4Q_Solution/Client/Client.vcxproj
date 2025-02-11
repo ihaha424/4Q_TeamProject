@@ -151,7 +151,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="BaseMiniStone.h" />
     <ClInclude Include="BaseStone.h" />
+    <ClInclude Include="BaseWoolball.h" />
     <ClInclude Include="GameCoreData.h" />
     <ClInclude Include="NPCData.h" />
     <ClInclude Include="InteractObject.h" />
@@ -163,6 +165,21 @@
     <ClInclude Include="Obj_Bermiore_Fabric.h" />
     <ClInclude Include="Obj_Bermiore_Hanger.h" />
     <ClInclude Include="Obj_Bermiore_Woolball_1.h" />
+    <ClInclude Include="Obj_Bermiore_Woolball_2.h" />
+    <ClInclude Include="Obj_Bermiore_Woolball_3.h" />
+    <ClInclude Include="Obj_Bermiore_Woolball_4.h" />
+    <ClInclude Include="Obj_Bermiore_Woolball_5.h" />
+    <ClInclude Include="Obj_Bermiore_Woolball_6.h" />
+    <ClInclude Include="Obj_Puzzle_Mini_Stone_1.h" />
+    <ClInclude Include="Obj_Puzzle_Mini_Stone_2.h" />
+    <ClInclude Include="Obj_Puzzle_Mini_Stone_3.h" />
+    <ClInclude Include="Obj_Puzzle_Mini_Stone_4.h" />
+    <ClInclude Include="Obj_Puzzle_Mini_Stone_5.h" />
+    <ClInclude Include="Obj_Puzzle_Shinave_Stone_1.h" />
+    <ClInclude Include="Obj_Puzzle_Shinave_Stone_2.h" />
+    <ClInclude Include="Obj_Puzzle_Shinave_Stone_3.h" />
+    <ClInclude Include="Obj_Puzzle_Shinave_Stone_4.h" />
+    <ClInclude Include="Obj_Puzzle_Shinave_Stone_5.h" />
     <ClInclude Include="Obj_BG_Tree_3.h" />
     <ClInclude Include="Obj_Buildings_Hide_House_5.h" />
     <ClInclude Include="Obj_Hide_Box_1.h" />
@@ -175,16 +192,6 @@
     <ClInclude Include="Obj_Ornoa_Soundblock_1.h" />
     <ClInclude Include="Obj_Props_Rock.h" />
     <ClInclude Include="Obj_Puzzle_Mini_Platform.h" />
-    <ClInclude Include="Obj_Puzzle_Mini_Stone_1.h" />
-    <ClInclude Include="Obj_Puzzle_Mini_Stone_2.h" />
-    <ClInclude Include="Obj_Puzzle_Mini_Stone_3.h" />
-    <ClInclude Include="Obj_Puzzle_Mini_Stone_4.h" />
-    <ClInclude Include="Obj_Puzzle_Mini_Stone_5.h" />
-    <ClInclude Include="Obj_Shinave_Stone_1.h" />
-    <ClInclude Include="Obj_Shinave_Stone_2.h" />
-    <ClInclude Include="Obj_Shinave_Stone_3.h" />
-    <ClInclude Include="Obj_Shinave_Stone_4.h" />
-    <ClInclude Include="Obj_Shinave_Stone_5.h" />
     <ClInclude Include="GrabbedObject.h" />
     <ClInclude Include="Obj_Shinave_Bermiore.h" />
     <ClInclude Include="Obj_Shinave_Platform_Set.h" />
@@ -251,7 +258,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="BaseMiniStone.cpp" />
     <ClCompile Include="BaseStone.cpp" />
+    <ClCompile Include="BaseWoolball.cpp" />
     <ClCompile Include="GameCoreData.cpp" />
     <ClCompile Include="InteractObject.cpp" />
     <ClCompile Include="NPC_Hide.cpp" />
@@ -261,6 +270,16 @@
     <ClCompile Include="NPC_Ornoa_Elder.cpp" />
     <ClCompile Include="Obj_Bermiore_Fabric.cpp" />
     <ClCompile Include="Obj_Bermiore_Hanger.cpp" />
+    <ClCompile Include="Obj_Bermiore_Woolball_2.cpp" />
+    <ClCompile Include="Obj_Bermiore_Woolball_3.cpp" />
+    <ClCompile Include="Obj_Bermiore_Woolball_4.cpp" />
+    <ClCompile Include="Obj_Bermiore_Woolball_5.cpp" />
+    <ClCompile Include="Obj_Bermiore_Woolball_6.cpp" />
+    <ClCompile Include="Obj_Puzzle_Shinave_Stone_1.cpp" />
+    <ClCompile Include="Obj_Puzzle_Shinave_Stone_2.cpp" />
+    <ClCompile Include="Obj_Puzzle_Shinave_Stone_3.cpp" />
+    <ClCompile Include="Obj_Puzzle_Shinave_Stone_4.cpp" />
+    <ClCompile Include="Obj_Puzzle_Shinave_Stone_5.cpp" />
     <ClCompile Include="Obj_Bermiore_Woolball_1.cpp" />
     <ClCompile Include="Obj_BG_Tree_3.cpp" />
     <ClCompile Include="Obj_Buildings_Hide_House_5.cpp" />
@@ -279,18 +298,13 @@
     <ClCompile Include="Obj_Puzzle_Mini_Stone_3.cpp" />
     <ClCompile Include="Obj_Puzzle_Mini_Stone_4.cpp" />
     <ClCompile Include="Obj_Puzzle_Mini_Stone_5.cpp" />
-    <ClCompile Include="Obj_Shinave_Stone_1.cpp" />
-    <ClCompile Include="Obj_Shinave_Stone_2.cpp" />
-    <ClCompile Include="Obj_Shinave_Stone_3.cpp" />
-    <ClCompile Include="Obj_Shinave_Stone_4.cpp" />
-    <ClCompile Include="Obj_Shinave_Stone_5.cpp" />
     <ClCompile Include="GrabbedObject.cpp" />
     <ClCompile Include="Obj_Shinave_Bermiore.cpp" />
     <ClCompile Include="Obj_Shinave_Platform_Set.cpp" />
     <ClCompile Include="Obj_Shinave_Platform_Spawn.cpp" />
     <ClCompile Include="Obj_Sudium_blue.cpp" />
-    <ClCompile Include="Obj_Sudium_bouquet.cpp" />
     <ClCompile Include="Obj_Sudium_red.cpp" />
+    <ClCompile Include="Obj_Sudium_bouquet.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Live.cpp" />
     <ClCompile Include="Obj_Buildings_Ornoa_House_3.cpp" />

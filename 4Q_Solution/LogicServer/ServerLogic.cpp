@@ -609,7 +609,7 @@ void ServerLogic::ObjectTriggerProcess(const Packet& packet)
     int triggerboxId = _triggerObject.triggerboxid();
     int targetObjectId = _triggerObject.objectserialnumber();
 
-
+    Puzzle6(targetObjectId, triggerboxId);
 }
 // =============================
 
@@ -916,7 +916,7 @@ void ServerLogic::PuzzleProcess(int objectId)
     }
     case 6:
     {
-        Puzzle6(objectId);
+        
         break;
     }
     default:
@@ -929,7 +929,7 @@ void ServerLogic::Puzzle1(int objectId)
     int maxCorrectCount = 3;
     static int activeObjectId = 11103;
     // 리브가 상호작용을 했을 때 이쪽으로 와야함.
-    if (objectId == 11105 || objectId == 11106 || objectId == 11107) {
+    if (objectId == 11107 || objectId == 11108 || objectId == 11109) {
         curCorrectCount++;
         // send puzzleSuccess.
         //_objectActive.set_objectserialnumber(activeObjectId);
@@ -941,6 +941,11 @@ void ServerLogic::Puzzle1(int objectId)
 void ServerLogic::Puzzle2(int objectId)
 {
     // 12102 ~ 12107
+    if (objectId == 12108) {
+        _soundPlay.set_soundid(101);
+        _soundPlay.SerializeToString(&_msgBuffer);
+        Server::BroadCast(_msgBuffer, (short)PacketID::SoundPlay, _soundPlay.ByteSizeLong(), 1);
+    }
     if (objectId < 12102 && objectId > 12107) {
         return;
     }
@@ -989,17 +994,16 @@ void ServerLogic::Puzzle5(int objectId)
 {
     // 트리거로만 작동.
 }
-void ServerLogic::Puzzle6(int objectId)
+void ServerLogic::Puzzle6(int objectId, int triggerboxId)
 {
-    _soundPlay.set_soundid(objectId);
-    _soundPlay.SerializeToString(&_msgBuffer);
-    Server::SavePacketData(
-        _msgBuffer,
-        _playerSlot[1]._sessionId,
-        (short)PacketID::SoundPlay,
-        _soundPlay.ByteSizeLong(),
-        0
-    );
+    // triggerBox ID : 100100 ~ 100104
+    int areaIndex = triggerboxId - 100100;
+    int boxIndex = objectId - 16301;
+    _currentWeight[areaIndex] += _puzzle6Box[boxIndex];
+
+    if (_currentWeight[areaIndex] == 5) {
+        // turn on light.
+    }
 }
 // =============================
 

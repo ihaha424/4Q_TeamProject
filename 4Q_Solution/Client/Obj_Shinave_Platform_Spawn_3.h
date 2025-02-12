@@ -17,4 +17,5 @@ protected:
 	void PostInitialize(const Engine::Modules& modules) override;
 
 	Engine::Component::Synchronize* _sync;
+	Engine::Component::Effect3DSound* _sound;
 };

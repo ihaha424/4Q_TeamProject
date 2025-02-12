@@ -50,6 +50,7 @@ void BaseStone::SetSoundProperty(std::filesystem::path path, float min, float ma
 	_sound->SetPath(path);
 	_sound->SetMinDistance(min);
 	_sound->SetMaxDistance(max);
+	_sound->SetPosition(_transform.position);
 }
 
 

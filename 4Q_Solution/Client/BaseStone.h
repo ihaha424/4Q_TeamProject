@@ -19,7 +19,8 @@ protected:
 	void PreInitialize(const Engine::Modules& modules) override;
 
 	void SendInteractToServer();
-	void SetSoundProperty(std::filesystem::path path, float min, float max);
+	void PreSetSoundProperty(std::filesystem::path path);
+	void PostSetSoundProperty(float min, float max);
 protected:
 	Engine::GameState::IManager* myManager;
 	unsigned int index;

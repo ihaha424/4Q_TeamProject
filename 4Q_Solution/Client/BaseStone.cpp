@@ -45,9 +45,13 @@ void BaseStone::SendInteractToServer()
 	);
 }
 
-void BaseStone::SetSoundProperty(std::filesystem::path path, float min, float max)
+void BaseStone::PreSetSoundProperty(std::filesystem::path path)
 {
 	_sound->SetPath(path);
+}
+
+void BaseStone::PostSetSoundProperty(float min, float max)
+{
 	_sound->SetMinDistance(min);
 	_sound->SetMaxDistance(max);
 	_sound->SetPosition(_transform.position);

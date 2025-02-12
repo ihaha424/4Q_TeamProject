@@ -29,9 +29,14 @@ void Obj_Shinave_Stone_5::PreInitialize(const Engine::Modules& modules)
 {
 	BaseStone::PreInitialize(modules);
 	_sync->SetSerialNumber(11110);
-	SetSoundProperty(L"Assets/Sounds/SFX_Shinave_Stone_Wrong_1.wav", 1.4f, 8.5f);
+	PreSetSoundProperty(L"Assets/Sounds/SFX_Shinave_Stone_Correct_1.wav");
 }
 
+void Obj_Shinave_Stone_5::PostInitialize(const Engine::Modules& modules)
+{
+	BaseStone::PostInitialize(modules);
+	PostSetSoundProperty(1.4f, 8.5f);
+}
 void Obj_Shinave_Stone_5::DataChangeCallBack(const std::wstring& name, const std::any& value)
 {
 	activate = true;

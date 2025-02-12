@@ -33,7 +33,15 @@ void Obj_Shinave_Stone_1::PreInitialize(const Engine::Modules& modules)
 
 	_trigger->BindBeginInteraction([this]()
 		{
-			_sound->Play();
+			auto isData = GameClient::Application::GetGameStateManager()->GetData(L"GameCoreData");
+			if (!isData)
+				return;
+			auto data = std::any_cast<GameCoreData>(*isData);
+			if (data.player == 2 || data.player == 3)
+			{
+				_staticMesh->SetActiveDraw(true);
+				_sound->Play();
+			}
 		});
 }
 

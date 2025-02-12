@@ -29,11 +29,19 @@ void Obj_Shinave_Stone_2::PreInitialize(const Engine::Modules& modules)
 {
 	BaseStone::PreInitialize(modules);
 	_sync->SetSerialNumber(11107);
-	PreSetSoundProperty(L"Assets/Sounds/SFX_Shinave_Stone_Correct_1.wav");
+	PreSetSoundProperty(L"Assets/Sounds/SFX_Shinave_Stone_Wrong_1.wav");
 
 	_trigger->BindBeginInteraction([this]()
 		{
-			_sound->Play();
+			auto isData = GameClient::Application::GetGameStateManager()->GetData(L"GameCoreData");
+			if (!isData)
+				return;
+			auto data = std::any_cast<GameCoreData>(*isData);
+			if (data.player == 2 || data.player == 3)
+			{
+				_staticMesh->SetActiveDraw(true);
+				_sound->Play();
+			}
 		});
 }
 

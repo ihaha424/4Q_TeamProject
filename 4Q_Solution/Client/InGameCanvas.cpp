@@ -33,9 +33,11 @@ void InGameCanvas::Initialize(const Engine::Modules& modules)
 	_fadeMask->SetOpacity(1.0f);
 	_fadeMask->BindOnFadeOutEnd([this]()
 		{
-		AsyncDelayCall()
-			_moveTutorial->FadeIn(1.5f);
-			_sequence = Sequence::MoveTutorialFadingIn;
+			AsyncDelayCall()([this]
+			{
+				_moveTutorial->FadeIn(1.5f);
+				_sequence = Sequence::MoveTutorialFadingIn;
+			}, 1.0f);
 		});
 
 	_moveTutorial->SetOpacity(0.0f);
@@ -45,8 +47,11 @@ void InGameCanvas::Initialize(const Engine::Modules& modules)
 		});
 	_moveTutorial->BindOnFadeOutEnd([this]()
 		{
-			_viewTutorial->FadeIn(1.5f);
-			_sequence = Sequence::ViewTutorialFadingIn;
+			AsyncDelayCall()([this]
+				{
+					_viewTutorial->FadeIn(1.5f);
+					_sequence = Sequence::ViewTutorialFadingIn;
+				}, 1.0f);
 		});
 
 	_viewTutorial->SetOpacity(0.0f);
@@ -54,8 +59,20 @@ void InGameCanvas::Initialize(const Engine::Modules& modules)
 		{
 			_sequence = Sequence::ViewTutorialFaded;
 		});
+	_viewTutorial->BindOnFadeOutEnd([this]()
+		{
+			AsyncDelayCall()([this]
+				{
+					_jumpTutorial->FadeIn(1.5f);
+					_sequence = Sequence::JumpTutorialFadingIn;
+				}, 1.0f);
+		});
 
-
+	_jumpTutorial->SetOpacity(0.0f);
+	_jumpTutorial->BindOnFadeInEnd([this]()
+		{
+			_sequence = Sequence::JumpTutorialFaded;
+		});
 }
 
 void InGameCanvas::Attach()
@@ -77,4 +94,11 @@ void InGameCanvas::ViewTutorialDone()
 	if (_sequence != Sequence::ViewTutorialFaded) return;
 	_viewTutorial->FadeOut(0.5f);
 	_sequence = Sequence::ViewTutorialFadingOut;
+}
+
+void InGameCanvas::JumpTutorialDone()
+{
+	if (_sequence != Sequence::JumpTutorialFaded) return;
+	_jumpTutorial->FadeOut(0.5f);
+	_sequence = Sequence::JumpTutorialFadingOut;
 }

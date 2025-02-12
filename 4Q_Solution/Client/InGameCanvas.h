@@ -31,6 +31,7 @@ public:
 
 	void MoveTutorialDone();
 	void ViewTutorialDone();
+	void JumpTutorialDone();
 
 private:
 	Sequence _sequence;

@@ -328,7 +328,6 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Terminal.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="TextElement.h" />
-    <ClInclude Include="TextRenderer.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Requires.h" />
@@ -497,7 +496,6 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Terminal.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="TextElement.cpp" />
-    <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="ThrowIfFailed.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Transform.cpp" />

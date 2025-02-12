@@ -10,6 +10,7 @@ namespace Engine
 	class Canvas
 	{
 	public:
+		virtual ~Canvas() = default;
 		explicit Canvas(const Math::Size& viewportSize);
 
 		virtual void Initialize(const Modules& modules);

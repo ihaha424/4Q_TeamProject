@@ -2,6 +2,7 @@
 #include "InGameCanvas.h"
 
 #include "DelayCall.h"
+#include "InteractImage.h"
 #include "../Engine/OverlayPanel.h"
 
 InGameCanvas::InGameCanvas():
@@ -22,6 +23,9 @@ InGameCanvas::InGameCanvas(const Engine::Math::Size& viewportSize):
 
 	auto [jumpTutorialOverlayChild, jumpTutorial] = overlay->CreateChild<Engine::UI::Wrapper::FadeImage>(L"Assets/UI/UI_Gamepad_A.png", 0.5f);
 	_jumpTutorial = jumpTutorial;
+
+	auto [interactImageOverlayChild, interactImage] = overlay->CreateChild<InteractImage>(L"Assets/UI/UI_Gamepad_B.png", 0.2f);
+	_interactImage = interactImage;
 
 	auto [fadeMaskOverlayChild, fadeMask] = overlay->CreateChild<Engine::UI::Wrapper::FadeImage>(L"Assets/UI/UI_Fade_Mask.png", 1.0f);
 	_fadeMask = fadeMask;
@@ -73,6 +77,8 @@ void InGameCanvas::Initialize(const Engine::Modules& modules)
 		{
 			_sequence = Sequence::JumpTutorialFaded;
 		});
+
+	_interactImage->SetOpacity(1.0f);
 }
 
 void InGameCanvas::Attach()
@@ -101,4 +107,20 @@ void InGameCanvas::JumpTutorialDone()
 	if (_sequence != Sequence::JumpTutorialFaded) return;
 	_jumpTutorial->FadeOut(0.5f);
 	_sequence = Sequence::JumpTutorialFadingOut;
+}
+
+void InGameCanvas::ShowInteractUI()
+{
+}
+
+void InGameCanvas::HideInteractUI()
+{
+}
+
+void InGameCanvas::ShowGrabUI()
+{
+}
+
+void InGameCanvas::HideGrabUI()
+{
 }

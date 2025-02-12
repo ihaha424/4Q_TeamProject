@@ -1,5 +1,7 @@
 #pragma once
 
+class InteractImage;
+
 namespace Engine::UI::Wrapper
 {
 	class FadeImage;
@@ -29,10 +31,14 @@ public:
 	void Initialize(const Engine::Modules& modules) override;
 	void Attach() override;
 
-
 	void MoveTutorialDone();
 	void ViewTutorialDone();
 	void JumpTutorialDone();
+
+	void ShowInteractUI();
+	void HideInteractUI();
+	void ShowGrabUI();
+	void HideGrabUI();
 
 private:
 	Sequence _sequence;
@@ -41,4 +47,5 @@ private:
 	Engine::UI::Wrapper::FadeImage* _moveTutorial;
 	Engine::UI::Wrapper::FadeImage* _viewTutorial;
 	Engine::UI::Wrapper::FadeImage* _jumpTutorial;
+	InteractImage* _interactImage;
 };

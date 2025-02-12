@@ -16,9 +16,9 @@ namespace Engine::UI::Wrapper
 
 	protected:
 		Component::Sprite _sprite;
+		Math::Matrix _matrix;
 
 	private:
 		std::filesystem::path _path;
-		Math::Matrix _matrix;
 	};
 }

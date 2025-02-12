@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "InGameCanvas.h"
 
+#include "DelayCall.h"
 #include "../Engine/OverlayPanel.h"
 
 InGameCanvas::InGameCanvas():
@@ -32,6 +33,7 @@ void InGameCanvas::Initialize(const Engine::Modules& modules)
 	_fadeMask->SetOpacity(1.0f);
 	_fadeMask->BindOnFadeOutEnd([this]()
 		{
+		AsyncDelayCall()
 			_moveTutorial->FadeIn(1.5f);
 			_sequence = Sequence::MoveTutorialFadingIn;
 		});

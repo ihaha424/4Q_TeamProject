@@ -17,6 +17,7 @@ namespace GameClient
 		void PrepareInitialHUD(Engine::DSHHud::Manager* hudManager) override;
 
 	private:
+		void DeclareUIAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext);
 		void DeclareMoveAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext);
 		void DeclareCameraAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext);
 		void DeclareSystemAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext);

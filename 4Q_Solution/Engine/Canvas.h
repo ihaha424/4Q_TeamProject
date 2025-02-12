@@ -19,6 +19,8 @@ namespace Engine
 		void Detach();
 		void Finalize();
 
+		virtual void Action();
+
 		[[nodiscard]] UI::Panel::Anchor* GetRootPanel();
 
 	protected:

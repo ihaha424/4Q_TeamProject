@@ -175,6 +175,12 @@
     <Filter Include="Canvas\Main">
       <UniqueIdentifier>{fa71e9a0-e353-4433-a197-d94f776d1659}</UniqueIdentifier>
     </Filter>
+    <Filter Include="World\EmptyWorld">
+      <UniqueIdentifier>{22556cbd-66a1-46ff-b453-db243ac00374}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\SimpleCamera">
+      <UniqueIdentifier>{afaaabca-0ecd-4345-8122-99602b6136a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -549,6 +555,12 @@
     <ClInclude Include="MainCanvas.h">
       <Filter>Canvas\Main</Filter>
     </ClInclude>
+    <ClInclude Include="EmptyWorld.h">
+      <Filter>World\EmptyWorld</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleCamera.h">
+      <Filter>Object\SimpleCamera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -886,6 +898,12 @@
     </ClCompile>
     <ClCompile Include="MainCanvas.cpp">
       <Filter>Canvas\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="EmptyWorld.cpp">
+      <Filter>World\EmptyWorld</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleCamera.cpp">
+      <Filter>Object\SimpleCamera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

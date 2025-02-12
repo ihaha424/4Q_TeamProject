@@ -160,6 +160,7 @@
     <ClInclude Include="BG_Ornoa_Cloth_2.h" />
     <ClInclude Include="BG_Ornoa_Cloth_3.h" />
     <ClInclude Include="BG_Props_Fence.h" />
+    <ClInclude Include="EmptyWorld.h" />
     <ClInclude Include="GameCoreData.h" />
     <ClInclude Include="Hide_SoundTrigger.h" />
     <ClInclude Include="MainCanvas.h" />
@@ -265,6 +266,7 @@
     <ClInclude Include="RemoteRay.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SceneFillter.h" />
+    <ClInclude Include="SimpleCamera.h" />
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="StaticObject.h" />
     <ClInclude Include="Obj_Props_Bermiore_Cloth_1.h" />
@@ -286,6 +288,7 @@
     <ClCompile Include="BG_Ornoa_Cloth_2.cpp" />
     <ClCompile Include="BG_Ornoa_Cloth_3.cpp" />
     <ClCompile Include="BG_Props_Fence.cpp" />
+    <ClCompile Include="EmptyWorld.cpp" />
     <ClCompile Include="MainCanvas.cpp" />
     <ClCompile Include="GameCoreData.cpp" />
     <ClCompile Include="Hide_SoundTrigger.cpp" />
@@ -382,6 +385,7 @@
     <ClCompile Include="RemoteLive.cpp" />
     <ClCompile Include="RemoteMove.cpp" />
     <ClCompile Include="RemoteRay.cpp" />
+    <ClCompile Include="SimpleCamera.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="StaticObject.cpp" />
     <ClCompile Include="Obj_Props_Bermiore_Cloth_1.cpp" />

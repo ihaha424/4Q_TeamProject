@@ -37,6 +37,10 @@ void Engine::Canvas::Finalize()
 	_rootPanel.Finalize();
 }
 
+void Engine::Canvas::Action()
+{
+}
+
 Engine::UI::Panel::Anchor* Engine::Canvas::GetRootPanel()
 {
 	return &_rootPanel;

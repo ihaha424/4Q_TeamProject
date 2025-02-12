@@ -17,6 +17,8 @@ namespace Engine::DSHHud
 
 		void SetCanvas(Canvas* canvas);
 
+		void ActionThisCanvas() const;
+
 	private:
 		Canvas* _canvas;
 		Canvas* _nextCanvas;

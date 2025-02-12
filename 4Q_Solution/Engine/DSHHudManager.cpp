@@ -49,3 +49,8 @@ void Engine::DSHHud::Manager::SetCanvas(Canvas* canvas)
 {
 	_nextCanvas = canvas;
 }
+
+void Engine::DSHHud::Manager::ActionThisCanvas() const
+{
+	if (_canvas != nullptr) _canvas->Action();
+}

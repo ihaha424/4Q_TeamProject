@@ -3,6 +3,8 @@
 
 #include "MainCanvas.h"
 #include "TestWorld.h"
+#include "EmptyWorld.h"
+#include "SimpleCamera.h"
 #include "../Engine/DSHHudManager.h"
 
 GameClient::Application::Application(const HINSTANCE instanceHandle) : Engine::Application(instanceHandle)
@@ -17,14 +19,18 @@ void GameClient::Application::LoadData(Engine::Load::IManager* loadManager)
 
 void GameClient::Application::DeclareInputActions(Engine::Input::IManager* inputManager)
 {
-	Engine::Input::IMappingContext* mappingContext = nullptr;
-	inputManager->GetMappingContext(L"Default", &mappingContext);
+	Engine::Input::IMappingContext* gameMappingContext = nullptr;
+	inputManager->GetMappingContext(L"Default", &gameMappingContext);
 
-	DeclareMoveAction(inputManager, mappingContext);
-	DeclareCameraAction(inputManager, mappingContext);
-	DeclareSystemAction(inputManager, mappingContext);
+	Engine::Input::IMappingContext* uiMappingContext = nullptr;
+	inputManager->GetMappingContext(L"UI", &uiMappingContext);
 
-	inputManager->SetActiveMappingContext(mappingContext);
+	DeclareUIAction(inputManager, uiMappingContext);
+	DeclareMoveAction(inputManager, gameMappingContext);
+	DeclareCameraAction(inputManager, gameMappingContext);
+	DeclareSystemAction(inputManager, gameMappingContext);
+
+	inputManager->SetActiveMappingContext(uiMappingContext);
 }
 
 void GameClient::Application::Register(Engine::Content::IManager* contentManager, Engine::Load::IManager* loadManager)
@@ -32,9 +38,11 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	Engine::Application::Register(contentManager, loadManager);
 
 	const auto worldFactory = contentManager->GetWorldFactory();
+	worldFactory->Register<EmptyWorld>();
 	worldFactory->Register<TestWorld>();
 
 	const auto objectFactory = contentManager->GetObjectFactory();
+	objectFactory->Register<SimpleCamera>();
 	objectFactory->Register<GlobalLight>();
 	objectFactory->Register<Ray>(L"Assets/Models/Ray.fbx");
 	objectFactory->Register<RemoteRay>(L"Assets/Models/Ray.fbx");
@@ -451,7 +459,8 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 
 void GameClient::Application::PrepareInitialWorld(Engine::Content::Factory::World* worldFactory)
 {
-	worldFactory->Clone<TestWorld>();
+	worldFactory->Clone<EmptyWorld>();
+	//worldFactory->Clone<TestWorld>();
 }
 
 void GameClient::Application::PrepareInitialHUD(Engine::DSHHud::Manager* hudManager)
@@ -459,6 +468,27 @@ void GameClient::Application::PrepareInitialHUD(Engine::DSHHud::Manager* hudMana
 	_mainCanvas = new MainCanvas(_size);
 	hudManager->SetCanvas(_mainCanvas);	
 }
+
+void GameClient::Application::DeclareUIAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext)
+{
+	Engine::Input::Device::IController* controller = nullptr;
+	inputManager->GetDevice(&controller);
+
+	// Move
+	Engine::Input::IAction* action = nullptr;
+	mappingContext->GetAction(L"UINext", &action);
+
+	Engine::Input::Trigger::IDown* bButtonTrigger = nullptr;
+	action->GetTrigger(&bButtonTrigger);
+	Engine::Input::Component::IButtonComponent* bButton = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Button::B, &bButton);
+	bButtonTrigger->SetComponent(bButton);
+
+	action->AddListener(Engine::Input::Trigger::Event::Started, [](auto) {
+		GetHudManager()->ActionThisCanvas();
+		});
+}
+
 
 void GameClient::Application::DeclareMoveAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext)
 {

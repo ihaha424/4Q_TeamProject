@@ -11,10 +11,10 @@ Engine::UI::Wrapper::Wrapper::~Wrapper()
 	Utility::SafeDelete()(&_child);
 }
 
-void Engine::UI::Wrapper::Wrapper::Initialize()
+void Engine::UI::Wrapper::Wrapper::Initialize(const Modules& modules)
 {
-	UserInterface::Initialize();
-	_child->Initialize();
+	UserInterface::Initialize(modules);
+	_child->Initialize(modules);
 }
 
 void Engine::UI::Wrapper::Wrapper::Attach()

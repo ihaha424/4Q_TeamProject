@@ -7,7 +7,16 @@ namespace Engine::UI::Wrapper
 	public:
 		Image(Math::Rect* rect, const std::filesystem::path& path);
 
+		void Initialize(const Modules& modules) override;
+		void Attach() override;
+		void Update(float deltaGameTime) override;
+		void FixedUpdate() override;
+		void Detach() override;
+		void Finalize() override;
+
 	private:
 		std::filesystem::path _path;
+
+		Component::Sprite _sprite;
 	};
 }

@@ -547,6 +547,9 @@
     <Filter Include="Components\LineWave">
       <UniqueIdentifier>{d40712da-0a65-47bd-9ab1-07f6cbe62826}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UserInterfaces\Panels\Overlay">
+      <UniqueIdentifier>{ed005572-5304-4feb-a240-666f3d6e633d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -1071,6 +1074,9 @@
     <ClInclude Include="ShadowCamera.h">
       <Filter>Components\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="OverlayPanel.h">
+      <Filter>UserInterfaces\Panels\Overlay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1501,6 +1507,9 @@
     </ClCompile>
     <ClCompile Include="ShadowCamera.cpp">
       <Filter>Components\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="OverlayPanel.cpp">
+      <Filter>UserInterfaces\Panels\Overlay</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -7,9 +7,9 @@ Engine::Canvas::Canvas(const Math::Size& viewportSize) :
 {
 }
 
-void Engine::Canvas::Initialize()
+void Engine::Canvas::Initialize(const Modules& modules)
 {
-	_rootPanel.Initialize();
+	_rootPanel.Initialize(modules);
 }
 
 void Engine::Canvas::Attach()

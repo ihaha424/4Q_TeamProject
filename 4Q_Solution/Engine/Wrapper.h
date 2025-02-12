@@ -8,7 +8,7 @@ namespace Engine::UI::Wrapper
 		explicit Wrapper(Math::Rect* rect);
 		~Wrapper() override;
 
-		void Initialize() override;
+		void Initialize(const Modules& modules) override;
 		void Attach() override;
 		void Update(float deltaGameTime) override;
 		void FixedUpdate() override;

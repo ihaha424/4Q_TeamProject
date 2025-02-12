@@ -208,6 +208,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="LoggerManager.h" />
     <ClInclude Include="LogLevel.h" />
     <ClInclude Include="LTRB.h" />
+    <ClInclude Include="OverlayPanel.h" />
     <ClInclude Include="Panels.h" />
     <ClInclude Include="PHICoordinateConvert.h" />
     <ClInclude Include="FiniteStateMachine.h" />
@@ -385,6 +386,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="LoggerManager.cpp" />
     <ClCompile Include="LogLevel.cpp" />
     <ClCompile Include="LTRB.cpp" />
+    <ClCompile Include="OverlayPanel.cpp" />
     <ClCompile Include="PHICoordinateConvert.cpp" />
     <ClCompile Include="FiniteStateMachine.cpp" />
     <ClCompile Include="PHICollision.cpp" />

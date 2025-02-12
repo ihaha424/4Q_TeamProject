@@ -12,7 +12,7 @@ namespace Engine
 	public:
 		explicit Canvas(const Math::Size& viewportSize);
 
-		void Initialize();
+		void Initialize(const Modules& modules);
 		void Attach();
 		void Update(float deltaGameTime);
 		void FixedUpdate();

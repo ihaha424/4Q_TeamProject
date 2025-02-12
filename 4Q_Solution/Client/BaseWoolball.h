@@ -16,7 +16,6 @@ public:
 	void PostSetSoundProperty(int index, float min, float max);
 protected:
 	void DisposeComponents() override;
-	void PreInitialize(const Engine::Modules& modules) override;
 	void InteractCallback(const PlayMsg::InteractObject* msg);
 
 	Engine::Component::Synchronize* _sync;

@@ -10,6 +10,8 @@ void Obj_Bermiore_Soundblock::Prepare(Engine::Content::Factory::Component* compo
 {
 	InteractObject::Prepare(componentFactory);
 	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
+	for (int i = 0; i < 3; i++)
+		_sound[i] = componentFactory->Clone<Engine::Component::Effect3DSound>(this);
 }
 
 void Obj_Bermiore_Soundblock::SendInteractToServer()
@@ -44,6 +46,8 @@ void Obj_Bermiore_Soundblock::DisposeComponents()
 {
 	InteractObject::DisposeComponents();
 	_sync->Dispose();
+	for (int i = 0; i < 6; i++)
+		_sound[i]->Dispose();
 }
 
 void Obj_Bermiore_Soundblock::PreInitialize(const Engine::Modules& modules)
@@ -57,6 +61,25 @@ void Obj_Bermiore_Soundblock::PreInitialize(const Engine::Modules& modules)
 	, this);
 	_sync->AddCallback((short)PacketID::InteractObject, &Obj_Bermiore_Soundblock::PlaySound, this);
 	_sync->SetSerialNumber(12108);
+
+	_sound[0]->SetPath(L"Assets/Sounds/SFX_Bermiore_Ball_1.wav");
+	_sound[1]->SetPath(L"Assets/Sounds/SFX_Bermiore_Ball_2.wav");
+	_sound[2]->SetPath(L"Assets/Sounds/SFX_Bermiore_Ball_3.wav");
+}
+
+void Obj_Bermiore_Soundblock::PostInitialize(const Engine::Modules& modules)
+{
+	InteractObject::PostInitialize(modules);
+
+	_sound[0]->SetMinDistance(5.f);
+	_sound[1]->SetMinDistance(5.f);
+	_sound[2]->SetMinDistance(5.f);
+	_sound[0]->SetMaxDistance(15.f);
+	_sound[1]->SetMaxDistance(15.f);
+	_sound[2]->SetPosition(_transform.position);
+	_sound[0]->SetPosition(_transform.position);
+	_sound[1]->SetPosition(_transform.position);
+	_sound[2]->SetPosition(_transform.position);
 }
 
 void Obj_Bermiore_Soundblock::Interact()
@@ -86,7 +109,8 @@ void Obj_Bermiore_Soundblock::PostUpdate(float deltaTime)
 				if (isData)
 				{
 					auto puzzleData = std::any_cast<Puzzle_01>(*isData);
-					puzzleData.curPosition[_soundIndex];//°¡ ÀÎµ¦½º
+					int index = puzzleData.curPosition[_soundIndex];//°¡ ÀÎµ¦½º
+					_sound[index]->Play();
 				}
 			}
 			_soundIndex++;

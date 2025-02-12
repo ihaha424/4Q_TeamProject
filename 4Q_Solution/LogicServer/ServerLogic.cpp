@@ -618,7 +618,13 @@ void ServerLogic::ObjectTriggerProcess(const Packet& packet)
     int triggerboxId = _triggerObject.triggerboxid();
     int targetObjectId = _triggerObject.objectserialnumber();
 
-    
+    // trigger는 8001부터 시작.
+    // 퍼즐 1 8001 ~ 8005
+    // 퍼즐 3 8011 ~ 8015
+    // 퍼즐 4 8021 ~ 8025
+    // 퍼즐 5 8031 ~ 8035
+    // 지역 브금 8041 ~ 8045
+
     Puzzle5(targetObjectId, triggerboxId);
 }
 // =============================

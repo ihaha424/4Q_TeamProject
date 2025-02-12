@@ -486,12 +486,6 @@ void ServerLogic::ObjectInteractProcess(const Packet& packet)
     else if (objectNum == 10002 && _currentQuestID == 3103) {
         PlayDialog(31306); // 리브 레이 대화
     }
-    else if (objectNum == 10004 && _currentQuestID == 3104) {
-        PlayDialog(41301);
-    }
-    else if (objectNum == 10002 && _currentQuestID == 3105) {
-        PlayDialog(41204); // 리브 레이 대화
-    }
     else if (objectNum == 10004 && _currentQuestID == 1999) {
         PlayDialog(51501);
     }
@@ -515,7 +509,7 @@ void ServerLogic::ObjectInteractProcess(const Packet& packet)
         QuestProcess(_currentQuestID);
         printf("[Interact Process] Puzzle Clear. Puzzle Number : %d\n", _currentPuzzleNumber);
     }
-    else if (objectNum == 12101) {
+    else if (objectNum == 12101 && _puzzle2Clear) {
         Server::BroadCast("", (short)PacketID::PuzzleSuccess, 0, 9002);
         QuestProcess(_currentQuestID);
         printf("[Interact Process] Puzzle Clear. Puzzle Number : %d\n", _currentPuzzleNumber);
@@ -1026,8 +1020,19 @@ void ServerLogic::Puzzle1(int objectId)
 void ServerLogic::Puzzle2(int objectId)
 {
     // 12102 ~ 12107
-    if (objectId == 12108) {
 
+
+    if (objectId == 12108) {
+        _interactObject.set_objectserialnumber(objectId);
+        _interactObject.SerializeToString(&_msgBuffer);
+        Server::BroadCast(_msgBuffer, (short)PacketID::InteractObject, _interactObject.ByteSizeLong(), objectId);
+    }
+    else if (objectId == 12101) {
+        if (_puzzle2Clear == false) {
+            _interactObject.set_objectserialnumber(objectId);
+            _interactObject.SerializeToString(&_msgBuffer);
+            Server::BroadCast(_msgBuffer, (short)PacketID::InteractObject, _interactObject.ByteSizeLong(), objectId);
+        }
     }
     if (objectId < 12102 && objectId > 12107) {
         return;
@@ -1046,9 +1051,11 @@ void ServerLogic::Puzzle2(int objectId)
     if (_balls[0] == 1 && _balls[1] == 2 && _balls[2] == 2 && _balls[3] == 2 && _balls[4] == 1 && _balls[5] == 3) {
         //_objectActive.set_objectserialnumber(12101);
         //_objectActive.SerializeToString(&_msgBuffer);
+        _puzzle2Clear = true;
         Server::BroadCast("", (short)PacketID::ObjectActive, 0, 12101);
         printf("[Puzzle 2] Puzzle Clear Object Activated.\n");
     }
+
 }
 void ServerLogic::Puzzle3(int objectId)
 {

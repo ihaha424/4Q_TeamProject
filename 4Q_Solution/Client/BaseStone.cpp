@@ -10,12 +10,14 @@ void BaseStone::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
 	InteractObject::Prepare(componentFactory);
 	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
+	_sound = componentFactory->Clone<Engine::Component::Effect3DSound>(this);
 }
 
 void BaseStone::DisposeComponents()
 {
 	InteractObject::DisposeComponents();
 	_sync->Dispose();
+	_sound->Dispose();
 }
 
 void BaseStone::PreInitialize(const Engine::Modules& modules)
@@ -41,6 +43,18 @@ void BaseStone::SendInteractToServer()
 		_sync->_interactObject.ByteSizeLong(), 
 		_sync->GetSerialNumber()
 	);
+}
+
+void BaseStone::PreSetSoundProperty(std::filesystem::path path)
+{
+	_sound->SetPath(path);
+}
+
+void BaseStone::PostSetSoundProperty(float min, float max)
+{
+	_sound->SetMinDistance(min);
+	_sound->SetMaxDistance(max);
+	_sound->SetPosition(_transform.position);
 }
 
 

@@ -23,6 +23,9 @@ void BaseWoolball::Prepare(Engine::Content::Factory::Component* componentFactory
 {
 	InteractObject::Prepare(componentFactory);
 	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
+	_sound1 = componentFactory->Clone<Engine::Component::Effect3DSound>(this);
+	_sound2 = componentFactory->Clone<Engine::Component::Effect3DSound>(this);
+	_sound3 = componentFactory->Clone<Engine::Component::Effect3DSound>(this);
 }
 
 void BaseWoolball::SendInteractToServer()
@@ -37,10 +40,50 @@ void BaseWoolball::SendInteractToServer()
 	);
 }
 
+void BaseWoolball::PreSetSoundProperty(int index, std::filesystem::path path)
+{
+	switch (index) {
+	case 1:
+		_sound1->SetPath(path);
+		break;
+	case 2:
+		_sound2->SetPath(path);
+		break;
+	case 3:
+		_sound3->SetPath(path);
+		break;
+	}
+}
+
+void BaseWoolball::PostSetSoundProperty(int index, float min, float max)
+{
+	switch (index) {
+	case 1:
+		_sound1->SetMaxDistance(max);
+		_sound1->SetMinDistance(min);
+		_sound1->SetPosition(_transform.position);
+		break;
+	case 2:
+		_sound2->SetMaxDistance(max);
+		_sound2->SetMinDistance(min);
+		_sound2->SetPosition(_transform.position);
+		break;
+	case 3:
+		_sound3->SetMaxDistance(max);
+		_sound3->SetMinDistance(min);
+		_sound3->SetPosition(_transform.position);
+		break;
+	}
+}
+
 void BaseWoolball::DisposeComponents()
 {
 	InteractObject::DisposeComponents();
+
 	_sync->Dispose();
+	_sound1->Dispose();
+	_sound2->Dispose();
+	_sound3->Dispose();
 }
 
 void BaseWoolball::PreInitialize(const Engine::Modules& modules)
@@ -78,7 +121,17 @@ void BaseWoolball::InteractCallback(const PlayMsg::InteractObject* msg)
 		if (_posIndex != muteValue[_index])
 		{
 			// 사운드 인덱스 재생
-			_index;
+			switch (_index) {
+			case 0:
+				_sound1->Play();
+				break;
+			case 1:
+				_sound2->Play();
+				break;
+			case 2:
+				_sound3->Play();
+				break;
+			}
 		}
 	}
 }

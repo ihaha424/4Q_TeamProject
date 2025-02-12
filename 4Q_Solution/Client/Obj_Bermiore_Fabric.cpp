@@ -10,6 +10,8 @@ void Obj_Bermiore_Fabric::Prepare(Engine::Content::Factory::Component* component
 {
 	InteractObject::Prepare(componentFactory);
 	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
+	_sound = componentFactory->Clone<Engine::Component::Effect3DSound>(this);
+	_soundClear = componentFactory->Clone<Engine::Component::Effect3DSound>(this);
 }
 
 void Obj_Bermiore_Fabric::SendInteractToServer()
@@ -45,6 +47,7 @@ void Obj_Bermiore_Fabric::InteractCallback(const PlayMsg::InteractObject* msg)
 	if (data.player == static_cast<int>(PlayerEnum::Live) || data.player == static_cast<int>(PlayerEnum::Developer))
 	{
 		// Sound ÆÄÀÏ
+		_sound->Play();
 	}
 	
 }
@@ -53,6 +56,8 @@ void Obj_Bermiore_Fabric::DisposeComponents()
 {
 	InteractObject::DisposeComponents();
 	_sync->Dispose();
+	_sound->Dispose();
+	_soundClear->Dispose();
 }
 
 void Obj_Bermiore_Fabric::PreInitialize(const Engine::Modules& modules)
@@ -67,6 +72,21 @@ void Obj_Bermiore_Fabric::PreInitialize(const Engine::Modules& modules)
 			DataChangeCallBack(name, value);
 		}
 	, this);
+
+	_sound->SetPath(L"Assets/Sounds/SFX_Bermiore.wav");
+	_soundClear->SetPath(L"Assets/Sounds/SFX_Bermiore_Clear.wav");
+}
+
+void Obj_Bermiore_Fabric::PostInitialize(const Engine::Modules& modules)
+{
+	InteractObject::PostInitialize(modules);
+
+	_sound->SetMinDistance(10.f);
+	_sound->SetMaxDistance(20.f);
+	_sound->SetPosition(_transform.position);
+	_soundClear->SetMinDistance(10.f);
+	_soundClear->SetMaxDistance(20.f);
+	_soundClear->SetPosition(_transform.position);
 }
 
 void Obj_Bermiore_Fabric::Interact()
@@ -82,6 +102,8 @@ void Obj_Bermiore_Fabric::DataChangeCallBack(const std::wstring& name, const std
 		_activate = true;
 	if (data._puzzleClear)
 		_answer = true;
-	if (data._finish)
+	if (data._finish) {
 		_activate = false;
+		_soundClear->Play();
+	}
 }

@@ -550,6 +550,12 @@
     <Filter Include="UserInterfaces\Panels\Overlay">
       <UniqueIdentifier>{ed005572-5304-4feb-a240-666f3d6e633d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Difinition\DSHHud">
+      <UniqueIdentifier>{25204b7b-b97e-46d6-ae75-bc53be52ecc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Difinition\DSHHud\Manager">
+      <UniqueIdentifier>{ce9c4f2a-e88f-448f-93c4-d682324350f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -1077,6 +1083,9 @@
     <ClInclude Include="OverlayPanel.h">
       <Filter>UserInterfaces\Panels\Overlay</Filter>
     </ClInclude>
+    <ClInclude Include="DSHHudManager.h">
+      <Filter>Modules\Difinition\DSHHud\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1510,6 +1519,9 @@
     </ClCompile>
     <ClCompile Include="OverlayPanel.cpp">
       <Filter>UserInterfaces\Panels\Overlay</Filter>
+    </ClCompile>
+    <ClCompile Include="DSHHudManager.cpp">
+      <Filter>Modules\Difinition\DSHHud\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "Application.h"
 
+#include "MainCanvas.h"
 #include "TestWorld.h"
+#include "../Engine/DSHHudManager.h"
 
 GameClient::Application::Application(const HINSTANCE instanceHandle) : Engine::Application(instanceHandle)
 {
@@ -450,6 +452,12 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 void GameClient::Application::PrepareInitialWorld(Engine::Content::Factory::World* worldFactory)
 {
 	worldFactory->Clone<TestWorld>();
+}
+
+void GameClient::Application::PrepareInitialHUD(Engine::DSHHud::Manager* hudManager)
+{
+	_mainCanvas = new MainCanvas(_size);
+	hudManager->SetCanvas(_mainCanvas);	
 }
 
 void GameClient::Application::DeclareMoveAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext)

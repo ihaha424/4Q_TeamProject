@@ -6,6 +6,7 @@
 #include "DSHLoadManager.h"
 #include "DSHLoggerManager.h"
 #include "DSHAudioManager.h"
+#include "DSHHudManager.h"
 #include "DSHTimeManager.h"
 #include "DSHWindowManager.h"
 #include "GEGraphicsManager.h"
@@ -24,6 +25,7 @@ Engine::Physics::Manager* Engine::Application::_physicsManager = nullptr;
 Engine::Logger::Manager* Engine::Application::_loggerManager = nullptr;
 Engine::GameState::Manager* Engine::Application::_gameStateManager = nullptr;
 Engine::DSHAudio::Manager* Engine::Application::_soundManager = nullptr;
+Engine::DSHHud::Manager* Engine::Application::_hudManager = nullptr;
 
 Engine::Math::Size Engine::Application::_size = Math::Size::Zero;
 
@@ -40,6 +42,7 @@ void Engine::Application::Begin()
 	InitializeManagers();
 	DeclareInputActions(_inputManager);
 	Register(_contentManager, _loadManager);
+	PrepareInitialHUD(_hudManager);
 	PrepareInitialWorld(_contentManager->GetWorldFactory());
 }
 
@@ -68,6 +71,14 @@ void Engine::Application::Run(const int showCommand)
 			_inputManager->Update(metaTime);
 			_graphicsManager->PreUpdate(deltaTime);
 
+			_hudManager->Contraction(Modules{
+				.graphicsManager = _graphicsManager,
+				.physicsManager = _physicsManager,
+				.loadManager = _loadManager,
+				.gameStateManager = _gameStateManager,
+				.audioManager = _soundManager
+				});
+
 			_contentManager->Contraction(Modules{
 				.graphicsManager = _graphicsManager,
 				.physicsManager = _physicsManager,
@@ -82,12 +93,15 @@ void Engine::Application::Run(const int showCommand)
 
 			while (_timeManager->IsFixedUpdate())
 			{
+				_hudManager->FixedUpdate();
 				_contentManager->FixedUpdate();
 			}
 
+			_hudManager->Update(deltaTime);
 			_contentManager->Update(deltaTime);
 			_contentManager->LazyUpdate(deltaTime);
 
+			_hudManager->Relaxation();
 			_contentManager->Relaxation();
 
 			_soundManager->Update();
@@ -166,6 +180,11 @@ Engine::Audio::IManager* Engine::Application::GetSoundManager()
 	return _soundManager;
 }
 
+Engine::DSHHud::Manager* Engine::Application::GetHudManager()
+{
+	return _hudManager;
+}
+
 void Engine::Application::Register(Content::IManager* contentManager, Load::IManager* loadManager)
 {
 	const auto componentFactory = contentManager->GetComponentFactory();
@@ -203,6 +222,7 @@ void Engine::Application::CreateManagers()
 	CreateInputManager(&_inputManager);
 	CreateGraphicsManager(&_graphicsManager);
 	CreateLoadManager(&_loadManager);
+	CreateHudManager(&_hudManager);
 	CreateContentManager(&_contentManager);
 	CreateNetworkManager(&_networkManager);
 	CreatePhysicsManager(&_physicsManager);
@@ -219,6 +239,7 @@ void Engine::Application::InitializeManagers() const
 	_inputManager->Initialize(_windowManager->GetHandle());
 	_windowManager->AddProcedure(DSHInput::Manager::Procedure);
 	_graphicsManager->Initialize(_windowManager->GetHandle(), L"../Shaders/", _size, false, 1);
+	_hudManager->Initialize();
 	_contentManager->Initialize();
     _networkManager->Initialize();
     //_physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, true);
@@ -241,6 +262,7 @@ void Engine::Application::FinalizeManagers()
 {
 	_soundManager->Finalize();
 	_contentManager->Finalize();
+	_hudManager->Finalize();
 	_loadManager->Finalize();
 	_graphicsManager->Finalize();
 	_inputManager->Finalize();
@@ -261,6 +283,7 @@ void Engine::Application::DeleteManagers()
 	deleter(&_graphicsManager);
 	deleter(&_loadManager);
 	deleter(&_contentManager);
+	deleter(&_hudManager);
 	deleter(&_networkManager);
 	deleter(&_physicsManager);
 	deleter(&_loggerManager);
@@ -397,5 +420,17 @@ void Engine::Application::CreateSoundManager(DSHAudio::Manager** soundManager)
 		DSHAudio::Manager* manager = new DSHAudio::Manager();
 		if (manager == nullptr) thrower(E_OUTOFMEMORY);
 		*soundManager = manager;
+	}
+}
+
+void Engine::Application::CreateHudManager(DSHHud::Manager** hudManager)
+{
+	constexpr Utility::ThrowIfFailed thrower;
+	if (hudManager == nullptr) thrower(E_INVALIDARG);
+	else
+	{
+		DSHHud::Manager* manager = new DSHHud::Manager();
+		if (manager == nullptr) thrower(E_OUTOFMEMORY);
+		*hudManager = manager;
 	}
 }

@@ -2,7 +2,14 @@
 #include "MainCanvas.h"
 
 MainCanvas::MainCanvas() :
-	Canvas(GameClient::Application::GetSize())
+	MainCanvas(GameClient::Application::GetSize())
 {
-	auto [anchorChild, overlay] = _rootPanel.CreateChild<Engine::UI::Wrapper::Image>(L"Assets/UI/UI_Logo.png");
+}
+
+MainCanvas::MainCanvas(const Engine::Math::Size& viewportSize):
+	Canvas(viewportSize)
+{
+	auto [anchorChild, logoImage] = _rootPanel.CreateChild<Engine::UI::Wrapper::Image>(L"Assets/UI/UI_Logo.png");
+	auto startImage = logoImage->CreateChild<Engine::UI::Wrapper::Image>(L"Assets/UI/UI_GameStart_Off.png");
+	//startImage->CreateChild<Engine::UI::Wrapper::Image>(L"Assets/UI/UI_GameStart_On.png");
 }

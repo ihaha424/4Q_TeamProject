@@ -14,37 +14,37 @@ Engine::UI::Wrapper::Wrapper::~Wrapper()
 void Engine::UI::Wrapper::Wrapper::Initialize(const Modules& modules)
 {
 	UserInterface::Initialize(modules);
-	_child->Initialize(modules);
+	if (_child != nullptr) _child->Initialize(modules);
 }
 
 void Engine::UI::Wrapper::Wrapper::Attach()
 {
 	UserInterface::Attach();
-	_child->Attach();
+	if (_child != nullptr) _child->Attach();
 }
 
 void Engine::UI::Wrapper::Wrapper::Update(const float deltaGameTime)
 {
 	UserInterface::Update(deltaGameTime);
-	_child->Update(deltaGameTime);
+	if (_child != nullptr) _child->Update(deltaGameTime);
 }
 
 void Engine::UI::Wrapper::Wrapper::FixedUpdate()
 {
 	UserInterface::FixedUpdate();
-	_child->FixedUpdate();
+	if (_child != nullptr) _child->FixedUpdate();
 }
 
 void Engine::UI::Wrapper::Wrapper::Detach()
 {
 	UserInterface::Detach();
-	_child->Detach();
+	if (_child != nullptr) _child->Detach();
 }
 
 void Engine::UI::Wrapper::Wrapper::Finalize()
 {
 	UserInterface::Finalize();
-	_child->Finalize();
+	if (_child != nullptr) _child->Finalize();
 }
 
 void Engine::UI::Wrapper::Wrapper::SetChild(UserInterface* child)

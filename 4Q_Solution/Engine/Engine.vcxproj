@@ -194,6 +194,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="ChractorController.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="DSHHudManager.h" />
     <ClInclude Include="DSHLoggerManager.h" />
     <ClInclude Include="DSHAudioManager.h" />
     <ClInclude Include="Effect3DSoundComponent.h" />
@@ -375,6 +376,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="ChractorController.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="DSHHudManager.cpp" />
     <ClCompile Include="DSHLoggerManager.cpp" />
     <ClCompile Include="DSHAudioManager.cpp" />
     <ClCompile Include="Effect3DSoundComponent.cpp" />

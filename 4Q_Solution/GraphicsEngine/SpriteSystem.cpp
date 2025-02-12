@@ -38,6 +38,9 @@ void SpriteSystem::Initialize()
 
 void SpriteSystem::Render()
 {
+	auto* blendState = g_pStateManagement->GetBlendState(L"AlphaBlend");
+	_pDeviceContext->OMSetBlendState(blendState, nullptr, 0xFFFFFFFF);
+
 	_psSprite->SetPixelShader();
 
 	for (auto& [component, matrix] : _components)
@@ -46,6 +49,8 @@ void SpriteSystem::Render()
 		g_pConstantBuffer->UpdateConstantBuffer(L"World", &transpose);
 		component->Render(_pDeviceContext);
 	}
+
+	_pDeviceContext->OMSetBlendState(nullptr, nullptr, 0xFFFFFFFF);
 }
 
 void SpriteSystem::Free()

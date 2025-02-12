@@ -1,5 +1,7 @@
 #pragma once
 
+class MainCanvas;
+
 namespace GameClient
 {
 	class Application final : public Engine::Application
@@ -12,12 +14,16 @@ namespace GameClient
 		void DeclareInputActions(Engine::Input::IManager* inputManager) override;
 		void Register(Engine::Content::IManager* contentManager, Engine::Load::IManager* loadManager) override;
 		void PrepareInitialWorld(Engine::Content::Factory::World* worldFactory) override;
+		void PrepareInitialHUD(Engine::DSHHud::Manager* hudManager) override;
 
 	private:
 		void DeclareMoveAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext);
 		void DeclareCameraAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext);
 		void DeclareSystemAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext);
-	
+
+
+		MainCanvas* _mainCanvas;
+
 	private:
 		template<typename T>
 		inline void RegisterHelp(const std::wstring& name, Engine::Load::IManager* loadManager, Engine::Content::Factory::Object* const objectFactory)

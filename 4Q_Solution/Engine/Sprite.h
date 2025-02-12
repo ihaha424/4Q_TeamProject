@@ -18,6 +18,7 @@ namespace Engine::Component
 		void SetMatrix(Math::Matrix* matrix);
 		void SetFilePath(const std::filesystem::path& filePath);
 		void SetActiveDraw(bool isActive);
+		void SetAlpha(float alpha);
 
 	private:
 		GE::Matrix4x4			_geWorld;

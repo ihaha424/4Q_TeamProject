@@ -18,9 +18,10 @@ namespace Engine::UI::Wrapper
         void SetChild(UserInterface* child);
 
         template <typename T, typename... Args>
+			requires std::derived_from<T, UserInterface>&& std::constructible_from<T, Math::Rect*, Args...>
 		T* CreateChild(Args&&... args)
 		{
-			T* child = new T(std::forward<Args>(args)...);
+			T* child = new T(&_childRect, std::forward<Args>(args)...);
 			SetChild(child);
 			return child;
 		}

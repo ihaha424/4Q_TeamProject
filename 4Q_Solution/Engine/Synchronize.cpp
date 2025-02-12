@@ -154,6 +154,11 @@ void Engine::Component::Synchronize::InvokeMessage(const Packet& packet)
 		_callbackMap[packet._packetId]->Invoke(&_syncObject);
 		break;
 	}
+	case PacketID::ObjectActive:
+	{
+		_callbackMap[packet._packetId]->Invoke(nullptr);
+		break;
+	}
 	
     default:
         break;

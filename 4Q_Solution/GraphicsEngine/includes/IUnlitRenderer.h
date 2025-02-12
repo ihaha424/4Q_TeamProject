@@ -14,6 +14,6 @@ namespace GE
 		IUnlitRenderer& operator=(IUnlitRenderer&&) = delete;
 
 	public:
-		virtual void Querry(void** pointer) = 0;
+		virtual void SetPostEffectLayer(unsigned int layer) = 0;
 	};
 }

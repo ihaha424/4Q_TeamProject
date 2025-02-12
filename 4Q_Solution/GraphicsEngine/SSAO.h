@@ -29,5 +29,6 @@ private:
 	std::vector<Vector3> _noise;
 	std::shared_ptr<PixelShader> _psSSAO[End];
 	std::shared_ptr<PixelShader> _psGaussianBlur[End];
+	std::shared_ptr<PixelShader> _psBlend;
 	std::shared_ptr<Texture> _texture;
 };

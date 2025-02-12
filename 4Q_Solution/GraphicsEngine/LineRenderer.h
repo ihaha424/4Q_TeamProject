@@ -6,8 +6,9 @@ class VertexShader;
 class PixelShader;
 class GeometryShader;
 class Texture;
-class LineRenderer : public UnlitRenderer, virtual public GE::ILineRenderer
+class LineRenderer final : public GE::ILineRenderer, public UnlitRenderer
 {
+private:
 	struct Line
 	{
 		Vector4 position;
@@ -32,7 +33,9 @@ public:
 	void SetMaskTexture(const wchar_t* filePath) override;
 	void SetGradientTexture(const wchar_t* filePath) override;
 	void Update(float deltaTime) override;
-	void Querry(void** pointer) override;
+
+	// ILineRenderer을(를) 통해 상속됨
+	void SetPostEffectLayer(unsigned int layer) override;
 
 public:
 	void Initialize();
@@ -51,6 +54,4 @@ private:
 	unsigned int					_numSegments{ 0 };
 	unsigned int					_stride{ 0 };
 	unsigned int					_offset{ 0 };
-
-
 };

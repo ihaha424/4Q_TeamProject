@@ -35,8 +35,8 @@ bool ServerLogic::Initialize()
     printf("Start Loading MapData.json...\n");
     _mapData = _jsonLoader.DeSerialize("Assets/Test/MapData.json");
     printf("MapData.json Load Complete.\n");
-    LoadBuilding();
-    LoadSudium();
+    LoadStatic();
+
     LoadQuestData();
     LoadDialogData();
     //============================
@@ -618,87 +618,61 @@ void ServerLogic::ObjectTriggerProcess(const Packet& packet)
 // JSON Method, Variable Area
 // =============================
 
-void ServerLogic::LoadBuilding()
+void ServerLogic::LoadStatic()
 {
     printf("Start Loading Building Data...\n");
     const auto& groupData = _mapData["objectGroup"]["groups"];
-    const auto& buildingData = (*groupData.begin())["models"];
-    for (const auto& data : buildingData) {
-        Object* obj = new Object();
-        obj->_resourceId = data["className"].get<std::string>();
-        obj->_public = data["publicObject"];
+    for (const auto& staticObject : groupData)
+    {
+        const auto& objectData = staticObject["models"];
+        for (const auto& data : objectData) {
+            Object* obj = new Object();
+            obj->_resourceId = data["className"].get<std::string>();
+            obj->_public = data["publicObject"];
 
-        const auto& transformData = data["transformData"];
-        const auto& position = transformData["position"];
-        const auto& rotation = transformData["rotation"];
-        const auto& scale = transformData["scale"];
-        const auto& boxScale = data["boxScale"];
-        obj->_position = Engine::Math::Vector3(position["x"], position["y"], position["z"]);
-        obj->_rotation = Engine::Math::Quaternion(Engine::Math::Vector4(rotation["x"], rotation["y"], rotation["z"], rotation["w"]));
-        obj->_scale = Engine::Math::Vector3(scale["x"], scale["y"], scale["z"]);
-        obj->_boxScale = Engine::Math::Vector3(boxScale["x"], boxScale["y"], boxScale["z"]);
-        printf("Object Load Complete.\n");
-        printf("ClassName : %s, \nPosition : (%f, %f, %f), \nRotation : (%f, %f, %f, %f), \nScale : (%f, %f, %f)\n",
-            obj->_resourceId.c_str(),
-            obj->_position.x, obj->_position.y, obj->_position.z,
-            obj->_rotation.z, obj->_rotation.y, obj->_rotation.z, obj->_rotation.w,
-            obj->_scale.x, obj->_scale.y, obj->_scale.z
-        );
-        obj->_serialNumber = _staticObjectSerialNumber++;
-        _buildings.push_back(obj);
-        Engine::Transform transform{};
-        obj->_position *= 10;
-        obj->_scale /= 10;
-        obj->_boxScale = obj->_boxScale.Split(obj->_scale) * 50.f;
-        transform.position = obj->_position;
-        transform.rotation = obj->_rotation;
-        RegistStaticPhysics(*obj, obj->_boxScale);
-        obj->_staticRigid->SetTransform(transform);
-        printf("Building Create Complete. SerialNumber : %d\n", obj->_serialNumber);
+            const auto& transformData = data["transformData"];
+            const auto& position = transformData["position"];
+            const auto& rotation = transformData["rotation"];
+            const auto& scale = transformData["scale"];
+            const auto& boxScale = data["boxScale"];
+            const auto& boxCentor = data["boxPosition"];
+            const auto& isSphere = data["isSphere"];
+            obj->_position = Engine::Math::Vector3(position["x"], position["y"], position["z"]);
+            obj->_rotation = Engine::Math::Quaternion(Engine::Math::Vector4(rotation["x"], rotation["y"], rotation["z"], rotation["w"]));
+            obj->_scale = Engine::Math::Vector3(scale["x"], scale["y"], scale["z"]);
+            obj->_boxScale = Engine::Math::Vector3(boxScale["x"], boxScale["y"], boxScale["z"]);
+            auto objBoxCentor = Engine::Math::Vector3(boxCentor["x"], boxCentor["y"], boxCentor["z"]);
+            printf("Object Load Complete.\n");
+            printf("ClassName : %s, \nPosition : (%f, %f, %f), \nRotation : (%f, %f, %f, %f), \nScale : (%f, %f, %f)\n",
+                obj->_resourceId.c_str(),
+                obj->_position.x, obj->_position.y, obj->_position.z,
+                obj->_rotation.z, obj->_rotation.y, obj->_rotation.z, obj->_rotation.w,
+                obj->_scale.x, obj->_scale.y, obj->_scale.z
+            );
+            obj->_serialNumber = _staticObjectSerialNumber++;
+            _staticObejcts.push_back(obj);
+            Engine::Transform transform{};
+            obj->_position *= 10;
+            obj->_scale /= 10;
+            obj->_boxScale = obj->_boxScale.Split(obj->_scale) * 50.f;
+            objBoxCentor *= (obj->_scale);
+            objBoxCentor = Engine::Math::Vector3::Transform(objBoxCentor, obj->_rotation);
+            objBoxCentor += obj->_position;
+
+            transform.position = objBoxCentor;
+            transform.rotation = obj->_rotation;
+            if (!isSphere)
+                RegistStaticPhysicsBox(*obj, obj->_boxScale);
+            else
+                RegistStaticPhysicsSphere(*obj, obj->_boxScale);
+            obj->_staticRigid->SetTransform(transform);
+            printf("_staticObejcts Create Complete. SerialNumber : %d\n", obj->_serialNumber);
+        }
     }
-    printf("Building Data Load Complete.\n");
+    printf("_staticObejcts Data Load Complete.\n");
 }
-void ServerLogic::LoadSudium()
-{
-    printf("Start Loading Sudium Data...\n");
-    const auto& groupData = _mapData["objectGroup"]["groups"];
-    const auto& sudiumData = (*(groupData.begin() + 1))["models"];
-    for (const auto& data : sudiumData) {
-        Object* obj = new Object();
-        obj->_resourceId = data["className"].get<std::string>();
-        obj->_public = data["publicObject"];
 
-        const auto& transformData = data["transformData"];
-        const auto& position = transformData["position"];
-        const auto& rotation = transformData["rotation"];
-        const auto& scale = transformData["scale"];
-        const auto& boxScale = data["boxScale"];
-        obj->_position = Engine::Math::Vector3(position["x"], position["y"], position["z"]);
-        obj->_rotation = Engine::Math::Quaternion(Engine::Math::Vector4(rotation["x"], rotation["y"], rotation["z"], rotation["w"]));
-        obj->_scale = Engine::Math::Vector3(scale["x"], scale["y"], scale["z"]);
-        obj->_boxScale = Engine::Math::Vector3(boxScale["x"], boxScale["y"], boxScale["z"]);
-        printf("Object Load Complete.\n");
-        printf("ClassName : %s, \nPosition : (%f, %f, %f), \nRotation : (%f, %f, %f, %f), \nScale : (%f, %f, %f)\n",
-            obj->_resourceId.c_str(),
-            obj->_position.x, obj->_position.y, obj->_position.z,
-            obj->_rotation.z, obj->_rotation.y, obj->_rotation.z, obj->_rotation.w,
-            obj->_scale.x, obj->_scale.y, obj->_scale.z
-        );
-        obj->_serialNumber = _staticObjectSerialNumber++;
-        _sudiums.push_back(obj);
-        Engine::Transform transform{};
-        obj->_position *= 10;
-        obj->_scale /= 10;
-        obj->_boxScale = obj->_boxScale.Split(obj->_scale) * 50.f;
-        transform.position = obj->_position;
-        transform.rotation = obj->_rotation;
-        RegistStaticPhysics(*obj, obj->_boxScale);
-        obj->_staticRigid->SetTransform(transform);
 
-        printf("Sudium Create Complete. SerialNumber : %d\n", obj->_serialNumber);
-    }
-    printf("Sudium Data Load Complete.\n");
-}
 // =============================
 
 // ==============================
@@ -720,7 +694,7 @@ void ServerLogic::RegistDynamicPhysics(Object& obj, Engine::Math::Vector3 scale)
     _mainScene->AddActor(obj._dynamicRigid);
 }
 
-void ServerLogic::RegistStaticPhysics(Object& obj, Engine::Math::Vector3 scale)
+void ServerLogic::RegistStaticPhysicsBox(Object& obj, Engine::Math::Vector3 scale)
 {
     Engine::Physics::RigidComponentDesc rcd;
     rcd.rigidType = Engine::Physics::RigidBodyType::Static;
@@ -734,12 +708,28 @@ void ServerLogic::RegistStaticPhysics(Object& obj, Engine::Math::Vector3 scale)
     _physicsManager->CreateStatic(&obj._staticRigid, rcd, tf);
     _mainScene->AddActor(obj._staticRigid);
 }
+
+void ServerLogic::RegistStaticPhysicsSphere(Object& obj, Engine::Math::Vector3 scale)
+{
+    Engine::Physics::RigidComponentDesc rcd;
+    rcd.rigidType = Engine::Physics::RigidBodyType::Static;
+    rcd.shapeDesc.geometryDesc.type = Engine::Physics::GeometryShape::Sphere;
+    rcd.shapeDesc.geometryDesc.data = { scale.x, scale.y, scale.z, 0 };
+    rcd.shapeDesc.isExclusive = true;
+    rcd.shapeDesc.materialDesc.data = { 0.5f, 0.5f, 0.f };
+
+    Engine::Transform tf{};
+    tf.position = { 0, 0, 0 };
+    _physicsManager->CreateStatic(&obj._staticRigid, rcd, tf);
+    _mainScene->AddActor(obj._staticRigid);
+}
+
 void ServerLogic::RegistPlayer(Player* player)
 {
     Engine::Physics::ControllerDesc cd;
     cd.position = Engine::Math::Vector3(0, 0, 0);
-    cd.height = 10.f;
-    cd.radius = 2.f;
+    cd.height = 50.f;
+    cd.radius = 10.f;
     cd.gravity = { 0.f, -9.8f * 10, 0.f };
     cd.contactOffset = 0.2f;
     cd.stepOffset = 10.f;
@@ -750,27 +740,32 @@ void ServerLogic::RegistPlayer(Player* player)
     player->_controller->SetOwner(&player);
     player->_controller->SetBottomPosition(Engine::Math::Vector3(0.f, 10.f, 0.f));
     player->_controller->Initialize();
-    player->_controller->SetPosition(Engine::Math::Vector3(0, 300, 0));
+    player->_controller->SetPosition(Engine::Math::Vector3(0, 500, 0));
 }
 
 void ServerLogic::RegistGround(Ground& ground)
 {
-    Engine::Physics::GeometryDesc geometryDesc;
-    geometryDesc.data = { 2.5f, 2.5f, 6.5f };
-    _physicsManager->LoadHeightMap(geometryDesc, "terrain", "Assets/Models/Smoothed_Height_Map.png");
-    //_physicsManager->LoadTriangleMesh(geometryDesc, "terrain", "Assets/Test/Landscape03.fbx");
+    //Engine::Physics::GeometryDesc geometryDesc;
+    //geometryDesc.data = { 2.5f, 2.5f, 6.32f };
+    ////geometryDesc.data = { 2.5f, 2.5f, 5.f };
+    //_physicsManager->LoadHeightMap(geometryDesc, "terrain", "Assets/Models/Smoothed_Height_Map.png");
+   
+    //Engine::Transform transform{};
+    //Engine::Physics::IRigidStaticComponent* staticrigid;
+    //_physicsManager->CreateTriangleStatic(&staticrigid, "terrain", { {0.0f,0.f,0.f } }, transform);
+    //ground._staticRigid = static_cast<Engine::Physics::RigidStaticComponent*>(staticrigid);
+    //_mainScene->AddActor(ground._staticRigid);
+    //ground._staticRigid->SetTranslate({ -2560.f, -1350.f, -2560.f });
+    ////ground._staticRigid->SetTranslate({ -2560.f, -1035.f, -2560.f });
+    //auto tempRotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(-std::numbers::pi_v<float> * 0.5f, 0.f, 0.f);
+    //ground._staticRigid->SetRotation(tempRotation);
 
-    Engine::Transform transform{};
-    Engine::Physics::IRigidStaticComponent* staticrigid;
-    _physicsManager->CreateTriangleStatic(&staticrigid, "terrain", { {0.3f,0.f,0.f } }, transform);
-    ground._staticRigid = static_cast<Engine::Physics::RigidStaticComponent*>(staticrigid);
-    _mainScene->AddActor(ground._staticRigid);
-    ground._staticRigid->SetTranslate({ -2560.f, -1420.f, -2560.f });
-    auto tempRotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(-std::numbers::pi_v<float> * 0.5f, 0.f, 0.f);
-    ground._staticRigid->SetRotation(tempRotation);
+    //ground._staticRigid->SetOwner(&ground);
+    //ground._staticRigid->Initialize();
 
-    ground._staticRigid->SetOwner(&ground);
-    ground._staticRigid->Initialize();
+    Engine::Physics::IRigidComponent* rigid;
+    _physicsManager->CreatePlane(&rigid, Engine::Math::Vector3{ 0.f, 0.f, 0.f }, Engine::Math::Vector3{ 0.f,1.f, 0 }, { {0.f,0.f,0.f} });
+    _mainScene->AddActor(rigid);
 }
 void ServerLogic::RegistTriggerBox(TriggerBox& triggerBox)
 {

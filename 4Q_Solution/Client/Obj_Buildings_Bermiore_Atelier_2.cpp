@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "Obj_Buildings_Bermiore_Atelier_2.h"
 
-Obj_Buildings_Bermiore_Atelier_2::Obj_Buildings_Bermiore_Atelier_2(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath)
-	: StaticObject(std::forward<std::filesystem::path>(meshPath), std::forward<std::filesystem::path>(physicsPath))
+
+Obj_Buildings_Bermiore_Atelier_2::Obj_Buildings_Bermiore_Atelier_2(const std::filesystem::path& meshPath,
+	const std::filesystem::path& physicsPath):
+	StaticObject(meshPath, physicsPath)
 {
 }

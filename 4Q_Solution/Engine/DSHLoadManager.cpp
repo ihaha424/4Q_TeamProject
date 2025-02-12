@@ -55,6 +55,8 @@ void Engine::DSHLoad::Manager::LoadCloneData(const std::filesystem::path& path)
 
 			const auto& boxPosition = modelData["boxPosition"];
 			Math::Vector3 boxPositionData = { boxPosition["x"].get<float>(), boxPosition["y"].get<float>(), boxPosition["z"].get<float>() };
+			
+			bool isSphere = modelData["isSphere"];
 
 			positionData *= 10;
 			scaleData /= 10;
@@ -75,7 +77,8 @@ void Engine::DSHLoad::Manager::LoadCloneData(const std::filesystem::path& path)
 				std::pair<const std::wstring, std::any>{L"rotation", rotationData},
 				std::pair<const std::wstring, std::any>{L"scale", scaleData},
 				std::pair<const std::wstring, std::any>{L"boxScale", boxScaleData},
-				std::pair<const std::wstring, std::any>{L"boxPosition", boxPositionData}
+				std::pair<const std::wstring, std::any>{L"boxPosition", boxPositionData},
+				std::pair<const std::wstring, std::any>{L"isSphere", isSphere}
 			};
 			_objectCloneData[objectClassName].push_back(cloneData);
 		}

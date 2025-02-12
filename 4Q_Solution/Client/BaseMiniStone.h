@@ -4,8 +4,7 @@
 class BaseMiniStone : public InteractObject
 {
 public:
-	explicit BaseMiniStone(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
-	virtual ~BaseMiniStone() = default;
+	BaseMiniStone(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath);
 
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
 

@@ -49,6 +49,7 @@ using namespace DirectX::SimpleMath;
 #include "RenderGroup.h"
 #include "PostProcessSystem.h"
 #include "ViewManagement.h"
+#include "StateManagement.h"
 #include "Quad.h"
 #include "Sprite.h"
 

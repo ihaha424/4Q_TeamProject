@@ -21,6 +21,7 @@ namespace Engine::Component
 		void SetSourcePosition(const Engine::Math::Vector3* source);
 		void SetDestinationPosition(const Engine::Math::Vector3* destination);
 		void SetSegment(unsigned int segments);
+		void SetPostEffectLayer(unsigned int layer);
 
 	private:
 		GE::Matrix4x4 _geMatrix;

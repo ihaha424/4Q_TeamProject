@@ -19,7 +19,7 @@ GraphicDevice*		g_pGraphicDevice;
 Sampler*			g_pSampler;
 ViewManagement*		g_pViewManagement;
 RenderGroup*		g_pRenderGroup;
-PostProcessSystem*	g_pPostProcessSystem;
+StateManagement*	g_pStateManagement;
 Quad*				g_pQuad;
 Sprite*				g_pSprite;
 float				g_width;
@@ -52,8 +52,9 @@ void RenderSystem::Initialize(const GE::RENDERER_DESC* pDesc)
 
 void RenderSystem::Release()
 {
-	SafeRelease(g_pPostProcessSystem);
+	SafeRelease(g_pStateManagement);
 	SafeRelease(g_pResourceMgr);
+	SafeRelease(_pPostProcessSystem);
 	SafeRelease(_pRenderer);
 	SafeRelease(_pTextSystem);
 	SafeRelease(_pSpriteSystem);
@@ -74,6 +75,7 @@ void RenderSystem::Render()
 {
 	_pRenderer->Render();
 	_pUnlitSystem->Render();
+	_pPostProcessSystem->Render();
 	_pSpriteSystem->Render();
 	_pTextSystem->Render();
 	_pSwapChain->Present(0, 0);
@@ -86,7 +88,7 @@ void RenderSystem::GetTextSystem(GE::ITextSystem** ppTextSystem)
 
 void RenderSystem::GetPostProcessSystem(GE::IPostProcessSystem** ppPostProcessSystem)
 {
-	(*ppPostProcessSystem) = g_pPostProcessSystem;
+	(*ppPostProcessSystem) = _pPostProcessSystem;
 }
 
 void RenderSystem::GetSpriteSystem(GE::ISpriteSystem** ppSpriteSystem)
@@ -138,8 +140,10 @@ void RenderSystem::InitializeDX11(HWND hWnd, bool isFullScreen, const unsigned i
 	g_pViewManagement = new ViewManagement;
 	g_pStructuredBuffer = new StructuredBuffer;
 	g_pConstantBuffer = new ConstantBuffer;
-	
 	g_pRenderGroup = new RenderGroup;
+
+	g_pStateManagement = new StateManagement;
+	g_pStateManagement->Initialize();
 
 	g_pSampler = new Sampler;
 	g_pSampler->Initialize();
@@ -156,8 +160,8 @@ void RenderSystem::InitializeDX11(HWND hWnd, bool isFullScreen, const unsigned i
 	_pTextSystem = new TextSystem;
 	_pTextSystem->Initialize();
 
-	g_pPostProcessSystem = new PostProcessSystem;
-	g_pPostProcessSystem->Initialize();
+	_pPostProcessSystem = new PostProcessSystem;
+	_pPostProcessSystem->Initialize();
 
 	_pSpriteSystem = new SpriteSystem;
 	_pSpriteSystem->Initialize();

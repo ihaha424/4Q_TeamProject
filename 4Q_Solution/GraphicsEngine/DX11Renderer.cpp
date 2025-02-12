@@ -21,7 +21,7 @@
 
 // Filters
 #include "Filter.h"
-#include "ToneMapping.h"
+#include "SSAO.h"
 
 // System
 #include "CameraSystem.h"
@@ -118,8 +118,8 @@ void DX11Renderer::Render()
 
 	alphaMeshes.sort([this, view](const DrawData& data0, const DrawData& data1)
 		{
-			Matrix m0 = _matrices[data0.modelID] * view;
-			Matrix m1 = _matrices[data1.modelID] * view;
+			Matrix m0 = XMMatrixTranspose(_matrices[data0.modelID]) * view;
+			Matrix m1 = XMMatrixTranspose(_matrices[data1.modelID]) * view;
 			return m0.Translation().z > m1.Translation().z;
 		});
 
@@ -161,9 +161,8 @@ void DX11Renderer::Render()
 
 	ShadowPass();
 	GBufferPass(noneAlphaMeshs);
-	LigthingPass(skyBoxes.front().second, alphaMeshes);
-	SkyBoxPass(skyBoxes);
-	PostProcessPass();
+	LigthingPass(skyBoxes.front().second, alphaMeshes, skyBoxes);
+	//SkyBoxPass(skyBoxes);
 }
 
 void DX11Renderer::SetViewport(float width, float height)
@@ -271,21 +270,40 @@ void DX11Renderer::GBufferPass(std::list<DrawData>& noneAlphaMeshes)
 {
 	auto& [RTVs, SRVs] = g_pViewManagement->GetRenderTargetGroup(L"G-Buffer");
 	unsigned int numTargets = (unsigned int)RTVs.size();
-
+	
+	auto* blendState = g_pStateManagement->GetBlendState(L"NoneBlend");
+	_pDeviceContext->OMSetBlendState(blendState, nullptr, 0xFFFFFFFF);
 	_pDeviceContext->OMSetRenderTargets(numTargets, RTVs.data(), _pDefaultDSV);
-	_pDeviceContext->OMSetBlendState(_pDeferredBlendState, NULL, 0xFFFFFFFF);
 	_pDeviceContext->ClearDepthStencilView(_pDefaultDSV, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 	for (unsigned int i = 0; i < numTargets; i++) _pDeviceContext->ClearRenderTargetView(RTVs[i], COLOR_ZERO);
 
 	RenderMesh(noneAlphaMeshes, _psGBuffer);
+
+	_pDeviceContext->OMSetBlendState(nullptr, nullptr, 0xFFFFFFFF);
 }
 
-void DX11Renderer::LigthingPass(SkyBoxRenderer* pSkyBox, std::list<DrawData>& alphaMeshes)
+void DX11Renderer::LigthingPass(SkyBoxRenderer* pSkyBox, std::list<DrawData>& alphaMeshes, std::list<std::pair<unsigned int, SkyBoxRenderer*>>& skyBoxes)
 {
 	pSkyBox->SetParameter(_pDeviceContext, 11);
-
+	
+	auto* blendState = g_pStateManagement->GetBlendState(L"AlphaBlend");
+	_pDeviceContext->OMSetBlendState(blendState, nullptr, 0xFFFFFFFF);
+	
 	DeferredLighting();
+
+	auto& [RTVs, SRVs] = g_pViewManagement->GetRenderTargetGroup(L"Forward");
+
+	//_pDeviceContext->OMSetDepthStencilState(_pAlphaDepthState, 1);
+	_pDeviceContext->OMSetRenderTargets((unsigned int)RTVs.size(), RTVs.data(), _pDefaultDSV);
+
+	SkyBoxPass(skyBoxes);
+
+	_pDeviceContext->OMSetBlendState(blendState, nullptr, 0xFFFFFFFF);
+
 	ForwardLigthing(alphaMeshes);
+	//AmbientOcclusion();
+	// 	
+	_pDeviceContext->OMSetBlendState(nullptr, nullptr, 0xFFFFFFFF);
 
 	//ClearBindResource(_pDeviceContext, 11, 1);
 }
@@ -293,12 +311,7 @@ void DX11Renderer::LigthingPass(SkyBoxRenderer* pSkyBox, std::list<DrawData>& al
 void DX11Renderer::SkyBoxPass(std::list<std::pair<unsigned int, SkyBoxRenderer*>>& skyBoxes)
 {
 	Camera* pCamera = g_pCameraSystem->GetCurrentCamera();
-	if (nullptr == pCamera) return;
-	
-	//auto& [RTVs, SRVs] = g_pViewManagement->GetRenderTargetGroup(L"Forward");
-	//_pDeviceContext->OMSetRenderTargets((unsigned int)RTVs.size(), RTVs.data(), nullptr);
-	//_pDeviceContext->OMSetDepthStencilState(_pAlphaDepthState, 0);
-	//for (size_t i = 0; i < RTVs.size(); i++) _pDeviceContext->ClearRenderTargetView(RTVs[i], COLOR_ZERO);
+	if (nullptr == pCamera) return;	
 
 	Matrix view = pCamera->GetViewMatrix();
 	
@@ -309,6 +322,11 @@ void DX11Renderer::SkyBoxPass(std::list<std::pair<unsigned int, SkyBoxRenderer*>
 
 	g_pConstantBuffer->UpdateConstantBuffer(L"SkyVP", &skyVP);
 
+	auto& [RTVs, SRVs] = g_pViewManagement->GetRenderTargetGroup(L"Forward");
+	auto* blendState = g_pStateManagement->GetBlendState(L"NoneBlend");
+
+	_pDeviceContext->OMSetRenderTargets((unsigned int)RTVs.size(), RTVs.data(), _pDefaultDSV);
+	_pDeviceContext->OMSetBlendState(blendState, nullptr, 0xFFFFFFFF);
 	_pDeviceContext->RSSetState(_pRSSkyBoxState);
 
 	unsigned int offset[2]{ 0, MAX_BONE_MATRIX };
@@ -323,47 +341,8 @@ void DX11Renderer::SkyBoxPass(std::list<std::pair<unsigned int, SkyBoxRenderer*>
 	}
 
 	_pDeviceContext->RSSetState(nullptr);
+	_pDeviceContext->OMSetBlendState(nullptr, nullptr, 0xFFFFFFFF);
 	//_pDeviceContext->OMSetDepthStencilState(nullptr, 0);
-}
-
-void DX11Renderer::PostProcessPass()
-{	
-	_pDeviceContext->OMSetRenderTargets(0, nullptr, nullptr);
-
-	auto& [RTVs, SRVs] = g_pViewManagement->GetRenderTargetGroup(L"Blend");
-	auto* pBaseSRV = g_pViewManagement->GetShaderResourceView(L"Base");
-	auto* pLayerMaskSRV = g_pViewManagement->GetShaderResourceView(L"LayerMask");
-	auto* pPostProcessRTV = g_pViewManagement->GetRenderTargetView(L"PostProcess");
-
-	_pDeviceContext->PSSetShaderResources(0, 1, &pBaseSRV);
-	_pDeviceContext->PSSetShaderResources(1, 1, &pLayerMaskSRV);
-	_pDeviceContext->ClearRenderTargetView(pPostProcessRTV, COLOR_ZERO);
-
-	unsigned int currentIndex = 0;
-	ID3D11ShaderResourceView* pSRV = nullptr;
-	auto& filters = g_pPostProcessSystem->GetFilters();
-	for (auto& [mask, filter] : filters)
-	{
-		g_pConstantBuffer->UpdateConstantBuffer(L"LayerMask", &mask);
-
-		filter->Render();
-		Blending(RTVs[currentIndex], pSRV);
-		pSRV = SRVs[currentIndex];
-		currentIndex = (currentIndex + 1) % 2;
-	}
-
-	// Blending
-	ClearBindResource(_pDeviceContext, 2, 2);
-	auto* pPostProcessTarget = g_pViewManagement->GetRenderTargetView(L"PostProcess");
-
-	_pDeviceContext->OMSetRenderTargets(1, &pPostProcessTarget, nullptr);
-	_pDeviceContext->PSSetShaderResources(2, 1, &pBaseSRV);
-	_pDeviceContext->PSSetShaderResources(3, 1, &SRVs[currentIndex]);
-	_psBlend->SetPixelShader();
-	g_pQuad->Render();
-
-	// ToneMapping
-	_pToneMapping->Render();
 }
 
 void DX11Renderer::DeferredLighting()
@@ -372,7 +351,7 @@ void DX11Renderer::DeferredLighting()
 	auto& [Deferred_RTVs, Deferred_SRVs] = g_pViewManagement->GetRenderTargetGroup(L"Deferred");
 
 	_pDeviceContext->OMSetRenderTargets((unsigned int)Deferred_RTVs.size(), Deferred_RTVs.data(), nullptr);
-	for (size_t i = 0; i < Deferred_RTVs.size(); i++) _pDeviceContext->ClearRenderTargetView(Deferred_RTVs[i], COLOR_ZERO);
+	for (size_t i = 0; i < Deferred_RTVs.size(); i++) _pDeviceContext->ClearRenderTargetView(Deferred_RTVs[i], COLOR_ZERO);	
 
 	// Diffuse, Normal, RMA, Emissive, ShadowPosition
 	_pDeviceContext->PSSetShaderResources(0, 5, G_Buffer_SRVs.data());
@@ -388,25 +367,17 @@ void DX11Renderer::DeferredLighting()
 
 void DX11Renderer::ForwardLigthing(std::list<DrawData>& alphaMeshes)
 {
-	float blendFactor[4]{ 0.f, 0.f, 0.f, 0.f };
-	auto& [RTVs, SRVs] = g_pViewManagement->GetRenderTargetGroup(L"Forward");
+	//auto& [RTVs, SRVs] = g_pViewManagement->GetRenderTargetGroup(L"Forward");
 
-	_pDeviceContext->OMSetRenderTargets((unsigned int)RTVs.size(), RTVs.data(), _pDefaultDSV);
-	_pDeviceContext->OMSetBlendState(_pForwardBlendState, blendFactor, 0xFFFFFFFF);	
+	////_pDeviceContext->OMSetDepthStencilState(_pAlphaDepthState, 1);
+	//_pDeviceContext->OMSetRenderTargets((unsigned int)RTVs.size(), RTVs.data(), _pDefaultDSV);
 	RenderMesh(alphaMeshes, _psForwardLighting);
-	//_pDeviceContext->OMSetBlendState(nullptr, nullptr, 0xFFFFFFFF);
+	//_pDeviceContext->OMSetDepthStencilState(nullptr, 1);
 }
 
-void DX11Renderer::Blending(ID3D11RenderTargetView* pRTV, ID3D11ShaderResourceView* pSRV)
+void DX11Renderer::AmbientOcclusion()
 {
-	auto* pPostSRV = g_pViewManagement->GetShaderResourceView(L"PostProcess");
-	ClearBindResource(_pDeviceContext, 2, 1);
-	_pDeviceContext->OMSetRenderTargets(1, &pRTV, nullptr);
-	_pDeviceContext->PSSetShaderResources(2, 1, &pSRV);
-	_pDeviceContext->PSSetShaderResources(3, 1, &pPostSRV);
-	_psBlend->SetPixelShader();
-	g_pQuad->Render();
-	ClearBindResource(_pDeviceContext, 3, 1);
+	_pSSAO->Render();
 }
 
 void DX11Renderer::RenderMesh(std::list<DrawData>& renderData, std::shared_ptr<PixelShader>& pixelShader)
@@ -431,49 +402,10 @@ void DX11Renderer::RenderMesh(std::list<DrawData>& renderData, std::shared_ptr<P
 
 void DX11Renderer::InitState()
 {
+	g_pStateManagement->AddBlendState(L"AlphaBlend", StateManagement::Type::AlphaBlend);
+	g_pStateManagement->AddBlendState(L"NoneBlend", StateManagement::Type::NoneBlend);
+		
 	ID3D11Device* pDevice = g_pGraphicDevice->GetDevice();
-
-	D3D11_RENDER_TARGET_BLEND_DESC enableRTBD
-	{
-		.BlendEnable = TRUE,
-		.SrcBlend = D3D11_BLEND_SRC_ALPHA,
-		.DestBlend = D3D11_BLEND_INV_SRC_ALPHA,
-		.BlendOp = D3D11_BLEND_OP_ADD,
-		.SrcBlendAlpha = D3D11_BLEND_SRC_ALPHA,
-		.DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA,
-		.BlendOpAlpha = D3D11_BLEND_OP_ADD,
-		.RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL,
-	};
-
-	D3D11_RENDER_TARGET_BLEND_DESC disableRTBD
-	{
-		.BlendEnable = FALSE,
-		.SrcBlend = D3D11_BLEND_SRC_ALPHA,
-		.DestBlend = D3D11_BLEND_INV_SRC_ALPHA,
-		.BlendOp = D3D11_BLEND_OP_ADD,
-		.SrcBlendAlpha = D3D11_BLEND_ONE,
-		.DestBlendAlpha = D3D11_BLEND_ZERO,
-		.BlendOpAlpha = D3D11_BLEND_OP_ADD,
-		.RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL
-	};
-
-	D3D11_BLEND_DESC forwardDesc{};
-	forwardDesc.IndependentBlendEnable = TRUE;
-	forwardDesc.RenderTarget[0] = enableRTBD;
-	forwardDesc.RenderTarget[1] = disableRTBD;
-	forwardDesc.RenderTarget[2] = disableRTBD;
-	forwardDesc.RenderTarget[3] = disableRTBD;
-
-	pDevice->CreateBlendState(&forwardDesc, &_pForwardBlendState);
-	
-	D3D11_BLEND_DESC deferredDesc{};
-	deferredDesc.RenderTarget[0] = disableRTBD;
-	deferredDesc.RenderTarget[1] = disableRTBD;
-	deferredDesc.RenderTarget[2] = disableRTBD;
-	deferredDesc.RenderTarget[3] = disableRTBD;
-	deferredDesc.RenderTarget[4] = disableRTBD;
-	deferredDesc.RenderTarget[5] = disableRTBD;
-	pDevice->CreateBlendState(&deferredDesc, &_pDeferredBlendState);
 
 	D3D11_RASTERIZER_DESC rsDesc
 	{
@@ -522,9 +454,9 @@ void DX11Renderer::InitMRT()
 	g_pViewManagement->AddRenderTargetGroup(L"Deferred", L"Ambient");
 
 	g_pViewManagement->AddRenderTargetGroup(L"Forward", L"Base");
-	g_pViewManagement->AddRenderTargetGroup(L"Forward", L"LayerMask");
-	g_pViewManagement->AddRenderTargetGroup(L"Forward", L"Normal");
 	g_pViewManagement->AddRenderTargetGroup(L"Forward", L"Ambient");
+	g_pViewManagement->AddRenderTargetGroup(L"Forward", L"Normal");
+	g_pViewManagement->AddRenderTargetGroup(L"Forward", L"LayerMask");
 
 	g_pViewManagement->AddRenderTargetView(L"Blend0", Vector2(g_width, g_height));
 	g_pViewManagement->AddRenderTargetView(L"Blend1", Vector2(g_width, g_height));
@@ -535,7 +467,7 @@ void DX11Renderer::InitMRT()
 	g_pViewManagement->AddRenderTargetGroup(L"Blend", L"Blend1");
 
 	g_pViewManagement->AddRenderTargetGroup(L"Blend2", L"Blend2");
-	g_pViewManagement->AddRenderTargetGroup(L"Blend2", L"Blend3");
+	g_pViewManagement->AddRenderTargetGroup(L"Blend2", L"Blend3");	
 
 	g_pViewManagement->AddMipMapRenderTargetView(L"MipMap", Vector2(g_width, g_height));
 	g_pViewManagement->AddRenderTargetView(L"PostProcess", Vector2(g_width, g_height));
@@ -548,8 +480,7 @@ void DX11Renderer::InitShaders()
 
 	_psForwardLighting = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/ForwardLightingPS.cso");
 	_psDeferredLighting = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/DeferredLightingPS.cso");
-	_psGBuffer = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/GBufferPS.cso");
-	_psBlend = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/BlendPS.cso");	
+	_psGBuffer = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/GBufferPS.cso");	
 }
 
 void DX11Renderer::InitDepthStencil()
@@ -595,16 +526,14 @@ void DX11Renderer::InitStructuredBuffer()
 }
 
 void DX11Renderer::InitFilters()
-{
-	_pToneMapping = new ToneMapping;
-	_pToneMapping->Initialize();
+{	
+	_pSSAO = new SSAO;
+	_pSSAO->Initialize();
 }
 
 void DX11Renderer::Free()
 {
-	SafeRelease(_pRSSkyBoxState);
-	SafeRelease(_pDeferredBlendState);
-	SafeRelease(_pForwardBlendState);
-	SafeRelease(_pToneMapping);
+	SafeRelease(_pSSAO);
+	SafeRelease(_pRSSkyBoxState);	
 	SafeRelease(_pAlphaDepthState);
 }

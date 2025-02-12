@@ -129,7 +129,9 @@ float4 main(PS_INPUT input) : SV_Target
 #else
     float SSAO = txSSAO.Sample(samLinear_wrap, input.uv).r;
     float4 ambient = txAmbient.Sample(samLinear_wrap, input.uv);
-    float4 color = float4(ambient.rgb * ambient.a * SSAO, 1);
-    return color;
+    float3 ambientColor = ambient.rgb * ambient.a * SSAO;
+    float3 color = ambientColor + txSource.Sample(samLinear_wrap, input.uv).rgb;
+    
+    return float4(color, 1);
 #endif
 }

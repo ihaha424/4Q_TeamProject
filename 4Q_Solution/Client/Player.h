@@ -10,11 +10,13 @@ class Player : public Engine::Object
 		Walk				= 1 << 1,
 		Jump				= 1 << 2,
 		Interact			= 1 << 3,
-		Jump_Started		= 1 << 4,
-		Jump_Triggered		= 1 << 5,
-		Interact_Started	= 1 << 6,
-		Interact_Triggered	= 1 << 7,
-		Interact_Completed	= 1 << 8
+		Move_Started		= 1 << 4,
+		Move_Completed		= 1 << 5,
+		Jump_Started		= 1 << 6,
+		Jump_Triggered		= 1 << 7,
+		Interact_Started	= 1 << 8,
+		Interact_Triggered	= 1 << 9,
+		Interact_Completed	= 1 << 10
 	};
 
 	enum SplitType { Lower, Upper, End };

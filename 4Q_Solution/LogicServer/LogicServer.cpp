@@ -22,4 +22,6 @@ int main()
     while (true) {
         _logic->Update();
     }
+
+    system("pause");
 }

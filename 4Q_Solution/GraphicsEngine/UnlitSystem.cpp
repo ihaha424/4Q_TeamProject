@@ -2,6 +2,8 @@
 #include "UnlitSystem.h"
 #include "UnlitRenderer.h"
 #include "LineRenderer.h"
+#include "Camera.h"
+#include "CameraSystem.h"
 
 void UnlitSystem::CreateUnlitRenderer(GE::IUnlitRenderer** ppComponent, const GE::UNLIT_RENDERER_DESC* desc)
 {
@@ -70,6 +72,15 @@ void UnlitSystem::Render()
 
 	_pDeviceContext->RSSetState(_pRSState);
 	_pDeviceContext->OMSetBlendState(pBlendState, nullptr, 1);
+
+	Camera* pCemra = g_pCameraSystem->GetCurrentCamera();
+	Matrix view = XMMatrixIdentity();
+
+	if (nullptr != pCemra)
+		view = pCemra->GetViewMatrix();
+
+	std::ranges::sort(_components, [this, view](const auto& lhs, const auto& rhs)
+		{ return ((*lhs.second) * view).Translation().z > ((*rhs.second) * view).Translation().z; });
 
 	for (auto& [component, matrix] : _components)
 	{

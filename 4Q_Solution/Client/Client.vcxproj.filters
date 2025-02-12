@@ -175,6 +175,12 @@
     <Filter Include="Object\Puzzle\Manager\Object">
       <UniqueIdentifier>{f7abad50-9913-4435-9e68-da864ec06da8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{b075a313-d0b9-4d88-b7b0-c96a96cb3d2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities\DelayCall">
+      <UniqueIdentifier>{7ec779a9-7b8b-479c-ba8b-9cfa0093c92e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -573,6 +579,9 @@
     <ClInclude Include="PuzzleManagerSet.h">
       <Filter>Object\Puzzle\Manager\Object</Filter>
     </ClInclude>
+    <ClInclude Include="DelayCall.h">
+      <Filter>Utilities\DelayCall</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -931,6 +940,9 @@
     </ClCompile>
     <ClCompile Include="PuzzleManager04.cpp">
       <Filter>Object\Puzzle\Manager\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="DelayCall.cpp">
+      <Filter>Utilities\DelayCall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

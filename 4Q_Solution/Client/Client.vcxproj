@@ -160,6 +160,7 @@
     <ClInclude Include="BG_Ornoa_Cloth_2.h" />
     <ClInclude Include="BG_Ornoa_Cloth_3.h" />
     <ClInclude Include="BG_Props_Fence.h" />
+    <ClInclude Include="DelayCall.h" />
     <ClInclude Include="PuzzleManager03.h" />
     <ClInclude Include="GameCoreData.h" />
     <ClInclude Include="GrabData.h" />
@@ -294,6 +295,7 @@
     <ClCompile Include="BG_Ornoa_Cloth_2.cpp" />
     <ClCompile Include="BG_Ornoa_Cloth_3.cpp" />
     <ClCompile Include="BG_Props_Fence.cpp" />
+    <ClCompile Include="DelayCall.cpp" />
     <ClCompile Include="PuzzleManager03.cpp" />
     <ClCompile Include="GameCoreData.cpp" />
     <ClCompile Include="GrabData.cpp" />

@@ -37,14 +37,5 @@ void TriggerArea::PreInitialize(const Engine::Modules& modules)
 
 	PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::mainScene))->AddActor(_trigger->_triggerBox);
 
-
-	// TODO Bind Trigger(상속받은 오브젝트가 PreInitialize단계에서 트리거를 바인딩 하면 됨)
-	// TestCode TODO: Delete
-	//_trigger->BindBeginInteraction([]() {
-	//		std::cout << "TriggerBegine!\n";
-	//	});
-	//_trigger->BindEndInteraction([]() {
-	//		std::cout << "TriggerEnd!\n";
-	//	});
 }
 

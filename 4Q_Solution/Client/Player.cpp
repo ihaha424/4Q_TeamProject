@@ -35,6 +35,11 @@ void Player::SetCapsuleScale(Engine::Math::Vector3 capsuleScale)
 	_capsuleScale = capsuleScale;
 }
 
+Engine::Component::Camera* Player::GetCamera() const
+{
+	return _camera;
+}
+
 void Player::DisposeComponents()
 {
 	_camera->Dispose();
@@ -75,7 +80,7 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	_fixedArm->SetTarget(&_transform);
 	_fixedArm->SetCameraComponent(_camera);
 	_fixedArm->SetDistance(60.f);
-	_fixedArm->SetCameraPosition(Engine::Math::Vector2{ 0.f, 15.f });
+	_fixedArm->SetCameraPosition(Engine::Math::Vector2{ 0.f, 10.f });
 	_fixedArm->SetRotationSpeed(Engine::Math::Vector2{ 0.02f, 0.04f });
 	_fixedArm->SetFollowSpeed(0.01f);
 	
@@ -110,8 +115,8 @@ void Player::PreInitialize(const Engine::Modules& modules)
 
 	Engine::Physics::ControllerDesc cd;
 	cd.position = Engine::Math::Vector3(0.f, 0.f, 0.f);
-	cd.height = 10.f;
-	cd.radius = 5.f;
+	cd.height = 100.f;
+	cd.radius = 20.f;
 	// TODO: Player Gravity
 	//cd.gravity = { 0.f, -9.8f, 0.f };
 
@@ -128,6 +133,7 @@ void Player::PreInitialize(const Engine::Modules& modules)
 
 	_sync->AddCallback((short)PacketID::MoveSync, &Player::SyncMove, this);
 	_sync->AddCallback((short)PacketID::DataRemote, &Player::SetLocation, this);	
+	_sync->AddCallback((short)PacketID::StateChange, &Player::StateChange, this);
 }
 
 void Player::PostInitialize(const Engine::Modules& modules)
@@ -172,7 +178,7 @@ void Player::PostUpdate(float deltaTime)
 
 	_worldMatrix = Engine::Math::Matrix::CreateScale(0.15f)
 		* Engine::Math::Matrix::CreateFromQuaternion(q)
-		* Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
+		* Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y - 14.f, _transform.position.z);
 
 	_leftSrc = (*_leftHand * _worldMatrix).Translation();
 	_leftDst = _leftSrc + _worldMatrix.Forward() * 100.f;
@@ -180,11 +186,7 @@ void Player::PostUpdate(float deltaTime)
 	_rightSrc = (*_rightHand * _worldMatrix).Translation();
 	_rightDst = _rightSrc + _worldMatrix.Forward() * 100.f;
 
-	Engine::Math::Vector3 shadowCameraPosition = _worldMatrix.Translation();
-	shadowCameraPosition.y += 100.f;
-	_shadowCamera->SetPosition(shadowCameraPosition);
-
-	_camera->SetPerspective(1.f, 5000.f, std::numbers::pi_v<float> / 5.f);
+	_camera->SetPerspective(1.f, 5000.f, std::numbers::pi_v<float> / 4.f);
 
 	UpdateState();
 }
@@ -272,8 +274,7 @@ void Player::JumpStarted()
 
 	_bitFlag->OnFlag(StateFlag::Jump | StateFlag::Jump_Started);
 	_animator->ChangeAnimation("rig|Anim_Jump_start");
-	_animator->SetAnimationSpeed(1.5f);
-	SendStateMessage();
+	//_animator->SetAnimationSpeed(1.5f);	
 }
 
 void Player::InteractStarted()
@@ -400,9 +401,8 @@ void Player::UpdateState()
 				_remote->SetSpeed(_speed * 0.5f);
 				_remote->SetDirection(Engine::Math::Vector3(0.f, 1.f, 0.f));
 
-				_sync->_jump.set_power(2.f);
-				_sync->_jump.SerializeToString(&_sync->_msgBuffer);
-				
+				_sync->_jump.set_power(15.f);
+				_sync->_jump.SerializeToString(&_sync->_msgBuffer);				
 
 				Engine::Application::GetNetworkManager()->SaveSendData(
 					(short)PacketID::Jump,
@@ -412,24 +412,11 @@ void Player::UpdateState()
 				);
 
 				_bitFlag->OnFlag(StateFlag::Jump_Triggered);
+				SendStateMessage();
 				_animator->ChangeAnimation("rig|Anim_Jump_loop");
-				_animator->SetAnimationSpeed(1.f);
+				//_animator->SetAnimationSpeed(1.f);
 			}
-		}
-		if (_animator->IsLastFrame(0.3f))
-		{
-			if (_bitFlag->IsOnFlag(StateFlag::Jump_Triggered))
-			{
-				_bitFlag->OffFlag(StateFlag::Jump | StateFlag::Jump_Started | StateFlag::Jump_Triggered);
-
-				if (_bitFlag->IsOnFlag(StateFlag::Walk))
-					_animator->ChangeAnimation("rig|Anim_Walk");
-				else
-					_animator->ChangeAnimation("rig|Anim_Jump_end");
-
-				_remote->SetDirection(Engine::Math::Vector3::Zero);
-			}
-		}
+		}		
 	}
 
 	if (_bitFlag->IsOnFlag(StateFlag::Interact_Completed))
@@ -478,4 +465,24 @@ void Player::SetLocation(const MoveMsg::MoveSync* msg)
 	float y = msg->y();
 	float z = msg->z();
 	_transform.position = Engine::Math::Vector3(x, y, z);
+}
+
+void Player::StateChange(const MoveMsg::StateChange* msg)
+{
+	unsigned int flag = msg->stateinfo();
+
+	if (1 == flag && _bitFlag->IsOnFlag(StateFlag::Jump_Triggered))
+	{		
+		_bitFlag->OffFlag(StateFlag::Jump | StateFlag::Jump_Started | StateFlag::Jump_Triggered);
+
+		if (_bitFlag->IsOnFlag(StateFlag::Walk))
+			_animator->ChangeAnimation("rig|Anim_Walk");
+		else
+			_animator->ChangeAnimation("rig|Anim_Jump_end");
+
+		_remote->SetDirection(Engine::Math::Vector3::Zero);
+		_bitFlag->OnFlag(StateFlag::Jump_Completed);
+		SendStateMessage();
+		_bitFlag->OffFlag(StateFlag::Jump_Completed);
+	}
 }

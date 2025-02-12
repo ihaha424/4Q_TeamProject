@@ -101,3 +101,13 @@ void StaticObject::PreInitialize(const Engine::Modules& modules)
 	_rigidStatc->_boundBox->SetOwner(this);
 	PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::cameraScene))->AddActor(_rigidStatc->_boundBox);*/
 }
+
+void StaticObject::Hide()
+{
+	_staticMesh->SetActiveDraw(false);
+}
+
+void StaticObject::Show()
+{
+	_staticMesh->SetActiveDraw(true);
+}

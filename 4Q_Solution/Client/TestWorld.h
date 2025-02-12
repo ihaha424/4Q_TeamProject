@@ -4,6 +4,7 @@
 #include "BG_Terrain.h"
 #include "SkyBox.h"
 
+#include "Player.h"
 #include "Ray.h"
 
 //Test
@@ -44,6 +45,7 @@ private:
 	BG_Terrain* _terrain;
 	SkyBox* _skyBox;
 	TestSprite* _testSprite;
+	Player* _currentPlayer;
 
 	int playerSerialNum = 0;
 	bool _dataLoad = false;

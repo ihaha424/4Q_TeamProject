@@ -12,9 +12,10 @@ class Remote : public Engine::Object
 		Move_Completed		= 1 << 5,
 		Jump_Started		= 1 << 6,
 		Jump_Triggered		= 1 << 7,
-		Interact_Started	= 1 << 8,
-		Interact_Triggered	= 1 << 9,
-		Interact_Completed	= 1 << 10
+		Jump_Completed		= 1 << 8,
+		Interact_Started	= 1 << 9,
+		Interact_Triggered	= 1 << 10,
+		Interact_Completed	= 1 << 11
 	};
 
 	enum SplitType { Lower, Upper, End };

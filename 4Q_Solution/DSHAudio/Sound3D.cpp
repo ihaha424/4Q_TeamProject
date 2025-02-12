@@ -6,7 +6,7 @@
 DSH::Audio::Sound3D::Sound3D(FMOD::System* system, FMOD::ChannelGroup* group, const std::filesystem::path& path,
 	const bool isLoop) :
 	_referenceCount(1), _system(system), _channel(nullptr), _sound(nullptr), _group(group),
-	_rate(0), _minDistance(1), _maxDistance(10000)
+	_rate(0), _position(), _velocity(), _minDistance(1), _maxDistance(10000)
 {
 	_system->createSound(path.string().c_str(), isLoop ? FMOD_LOOP_NORMAL : FMOD_DEFAULT | FMOD_3D, nullptr, &_sound);
 	_system->getSoftwareFormat(&_rate, nullptr, nullptr);
@@ -43,7 +43,10 @@ ULONG DSH::Audio::Sound3D::Release()
 
 HRESULT DSH::Audio::Sound3D::Play()
 {
-	return Helper::FmodResultToHResult()(_system->playSound(_sound, _group, false, &_channel));
+	auto result = Helper::FmodResultToHResult()(_system->playSound(_sound, _group, false, &_channel));
+	result = Helper::FmodResultToHResult()(_channel->set3DAttributes(&_position, &_velocity));
+	result = Helper::FmodResultToHResult()(_channel->set3DMinMaxDistance(_minDistance, _maxDistance));
+	return result;
 }
 
 HRESULT DSH::Audio::Sound3D::Stop()
@@ -161,25 +164,29 @@ float DSH::Audio::Sound3D::GetLength() const
 HRESULT DSH::Audio::Sound3D::SetPosition(const Vector& position)
 {
 	_position = position;
-	return Helper::FmodResultToHResult()(_channel->set3DAttributes(&_position, &_velocity));
+	if (IsPlaying()) return Helper::FmodResultToHResult()(_channel->set3DAttributes(&_position, &_velocity));
+	return S_OK;
 }
 
 HRESULT DSH::Audio::Sound3D::SetVelocity(const Vector& velocity)
 {
 	_velocity = velocity;
-	return Helper::FmodResultToHResult()(_channel->set3DAttributes(&_position, &_velocity));
+	if (IsPlaying()) return Helper::FmodResultToHResult()(_channel->set3DAttributes(&_position, &_velocity));
+	return S_OK;
 }
 
 HRESULT DSH::Audio::Sound3D::SetMinDistance(const float minDistance)
 {
 	_minDistance = minDistance;
-	return Helper::FmodResultToHResult()(_channel->set3DMinMaxDistance(_minDistance, _maxDistance));
+	if (IsPlaying()) return Helper::FmodResultToHResult()(_channel->set3DMinMaxDistance(_minDistance, _maxDistance));
+	return S_OK;
 }
 
 HRESULT DSH::Audio::Sound3D::SetMaxDistance(const float maxDistance)
 {
 	_maxDistance = maxDistance;
-	return Helper::FmodResultToHResult()(_channel->set3DMinMaxDistance(_minDistance, _maxDistance));
+	if (IsPlaying()) return Helper::FmodResultToHResult()(_channel->set3DMinMaxDistance(_minDistance, _maxDistance));
+	return S_OK;
 }
 
 unsigned long long DSH::Audio::Sound3D::GetDspClock() const

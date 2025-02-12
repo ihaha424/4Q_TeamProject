@@ -20,6 +20,7 @@ public:
 protected:
 	void DisposeComponents() override;
 	void PreInitialize(const Engine::Modules& modules) override;
+	void PostInitialize(const Engine::Modules& modules) override {}
 
 	void Hide() override;
 	void Show() override;

@@ -201,6 +201,7 @@ private:
 	void QuestProcess(int& questId);
 	void PlayDialog(int dialogId);
 	void PlayDialog(int dialogId, int targetSessionId);
+	void SoundPlayProgress(int objectId);
 	// =============================
 
 	// =============================
@@ -219,9 +220,9 @@ private:
 
 	// Puzzle 2
 
-	std::vector<int> _balls	{ 1, 1, 1, 1, 1, 1 };
-	std::vector<int> _dir	{ 1, 1, 1, 1, 1, 1 };
-
+	std::vector<int> _balls	{ 3, 1, 1, 2, 3, 1 };
+	std::vector<int> _dir	{ -1, 1, 1, 1, -1, 1 };
+	bool _puzzle2Clear = false;
 	// Puzzle 3
 
 	//미로가 나오면 오브젝트 트리거 배치.
@@ -236,7 +237,8 @@ private:
 	// Puzzle 6
 
 	std::vector<int> _currentWeight	{ 0, 0, 0, 0, 0 };
-	std::vector<int> _puzzle6Box	{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+	std::vector <bool> _complete	{ false, false, false, false, false };
+	std::vector<int> _puzzle6Box	{ 1, 2, 3, 4, 5, 1, 2, 3, 4, 5 };
 
 	void PuzzleProcess(int objectId);
 	void Puzzle1(int objectId);

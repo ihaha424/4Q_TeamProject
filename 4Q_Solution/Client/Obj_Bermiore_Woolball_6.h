@@ -8,6 +8,7 @@ public:
 
 	void Interact() override;
 	void PreInitialize(const Engine::Modules& modules) override;
+	void PostInitialize(const Engine::Modules& modules) override;
 	void DataChangeCallBack(const std::wstring& name, const std::any& value) override;
 
 protected:

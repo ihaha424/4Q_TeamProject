@@ -10,6 +10,7 @@ void Obj_Shinave_Platform_Spawn_2::Prepare(Engine::Content::Factory::Component* 
 {
 	StaticObject::Prepare(componentFactory);
 	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
+	_sound = componentFactory->Clone<Engine::Component::Effect3DSound>(this);
 }
 
 void Obj_Shinave_Platform_Spawn_2::SetActive(const PlayMsg::ObjectActive* msg)
@@ -21,6 +22,7 @@ void Obj_Shinave_Platform_Spawn_2::SetActive(const PlayMsg::ObjectActive* msg)
 	if (data.player == 1 || data.player == 3)
 	{
 		_staticMesh->SetActiveDraw(true);
+		_sound->Play();
 	}
 }
 
@@ -28,6 +30,7 @@ void Obj_Shinave_Platform_Spawn_2::DisposeComponents()
 {
 	StaticObject::DisposeComponents();
 	_sync->Dispose();
+	_sound->Dispose();
 }
 
 void Obj_Shinave_Platform_Spawn_2::PreInitialize(const Engine::Modules& modules)
@@ -35,10 +38,17 @@ void Obj_Shinave_Platform_Spawn_2::PreInitialize(const Engine::Modules& modules)
 	StaticObject::PreInitialize(modules);
 	_sync->AddCallback((short)PacketID::ObjectActive, &Obj_Shinave_Platform_Spawn_2::SetActive, this);
 	_sync->SetSerialNumber(11104);
+
+
+	_sound->SetPath(L"Assets/Sounds/SFX_Shinave_Platform_appear.wav");
 }
 
 
 void Obj_Shinave_Platform_Spawn_2::PostInitialize(const Engine::Modules& modules)
 {
 	_staticMesh->SetActiveDraw(false);
+
+	_sound->SetMinDistance(1.5f);
+	_sound->SetMaxDistance(27.f);
+	_sound->SetPosition(_transform.position);
 }

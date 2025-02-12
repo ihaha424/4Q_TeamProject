@@ -9,6 +9,9 @@ namespace GameClient
 	{
 	public:
 		explicit Application(HINSTANCE instanceHandle);
+		~Application();
+
+		static InGameCanvas* GetInGameCanvas();
 
 	protected:
 		void LoadData(Engine::Load::IManager* loadManager) override;
@@ -25,7 +28,7 @@ namespace GameClient
 
 
 		MainCanvas* _mainCanvas;
-		InGameCanvas* _inGameCanvas;
+		static InGameCanvas* _inGameCanvas;
 
 	private:
 		template<typename T>

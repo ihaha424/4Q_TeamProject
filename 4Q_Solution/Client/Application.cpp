@@ -8,8 +8,21 @@
 #include "SimpleCamera.h"
 #include "../Engine/DSHHudManager.h"
 
+InGameCanvas* GameClient::Application::_inGameCanvas = nullptr;
+
 GameClient::Application::Application(const HINSTANCE instanceHandle) : Engine::Application(instanceHandle)
 {
+}
+
+GameClient::Application::~Application()
+{
+	delete _mainCanvas;
+	delete _inGameCanvas;
+}
+
+InGameCanvas* GameClient::Application::GetInGameCanvas()
+{
+	return _inGameCanvas;
 }
 
 void GameClient::Application::LoadData(Engine::Load::IManager* loadManager)
@@ -52,7 +65,7 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	objectFactory->Register<SkyBox>(L"Assets/Models/skybox.fbx");
 
 	// BG_Terrain
-	{		
+	{
 		objectFactory->Register<BG_Terrain>(L"Assets/Models/BG_Terrain.fbx", L"Assets/Models/BG_Terrain.fbx");
 	}
 
@@ -211,7 +224,7 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Sudium_red").value();
 		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
 		objectFactory->Register<Obj_Sudium_red>(buildingProperty, buildingProperty);
-	}	
+	}
 
 	// Obj_BG_Tree_3_Active
 	{
@@ -425,10 +438,10 @@ void GameClient::Application::PrepareInitialHUD(Engine::DSHHud::Manager* hudMana
 	_inGameCanvas = new InGameCanvas(_size);
 	hudManager->SetCanvas(_mainCanvas);
 	_mainCanvas->BindOnFadeIn([hudManager, this]()
-	{
-		hudManager->SetCanvas(_inGameCanvas);
-		GetInputManager()->SetActiveMappingContext(L"Default");
-	});
+		{
+			hudManager->SetCanvas(_inGameCanvas);
+			GetInputManager()->SetActiveMappingContext(L"Default");
+		});
 }
 
 void GameClient::Application::DeclareUIAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mainMappingContext, Engine::Input::IMappingContext* defaultMappingContext)

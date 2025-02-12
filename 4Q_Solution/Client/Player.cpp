@@ -3,14 +3,16 @@
 #include "GrabbedObject.h"
 #include "InteractObject.h"
 #include "Application.h"
+#include "InGameCanvas.h"
 
 Player::Player() : 
 	//, _movement(nullptr)
 	_camera(nullptr)
 	, _skeletalMesh(nullptr)
-	, _animator(nullptr), _fixedArm(nullptr), _rigid(nullptr), _bitFlag(nullptr), _leftLineWave(nullptr), _rightLineWave(nullptr)
-	, _leftHand(nullptr), _rightHand(nullptr), _shadowCamera(nullptr)
-	, _offset(Engine::Math::Quaternion::CreateFromYawPitchRoll(std::numbers::pi_v<float>, 0, 0))
+	, _animator(nullptr), _fixedArm(nullptr), _shadowCamera(nullptr), _rigid(nullptr), _bitFlag(nullptr), _leftLineWave(nullptr)
+	, _rightLineWave(nullptr), _leftHand(nullptr), _rightHand(nullptr)
+	, _offset(Engine::Math::Quaternion::CreateFromYawPitchRoll(std::numbers::pi_v<float>, 0, 0)),
+	_prevInteractRay(false), _prevGrabRay(false), _interactRay(false), _grabRay(false)
 {
 }
 
@@ -174,6 +176,8 @@ void Player::PostUpdate(float deltaTime)
 {
 	Object::PostUpdate(deltaTime);
 
+	RayCast();
+
 	Engine::Math::Quaternion q = Engine::Math::Quaternion::Concatenate(_transform.rotation, _offset);
 
 	_worldMatrix = Engine::Math::Matrix::CreateScale(0.15f)
@@ -196,6 +200,12 @@ void Player::PostAttach()
 	Object::PostAttach();
 	_camera->Activate();
 	_shadowCamera->Activate();
+}
+
+void Player::PreLazyUpdate(float deltaTime)
+{
+	Object::PreLazyUpdate(deltaTime);
+	ShowHintUIFromRayCast();
 }
 
 void Player::MoveStarted()
@@ -279,43 +289,35 @@ void Player::JumpStarted()
 
 void Player::InteractStarted()
 {
-	if (_bitFlag->IsOnFlag(StateFlag::Interact | StateFlag::Jump))
+	if (_bitFlag->IsOnFlag(Interact | Jump))
 		return;
 
 	/*Raycast*/
 	{
-		Engine::Physics::AdditionalQueryData queryData;
-		auto PhysicsManager = Engine::Application::GetPhysicsManager();
-		auto raycastScene = PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::mainScene));
-		auto rayDirection = _transform.GetForward();	// WHy????????? I don't konw Why flip the X-axis
-		rayDirection.z *= -1;
-		raycastScene->Raycast(queryData, _transform.position, rayDirection, 1000.f);
-		if (queryData.num > 0)
+		for (size_t i = 0; i < _queryData.num; i++)
 		{
-			for (size_t i = 0; i < queryData.num; i++)
+			Object* obj = static_cast<Object*>(_queryData.UserDatas[i]->GetOwner());
+			auto interactObject = dynamic_cast<InteractObject*>(obj);
+			if (nullptr != interactObject)
 			{
-				Engine::Object* obj = static_cast<Engine::Object*>(queryData.UserDatas[i]->GetOwner());
-				auto interactObject = dynamic_cast<InteractObject*>(obj);
-				if (nullptr != interactObject)
-				{
-					interactObject->Interact();
-				}
-				//Picking
-				auto checkGrabbedObject = dynamic_cast<GrabbedObject*>(obj);
-				if (nullptr != checkGrabbedObject)
-				{
-					bool isGrab = checkGrabbedObject->Grabbed(&_transform);
-					grabbedObject = checkGrabbedObject;
-					continue;
-				}
+				interactObject->Interact();
+				break;
+			}
+			//Picking
+			auto checkGrabbedObject = dynamic_cast<GrabbedObject*>(obj);
+			if (nullptr != checkGrabbedObject)
+			{
+				bool isGrab = checkGrabbedObject->Grabbed(&_transform);
+				grabbedObject = checkGrabbedObject;
+				break;
 			}
 		}
 	}
 
-	_bitFlag->OnFlag(StateFlag::Interact | StateFlag::Interact_Started);
-	_bitFlag->OffFlag(StateFlag::Interact_Completed);
+	_bitFlag->OnFlag(Interact | Interact_Started);
+	_bitFlag->OffFlag(Interact_Completed);
 
-	ChangeSplitAnimation("rig|Anim_Interaction_start", StateFlag::Walk, Upper);
+	ChangeSplitAnimation("rig|Anim_Interaction_start", Walk, Upper);
 	SendStateMessage();
 }
 
@@ -349,6 +351,60 @@ void Player::InteractCompleted()
 			grabbedObject->PutThis();
 			grabbedObject = nullptr;
 		}
+	}
+}
+
+void Player::RayCast()
+{
+	auto PhysicsManager = Engine::Application::GetPhysicsManager();
+	auto raycastScene = PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::mainScene));
+	auto rayDirection = _transform.GetForward();	// WHy????????? I don't konw Why flip the X-axis
+	rayDirection.z *= -1;
+	raycastScene->Raycast(_queryData, _transform.position, rayDirection, 1000.f);
+}
+
+void Player::ShowHintUIFromRayCast()
+{
+	// Reset
+	_prevInteractRay = _interactRay;
+	_prevGrabRay = _grabRay;
+	_interactRay = false;
+	_grabRay = false;
+
+	// Cast
+	for (size_t i = 0; i < _queryData.num; i++)
+	{
+		Object* obj = static_cast<Object*>(_queryData.UserDatas[i]->GetOwner());
+		auto interactObject = dynamic_cast<InteractObject*>(obj);
+		if (nullptr != interactObject)
+		{
+			_interactRay = true;
+		}
+		//Picking
+		auto checkGrabbedObject = dynamic_cast<GrabbedObject*>(obj);
+		if (nullptr != checkGrabbedObject)
+		{
+			_grabRay = true;
+		}
+	}
+
+	// Show
+	if (_interactRay && !_prevInteractRay)
+	{
+		GameClient::Application::GetInGameCanvas()->ShowInteractUI();
+	}
+	else if (!_interactRay && _prevInteractRay)
+	{
+		GameClient::Application::GetInGameCanvas()->HideInteractUI();
+	}
+
+	if (_grabRay && !_prevGrabRay)
+	{
+		GameClient::Application::GetInGameCanvas()->ShowGrabUI();
+	}
+	else if (!_grabRay && _prevGrabRay)
+	{
+		GameClient::Application::GetInGameCanvas()->HideGrabUI();
 	}
 }
 

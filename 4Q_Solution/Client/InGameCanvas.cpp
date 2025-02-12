@@ -81,6 +81,10 @@ void InGameCanvas::Initialize(const Engine::Modules& modules)
 		{
 			_sequence = Sequence::JumpTutorialFaded;
 		});
+	_jumpTutorial->BindOnFadeOutEnd([this]()
+		{
+			_sequence = Sequence::GamePlaying;
+		});
 
 	_interactImage->SetOpacity(0.0f);
 	_grabImage->SetOpacity(0.0f);
@@ -116,20 +120,24 @@ void InGameCanvas::JumpTutorialDone()
 
 void InGameCanvas::ShowInteractUI() const
 {
+	if (_sequence != Sequence::GamePlaying) return;
 	_interactImage->FadeIn();
 }
 
 void InGameCanvas::HideInteractUI() const
 {
+	if (_sequence != Sequence::GamePlaying) return;
 	_interactImage->FadeOut();
 }
 
 void InGameCanvas::ShowGrabUI() const
 {
+	if (_sequence != Sequence::GamePlaying) return;
 	_grabImage->FadeIn();
 }
 
 void InGameCanvas::HideGrabUI() const
 {
+	if (_sequence != Sequence::GamePlaying) return;
 	_grabImage->FadeOut();
 }

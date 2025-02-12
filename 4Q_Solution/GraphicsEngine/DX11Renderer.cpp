@@ -369,10 +369,10 @@ void DX11Renderer::ForwardLigthing(std::list<DrawData>& alphaMeshes)
 {
 	//auto& [RTVs, SRVs] = g_pViewManagement->GetRenderTargetGroup(L"Forward");
 
-	////_pDeviceContext->OMSetDepthStencilState(_pAlphaDepthState, 1);
+	_pDeviceContext->OMSetDepthStencilState(_pAlphaDepthState, 1);
 	//_pDeviceContext->OMSetRenderTargets((unsigned int)RTVs.size(), RTVs.data(), _pDefaultDSV);
 	RenderMesh(alphaMeshes, _psForwardLighting);
-	//_pDeviceContext->OMSetDepthStencilState(nullptr, 1);
+	_pDeviceContext->OMSetDepthStencilState(nullptr, 1);
 }
 
 void DX11Renderer::AmbientOcclusion()

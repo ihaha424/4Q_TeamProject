@@ -724,19 +724,20 @@ void ServerLogic::RegistPlayer(Player* player)
 {
     Engine::Physics::ControllerDesc cd;
     cd.position = Engine::Math::Vector3(0, 0, 0);
-    cd.height = 50.f;
-    cd.radius = 10.f;
-    cd.gravity = { 0.f, -9.8f * 10, 0.f };
+    cd.height = 10.f;
+    cd.radius = 5.f;
+    //cd.gravity = { 0.f, -0.98f, 0.f };
+    cd.gravity = { 0.f, 0.f, 0.f };
     cd.contactOffset = 0.2f;
-    cd.stepOffset = 10.f;
+    //cd.stepOffset = 10.f;
     cd.slopeLimit = 0.1f;
     Engine::Physics::IController* controller = player->_controller;
     _physicsManager->CreatePlayerController(&controller, _mainScene, cd);
     player->_controller = static_cast<Engine::Physics::Controller*>(controller);
     player->_controller->SetOwner(&player);
-    player->_controller->SetBottomPosition(Engine::Math::Vector3(0.f, 10.f, 0.f));
+    player->_controller->SetBottomPosition(Engine::Math::Vector3(0.f, (cd.height + cd.radius) * 0.5f, 0.f));
     player->_controller->Initialize();
-    player->_controller->SetPosition(Engine::Math::Vector3(0, 500, 0));
+    player->_controller->SetPosition(Engine::Math::Vector3(0, 0, 0));
 }
 
 void ServerLogic::RegistGround(Ground& ground)

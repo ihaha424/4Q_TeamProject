@@ -41,10 +41,8 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	objectFactory->Register<SkyBox>(L"Assets/Models/skybox.fbx");
 
 	// BG_Terrain
-	{
-		auto buildingConfig = loadManager->GetObjectRegisterData(L"BG_Terrain").value();
-		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
-		objectFactory->Register<BG_Terrain>(buildingProperty, buildingProperty);
+	{		
+		objectFactory->Register<BG_Terrain>(L"Assets/Models/BG_Terrain.fbx", L"Assets/Models/BG_Terrain.fbx");
 	}
 
 	// Obj_Bermiore_Fabric
@@ -70,7 +68,7 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 
 	// Obj_Ornoa_Print
 	{
-		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Ornoa_Print").value();
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Ornoa_Print_1").value();
 		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
 		objectFactory->Register<Obj_Ornoa_Print>(buildingProperty, buildingProperty);
 	}
@@ -202,21 +200,7 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Sudium_red").value();
 		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
 		objectFactory->Register<Obj_Sudium_red>(buildingProperty, buildingProperty);
-	}
-
-	// Obj_Mini_Platform_Set
-	{
-		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Mini_Platform_Set").value();
-		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
-		objectFactory->Register<Obj_Mini_Platform_Set>(buildingProperty, buildingProperty);
-	}
-
-	// Obj_Mini_Platform_Spawn
-	{
-		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Mini_Platform_Spawn").value();
-		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
-		objectFactory->Register<Obj_Mini_Platform_Spawn>(buildingProperty, buildingProperty);
-	}
+	}	
 
 	// Obj_BG_Tree_3_Active
 	{
@@ -295,13 +279,6 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_Shinave_Platform_Spawn_3>(buildingProperty, buildingProperty);
 	}
 
-	// Obj_Props_Rock
-	{
-		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Props_Rock").value();
-		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
-		objectFactory->Register<Obj_Props_Rock>(buildingProperty, buildingProperty);
-	}
-
 	// Obj_Bermiore_Woolball_inBox
 	{
 		// TODO: Bermiore_Woolball_inBox
@@ -350,41 +327,6 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Soundblock").value();
 		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
 		objectFactory->Register<Obj_Bermiore_Soundblock>(buildingProperty, buildingProperty);
-	}
-
-	// Obj_Mini_Stone_1
-	{
-		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Mini_Stone_1").value();
-		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
-		objectFactory->Register<Obj_Mini_Stone_1>(buildingProperty, buildingProperty);
-	}
-
-	// Obj_Mini_Stone_2
-	{
-		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Mini_Stone_2").value();
-		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
-		objectFactory->Register<Obj_Mini_Stone_2>(buildingProperty, buildingProperty);
-	}
-
-	// Obj_Mini_Stone_3
-	{
-		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Mini_Stone_3").value();
-		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
-		objectFactory->Register<Obj_Mini_Stone_3>(buildingProperty, buildingProperty);
-	}
-
-	// Obj_Mini_Stone_4
-	{
-		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Mini_Stone_4").value();
-		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
-		objectFactory->Register<Obj_Mini_Stone_4>(buildingProperty, buildingProperty);
-	}
-
-	// Obj_Mini_Stone_5
-	{
-		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Mini_Stone_5").value();
-		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
-		objectFactory->Register<Obj_Mini_Stone_5>(buildingProperty, buildingProperty);
 	}
 
 	// Obj_Hide_Box

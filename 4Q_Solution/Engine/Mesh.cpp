@@ -56,3 +56,9 @@ void Engine::Component::Mesh::SetActiveShadow(bool isActive)
 	_geMeshDescription.activeShadow = isActive;
 	_geMeshRenderer->SetDesc(&_geMeshDescription);
 }
+
+void Engine::Component::Mesh::SetZWrite(bool isWrite)
+{
+	_geMeshDescription.zWrite = isWrite;
+	_geMeshRenderer->SetDesc(&_geMeshDescription);
+}

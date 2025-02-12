@@ -68,7 +68,7 @@ void DX11Renderer::Render()
 {	
 	const auto& renderData = g_pRenderGroup->GetRenderDatas();
 	
-	std::list<DrawData> alphaMeshes, noneAlphaMeshs;
+	std::list<DrawData> alphaMeshes[ZWrite_End], noneAlphaMeshs;
 	std::list<std::pair<unsigned int, SkyBoxRenderer*>> skyBoxes;
 
 	unsigned int ID = 0;
@@ -99,7 +99,10 @@ void DX11Renderer::Render()
 		{			
 			if (mesh->_pMaterial->IsAlpha())
 			{
-				alphaMeshes.emplace_back(ID, mask, mesh);
+				if (component->IsZWrite())
+					alphaMeshes[ZWrite::On].emplace_back(ID, mask, mesh);
+				else
+					alphaMeshes[ZWrite::Off].emplace_back(ID, mask, mesh);
 			}
 			else
 			{
@@ -116,7 +119,7 @@ void DX11Renderer::Render()
 	if (nullptr != pCamera)
 		view = pCamera->GetViewMatrix();
 
-	alphaMeshes.sort([this, view](const DrawData& data0, const DrawData& data1)
+	alphaMeshes[On].sort([this, view](const DrawData& data0, const DrawData& data1)
 		{
 			Matrix m0 = XMMatrixTranspose(_matrices[data0.modelID]) * view;
 			Matrix m1 = XMMatrixTranspose(_matrices[data1.modelID]) * view;
@@ -128,6 +131,9 @@ void DX11Renderer::Render()
 	
 	for (auto& light : lights)
 	{
+		if (!light->GetActive())
+			continue;
+
 		switch (light->GetType())
 		{
 		case GE::ILight::Directional:
@@ -282,7 +288,7 @@ void DX11Renderer::GBufferPass(std::list<DrawData>& noneAlphaMeshes)
 	_pDeviceContext->OMSetBlendState(nullptr, nullptr, 0xFFFFFFFF);
 }
 
-void DX11Renderer::LigthingPass(SkyBoxRenderer* pSkyBox, std::list<DrawData>& alphaMeshes, std::list<std::pair<unsigned int, SkyBoxRenderer*>>& skyBoxes)
+void DX11Renderer::LigthingPass(SkyBoxRenderer* pSkyBox, std::list<DrawData>* alphaMeshes, std::list<std::pair<unsigned int, SkyBoxRenderer*>>& skyBoxes)
 {
 	pSkyBox->SetParameter(_pDeviceContext, 11);
 	
@@ -300,12 +306,16 @@ void DX11Renderer::LigthingPass(SkyBoxRenderer* pSkyBox, std::list<DrawData>& al
 
 	_pDeviceContext->OMSetBlendState(blendState, nullptr, 0xFFFFFFFF);
 
-	ForwardLigthing(alphaMeshes);
-	//AmbientOcclusion();
-	// 	
-	_pDeviceContext->OMSetBlendState(nullptr, nullptr, 0xFFFFFFFF);
+	// zWrite
+	ForwardLigthing(alphaMeshes[On]);
 
-	//ClearBindResource(_pDeviceContext, 11, 1);
+	// zNoneWrite
+	_pDeviceContext->OMSetDepthStencilState(_pAlphaDepthState, 1);
+	ForwardLigthing(alphaMeshes[Off]);
+	_pDeviceContext->OMSetDepthStencilState(nullptr, 1);
+
+	//AmbientOcclusion();
+	_pDeviceContext->OMSetBlendState(nullptr, nullptr, 0xFFFFFFFF);
 }
 
 void DX11Renderer::SkyBoxPass(std::list<std::pair<unsigned int, SkyBoxRenderer*>>& skyBoxes)
@@ -366,13 +376,8 @@ void DX11Renderer::DeferredLighting()
 }
 
 void DX11Renderer::ForwardLigthing(std::list<DrawData>& alphaMeshes)
-{
-	//auto& [RTVs, SRVs] = g_pViewManagement->GetRenderTargetGroup(L"Forward");
-
-	_pDeviceContext->OMSetDepthStencilState(_pAlphaDepthState, 1);
-	//_pDeviceContext->OMSetRenderTargets((unsigned int)RTVs.size(), RTVs.data(), _pDefaultDSV);
-	RenderMesh(alphaMeshes, _psForwardLighting);
-	_pDeviceContext->OMSetDepthStencilState(nullptr, 1);
+{	
+	RenderMesh(alphaMeshes, _psForwardLighting);	
 }
 
 void DX11Renderer::AmbientOcclusion()

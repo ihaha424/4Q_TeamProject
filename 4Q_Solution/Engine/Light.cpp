@@ -108,3 +108,8 @@ void Engine::Component::Light::SetMainLight()
 	auto* lightSystem = _graphicsManager->GetLightSystem();
 	lightSystem->SetMainLight(_geLight);
 }
+
+void Engine::Component::Light::SetActive(bool active) const
+{
+	_geLight->SetActive(active);
+}

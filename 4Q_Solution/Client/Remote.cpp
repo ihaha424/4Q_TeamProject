@@ -243,11 +243,12 @@ void Remote::UpdateState()
 
 	if (_bitFlag->IsOnFlag(StateFlag::Interact_Started))
 	{
-		if (_animator->IsLastFrame(0.1f))
+		if (_animator->IsLastFrame(0.1f, Upper))
 		{
-			_animator->ChangeAnimation("rig|Anim_Interaction_loop");
 			_bitFlag->OffFlag(StateFlag::Interact_Started);
 			_bitFlag->OnFlag(StateFlag::Interact_Triggered);
+
+			ChangeSplitAnimation("rig|Anim_Interaction_loop", StateFlag::Walk, Upper);
 		}
 	}
 

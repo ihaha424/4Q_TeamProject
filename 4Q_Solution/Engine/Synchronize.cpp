@@ -30,6 +30,11 @@ void Engine::Component::Synchronize::InvokeMessage(const Packet& packet)
 		_callbackMap[packet._packetId]->Invoke(&_enterAccept);
 		break;
 	}
+	case PacketID::Exit:
+	{
+		_callbackMap[packet._packetId]->Invoke(nullptr);
+		break;
+	}
 	case PacketID::Sync:
 	{
 		_syncPlayer.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
@@ -48,10 +53,16 @@ void Engine::Component::Synchronize::InvokeMessage(const Packet& packet)
 		_callbackMap[packet._packetId]->Invoke(&_moveSync);
 		break;
 	}
+	case PacketID::StateChange:
+	{
+		_stateChange.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
+		_callbackMap[packet._packetId]->Invoke(&_stateChange);
+		break;
+	}
 	case PacketID::ObjectMove:
 	{
-		_objectMove.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
-		_callbackMap[packet._packetId]->Invoke(&_objectMove);
+		//_objectMove.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
+		//_callbackMap[packet._packetId]->Invoke(&_objectMove);
 		break;
 	}
 	case PacketID::PickObject:
@@ -66,6 +77,12 @@ void Engine::Component::Synchronize::InvokeMessage(const Packet& packet)
 		_callbackMap[packet._packetId]->Invoke(&_putObject);
 		break;
 	}
+	case PacketID::PuzzleStart:
+	{
+		_puzzleStart.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
+		_callbackMap[packet._packetId]->Invoke(&_puzzleStart);
+		break;
+	}
 	case PacketID::PuzzleSuccess:
 	{
 		_callbackMap[packet._packetId]->Invoke(nullptr);
@@ -77,10 +94,28 @@ void Engine::Component::Synchronize::InvokeMessage(const Packet& packet)
 		_callbackMap[packet._packetId]->Invoke(&_soundPlay);
 		break;
 	}
+	case PacketID::InteractObject:
+	{
+		_interactObject.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
+		_callbackMap[packet._packetId]->Invoke(&_interactObject);
+		break;
+	}
+	case PacketID::TriggerObject:
+	{
+		_triggerObject.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
+		_callbackMap[packet._packetId]->Invoke(&_triggerObject);
+		break;
+	}
 	case PacketID::PlayDialog:
 	{
 		_dialogProgress.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
 		_callbackMap[packet._packetId]->Invoke(&_dialogProgress);
+		break;
+	}
+	case PacketID::InteractDialog:
+	{
+		_interactDialog.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
+		_callbackMap[packet._packetId]->Invoke(&_interactDialog);
 		break;
 	}
 	case PacketID::QuestStart:
@@ -95,16 +130,16 @@ void Engine::Component::Synchronize::InvokeMessage(const Packet& packet)
 		_callbackMap[packet._packetId]->Invoke(&_questEnd);
 		break;
 	}
-	case PacketID::InteractObject:
+	case PacketID::ObjectActive:
 	{
-		_interactObject.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
-		_callbackMap[packet._packetId]->Invoke(&_interactObject);
+		_objectActive.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
+		_callbackMap[packet._packetId]->Invoke(&_objectActive);
 		break;
 	}
-	case PacketID::StateChange:
+	case PacketID::ObjectDisable:
 	{
-		_stateChange.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
-		_callbackMap[packet._packetId]->Invoke(&_stateChange);
+		_objectActive.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
+		_callbackMap[packet._packetId]->Invoke(&_objectActive);
 		break;
 	}
 	case PacketID::DataRemote:

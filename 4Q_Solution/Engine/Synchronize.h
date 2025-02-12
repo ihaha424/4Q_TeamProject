@@ -60,7 +60,7 @@ namespace Engine::Component
 		MoveMsg::Jump _jump;
 		MoveMsg::MoveSync _moveSync;
 		MoveMsg::StateChange _stateChange;
-		MoveMsg::ObjectMove _objectMove;
+		//MoveMsg::ObjectMove _objectMove;
 
 		PlayMsg::SelectPart _selectPart;
 		PlayMsg::PickObject _pickObject;
@@ -72,8 +72,10 @@ namespace Engine::Component
 		PlayMsg::DialogProgress _dialogProgress;
 		PlayMsg::InteractObject _interactObject;
 		PlayMsg::InteractDialog _interactDialog;
+		PlayMsg::TriggerObject _triggerObject;
 		PlayMsg::PuzzleStart _puzzleStart;
 		PlayMsg::ObjectActive _objectActive;
+		PlayMsg::ObjectDisable _objectDisable;
 	};
 
 }

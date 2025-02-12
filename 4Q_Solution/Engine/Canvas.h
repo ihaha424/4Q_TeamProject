@@ -2,26 +2,27 @@
 
 namespace Engine
 {
-    namespace UI::Panel
-    {
-        class Anchor;
-    }
+	namespace UI::Panel
+	{
+		class Anchor;
+	}
 
 	class Canvas
 	{
-    public:
-        explicit Canvas(const Math::Size& viewportSize);
+	public:
+		explicit Canvas(const Math::Size& viewportSize);
 
-        void Initialize();
-        void Attach();
-        void Update(float deltaGameTime) const;
-		void FixedUpdate() const;
+		void Initialize();
+		void Attach();
+		void Update(float deltaGameTime);
+		void FixedUpdate();
 		void Detach();
-        void Finalize() const;
+		void Finalize();
 
-        [[nodiscard]] UI::Panel::Anchor GetRootPanel() const;
+		[[nodiscard]] UI::Panel::Anchor* GetRootPanel();
 
-    protected:
-        UI::Panel::Anchor* _rootPanel;
+	protected:
+		Math::Rect _rect;
+		UI::Panel::Anchor _rootPanel;
 	};
 }

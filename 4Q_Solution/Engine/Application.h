@@ -22,6 +22,8 @@ namespace Engine
 		void Run(int showCommand);
 		void End();
 
+		static Math::Size GetSize();
+
 	protected:
 		virtual void LoadData(Load::IManager* loadManager) = 0;
 		virtual void DeclareInputActions(Input::IManager* inputManager) = 0;
@@ -42,7 +44,7 @@ namespace Engine
 
 		// TODO: Setup from file.
 		std::wstring _title;
-		Math::Size _size;
+		static Math::Size _size;
 
 	public:
 		static Time::IManager* GetTimeManager();

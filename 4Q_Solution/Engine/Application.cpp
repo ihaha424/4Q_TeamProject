@@ -25,8 +25,10 @@ Engine::Logger::Manager* Engine::Application::_loggerManager = nullptr;
 Engine::GameState::Manager* Engine::Application::_gameStateManager = nullptr;
 Engine::DSHAudio::Manager* Engine::Application::_soundManager = nullptr;
 
+Engine::Math::Size Engine::Application::_size = Math::Size::Zero;
+
 Engine::Application::Application(const HINSTANCE instanceHandle) :
-	_instanceHandle(instanceHandle), _size(Math::Size::Zero)
+	_instanceHandle(instanceHandle)
 {
 }
 
@@ -107,6 +109,11 @@ void Engine::Application::End()
 {
 	FinalizeManagers();
 	DeleteManagers();
+}
+
+Engine::Math::Size Engine::Application::GetSize()
+{
+	return _size;
 }
 
 Engine::Time::IManager* Engine::Application::GetTimeManager()

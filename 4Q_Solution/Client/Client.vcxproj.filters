@@ -169,6 +169,12 @@
     <Filter Include="Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_1">
       <UniqueIdentifier>{86ba4639-df1c-49ab-8d91-7f6f3aed61dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Canvas">
+      <UniqueIdentifier>{28df2601-1c54-4987-988f-3076c2880f8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Canvas\Main">
+      <UniqueIdentifier>{fa71e9a0-e353-4433-a197-d94f776d1659}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -540,6 +546,9 @@
     <ClInclude Include="Obj_Ornoa_Soundblock_1.h">
       <Filter>Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_1</Filter>
     </ClInclude>
+    <ClInclude Include="MainCanvas.h">
+      <Filter>Canvas\Main</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -874,6 +883,9 @@
     </ClCompile>
     <ClCompile Include="Obj_Ornoa_Soundblock_1.cpp">
       <Filter>Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_1</Filter>
+    </ClCompile>
+    <ClCompile Include="MainCanvas.cpp">
+      <Filter>Canvas\Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

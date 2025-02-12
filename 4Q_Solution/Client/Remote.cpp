@@ -111,6 +111,81 @@ void Remote::PostAttach()
 	Object::PostAttach();
 }
 
+void Remote::MoveStarted()
+{
+	_bitFlag->OnFlag(StateFlag::Walk);
+
+	if (!_bitFlag->IsOnFlag(StateFlag::Jump))
+	{
+		ChangeSplitAnimation("rig|Anim_Walk", StateFlag::Interact, Lower);
+	}	
+}
+
+void Remote::MoveCompleted()
+{
+	if (!_bitFlag->IsOnFlag(StateFlag::Jump))
+		SyncPatialAnimation("rig|Anim_Idle", StateFlag::Interact, Upper, Lower);
+
+	_bitFlag->OffFlag(StateFlag::Walk);
+}
+
+void Remote::JumpStarted()
+{
+	if (_bitFlag->IsOnFlag(StateFlag::Jump | StateFlag::Interact))
+		return;
+
+	_bitFlag->OnFlag(StateFlag::Jump | StateFlag::Jump_Started);
+	_animator->ChangeAnimation("rig|Anim_Jump_start");
+	_animator->SetAnimationSpeed(1.5f);
+}
+
+void Remote::JumpCompleted()
+{
+}
+
+void Remote::InteractStarted()
+{
+	if (_bitFlag->IsOnFlag(StateFlag::Interact | StateFlag::Jump))
+		return;	
+
+	_bitFlag->OnFlag(StateFlag::Interact | StateFlag::Interact_Started);
+	_bitFlag->OffFlag(StateFlag::Interact_Completed);
+
+	ChangeSplitAnimation("rig|Anim_Interaction_start", StateFlag::Walk, Upper);
+}
+
+void Remote::InteractCompleted()
+{
+	_bitFlag->OnFlag(StateFlag::Interact_Completed);
+	_bitFlag->OffFlag(StateFlag::Interact | StateFlag::Interact_Started | StateFlag::Interact_Triggered);
+
+	ChangeSplitAnimation("rig|Anim_Interaction_end", StateFlag::Walk, Upper);
+}
+
+void Remote::ChangeSplitAnimation(const char* animation, StateFlag flag, SplitType type)
+{
+	if (_bitFlag->IsOnFlag(flag))
+	{
+		_animator->ChangeAnimation(animation, type);
+	}
+	else
+	{
+		_animator->ChangeAnimation(animation);
+	}
+}
+
+void Remote::SyncPatialAnimation(const char* animation, StateFlag flag, SplitType parent, SplitType child)
+{
+	if (_bitFlag->IsOnFlag(flag))
+	{
+		_animator->SyncPartialAnimation(parent, child);
+	}
+	else
+	{
+		_animator->ChangeAnimation(animation);
+	}
+}
+
 void Remote::UpdateState()
 {
 	// Jump
@@ -120,7 +195,7 @@ void Remote::UpdateState()
 		{
 			if (!_bitFlag->IsOnFlag(StateFlag::Jump_Triggered))
 			{
-				_sync->_jump.set_power(15.f);
+				_sync->_jump.set_power(20.f);
 				_sync->_jump.SerializeToString(&_sync->_msgBuffer);
 
 				Engine::Application::GetNetworkManager()->SaveSendData(
@@ -140,16 +215,25 @@ void Remote::UpdateState()
 			if (_bitFlag->IsOnFlag(StateFlag::Jump_Triggered))
 			{
 				_bitFlag->OffFlag(StateFlag::Jump | StateFlag::Jump_Started | StateFlag::Jump_Triggered);
-				_animator->ChangeAnimation("rig|Anim_Jump_end");
+
+				if (_bitFlag->IsOnFlag(StateFlag::Walk))
+					_animator->ChangeAnimation("rig|Anim_Walk");
+				else
+					_animator->ChangeAnimation("rig|Anim_Jump_end");
+
+				_remote->SetDirection(Engine::Math::Vector3::Zero);
 			}
 		}
 	}
 
-	if (!_bitFlag->IsOnFlag(StateFlag::Walk | StateFlag::Jump | StateFlag::Interact))
+	if (_bitFlag->IsOnFlag(StateFlag::Interact_Completed))
 	{
-		if (_animator->IsLastFrame(0.1f))
+		if (_animator->IsLastFrame(0.1f, Upper))
 		{
-			_animator->ChangeAnimation("rig|Anim_Idle");
+			_bitFlag->OffFlag(StateFlag::Interact_Completed);
+
+			if (_bitFlag->IsOnFlag(StateFlag::Walk))
+				_animator->SyncPartialAnimation(Lower, Upper);
 		}
 	}
 
@@ -159,6 +243,16 @@ void Remote::UpdateState()
 		{
 			_animator->ChangeAnimation("rig|Anim_Interaction_loop");
 			_bitFlag->OffFlag(StateFlag::Interact_Started);
+			_bitFlag->OnFlag(StateFlag::Interact_Triggered);
+		}
+	}
+
+	if (!_bitFlag->IsOnFlag(StateFlag::Walk | StateFlag::Jump | StateFlag::Interact))
+	{
+		if (_animator->IsLastFrame(0.1f))
+		{
+			_animator->ChangeAnimation("rig|Anim_Idle");
+			//_remote->SetSpeed(_speed);
 		}
 	}
 }
@@ -177,50 +271,35 @@ void Remote::StateChange(const MoveMsg::StateChange* msg)
 {
 	unsigned long long flag = msg->stateinfo();
 	
-	if (flag == _bitFlag->GetCurrentFlag())
-		return;
+	/*if (flag == _bitFlag->GetCurrentFlag())
+		return;*/
 
-	if (!_bitFlag->IsOnFlag(StateFlag::Jump))
+	if (flag & StateFlag::Move_Started)
 	{
-		if (_bitFlag->IsOnFlag(StateFlag::Interact))
-		{
-			unsigned long long checkFlag = flag & (StateFlag::Interact | 
-												   StateFlag::Interact_Started | 
-												   StateFlag::Interact_Triggered);
-			if (0 == flag)
-			{
-				_animator->ChangeAnimation("rig|Anim_Interaction_end");
-			}
-		}
-		else
-		{			
-			if (flag & StateFlag::Walk)
-			{
-				_animator->ChangeAnimation("rig|Anim_Walk");
-			}
-			else
-			{
-				_animator->ChangeAnimation("rig|Anim_Idle");
-			}
+		MoveStarted();
+	}
 
-			if (flag & StateFlag::Jump_Started)
-			{
-				_animator->ChangeAnimation("rig|Anim_Jump_start");
-				_animator->SetAnimationSpeed(1.5f);
-			}
-		}
+	if (flag & StateFlag::Move_Completed)
+	{
+		MoveCompleted();
+	}
 
-		if (!_bitFlag->IsOnFlag(StateFlag::Interact))
-		{
-			if (flag & StateFlag::Interact_Started)
-			{
-				_animator->ChangeAnimation("rig|Anim_Interaction_start");
-				printf("interaction_start\n");
-			}
-		}
-	}	
+	if (flag & StateFlag::Jump_Started)
+	{
+		JumpStarted();
+	}
 
-	_bitFlag->SetFlag(flag);
+	if (flag & StateFlag::Interact_Started)
+	{
+		InteractStarted();
+	}
+
+	if (flag & StateFlag::Interact_Completed)
+	{
+		InteractCompleted();
+	}
+
+	//_bitFlag->SetFlag(flag);
 }
 
 void Remote::SyncMove(const MoveMsg::MoveSync* msg)

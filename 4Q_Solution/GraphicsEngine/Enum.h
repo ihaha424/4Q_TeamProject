@@ -15,7 +15,7 @@ namespace RenderType
 
 constexpr float SHADOW_WIDTH = 8192.f;
 constexpr float SHADOW_HEIGHT = 8192.f;
-constexpr unsigned int MAX_BONE_MATRIX = 128;
+constexpr unsigned int MAX_BONE_MATRIX = 512;
 constexpr unsigned int MAX_DRAW_OBJECT = 2048;
 constexpr unsigned int MAX_DIRECTIONAL_LIGHT = 4;
 constexpr unsigned int MAX_POINT_LIGHT = 32;

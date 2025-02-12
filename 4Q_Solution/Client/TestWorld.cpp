@@ -3,6 +3,8 @@
 
 #include "Application.h"
 #include "NPC_Hide.h"
+#include "NPC_Ornoa.h"
+#include "NPC_Ornoa_Elder.h"
 
 void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 {
@@ -30,6 +32,8 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	// NPC
 	{
 		objectFactory->Clone<NPC_Hide>(this);
+		objectFactory->Clone<NPC_Ornoa>(this);
+		objectFactory->Clone<NPC_Ornoa_Elder>(this);
 	}
 
 	// BG_Terrain

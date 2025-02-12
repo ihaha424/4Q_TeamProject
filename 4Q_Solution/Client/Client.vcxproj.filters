@@ -636,6 +636,9 @@
     <ClInclude Include="Trigger_Sudium_SoundTrigger_5.h">
       <Filter>Object\Puzzle\02. Puzzle\Object</Filter>
     </ClInclude>
+    <ClInclude Include="NPC.h">
+      <Filter>Object\NPC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -1027,6 +1030,9 @@
     </ClCompile>
     <ClCompile Include="GrabImage.cpp">
       <Filter>UserInterfaces\GrabImage</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC.cpp">
+      <Filter>Object\NPC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -163,6 +163,7 @@
     <ClInclude Include="DelayCall.h" />
     <ClInclude Include="GrabImage.h" />
     <ClInclude Include="InteractImage.h" />
+    <ClInclude Include="NPC.h" />
     <ClInclude Include="PuzzleManager03.h" />
     <ClInclude Include="EmptyWorld.h" />
     <ClInclude Include="GameCoreData.h" />
@@ -311,6 +312,7 @@
     <ClCompile Include="InteractImage.cpp" />
     <ClCompile Include="MainCanvas.cpp" />
     <ClCompile Include="DelayCall.cpp" />
+    <ClCompile Include="NPC.cpp" />
     <ClCompile Include="PuzzleManager03.cpp" />
     <ClCompile Include="GameCoreData.cpp" />
     <ClCompile Include="GrabData.cpp" />

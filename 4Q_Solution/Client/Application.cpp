@@ -6,6 +6,8 @@
 #include "TestWorld.h"
 #include "EmptyWorld.h"
 #include "NPC_Hide.h"
+#include "NPC_Ornoa.h"
+#include "NPC_Ornoa_Elder.h"
 #include "SimpleCamera.h"
 #include "../Engine/DSHHudManager.h"
 
@@ -64,7 +66,14 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	objectFactory->Register<Live>(L"Assets/Models/Live.fbx");
 	objectFactory->Register<RemoteLive>(L"Assets/Models/Live.fbx");
 	objectFactory->Register<SkyBox>(L"Assets/Models/skybox.fbx");
-	objectFactory->Register<NPC_Hide>();
+
+
+	// NPC
+	{
+		objectFactory->Register<NPC_Hide>();
+		objectFactory->Register<NPC_Ornoa>();
+		objectFactory->Register<NPC_Ornoa_Elder>();
+	}
 
 
 	// BG_Terrain

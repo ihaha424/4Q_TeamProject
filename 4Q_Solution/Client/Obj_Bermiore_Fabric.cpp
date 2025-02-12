@@ -42,7 +42,7 @@ void Obj_Bermiore_Fabric::InteractCallback(const PlayMsg::InteractObject* msg)
 	if (!isData)
 		return;
 	auto data = std::any_cast<GameCoreData>(*isData);
-	if (data.player == PlayerEnum::Live || data.player == PlayerEnum::Developer)
+	if (data.player == static_cast<int>(PlayerEnum::Live) || data.player == static_cast<int>(PlayerEnum::Developer))
 	{
 		// Sound ÆÄÀÏ
 	}

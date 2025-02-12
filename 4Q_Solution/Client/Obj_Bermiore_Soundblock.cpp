@@ -30,7 +30,7 @@ void Obj_Bermiore_Soundblock::PlaySound(const PlayMsg::InteractObject* msg)
 	if (!isData)
 		return;
 	auto data = std::any_cast<GameCoreData>(*isData);
-	if (data.player == PlayerEnum::Live || data.player == PlayerEnum::Developer)
+	if (data.player == static_cast<int>(PlayerEnum::Live) || data.player == static_cast<int>(PlayerEnum::Developer))
 	{
 		// 사운드 컴포먼트 6개를 1개씩 실행해야함
 		// flag로 한다음 update에서 확인 하는 방식을 생각함

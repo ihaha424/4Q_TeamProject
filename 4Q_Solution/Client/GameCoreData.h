@@ -1,6 +1,6 @@
 #pragma once
 
-enum PlayerEnum
+enum class PlayerEnum
 {
 	Ray = 1,
 	Live = 2,

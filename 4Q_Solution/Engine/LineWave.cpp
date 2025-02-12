@@ -4,6 +4,7 @@
 
 Engine::Component::LineWave::LineWave()
 	: _geLineRenderer(nullptr)
+	, _source(nullptr)
 {
 }
 
@@ -35,6 +36,8 @@ void Engine::Component::LineWave::Attach()
 void Engine::Component::LineWave::LateUpdate(float deltaTime)
 {
 	Component::LateUpdate(deltaTime);
+
+	_geMatrix = Engine::Math::Matrix::CreateTranslation(*_source);
 	_geLineRenderer->Update(deltaTime);
 }
 
@@ -69,6 +72,7 @@ void Engine::Component::LineWave::SetGradientTexturePath(const std::filesystem::
 void Engine::Component::LineWave::SetSourcePosition(const Engine::Math::Vector3* source)
 {
 	_geLineRenderer->SetSourcePosition((float*)source);
+	_source = source;
 }
 
 void Engine::Component::LineWave::SetDestinationPosition(const Engine::Math::Vector3* destination)

@@ -449,9 +449,18 @@ void GameClient::Application::DeclareUIAction(Engine::Input::IManager* inputMana
 	Engine::Input::Device::IController* controller = nullptr;
 	inputManager->GetDevice(&controller);
 
+	Engine::Input::Device::IMouse* mouse = nullptr;
+	inputManager->GetDevice(&mouse);
+
 	// UINext
 	Engine::Input::IAction* action = nullptr;
 	mainMappingContext->GetAction(L"UINext", &action);
+
+	Engine::Input::Trigger::IDown* leftClickTrigger = nullptr;
+	action->GetTrigger(&leftClickTrigger);
+	Engine::Input::Component::IButtonComponent* leftClick = nullptr;
+	mouse->GetComponent(Engine::Input::Device::IMouse::Button::Left, &leftClick);
+	leftClickTrigger->SetComponent(leftClick);
 
 	Engine::Input::Trigger::IDown* bButtonTrigger = nullptr;
 	action->GetTrigger(&bButtonTrigger);

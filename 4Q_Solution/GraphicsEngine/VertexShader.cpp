@@ -30,7 +30,7 @@ HRESULT VertexShader::LoadResource(const std::filesystem::path& filePath)
 
 	if (vertexShaderData.empty())
 	{
-		CompileShader(vertexShaderData, filePath, "main", "ps_5_0");
+		CompileShader(vertexShaderData, filePath, "main", "vs_5_0");
 	}
 #endif
 

@@ -460,8 +460,8 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 
 void GameClient::Application::PrepareInitialWorld(Engine::Content::Factory::World* worldFactory)
 {
-	worldFactory->Clone<EmptyWorld>();
-	//worldFactory->Clone<TestWorld>();
+	//worldFactory->Clone<EmptyWorld>();
+	worldFactory->Clone<TestWorld>();
 }
 
 void GameClient::Application::PrepareInitialHUD(Engine::DSHHud::Manager* hudManager)
@@ -472,7 +472,7 @@ void GameClient::Application::PrepareInitialHUD(Engine::DSHHud::Manager* hudMana
 	_mainCanvas->BindOnFadeIn([hudManager, this]()
 	{
 		hudManager->SetCanvas(_inGameCanvas);
-		GetContentManager()->GetWorldFactory()->Clone<TestWorld>();
+		this->GetInputManager()->SetActiveMappingContext(L"Default");
 	});
 }
 

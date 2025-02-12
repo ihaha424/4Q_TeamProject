@@ -32,6 +32,7 @@ namespace Engine::Input
 
 		virtual void GetMappingContext(const wchar_t* name, IMappingContext** mappingContext) = 0;
 		virtual void SetActiveMappingContext(IMappingContext* mappingContext) = 0;
+		virtual void SetActiveMappingContext(const std::wstring& name) = 0;
 
 		virtual void GetModifier(Modifier::INegative** negative) = 0;
 		virtual void GetModifier(Modifier::ISwizzleAxis::Type type, Modifier::ISwizzleAxis** swizzleAxis) = 0;

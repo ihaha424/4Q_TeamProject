@@ -101,13 +101,13 @@ void Engine::Application::Run(const int showCommand)
 			_contentManager->Update(deltaTime);
 			_contentManager->LazyUpdate(deltaTime);
 
-			_hudManager->Relaxation();
-			_contentManager->Relaxation();
-
 			_soundManager->Update();
 
 			_graphicsManager->PostUpdate(deltaTime);
 			_graphicsManager->Render();
+
+			_hudManager->Relaxation();
+			_contentManager->Relaxation();
 
 			_inputManager->Reset();
 

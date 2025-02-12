@@ -15,6 +15,8 @@ public:
 
 	void Action() override;
 
+	void BindOnFadeIn(const Engine::UI::Wrapper::FadeImage::Event& event) const;
+
 private:
 	Engine::UI::Wrapper::FadeImage* _fadeMask;
 };

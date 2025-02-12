@@ -2,6 +2,7 @@
 #include "Application.h"
 
 #include "MainCanvas.h"
+#include "InGameCanvas.h"
 #include "TestWorld.h"
 #include "EmptyWorld.h"
 #include "SimpleCamera.h"
@@ -466,7 +467,13 @@ void GameClient::Application::PrepareInitialWorld(Engine::Content::Factory::Worl
 void GameClient::Application::PrepareInitialHUD(Engine::DSHHud::Manager* hudManager)
 {
 	_mainCanvas = new MainCanvas(_size);
-	hudManager->SetCanvas(_mainCanvas);	
+	_inGameCanvas = new InGameCanvas(_size);
+	hudManager->SetCanvas(_mainCanvas);
+	_mainCanvas->BindOnFadeIn([hudManager, this]()
+	{
+		hudManager->SetCanvas(_inGameCanvas);
+		GetContentManager()->GetWorldFactory()->Clone<TestWorld>();
+	});
 }
 
 void GameClient::Application::DeclareUIAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext)

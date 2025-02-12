@@ -9,11 +9,13 @@ Engine::UI::Wrapper::FadeImage::FadeImage(Math::Rect* rect, const std::filesyste
 void Engine::UI::Wrapper::FadeImage::FadeIn()
 {
 	_state = State::FadeIn;
+	_elapsedTime = 0.0f;
 }
 
 void Engine::UI::Wrapper::FadeImage::FadeOut()
 {
 	_state = State::FadeOut;
+	_elapsedTime = _duration;
 }
 
 void Engine::UI::Wrapper::FadeImage::Update(const float deltaGameTime)

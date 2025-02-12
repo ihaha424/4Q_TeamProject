@@ -163,6 +163,7 @@
     <ClInclude Include="EmptyWorld.h" />
     <ClInclude Include="GameCoreData.h" />
     <ClInclude Include="Hide_SoundTrigger.h" />
+    <ClInclude Include="InGameCanvas.h" />
     <ClInclude Include="MainCanvas.h" />
     <ClInclude Include="Not_Puzzle_ObjectData.h" />
     <ClInclude Include="NPCData.h" />
@@ -289,6 +290,7 @@
     <ClCompile Include="BG_Ornoa_Cloth_3.cpp" />
     <ClCompile Include="BG_Props_Fence.cpp" />
     <ClCompile Include="EmptyWorld.cpp" />
+    <ClCompile Include="InGameCanvas.cpp" />
     <ClCompile Include="MainCanvas.cpp" />
     <ClCompile Include="GameCoreData.cpp" />
     <ClCompile Include="Hide_SoundTrigger.cpp" />

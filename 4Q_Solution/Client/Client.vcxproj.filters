@@ -181,6 +181,9 @@
     <Filter Include="Object\SimpleCamera">
       <UniqueIdentifier>{afaaabca-0ecd-4345-8122-99602b6136a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Canvas\InGame">
+      <UniqueIdentifier>{0c1e44ed-f9a3-4a74-9293-e49505c27df9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -561,6 +564,9 @@
     <ClInclude Include="SimpleCamera.h">
       <Filter>Object\SimpleCamera</Filter>
     </ClInclude>
+    <ClInclude Include="InGameCanvas.h">
+      <Filter>Canvas\InGame</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -904,6 +910,9 @@
     </ClCompile>
     <ClCompile Include="SimpleCamera.cpp">
       <Filter>Object\SimpleCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="InGameCanvas.cpp">
+      <Filter>Canvas\InGame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

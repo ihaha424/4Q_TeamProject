@@ -12,12 +12,12 @@ namespace Engine
 	public:
 		explicit Canvas(const Math::Size& viewportSize);
 
-		void Initialize(const Modules& modules);
-		void Attach();
-		void Update(float deltaGameTime);
-		void FixedUpdate();
-		void Detach();
-		void Finalize();
+		virtual void Initialize(const Modules& modules);
+		virtual void Attach();
+		virtual void Update(float deltaGameTime);
+		virtual void FixedUpdate();
+		virtual void Detach();
+		virtual void Finalize();
 
 		virtual void Action();
 

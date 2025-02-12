@@ -1,5 +1,6 @@
 #pragma once
 
+class InGameCanvas;
 class MainCanvas;
 
 namespace GameClient
@@ -24,6 +25,7 @@ namespace GameClient
 
 
 		MainCanvas* _mainCanvas;
+		InGameCanvas* _inGameCanvas;
 
 	private:
 		template<typename T>

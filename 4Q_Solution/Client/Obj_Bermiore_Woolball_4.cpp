@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "Obj_Bermiore_Woolball_4.h"
 
-Obj_Bermiore_Woolball_4::Obj_Bermiore_Woolball_4(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath) :
-	BaseWoolball(std::forward<std::filesystem::path>(meshPath), std::forward<std::filesystem::path>(physicsPath))
+Obj_Bermiore_Woolball_4::Obj_Bermiore_Woolball_4(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath) :
+	BaseWoolball((meshPath), (physicsPath))
 {
 }
 

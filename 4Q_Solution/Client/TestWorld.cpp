@@ -256,7 +256,33 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 
 	// Obj_Bermiore_Woolball_inBox
 	{
-		// TODO: Bermiore_Woolball_inBox
+		{
+			helpPrepare<Obj_Bermiore_Soundblock>(L"Obj_Bermiore_Soundblock", objectFactory);
+		}
+		{
+			helpPrepare<Obj_Bermiore_Fabric>(L"Obj_Bermiore_Fabric", objectFactory);
+		}
+		{
+			helpPrepare<Obj_Bermiore_Hanger>(L"Obj_Bermiore_Hanger", objectFactory);
+		}
+		{
+			helpPrepare<Obj_Bermiore_Woolball_1>(L"Obj_Bermiore_Woolball_1", objectFactory);
+		}
+		{
+			helpPrepare<Obj_Bermiore_Woolball_2>(L"Obj_Bermiore_Woolball_2", objectFactory);
+		}
+		{
+			helpPrepare<Obj_Bermiore_Woolball_3>(L"Obj_Bermiore_Woolball_3", objectFactory);
+		}
+		{
+			helpPrepare<Obj_Bermiore_Woolball_4>(L"Obj_Bermiore_Woolball_4", objectFactory);
+		}
+		{
+			helpPrepare<Obj_Bermiore_Woolball_5>(L"Obj_Bermiore_Woolball_5", objectFactory);
+		}
+		{
+			helpPrepare<Obj_Bermiore_Woolball_6>(L"Obj_Bermiore_Woolball_6", objectFactory);
+		}
 	}
 
 	// TODO: Wool Series

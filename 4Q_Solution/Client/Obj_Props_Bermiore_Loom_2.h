@@ -4,7 +4,7 @@
 class Obj_Props_Bermiore_Loom_2 : public StaticObject
 {
 public:
-	explicit Obj_Props_Bermiore_Loom_2(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
+	explicit Obj_Props_Bermiore_Loom_2(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath);
 	virtual ~Obj_Props_Bermiore_Loom_2() = default;
 };
 

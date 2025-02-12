@@ -128,6 +128,9 @@ void DX11Renderer::Render()
 	
 	for (auto& light : lights)
 	{
+		if (!light->GetActive())
+			continue;
+
 		switch (light->GetType())
 		{
 		case GE::ILight::Directional:

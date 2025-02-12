@@ -409,7 +409,7 @@ void TestWorld::PreInitialize(const Engine::Modules& modules)
 	auto _physicsManager = Engine::Application::GetPhysicsManager();
 
 	// 메인 씬 만들기 - 중력값 설정 필요
-	Engine::Physics::SceneDesc mainSceneDesc{ {0.f,-9.8f,0.f},0 };
+	Engine::Physics::SceneDesc mainSceneDesc{ {0.f, 0.f,0.f},0 };
 	_physicsManager->CreateScene(&mainScene, mainSceneDesc);
 	_physicsManager->AttachUpdateScene(mainScene);
 	_physicsManager->CreateControllerManager(mainScene);
@@ -428,9 +428,9 @@ void TestWorld::PreInitialize(const Engine::Modules& modules)
 	//	data.y : aspect
 	//	data.z : nearPlane
 	//	data.w : farPlane
-	geometryDesc.data = { 120.f, 2, 0.01f, 10000.0f };
-	_physicsManager->AddGeomtry("Camera", geometryDesc, {});
 
+	geometryDesc.data = { std::numbers::pi_v<float> / 4.f, 16.f / 9.f, 1.f, 1000.0f };
+	_physicsManager->AddGeomtry("Camera", geometryDesc, {});
 
 	Engine::Application::GetNetworkManager()->RegistWorldEvent(
 		(short)PacketID::EnterAccept,
@@ -469,33 +469,44 @@ void TestWorld::PreUpdate(float deltaTime)
 
 void TestWorld::PostUpdate(float deltaTime)
 {
-	//Engine::Application::GetPhysicsManager()->UpdateScene(cameraScene, deltaTime);
-	//Engine::Application::GetPhysicsManager()->FetchScene(cameraScene, true);
+	Engine::Application::GetPhysicsManager()->UpdateScene(mainScene, deltaTime);
+	Engine::Application::GetPhysicsManager()->FetchScene(mainScene, true);
 
-	Engine::Physics::AdditionalQueryData OverlapInfo;
-	// TODO: transform = GetCameraTransform 해서 넣어줘야함
-	Engine::Transform transform{};
-	//cameraScene->Overlap(OverlapInfo, "Camera", transform);
+	//Engine::Physics::AdditionalQueryData OverlapInfo;
+	//// TODO: transform = GetCameraTransform 해서 넣어줘야함
 
-	for (auto& object : OverlapInfo.UserDatas)
-	{
-		static_cast<Engine::Object*>(object->GetOwner());
-		// TODO:: RenderFlag 끄기
-	}
+	//auto* camera = _currentPlayer->GetCamera();
+	//Engine::Math::Matrix matrix = camera->GetCameraMatrix();
+
+	//Engine::Math::Vector3 position, scale; 
+	//Engine::Math::Quaternion rotation;
+	//matrix.Decompose(scale, rotation, position);
+
+	//rotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(std::numbers::pi_v< float> * 0.5f, std::numbers::pi_v < float>, 0.f) * rotation;
+	//Engine::Transform transform{};
+	//transform.rotation = rotation;
+	//transform.position = position;
+	//mainScene->Overlap(OverlapInfo, "Camera", transform);
+
+	//for (auto& object : OverlapInfo.UserDatas)
+	//{
+	//	Engine::Object* owner = static_cast<Engine::Object*>(object->GetOwner());
+	//	owner->Show();
+	//}
 }
 
 void TestWorld::PostFixedUpdate()
 {
-
 }
-
 
 void TestWorld::EnterAccept(const ConnectMsg::AddObject* msg) {
 	if (msg->grantnumber() == 1) {
 		_ray = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Ray>(this);
 		playerSerialNum = msg->grantnumber();
 		_ray->SetSerialNumber(msg->grantnumber());
-		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 3 });
+		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 1 });
+
+		_currentPlayer = _ray;
 	}
 	else if (msg->grantnumber() == 2) {
 		// TODO: 여기에 리브의 오브젝트를 생성하는 코드를 넣어야 합니다.
@@ -503,6 +514,8 @@ void TestWorld::EnterAccept(const ConnectMsg::AddObject* msg) {
 		playerSerialNum = msg->grantnumber();
 		_live->SetSerialNumber(msg->grantnumber());
 		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 2 });
+
+		_currentPlayer = _live;
 	}
 }
 void TestWorld::CreatePlayer(const ConnectMsg::AddObject* msg) {

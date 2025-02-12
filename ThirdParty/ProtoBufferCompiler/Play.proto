@@ -31,6 +31,11 @@ message TriggerObject {
 	optional int32 triggerboxid = 2;
 }
 
+message TriggerOut {
+	optional int32 objectserialnumber = 1;
+	optional int32 triggerboxid = 2;
+}
+
 message InteractDialog {
 	optional int32 currentdialogid = 1;
 }

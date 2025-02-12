@@ -15,7 +15,7 @@ bool ServerLogic::Initialize()
     delete _system;
 
     _physicsManager = new Engine::PHI::Manager();
-    _physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, true);
+    _physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, false);
     //_physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, false);
 
     //============================
@@ -173,7 +173,7 @@ void ServerLogic::UpdateObject(float deltaTime)
         _playerSlot[i]._flag = _playerSlot[i]._controller->GetCollisionFlag();
         _playerSlot[i]._controller->FixedUpdate();
 
-        if (_playerSlot[i]._state & (1 << 4) && _playerSlot[i]._controller->IsJump() == false) {
+        if (_playerSlot[i]._state & (1 << 7) && _playerSlot[i]._controller->IsJump() == false) {
             _stateChange.set_stateinfo(1);
             _stateChange.SerializeToString(&_msgBuffer);
             Server::BroadCast(_msgBuffer, (short)PacketID::StateChange, _stateChange.ByteSizeLong(), _playerSlot[i]._serialNumber);
@@ -504,9 +504,6 @@ void ServerLogic::ObjectInteractProcess(const Packet& packet)
     else if (objectNum == 10003 && _currentQuestID == 5103) {
         PlayDialog(61605);
     }
-    //else if (objectNum == 10002 && _currentQuestID == 1103) {
-    //    PlayDialog(71601);
-    //}
     // ====================
 
     // ====================
@@ -532,13 +529,6 @@ void ServerLogic::ObjectInteractProcess(const Packet& packet)
         Server::BroadCast("", (short)PacketID::PuzzleSuccess, 0, 9004);
         QuestProcess(_currentQuestID);
         _puzzle5Clear = true;
-        printf("[Interact Process] Puzzle Clear. Puzzle Number : %d\n", _currentPuzzleNumber);
-    }
-    // puzzle 6번은 여기서 타는게 아니라 PuzzleProcess에서 타야 할듯.
-    else if (objectNum == 6999) {
-        Server::BroadCast("", (short)PacketID::PuzzleSuccess, 0, 1);
-        QuestProcess(_currentQuestID);
-        _puzzle6Clear = true;
         printf("[Interact Process] Puzzle Clear. Puzzle Number : %d\n", _currentPuzzleNumber);
     }
     // ====================
@@ -621,13 +611,90 @@ void ServerLogic::ObjectTriggerProcess(const Packet& packet)
     int targetObjectId = _triggerObject.objectserialnumber();
 
     // trigger는 8001부터 시작.
-    // 퍼즐 1 8001 ~ 8005
+    // 퍼즐 1 8001 ~ 8005  ->  11106 ~ 11110
+    if (triggerboxId == 8001) {
+        SoundPlayProgress(11106);
+    }
+    else if (triggerboxId == 8002) {
+        SoundPlayProgress(11107);
+    }
+    else if (triggerboxId == 8003) {
+        SoundPlayProgress(11108);
+    }
+    else if (triggerboxId == 8004) {
+        SoundPlayProgress(11109);
+    }
+    else if (triggerboxId == 8005) {
+        SoundPlayProgress(11110);
+    }
     // 퍼즐 3 8011 ~ 8015
+    else if (triggerboxId == 8011) {
+        SoundPlayProgress(13201);
+    }
+    else if (triggerboxId == 8012) {
+        SoundPlayProgress(13202);
+    }
+    else if (triggerboxId == 8013) {
+        SoundPlayProgress(13203);
+    }
+    else if (triggerboxId == 8014) {
+        SoundPlayProgress(13204);
+    }
+    else if (triggerboxId == 8015) {
+        SoundPlayProgress(13205);
+    }
     // 퍼즐 4 8021 ~ 8025
+    else if (triggerboxId == 8021) {
+        SoundPlayProgress(15202);
+    }
+    else if (triggerboxId == 8022) {
+        SoundPlayProgress(15203);
+    }
+    else if (triggerboxId == 8023) {
+        SoundPlayProgress(15204);
+    }
+    else if (triggerboxId == 8024) {
+        SoundPlayProgress(15205);
+    }
+    else if (triggerboxId == 8025) {
+        SoundPlayProgress(15206);
+    }
     // 퍼즐 5 8031 ~ 8035
+    else if (triggerboxId == 8031) {
+        Puzzle5(targetObjectId, triggerboxId);
+    }
+    else if (triggerboxId == 8032) {
+        Puzzle5(targetObjectId, triggerboxId);
+    }
+    else if (triggerboxId == 8033) {
+        Puzzle5(targetObjectId, triggerboxId);
+    }
+    else if (triggerboxId == 8034) {
+        Puzzle5(targetObjectId, triggerboxId);
+    }
+    else if (triggerboxId == 8035) {
+        Puzzle5(targetObjectId, triggerboxId);
+    }
     // 지역 브금 8041 ~ 8045
+    else if (triggerboxId == 8041) {
+        SoundPlayProgress(17011);
+    }
+    else if (triggerboxId == 8042) {
+        SoundPlayProgress(17012);
+    }
+    else if (triggerboxId == 8043) {
+        SoundPlayProgress(17013);
+    }
+    else if (triggerboxId == 8044) {
+        SoundPlayProgress(17014);
+    }
+    else if (triggerboxId == 8045) {
+        SoundPlayProgress(17015);
+    }
+    else if (triggerboxId == 8500) {
+        PlayDialog(71601);
+    }
 
-    Puzzle5(targetObjectId, triggerboxId);
 }
 // =============================
 
@@ -746,17 +813,19 @@ void ServerLogic::RegistPlayer(Player* player)
     Engine::Physics::ControllerDesc cd;
     cd.position = Engine::Math::Vector3(0, 0, 0);
     cd.height = 10.f;
-    cd.radius = 5.f;
-    cd.gravity = { 0.f, -0.98f, 0.f };
-    cd.gravity = { 0.f, 0.f, 0.f };
+    cd.radius = 10.f;
+    cd.gravity = { 0.f, -98.f, 0.f };
+    //cd.gravity = { 0.f, 0.f, 0.f };
     cd.contactOffset = 0.2f;
+    //cd.stepOffset = 10.f;
+    //cd.slopeLimit = 0.1f;
     Engine::Physics::IController* controller = player->_controller;
     _physicsManager->CreatePlayerController(&controller, _mainScene, cd);
     player->_controller = static_cast<Engine::Physics::Controller*>(controller);
     player->_controller->SetOwner(&player);
-    player->_controller->SetBottomPosition(Engine::Math::Vector3(0.f, (cd.height + cd.radius) * 0.5f, 0.f));
+    player->_controller->SetBottomPosition(Engine::Math::Vector3(0.f, (cd.height + cd.radius) * 0.5f + 15.f, 0.f));
     player->_controller->Initialize();
-    player->_controller->SetPosition(Engine::Math::Vector3(0, 0, 0));
+    player->_controller->SetPosition(Engine::Math::Vector3(0, 200, 0));
 }
 
 void ServerLogic::RegistGround(Ground& ground)
@@ -891,6 +960,12 @@ void ServerLogic::PlayDialog(int dialogId, int targetSessionId)
     Server::SavePacketData(_msgBuffer, targetSessionId, (short)PacketID::PlayDialog, _dialogProgress.ByteSizeLong(), 9000);
     printf("[Dialog Progress] Dialog Play Message Send. Dialog Id : %d\n", dialogId);
 }
+void ServerLogic::SoundPlayProgress(int objectId)
+{
+    _soundPlay.set_soundid(objectId);
+    _soundPlay.SerializeToString(&_msgBuffer);
+    Server::BroadCast(_msgBuffer, (short)PacketID::SoundPlay, _soundPlay.ByteSizeLong(), objectId);
+}
 // =============================
 
 // =============================
@@ -966,7 +1041,7 @@ void ServerLogic::Puzzle2(int objectId)
         _dir[index] *= -1;
     }
 
-    if (_balls[0] == 1 && _balls[1] == 2 && _balls[2] == 2 && _balls[3] == 3 && _balls[4] == 2 && _balls[5] == 1) {
+    if (_balls[0] == 1 && _balls[1] == 2 && _balls[2] == 2 && _balls[3] == 2 && _balls[4] == 1 && _balls[5] == 3) {
         //_objectActive.set_objectserialnumber(12101);
         //_objectActive.SerializeToString(&_msgBuffer);
         Server::BroadCast("", (short)PacketID::ObjectActive, 0, 12101);
@@ -983,14 +1058,44 @@ void ServerLogic::Puzzle4(int objectId)
 }
 void ServerLogic::Puzzle5(int objectId, int triggerboxId)
 {
-    // triggerBox ID : 8000 ~ 8004
+    // triggerBox ID : 8031 ~ 8035
 
-    int areaIndex = triggerboxId - 8000;
+    int areaIndex = triggerboxId - 8031;
     int boxIndex = objectId - 16301;
+
+    //if (_complete[areaIndex] == true) {
+    //    return;
+    //}
+
     _currentWeight[areaIndex] += _puzzle6Box[boxIndex];
 
-    if (_currentWeight[areaIndex] == 5) {
+    // 1 4 7 8 10
+    if (_currentWeight[0] == 1) {
+        _complete[0] = true;
         // turn on light.
+    }
+    if (_currentWeight[1] == 4) {
+        _complete[1] = true;
+        // turn on light.
+    }
+    if (_currentWeight[2] == 7) {
+        _complete[2] = true;
+        // turn on light.
+    }
+    if (_currentWeight[3] == 8) {
+        _complete[3] = true;
+        // turn on light.
+    }
+    if (_currentWeight[4] == 10) {
+        _complete[4] = true;
+        // turn on light.
+    }
+
+    if (_complete[0] && _complete[1] && _complete[2] && _complete[3] && _complete[4]) {
+        Server::BroadCast("", (short)PacketID::PuzzleSuccess, 0, 9005);
+        QuestProcess(_currentQuestID);
+        _puzzle6Clear = true;
+        printf("[Interact Process] Puzzle Clear. Puzzle Number : %d\n", _currentPuzzleNumber);
     }
 }
 // =============================

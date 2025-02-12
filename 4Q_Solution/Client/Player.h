@@ -14,9 +14,10 @@ class Player : public Engine::Object
 		Move_Completed		= 1 << 5,
 		Jump_Started		= 1 << 6,
 		Jump_Triggered		= 1 << 7,
-		Interact_Started	= 1 << 8,
-		Interact_Triggered	= 1 << 9,
-		Interact_Completed	= 1 << 10
+		Jump_Completed		= 1 << 8,
+		Interact_Started	= 1 << 9,
+		Interact_Triggered	= 1 << 10,
+		Interact_Completed	= 1 << 11
 	};
 
 	enum SplitType { Lower, Upper, End };
@@ -26,6 +27,8 @@ public:
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
 
 	void SetCapsuleScale(Engine::Math::Vector3 capsuleScale);
+	Engine::Component::Camera* GetCamera() const;
+
 protected:
 	void DisposeComponents() override;
 
@@ -47,6 +50,7 @@ private:
 
 	void ChangeSplitAnimation(const char* animation, StateFlag flag, SplitType type);
 	void SyncPatialAnimation(const char* animation, StateFlag flag, SplitType parent, SplitType child);
+	
 private:
 	void SendStateMessage();
 
@@ -95,5 +99,6 @@ public:
 	void SyncMove(const MoveMsg::MoveSync* msg);
 	// 이 함수는 최초 입장 했을 때 초기 위치 설정을 위한 함수입니다.
 	void SetLocation(const MoveMsg::MoveSync* msg);
+	void StateChange(const MoveMsg::StateChange* msg);
 };
 

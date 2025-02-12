@@ -32,7 +32,7 @@ void GlobalLight::PostInitialize(const Engine::Modules& modules)
 	_globalLight->SetDiffuse(1.f, 1.f, 1.f, 1.f);
 	_globalLight->SetSpecular(1.f, 1.f, 1.f, 1.f);
 	_globalLight->SetAmbient(0.2f, 0.2f, 0.2f, 0.2f);
-	_globalLight->SetDirection(0.f, 1.f, 1.f);
+	_globalLight->SetDirection(0.f, -1.f, 1.f);
 	_globalLight->SetIntensity(1.f);
 	_globalLight->SetMainLight();
 

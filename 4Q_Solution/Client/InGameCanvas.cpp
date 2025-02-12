@@ -82,8 +82,8 @@ void InGameCanvas::Initialize(const Engine::Modules& modules)
 			_sequence = Sequence::JumpTutorialFaded;
 		});
 
-	_interactImage->SetOpacity(1.0f);
-	_grabImage->SetOpacity(1.0f);
+	_interactImage->SetOpacity(0.0f);
+	_grabImage->SetOpacity(0.0f);
 }
 
 void InGameCanvas::Attach()
@@ -114,18 +114,22 @@ void InGameCanvas::JumpTutorialDone()
 	_sequence = Sequence::JumpTutorialFadingOut;
 }
 
-void InGameCanvas::ShowInteractUI()
+void InGameCanvas::ShowInteractUI() const
 {
+	_interactImage->FadeIn();
 }
 
-void InGameCanvas::HideInteractUI()
+void InGameCanvas::HideInteractUI() const
 {
+	_interactImage->FadeOut();
 }
 
-void InGameCanvas::ShowGrabUI()
+void InGameCanvas::ShowGrabUI() const
 {
+	_grabImage->FadeIn();
 }
 
-void InGameCanvas::HideGrabUI()
+void InGameCanvas::HideGrabUI() const
 {
+	_grabImage->FadeOut();
 }

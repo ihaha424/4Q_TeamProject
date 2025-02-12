@@ -36,10 +36,10 @@ public:
 	void ViewTutorialDone();
 	void JumpTutorialDone();
 
-	void ShowInteractUI();
-	void HideInteractUI();
-	void ShowGrabUI();
-	void HideGrabUI();
+	void ShowInteractUI() const;
+	void HideInteractUI() const;
+	void ShowGrabUI() const;
+	void HideGrabUI() const;
 
 private:
 	Sequence _sequence;

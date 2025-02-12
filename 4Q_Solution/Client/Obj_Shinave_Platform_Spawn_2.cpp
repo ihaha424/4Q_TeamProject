@@ -10,7 +10,7 @@ void Obj_Shinave_Platform_Spawn_2::Prepare(Engine::Content::Factory::Component* 
 {
 	StaticObject::Prepare(componentFactory);
 	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
-	_sound = componentFactory->Clone<Engine::Component::Synchronize>(this);
+	_sound = componentFactory->Clone<Engine::Component::Effect3DSound>(this);
 }
 
 void Obj_Shinave_Platform_Spawn_2::SetActive(const PlayMsg::ObjectActive* msg)

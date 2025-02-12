@@ -621,6 +621,9 @@
     <ClInclude Include="InteractImage.h">
       <Filter>UserInterfaces\InteractImage</Filter>
     </ClInclude>
+    <ClInclude Include="GrabImage.h">
+      <Filter>UserInterfaces\GrabImage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -997,6 +1000,9 @@
     </ClCompile>
     <ClCompile Include="InteractImage.cpp">
       <Filter>UserInterfaces\InteractImage</Filter>
+    </ClCompile>
+    <ClCompile Include="GrabImage.cpp">
+      <Filter>UserInterfaces\GrabImage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

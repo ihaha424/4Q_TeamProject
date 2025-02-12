@@ -2,6 +2,7 @@
 #include "InGameCanvas.h"
 
 #include "DelayCall.h"
+#include "GrabImage.h"
 #include "InteractImage.h"
 #include "../Engine/OverlayPanel.h"
 
@@ -26,6 +27,9 @@ InGameCanvas::InGameCanvas(const Engine::Math::Size& viewportSize):
 
 	auto [interactImageOverlayChild, interactImage] = overlay->CreateChild<InteractImage>(L"Assets/UI/UI_Gamepad_B.png", 0.2f);
 	_interactImage = interactImage;
+
+	auto [grabImageOverlayChild, grabImage] = overlay->CreateChild<GrabImage>(L"Assets/UI/UI_Gamepad_RT.png", 0.2f);
+	_grabImage = grabImage;
 
 	auto [fadeMaskOverlayChild, fadeMask] = overlay->CreateChild<Engine::UI::Wrapper::FadeImage>(L"Assets/UI/UI_Fade_Mask.png", 1.0f);
 	_fadeMask = fadeMask;
@@ -79,6 +83,7 @@ void InGameCanvas::Initialize(const Engine::Modules& modules)
 		});
 
 	_interactImage->SetOpacity(1.0f);
+	_grabImage->SetOpacity(1.0f);
 }
 
 void InGameCanvas::Attach()

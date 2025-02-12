@@ -1,5 +1,6 @@
 #pragma once
 
+class GrabImage;
 class InteractImage;
 
 namespace Engine::UI::Wrapper
@@ -48,4 +49,5 @@ private:
 	Engine::UI::Wrapper::FadeImage* _viewTutorial;
 	Engine::UI::Wrapper::FadeImage* _jumpTutorial;
 	InteractImage* _interactImage;
+	GrabImage* _grabImage;
 };

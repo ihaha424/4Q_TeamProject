@@ -74,8 +74,8 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	// FixedArm
 	_fixedArm->SetTarget(&_transform);
 	_fixedArm->SetCameraComponent(_camera);
-	_fixedArm->SetDistance(50.f);
-	_fixedArm->SetCameraPosition(Engine::Math::Vector2{ 0.f, 20.f });
+	_fixedArm->SetDistance(60.f);
+	_fixedArm->SetCameraPosition(Engine::Math::Vector2{ 0.f, 15.f });
 	_fixedArm->SetRotationSpeed(Engine::Math::Vector2{ 0.02f, 0.04f });
 	_fixedArm->SetFollowSpeed(0.01f);
 	
@@ -173,7 +173,7 @@ void Player::PostUpdate(float deltaTime)
 
 	Engine::Math::Quaternion q = Engine::Math::Quaternion::Concatenate(_transform.rotation, _offset);
 
-	_worldMatrix = Engine::Math::Matrix::CreateScale(0.05f)
+	_worldMatrix = Engine::Math::Matrix::CreateScale(0.15f)
 		* Engine::Math::Matrix::CreateFromQuaternion(q)
 		* Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
 
@@ -208,14 +208,16 @@ void Player::MoveStarted()
 		ChangeSplitAnimation("rig|Anim_Walk", StateFlag::Interact, Lower);
 	}
 
+	_bitFlag->OnFlag(StateFlag::Move_Started);
 	SendStateMessage();
+	_bitFlag->OffFlag(StateFlag::Move_Started);
 }
 
 void Player::MoveTriggered(Engine::Math::Vector3 value)
 {	
 	_remote->SetDirection(_fixedArm->GetTransformDirection(value));
 	_transform.rotation = _fixedArm->GetRotation(value, _transform.rotation);
-	//_fixedArm->FollowDirection(value);
+	//_fixedArm->FollowDirection(value);	
 
 	Engine::Math::Vector3 direction = _fixedArm->GetTransformDirection(value);
 	_sync->_move.set_x(direction.x);
@@ -261,12 +263,14 @@ void Player::MoveCompleted()
 		_sync->GetSerialNumber()
 	);
 
+	_bitFlag->OnFlag(StateFlag::Move_Completed);
 	SendStateMessage();
+	_bitFlag->OffFlag(StateFlag::Move_Completed);
 }
 
 void Player::JumpStarted()
 {
-	if (_bitFlag->IsOnFlag(StateFlag::Jump))
+	if (_bitFlag->IsOnFlag(StateFlag::Jump | StateFlag::Interact))
 		return;
 
 	_bitFlag->OnFlag(StateFlag::Jump | StateFlag::Jump_Started);
@@ -277,7 +281,7 @@ void Player::JumpStarted()
 
 void Player::InteractStarted()
 {
-	if (_bitFlag->IsOnFlag(StateFlag::Interact))
+	if (_bitFlag->IsOnFlag(StateFlag::Interact | StateFlag::Jump))
 		return;
 
 	/*Raycast*/
@@ -327,7 +331,7 @@ void Player::InteractTriggered()
 			_bitFlag->OnFlag(StateFlag::Interact_Triggered);
 
 			ChangeSplitAnimation("rig|Anim_Interaction_loop", StateFlag::Walk, Upper);
-			SendStateMessage();
+			// SendStateMessage();
 		}
 	}
 }
@@ -399,7 +403,7 @@ void Player::UpdateState()
 				_remote->SetSpeed(_speed * 0.5f);
 				_remote->SetDirection(Engine::Math::Vector3(0.f, 1.f, 0.f));
 
-				_sync->_jump.set_power(20.f);
+				_sync->_jump.set_power(2.f);
 				_sync->_jump.SerializeToString(&_sync->_msgBuffer);
 				
 
@@ -420,7 +424,12 @@ void Player::UpdateState()
 			if (_bitFlag->IsOnFlag(StateFlag::Jump_Triggered))
 			{
 				_bitFlag->OffFlag(StateFlag::Jump | StateFlag::Jump_Started | StateFlag::Jump_Triggered);
-				_animator->ChangeAnimation("rig|Anim_Jump_end");
+
+				if (_bitFlag->IsOnFlag(StateFlag::Walk))
+					_animator->ChangeAnimation("rig|Anim_Walk");
+				else
+					_animator->ChangeAnimation("rig|Anim_Jump_end");
+
 				_remote->SetDirection(Engine::Math::Vector3::Zero);
 			}
 		}
@@ -459,19 +468,17 @@ const int Player::GetSerialNumber() const
 
 void Player::SyncMove(const MoveMsg::MoveSync* msg)
 {
-	const auto& pos = msg->position();
-	float x = *(pos.begin());
-	float y = *(pos.begin() + 1);
-	float z = *(pos.begin() + 2);
+	float x = msg->x();
+	float y = msg->y();
+	float z = msg->z();
 	Engine::Math::Vector3 nextLocation(x, y, z);
 	_remote->SetNextLocation(nextLocation);
 }
 
 void Player::SetLocation(const MoveMsg::MoveSync* msg)
 {
-	const auto& pos = msg->position();
-	float x = *(pos.begin());
-	float y = *(pos.begin() + 1);
-	float z = *(pos.begin() + 2);
+	float x = msg->x();
+	float y = msg->y();
+	float z = msg->z();
 	_transform.position = Engine::Math::Vector3(x, y, z);
 }

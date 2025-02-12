@@ -31,5 +31,6 @@ namespace GE
 		virtual void SetDiffuseFromArray(float* pArray) = 0;
 		virtual void SetSpecularFromArray(float* pArray) = 0;
 		virtual void SetAmbientFromArray(float* pArray) = 0;
+		virtual void SetActive(bool isActive) = 0;
 	};
 }

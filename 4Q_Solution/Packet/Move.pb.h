@@ -61,9 +61,6 @@ extern MoveDefaultTypeInternal _Move_default_instance_;
 class MoveSync;
 struct MoveSyncDefaultTypeInternal;
 extern MoveSyncDefaultTypeInternal _MoveSync_default_instance_;
-class ObjectMove;
-struct ObjectMoveDefaultTypeInternal;
-extern ObjectMoveDefaultTypeInternal _ObjectMove_default_instance_;
 class StateChange;
 struct StateChangeDefaultTypeInternal;
 extern StateChangeDefaultTypeInternal _StateChange_default_instance_;
@@ -272,204 +269,6 @@ class StateChange final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
-class ObjectMove final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:MoveMsg.ObjectMove) */ {
- public:
-  inline ObjectMove() : ObjectMove(nullptr) {}
-  ~ObjectMove() PROTOBUF_FINAL;
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(ObjectMove* msg, std::destroying_delete_t) {
-    SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(ObjectMove));
-  }
-#endif
-
-  template <typename = void>
-  explicit PROTOBUF_CONSTEXPR ObjectMove(
-      ::google::protobuf::internal::ConstantInitialized);
-
-  inline ObjectMove(const ObjectMove& from) : ObjectMove(nullptr, from) {}
-  inline ObjectMove(ObjectMove&& from) noexcept
-      : ObjectMove(nullptr, std::move(from)) {}
-  inline ObjectMove& operator=(const ObjectMove& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline ObjectMove& operator=(ObjectMove&& from) noexcept {
-    if (this == &from) return *this;
-    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
-  }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::google::protobuf::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::google::protobuf::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const ObjectMove& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const ObjectMove* internal_default_instance() {
-    return reinterpret_cast<const ObjectMove*>(
-        &_ObjectMove_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages = 4;
-  friend void swap(ObjectMove& a, ObjectMove& b) { a.Swap(&b); }
-  inline void Swap(ObjectMove* other) {
-    if (other == this) return;
-    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
-      InternalSwap(other);
-    } else {
-      ::google::protobuf::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(ObjectMove* other) {
-    if (other == this) return;
-    ABSL_DCHECK(GetArena() == other->GetArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  ObjectMove* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<ObjectMove>(arena);
-  }
-  using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const ObjectMove& from);
-  using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const ObjectMove& from) { ObjectMove::MergeImpl(*this, from); }
-
-  private:
-  static void MergeImpl(
-      ::google::protobuf::MessageLite& to_msg,
-      const ::google::protobuf::MessageLite& from_msg);
-
-  public:
-  bool IsInitialized() const {
-    return true;
-  }
-  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* _InternalSerialize(
-      const MessageLite& msg, ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream);
-
-  public:
-  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-    return _InternalSerialize(*this, target, stream);
-  }
-  #else   // PROTOBUF_CUSTOM_VTABLE
-  ::size_t ByteSizeLong() const final;
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
-  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::google::protobuf::Arena* arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(ObjectMove* other);
- private:
-  template <typename T>
-  friend ::absl::string_view(
-      ::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "MoveMsg.ObjectMove"; }
-
- protected:
-  explicit ObjectMove(::google::protobuf::Arena* arena);
-  ObjectMove(::google::protobuf::Arena* arena, const ObjectMove& from);
-  ObjectMove(::google::protobuf::Arena* arena, ObjectMove&& from) noexcept
-      : ObjectMove(arena) {
-    *this = ::std::move(from);
-  }
-  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
-  static void* PlacementNew_(const void*, void* mem,
-                             ::google::protobuf::Arena* arena);
-  static constexpr auto InternalNewImpl_();
-  static const ::google::protobuf::internal::ClassDataFull _class_data_;
-
- public:
-  ::google::protobuf::Metadata GetMetadata() const;
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-  enum : int {
-    kPositionFieldNumber = 1,
-  };
-  // repeated float position = 1;
-  int position_size() const;
-  private:
-  int _internal_position_size() const;
-
-  public:
-  void clear_position() ;
-  float position(int index) const;
-  void set_position(int index, float value);
-  void add_position(float value);
-  const ::google::protobuf::RepeatedField<float>& position() const;
-  ::google::protobuf::RepeatedField<float>* mutable_position();
-
-  private:
-  const ::google::protobuf::RepeatedField<float>& _internal_position() const;
-  ::google::protobuf::RepeatedField<float>* _internal_mutable_position();
-
-  public:
-  // @@protoc_insertion_point(class_scope:MoveMsg.ObjectMove)
- private:
-  class _Internal;
-  friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 0,
-      0, 2>
-      _table_;
-
-  friend class ::google::protobuf::MessageLite;
-  friend class ::google::protobuf::Arena;
-  template <typename T>
-  friend class ::google::protobuf::Arena::InternalHelper;
-  using InternalArenaConstructable_ = void;
-  using DestructorSkippable_ = void;
-  struct Impl_ {
-    inline explicit constexpr Impl_(
-        ::google::protobuf::internal::ConstantInitialized) noexcept;
-    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                          ::google::protobuf::Arena* arena);
-    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                          ::google::protobuf::Arena* arena, const Impl_& from,
-                          const ObjectMove& from_msg);
-    ::google::protobuf::RepeatedField<float> position_;
-    ::google::protobuf::internal::CachedSize _cached_size_;
-    PROTOBUF_TSAN_DECLARE_MEMBER
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_Move_2eproto;
-};
-// -------------------------------------------------------------------
-
 class MoveSync final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:MoveMsg.MoveSync) */ {
  public:
@@ -616,28 +415,12 @@ class MoveSync final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kPositionFieldNumber = 1,
-    kRotationFieldNumber = 2,
+    kRotationFieldNumber = 4,
+    kXFieldNumber = 1,
+    kYFieldNumber = 2,
+    kZFieldNumber = 3,
   };
-  // repeated float position = 1;
-  int position_size() const;
-  private:
-  int _internal_position_size() const;
-
-  public:
-  void clear_position() ;
-  float position(int index) const;
-  void set_position(int index, float value);
-  void add_position(float value);
-  const ::google::protobuf::RepeatedField<float>& position() const;
-  ::google::protobuf::RepeatedField<float>* mutable_position();
-
-  private:
-  const ::google::protobuf::RepeatedField<float>& _internal_position() const;
-  ::google::protobuf::RepeatedField<float>* _internal_mutable_position();
-
-  public:
-  // repeated float rotation = 2;
+  // repeated float rotation = 4;
   int rotation_size() const;
   private:
   int _internal_rotation_size() const;
@@ -655,12 +438,45 @@ class MoveSync final : public ::google::protobuf::Message
   ::google::protobuf::RepeatedField<float>* _internal_mutable_rotation();
 
   public:
+  // optional float x = 1;
+  bool has_x() const;
+  void clear_x() ;
+  float x() const;
+  void set_x(float value);
+
+  private:
+  float _internal_x() const;
+  void _internal_set_x(float value);
+
+  public:
+  // optional float y = 2;
+  bool has_y() const;
+  void clear_y() ;
+  float y() const;
+  void set_y(float value);
+
+  private:
+  float _internal_y() const;
+  void _internal_set_y(float value);
+
+  public:
+  // optional float z = 3;
+  bool has_z() const;
+  void clear_z() ;
+  float z() const;
+  void set_z(float value);
+
+  private:
+  float _internal_z() const;
+  void _internal_set_z(float value);
+
+  public:
   // @@protoc_insertion_point(class_scope:MoveMsg.MoveSync)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      1, 2, 0,
+      2, 4, 0,
       0, 2>
       _table_;
 
@@ -678,9 +494,12 @@ class MoveSync final : public ::google::protobuf::Message
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const MoveSync& from_msg);
-    ::google::protobuf::RepeatedField<float> position_;
-    ::google::protobuf::RepeatedField<float> rotation_;
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::RepeatedField<float> rotation_;
+    float x_;
+    float y_;
+    float z_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -1371,52 +1190,91 @@ inline void StateChange::_internal_set_stateinfo(::int32_t value) {
 
 // MoveSync
 
-// repeated float position = 1;
-inline int MoveSync::_internal_position_size() const {
-  return _internal_position().size();
+// optional float x = 1;
+inline bool MoveSync::has_x() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
 }
-inline int MoveSync::position_size() const {
-  return _internal_position_size();
-}
-inline void MoveSync::clear_position() {
+inline void MoveSync::clear_x() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.position_.Clear();
+  _impl_.x_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
-inline float MoveSync::position(int index) const {
-  // @@protoc_insertion_point(field_get:MoveMsg.MoveSync.position)
-  return _internal_position().Get(index);
+inline float MoveSync::x() const {
+  // @@protoc_insertion_point(field_get:MoveMsg.MoveSync.x)
+  return _internal_x();
 }
-inline void MoveSync::set_position(int index, float value) {
-  _internal_mutable_position()->Set(index, value);
-  // @@protoc_insertion_point(field_set:MoveMsg.MoveSync.position)
+inline void MoveSync::set_x(float value) {
+  _internal_set_x(value);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  // @@protoc_insertion_point(field_set:MoveMsg.MoveSync.x)
 }
-inline void MoveSync::add_position(float value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _internal_mutable_position()->Add(value);
-  // @@protoc_insertion_point(field_add:MoveMsg.MoveSync.position)
-}
-inline const ::google::protobuf::RepeatedField<float>& MoveSync::position() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_list:MoveMsg.MoveSync.position)
-  return _internal_position();
-}
-inline ::google::protobuf::RepeatedField<float>* MoveSync::mutable_position()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable_list:MoveMsg.MoveSync.position)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _internal_mutable_position();
-}
-inline const ::google::protobuf::RepeatedField<float>&
-MoveSync::_internal_position() const {
+inline float MoveSync::_internal_x() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.position_;
+  return _impl_.x_;
 }
-inline ::google::protobuf::RepeatedField<float>* MoveSync::_internal_mutable_position() {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return &_impl_.position_;
+inline void MoveSync::_internal_set_x(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.x_ = value;
 }
 
-// repeated float rotation = 2;
+// optional float y = 2;
+inline bool MoveSync::has_y() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline void MoveSync::clear_y() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.y_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline float MoveSync::y() const {
+  // @@protoc_insertion_point(field_get:MoveMsg.MoveSync.y)
+  return _internal_y();
+}
+inline void MoveSync::set_y(float value) {
+  _internal_set_y(value);
+  _impl_._has_bits_[0] |= 0x00000002u;
+  // @@protoc_insertion_point(field_set:MoveMsg.MoveSync.y)
+}
+inline float MoveSync::_internal_y() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.y_;
+}
+inline void MoveSync::_internal_set_y(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.y_ = value;
+}
+
+// optional float z = 3;
+inline bool MoveSync::has_z() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  return value;
+}
+inline void MoveSync::clear_z() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.z_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000004u;
+}
+inline float MoveSync::z() const {
+  // @@protoc_insertion_point(field_get:MoveMsg.MoveSync.z)
+  return _internal_z();
+}
+inline void MoveSync::set_z(float value) {
+  _internal_set_z(value);
+  _impl_._has_bits_[0] |= 0x00000004u;
+  // @@protoc_insertion_point(field_set:MoveMsg.MoveSync.z)
+}
+inline float MoveSync::_internal_z() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.z_;
+}
+inline void MoveSync::_internal_set_z(float value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.z_ = value;
+}
+
+// repeated float rotation = 4;
 inline int MoveSync::_internal_rotation_size() const {
   return _internal_rotation().size();
 }
@@ -1459,55 +1317,6 @@ MoveSync::_internal_rotation() const {
 inline ::google::protobuf::RepeatedField<float>* MoveSync::_internal_mutable_rotation() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.rotation_;
-}
-
-// -------------------------------------------------------------------
-
-// ObjectMove
-
-// repeated float position = 1;
-inline int ObjectMove::_internal_position_size() const {
-  return _internal_position().size();
-}
-inline int ObjectMove::position_size() const {
-  return _internal_position_size();
-}
-inline void ObjectMove::clear_position() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.position_.Clear();
-}
-inline float ObjectMove::position(int index) const {
-  // @@protoc_insertion_point(field_get:MoveMsg.ObjectMove.position)
-  return _internal_position().Get(index);
-}
-inline void ObjectMove::set_position(int index, float value) {
-  _internal_mutable_position()->Set(index, value);
-  // @@protoc_insertion_point(field_set:MoveMsg.ObjectMove.position)
-}
-inline void ObjectMove::add_position(float value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _internal_mutable_position()->Add(value);
-  // @@protoc_insertion_point(field_add:MoveMsg.ObjectMove.position)
-}
-inline const ::google::protobuf::RepeatedField<float>& ObjectMove::position() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_list:MoveMsg.ObjectMove.position)
-  return _internal_position();
-}
-inline ::google::protobuf::RepeatedField<float>* ObjectMove::mutable_position()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable_list:MoveMsg.ObjectMove.position)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _internal_mutable_position();
-}
-inline const ::google::protobuf::RepeatedField<float>&
-ObjectMove::_internal_position() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.position_;
-}
-inline ::google::protobuf::RepeatedField<float>* ObjectMove::_internal_mutable_position() {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return &_impl_.position_;
 }
 
 #ifdef __GNUC__

@@ -496,6 +496,45 @@
     <Filter Include="Components\Listener">
       <UniqueIdentifier>{df805026-f75d-45bc-82e8-17beecbf57d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Canvas">
+      <UniqueIdentifier>{653f6cf6-8fde-4fc6-a2f3-24b5eea52724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterfaces">
+      <UniqueIdentifier>{8a53e9dc-495f-411e-a886-07b79ed98e39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterfaces\UserInterface">
+      <UniqueIdentifier>{4d10b784-23f8-4142-a9da-fa8142589a32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Rect">
+      <UniqueIdentifier>{dfbb4a8d-7868-4d01-9d0b-70bb733195fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\LTRB">
+      <UniqueIdentifier>{4e956724-037d-4d5d-ab57-544450745b48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterfaces\Panels">
+      <UniqueIdentifier>{e71cef2c-7438-47a5-b41b-493f937c6e76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterfaces\Panels\Anchor">
+      <UniqueIdentifier>{fe11b073-8c10-49c7-abdc-aa84c4f256a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterfaces\Wrappers">
+      <UniqueIdentifier>{7934c75b-dce8-409b-bc3e-051ca7dbd4d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterfaces\Wrappers\Button">
+      <UniqueIdentifier>{10285e38-c5a5-416d-89fe-761417ae048a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterfaces\Wrappers\Wrapper">
+      <UniqueIdentifier>{a09aed04-5622-4ed9-83b9-021ea389c75f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterfaces\Wrappers\Image">
+      <UniqueIdentifier>{d69b3814-9edd-4949-a519-b5149db09277}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterfaces\Elements">
+      <UniqueIdentifier>{838a5ccd-23c9-42bc-8b7b-2f3a4e6ad26c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterfaces\Elements\Text">
+      <UniqueIdentifier>{0215ed10-0cc5-43bb-a382-26b596df08d9}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Components\Text">
       <UniqueIdentifier>{922e5f29-c1a8-42da-aadd-1b65620c25ff}</UniqueIdentifier>
     </Filter>
@@ -981,6 +1020,45 @@
     <ClInclude Include="ListenerComponent.h">
       <Filter>Components\Listener</Filter>
     </ClInclude>
+    <ClInclude Include="Canvas.h">
+      <Filter>Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface.h">
+      <Filter>UserInterfaces\UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>Math\Rect</Filter>
+    </ClInclude>
+    <ClInclude Include="LTRB.h">
+      <Filter>Math\LTRB</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterfaces.h">
+      <Filter>UserInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="AnchorPanel.h">
+      <Filter>UserInterfaces\Panels\Anchor</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonWrapper.h">
+      <Filter>UserInterfaces\Wrappers\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="Wrapper.h">
+      <Filter>UserInterfaces\Wrappers\Wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="Wrappers.h">
+      <Filter>UserInterfaces\Wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="Panels.h">
+      <Filter>UserInterfaces\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageWrapper.h">
+      <Filter>UserInterfaces\Wrappers\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="Elements.h">
+      <Filter>UserInterfaces\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="TextElement.h">
+      <Filter>UserInterfaces\Elements\Text</Filter>
+    </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>Components\Sprite</Filter>
     </ClInclude>
@@ -1384,6 +1462,33 @@
     </ClCompile>
     <ClCompile Include="ListenerComponent.cpp">
       <Filter>Components\Listener</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas.cpp">
+      <Filter>Canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface.cpp">
+      <Filter>UserInterfaces\UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="Rect.cpp">
+      <Filter>Math\Rect</Filter>
+    </ClCompile>
+    <ClCompile Include="LTRB.cpp">
+      <Filter>Math\LTRB</Filter>
+    </ClCompile>
+    <ClCompile Include="AnchorPanel.cpp">
+      <Filter>UserInterfaces\Panels\Anchor</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonWrapper.cpp">
+      <Filter>UserInterfaces\Wrappers\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="Wrapper.cpp">
+      <Filter>UserInterfaces\Wrappers\Wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageWrapper.cpp">
+      <Filter>UserInterfaces\Wrappers\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="TextElement.cpp">
+      <Filter>UserInterfaces\Elements\Text</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>Components\Sprite</Filter>

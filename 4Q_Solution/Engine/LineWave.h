@@ -29,5 +29,6 @@ namespace Engine::Component
 		std::filesystem::path _masktexturePath;
 		std::filesystem::path _gradientTexturePath;
 		GE::ILineRenderer* _geLineRenderer;
+		const Engine::Math::Vector3* _source;
 	};
 }

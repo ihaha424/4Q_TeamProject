@@ -18,6 +18,7 @@ namespace Engine::Component
 		void SetFilePath(const std::filesystem::path& filePath);
         void SetActiveDraw(bool isActive);
         void SetActiveShadow(bool isActive);
+		void SetZWrite(bool isWrite);
 
     protected:
         std::filesystem::path   _filePath;

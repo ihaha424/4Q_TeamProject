@@ -191,9 +191,9 @@ void ServerLogic::SendPositionData()
         Engine::Math::Vector3 position = _playerSlot[i]._controller->GetPosition();
         Engine::Math::Quaternion rotation = _playerSlot[i]._rotation;
         //printf("Player%d Position : (%f, %f, %f)\n", i + 1, position.x, position.y, position.z);
-        _moveSync.add_position(position.x);
-        _moveSync.add_position(position.y);
-        _moveSync.add_position(position.z);
+        _moveSync.set_x(position.x);
+        _moveSync.set_y(position.y);
+        _moveSync.set_z(position.z);
         _moveSync.add_rotation(rotation.x);
         _moveSync.add_rotation(rotation.y);
         _moveSync.add_rotation(rotation.z);
@@ -329,18 +329,20 @@ void ServerLogic::MoveProcess(const Packet& packet)
 
         Engine::Math::Vector3 position = _playerSlot[serialNum]._controller->GetPosition();
         //printf("Player%d Direction : (%f, %f, %f)\n", serialNum + 1, direction.x, direction.y, direction.z);
-        _moveSync.add_position(position.x);
-        _moveSync.add_position(position.y);
-        _moveSync.add_position(position.z);
+        _moveSync.set_x(position.x);
+        _moveSync.set_y(position.y);
+        _moveSync.set_z(position.z);
 
         _moveSync.SerializeToString(&_msgBuffer);
-        Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), packet._serialNumber);
+        Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), _playerSlot[serialNum]._serialNumber);
+        //_moveSync.Clear();
     }
 }
 void ServerLogic::JumpProcess(const Packet& packet)
 {
     _jump.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
     int playerIdx = packet._serialNumber - 1;
+    if (_playerSlot[playerIdx]._controller == nullptr) return;
     _playerSlot[playerIdx]._controller->Jump(_jump.power() * 5);
 }
 void ServerLogic::StateChangeProcess(const Packet& packet)
@@ -367,9 +369,6 @@ void ServerLogic::DataRequestProcess(const Packet& packet)
 
         Server::BroadCast(_msgBuffer, (short)PacketID::DataRemote, _syncPlayer.ByteSizeLong(), _playerSlot[i]._serialNumber);
     }  // for end
-    
-    // Static Object Client Send.
-
     //for (int i = 0; i < _buildings.size(); i++) {
     //    _syncObject.set_public_(_buildings[i]->_public);
     //    _syncObject.add_position(_buildings[i]->_position.x);
@@ -414,7 +413,7 @@ void ServerLogic::DataRequestProcess(const Packet& packet)
     //    );
     //    _syncObject.Clear();
     //}
-    Server::BroadCast("", (short)PacketID::DataSendComplete, 0, 0);
+    //Server::BroadCast("", (short)PacketID::DataSendComplete, 0, 0);
 }
 void ServerLogic::ObjectPickProcess(const Packet& packet)
 {
@@ -730,19 +729,20 @@ void ServerLogic::RegistPlayer(Player* player)
 {
     Engine::Physics::ControllerDesc cd;
     cd.position = Engine::Math::Vector3(0, 0, 0);
-    cd.height = 50.f;
-    cd.radius = 10.f;
-    cd.gravity = { 0.f, -9.8f * 10, 0.f };
+    cd.height = 10.f;
+    cd.radius = 5.f;
+    //cd.gravity = { 0.f, -0.98f, 0.f };
+    cd.gravity = { 0.f, 0.f, 0.f };
     cd.contactOffset = 0.2f;
-    cd.stepOffset = 10.f;
+    //cd.stepOffset = 10.f;
     cd.slopeLimit = 0.1f;
     Engine::Physics::IController* controller = player->_controller;
     _physicsManager->CreatePlayerController(&controller, _mainScene, cd);
     player->_controller = static_cast<Engine::Physics::Controller*>(controller);
     player->_controller->SetOwner(&player);
-    player->_controller->SetBottomPosition(Engine::Math::Vector3(0.f, 10.f, 0.f));
+    player->_controller->SetBottomPosition(Engine::Math::Vector3(0.f, (cd.height + cd.radius) * 0.5f, 0.f));
     player->_controller->Initialize();
-    player->_controller->SetPosition(Engine::Math::Vector3(0, 500, 0));
+    player->_controller->SetPosition(Engine::Math::Vector3(0, 0, 0));
 }
 
 void ServerLogic::RegistGround(Ground& ground)

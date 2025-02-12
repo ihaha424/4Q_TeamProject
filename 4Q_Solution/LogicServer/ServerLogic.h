@@ -95,7 +95,7 @@ private:
 	MoveMsg::Jump _jump;
 	MoveMsg::MoveSync _moveSync;
 	MoveMsg::StateChange _stateChange;
-	MoveMsg::ObjectMove _objectMove;
+	//MoveMsg::ObjectMove _objectMove;
 
 	PlayMsg::SelectPart _selectPart;
 	PlayMsg::PickObject _pickObject;
@@ -213,6 +213,8 @@ private:
 
 
 	// Puzzle 1
+
+
 
 	// Puzzle 2
 

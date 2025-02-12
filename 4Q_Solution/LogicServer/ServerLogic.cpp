@@ -1008,7 +1008,7 @@ void ServerLogic::Puzzle1(int objectId)
     int maxCorrectCount = 3;
     static int activeObjectId = 11103;
     // 리브가 상호작용을 했을 때 이쪽으로 와야함.
-    if (objectId == 11107 || objectId == 11108 || objectId == 11109) {
+    if (objectId == 11106 || objectId == 11108 || objectId == 11109) {
         curCorrectCount++;
         // send puzzleSuccess.
         //_objectActive.set_objectserialnumber(activeObjectId);

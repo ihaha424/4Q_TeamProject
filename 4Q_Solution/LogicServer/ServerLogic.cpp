@@ -191,9 +191,9 @@ void ServerLogic::SendPositionData()
         Engine::Math::Vector3 position = _playerSlot[i]._controller->GetPosition();
         Engine::Math::Quaternion rotation = _playerSlot[i]._rotation;
         //printf("Player%d Position : (%f, %f, %f)\n", i + 1, position.x, position.y, position.z);
-        _moveSync.add_position(position.x);
-        _moveSync.add_position(position.y);
-        _moveSync.add_position(position.z);
+        _moveSync.set_x(position.x);
+        _moveSync.set_y(position.y);
+        _moveSync.set_z(position.z);
         _moveSync.add_rotation(rotation.x);
         _moveSync.add_rotation(rotation.y);
         _moveSync.add_rotation(rotation.z);
@@ -329,12 +329,12 @@ void ServerLogic::MoveProcess(const Packet& packet)
 
         Engine::Math::Vector3 position = _playerSlot[serialNum]._controller->GetPosition();
         //printf("Player%d Direction : (%f, %f, %f)\n", serialNum + 1, direction.x, direction.y, direction.z);
-        _moveSync.add_position(position.x);
-        _moveSync.add_position(position.y);
-        _moveSync.add_position(position.z);
+        _moveSync.set_x(position.x);
+        _moveSync.set_y(position.y);
+        _moveSync.set_z(position.z);
 
         _moveSync.SerializeToString(&_msgBuffer);
-        Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), packet._serialNumber);
+        Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), _playerSlot[serialNum]._serialNumber);
         _moveSync.Clear();
     }
 }

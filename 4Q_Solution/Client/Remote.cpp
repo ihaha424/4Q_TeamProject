@@ -225,10 +225,9 @@ void Remote::StateChange(const MoveMsg::StateChange* msg)
 
 void Remote::SyncMove(const MoveMsg::MoveSync* msg)
 {
-	const auto& pos = msg->position();
-	float x = *(pos.begin());
-	float y = *(pos.begin() + 1);
-	float z = *(pos.begin() + 2);
+	float x = msg->x();
+	float y = msg->y();
+	float z = msg->z();
 	Engine::Math::Vector3 nextLocation(x, y, z);
 	_remote->SetNextLocation(nextLocation);
 	const auto& rot = msg->rotation();
@@ -241,9 +240,8 @@ void Remote::SyncMove(const MoveMsg::MoveSync* msg)
 
 void Remote::SetLocation(const MoveMsg::MoveSync* msg)
 {
-	const auto& pos = msg->position();
-	float x = *(pos.begin());
-	float y = *(pos.begin() + 1);
-	float z = *(pos.begin() + 2);
+	float x = msg->x();
+	float y = msg->y();
+	float z = msg->z();
 	_transform.position = Engine::Math::Vector3(x, y, z);
 }

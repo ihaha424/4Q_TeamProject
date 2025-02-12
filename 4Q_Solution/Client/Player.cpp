@@ -459,19 +459,17 @@ const int Player::GetSerialNumber() const
 
 void Player::SyncMove(const MoveMsg::MoveSync* msg)
 {
-	const auto& pos = msg->position();
-	float x = *(pos.begin());
-	float y = *(pos.begin() + 1);
-	float z = *(pos.begin() + 2);
+	float x = msg->x();
+	float y = msg->y();
+	float z = msg->z();
 	Engine::Math::Vector3 nextLocation(x, y, z);
 	_remote->SetNextLocation(nextLocation);
 }
 
 void Player::SetLocation(const MoveMsg::MoveSync* msg)
 {
-	const auto& pos = msg->position();
-	float x = *(pos.begin());
-	float y = *(pos.begin() + 1);
-	float z = *(pos.begin() + 2);
+	float x = msg->x();
+	float y = msg->y();
+	float z = msg->z();
 	_transform.position = Engine::Math::Vector3(x, y, z);
 }

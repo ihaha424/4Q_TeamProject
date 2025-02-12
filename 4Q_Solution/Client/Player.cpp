@@ -203,10 +203,10 @@ void Player::MoveStarted()
 {
 	_bitFlag->OnFlag(StateFlag::Walk);
 
-	if (!_bitFlag->IsOnFlag(StateFlag::Jump))
+	/*if (!_bitFlag->IsOnFlag(StateFlag::Jump))
 	{
 		ChangeSplitAnimation("rig|Anim_Walk", StateFlag::Interact, Lower);
-	}
+	}*/
 
 	SendStateMessage();
 }
@@ -216,6 +216,11 @@ void Player::MoveTriggered(Engine::Math::Vector3 value)
 	_remote->SetDirection(_fixedArm->GetTransformDirection(value));
 	_transform.rotation = _fixedArm->GetRotation(value, _transform.rotation);
 	//_fixedArm->FollowDirection(value);
+
+	if (!_bitFlag->IsOnFlag(StateFlag::Jump))
+	{
+		ChangeSplitAnimation("rig|Anim_Walk", StateFlag::Interact, Lower);
+	}
 
 	Engine::Math::Vector3 direction = _fixedArm->GetTransformDirection(value);
 	_sync->_move.set_x(direction.x);
@@ -266,7 +271,7 @@ void Player::MoveCompleted()
 
 void Player::JumpStarted()
 {
-	if (_bitFlag->IsOnFlag(StateFlag::Jump))
+	if (_bitFlag->IsOnFlag(StateFlag::Jump | StateFlag::Interact))
 		return;
 
 	_bitFlag->OnFlag(StateFlag::Jump | StateFlag::Jump_Started);
@@ -277,7 +282,7 @@ void Player::JumpStarted()
 
 void Player::InteractStarted()
 {
-	if (_bitFlag->IsOnFlag(StateFlag::Interact))
+	if (_bitFlag->IsOnFlag(StateFlag::Interact | StateFlag::Jump))
 		return;
 
 	/*Raycast*/

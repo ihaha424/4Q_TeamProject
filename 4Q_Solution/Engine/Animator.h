@@ -24,6 +24,7 @@ namespace Engine::Component
         void SetUpSplitBone(unsigned int maxSplit) const;
         void SplitBone(unsigned int id, const char* boneName) const;
         void SetAnimationSpeed(float speed) const;
+        void SetAnimationSpeed(float speed, unsigned int id) const;
         void MakeParent(const char* parent, const char* child) const;
         void GetSkeletonMatrix(const char* bone, Engine::Math::Matrix** out) const;
 

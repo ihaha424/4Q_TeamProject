@@ -10,6 +10,7 @@ public:
 
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
 	void PreInitialize(const Engine::Modules& modules) override;
+	void PostInitialize(const Engine::Modules& modules) override;
 
 protected:
 	void DisposeComponents() override;

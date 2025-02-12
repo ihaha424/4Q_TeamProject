@@ -32,7 +32,7 @@ void Animator::Update(const float deltaTime)
 	for (unsigned int i = 0; i < _maxSplit; i++)
 	{
 		const Animation::Channel& animation = _animation->_animations[_controllers[i].animation];
-		_controllers[i].playTime += _speed * deltaTime;
+		_controllers[i].playTime += _controllers[i].speed * deltaTime;
 	
 		if (_controllers[i].playTime >= animation.lastTime)
 		{
@@ -159,7 +159,21 @@ void Animator::SplitBone(const unsigned int ID, const char* boneName)
 
 void Animator::SetAnimationSpeed(float speed)
 {
-	_speed = speed;
+	for (unsigned int i = 0; i < _maxSplit; i++)
+	{
+		_controllers[i].speed = speed;
+	}
+}
+
+void Animator::SetAnimationSpeed(float speed, unsigned int ID)
+{
+	if (_maxSplit <= ID)
+	{
+		ASSERT(false, L"Greater than the number of bones you set.");
+		return;
+	}
+
+	_controllers[ID].speed = speed;
 }
 
 void Animator::MakeParent(const char* parent, const char* child)

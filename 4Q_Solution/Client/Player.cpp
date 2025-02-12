@@ -2,7 +2,6 @@
 #include "Player.h"
 #include "GrabbedObject.h"
 #include "InteractObject.h"
-#include "Application.h"
 
 Player::Player() : 
 	//, _movement(nullptr)
@@ -82,7 +81,7 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	_fixedArm->SetTarget(&_transform);
 	_fixedArm->SetCameraComponent(_camera);
 	_fixedArm->SetDistance(60.f);
-	_fixedArm->SetCameraPosition(Engine::Math::Vector2{ 0.f, 10.f });
+	_fixedArm->SetCameraPosition(Engine::Math::Vector2{ 0.f, 1000.f });
 	_fixedArm->SetRotationSpeed(Engine::Math::Vector2{ 0.02f, 0.04f });
 	_fixedArm->SetFollowSpeed(0.01f);
 	
@@ -178,6 +177,14 @@ void Player::PostInitialize(const Engine::Modules& modules)
 void Player::PostUpdate(float deltaTime)
 {
 	Object::PostUpdate(deltaTime);
+	_fixedArm->SetCameraPosition(Engine::Math::Vector2{ 0.f, 10.f });
+
+	auto container = std::ranges::remove_if(_delayQueue, [deltaTime](auto& delayCall)
+		{
+			return !delayCall(deltaTime);
+		});
+
+	_delayQueue.erase(container.begin(), container.end());
 
 	Engine::Math::Quaternion q = Engine::Math::Quaternion::Concatenate(_transform.rotation, _offset);
 
@@ -215,7 +222,7 @@ void Player::MoveStarted()
 
 	if (!_bitFlag->IsOnFlag(StateFlag::Jump))
 	{
-		ChangeSplitAnimation("rig|Anim_Walk", StateFlag::Interact, Lower);
+		ChangeSplitAnimation("rig|Anim_Walk", StateFlag::Interact, Lower, 1.2);
 	}
 
 	_bitFlag->OnFlag(StateFlag::Move_Started);
@@ -285,7 +292,8 @@ void Player::JumpStarted()
 
 	_bitFlag->OnFlag(StateFlag::Jump | StateFlag::Jump_Started);
 	_animator->ChangeAnimation("rig|Anim_Jump_start");
-	//_animator->SetAnimationSpeed(1.5f);	
+	_animator->SetAnimationSpeed(1.5f);
+	_remote->SetSpeed(_speed * 0.2f);
 }
 
 void Player::InteractStarted()
@@ -363,15 +371,17 @@ void Player::InteractCompleted()
 	}
 }
 
-void Player::ChangeSplitAnimation(const char* animation, StateFlag flag, SplitType type)
+void Player::ChangeSplitAnimation(const char* animation, StateFlag flag, SplitType type, float speed)
 {
 	if (_bitFlag->IsOnFlag(flag))
 	{
 		_animator->ChangeAnimation(animation, type);
+		_animator->SetAnimationSpeed(speed, type);
 	}
 	else
 	{
 		_animator->ChangeAnimation(animation);
+		_animator->SetAnimationSpeed(speed);
 	}
 }
 
@@ -392,6 +402,8 @@ void Player::SendStateMessage()
 	_sync->_stateChange.set_stateinfo(static_cast<int32_t>(_bitFlag->GetCurrentFlag()));
 	_sync->_stateChange.SerializeToString(&_sync->_msgBuffer);
 
+	//printf("current Flag : %lld\n", _bitFlag->GetCurrentFlag());
+
 	Engine::Application::GetNetworkManager()->SaveSendData(
 		(short)PacketID::StateChange,
 		_sync->_msgBuffer,
@@ -410,7 +422,7 @@ void Player::UpdateState()
 			if (!_bitFlag->IsOnFlag(StateFlag::Jump_Triggered))
 			{
 				_remote->SetSpeed(_speed * 0.5f);
-				_remote->SetDirection(Engine::Math::Vector3(0.f, 1.f, 0.f));
+				_remote->SetDirection(Engine::Math::Vector3(0.f, 1.f, 0.f));				
 
 				_sync->_jump.set_power(15.f);
 				_sync->_jump.SerializeToString(&_sync->_msgBuffer);				
@@ -421,13 +433,16 @@ void Player::UpdateState()
 					static_cast<long>(_sync->_jump.ByteSizeLong()),
 					_sync->GetSerialNumber()
 				);
-
-				_bitFlag->OnFlag(StateFlag::Jump_Triggered);
-				SendStateMessage();
+				_delayQueue.push_back(DelayCall([=]() {
+					_bitFlag->OnFlag(StateFlag::Jump_Triggered);
+					SendStateMessage();
+					printf("Jump Triggered\n");
+					}, 0.05f));
+				
 				_animator->ChangeAnimation("rig|Anim_Jump_loop");
-				//_animator->SetAnimationSpeed(1.f);
+				_animator->SetAnimationSpeed(1.f);
 			}
-		}		
+		}
 	}
 
 	if (_bitFlag->IsOnFlag(StateFlag::Interact_Completed))
@@ -493,7 +508,9 @@ void Player::StateChange(const MoveMsg::StateChange* msg)
 
 		_remote->SetDirection(Engine::Math::Vector3::Zero);
 		_bitFlag->OnFlag(StateFlag::Jump_Completed);
+		_bitFlag->OffFlag(StateFlag::Jump_Triggered);
 		SendStateMessage();
 		_bitFlag->OffFlag(StateFlag::Jump_Completed);
+		_remote->SetSpeed(_speed);
 	}
 }

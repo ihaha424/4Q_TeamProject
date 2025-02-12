@@ -25,6 +25,10 @@ HRESULT GeometryShader::LoadResource(const std::filesystem::path& filePath)
 	CompileShader(geometryShaderData, filePath, "main", "gs_5_0");
 #else
 	std::vector<uint8_t> geometryShaderData = ReadData(filePath.c_str());
+	if (geometryShaderData.empty())
+	{
+		CompileShader(geometryShaderData, filePath, "main", "gs_5_0");
+	}
 #endif
 
 	ID3D11ShaderReflection* pReflector = nullptr;

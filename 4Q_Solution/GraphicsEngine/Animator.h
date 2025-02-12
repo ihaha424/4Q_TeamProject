@@ -14,6 +14,7 @@ class Animator : public GE::IAnimator
 		const char* animation = "";
 		float playTime = 0.f;
 		float lastTime = 0.f;
+		float speed = 1.f;
 	};
 
 	struct Blend
@@ -44,6 +45,7 @@ public:
 	void SetUpSplitBone(unsigned int maxSplit) override;
 	void SplitBone(unsigned int ID, const char* boneName) override;
 	void SetAnimationSpeed(float speed) override;
+	void SetAnimationSpeed(float speed, unsigned int ID) override;
 	void MakeParent(const char* parent, const char* child) override;
 	void GetSkeletonMatrix(const char* bone, GE::Matrix4x4** out) override;
 
@@ -83,7 +85,6 @@ private:
 	Skeleton*								_pSkeleton{ nullptr };
 	static unsigned int						_globalID;
 	unsigned int							_ID{ 0 };
-	unsigned int							_maxSplit{ 0 };
-	float									_speed{ 1.f };
+	unsigned int							_maxSplit{ 0 };	
 	bool									_isBlending{ false };
 };

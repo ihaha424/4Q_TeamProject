@@ -50,7 +50,7 @@ void Shader::CompileShader(std::vector<uint8_t>& output, const std::filesystem::
 	if (pErrorBlob)
 	{
 		const char* errmsg = (const char*)pErrorBlob->GetBufferPointer();
-		int a = 0;
+		printf(errmsg);
 		__debugbreak();
 	}
 

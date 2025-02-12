@@ -14,10 +14,9 @@ void BG_Terrain::PreInitialize(const Engine::Modules& modules)
 	Object::PreInitialize(modules);
 	_staticMesh->SetFilePath(_meshPath);
 	_matrix = _transform.GetMatrix();
-	//_matrix = Engine::Math::Matrix::CreateScale(0.1f); /**
-	//	Engine::Math::Matrix::CreateFromQuaternion(
-	//		Engine::Math::Quaternion::CreateFromYawPitchRoll(std::numbers::pi_v<float>, 0.f, 0.f)) *
-	//			Engine::Math::Matrix::CreateTranslation(Engine::Math::Vector3(-100.f, 0.f, 0.f))*/;
+	_matrix = Engine::Math::Matrix::CreateScale(0.1f) *
+		Engine::Math::Matrix::CreateFromQuaternion(
+			Engine::Math::Quaternion::CreateFromYawPitchRoll(std::numbers::pi_v<float>, 0.f, 0.f));
 
 	_staticMesh->SetMatrix(&_matrix);
 	

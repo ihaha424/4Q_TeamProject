@@ -335,6 +335,7 @@ void ServerLogic::MoveProcess(const Packet& packet)
 
         _moveSync.SerializeToString(&_msgBuffer);
         Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), packet._serialNumber);
+        _moveSync.Clear();
     }
 }
 void ServerLogic::JumpProcess(const Packet& packet)

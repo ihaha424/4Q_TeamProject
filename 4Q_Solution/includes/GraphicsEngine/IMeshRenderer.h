@@ -8,6 +8,7 @@ namespace GE
 		unsigned int postEffectFlag;
 		bool activeShadow;
 		bool activeDraw;
+		bool zWrite;
 	};
 
 	enum class Type { Static, Skeletal, SkyBox };

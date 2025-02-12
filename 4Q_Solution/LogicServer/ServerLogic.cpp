@@ -328,7 +328,7 @@ void ServerLogic::MoveProcess(const Packet& packet)
         _playerSlot[serialNum]._direction = direction;
 
         Engine::Math::Vector3 position = _playerSlot[serialNum]._controller->GetPosition();
-        //printf("Player%d Direction : (%f, %f, %f)\n", serialNum + 1, direction.x, direction.y, direction.z);
+        printf("Player%d Direction : (%f, %f, %f)\n", serialNum + 1, direction.x, direction.y, direction.z);
         _moveSync.set_x(position.x);
         _moveSync.set_y(position.y);
         _moveSync.set_z(position.z);
@@ -427,6 +427,7 @@ void ServerLogic::ObjectPickProcess(const Packet& packet)
         _pickObject.ByteSizeLong(),
         _pickObject.targetserialnumber()
     );
+    printf("Object Picked. Player ID : %d, Object ID : %d.\n", _pickObject.playerid(), _pickObject.targetserialnumber());
 }
 void ServerLogic::ObjectPutProcess(const Packet& packet)
 {
@@ -440,13 +441,23 @@ void ServerLogic::ObjectPutProcess(const Packet& packet)
         _putObject.ByteSizeLong(),
         _putObject.targetserialnumber()
     );
+
+    const auto& position = _putObject.position();
+
+    printf("Player ID : %d Put Object ID : %d on position (%f, %f, %f).\n", 
+        _putObject.playerid(), 
+        _putObject.targetserialnumber(),
+        (*position.begin()),
+        (*position.begin() + 1),
+        (*position.begin() + 2)
+    );
 }
 void ServerLogic::ObjectInteractProcess(const Packet& packet)
 {
     // TODO: 여기서는 오브젝트의 ID에 따라 잡기를 진행하는 부분과 퀘스트 완료와 다이얼로그 시작 로직을 사용해야 합니다.
     _interactObject.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
     int objectNum = _interactObject.objectserialnumber();
-    printf("Object Interact Message. Sender Id : %d, Interact Object Id : %d\n", packet._serialNumber, objectNum);
+    printf("Object Interact Message. Interact Object Id : %d\n", objectNum);
     // 여기서 해야할 것들.
     // 다이얼로그 띄우기, 퍼즐 클리어(퀘스트 완료), 퍼즐 진행, 
     //
@@ -516,7 +527,7 @@ void ServerLogic::ObjectInteractProcess(const Packet& packet)
         printf("[Interact Process] Puzzle Clear. Puzzle Number : %d\n", _currentPuzzleNumber);
     }
     else if (objectNum == 10005) {
-        Server::BroadCast("", (short)PacketID::PuzzleSuccess, 0, 1);
+        Server::BroadCast("", (short)PacketID::PuzzleSuccess, 0, 9004);
         QuestProcess(_currentQuestID);
         _puzzle5Clear = true;
         printf("[Interact Process] Puzzle Clear. Puzzle Number : %d\n", _currentPuzzleNumber);
@@ -544,12 +555,18 @@ void ServerLogic::DialogInteractProcess(const Packet& packet)
         if (!_rayRead) {
             printf("Ray Interacted Dialog.\n");
             _rayRead = true;
+            _dialogNext.set_playerid(1);
+            _dialogNext.SerializeToString(&_msgBuffer);
+            Server::BroadCast(_msgBuffer, (short)PacketID::DialogNext, _dialogNext.ByteSizeLong(), 9000);
         }
     }
     else if (packet._serialNumber == 2) {
         if (!_liveRead) {
             printf("Live Interacted Dialog.\n");
             _liveRead = true;
+            _dialogNext.set_playerid(2);
+            _dialogNext.SerializeToString(&_msgBuffer);
+            Server::BroadCast(_msgBuffer, (short)PacketID::DialogNext, _dialogNext.ByteSizeLong(), 9000);
         }
     }
 
@@ -584,18 +601,13 @@ void ServerLogic::DialogInteractProcess(const Packet& packet)
         _currentPuzzleNumber++;
         printf("[DialogProgress] Puzzle Start. PuzzleNum : %d\n", _currentPuzzleNumber);
     }
-    else if (_currentQuestID == 3104) {
-        Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 9004);
-        _currentPuzzleNumber++;
-        printf("[DialogProgress] Puzzle Start. PuzzleNum : %d\n", _currentPuzzleNumber);
-    }
     else if (_currentQuestID == 4102) {
-        Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 1);
+        Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 9004);
         _currentPuzzleNumber = 5;
         printf("[DialogProgress] Puzzle Start. PuzzleNum : %d\n", _currentPuzzleNumber);
     }
     else if (_currentQuestID == 5102) {
-        Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 1);
+        Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 9005);
         _currentPuzzleNumber = 6;
         printf("[DialogProgress] Puzzle Start. PuzzleNum : %d\n", _currentPuzzleNumber);
     }
@@ -606,6 +618,7 @@ void ServerLogic::ObjectTriggerProcess(const Packet& packet)
     int triggerboxId = _triggerObject.triggerboxid();
     int targetObjectId = _triggerObject.objectserialnumber();
 
+    
     Puzzle5(targetObjectId, triggerboxId);
 }
 // =============================
@@ -846,7 +859,7 @@ void ServerLogic::LoadDialogData()
 void ServerLogic::QuestProcess(int& questId)
 {
     // 여기서는 퀘스트를 진행 시키고, 특정 조건이 만족되면, 퍼즐을 활성화 해야함.
-    Server::BroadCast("", (short)PacketID::QuestClear, 0, 0);
+    Server::BroadCast("", (short)PacketID::QuestClear, 0, 9000);
     printf("[Quest Process] Quest Clear. Quest Number : %d\n", questId);
     int nextQuestId = _questTable[questId];
     if(questId == 3106 || questId == 4103 || questId == 5103){
@@ -954,7 +967,7 @@ void ServerLogic::Puzzle2(int objectId)
         printf("[Puzzle 2] Puzzle Clear Object Activated.\n");
     }
 }
-void Puzzle3(int objectId) 
+void ServerLogic::Puzzle3(int objectId)
 {
     
 }
@@ -964,8 +977,9 @@ void ServerLogic::Puzzle4(int objectId)
 }
 void ServerLogic::Puzzle5(int objectId, int triggerboxId)
 {
-    // triggerBox ID : 100100 ~ 100104
-    int areaIndex = triggerboxId - 100100;
+    // triggerBox ID : 8000 ~ 8004
+
+    int areaIndex = triggerboxId - 8000;
     int boxIndex = objectId - 16301;
     _currentWeight[areaIndex] += _puzzle6Box[boxIndex];
 

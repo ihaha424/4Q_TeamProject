@@ -52,6 +52,9 @@ struct TableStruct_Play_2eproto {
 extern const ::google::protobuf::internal::DescriptorTable
     descriptor_table_Play_2eproto;
 namespace PlayMsg {
+class DialogNext;
+struct DialogNextDefaultTypeInternal;
+extern DialogNextDefaultTypeInternal _DialogNext_default_instance_;
 class DialogProgress;
 struct DialogProgressDefaultTypeInternal;
 extern DialogProgressDefaultTypeInternal _DialogProgress_default_instance_;
@@ -1415,10 +1418,11 @@ class PutObject final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kPositionFieldNumber = 2,
+    kPositionFieldNumber = 3,
     kTargetserialnumberFieldNumber = 1,
+    kPlayeridFieldNumber = 2,
   };
-  // repeated float position = 2;
+  // repeated float position = 3;
   int position_size() const;
   private:
   int _internal_position_size() const;
@@ -1447,12 +1451,23 @@ class PutObject final : public ::google::protobuf::Message
   void _internal_set_targetserialnumber(::int32_t value);
 
   public:
+  // optional int32 playerid = 2;
+  bool has_playerid() const;
+  void clear_playerid() ;
+  ::int32_t playerid() const;
+  void set_playerid(::int32_t value);
+
+  private:
+  ::int32_t _internal_playerid() const;
+  void _internal_set_playerid(::int32_t value);
+
+  public:
   // @@protoc_insertion_point(class_scope:PlayMsg.PutObject)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      1, 2, 0,
+      2, 3, 0,
       0, 2>
       _table_;
 
@@ -1474,6 +1489,7 @@ class PutObject final : public ::google::protobuf::Message
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::google::protobuf::RepeatedField<float> position_;
     ::int32_t targetserialnumber_;
+    ::int32_t playerid_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -1628,6 +1644,7 @@ class PickObject final : public ::google::protobuf::Message
   // accessors -------------------------------------------------------
   enum : int {
     kTargetserialnumberFieldNumber = 1,
+    kPlayeridFieldNumber = 2,
   };
   // optional int32 targetserialnumber = 1;
   bool has_targetserialnumber() const;
@@ -1640,12 +1657,23 @@ class PickObject final : public ::google::protobuf::Message
   void _internal_set_targetserialnumber(::int32_t value);
 
   public:
+  // optional int32 playerid = 2;
+  bool has_playerid() const;
+  void clear_playerid() ;
+  ::int32_t playerid() const;
+  void set_playerid(::int32_t value);
+
+  private:
+  ::int32_t _internal_playerid() const;
+  void _internal_set_playerid(::int32_t value);
+
+  public:
   // @@protoc_insertion_point(class_scope:PlayMsg.PickObject)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 0,
+      1, 2, 0,
       0, 2>
       _table_;
 
@@ -1666,6 +1694,7 @@ class PickObject final : public ::google::protobuf::Message
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::int32_t targetserialnumber_;
+    ::int32_t playerid_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -2211,6 +2240,7 @@ class InteractObject final : public ::google::protobuf::Message
   // accessors -------------------------------------------------------
   enum : int {
     kObjectserialnumberFieldNumber = 1,
+    kPlayeridFieldNumber = 2,
   };
   // optional int32 objectserialnumber = 1;
   bool has_objectserialnumber() const;
@@ -2223,12 +2253,23 @@ class InteractObject final : public ::google::protobuf::Message
   void _internal_set_objectserialnumber(::int32_t value);
 
   public:
+  // optional int32 playerid = 2;
+  bool has_playerid() const;
+  void clear_playerid() ;
+  ::int32_t playerid() const;
+  void set_playerid(::int32_t value);
+
+  private:
+  ::int32_t _internal_playerid() const;
+  void _internal_set_playerid(::int32_t value);
+
+  public:
   // @@protoc_insertion_point(class_scope:PlayMsg.InteractObject)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 0,
+      1, 2, 0,
       0, 2>
       _table_;
 
@@ -2249,6 +2290,7 @@ class InteractObject final : public ::google::protobuf::Message
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::int32_t objectserialnumber_;
+    ::int32_t playerid_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -2638,6 +2680,198 @@ class DialogProgress final : public ::google::protobuf::Message
   union { Impl_ _impl_; };
   friend struct ::TableStruct_Play_2eproto;
 };
+// -------------------------------------------------------------------
+
+class DialogNext final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:PlayMsg.DialogNext) */ {
+ public:
+  inline DialogNext() : DialogNext(nullptr) {}
+  ~DialogNext() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(DialogNext* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(DialogNext));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR DialogNext(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline DialogNext(const DialogNext& from) : DialogNext(nullptr, from) {}
+  inline DialogNext(DialogNext&& from) noexcept
+      : DialogNext(nullptr, std::move(from)) {}
+  inline DialogNext& operator=(const DialogNext& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline DialogNext& operator=(DialogNext&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const DialogNext& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const DialogNext* internal_default_instance() {
+    return reinterpret_cast<const DialogNext*>(
+        &_DialogNext_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 13;
+  friend void swap(DialogNext& a, DialogNext& b) { a.Swap(&b); }
+  inline void Swap(DialogNext* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(DialogNext* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  DialogNext* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<DialogNext>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const DialogNext& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const DialogNext& from) { DialogNext::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(DialogNext* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "PlayMsg.DialogNext"; }
+
+ protected:
+  explicit DialogNext(::google::protobuf::Arena* arena);
+  DialogNext(::google::protobuf::Arena* arena, const DialogNext& from);
+  DialogNext(::google::protobuf::Arena* arena, DialogNext&& from) noexcept
+      : DialogNext(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kPlayeridFieldNumber = 1,
+  };
+  // optional int32 playerid = 1;
+  bool has_playerid() const;
+  void clear_playerid() ;
+  ::int32_t playerid() const;
+  void set_playerid(::int32_t value);
+
+  private:
+  ::int32_t _internal_playerid() const;
+  void _internal_set_playerid(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:PlayMsg.DialogNext)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      0, 1, 0,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const DialogNext& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::int32_t playerid_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Play_2eproto;
+};
 
 // ===================================================================
 
@@ -2715,6 +2949,34 @@ inline void PickObject::_internal_set_targetserialnumber(::int32_t value) {
   _impl_.targetserialnumber_ = value;
 }
 
+// optional int32 playerid = 2;
+inline bool PickObject::has_playerid() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline void PickObject::clear_playerid() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.playerid_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline ::int32_t PickObject::playerid() const {
+  // @@protoc_insertion_point(field_get:PlayMsg.PickObject.playerid)
+  return _internal_playerid();
+}
+inline void PickObject::set_playerid(::int32_t value) {
+  _internal_set_playerid(value);
+  _impl_._has_bits_[0] |= 0x00000002u;
+  // @@protoc_insertion_point(field_set:PlayMsg.PickObject.playerid)
+}
+inline ::int32_t PickObject::_internal_playerid() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.playerid_;
+}
+inline void PickObject::_internal_set_playerid(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.playerid_ = value;
+}
+
 // -------------------------------------------------------------------
 
 // PutObject
@@ -2747,7 +3009,35 @@ inline void PutObject::_internal_set_targetserialnumber(::int32_t value) {
   _impl_.targetserialnumber_ = value;
 }
 
-// repeated float position = 2;
+// optional int32 playerid = 2;
+inline bool PutObject::has_playerid() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline void PutObject::clear_playerid() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.playerid_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline ::int32_t PutObject::playerid() const {
+  // @@protoc_insertion_point(field_get:PlayMsg.PutObject.playerid)
+  return _internal_playerid();
+}
+inline void PutObject::set_playerid(::int32_t value) {
+  _internal_set_playerid(value);
+  _impl_._has_bits_[0] |= 0x00000002u;
+  // @@protoc_insertion_point(field_set:PlayMsg.PutObject.playerid)
+}
+inline ::int32_t PutObject::_internal_playerid() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.playerid_;
+}
+inline void PutObject::_internal_set_playerid(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.playerid_ = value;
+}
+
+// repeated float position = 3;
 inline int PutObject::_internal_position_size() const {
   return _internal_position().size();
 }
@@ -2854,6 +3144,34 @@ inline ::int32_t InteractObject::_internal_objectserialnumber() const {
 inline void InteractObject::_internal_set_objectserialnumber(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.objectserialnumber_ = value;
+}
+
+// optional int32 playerid = 2;
+inline bool InteractObject::has_playerid() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline void InteractObject::clear_playerid() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.playerid_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline ::int32_t InteractObject::playerid() const {
+  // @@protoc_insertion_point(field_get:PlayMsg.InteractObject.playerid)
+  return _internal_playerid();
+}
+inline void InteractObject::set_playerid(::int32_t value) {
+  _internal_set_playerid(value);
+  _impl_._has_bits_[0] |= 0x00000002u;
+  // @@protoc_insertion_point(field_set:PlayMsg.InteractObject.playerid)
+}
+inline ::int32_t InteractObject::_internal_playerid() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.playerid_;
+}
+inline void InteractObject::_internal_set_playerid(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.playerid_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -3155,6 +3473,38 @@ ObjectDisable::_internal_objectserialnumber() const {
 inline ::google::protobuf::RepeatedField<::int32_t>* ObjectDisable::_internal_mutable_objectserialnumber() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.objectserialnumber_;
+}
+
+// -------------------------------------------------------------------
+
+// DialogNext
+
+// optional int32 playerid = 1;
+inline bool DialogNext::has_playerid() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline void DialogNext::clear_playerid() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.playerid_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline ::int32_t DialogNext::playerid() const {
+  // @@protoc_insertion_point(field_get:PlayMsg.DialogNext.playerid)
+  return _internal_playerid();
+}
+inline void DialogNext::set_playerid(::int32_t value) {
+  _internal_set_playerid(value);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  // @@protoc_insertion_point(field_set:PlayMsg.DialogNext.playerid)
+}
+inline ::int32_t DialogNext::_internal_playerid() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.playerid_;
+}
+inline void DialogNext::_internal_set_playerid(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.playerid_ = value;
 }
 
 #ifdef __GNUC__

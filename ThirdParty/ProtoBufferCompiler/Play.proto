@@ -58,3 +58,7 @@ message ObjectActive {
 message ObjectDisable {
 	repeated int32 objectserialnumber = 1;
 }
+
+message DialogNext {
+	optional int32 playerid = 1;
+}

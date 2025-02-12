@@ -111,6 +111,7 @@ private:
 	PlayMsg::PuzzleStart _puzzleStart;
 	PlayMsg::ObjectActive _objectActive;
 	PlayMsg::ObjectDisable _objectDisable;
+	PlayMsg::DialogNext _dialogNext;
 
 	std::string _msgBuffer = std::string(256, '\0');
 

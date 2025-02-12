@@ -747,26 +747,26 @@ void ServerLogic::RegistPlayer(Player* player)
 
 void ServerLogic::RegistGround(Ground& ground)
 {
-    Engine::Physics::GeometryDesc geometryDesc;
-    geometryDesc.data = { 2.5f, 2.5f, 6.32f };
-    //geometryDesc.data = { 2.5f, 2.5f, 5.f };
-    _physicsManager->LoadHeightMap(geometryDesc, "terrain", "Assets/Models/Smoothed_Height_Map.png");
+    //Engine::Physics::GeometryDesc geometryDesc;
+    //geometryDesc.data = { 2.5f, 2.5f, 6.32f };
+    ////geometryDesc.data = { 2.5f, 2.5f, 5.f };
+    //_physicsManager->LoadHeightMap(geometryDesc, "terrain", "Assets/Models/Smoothed_Height_Map.png");
    
-    Engine::Transform transform{};
-    Engine::Physics::IRigidStaticComponent* staticrigid;
-    _physicsManager->CreateTriangleStatic(&staticrigid, "terrain", { {0.0f,0.f,0.f } }, transform);
-    ground._staticRigid = static_cast<Engine::Physics::RigidStaticComponent*>(staticrigid);
-    _mainScene->AddActor(ground._staticRigid);
-    ground._staticRigid->SetTranslate({ -2560.f, -1350.f, -2560.f });
-    //ground._staticRigid->SetTranslate({ -2560.f, -1035.f, -2560.f });
-    auto tempRotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(-std::numbers::pi_v<float> * 0.5f, 0.f, 0.f);
-    ground._staticRigid->SetRotation(tempRotation);
+    //Engine::Transform transform{};
+    //Engine::Physics::IRigidStaticComponent* staticrigid;
+    //_physicsManager->CreateTriangleStatic(&staticrigid, "terrain", { {0.0f,0.f,0.f } }, transform);
+    //ground._staticRigid = static_cast<Engine::Physics::RigidStaticComponent*>(staticrigid);
+    //_mainScene->AddActor(ground._staticRigid);
+    //ground._staticRigid->SetTranslate({ -2560.f, -1350.f, -2560.f });
+    ////ground._staticRigid->SetTranslate({ -2560.f, -1035.f, -2560.f });
+    //auto tempRotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(-std::numbers::pi_v<float> * 0.5f, 0.f, 0.f);
+    //ground._staticRigid->SetRotation(tempRotation);
 
-    ground._staticRigid->SetOwner(&ground);
-    ground._staticRigid->Initialize();
+    //ground._staticRigid->SetOwner(&ground);
+    //ground._staticRigid->Initialize();
 
     Engine::Physics::IRigidComponent* rigid;
-    _physicsManager->CreatePlane(&rigid, Engine::Math::Vector3{ 0.f,-60.f, 0 }, Engine::Math::Vector3{ 0.f,1.f, 0 }, { {0.f,0.f,0.f} });
+    _physicsManager->CreatePlane(&rigid, Engine::Math::Vector3{ 0.f, 0.f, 0.f }, Engine::Math::Vector3{ 0.f,1.f, 0 }, { {0.f,0.f,0.f} });
     _mainScene->AddActor(rigid);
 }
 void ServerLogic::RegistTriggerBox(TriggerBox& triggerBox)

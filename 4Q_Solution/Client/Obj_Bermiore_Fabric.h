@@ -16,8 +16,11 @@ public:
 protected:
 	void DisposeComponents() override;
 	void PreInitialize(const Engine::Modules& modules) override;
+	void PostInitialize(const Engine::Modules& modules) override;
 
 	Engine::Component::Synchronize* _sync;
+	Engine::Component::Effect3DSound* _sound;
+	Engine::Component::Effect3DSound* _soundClear;
 	bool _activate;
 	bool _answer;
 };

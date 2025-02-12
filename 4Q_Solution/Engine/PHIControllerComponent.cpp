@@ -232,6 +232,7 @@ namespace Engine::PHI
 		jumpFlag = true;
 		velocity.y = 0;
 		force.y += JumpForce;
+		controller->Move(Vector3ToPhysicsVector3({0.f,1.f,0.f}), minDistance, 1);
 	}
 	void Controller::SetDirection(Engine::Math::Vector3 _direction)
 	{

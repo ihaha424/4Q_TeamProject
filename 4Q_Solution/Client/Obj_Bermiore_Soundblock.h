@@ -11,7 +11,7 @@ public:
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
 
 	void SendInteractToServer();
-	void PlaySound();
+	void PlaySound(const PlayMsg::InteractObject* msg);
 	void Interact() override;
 	void DataChangeCallBack(const std::wstring& name, const std::any& value) override;
 
@@ -20,5 +20,6 @@ protected:
 	void PreInitialize(const Engine::Modules& modules) override;
 
 	Engine::Component::Synchronize* _sync;
+	bool _activate = false;
 };
 

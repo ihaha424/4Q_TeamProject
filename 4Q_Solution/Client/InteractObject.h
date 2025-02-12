@@ -1,4 +1,6 @@
 #pragma once
+#include "InteractObject.h"
+
 class InteractObject
 	: public Engine::Object
 {

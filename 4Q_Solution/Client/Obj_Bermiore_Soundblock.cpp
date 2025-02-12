@@ -24,9 +24,17 @@ void Obj_Bermiore_Soundblock::SendInteractToServer()
 	);
 }
 
-void Obj_Bermiore_Soundblock::PlaySound()
+void Obj_Bermiore_Soundblock::PlaySound(const PlayMsg::InteractObject* msg)
 {
-
+	auto isData = GameClient::Application::GetGameStateManager()->GetData(L"GameCoreData");
+	if (!isData)
+		return;
+	auto data = std::any_cast<GameCoreData>(*isData);
+	if (data.player == PlayerEnum::Live || data.player == PlayerEnum::Developer)
+	{
+		// 사운드 컴포먼트 6개를 1개씩 실행해야함
+		// flag로 한다음 update에서 확인 하는 방식을 생각함
+	}
 }
 
 void Obj_Bermiore_Soundblock::DisposeComponents()
@@ -44,8 +52,8 @@ void Obj_Bermiore_Soundblock::PreInitialize(const Engine::Modules& modules)
 			DataChangeCallBack(name, value);
 		}
 	, this);
-	//_sync->AddCallback((short)PacketID::ObjectActive, &Obj_Bermiore_Soundblock::PlaySound, this);
-	//_sync->SetSerialNumber(12108);
+	_sync->AddCallback((short)PacketID::InteractObject, &Obj_Bermiore_Soundblock::PlaySound, this);
+	_sync->SetSerialNumber(12108);
 }
 
 void Obj_Bermiore_Soundblock::Interact()
@@ -55,4 +63,9 @@ void Obj_Bermiore_Soundblock::Interact()
 
 void Obj_Bermiore_Soundblock::DataChangeCallBack(const std::wstring& name, const std::any& value)
 {
+	auto data = std::any_cast<Puzzle_01>(value);
+	if (data._finish)
+		_activate = false;
+	if (data._start)
+		_activate = true;
 }

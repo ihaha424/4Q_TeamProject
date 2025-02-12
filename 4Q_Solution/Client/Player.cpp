@@ -74,8 +74,8 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	// FixedArm
 	_fixedArm->SetTarget(&_transform);
 	_fixedArm->SetCameraComponent(_camera);
-	_fixedArm->SetDistance(20.f);
-	_fixedArm->SetCameraPosition(Engine::Math::Vector2{ 0.f, 5.f });
+	_fixedArm->SetDistance(60.f);
+	_fixedArm->SetCameraPosition(Engine::Math::Vector2{ 0.f, 15.f });
 	_fixedArm->SetRotationSpeed(Engine::Math::Vector2{ 0.02f, 0.04f });
 	_fixedArm->SetFollowSpeed(0.01f);
 	
@@ -173,7 +173,7 @@ void Player::PostUpdate(float deltaTime)
 
 	Engine::Math::Quaternion q = Engine::Math::Quaternion::Concatenate(_transform.rotation, _offset);
 
-	_worldMatrix = Engine::Math::Matrix::CreateScale(0.05f)
+	_worldMatrix = Engine::Math::Matrix::CreateScale(0.15f)
 		* Engine::Math::Matrix::CreateFromQuaternion(q)
 		* Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
 
@@ -403,7 +403,7 @@ void Player::UpdateState()
 				_remote->SetSpeed(_speed * 0.5f);
 				_remote->SetDirection(Engine::Math::Vector3(0.f, 1.f, 0.f));
 
-				_sync->_jump.set_power(20.f);
+				_sync->_jump.set_power(2.f);
 				_sync->_jump.SerializeToString(&_sync->_msgBuffer);
 				
 

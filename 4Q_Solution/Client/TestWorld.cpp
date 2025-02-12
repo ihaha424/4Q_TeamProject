@@ -29,7 +29,7 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	// BG_Terrain
 	{
 		objectFactory->Clone<BG_Terrain>(this);
-		//helpPrepare<BG_Terrain>(L"BG_Terrain", objectFactory);
+		helpPrepare<BG_Terrain>(L"BG_Terrain", objectFactory);
 	}
 
 	// Obj_Bermiore_Fabric
@@ -49,7 +49,7 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 
 	// Obj_Ornoa_Print
 	{
-		helpPrepare<Obj_Ornoa_Print>(L"Obj_Ornoa_Print", objectFactory);
+		helpPrepare<Obj_Ornoa_Print>(L"Obj_Ornoa_Print_1", objectFactory);
 	}
 
 	// BG_Ornoa_Cloth_3
@@ -69,17 +69,17 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 
 	// Obj_BG_Tree_3
 	{
-		//helpPrepare<Obj_BG_Tree_3>(L"Obj_BG_Tree_3", objectFactory);
+		helpPrepare<Obj_BG_Tree_3>(L"Obj_BG_Tree_3", objectFactory);
 	}
 
 	// Obj_BG_Tree_2
 	{
-		//helpPrepare<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", objectFactory);
+		helpPrepare<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", objectFactory);
 	}
 
 	// Obj_BG_Tree_1
 	{
-		//helpPrepare<Obj_BG_Tree_1>(L"Obj_BG_Tree_1", objectFactory);
+		helpPrepare<Obj_BG_Tree_1>(L"Obj_BG_Tree_1", objectFactory);
 	}
 
 	// Obj_Buildings_Ornoa_House_1
@@ -99,7 +99,7 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 
 	// Obj_Buildings_Sudium
 	{
-		//helpPrepare<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", objectFactory);
+		helpPrepare<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", objectFactory);
 	}
 
 	// Obj_Buildings_Hide_House_5
@@ -145,48 +145,6 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	// Obj_Sudium_red
 	{
 		helpPrepare<Obj_Sudium_red>(L"Obj_Sudium_red", objectFactory);
-	}
-
-	// Obj_Mini_Platform_Set
-	{
-		// TODO: Refactor this.
-		auto object = GameClient::Application::GetLoadManager()->GetObjectCloneData(L"Obj_Mini_Platform_Set");
-		for (auto& data : object)
-		{
-			auto building = objectFactory->Clone<Obj_Mini_Platform_Set>(this);
-			building->SetisDynamic(data.GetProperty<bool>(L"isDynamic").value());
-			building->SetIsPublic(data.GetProperty<bool>(L"isPublic").value());
-			building->SetHasMesh(data.GetProperty<bool>(L"hasMesh").value());
-			building->SetTransform({
-					data.GetProperty<Engine::Math::Vector3>(L"position").value(),
-					data.GetProperty<Engine::Math::Quaternion>(L"rotation").value(),
-					data.GetProperty<Engine::Math::Vector3>(L"scale").value() * 100.
-				});
-			building->SetBoxPosition({ data.GetProperty<Engine::Math::Vector3>(L"boxPosition").value() });
-			building->SetBoxScale(data.GetProperty<Engine::Math::Vector3>(L"boxScale").value());
-		}
-		//helpPrepare<Obj_Mini_Platform_Set>(L"Obj_Mini_Platform_Set", objectFactory);
-	}
-
-	// Obj_Mini_Platform_Spawn
-	{
-		// TODO: Refactor this.
-		auto object = GameClient::Application::GetLoadManager()->GetObjectCloneData(L"Obj_Mini_Platform_Spawn");
-		for (auto& data : object)
-		{
-			auto building = objectFactory->Clone<Obj_Mini_Platform_Spawn>(this);
-			building->SetisDynamic(data.GetProperty<bool>(L"isDynamic").value());
-			building->SetIsPublic(data.GetProperty<bool>(L"isPublic").value());
-			building->SetHasMesh(data.GetProperty<bool>(L"hasMesh").value());
-			building->SetTransform({
-					data.GetProperty<Engine::Math::Vector3>(L"position").value(),
-					data.GetProperty<Engine::Math::Quaternion>(L"rotation").value(),
-					data.GetProperty<Engine::Math::Vector3>(L"scale").value() * 100.
-				});
-			building->SetBoxPosition({ data.GetProperty<Engine::Math::Vector3>(L"boxPosition").value() });
-			building->SetBoxScale(data.GetProperty<Engine::Math::Vector3>(L"boxScale").value());
-		}
-		//helpPrepare<Obj_Mini_Platform_Spawn>(L"Obj_Mini_Platform_Spawn", objectFactory);
 	}
 
 	// Obj_BG_Tree_3_Active
@@ -242,11 +200,6 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	// Obj_Shinave_Platform_Spawn_3
 	{
 		helpPrepare<Obj_Shinave_Platform_Spawn_3>(L"Obj_Shinave_Platform_Spawn_3", objectFactory);
-	}
-
-	// Obj_Props_Rock
-	{
-		helpPrepare<Obj_Props_Rock>(L"Obj_Props_Rock", objectFactory);
 	}
 
 	// Obj_Bermiore_Woolball_inBox
@@ -317,31 +270,6 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	// Obj_Bermiore_Soundblock
 	{
 		helpPrepare<Obj_Bermiore_Soundblock>(L"Obj_Bermiore_Soundblock", objectFactory);
-	}
-
-	// Obj_Mini_Stone_1
-	{		
-		helpPrepare<Obj_Mini_Stone_1>(L"Obj_Mini_Stone_1", objectFactory);
-	}
-
-	// Obj_Mini_Stone_2
-	{
-		helpPrepare<Obj_Mini_Stone_2>(L"Obj_Mini_Stone_2", objectFactory);
-	}
-
-	// Obj_Mini_Stone_3
-	{
-		helpPrepare<Obj_Mini_Stone_3>(L"Obj_Mini_Stone_3", objectFactory);
-	}
-
-	// Obj_Mini_Stone_4
-	{
-		helpPrepare<Obj_Mini_Stone_4>(L"Obj_Mini_Stone_4", objectFactory);
-	}
-
-	// Obj_Mini_Stone_5
-	{
-		helpPrepare<Obj_Mini_Stone_5>(L"Obj_Mini_Stone_5", objectFactory);
 	}
 
 	// Obj_Hide_Box

@@ -485,7 +485,7 @@ void TestWorld::EnterAccept(const ConnectMsg::AddObject* msg) {
 		_ray = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Ray>(this);
 		playerSerialNum = msg->grantnumber();
 		_ray->SetSerialNumber(msg->grantnumber());
-		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 2 });
+		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 1 });
 	}
 	else if (msg->grantnumber() == 2) {
 		// TODO: 여기에 리브의 오브젝트를 생성하는 코드를 넣어야 합니다.
@@ -524,6 +524,7 @@ void TestWorld::InitializeGameStateManager(const Engine::Modules& modules)
 {
 	auto gameStateManager = modules.gameStateManager;
 
+	gameStateManager->RegisterData(L"GrabData", GrabData{});
 
 	auto puzzle_00 = gameStateManager->NewSubManager();
 	gameStateManager->RegisterSubManager(L"puzzle_00", puzzle_00);

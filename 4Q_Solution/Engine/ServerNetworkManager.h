@@ -27,6 +27,7 @@ namespace Engine::ServerNetwork {
 		void DispatchPacket() override;
 		void SaveSendData(short packetId, std::string data, long dataSize, int serialNum) override;
 		void RegistWorldEvent(short packetId, std::function<void(const ConnectMsg::AddObject*)> callback) override;
+
 	private:
 		TerminalList _terminalList;
 		PacketQueue* _msgContainer = nullptr;

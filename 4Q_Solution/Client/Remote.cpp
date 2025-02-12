@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "Remote.h"
+#include "GrabData.h"
+#include "GrabbedObject.h"
 
 Remote::Remote() :
 	//, _movement(nullptr)
@@ -90,6 +92,13 @@ void Remote::PostInitialize(const Engine::Modules& modules)
 
 	//_skeletalMesh->SetActiveShadow(false);
 	_skeletalMesh->SetPostEffectFlag(1);
+
+	modules.gameStateManager->Subscribe(L"GrabData", [this](const std::wstring& name, const std::any& value)
+		{
+			Grab(name, value);
+		}
+	, this);
+
 }
 
 
@@ -246,4 +255,23 @@ void Remote::SetLocation(const MoveMsg::MoveSync* msg)
 	float y = *(pos.begin() + 1);
 	float z = *(pos.begin() + 2);
 	_transform.position = Engine::Math::Vector3(x, y, z);
+}
+
+void Remote::Grab(const std::wstring& name, const std::any& value)
+{
+	GrabData* data = std::any_cast<GrabData*>(value);
+	auto coreData = GameClient::Application::GetGameStateManager()->GetData(L"GameCoreData");
+	if (!coreData)
+		return;
+	GameCoreData* playerData = std::any_cast<GameCoreData*>(coreData);
+	if (data->player != playerData->player)
+	{
+		if (data->remoteGrab)
+		{
+			data->remoteGrab->Grabbed(&_transform, true);
+			grabbedObject = data->remoteGrab;
+		}
+		else
+			grabbedObject = nullptr;
+	}
 }

@@ -1,11 +1,11 @@
 #pragma once
-constexpr int BoxCount = 4;
+constexpr int BoxCount = 8;//?
 
 struct Puzzle_04
 {
-	bool _start;
-	bool _finish;
-	bool _trigger[BoxCount];
+	bool _start = false;
+	bool _finish = false;
+	bool _trigger[BoxCount]{};
 	Engine::Math::Vector3* livePos;
 };
 

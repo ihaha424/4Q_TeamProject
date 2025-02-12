@@ -19,11 +19,13 @@ protected:
 	void PreInitialize(const Engine::Modules& modules) override;
 
 	void SendInteractToServer();
+	void SetSoundProperty(std::filesystem::path path, float min, float max);
 protected:
 	Engine::GameState::IManager* myManager;
 	unsigned int index;
 
 	Engine::Component::Synchronize* _sync;
+	Engine::Component::Effect3DSound* _sound;
 	int player;
 	bool activate = false;
 };

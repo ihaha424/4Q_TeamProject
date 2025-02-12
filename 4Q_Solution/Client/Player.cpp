@@ -116,8 +116,8 @@ void Player::PreInitialize(const Engine::Modules& modules)
 
 	Engine::Physics::ControllerDesc cd;
 	cd.position = Engine::Math::Vector3(0.f, 0.f, 0.f);
-	cd.height = 100.f;
-	cd.radius = 20.f;
+	cd.height = 10.f;
+	cd.radius = 10.f;
 	// TODO: Player Gravity
 	//cd.gravity = { 0.f, -9.8f, 0.f };
 

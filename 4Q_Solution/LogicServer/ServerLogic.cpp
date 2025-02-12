@@ -486,12 +486,6 @@ void ServerLogic::ObjectInteractProcess(const Packet& packet)
     else if (objectNum == 10002 && _currentQuestID == 3103) {
         PlayDialog(31306); // 리브 레이 대화
     }
-    else if (objectNum == 10004 && _currentQuestID == 3104) {
-        PlayDialog(41301);
-    }
-    else if (objectNum == 10002 && _currentQuestID == 3105) {
-        PlayDialog(41204); // 리브 레이 대화
-    }
     else if (objectNum == 10004 && _currentQuestID == 1999) {
         PlayDialog(51501);
     }

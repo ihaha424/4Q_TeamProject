@@ -27,6 +27,7 @@ protected:
 
 	Engine::Component::Synchronize* _sync;
 	Engine::Component::Effect3DSound* _sound;
+	TriggerBox* _trigger;
 	int player;
 	bool activate = false;
 };

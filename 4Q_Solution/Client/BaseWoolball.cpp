@@ -96,6 +96,7 @@ void BaseWoolball::PreInitialize(const Engine::Modules& modules)
 			DataChangeCallBack(name, value);
 		}
 	, this);
+
 }
 
 void BaseWoolball::InteractCallback(const PlayMsg::InteractObject* msg)

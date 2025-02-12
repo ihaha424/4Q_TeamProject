@@ -30,6 +30,11 @@ void Obj_Shinave_Stone_5::PreInitialize(const Engine::Modules& modules)
 	BaseStone::PreInitialize(modules);
 	_sync->SetSerialNumber(11110);
 	PreSetSoundProperty(L"Assets/Sounds/SFX_Shinave_Stone_Correct_1.wav");
+
+	_trigger->BindBeginInteraction([this]()
+		{
+			_sound->Play();
+		});
 }
 
 void Obj_Shinave_Stone_5::PostInitialize(const Engine::Modules& modules)

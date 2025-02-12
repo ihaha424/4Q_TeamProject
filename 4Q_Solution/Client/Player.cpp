@@ -173,7 +173,7 @@ void Player::PostUpdate(float deltaTime)
 
 	Engine::Math::Quaternion q = Engine::Math::Quaternion::Concatenate(_transform.rotation, _offset);
 
-	_worldMatrix = Engine::Math::Matrix::CreateScale(0.15f)
+	_worldMatrix = Engine::Math::Matrix::CreateScale(0.05f)
 		* Engine::Math::Matrix::CreateFromQuaternion(q)
 		* Engine::Math::Matrix::CreateTranslation(_transform.position.x, _transform.position.y, _transform.position.z);
 

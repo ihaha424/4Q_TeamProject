@@ -40,7 +40,14 @@ void Obj_Hide_Potion::PreInitialize(const Engine::Modules& modules)
 void Obj_Hide_Potion::Interact()
 {
 	SendInteractToServer();
-	Dispose();
+	auto data = myManager->GetData(L"Data");
+	if (data)
+	{
+		auto puzzle04 = std::any_cast<Puzzle_04>(data);
+		puzzle04._start = true;
+		myManager->SetData(L"Data", puzzle04);
+		Dispose();
+	}
 }
 
 void Obj_Hide_Potion::DataChangeCallBack(const std::wstring& name, const std::any& value)

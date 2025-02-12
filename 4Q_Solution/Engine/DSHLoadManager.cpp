@@ -52,7 +52,21 @@ void Engine::DSHLoad::Manager::LoadCloneData(const std::filesystem::path& path)
 
 			const auto& boxscale = modelData["boxScale"];
 			Math::Vector3 boxScaleData = { boxscale["x"].get<float>(), boxscale["y"].get<float>(), boxscale["z"].get<float>() };
-			boxScaleData *= 10;
+
+			const auto& boxPosition = modelData["boxPosition"];
+			Math::Vector3 boxPositionData = { boxPosition["x"].get<float>(), boxPosition["y"].get<float>(), boxPosition["z"].get<float>() };
+			
+			bool isSphere = modelData["isSphere"];
+
+			positionData *= 10;
+			scaleData /= 10;
+			boxScaleData = boxScaleData.Split(scaleData) * 50.f;
+
+
+			//boxScaleData *= 10;
+			//boxPositionData *= 10;
+			boxPositionData = Math::Vector3::Zero;
+			//boxPositionData /= 10;
 
 			Properties cloneData
 			{
@@ -62,7 +76,9 @@ void Engine::DSHLoad::Manager::LoadCloneData(const std::filesystem::path& path)
 				std::pair<const std::wstring, std::any>{L"position", positionData},
 				std::pair<const std::wstring, std::any>{L"rotation", rotationData},
 				std::pair<const std::wstring, std::any>{L"scale", scaleData},
-				std::pair<const std::wstring, std::any>{L"boxScale", boxScaleData}
+				std::pair<const std::wstring, std::any>{L"boxScale", boxScaleData},
+				std::pair<const std::wstring, std::any>{L"boxPosition", boxPositionData},
+				std::pair<const std::wstring, std::any>{L"isSphere", isSphere}
 			};
 			_objectCloneData[objectClassName].push_back(cloneData);
 		}

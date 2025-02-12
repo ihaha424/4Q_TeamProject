@@ -15,9 +15,9 @@ struct PS_INPUT
 struct PS_OUTPUT
 {
     float4 color     : SV_Target0;
-    uint   layerMask : SV_target1;
+    float4 ambient   : SV_Target1;
     float4 normal    : SV_target2;
-    float4 ambient   : SV_Target3;
+    uint   layerMask : SV_target3;
 };
 
 cbuffer LayerMask
@@ -69,8 +69,8 @@ PS_OUTPUT main(PS_INPUT input)
     
 #ifdef IBL        
     AmbientIBL ambientIBL = AmbientLightIBL(input.uv, N, V, albedo, ARM.g, ARM.b, ARM.r);
-    ambientIBL.diffuseIBL.rgb = LinearToGammaSpace(ambientIBL.diffuseIBL.rgb);
-    ambientLighting = ambientIBL.specularIBL;
+    //ambientIBL.diffuseIBL.rgb = LinearToGammaSpace(ambientIBL.diffuseIBL.rgb);
+    ambientLighting = ambientIBL.diffuseIBL.rgb * ambientIBL.diffuseIBL.a + ambientIBL.specularIBL;
 #endif
    
 #ifdef Shadow
@@ -108,11 +108,14 @@ PS_OUTPUT main(PS_INPUT input)
     color.a = alpha;
         
     float4 opacity = txOpacity.Sample(samLinear_wrap, input.uv);
-    
-    if (length(opacity))
+   
+    if (1 > opacity.a)
+    {
         color.a = opacity.a;
+        ambientIBL.diffuseIBL.rgb = opacity.a;
+    }
     else
-        color.a = 1.f;    
+        color.a = 1.f;
     
     color.rgb = LinearToGammaSpace(color.rgb);
     //color.rgb += RimLight(N, V);

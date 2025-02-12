@@ -1,30 +1,46 @@
 #include "pch.h"
 #include "BaseStone.h"
 
-BaseStone::BaseStone(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath)\
-	: StaticObject(std::forward<std::filesystem::path>(meshPath), std::forward<std::filesystem::path>(physicsPath))
+BaseStone::BaseStone(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath)
+	: InteractObject(meshPath, physicsPath)
 {
 }
 
 void BaseStone::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
-	StaticObject::Prepare(componentFactory);
-	_trigger = componentFactory->Clone<TriggerBox>(this);
+	InteractObject::Prepare(componentFactory);
+	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
 }
 
 void BaseStone::DisposeComponents()
 {
-	StaticObject::DisposeComponents();
-	_trigger->Dispose();
+	InteractObject::DisposeComponents();
+	_sync->Dispose();
 }
 
 void BaseStone::PreInitialize(const Engine::Modules& modules)
 {
-	StaticObject::PreInitialize(modules);
+	InteractObject::PreInitialize(modules);
 
-	auto PhysicsManager = Engine::Application::GetPhysicsManager();
-	PhysicsManager->CreateStaticBoundBoxActor(&_trigger->_triggerBox, _boxScale, _transform);
-	_rigidStatc->_boundBox->SetOwner(this);
-	PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::mainScene))->AddActor(_trigger->_triggerBox);
+	myManager = modules.gameStateManager->FindSubManager(L"puzzle_00");
+	myManager->Subscribe(L"Data", [this](const std::wstring& name, const std::any& value)
+								{
+									DataChangeCallBack(name, value);
+								}
+	, this);
+
 }
+
+void BaseStone::SendInteractToServer()
+{
+	_sync->_interactObject.set_objectserialnumber(_sync->GetSerialNumber());
+	_sync->_interactObject.SerializeToString(&_sync->_msgBuffer);
+	Client::SavePacketData(
+		_sync->_msgBuffer, 
+		(short)PacketID::InteractObject, 
+		_sync->_interactObject.ByteSizeLong(), 
+		_sync->GetSerialNumber()
+	);
+}
+
 

@@ -39,20 +39,20 @@ void SSAO::Initialize()
     _psSSAO[Blend] = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/SSAOPS_Blend.cso");
     _psGaussianBlur[X] = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/GaussianBlurPS_X.cso");
     _psGaussianBlur[Y] = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/GaussianBlurPS_Y.cso");
+    _psBlend = g_pResourceMgr->LoadResource<PixelShader>(L"Assets/Shaders/BlendPS.cso");
 }
 
 void SSAO::Render()
 {
     auto* pDSSRV = g_pViewManagement->GetShaderResourceView(L"DefaultDepth");
     auto* pNormalSRV = g_pViewManagement->GetShaderResourceView(L"Normal");
-    auto* noise = _texture->Get();
 
     // SSAO ÃßÃâ
     _pDeviceContext->OMSetRenderTargets(1, &_pPostRTV, nullptr);
     _pDeviceContext->ClearRenderTargetView(_pPostRTV, COLOR_ZERO);
     _pDeviceContext->PSSetShaderResources(2, 1, &pDSSRV);
     _pDeviceContext->PSSetShaderResources(3, 1, &pNormalSRV);
-    _pDeviceContext->PSSetShaderResources(4, 1, &noise);
+    _pDeviceContext->PSSetShaderResources(4, 1, _texture->Get());
 
     _psSSAO[Sample]->SetPixelShader();
     g_pQuad->Render();
@@ -73,11 +73,21 @@ void SSAO::Render()
 
     // AO Blend
     auto* pAmbientSRV = g_pViewManagement->GetShaderResourceView(L"Ambient");
+    auto* pBaseRTV = g_pViewManagement->GetRenderTargetView(L"Base");
+    auto* pBaseSRV = g_pViewManagement->GetShaderResourceView(L"Base");
 
     _pDeviceContext->OMSetRenderTargets(1, &_pPostRTV, nullptr);
+    _pDeviceContext->PSSetShaderResources(0, 1, &pBaseSRV);
     _pDeviceContext->PSSetShaderResources(2, 1, &_pBlendSRVs[1]);
     _pDeviceContext->PSSetShaderResources(3, 1, &pAmbientSRV);
     _psSSAO[Blend]->SetPixelShader();
+    g_pQuad->Render();
+
+    ClearBindResource(_pDeviceContext, 0, 1);
+    _pDeviceContext->OMSetRenderTargets(1, &pBaseRTV, nullptr);
+    _pDeviceContext->PSSetShaderResources(2, 1, &_pPostSRV);
+    ClearBindResource(_pDeviceContext, 3, 1);
+    _psBlend->SetPixelShader();
     g_pQuad->Render();
 
     _pDeviceContext->OMSetRenderTargets(0, nullptr, nullptr);

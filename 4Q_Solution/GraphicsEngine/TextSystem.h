@@ -24,9 +24,9 @@ public:
 public:
 	// ITextSystem을(를) 통해 상속됨
 	void RegisterFont(const wchar_t* filePath);
-	void CreateTextRenderer(GE::ITextRenderer** ppTextRenderer) override;
-	void RegisterRenderQueue(GE::ITextRenderer* pTextRenderer) override;
-	void UnRegisterRenderQueue(GE::ITextRenderer* pTextRenderer) override;
+	void CreateTextRenderer(GE::ITextRenderer** ppComponent) override;
+	void RegisterRenderQueue(GE::ITextRenderer* pComponent) override;
+	void UnRegisterRenderQueue(GE::ITextRenderer* pComponent) override;
 
 public:
 	void Initialize();
@@ -36,7 +36,7 @@ private:
 	void Free() override;
 
 private:
-	std::unordered_map<std::wstring, SpriteFont*> _fonts;
-	std::vector<TextRenderer*> _components;
-	SpriteBatch* _pSpriteBatch{ nullptr };
+	std::unordered_map<std::wstring, SpriteFont*>	_fonts;
+	std::vector<TextRenderer*>						_components;
+	SpriteBatch*									_pSpriteBatch{ nullptr };
 };

@@ -15,6 +15,11 @@ namespace PhysicsEngineAPI::Utils::Math
 	union Vector3;
 }
 
+namespace DSH::Audio
+{
+	struct Vector;
+}
+
 namespace Engine::Math
 {
 	struct Vector3 : DirectX::SimpleMath::Vector3

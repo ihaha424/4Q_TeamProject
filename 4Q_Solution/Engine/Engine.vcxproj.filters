@@ -247,9 +247,6 @@
     <Filter Include="Math\Matrix">
       <UniqueIdentifier>{63280bb6-83dd-4f40-8cc0-6086687df9b3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\TextRenderer">
-      <UniqueIdentifier>{922e5f29-c1a8-42da-aadd-1b65620c25ff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Modules\Interfaces\Physics\00. Manager">
       <UniqueIdentifier>{d7375d06-09bd-45e8-85a7-73fab5ebb018}</UniqueIdentifier>
     </Filter>
@@ -538,6 +535,18 @@
     <Filter Include="UserInterfaces\Elements\Text">
       <UniqueIdentifier>{0215ed10-0cc5-43bb-a382-26b596df08d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Text">
+      <UniqueIdentifier>{922e5f29-c1a8-42da-aadd-1b65620c25ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Sprite">
+      <UniqueIdentifier>{8a626a3c-9442-4b0d-b783-1c6c0988859e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\CameraRail">
+      <UniqueIdentifier>{a95f88e6-af49-42f3-8695-1ec12b734902}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\LineWave">
+      <UniqueIdentifier>{d40712da-0a65-47bd-9ab1-07f6cbe62826}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -810,8 +819,8 @@
     <ClInclude Include="PhysicsCollision.h">
       <Filter>Modules\Interfaces\Physics\98. Collision</Filter>
     </ClInclude>
-    <ClInclude Include="TextRenderer.h">
-      <Filter>Components\TextRenderer</Filter>
+    <ClInclude Include="Text.h">
+      <Filter>Components\Text</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsFactory.h">
       <Filter>Modules\Interfaces\Physics\00. Manager\PhysicsFactory</Filter>
@@ -1050,6 +1059,18 @@
     <ClInclude Include="TextElement.h">
       <Filter>UserInterfaces\Elements\Text</Filter>
     </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Components\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraRail.h">
+      <Filter>Object\CameraRail</Filter>
+    </ClInclude>
+    <ClInclude Include="LineWave.h">
+      <Filter>Components\LineWave</Filter>
+    </ClInclude>
+    <ClInclude Include="ShadowCamera.h">
+      <Filter>Components\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1280,8 +1301,8 @@
     <ClCompile Include="PhysicsCollision.cpp">
       <Filter>Modules\Interfaces\Physics\98. Collision</Filter>
     </ClCompile>
-    <ClCompile Include="TextRenderer.cpp">
-      <Filter>Components\TextRenderer</Filter>
+    <ClCompile Include="Text.cpp">
+      <Filter>Components\Text</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsRigidStaticComponent.cpp">
       <Filter>Modules\Interfaces\Physics\06. Component\RigidComponent\PhysicsRigidStaticComponent</Filter>
@@ -1468,6 +1489,18 @@
     </ClCompile>
     <ClCompile Include="TextElement.cpp">
       <Filter>UserInterfaces\Elements\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Components\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="LineWave.cpp">
+      <Filter>Components\LineWave</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraRail.cpp">
+      <Filter>Object\CameraRail</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowCamera.cpp">
+      <Filter>Components\Camera</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

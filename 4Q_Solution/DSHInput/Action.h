@@ -6,8 +6,8 @@ namespace DSH::Input
 	namespace Trigger
 	{
 		enum class Event : unsigned char;
-		struct Down;
-		struct ChordAction;
+		class Down;
+		class ChordAction;
 	}
 
 	class Action final : public IAction

@@ -79,7 +79,7 @@ namespace Engine::Physics
 	 * @brief		: QueryData
 	 * @UserDatas	: Actor's UserData
 	 */
-	class Component;
+	struct Component;
 	struct QueryData
 	{
 		enum QueryFlag
@@ -251,7 +251,7 @@ namespace Engine::Physics
 	/**
 	 * @brief CollisionEventData
 	 */
-	class Component;
+	struct Component;
 	struct TriggerEvent
 	{
 		Component* myCollision;
@@ -354,6 +354,6 @@ namespace Engine::Physics
 		Math::Vector3		material{0,0,0};
 		float				radius;
 		float				height;
-		CapsuleClimbingMode	climbinMode{ CapsuleClimbingMode::Constrained };	
+		CapsuleClimbingMode	climbinMode{ CapsuleClimbingMode::Constrained };
 	};
 }

@@ -1,0 +1,11 @@
+#pragma once
+#include "Obj_Shinave_Bermiore.h"
+#include "Obj_Shinave_Platform_Set.h"
+#include "Obj_Shinave_Platform_Spawn_1.h"
+#include "Obj_Shinave_Platform_Spawn_2.h"
+#include "Obj_Shinave_Platform_Spawn_3.h"
+#include "Obj_Shinave_Stone_1.h"
+#include "Obj_Shinave_Stone_2.h"
+#include "Obj_Shinave_Stone_3.h"
+#include "Obj_Shinave_Stone_4.h"
+#include "Obj_Shinave_Stone_5.h"

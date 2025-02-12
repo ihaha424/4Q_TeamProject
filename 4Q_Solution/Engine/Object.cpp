@@ -37,6 +37,14 @@ void Engine::Object::PostUpdate(float deltaTime)
 {
 }
 
+void Engine::Object::PreLazyUpdate(float deltaTime)
+{
+}
+
+void Engine::Object::PostLazyUpdate(float deltaTime)
+{
+}
+
 void Engine::Object::PreFixedUpdate()
 {
 }

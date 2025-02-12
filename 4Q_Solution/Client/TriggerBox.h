@@ -8,18 +8,18 @@ public:
 	TriggerBox();
 	virtual ~TriggerBox();
 
-	void Interaction();
-	void BindInteraction(const InteractionFunction& callback);
+	void BindBeginInteraction(const InteractionFunction& callback);
+	void BindEndInteraction(const InteractionFunction& callback);
 
 	void Initialize(const Engine::Modules& modules) override;
-	void Update(float deltaTime) override;
 	void FixedUpdate() override;
 	void Finalize()override;
 
 public:
-	Engine::Physics::IRigidComponent* _triggerBox;
+	Engine::Physics::IRigidStaticComponent* _triggerBox;
 
 private:
-	InteractionFunction _function;
+	InteractionFunction _begineFunction;
+	InteractionFunction _endFunction;
 };
 

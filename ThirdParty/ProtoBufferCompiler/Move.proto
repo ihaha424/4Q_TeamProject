@@ -6,7 +6,8 @@ message Move {
 	optional float x = 1;
 	optional float y = 2;
 	optional float z = 3;
-	optional float speed = 4;
+	repeated float rotation = 4;
+	optional float speed = 5;
 }
 
 message Jump {
@@ -21,4 +22,5 @@ message MoveSync {
 	optional float x = 1;
 	optional float y = 2;
 	optional float z = 3;
+	repeated float rotation = 4;
 }

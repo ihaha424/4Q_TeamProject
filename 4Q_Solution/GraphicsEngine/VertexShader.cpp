@@ -20,7 +20,6 @@ void VertexShader::SetVertexShader()
 HRESULT VertexShader::LoadResource(const std::filesystem::path& filePath)
 {
 	ID3D11Device* pDevice = g_pGraphicDevice->GetDevice();
-	_pDeviceContext = g_pGraphicDevice->GetDeviceContext();
 
 #ifdef _DEBUG
 	// 컴파일된 cso 파일로부터 쉐이더 정보를 불러옴

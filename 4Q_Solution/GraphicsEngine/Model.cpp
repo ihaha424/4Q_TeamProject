@@ -250,6 +250,9 @@ std::shared_ptr<Texture> Model::LoadTexture(const std::filesystem::path& rootPat
         fileName = filePath.C_Str();
         newPath = rootPath.parent_path().wstring() + L"/" + fileName.filename().wstring();
 
+        if (type == aiTextureType_OPACITY)
+            printf(newPath.string().c_str());
+
         return g_pResourceMgr->LoadResource<Texture>(newPath.c_str());
     }
 

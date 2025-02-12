@@ -22,6 +22,7 @@ public:
 public:
 	Type GetType() const { return _type; }
 	const unsigned int GetID() const { return _ID; }
+	bool GetActive() const { return _isActive; }
 
 public:
 	// ILight을(를) 통해 상속됨
@@ -40,10 +41,12 @@ public:
 	void SetDiffuseFromArray(float* pArray) override;
 	void SetSpecularFromArray(float* pArray) override;
 	void SetAmbientFromArray(float* pArray) override;
+	void SetActive(bool isActive) override;
 
 private:
 	LightData				_lightData{};
 	Type					_type;
 	static unsigned int		_globalID;
 	unsigned int			_ID{ 0 };
+	bool					_isActive{ true };
 };

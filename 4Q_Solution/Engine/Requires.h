@@ -18,24 +18,8 @@
 #include "DSHInput/Input.h"
 #include "DSHLogger/Logger.h"
 #include "DSHAudio/Audio.h"
-#include "GraphicsEngine/IGraphicsSystem.h"
-#include "GraphicsEngine/ICameraSystem.h"
-#include "GraphicsEngine/IRenderSystem.h"
-#include "GraphicsEngine/IAnimationSystem.h"
-#include "GraphicsEngine/ILightSystem.h"
-#include "GraphicsEngine/ITextSystem.h"
-#include "GraphicsEngine/IPostProcessSystem.h"
 
-#include "GraphicsEngine/ICamera.h"
-#include "GraphicsEngine/IAnimator.h"
-#include "GraphicsEngine/IMatrix.h"
-#include "GraphicsEngine/ILight.h"
-#include "GraphicsEngine/IMeshRenderer.h"
-#include "GraphicsEngine/ITextRenderer.h"
-#include "GraphicsEngine/ISkyBoxRenderer.h"
-
-#include "GraphicsEngine/IBloom.h"
-#include "GraphicsEngine/IBlur.h"
+#include "GraphicsEngine/GraphicsEngine.h"
 
 #ifdef NDEBUG
 	#define PhysicsDebuger false

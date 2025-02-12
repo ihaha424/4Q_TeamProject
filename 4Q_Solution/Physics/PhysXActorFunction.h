@@ -20,6 +20,8 @@ namespace PhysicsEngineAPI
 		void	SetTransform(const Utils::Math::Transform& transform, physx::PxRigidActor* actor);
 			Utils::Math::Transform GetTransform(physx::PxRigidActor* actor) const;
 
+			Utils::Math::Vector3 GetBounds(physx::PxRigidActor* actor) const;
+
 		void SetName(const char* name, physx::PxRigidActor* actor);
 		const char* GetName(physx::PxRigidActor* actor) const;
 

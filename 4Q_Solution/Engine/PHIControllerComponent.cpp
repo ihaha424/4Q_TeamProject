@@ -16,7 +16,7 @@ namespace Engine::PHI
 		, jumpMax{ 1000 }
 		, direction{}
 		, moveSpeed{ 1.f }
-		, minDistance{ 0.001 }
+		, minDistance{ 0.001f }
 		, owner{ nullptr }
 	{
 		collision = new Collision<Controller>{ this };
@@ -170,14 +170,15 @@ namespace Engine::PHI
 		velocity.z = velo.z;
 
 
-		velocity += gravity * deltaTime * gravityFlag;
+		velocity += gravity * deltaTime * (gravityFlag ? 1 : 0);
 
 		controllerCollisionFlag = controller->Move(Vector3ToPhysicsVector3(velocity * deltaTime), minDistance, deltaTime);
-		if (controllerCollisionFlag & 0x04 || controllerCollisionFlag & 0x01)
+		if (controllerCollisionFlag & 0x04)
 		{
+			if(gravityFlag && !jumpFlag)
+				velocity.y = 0;
 			jumpFlag = false;
 			gravityFlag = false;
-			velocity.y = 0;
 		}
 		else
 		{

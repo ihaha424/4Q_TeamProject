@@ -728,7 +728,6 @@ namespace PhysicsEngineAPI
 		const Utils::Math::Vector3& normal, 
 		IMaterial* _material)
 	{
-		physx::PxMaterial* mMaterial = physics->createMaterial(0.5f, 0.5f, 0.6f);
 		physx::PxRigidActor* actor = nullptr;
 		const PhysXMaterial* material = dynamic_cast<const PhysXMaterial*>(_material);
 		if (nullptr == material)
@@ -769,7 +768,6 @@ namespace PhysicsEngineAPI
 
 		controller->hitReportCallback = new PhysXReportCallback();
 		controller->behaviorCallback = new PhysXBehaviorCallback();
-
 
 		physx::PxCapsuleControllerDesc desc;
 		desc.position = Vector3ToPxExtendedVec3(_desc.position);
@@ -879,7 +877,8 @@ namespace PhysicsEngineAPI
 			for (int x = 0; x < width; x++) {
 				 // heightmap[y * width + x] = (float)image.data[y * width + x] / 255.0f;
 				 // heightmap[y * width + x] = (float)image.data[y * width + x] / 255.f * 25.f;
-				 heightmap[y * width + x] = (float)image.data[y * width + x];
+				  heightmap[y * width + x] = (float)image.data[y * width + x];
+				 // heightmap[y * width + x] = ((float)image.data[y * width + x]) * 128.0f;
 			}
 		}
 
@@ -887,7 +886,7 @@ namespace PhysicsEngineAPI
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				physx::PxHeightFieldSample& sample = samples[y * width + x];
-				sample.height = heightmap[y * width + x];
+				sample.height = static_cast<physx::PxI16>(heightmap[y * width + x]);
 				sample.materialIndex0 = 0;
 				sample.materialIndex1 = 0;
 			}
@@ -898,6 +897,7 @@ namespace PhysicsEngineAPI
 		hfDesc.nbColumns = height;
 		hfDesc.nbRows = width;
 		hfDesc.samples.data = samples;
+		hfDesc.convexEdgeThreshold = 0.5f;
 		hfDesc.samples.stride = sizeof(physx::PxHeightFieldSample);
 		hfDesc.flags = physx::PxHeightFieldFlags();
 

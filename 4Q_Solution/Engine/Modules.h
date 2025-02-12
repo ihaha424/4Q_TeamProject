@@ -29,6 +29,11 @@ namespace Engine
 		struct Manager;
 	}
 
+	namespace GameState
+	{
+		struct Manager;
+	}
+
 	namespace DSHAudio
 	{
 		class Manager;
@@ -39,6 +44,7 @@ namespace Engine
 		GEGraphics::Manager* graphicsManager;
 		Physics::Manager* physicsManager;
 		Load::IManager* loadManager;
+		GameState::IManager* gameStateManager;
 		DSHAudio::Manager* audioManager;
 	};
 }

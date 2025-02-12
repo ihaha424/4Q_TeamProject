@@ -12,6 +12,7 @@ namespace Engine::DSHContent
 
 		void Contraction(const Modules& modules) override;
 		void Update(float deltaTime) override;
+		void LazyUpdate(float deltaTime) override;
 		void FixedUpdate() override;
 		void Relaxation() override;
 

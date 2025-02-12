@@ -82,3 +82,8 @@ void Light::SetAmbientFromArray(float* pArray)
 {
 	_lightData.ambient = Vector4(pArray);
 }
+
+void Light::SetActive(bool isActive)
+{
+	_isActive = isActive;
+}

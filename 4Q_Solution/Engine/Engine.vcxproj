@@ -143,6 +143,7 @@
     </Link>
     <Lib>
       <AdditionalDependencies>DSHInput_d.lib;DSHTime_d.lib;DSHAudio_d.lib;DSHWindow_d.lib;DSHLogger_d.lib;Physics_d.lib;Server_d.lib;libprotobufd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/IGNORE:4006 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
     <PreBuildEvent>
       <Command>xcopy /y /d "..\dll\*.dll" "$(OutDir)"
@@ -169,6 +170,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     </Link>
     <Lib>
       <AdditionalDependencies>DSHInput.lib;DSHTime.lib;DSHAudio.lib;DSHWindow.lib;DSHLogger.lib;Physics.lib;Server.lib;libprotobuf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/IGNORE:4006 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
     <PreBuildEvent>
       <Command>
@@ -187,6 +189,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Application.h" />
     <ClInclude Include="BackgroundMusicComponent.h" />
     <ClInclude Include="BitFlag.h" />
+    <ClInclude Include="CameraRail.h" />
     <ClInclude Include="ButtonWrapper.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="ChractorController.h" />
@@ -198,6 +201,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="FixedArm.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateManager.h" />
+    <ClInclude Include="LineWave.h" />
     <ClInclude Include="ImageWrapper.h" />
     <ClInclude Include="ListenerComponent.h" />
     <ClInclude Include="Logger.h" />
@@ -306,6 +310,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="RigidStaticComponent.h" />
     <ClInclude Include="SafeDelete.h" />
     <ClInclude Include="SafeFinalize.h" />
+    <ClInclude Include="ShadowCamera.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="PhysicsScene.h" />
     <ClInclude Include="ServerNetworkManager.h" />
@@ -315,11 +320,13 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="EffectSoundComponent.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="SoundComponent.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StaticMesh.h" />
     <ClInclude Include="SwizzleAxis.h" />
     <ClInclude Include="Synchronize.h" />
     <ClInclude Include="Terminal.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="TextElement.h" />
     <ClInclude Include="TextRenderer.h" />
     <ClInclude Include="Time.h" />
@@ -373,6 +380,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Effect3DSoundComponent.cpp" />
     <ClCompile Include="FixedArm.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
+    <ClCompile Include="LineWave.cpp" />
     <ClCompile Include="ImageWrapper.cpp" />
     <ClCompile Include="ListenerComponent.cpp" />
     <ClCompile Include="LoggerManager.cpp" />
@@ -457,6 +465,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="PacketFilter.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Quaternion.cpp" />
+    <ClCompile Include="CameraRail.cpp" />
     <ClCompile Include="Rect.cpp" />
     <ClCompile Include="RigidComponent.cpp" />
     <ClCompile Include="RigidDynamicComponent.cpp" />
@@ -464,6 +473,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="RigidStaticComponent.cpp" />
     <ClCompile Include="SafeDelete.cpp" />
     <ClCompile Include="SafeFinalize.cpp" />
+    <ClCompile Include="ShadowCamera.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="PhysicsScene.cpp" />
     <ClCompile Include="ServerNetworkManager.cpp" />
@@ -472,6 +482,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="EffectSoundComponent.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="SoundComponent.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StaticMesh.cpp" />
     <ClCompile Include="SwizzleAxis.cpp" />
@@ -484,6 +495,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="SafeRelease.cpp" />
     <ClCompile Include="Synchronize.cpp" />
     <ClCompile Include="Terminal.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="TextElement.cpp" />
     <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="ThrowIfFailed.cpp" />

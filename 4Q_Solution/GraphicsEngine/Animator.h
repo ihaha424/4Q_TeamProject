@@ -16,10 +16,8 @@ class Animator : public GE::IAnimator
 		float lastTime = 0.f;
 	};
 
-	struct BlendInfo
+	struct Blend
 	{
-		std::string prevAnimation;
-		float prevPlayTime = 0.f;
 		float blendTime = 0.f;
 		bool isBlending = false;
 	};
@@ -29,7 +27,7 @@ public:
 	virtual ~Animator() = default;
 
 public:
-	const std::vector<Matrix>& GetAnimationTransform() const { return _animationTransforms; }
+	const Matrix* GetAnimationTransform() const { return _animationTransforms.data(); }
 	const unsigned int GetID() const { return _ID; }
 
 public:
@@ -40,14 +38,17 @@ public:
 	// IAnimator을(를) 통해 상속됨
 	void Release() override;
 	void ChangeAnimation(const char* animation) override;
-	void ChangeAnimation(const char* animation, const unsigned int ID) override;
-	bool IsLastFrame(float interval, const unsigned int ID) const override;
-	void SetUpSplitBone(const unsigned int maxSplit) override;
-	void SplitBone(const unsigned int ID, const char* boneName) override;
+	void ChangeAnimation(const char* animation, unsigned int ID) override;
+	void SyncPartialAnimation(unsigned int parentID, unsigned int childID) override;
+	bool IsLastFrame(float interval, unsigned int ID) const override;
+	void SetUpSplitBone(unsigned int maxSplit) override;
+	void SplitBone(unsigned int ID, const char* boneName) override;
 	void SetAnimationSpeed(float speed) override;
+	void MakeParent(const char* parent, const char* child) override;
+	void GetSkeletonMatrix(const char* bone, GE::Matrix4x4** out) override;
 
 private:
-	void UpdateAnimationTransform(const Bone& skeletion, const XMMATRIX& parentTransform, Controller* controller);
+	void UpdateAnimationTransform(Bone& skeletion, const XMMATRIX& parentTransform, std::vector<Controller>& controllers, std::vector<Matrix>& transforms);
 	XMVECTOR InterpolationVector3(const std::vector<std::pair<float, Vector3>>& v, const float t);
 	XMVECTOR InterpolationVector4(const std::vector<std::pair<float, Vector4>>& v, const float t);
 	XMMATRIX BlendAnimation(const Matrix& m0, const Matrix& m1, const float t);
@@ -68,17 +69,21 @@ private:
 	void BoneMasking(const Bone* bone, int mask);
 
 private:
+	std::vector<Matrix>						_animationTransforms;
+	std::vector<Matrix>						_currTransforms;
+	std::vector<Matrix>						_prevTransforms;
+	std::vector<int>						_blendMatrixMask;
+
 	std::unordered_map<std::string, int>	_boneMask;
 	Matrix									_root;
-	BlendInfo								_blendInfo;
-	std::vector<Matrix>						_animationTransforms;
-	std::vector<Matrix>						_blendTransform;
 	std::vector<Controller>					_controllers;
 	std::vector<Controller>					_prevControllers;
 	std::shared_ptr<Animation>				_animation;
+	std::vector<Blend>						_blends;
 	Skeleton*								_pSkeleton{ nullptr };
 	static unsigned int						_globalID;
 	unsigned int							_ID{ 0 };
 	unsigned int							_maxSplit{ 0 };
 	float									_speed{ 1.f };
+	bool									_isBlending{ false };
 };

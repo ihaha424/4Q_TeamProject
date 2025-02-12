@@ -1,6 +1,11 @@
 #include "pch.h"
 #include "Shader.h"
 
+Shader::Shader()
+{
+	_pDeviceContext = g_pGraphicDevice->GetDeviceContext();
+}
+
 void Shader::CompileShader(std::vector<uint8_t>& output, const std::filesystem::path& filePath, const char* entry, const char* model)
 {	
 	std::string path = filePath.string();
@@ -27,7 +32,7 @@ void Shader::CompileShader(std::vector<uint8_t>& output, const std::filesystem::
 
 	std::wstring shaderPath = g_shaderRootPath;
 	shaderPath += filePath.filename();
-	auto replaceStart = shaderPath.find_last_of('_');
+	auto replaceStart = shaderPath.find_first_of('_');
 	if(std::wstring::npos != replaceStart)
 		shaderPath.replace(replaceStart, std::wstring::npos, L".hlsl");
 	else

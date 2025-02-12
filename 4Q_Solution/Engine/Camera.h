@@ -20,11 +20,12 @@ namespace Engine::Component
 		void SetPosition(Math::Vector3 position) const;
 		void SetRotation(Math::Vector3 rotation) const;
 		void SetParent(Math::Matrix* matrix) const;
+		void SetPerspective(float nearZ, float farZ, float fov);
 		Engine::Math::Vector3 Forward() const;
 
 		void Rotate(Math::Vector3 rotation);
 
-	private:
+	protected:
 		std::wstring _name = L"";
 
 		float _nearZ;

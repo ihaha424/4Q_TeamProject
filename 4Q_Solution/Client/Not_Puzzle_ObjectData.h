@@ -1,0 +1,8 @@
+#pragma once
+#include "Obj_Shinave_SteppedSudium.h"
+#include "BG_Ornoa_Cloth_3.h"
+#include "BG_Ornoa_Cloth_2.h"
+#include "BG_Ornoa_Cloth_1.h"
+#include "BG_Props_Fence.h"
+#include "Obj_BG_Tree_3_Active.h"
+#include "Obj_BG_Tree_1_Active.h"

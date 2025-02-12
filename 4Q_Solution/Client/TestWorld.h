@@ -1,14 +1,22 @@
 #pragma once
 #include "Application.h"
 #include "GlobalLight.h"
-#include "Terrain.h"
+#include "BG_Terrain.h"
 #include "SkyBox.h"
 
 #include "Ray.h"
 
+//Test
+#include "GrabbedObject.h"
+#include "TriggerArea.h"
 
-#include "StaticObject.h"
 #include "MapData.h"
+
+#include "PuzzleData.h"
+
+#include "TestSprite.h"
+#include "GameCoreData.h"
+
 
 
 class TestWorld : public Engine::World
@@ -30,8 +38,9 @@ private:
 	Live* _live;
 	RemoteLive* _remoteLive;
 	GlobalLight* _light;
-	Terrain* _terrain;
+	BG_Terrain* _terrain;
 	SkyBox* _skyBox;
+	TestSprite* _testSprite;
 
 	int playerSerialNum = 0;
 	bool _dataLoad = false;
@@ -61,8 +70,12 @@ private:
 					data.GetProperty<Engine::Math::Quaternion>(L"rotation").value(),
 					data.GetProperty<Engine::Math::Vector3>(L"scale").value()
 				});
+			building->SetBoxPosition({ data.GetProperty<Engine::Math::Vector3>(L"boxPosition").value() });
 			building->SetBoxScale(data.GetProperty<Engine::Math::Vector3>(L"boxScale").value());
+			building->SetIsSphere(data.GetProperty<bool>(L"isSphere").value());
 		}
 	}
+
+	void InitializeGameStateManager(const Engine::Modules& modules);
 };
 

@@ -7,8 +7,8 @@ struct PS_INPUT
 struct PS_OUTPUT
 {
     float4 color        : SV_Target0;
-    uint   layerMask    : SV_target1;
-    float  depth        : SV_Depth;
+    uint   layerMask    : SV_target3;
+    float depth         : SV_Depth;
 };
 
 TextureCube txDiffuse        : register(t0);
@@ -27,7 +27,7 @@ PS_OUTPUT main(PS_INPUT input)
     float3 envVector = normalize(input.worldPosition);
     output.color = txDiffuse.SampleLevel(samLinear_wrap, envVector, 0);
     output.layerMask = layerMask;
-    output.depth = 1 - 0.0001;
+    output.depth = 1 - 0.00001;
     
     return output;
 }

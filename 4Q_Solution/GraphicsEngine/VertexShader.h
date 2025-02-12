@@ -19,16 +19,17 @@ public:
 public:
     void SetVertexShader();
 
+public:
     // Resource을(를) 통해 상속됨
     HRESULT LoadResource(const std::filesystem::path& filePath) override;
+
 private:
     void Free() override;
 
 private:
     std::vector<Slot>       _inputBindSlot;
-    ID3D11DeviceContext*    _pDeviceContext = nullptr;
-    ID3D11VertexShader*     _pVertexShader = nullptr;
-    ID3D11InputLayout*      _pInputLayout = nullptr;
-    unsigned int            _vertexBufferStride = 0;
-    unsigned int            _vertexBufferOffset = 0;
+    ID3D11VertexShader*     _pVertexShader{ nullptr };
+    ID3D11InputLayout*      _pInputLayout{ nullptr };
+    unsigned int            _vertexBufferStride{ 0 };
+    unsigned int            _vertexBufferOffset{ 0 };
 };

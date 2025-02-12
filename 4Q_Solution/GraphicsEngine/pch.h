@@ -49,7 +49,9 @@ using namespace DirectX::SimpleMath;
 #include "RenderGroup.h"
 #include "PostProcessSystem.h"
 #include "ViewManagement.h"
+#include "StateManagement.h"
 #include "Quad.h"
+#include "Sprite.h"
 
 #pragma comment (lib, "d3d11.lib")
 #pragma comment (lib, "d3dcompiler.lib")

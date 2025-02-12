@@ -25,6 +25,14 @@ void Engine::World::PostUpdate(float deltaTime)
 {
 }
 
+void Engine::World::PreLazyUpdate(float deltaTime)
+{
+}
+
+void Engine::World::PostLazyUpdate(float deltaTime)
+{
+}
+
 void Engine::World::PreFixedUpdate()
 {
 }

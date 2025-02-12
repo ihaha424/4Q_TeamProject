@@ -23,7 +23,7 @@ void PacketDispatcher::SaveRecvPacket(StreamBuffer* recvData, SessionID sid)
 
 		Packet packet;
 		recvData->Read(PtrCast(char*, &packet), (int)header._packetSize);
-		packet.sessionId = sid;
+		packet.sessionId = static_cast<short>(sid);
 		//printf("[Dispatcher::SaveRecvPacket] Packet Get. Size : %d\n", (int)header._packetSize);
 		Lock lock(_recvMtx);
 		_saveRecvContainer.push(std::move(packet));
@@ -95,7 +95,7 @@ void PacketDispatcher::SaveBroadCastPacket(std::string data, short packetId, lon
 {
 	for (auto& [sid, packetContainer] : _saveSendContainer) {
 		Packet packet;
-		MakePacket(packet, data, sid, packetId, dataSize, serialNum);
+ 		MakePacket(packet, data, sid, packetId, dataSize, serialNum);
 
 		Lock lock(_sendMtx);
 		packetContainer.push(packet);
@@ -104,10 +104,10 @@ void PacketDispatcher::SaveBroadCastPacket(std::string data, short packetId, lon
 
 void PacketDispatcher::MakePacket(Packet& packet, std::string data, SessionID sid, short packetId, long dataSize, int serialNum)
 {
-	packet.sessionId = sid;
+	packet.sessionId = static_cast<short>(sid);
 	packet._packetId = packetId;
-	packet._serialNumber = serialNum;
+	packet._serialNumber = static_cast<short>(serialNum);
 
 	memcpy(packet._data, data.c_str(), dataSize);
-	packet._packetSize = sizeof(PacketHeader) + dataSize;
+	packet._packetSize = static_cast<short>(sizeof(PacketHeader) + dataSize);
 }

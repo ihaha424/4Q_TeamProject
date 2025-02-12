@@ -200,8 +200,8 @@ void ServerLogic::SendPositionData()
         _moveSync.add_rotation(rotation.w);
 
         _moveSync.SerializeToString(&_msgBuffer);
-        Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), _playerSlot[i]._serialNumber);
         _moveSync.Clear();
+        Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), _playerSlot[i]._serialNumber);
     } // for end
 
     // TODO: 여기서 업데이트를 진행하는 dynamic object에 대해 위치 정보를 클라이언트로 전송해야 합니다.
@@ -335,6 +335,7 @@ void ServerLogic::MoveProcess(const Packet& packet)
 
         _moveSync.SerializeToString(&_msgBuffer);
         Server::BroadCast(_msgBuffer, (short)PacketID::MoveSync, _moveSync.ByteSizeLong(), packet._serialNumber);
+        _moveSync.Clear();
     }
 }
 void ServerLogic::JumpProcess(const Packet& packet)
@@ -367,9 +368,6 @@ void ServerLogic::DataRequestProcess(const Packet& packet)
 
         Server::BroadCast(_msgBuffer, (short)PacketID::DataRemote, _syncPlayer.ByteSizeLong(), _playerSlot[i]._serialNumber);
     }  // for end
-    
-    // Static Object Client Send.
-
     //for (int i = 0; i < _buildings.size(); i++) {
     //    _syncObject.set_public_(_buildings[i]->_public);
     //    _syncObject.add_position(_buildings[i]->_position.x);
@@ -414,7 +412,7 @@ void ServerLogic::DataRequestProcess(const Packet& packet)
     //    );
     //    _syncObject.Clear();
     //}
-    Server::BroadCast("", (short)PacketID::DataSendComplete, 0, 0);
+    //Server::BroadCast("", (short)PacketID::DataSendComplete, 0, 0);
 }
 void ServerLogic::ObjectPickProcess(const Packet& packet)
 {

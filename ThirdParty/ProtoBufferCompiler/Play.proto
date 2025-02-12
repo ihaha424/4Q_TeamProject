@@ -12,6 +12,20 @@ message PickObject {
 
 message PutObject {
 	optional int32 targetserialnumber = 1;
+	repeated float position = 2;
+}
+
+message SoundPlay {
+	optional int32 soundid = 1;
+}
+
+message InteractObject {
+	optional int32 objectserialnumber = 1;
+}
+
+message TriggerObject {
+	optional int32 objectserialnumber = 1;
+	optional int32 triggerboxid = 2;
 }
 
 message InteractDialog {
@@ -20,11 +34,6 @@ message InteractDialog {
 
 message DialogProgress {
 	optional int32 nextdialogid = 1;
-}
-
-message TriggerObject {
-	optional int32 objectserialnumber = 1;
-	optional int32 triggerboxid = 2;
 }
 
 message QuestStart {
@@ -41,4 +50,8 @@ message PuzzleStart {
 
 message ObjectActive {
 	optional int32 objectserialnumber = 1;
+}
+
+message ObjectDisable {
+	repeated int32 objectserialnumber = 1;
 }

@@ -482,6 +482,13 @@ void GameClient::Application::DeclareUIAction(Engine::Input::IManager* inputMana
 	viewTutorialAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto) {
 		_inGameCanvas->ViewTutorialDone();
 		});
+
+	// Jump Tutorial
+	Engine::Input::IAction* jumpTutorialAction = nullptr;
+	defaultMappingContext->GetAction(L"Jump", &jumpTutorialAction);
+	jumpTutorialAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto) {
+		_inGameCanvas->JumpTutorialDone();
+		});
 }
 
 

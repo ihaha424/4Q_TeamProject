@@ -570,22 +570,22 @@ void ServerLogic::DialogInteractProcess(const Packet& packet)
     }
 
     if (_currentQuestID == 1102) {
-        Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 1);
+        Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 9001);
         _currentPuzzleNumber++;
         printf("[DialogProgress] Puzzle Start. PuzzleNum : %d\n", _currentPuzzleNumber);
     }
     else if (_currentQuestID == 2102) {
-        Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 1);
+        Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 9002);
         _currentPuzzleNumber++;
         printf("[DialogProgress] Puzzle Start. PuzzleNum : %d\n", _currentPuzzleNumber);
     }
     else if (_currentQuestID == 3102) {
-        Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 1);
+        Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 9003);
         _currentPuzzleNumber++;
         printf("[DialogProgress] Puzzle Start. PuzzleNum : %d\n", _currentPuzzleNumber);
     }
     else if (_currentQuestID == 3104) {
-        Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 1);
+        Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 9004);
         _currentPuzzleNumber++;
         printf("[DialogProgress] Puzzle Start. PuzzleNum : %d\n", _currentPuzzleNumber);
     }

@@ -34,6 +34,9 @@ void Obj_Bermiore_Soundblock::PlaySound(const PlayMsg::InteractObject* msg)
 	{
 		// 사운드 컴포먼트 6개를 1개씩 실행해야함
 		// flag로 한다음 update에서 확인 하는 방식을 생각함
+		_isSound = true;
+		_soundIndex = 0;
+		_deltaTime = 0;
 	}
 }
 
@@ -68,4 +71,27 @@ void Obj_Bermiore_Soundblock::DataChangeCallBack(const std::wstring& name, const
 		_activate = false;
 	if (data._start)
 		_activate = true;
+}
+
+void Obj_Bermiore_Soundblock::PostUpdate(float deltaTime)
+{
+	if (_isSound)
+	{
+		_deltaTime += deltaTime;
+		if (_deltaTime > 0.25f)
+		{
+			_deltaTime -= 0.25;
+			{
+				auto isData = myManager->GetData(L"Data");
+				if (isData)
+				{
+					auto puzzleData = std::any_cast<Puzzle_01>(*isData);
+					puzzleData.curPosition[_soundIndex];//가 인덱스
+				}
+			}
+			_soundIndex++;
+			if (_soundIndex == 6)
+				_isSound = false;
+		}
+	}
 }

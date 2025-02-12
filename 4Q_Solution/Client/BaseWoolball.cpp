@@ -60,6 +60,15 @@ void BaseWoolball::InteractCallback(const PlayMsg::InteractObject* msg)
 	_posIndex += _direction;
 	if (_posIndex == 2 || _posIndex == 0)
 		_direction *= -1;
+	{
+		auto isData = myManager->GetData(L"Data");
+		if (isData)
+		{
+			auto puzzleData = std::any_cast<Puzzle_01>(*isData);
+			puzzleData.curPosition[_index] = _posIndex;
+			myManager->SetData(L"Data", puzzleData);
+		}
+	}
 	auto isData = GameClient::Application::GetGameStateManager()->GetData(L"GameCoreData");
 	if (!isData)
 		return;

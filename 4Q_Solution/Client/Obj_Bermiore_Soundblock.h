@@ -14,6 +14,7 @@ public:
 	void PlaySound(const PlayMsg::InteractObject* msg);
 	void Interact() override;
 	void DataChangeCallBack(const std::wstring& name, const std::any& value) override;
+	void PostUpdate(float deltaTime) override;
 
 protected:
 	void DisposeComponents() override;
@@ -21,5 +22,8 @@ protected:
 
 	Engine::Component::Synchronize* _sync;
 	bool _activate = false;
+	bool _isSound = false;
+	float _deltaTime = 0;
+	int _soundIndex = 0;
 };
 

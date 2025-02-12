@@ -156,9 +156,12 @@ void Player::PostInitialize(const Engine::Modules& modules)
 	_leftLineWave->SetSourcePosition(&_leftSrc);
 	_leftLineWave->SetDestinationPosition(&_leftDst);
 	_leftLineWave->SetSegment(0);
+	_leftLineWave->SetPostEffectLayer(1);
+
 	_rightLineWave->SetSourcePosition(&_rightSrc);
 	_rightLineWave->SetDestinationPosition(&_rightDst);
 	_rightLineWave->SetSegment(0);
+	_rightLineWave->SetPostEffectLayer(1);
 
 	_animator->GetSkeletonMatrix("hand.l", &_leftHand);
 	_animator->GetSkeletonMatrix("hand.r", &_rightHand);

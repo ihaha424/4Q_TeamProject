@@ -80,3 +80,8 @@ void Engine::Component::LineWave::SetSegment(unsigned int segments)
 {
 	_geLineRenderer->SetSegment(segments);
 }
+
+void Engine::Component::LineWave::SetPostEffectLayer(unsigned int layer)
+{
+	_geLineRenderer->SetPostEffectLayer(layer);
+}

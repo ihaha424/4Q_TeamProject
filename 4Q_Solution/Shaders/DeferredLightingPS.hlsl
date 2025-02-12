@@ -49,8 +49,8 @@ PS_OUTPUT main(PS_INPUT input)
     
 // IBL
     AmbientIBL ambientIBL = AmbientLightIBL(input.uv, N, V, albedo, RMA.r, RMA.g, RMA.b);
-    ambientIBL.diffuseIBL.rgb = LinearToGammaSpace(ambientIBL.diffuseIBL.rgb);
-    ambientLighting = ambientIBL.specularIBL;
+    //ambientIBL.diffuseIBL.rgb = LinearToGammaSpace(ambientIBL.diffuseIBL.rgb);
+    ambientLighting = ambientIBL.diffuseIBL.rgb * ambientIBL.diffuseIBL.a + ambientIBL.specularIBL;
     
 //Shadow
     float4 shadowPosition = txShadowPosition.Sample(samLinear_wrap, input.uv);

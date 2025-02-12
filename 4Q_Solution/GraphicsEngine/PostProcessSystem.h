@@ -3,6 +3,8 @@
 #include "includes/IPostProcessSystem.h"
 
 class Filter;
+class ToneMapping;
+class PixelShader;
 class PostProcessSystem : public Base, public GE::IPostProcessSystem
 {
 public:
@@ -18,6 +20,10 @@ public:
 
 public:
 	void Initialize();
+	void Render();
+
+private:
+	void Blending(ID3D11RenderTargetView* pRTV, ID3D11ShaderResourceView* pSRV);
 
 private:
 	// Base을(를) 통해 상속됨
@@ -25,5 +31,8 @@ private:
 
 private:
 	std::vector<std::pair<unsigned int, Filter*>> _filters;
+	std::shared_ptr<PixelShader> _psBlend;
+	ID3D11DeviceContext* _pDeviceContext{ nullptr };	
+	ToneMapping* _pToneMapping{ nullptr };
 	unsigned int _ID;
 };

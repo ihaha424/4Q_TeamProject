@@ -222,6 +222,7 @@
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="SpriteSystem.h" />
     <ClInclude Include="SSAO.h" />
+    <ClInclude Include="StateManagement.h" />
     <ClInclude Include="TextSystem.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GraphicDevice.h" />
@@ -293,6 +294,7 @@
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="SpriteSystem.cpp" />
     <ClCompile Include="SSAO.cpp" />
+    <ClCompile Include="StateManagement.cpp" />
     <ClCompile Include="TextSystem.cpp" />
     <ClCompile Include="GraphicDevice.cpp" />
     <ClCompile Include="Light.cpp" />

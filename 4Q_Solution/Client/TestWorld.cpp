@@ -74,12 +74,12 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 
 	// Obj_BG_Tree_2
 	{
-		helpPrepare<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", objectFactory);
+		//helpPrepare<Obj_BG_Tree_2>(L"Obj_BG_Tree_2", objectFactory);
 	}
 
 	// Obj_BG_Tree_1
 	{
-		helpPrepare<Obj_BG_Tree_1>(L"Obj_BG_Tree_1", objectFactory);
+		//helpPrepare<Obj_BG_Tree_1>(L"Obj_BG_Tree_1", objectFactory);
 	}
 
 	// Obj_Buildings_Ornoa_House_1
@@ -99,7 +99,7 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 
 	// Obj_Buildings_Sudium
 	{
-		helpPrepare<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", objectFactory);
+		//helpPrepare<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", objectFactory);
 	}
 
 	// Obj_Buildings_Hide_House_5

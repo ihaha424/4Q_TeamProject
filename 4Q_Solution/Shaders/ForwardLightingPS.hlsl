@@ -44,6 +44,9 @@ PS_OUTPUT main(PS_INPUT input)
 {
     PS_OUTPUT output = (PS_OUTPUT)0;
     
+    float4 opacity = txOpacity.Sample(samLinear_wrap, input.uv);
+    clip(opacity.a < 0.1f ? -1 : 1);
+    
     float3 normalTex = txNormal.Sample(samLinear_wrap, input.uv).xyz;
     float3x3 TBN = float3x3(input.tangent, input.biTangent, input.normal);
     float3 N = normalize(mul(normalTex * 2.0f - 1.0f, TBN));
@@ -105,10 +108,8 @@ PS_OUTPUT main(PS_INPUT input)
     
     float4 color = 0;
     color.rgb = shadowFactor * directLighting + ambientLighting;
-    color.a = alpha;
-        
-    float4 opacity = txOpacity.Sample(samLinear_wrap, input.uv);
-   
+    color.a = alpha;            
+    
     if (1 > opacity.a)
     {
         color.a = opacity.a;

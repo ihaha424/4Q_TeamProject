@@ -22,6 +22,7 @@ namespace GE
 		virtual void SetUpSplitBone(unsigned int maxSplit) = 0;
 		virtual void SplitBone(unsigned int ID, const char* boneName) = 0;
 		virtual void SetAnimationSpeed(float speed) = 0;
+		virtual void SetAnimationSpeed(float speed, unsigned int ID) = 0;
 		virtual void MakeParent(const char* parent, const char* child) = 0;
 		virtual void GetSkeletonMatrix(const char* bone, Matrix4x4** out) = 0;
 	};

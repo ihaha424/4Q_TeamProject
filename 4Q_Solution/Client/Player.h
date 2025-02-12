@@ -1,4 +1,5 @@
 #pragma once
+#include "DelayCall.h"
 
 class GrabbedObject;
 
@@ -48,7 +49,7 @@ private:
 	void InteractTriggered();
 	void InteractCompleted();
 
-	void ChangeSplitAnimation(const char* animation, StateFlag flag, SplitType type);
+	void ChangeSplitAnimation(const char* animation, StateFlag flag, SplitType type, float speed = 1.f);
 	void SyncPatialAnimation(const char* animation, StateFlag flag, SplitType parent, SplitType child);
 	
 private:
@@ -88,6 +89,8 @@ protected:
 
 
 	GrabbedObject* grabbedObject;
+
+	std::list<DelayCall> _delayQueue;
 
 private:
 	// State Test

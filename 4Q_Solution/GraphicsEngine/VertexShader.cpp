@@ -27,6 +27,11 @@ HRESULT VertexShader::LoadResource(const std::filesystem::path& filePath)
 	CompileShader(vertexShaderData, filePath, "main", "vs_5_0");
 #else
 	std::vector<uint8_t> vertexShaderData = ReadData(filePath.c_str());
+
+	if (vertexShaderData.empty())
+	{
+		CompileShader(vertexShaderData, filePath, "main", "ps_5_0");
+	}
 #endif
 
 	// 로드한 쉐이더 파일의 input semantic 을 읽어서 인풋 레이아웃 자동 생성

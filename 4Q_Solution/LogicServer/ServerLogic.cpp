@@ -351,8 +351,8 @@ void ServerLogic::StateChangeProcess(const Packet& packet)
 {
     _stateChange.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
 
-    _playerSlot[packet._serialNumber - 1]._state ^= _stateChange.stateinfo();
-    printf("Player%d State Changed. CurrentState : %d\n", packet._serialNumber, _stateChange.stateinfo());
+    _playerSlot[packet._serialNumber - 1]._state = _stateChange.stateinfo();
+    //printf("Player%d State Changed. CurrentState : %d\n", packet._serialNumber, _stateChange.stateinfo());
     _stateChange.SerializeToString(&_msgBuffer);
     Server::BroadCast(_msgBuffer, (short)PacketID::StateChange, _stateChange.ByteSizeLong(), packet._serialNumber);
 }

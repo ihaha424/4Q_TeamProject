@@ -97,6 +97,11 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<BG_Props_Fence>(L"BG_Props_Fence", objectFactory);
 	}
 
+	// Obj_Buildings_Shinav
+	{
+		helpPrepare<Obj_Buildings_Shinave>(L"Obj_Buildings_Shinave", objectFactory);
+	}
+
 	// Obj_Buildings_Sudium
 	{
 		helpPrepare<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", objectFactory);

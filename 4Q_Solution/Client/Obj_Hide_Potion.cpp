@@ -35,6 +35,8 @@ void Obj_Hide_Potion::PreInitialize(const Engine::Modules& modules)
 	InteractObject::PreInitialize(modules);
 	myManager = modules.gameStateManager->FindSubManager(L"puzzle_04");
 	_sync->SetSerialNumber(15101);
+
+	_matrix = Engine::Math::Matrix::CreateScale(0.01f);
 }
 
 void Obj_Hide_Potion::Interact()

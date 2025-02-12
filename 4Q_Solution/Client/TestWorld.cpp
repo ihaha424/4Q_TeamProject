@@ -2,6 +2,7 @@
 #include "TestWorld.h"
 
 #include "Application.h"
+#include "NPC_Hide.h"
 
 void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 {
@@ -25,6 +26,11 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	_light = objectFactory->Clone<GlobalLight>(this);
 	_skyBox = objectFactory->Clone<SkyBox>(this);
 	//_testSprite = objectFactory->Clone<TestSprite>(this);
+
+	// NPC
+	{
+		objectFactory->Clone<NPC_Hide>(this);
+	}
 
 	// BG_Terrain
 	{

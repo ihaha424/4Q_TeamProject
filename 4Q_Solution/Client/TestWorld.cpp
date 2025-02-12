@@ -509,7 +509,7 @@ void TestWorld::EnterAccept(const ConnectMsg::AddObject* msg) {
 		_ray = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Ray>(this);
 		playerSerialNum = msg->grantnumber();
 		_ray->SetSerialNumber(msg->grantnumber());
-		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 1 });
+		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 3 });
 
 		_currentPlayer = _ray;
 	}

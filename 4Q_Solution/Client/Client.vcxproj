@@ -277,7 +277,7 @@
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="StaticObject.h" />
     <ClInclude Include="Obj_Props_Bermiore_Cloth_1.h" />
-    <ClInclude Include="Sudium_SoundTrigger.h" />
+    <ClInclude Include="Trigger_Sudium_SoundTrigger_1.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="BG_Terrain.h" />
     <ClInclude Include="TestSprite.h" />
@@ -285,6 +285,10 @@
     <ClInclude Include="MapData.h" />
     <ClInclude Include="TriggerArea.h" />
     <ClInclude Include="TriggerBox.h" />
+    <ClInclude Include="Trigger_Sudium_SoundTrigger_2.h" />
+    <ClInclude Include="Trigger_Sudium_SoundTrigger_3.h" />
+    <ClInclude Include="Trigger_Sudium_SoundTrigger_4.h" />
+    <ClInclude Include="Trigger_Sudium_SoundTrigger_5.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
@@ -403,11 +407,15 @@
     <ClCompile Include="StaticObject.cpp" />
     <ClCompile Include="Obj_Props_Bermiore_Cloth_1.cpp" />
     <ClCompile Include="BG_Terrain.cpp" />
-    <ClCompile Include="Sudium_SoundTrigger.cpp" />
+    <ClCompile Include="Trigger_Sudium_SoundTrigger_1.cpp" />
     <ClCompile Include="TestSprite.cpp" />
     <ClCompile Include="TestWorld.cpp" />
     <ClCompile Include="TriggerArea.cpp" />
     <ClCompile Include="TriggerBox.cpp" />
+    <ClCompile Include="Trigger_Sudium_SoundTrigger_2.cpp" />
+    <ClCompile Include="Trigger_Sudium_SoundTrigger_3.cpp" />
+    <ClCompile Include="Trigger_Sudium_SoundTrigger_4.cpp" />
+    <ClCompile Include="Trigger_Sudium_SoundTrigger_5.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />

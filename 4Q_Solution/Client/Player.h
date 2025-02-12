@@ -37,7 +37,7 @@ protected:
 	void PostInitialize(const Engine::Modules& modules) override;
 	void PostUpdate(float deltaTime) override;
 	void PostAttach() override;
-
+	void PreLazyUpdate(float deltaTime) override;
 private:
 	void MoveStarted();
 	void MoveTriggered(Engine::Math::Vector3 value);
@@ -71,6 +71,7 @@ protected:
 	RemoteMove* _remote;
 
 	Engine::Component::BitFlag* _bitFlag;
+	Engine::Component::Listener* _listener;
 
 	Engine::Component::LineWave* _leftLineWave;
 	Engine::Component::LineWave* _rightLineWave;

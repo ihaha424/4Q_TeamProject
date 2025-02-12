@@ -27,6 +27,7 @@ void Player::Prepare(Engine::Content::Factory::Component* componentFactory)
 	_leftLineWave = componentFactory->Clone<Engine::Component::LineWave>(this);
 	_rightLineWave = componentFactory->Clone<Engine::Component::LineWave>(this);
 	_shadowCamera = componentFactory->Clone<Engine::Component::ShadowCamera>(this);
+	_listener = componentFactory->Clone<Engine::Component::Listener>(this);
 }
 
 void Player::SetCapsuleScale(Engine::Math::Vector3 capsuleScale)
@@ -53,6 +54,7 @@ void Player::DisposeComponents()
 	_bitFlag->Dispose();
 	_leftLineWave->Dispose();
 	_rightLineWave->Dispose();
+	_listener->Dispose();
 }
 
 void Player::PreInitialize(const Engine::Modules& modules)
@@ -133,6 +135,8 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	_sync->AddCallback((short)PacketID::MoveSync, &Player::SyncMove, this);
 	_sync->AddCallback((short)PacketID::DataRemote, &Player::SetLocation, this);	
 	_sync->AddCallback((short)PacketID::StateChange, &Player::StateChange, this);
+
+	_listener->Setup(_transform.GetForward(), { 0.f, 1.f, 0.f });
 }
 
 void Player::PostInitialize(const Engine::Modules& modules)
@@ -167,6 +171,7 @@ void Player::PostInitialize(const Engine::Modules& modules)
 
 	_animator->GetSkeletonMatrix("hand.l", &_leftHand);
 	_animator->GetSkeletonMatrix("hand.r", &_rightHand);
+
 }
 
 void Player::PostUpdate(float deltaTime)
@@ -203,6 +208,12 @@ void Player::PostAttach()
 	Object::PostAttach();
 	_camera->Activate();
 	_shadowCamera->Activate();
+}
+
+void Player::PreLazyUpdate(float deltaTime)
+{
+	_listener->SetPosition(_transform.position);
+	_listener->SetForward(_transform.GetForward());
 }
 
 void Player::MoveStarted()

@@ -6,6 +6,8 @@
 DSH::Audio::Listener::Listener(FMOD::System* system, const int index) :
 	_referenceCount(1), _system(system), _index(index)
 {
+	_forward = { 0, 0, 1 };
+	_up = { 0, 1, 0 };
 }
 
 HRESULT DSH::Audio::Listener::QueryInterface(const IID& riid, void** ppvObject)

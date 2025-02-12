@@ -94,6 +94,9 @@ extern SoundPlayDefaultTypeInternal _SoundPlay_default_instance_;
 class TriggerObject;
 struct TriggerObjectDefaultTypeInternal;
 extern TriggerObjectDefaultTypeInternal _TriggerObject_default_instance_;
+class TriggerOut;
+struct TriggerOutDefaultTypeInternal;
+extern TriggerOutDefaultTypeInternal _TriggerOut_default_instance_;
 }  // namespace PlayMsg
 namespace google {
 namespace protobuf {
@@ -105,6 +108,211 @@ namespace PlayMsg {
 // ===================================================================
 
 
+// -------------------------------------------------------------------
+
+class TriggerOut final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:PlayMsg.TriggerOut) */ {
+ public:
+  inline TriggerOut() : TriggerOut(nullptr) {}
+  ~TriggerOut() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(TriggerOut* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(TriggerOut));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR TriggerOut(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline TriggerOut(const TriggerOut& from) : TriggerOut(nullptr, from) {}
+  inline TriggerOut(TriggerOut&& from) noexcept
+      : TriggerOut(nullptr, std::move(from)) {}
+  inline TriggerOut& operator=(const TriggerOut& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline TriggerOut& operator=(TriggerOut&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const TriggerOut& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const TriggerOut* internal_default_instance() {
+    return reinterpret_cast<const TriggerOut*>(
+        &_TriggerOut_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 6;
+  friend void swap(TriggerOut& a, TriggerOut& b) { a.Swap(&b); }
+  inline void Swap(TriggerOut* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(TriggerOut* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  TriggerOut* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<TriggerOut>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const TriggerOut& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const TriggerOut& from) { TriggerOut::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(TriggerOut* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "PlayMsg.TriggerOut"; }
+
+ protected:
+  explicit TriggerOut(::google::protobuf::Arena* arena);
+  TriggerOut(::google::protobuf::Arena* arena, const TriggerOut& from);
+  TriggerOut(::google::protobuf::Arena* arena, TriggerOut&& from) noexcept
+      : TriggerOut(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kObjectserialnumberFieldNumber = 1,
+    kTriggerboxidFieldNumber = 2,
+  };
+  // optional int32 objectserialnumber = 1;
+  bool has_objectserialnumber() const;
+  void clear_objectserialnumber() ;
+  ::int32_t objectserialnumber() const;
+  void set_objectserialnumber(::int32_t value);
+
+  private:
+  ::int32_t _internal_objectserialnumber() const;
+  void _internal_set_objectserialnumber(::int32_t value);
+
+  public:
+  // optional int32 triggerboxid = 2;
+  bool has_triggerboxid() const;
+  void clear_triggerboxid() ;
+  ::int32_t triggerboxid() const;
+  void set_triggerboxid(::int32_t value);
+
+  private:
+  ::int32_t _internal_triggerboxid() const;
+  void _internal_set_triggerboxid(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:PlayMsg.TriggerOut)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      1, 2, 0,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const TriggerOut& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::int32_t objectserialnumber_;
+    ::int32_t triggerboxid_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Play_2eproto;
+};
 // -------------------------------------------------------------------
 
 class TriggerObject final : public ::google::protobuf::Message
@@ -755,7 +963,7 @@ class QuestStart final : public ::google::protobuf::Message
     return reinterpret_cast<const QuestStart*>(
         &_QuestStart_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 8;
+  static constexpr int kIndexInFileMessages = 9;
   friend void swap(QuestStart& a, QuestStart& b) { a.Swap(&b); }
   inline void Swap(QuestStart* other) {
     if (other == this) return;
@@ -947,7 +1155,7 @@ class QuestEnd final : public ::google::protobuf::Message
     return reinterpret_cast<const QuestEnd*>(
         &_QuestEnd_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 9;
+  static constexpr int kIndexInFileMessages = 10;
   friend void swap(QuestEnd& a, QuestEnd& b) { a.Swap(&b); }
   inline void Swap(QuestEnd* other) {
     if (other == this) return;
@@ -1139,7 +1347,7 @@ class PuzzleStart final : public ::google::protobuf::Message
     return reinterpret_cast<const PuzzleStart*>(
         &_PuzzleStart_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 10;
+  static constexpr int kIndexInFileMessages = 11;
   friend void swap(PuzzleStart& a, PuzzleStart& b) { a.Swap(&b); }
   inline void Swap(PuzzleStart* other) {
     if (other == this) return;
@@ -1761,7 +1969,7 @@ class ObjectDisable final : public ::google::protobuf::Message
     return reinterpret_cast<const ObjectDisable*>(
         &_ObjectDisable_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 12;
+  static constexpr int kIndexInFileMessages = 13;
   friend void swap(ObjectDisable& a, ObjectDisable& b) { a.Swap(&b); }
   inline void Swap(ObjectDisable* other) {
     if (other == this) return;
@@ -1960,7 +2168,7 @@ class ObjectActive final : public ::google::protobuf::Message
     return reinterpret_cast<const ObjectActive*>(
         &_ObjectActive_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 11;
+  static constexpr int kIndexInFileMessages = 12;
   friend void swap(ObjectActive& a, ObjectActive& b) { a.Swap(&b); }
   inline void Swap(ObjectActive* other) {
     if (other == this) return;
@@ -2357,7 +2565,7 @@ class InteractDialog final : public ::google::protobuf::Message
     return reinterpret_cast<const InteractDialog*>(
         &_InteractDialog_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 6;
+  static constexpr int kIndexInFileMessages = 7;
   friend void swap(InteractDialog& a, InteractDialog& b) { a.Swap(&b); }
   inline void Swap(InteractDialog* other) {
     if (other == this) return;
@@ -2549,7 +2757,7 @@ class DialogProgress final : public ::google::protobuf::Message
     return reinterpret_cast<const DialogProgress*>(
         &_DialogProgress_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 7;
+  static constexpr int kIndexInFileMessages = 8;
   friend void swap(DialogProgress& a, DialogProgress& b) { a.Swap(&b); }
   inline void Swap(DialogProgress* other) {
     if (other == this) return;
@@ -2741,7 +2949,7 @@ class DialogNext final : public ::google::protobuf::Message
     return reinterpret_cast<const DialogNext*>(
         &_DialogNext_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 13;
+  static constexpr int kIndexInFileMessages = 14;
   friend void swap(DialogNext& a, DialogNext& b) { a.Swap(&b); }
   inline void Swap(DialogNext* other) {
     if (other == this) return;
@@ -3230,6 +3438,66 @@ inline ::int32_t TriggerObject::_internal_triggerboxid() const {
   return _impl_.triggerboxid_;
 }
 inline void TriggerObject::_internal_set_triggerboxid(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.triggerboxid_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// TriggerOut
+
+// optional int32 objectserialnumber = 1;
+inline bool TriggerOut::has_objectserialnumber() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline void TriggerOut::clear_objectserialnumber() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.objectserialnumber_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline ::int32_t TriggerOut::objectserialnumber() const {
+  // @@protoc_insertion_point(field_get:PlayMsg.TriggerOut.objectserialnumber)
+  return _internal_objectserialnumber();
+}
+inline void TriggerOut::set_objectserialnumber(::int32_t value) {
+  _internal_set_objectserialnumber(value);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  // @@protoc_insertion_point(field_set:PlayMsg.TriggerOut.objectserialnumber)
+}
+inline ::int32_t TriggerOut::_internal_objectserialnumber() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.objectserialnumber_;
+}
+inline void TriggerOut::_internal_set_objectserialnumber(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.objectserialnumber_ = value;
+}
+
+// optional int32 triggerboxid = 2;
+inline bool TriggerOut::has_triggerboxid() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline void TriggerOut::clear_triggerboxid() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.triggerboxid_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline ::int32_t TriggerOut::triggerboxid() const {
+  // @@protoc_insertion_point(field_get:PlayMsg.TriggerOut.triggerboxid)
+  return _internal_triggerboxid();
+}
+inline void TriggerOut::set_triggerboxid(::int32_t value) {
+  _internal_set_triggerboxid(value);
+  _impl_._has_bits_[0] |= 0x00000002u;
+  // @@protoc_insertion_point(field_set:PlayMsg.TriggerOut.triggerboxid)
+}
+inline ::int32_t TriggerOut::_internal_triggerboxid() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.triggerboxid_;
+}
+inline void TriggerOut::_internal_set_triggerboxid(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.triggerboxid_ = value;
 }

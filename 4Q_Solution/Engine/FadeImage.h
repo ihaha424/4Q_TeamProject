@@ -19,7 +19,9 @@ namespace Engine::UI::Wrapper
 		FadeImage(Math::Rect* rect, const std::filesystem::path& path, float duration);
 
 		void FadeIn();
+		void FadeIn(float duration);
 		void FadeOut();
+		void FadeOut(float duration);
 
 		void Update(float deltaGameTime) override;
 

@@ -12,10 +12,22 @@ void Engine::UI::Wrapper::FadeImage::FadeIn()
 	_elapsedTime = 0.0f;
 }
 
+void Engine::UI::Wrapper::FadeImage::FadeIn(const float duration)
+{
+    _duration = duration;
+	FadeIn();
+}
+
 void Engine::UI::Wrapper::FadeImage::FadeOut()
 {
 	_state = State::FadeOut;
 	_elapsedTime = _duration;
+}
+
+void Engine::UI::Wrapper::FadeImage::FadeOut(const float duration)
+{
+	_duration = duration;
+	FadeOut();
 }
 
 void Engine::UI::Wrapper::FadeImage::Update(const float deltaGameTime)

@@ -26,7 +26,7 @@ void GameClient::Application::DeclareInputActions(Engine::Input::IManager* input
 	Engine::Input::IMappingContext* uiMappingContext = nullptr;
 	inputManager->GetMappingContext(L"UI", &uiMappingContext);
 
-	DeclareUIAction(inputManager, uiMappingContext);
+	DeclareUIAction(inputManager, uiMappingContext, gameMappingContext);
 	DeclareMoveAction(inputManager, gameMappingContext);
 	DeclareCameraAction(inputManager, gameMappingContext);
 	DeclareSystemAction(inputManager, gameMappingContext);
@@ -414,18 +414,18 @@ void GameClient::Application::PrepareInitialHUD(Engine::DSHHud::Manager* hudMana
 	_mainCanvas->BindOnFadeIn([hudManager, this]()
 	{
 		hudManager->SetCanvas(_inGameCanvas);
-		this->GetInputManager()->SetActiveMappingContext(L"Default");
+		GetInputManager()->SetActiveMappingContext(L"Default");
 	});
 }
 
-void GameClient::Application::DeclareUIAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext)
+void GameClient::Application::DeclareUIAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mainMappingContext, Engine::Input::IMappingContext* defaultMappingContext)
 {
 	Engine::Input::Device::IController* controller = nullptr;
 	inputManager->GetDevice(&controller);
 
-	// Move
+	// UINext
 	Engine::Input::IAction* action = nullptr;
-	mappingContext->GetAction(L"UINext", &action);
+	mainMappingContext->GetAction(L"UINext", &action);
 
 	Engine::Input::Trigger::IDown* bButtonTrigger = nullptr;
 	action->GetTrigger(&bButtonTrigger);
@@ -433,8 +433,41 @@ void GameClient::Application::DeclareUIAction(Engine::Input::IManager* inputMana
 	controller->GetComponent(Engine::Input::Device::IController::Button::B, &bButton);
 	bButtonTrigger->SetComponent(bButton);
 
-	action->AddListener(Engine::Input::Trigger::Event::Started, [](auto) {
-		GetHudManager()->ActionThisCanvas();
+	Engine::Input::Trigger::IDown* aButtonTrigger = nullptr;
+	action->GetTrigger(&aButtonTrigger);
+	Engine::Input::Component::IButtonComponent* aButton = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Button::A, &aButton);
+	aButtonTrigger->SetComponent(aButton);
+
+	Engine::Input::Trigger::IDown* xButtonTrigger = nullptr;
+	action->GetTrigger(&xButtonTrigger);
+	Engine::Input::Component::IButtonComponent* xButton = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Button::X, &xButton);
+	xButtonTrigger->SetComponent(xButton);
+
+	Engine::Input::Trigger::IDown* yButtonTrigger = nullptr;
+	action->GetTrigger(&yButtonTrigger);
+	Engine::Input::Component::IButtonComponent* yButton = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Button::Y, &yButton);
+	yButtonTrigger->SetComponent(yButton);
+
+	// InGame Fade In
+	action->AddListener(Engine::Input::Trigger::Event::Started, [this](auto) {
+		_mainCanvas->FadeIn();
+		});
+
+	// Move Tutorial
+	Engine::Input::IAction* moveTutorialAction = nullptr;
+	defaultMappingContext->GetAction(L"Move", &moveTutorialAction);
+	moveTutorialAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto) {
+		_inGameCanvas->MoveTutorialDone();
+		});
+
+	// View Tutorial
+	Engine::Input::IAction* viewTutorialAction = nullptr;
+	defaultMappingContext->GetAction(L"Camera", &viewTutorialAction);
+	viewTutorialAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto) {
+		_inGameCanvas->ViewTutorialDone();
 		});
 }
 

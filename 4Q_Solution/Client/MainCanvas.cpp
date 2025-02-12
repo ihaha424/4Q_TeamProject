@@ -7,7 +7,7 @@ MainCanvas::MainCanvas() :
 }
 
 MainCanvas::MainCanvas(const Engine::Math::Size& viewportSize):
-	Canvas(viewportSize)
+	Canvas(viewportSize), _sequence(Sequence::MaskNotFaded)
 {
 	auto [anchorChild, logoImage] = _rootPanel.CreateChild<Engine::UI::Wrapper::Image>(L"Assets/UI/UI_Logo.png");
 	const auto startImage = logoImage->CreateChild<Engine::UI::Wrapper::Image>(L"Assets/UI/UI_GameStart_Off.png");
@@ -15,9 +15,11 @@ MainCanvas::MainCanvas(const Engine::Math::Size& viewportSize):
 	_fadeMask = blinkImage->CreateChild<Engine::UI::Wrapper::FadeImage>(L"Assets/UI/UI_Fade_Mask.png", 1.0f);
 }
 
-void MainCanvas::FadeIn() const
+void MainCanvas::FadeIn()
 {
+	if (_sequence != Sequence::MaskNotFaded) return;
 	_fadeMask->FadeIn();
+	_sequence = Sequence::MaskFadingIn;
 }
 
 void MainCanvas::Action()

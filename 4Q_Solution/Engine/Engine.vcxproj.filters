@@ -556,6 +556,12 @@
     <Filter Include="Modules\Difinition\DSHHud\Manager">
       <UniqueIdentifier>{ce9c4f2a-e88f-448f-93c4-d682324350f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UserInterfaces\Wrappers\FadeImage">
+      <UniqueIdentifier>{c9820cff-73d7-4015-b842-f7e1dac7abef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterfaces\Wrappers\BlinkImage">
+      <UniqueIdentifier>{adec5564-638f-4141-92c3-d67b95aa3623}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -1086,6 +1092,12 @@
     <ClInclude Include="DSHHudManager.h">
       <Filter>Modules\Difinition\DSHHud\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="FadeImage.h">
+      <Filter>UserInterfaces\Wrappers\FadeImage</Filter>
+    </ClInclude>
+    <ClInclude Include="BlinkImage.h">
+      <Filter>UserInterfaces\Wrappers\BlinkImage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1522,6 +1534,12 @@
     </ClCompile>
     <ClCompile Include="DSHHudManager.cpp">
       <Filter>Modules\Difinition\DSHHud\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="FadeImage.cpp">
+      <Filter>UserInterfaces\Wrappers\FadeImage</Filter>
+    </ClCompile>
+    <ClCompile Include="BlinkImage.cpp">
+      <Filter>UserInterfaces\Wrappers\BlinkImage</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

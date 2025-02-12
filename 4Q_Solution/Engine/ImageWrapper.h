@@ -14,9 +14,11 @@ namespace Engine::UI::Wrapper
 		void Detach() override;
 		void Finalize() override;
 
+	protected:
+		Component::Sprite _sprite;
+
 	private:
 		std::filesystem::path _path;
 		Math::Matrix _matrix;
-		Component::Sprite _sprite;
 	};
 }

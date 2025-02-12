@@ -189,6 +189,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="Application.h" />
     <ClInclude Include="BackgroundMusicComponent.h" />
     <ClInclude Include="BitFlag.h" />
+    <ClInclude Include="BlinkImage.h" />
     <ClInclude Include="CameraRail.h" />
     <ClInclude Include="ButtonWrapper.h" />
     <ClInclude Include="Canvas.h" />
@@ -199,6 +200,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClInclude Include="DSHAudioManager.h" />
     <ClInclude Include="Effect3DSoundComponent.h" />
     <ClInclude Include="Elements.h" />
+    <ClInclude Include="FadeImage.h" />
     <ClInclude Include="FixedArm.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateManager.h" />
@@ -372,6 +374,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="BackgroundMusicComponent.cpp" />
+    <ClCompile Include="BlinkImage.cpp" />
     <ClCompile Include="ButtonWrapper.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="ChractorController.cpp" />
@@ -380,6 +383,7 @@ xcopy /y /d "..\lib\*.pdb" "$(OutDir)"</Command>
     <ClCompile Include="DSHLoggerManager.cpp" />
     <ClCompile Include="DSHAudioManager.cpp" />
     <ClCompile Include="Effect3DSoundComponent.cpp" />
+    <ClCompile Include="FadeImage.cpp" />
     <ClCompile Include="FixedArm.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="LineWave.cpp" />

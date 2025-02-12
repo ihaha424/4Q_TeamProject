@@ -15,8 +15,8 @@ bool ServerLogic::Initialize()
     delete _system;
 
     _physicsManager = new Engine::PHI::Manager();
-    _physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, true);
-    //_physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, false);
+    //_physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, true);
+    _physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, false);
 
     //============================
     //  Create Physics Scene

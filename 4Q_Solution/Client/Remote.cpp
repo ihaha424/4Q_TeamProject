@@ -82,11 +82,15 @@ void Remote::PostInitialize(const Engine::Modules& modules)
 	//_movement->SetSpeed(100.f);
 	_remote->SetSpeed(100.f);
 
-	//_skeltalMesh.SetRenderLayer(0);
-	/*_animator.SetUpSplitBone(2);
-	_animator.SplitBone(0, "Dummy_root");
-	_animator.SplitBone(1, "Bip01-Spine1");
-	_animator.ChangeAnimation("Wait");*/
+	_animator->SetUpSplitBone(End);
+	_animator->SplitBone(Lower, "RootNode"); // 하체
+	_animator->SplitBone(Upper, "c_spine_02.x"); // 상체
+	_animator->SplitBone(Upper, "arm_stretch.l");
+	_animator->SplitBone(Upper, "arm_stretch.r");
+	_animator->SplitBone(Upper, "forearm_stretch.l");
+	_animator->SplitBone(Upper, "forearm_stretch.r");
+	_animator->SplitBone(Upper, "forearm.l");
+	_animator->SplitBone(Upper, "forearm.r");
 
 	//_skeletalMesh->SetActiveShadow(false);
 	_skeletalMesh->SetPostEffectFlag(1);

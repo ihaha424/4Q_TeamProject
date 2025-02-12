@@ -91,13 +91,11 @@ void GrabbedObject::RemoteGrabbed(const PlayMsg::PickObject* msg)
 	auto data = manager->GetData(L"GrabData");
 	if (data)
 	{
-		auto grabData = std::any_cast<GrabData*>(data);
-		if (nullptr != grabData)
-		{
-			grabData->player = msg->targetserialnumber();
-			grabData->remoteGrab = nullptr;
-			manager->SetData(L"GrabData", grabData);
-		}
+		auto grabData = std::any_cast<GrabData>(*data);
+	
+		grabData.player = msg->targetserialnumber();
+		grabData.remoteGrab = nullptr;
+		manager->SetData(L"GrabData", grabData);
 	}
 }
 
@@ -113,9 +111,9 @@ void GrabbedObject::RemotePutThis(const PlayMsg::PutObject* msg)
 	auto data = manager->GetData(L"GrabData");
 	if (data)
 	{
-		auto grabData = std::any_cast<GrabData*>(data);
-		grabData->player = msg->targetserialnumber();
-		grabData->remoteGrab = nullptr;
+		auto grabData = std::any_cast<GrabData>(*data);
+		grabData.player = msg->targetserialnumber();
+		grabData.remoteGrab = nullptr;
 		manager->SetData(L"GrabData", grabData);
 		_catchOnwerTransform = nullptr;
 	}

@@ -341,17 +341,17 @@ void Remote::SetLocation(const MoveMsg::MoveSync* msg)
 
 void Remote::Grab(const std::wstring& name, const std::any& value)
 {
-	GrabData* data = std::any_cast<GrabData*>(value);
+	GrabData data = std::any_cast<GrabData>(value);
 	auto coreData = GameClient::Application::GetGameStateManager()->GetData(L"GameCoreData");
 	if (!coreData)
 		return;
-	GameCoreData* playerData = std::any_cast<GameCoreData*>(coreData);
-	if (data->player != playerData->player)
+	GameCoreData playerData = std::any_cast<GameCoreData>(*coreData);
+	if (data.player != playerData.player || playerData.player == 3)
 	{
-		if (data->remoteGrab)
+		if (data.remoteGrab)
 		{
-			data->remoteGrab->Grabbed(&_transform, true);
-			grabbedObject = data->remoteGrab;
+			data.remoteGrab->Grabbed(&_transform, true);
+			grabbedObject = data.remoteGrab;
 		}
 		else
 			grabbedObject = nullptr;

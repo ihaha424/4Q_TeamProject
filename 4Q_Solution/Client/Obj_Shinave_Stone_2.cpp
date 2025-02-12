@@ -17,7 +17,7 @@ void Obj_Shinave_Stone_2::Interact()
 			return;
 		auto data = std::any_cast<GameCoreData>(*isData);
 		player = data.player;
-		if (player == 2)
+		if (player == 2 || data.player == 3)
 		{
 			SendInteractToServer();
 			activate = false;
@@ -33,5 +33,5 @@ void Obj_Shinave_Stone_2::PreInitialize(const Engine::Modules& modules)
 
 void Obj_Shinave_Stone_2::DataChangeCallBack(const std::wstring& name, const std::any& value)
 {
-
+	activate = true;
 }

@@ -215,7 +215,7 @@ void Engine::Application::InitializeManagers() const
 	_contentManager->Initialize();
     _networkManager->Initialize();
     //_physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, true);
-    _physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, true);
+    _physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, false);
 	_gameStateManager->Initialize();
 	_soundManager->Initialize();
 }

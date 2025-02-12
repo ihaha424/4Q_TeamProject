@@ -18,6 +18,8 @@
 #include "GameCoreData.h"
 #include "GrabData.h"
 
+#include "PuzzleManagerSet.h"
+
 
 
 class TestWorld : public Engine::World

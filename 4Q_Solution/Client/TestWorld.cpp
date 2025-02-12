@@ -389,6 +389,16 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	{
 		helpPrepare<Obj_Ornoa_Soundblock_1>(L"Obj_Ornoa_Soundblock_1", objectFactory);
 	}
+
+	// Puzzle Manager
+	{
+		objectFactory->Clone<MainPuzzleManager>(this);
+		objectFactory->Clone<PuzzleManager00>(this);
+		objectFactory->Clone<PuzzleManager01>(this);
+		objectFactory->Clone<PuzzleManager02>(this);
+		objectFactory->Clone<PuzzleManager03>(this);
+		objectFactory->Clone<PuzzleManager04>(this);
+	}
 }
 
 void TestWorld::PreInitialize(const Engine::Modules& modules)
@@ -485,7 +495,7 @@ void TestWorld::EnterAccept(const ConnectMsg::AddObject* msg) {
 		_ray = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Ray>(this);
 		playerSerialNum = msg->grantnumber();
 		_ray->SetSerialNumber(msg->grantnumber());
-		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 2 });
+		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 3 });
 	}
 	else if (msg->grantnumber() == 2) {
 		// TODO: 여기에 리브의 오브젝트를 생성하는 코드를 넣어야 합니다.

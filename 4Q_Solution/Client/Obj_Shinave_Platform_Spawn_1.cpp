@@ -18,7 +18,7 @@ void Obj_Shinave_Platform_Spawn_1::SetActive(const PlayMsg::ObjectActive* msg)
 	if (!isData)
 		return;
 	auto data = std::any_cast<GameCoreData>(*isData);
-	if (data.player == 1)
+	if (data.player == 1 || data.player == 3)
 	{
 		_staticMesh->SetActiveDraw(true);
 	}

@@ -10,9 +10,9 @@ void Obj_Bermiore_Woolball_3::Interact()
 {
 	if (_activate)
 	{
-		_index += direction;
+		_index += _direction;
 		if (_index == 2 || _index == 0)
-			direction *= -1;
+			_direction *= -1;
 		SendInteractToServer();
 	}
 }

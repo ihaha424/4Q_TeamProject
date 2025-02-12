@@ -1,10 +1,22 @@
 #include "pch.h"
 #include "BaseWoolball.h"
 
+int BaseWoolball::index = 0;
+const int BaseWoolball::initPosition[6] = { 3,1,1,2,3,1 };
+const int BaseWoolball::initDirection[6] = { -1,1,1,1,-1,1 };
+const int BaseWoolball::thirdPos[6] = { 13.5, 13, 12.5, 12.5, 13, 13.5 };
+const int BaseWoolball::muteValue[6] = { 3, 1, 2, 1, 2, 2 };
+
 BaseWoolball::BaseWoolball(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath) :
 	InteractObject(meshPath, meshPath),
-	_pos{ 0, -30, -60 }, _index{ 0 }, _activate{ false }, direction{ 1 }
+	_pos{ }, _index{ index++ }, _activate{ false }
 {
+	_pos[0] = 0;
+	_pos[1] = 7;
+	_pos[2] = thirdPos[_index];
+
+	_direction = initDirection[_index];
+	_posIndex = initPosition[_index];
 }
 
 void BaseWoolball::Prepare(Engine::Content::Factory::Component* componentFactory)
@@ -34,10 +46,30 @@ void BaseWoolball::DisposeComponents()
 void BaseWoolball::PreInitialize(const Engine::Modules& modules)
 {
 	InteractObject::PreInitialize(modules);
+	_sync->AddCallback((short)PacketID::InteractObject, &BaseWoolball::InteractCallback, this);
 	myManager = modules.gameStateManager->FindSubManager(L"puzzle_01");
 	myManager->Subscribe(L"Data", [this](const std::wstring& name, const std::any& value)
 		{
 			DataChangeCallBack(name, value);
 		}
 	, this);
+}
+
+void BaseWoolball::InteractCallback(const PlayMsg::InteractObject* msg)
+{
+	_posIndex += _direction;
+	if (_posIndex == 2 || _posIndex == 0)
+		_direction *= -1;
+	auto isData = GameClient::Application::GetGameStateManager()->GetData(L"GameCoreData");
+	if (!isData)
+		return;
+	auto data = std::any_cast<GameCoreData>(*isData);
+	if (data.player == static_cast<int>(PlayerEnum::Live) || data.player == static_cast<int>(PlayerEnum::Developer))
+	{
+		if (_posIndex != muteValue[_index])
+		{
+			// 사운드 인덱스 재생
+			_index;
+		}
+	}
 }

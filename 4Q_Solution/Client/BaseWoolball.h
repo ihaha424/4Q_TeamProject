@@ -14,13 +14,22 @@ public:
 protected:
 	void DisposeComponents() override;
 	void PreInitialize(const Engine::Modules& modules) override;
+	void InteractCallback(const PlayMsg::InteractObject* msg);
 
 	Engine::Component::Synchronize* _sync;
 
-	int _pos[3];
+	float _pos[3];
+	int _posIndex;
 	int _index;
-	int direction;
+	int _direction;
 	bool _activate;
+
+	const static int initPosition[6];
+	const static int initDirection[6];
+	const static int thirdPos[6];
+	const static int muteValue[6];
+
+	static int index;
 };
 
 

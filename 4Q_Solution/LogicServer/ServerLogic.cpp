@@ -702,6 +702,8 @@ void ServerLogic::LoadStatic()
     const auto& groupData = _mapData["objectGroup"]["groups"];
     for (const auto& staticObject : groupData)
     {
+        if ("Group_Terrain" == staticObject["groupName"] || "Group_Trigger" == staticObject["groupName"] || "Group_Interact" == staticObject["groupName"])
+            continue;
         const auto& objectData = staticObject["models"];
         for (const auto& data : objectData) {
             Object* obj = new Object();

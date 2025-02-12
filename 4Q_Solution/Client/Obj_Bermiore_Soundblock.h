@@ -14,12 +14,19 @@ public:
 	void PlaySound(const PlayMsg::InteractObject* msg);
 	void Interact() override;
 	void DataChangeCallBack(const std::wstring& name, const std::any& value) override;
+	void PostUpdate(float deltaTime) override;
+	void PreInitialize(const Engine::Modules& modules) override;
+	void PostInitialize(const Engine::Modules& modules) override;
 
 protected:
 	void DisposeComponents() override;
-	void PreInitialize(const Engine::Modules& modules) override;
 
 	Engine::Component::Synchronize* _sync;
 	bool _activate = false;
+	bool _isSound = false;
+	float _deltaTime = 0;
+	int _soundIndex = 0;
+
+	Engine::Component::Effect3DSound* _sound[3];
 };
 

@@ -74,7 +74,7 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	// FixedArm
 	_fixedArm->SetTarget(&_transform);
 	_fixedArm->SetCameraComponent(_camera);
-	_fixedArm->SetDistance(10.f);
+	_fixedArm->SetDistance(20.f);
 	_fixedArm->SetCameraPosition(Engine::Math::Vector2{ 0.f, 5.f });
 	_fixedArm->SetRotationSpeed(Engine::Math::Vector2{ 0.02f, 0.04f });
 	_fixedArm->SetFollowSpeed(0.01f);

@@ -8,6 +8,7 @@ class PixelShader;
 class Mesh;
 class SkyBoxRenderer;
 class AO;
+
 class DX11Renderer : public IRenderer
 {
 	struct DrawData
@@ -17,6 +18,8 @@ class DX11Renderer : public IRenderer
 		Mesh* mesh;
 	};
 	enum TextureType { Diffuse, Normal, RMA, Emissive, ShadowPosition, LayerMask, End };
+	enum ZWrite { On, Off, ZWrite_End };
+
 public:
 	explicit DX11Renderer() = default;
 	virtual ~DX11Renderer() = default;
@@ -30,7 +33,7 @@ private:
 
 	void ShadowPass();
 	void GBufferPass(std::list<DrawData>& noneAlphaMeshes);
-	void LigthingPass(SkyBoxRenderer* pSkyBox, std::list<DrawData>& alphaMeshes, std::list<std::pair<unsigned int, SkyBoxRenderer*>>& skyBoxes);
+	void LigthingPass(SkyBoxRenderer* pSkyBox, std::list<DrawData>* alphaMeshes, std::list<std::pair<unsigned int, SkyBoxRenderer*>>& skyBoxes);
 	void SkyBoxPass(std::list<std::pair<unsigned int, SkyBoxRenderer*>>& skyBoxes);
 	void DeferredLighting();
 	void ForwardLigthing(std::list<DrawData>& alphaMeshes);

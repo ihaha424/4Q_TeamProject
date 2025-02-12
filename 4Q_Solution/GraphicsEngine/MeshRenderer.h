@@ -16,6 +16,7 @@ public:
 	const unsigned int GetPostEffectFlag() const { return _description.postEffectFlag; }
 	bool IsActiveDraw() const { return _description.activeDraw; }
 	bool IsActiveShadow() const { return _description.activeShadow; }
+	bool IsZWrite() const { return _description.zWrite; }
 
 public:
 	virtual void Initialize(const wchar_t* filePath) = 0;

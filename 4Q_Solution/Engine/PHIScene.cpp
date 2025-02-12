@@ -56,15 +56,19 @@ namespace Engine::PHI
 		if (nullptr == geometry)
 			return false;
 
-		bool result = scene->Overlap(data,
+		PhysicsEngineAPI::Utils::Transform physicsTransform = { {transform.position.x, transform.position.y, transform.position.z}, 
+										{transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w} };
+
+		bool result = scene->Overlap(data, geometry, physicsTransform);
+		/*bool result = scene->Overlap(data,
 			geometry,
 			TransformToPhysicsTransform(transform)
-		);
+		);*/
 		overlapInfo.flag = static_cast<Physics::QueryData::QueryFlag>(data.flag);
 		overlapInfo.num = data.num;
 		overlapInfo.UserDatas.reserve(data.num);
 		for (size_t i = 0; i < data.num; i++)
-			overlapInfo.UserDatas.push_back(static_cast<Collision<Engine::Physics::Component>*>(data.UserDatas[0])->rigidComponent);
+			overlapInfo.UserDatas.push_back(static_cast<Collision<Engine::Physics::Component>*>(data.UserDatas[i])->rigidComponent);
 
 		return result;
 	}

@@ -181,21 +181,12 @@ void DX11Renderer::SetViewport(float width, float height)
 void DX11Renderer::ShadowPass()
 {
 	Camera* pCamera = g_pCameraSystem->GetCurrentCamera();
-	Camera* pShadowCamera = g_pCameraSystem->GetShadowCaemra();
-	
 	Light* pMainLight = g_pLightSystem->GetMainLight();
-
-	XMVECTOR shadowPosition{ 0, 0, 1, 0 };
-
-	if (pShadowCamera)
-	{
-		shadowPosition = pShadowCamera->GetPosition();
-	}
 
 	float distance = 1000.f;
 
 	XMVECTOR direction = XMVector3Normalize(-pMainLight->_lightData.data);
-	XMVECTOR lightPosition = direction * distance * 4 + XMVectorSet(0.f, distance * 4, 0.f, 0.f);
+	XMVECTOR lightPosition = direction * 2200.f + XMVectorSet(0.f, 2000.f, 0.f, 0.f);
 	XMVECTOR lightTarget = XMVectorZero();
 	XMVECTOR lightUp = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 
@@ -204,7 +195,7 @@ void DX11Renderer::ShadowPass()
 	float viewWidth = SHADOW_WIDTH;
 	float viewHeight = SHADOW_HEIGHT;
 	float nearPlane = distance;
-	float farPlane = 7500.f;
+	float farPlane = 7000.f;
 	
 	ViewProjection vp{};
 	CameraDesc cameraDesc{};

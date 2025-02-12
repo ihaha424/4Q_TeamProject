@@ -29,7 +29,7 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	// BG_Terrain
 	{
 		objectFactory->Clone<BG_Terrain>(this);
-		helpPrepare<BG_Terrain>(L"BG_Terrain", objectFactory);
+		//helpPrepare<BG_Terrain>(L"BG_Terrain", objectFactory);
 	}
 
 	// Obj_Bermiore_Fabric
@@ -49,7 +49,7 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 
 	// Obj_Ornoa_Print
 	{
-		helpPrepare<Obj_Ornoa_Print>(L"Obj_Ornoa_Print_1", objectFactory);
+		helpPrepare<Obj_Ornoa_Print>(L"Obj_Ornoa_Print", objectFactory);
 	}
 
 	// BG_Ornoa_Cloth_3
@@ -69,7 +69,7 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 
 	// Obj_BG_Tree_3
 	{
-		helpPrepare<Obj_BG_Tree_3>(L"Obj_BG_Tree_3", objectFactory);
+		//helpPrepare<Obj_BG_Tree_3>(L"Obj_BG_Tree_3", objectFactory);
 	}
 
 	// Obj_BG_Tree_2
@@ -147,6 +147,48 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_Sudium_red>(L"Obj_Sudium_red", objectFactory);
 	}
 
+	// Obj_Mini_Platform_Set
+	{
+		// TODO: Refactor this.
+		auto object = GameClient::Application::GetLoadManager()->GetObjectCloneData(L"Obj_Mini_Platform_Set");
+		for (auto& data : object)
+		{
+			auto building = objectFactory->Clone<Obj_Mini_Platform_Set>(this);
+			building->SetisDynamic(data.GetProperty<bool>(L"isDynamic").value());
+			building->SetIsPublic(data.GetProperty<bool>(L"isPublic").value());
+			building->SetHasMesh(data.GetProperty<bool>(L"hasMesh").value());
+			building->SetTransform({
+					data.GetProperty<Engine::Math::Vector3>(L"position").value(),
+					data.GetProperty<Engine::Math::Quaternion>(L"rotation").value(),
+					data.GetProperty<Engine::Math::Vector3>(L"scale").value() * 100.
+				});
+			building->SetBoxPosition({ data.GetProperty<Engine::Math::Vector3>(L"boxPosition").value() });
+			building->SetBoxScale(data.GetProperty<Engine::Math::Vector3>(L"boxScale").value());
+		}
+		//helpPrepare<Obj_Mini_Platform_Set>(L"Obj_Mini_Platform_Set", objectFactory);
+	}
+
+	// Obj_Mini_Platform_Spawn
+	{
+		// TODO: Refactor this.
+		auto object = GameClient::Application::GetLoadManager()->GetObjectCloneData(L"Obj_Mini_Platform_Spawn");
+		for (auto& data : object)
+		{
+			auto building = objectFactory->Clone<Obj_Mini_Platform_Spawn>(this);
+			building->SetisDynamic(data.GetProperty<bool>(L"isDynamic").value());
+			building->SetIsPublic(data.GetProperty<bool>(L"isPublic").value());
+			building->SetHasMesh(data.GetProperty<bool>(L"hasMesh").value());
+			building->SetTransform({
+					data.GetProperty<Engine::Math::Vector3>(L"position").value(),
+					data.GetProperty<Engine::Math::Quaternion>(L"rotation").value(),
+					data.GetProperty<Engine::Math::Vector3>(L"scale").value() * 100.
+				});
+			building->SetBoxPosition({ data.GetProperty<Engine::Math::Vector3>(L"boxPosition").value() });
+			building->SetBoxScale(data.GetProperty<Engine::Math::Vector3>(L"boxScale").value());
+		}
+		//helpPrepare<Obj_Mini_Platform_Spawn>(L"Obj_Mini_Platform_Spawn", objectFactory);
+	}
+
 	// Obj_BG_Tree_3_Active
 	{
 		helpPrepare<Obj_BG_Tree_3_Active>(L"Obj_BG_Tree_3_Active", objectFactory);
@@ -200,6 +242,11 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	// Obj_Shinave_Platform_Spawn_3
 	{
 		helpPrepare<Obj_Shinave_Platform_Spawn_3>(L"Obj_Shinave_Platform_Spawn_3", objectFactory);
+	}
+
+	// Obj_Props_Rock
+	{
+		helpPrepare<Obj_Props_Rock>(L"Obj_Props_Rock", objectFactory);
 	}
 
 	// Obj_Bermiore_Woolball_inBox
@@ -272,6 +319,31 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_Bermiore_Soundblock>(L"Obj_Bermiore_Soundblock", objectFactory);
 	}
 
+	// Obj_Mini_Stone_1
+	{		
+		helpPrepare<Obj_Mini_Stone_1>(L"Obj_Mini_Stone_1", objectFactory);
+	}
+
+	// Obj_Mini_Stone_2
+	{
+		helpPrepare<Obj_Mini_Stone_2>(L"Obj_Mini_Stone_2", objectFactory);
+	}
+
+	// Obj_Mini_Stone_3
+	{
+		helpPrepare<Obj_Mini_Stone_3>(L"Obj_Mini_Stone_3", objectFactory);
+	}
+
+	// Obj_Mini_Stone_4
+	{
+		helpPrepare<Obj_Mini_Stone_4>(L"Obj_Mini_Stone_4", objectFactory);
+	}
+
+	// Obj_Mini_Stone_5
+	{
+		helpPrepare<Obj_Mini_Stone_5>(L"Obj_Mini_Stone_5", objectFactory);
+	}
+
 	// Obj_Hide_Box
 	{
 		// TODO: Refactor this.
@@ -317,6 +389,16 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	{
 		helpPrepare<Obj_Ornoa_Soundblock_1>(L"Obj_Ornoa_Soundblock_1", objectFactory);
 	}
+
+	// Puzzle Manager
+	{
+		objectFactory->Clone<MainPuzzleManager>(this);
+		objectFactory->Clone<PuzzleManager00>(this);
+		objectFactory->Clone<PuzzleManager01>(this);
+		objectFactory->Clone<PuzzleManager02>(this);
+		objectFactory->Clone<PuzzleManager03>(this);
+		objectFactory->Clone<PuzzleManager04>(this);
+	}
 }
 
 void TestWorld::PreInitialize(const Engine::Modules& modules)
@@ -327,7 +409,7 @@ void TestWorld::PreInitialize(const Engine::Modules& modules)
 	auto _physicsManager = Engine::Application::GetPhysicsManager();
 
 	// 메인 씬 만들기 - 중력값 설정 필요
-	Engine::Physics::SceneDesc mainSceneDesc{ {0.f,-9.8f,0.f},0 };
+	Engine::Physics::SceneDesc mainSceneDesc{ {0.f, 0.f,0.f},0 };
 	_physicsManager->CreateScene(&mainScene, mainSceneDesc);
 	_physicsManager->AttachUpdateScene(mainScene);
 	_physicsManager->CreateControllerManager(mainScene);
@@ -346,9 +428,9 @@ void TestWorld::PreInitialize(const Engine::Modules& modules)
 	//	data.y : aspect
 	//	data.z : nearPlane
 	//	data.w : farPlane
-	geometryDesc.data = { 120.f, 2, 0.01f, 10000.0f };
-	_physicsManager->AddGeomtry("Camera", geometryDesc, {});
 
+	geometryDesc.data = { std::numbers::pi_v<float> / 4.f, 16.f / 9.f, 1.f, 1000.0f };
+	_physicsManager->AddGeomtry("Camera", geometryDesc, {});
 
 	Engine::Application::GetNetworkManager()->RegistWorldEvent(
 		(short)PacketID::EnterAccept,
@@ -387,33 +469,44 @@ void TestWorld::PreUpdate(float deltaTime)
 
 void TestWorld::PostUpdate(float deltaTime)
 {
-	//Engine::Application::GetPhysicsManager()->UpdateScene(cameraScene, deltaTime);
-	//Engine::Application::GetPhysicsManager()->FetchScene(cameraScene, true);
+	Engine::Application::GetPhysicsManager()->UpdateScene(mainScene, deltaTime);
+	Engine::Application::GetPhysicsManager()->FetchScene(mainScene, true);
 
-	Engine::Physics::AdditionalQueryData OverlapInfo;
-	// TODO: transform = GetCameraTransform 해서 넣어줘야함
-	Engine::Transform transform{};
-	//cameraScene->Overlap(OverlapInfo, "Camera", transform);
+	//Engine::Physics::AdditionalQueryData OverlapInfo;
+	//// TODO: transform = GetCameraTransform 해서 넣어줘야함
 
-	for (auto& object : OverlapInfo.UserDatas)
-	{
-		static_cast<Engine::Object*>(object->GetOwner());
-		// TODO:: RenderFlag 끄기
-	}
+	//auto* camera = _currentPlayer->GetCamera();
+	//Engine::Math::Matrix matrix = camera->GetCameraMatrix();
+
+	//Engine::Math::Vector3 position, scale; 
+	//Engine::Math::Quaternion rotation;
+	//matrix.Decompose(scale, rotation, position);
+
+	//rotation = Engine::Math::Quaternion::CreateFromYawPitchRoll(std::numbers::pi_v< float> * 0.5f, std::numbers::pi_v < float>, 0.f) * rotation;
+	//Engine::Transform transform{};
+	//transform.rotation = rotation;
+	//transform.position = position;
+	//mainScene->Overlap(OverlapInfo, "Camera", transform);
+
+	//for (auto& object : OverlapInfo.UserDatas)
+	//{
+	//	Engine::Object* owner = static_cast<Engine::Object*>(object->GetOwner());
+	//	owner->Show();
+	//}
 }
 
 void TestWorld::PostFixedUpdate()
 {
-
 }
-
 
 void TestWorld::EnterAccept(const ConnectMsg::AddObject* msg) {
 	if (msg->grantnumber() == 1) {
 		_ray = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Ray>(this);
 		playerSerialNum = msg->grantnumber();
 		_ray->SetSerialNumber(msg->grantnumber());
-		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 2 });
+		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 1 });
+
+		_currentPlayer = _ray;
 	}
 	else if (msg->grantnumber() == 2) {
 		// TODO: 여기에 리브의 오브젝트를 생성하는 코드를 넣어야 합니다.
@@ -421,6 +514,8 @@ void TestWorld::EnterAccept(const ConnectMsg::AddObject* msg) {
 		playerSerialNum = msg->grantnumber();
 		_live->SetSerialNumber(msg->grantnumber());
 		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 2 });
+
+		_currentPlayer = _live;
 	}
 }
 void TestWorld::CreatePlayer(const ConnectMsg::AddObject* msg) {
@@ -452,6 +547,7 @@ void TestWorld::InitializeGameStateManager(const Engine::Modules& modules)
 {
 	auto gameStateManager = modules.gameStateManager;
 
+	gameStateManager->RegisterData(L"GrabData", GrabData{});
 
 	auto puzzle_00 = gameStateManager->NewSubManager();
 	gameStateManager->RegisterSubManager(L"puzzle_00", puzzle_00);

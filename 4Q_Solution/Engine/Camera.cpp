@@ -58,7 +58,10 @@ void Engine::Component::Camera::Activate() const
 }
 
 Engine::Math::Matrix Engine::Component::Camera::GetCameraMatrix() const
-{
+{	
+	if (nullptr == _geCamera)
+		return Engine::Math::Matrix();
+
 	return _geCamera->GetCameraMatrix();
 }
 

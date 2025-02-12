@@ -5,7 +5,7 @@ class GrabbedObject
 	: public Engine::Object
 {
 public:
-	explicit GrabbedObject(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
+	explicit GrabbedObject(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath);
 	virtual ~GrabbedObject() = default;
 	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
 
@@ -20,10 +20,13 @@ public:
 	void SetHasMesh(bool hasMesh);
 	void SetBoxScale(Engine::Math::Vector3 boxScale);
 	void SetBoxPosition(Engine::Math::Vector3 boxPosition);
+	void SetIsSphere(bool isSphere);
 
-
-	bool Grabbed(Engine::Transform* ownerTransform);
+	bool Grabbed(Engine::Transform* ownerTransform, bool isRemote = false);
 	void PutThis();
+
+	void RemoteGrabbed(const PlayMsg::PickObject* msg);
+	void RemotePutThis(const PlayMsg::PutObject* msg);
 
 protected:
 	void DisposeComponents() override;
@@ -36,6 +39,8 @@ protected:
 
 	Engine::Component::RigidKinematic* _rigidKinematic;
 	std::filesystem::path _physicsPath;
+
+	Engine::Component::Synchronize* _sync;
 
 protected:
 	bool _isPublic;

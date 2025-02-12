@@ -160,9 +160,13 @@
     <ClInclude Include="BG_Ornoa_Cloth_2.h" />
     <ClInclude Include="BG_Ornoa_Cloth_3.h" />
     <ClInclude Include="BG_Props_Fence.h" />
+    <ClInclude Include="DelayCall.h" />
+    <ClInclude Include="PuzzleManager03.h" />
     <ClInclude Include="EmptyWorld.h" />
     <ClInclude Include="GameCoreData.h" />
+    <ClInclude Include="GrabData.h" />
     <ClInclude Include="Hide_SoundTrigger.h" />
+    <ClInclude Include="MainPuzzleManager.h" />
     <ClInclude Include="InGameCanvas.h" />
     <ClInclude Include="MainCanvas.h" />
     <ClInclude Include="Not_Puzzle_ObjectData.h" />
@@ -247,6 +251,12 @@
     <ClInclude Include="GlobalLight.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PuzzleData.h" />
+    <ClInclude Include="PuzzleManager.h" />
+    <ClInclude Include="PuzzleManager00.h" />
+    <ClInclude Include="PuzzleManager01.h" />
+    <ClInclude Include="PuzzleManager02.h" />
+    <ClInclude Include="PuzzleManager04.h" />
+    <ClInclude Include="PuzzleManagerSet.h" />
     <ClInclude Include="Puzzle_00.h" />
     <ClInclude Include="Puzzle_00_ObjectData.h" />
     <ClInclude Include="Puzzle_02.h" />
@@ -292,9 +302,13 @@
     <ClCompile Include="EmptyWorld.cpp" />
     <ClCompile Include="InGameCanvas.cpp" />
     <ClCompile Include="MainCanvas.cpp" />
+    <ClCompile Include="DelayCall.cpp" />
+    <ClCompile Include="PuzzleManager03.cpp" />
     <ClCompile Include="GameCoreData.cpp" />
+    <ClCompile Include="GrabData.cpp" />
     <ClCompile Include="Hide_SoundTrigger.cpp" />
     <ClCompile Include="InteractObject.cpp" />
+    <ClCompile Include="MainPuzzleManager.cpp" />
     <ClCompile Include="NPC_Hide.cpp" />
     <ClCompile Include="NPC_Hide_Leader.cpp" />
     <ClCompile Include="NPC_Ornoa.cpp" />
@@ -375,6 +389,11 @@
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="PuzzleManager.cpp" />
+    <ClCompile Include="PuzzleManager00.cpp" />
+    <ClCompile Include="PuzzleManager01.cpp" />
+    <ClCompile Include="PuzzleManager02.cpp" />
+    <ClCompile Include="PuzzleManager04.cpp" />
     <ClCompile Include="Puzzle_00.cpp" />
     <ClCompile Include="Puzzle_02.cpp" />
     <ClCompile Include="Puzzle_01.cpp" />

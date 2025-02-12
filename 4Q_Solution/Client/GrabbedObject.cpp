@@ -1,9 +1,10 @@
 #include "pch.h"
 #include "GrabbedObject.h"
+#include "GrabData.h"
 
-GrabbedObject::GrabbedObject(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath)
-	: _staticMesh(nullptr), _meshPath(std::forward<std::filesystem::path>(meshPath))
-	, _rigidKinematic{ nullptr }, _physicsPath{ std::forward<std::filesystem::path>(physicsPath) }
+GrabbedObject::GrabbedObject(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath)
+	: _staticMesh(nullptr), _meshPath(meshPath)
+	, _rigidKinematic{ nullptr }, _physicsPath{ physicsPath }
 	, _catchOnwerTransform{ nullptr }, _maxRotation{ std::numbers::pi_v<float> / 4 }
 	, _minDistance{ 20.f }, _maxDistance{ 1000.f }, _moveSpeed{ 0.1f }
 {
@@ -13,6 +14,7 @@ void GrabbedObject::Prepare(Engine::Content::Factory::Component* componentFactor
 {
 	_staticMesh = componentFactory->Clone<Engine::Component::StaticMesh>(this);
 	_rigidKinematic = componentFactory->Clone<Engine::Component::RigidKinematic>(this);
+	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
 }
 
 void GrabbedObject::SetIsPublic(bool isPublic)
@@ -40,14 +42,29 @@ void GrabbedObject::SetBoxPosition(Engine::Math::Vector3 boxPosition)
 	_boxPosition = boxPosition;
 }
 
-bool GrabbedObject::Grabbed(Engine::Transform* ownerTransform)
+void GrabbedObject::SetIsSphere(bool isSphere)
+{
+}
+
+bool GrabbedObject::Grabbed(Engine::Transform* ownerTransform, bool isRemote)
 {
 	auto direction = _transform.position - ownerTransform->position;
 	if (direction.Length() < _minDistance || direction.Length() > _maxDistance)
 		return false;
 	_catchOnwerTransform = ownerTransform;
 	_prevOnwerTransform = *ownerTransform;
-	//TODO: 서버에세 잡았어 메세지
+	
+	if (isRemote)
+	{
+		_sync->_interactObject.set_objectserialnumber(_sync->GetSerialNumber());
+		_sync->_interactObject.SerializeToString(&_sync->_msgBuffer);
+		Client::SavePacketData(
+			_sync->_msgBuffer,
+			(short)PacketID::PickObject,
+			_sync->_interactObject.ByteSizeLong(),
+			_sync->GetSerialNumber()
+		);
+	}
 
 
 	return true;
@@ -56,7 +73,50 @@ bool GrabbedObject::Grabbed(Engine::Transform* ownerTransform)
 void GrabbedObject::PutThis()
 {
 	_catchOnwerTransform = nullptr;
-	//TODO 서버에게 놓았어 메세지
+	
+	_sync->_interactObject.set_objectserialnumber(_sync->GetSerialNumber());
+	_sync->_interactObject.SerializeToString(&_sync->_msgBuffer);
+	Client::SavePacketData(
+		_sync->_msgBuffer,
+		(short)PacketID::PutObject,
+		_sync->_interactObject.ByteSizeLong(),
+		_sync->GetSerialNumber()
+	);
+
+}
+
+void GrabbedObject::RemoteGrabbed(const PlayMsg::PickObject* msg)
+{
+	auto manager = GameClient::Application::GetGameStateManager();
+	auto data = manager->GetData(L"GrabData");
+	if (data)
+	{
+		auto grabData = std::any_cast<GrabData>(*data);
+	
+		grabData.player = msg->targetserialnumber();
+		grabData.remoteGrab = nullptr;
+		manager->SetData(L"GrabData", grabData);
+	}
+}
+
+void GrabbedObject::RemotePutThis(const PlayMsg::PutObject* msg)
+{
+	Engine::Math::Vector3 position;
+	const auto& pos = msg->position();
+	position.x = *(pos.begin());
+	position.y = *(pos.begin() + 1);
+	position.z = *(pos.begin() + 2);
+
+	auto manager = GameClient::Application::GetGameStateManager();
+	auto data = manager->GetData(L"GrabData");
+	if (data)
+	{
+		auto grabData = std::any_cast<GrabData>(*data);
+		grabData.player = msg->targetserialnumber();
+		grabData.remoteGrab = nullptr;
+		manager->SetData(L"GrabData", grabData);
+		_catchOnwerTransform = nullptr;
+	}
 }
 
 void GrabbedObject::PreUpdate(float deltaTime)
@@ -67,9 +127,8 @@ void GrabbedObject::PreUpdate(float deltaTime)
 	float angle = direction.Dot(_catchOnwerTransform->GetForward());
 	if (direction.Length() < _minDistance || direction.Length() > _maxDistance || angle > _maxRotation)
 	{
-		_catchOnwerTransform = nullptr;
+		PutThis();
 		return;
-		//TODO 서버에게 놓았어 메세지
 	}
 	_prevOnwerTransform.rotation.Conjugate();
 	Engine::Math::Quaternion deltaRot = _catchOnwerTransform->rotation * _prevOnwerTransform.rotation;
@@ -78,7 +137,7 @@ void GrabbedObject::PreUpdate(float deltaTime)
 
 	_transform.position = _catchOnwerTransform->position + direction + translate;
 	_prevOnwerTransform = *_catchOnwerTransform;
-	//TODO 서버에게 이 오브젝트의_transform 보내기(worldPos값)
+
 	std::cout << "x: " << _transform.position.x << " y: " << _transform.position.y << " z: " << _transform.position.z << std::endl;
 }
 
@@ -95,6 +154,7 @@ void GrabbedObject::DisposeComponents()
 {
 	_staticMesh->Dispose();
 	_rigidKinematic->Dispose();
+	_sync->Dispose();
 }
 
 void GrabbedObject::PreInitialize(const Engine::Modules& modules)
@@ -122,9 +182,10 @@ void GrabbedObject::PreInitialize(const Engine::Modules& modules)
 	_rigidKinematic->_rigidbody->SetFlag(Engine::Physics::CollisionType::Trigger, false);
 	_rigidKinematic->_rigidbody->SetFlag(Engine::Physics::CollisionType::Scene_Query, true);
 
-
-
 	PhysicsManager->CreateStaticBoundBoxActor(&_rigidKinematic->_boundBox, _boxScale, _transform);
 	_rigidKinematic->_boundBox->SetOwner(this);
 	PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::cameraScene))->AddActor(_rigidKinematic->_boundBox);
+
+	_sync->AddCallback((short)PacketID::PickObject, &Obj_Hide_Box::RemoteGrabbed, this);
+	_sync->AddCallback((short)PacketID::PutObject, &Obj_Hide_Box::RemotePutThis, this);
 }

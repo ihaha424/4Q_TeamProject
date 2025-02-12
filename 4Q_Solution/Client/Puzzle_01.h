@@ -1,6 +1,7 @@
 #pragma once
 struct Puzzle_01
 {
-	bool isFinish = false;
+	bool _start;
+	bool _finish;
 };
 

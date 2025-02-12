@@ -12,9 +12,10 @@ class Remote : public Engine::Object
 		Move_Completed		= 1 << 5,
 		Jump_Started		= 1 << 6,
 		Jump_Triggered		= 1 << 7,
-		Interact_Started	= 1 << 8,
-		Interact_Triggered	= 1 << 9,
-		Interact_Completed	= 1 << 10
+		Jump_Completed		= 1 << 8,
+		Interact_Started	= 1 << 9,
+		Interact_Triggered	= 1 << 10,
+		Interact_Completed	= 1 << 11
 	};
 
 	enum SplitType { Lower, Upper, End };
@@ -64,6 +65,8 @@ protected:
 	Engine::Math::Vector3 _capsuleScale;
 	Engine::Math::Quaternion _offset;
 
+	GrabbedObject* grabbedObject;
+
 private:
 	// State Test
 	void UpdateState();
@@ -75,5 +78,6 @@ public:
 	void SyncMove(const MoveMsg::MoveSync* msg);
 	// 이 함수는 최초 입장 했을 때 초기 위치 설정을 위한 함수입니다.
 	void SetLocation(const MoveMsg::MoveSync* msg);
+	void Grab(const std::wstring& name, const std::any& value);
 };
 

@@ -35,7 +35,7 @@ void Hide_SoundTrigger::PreInitialize(const Engine::Modules& modules)
 		if (!isData)
 			return;
 		auto data = std::any_cast<GameCoreData>(*isData);
-		if (data.player == 1)
+		if (data.player == 1 || data.player == 3)
 		{
 			//sound ¤¡¤¡
 		}

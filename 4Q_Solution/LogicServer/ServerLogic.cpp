@@ -15,7 +15,7 @@ bool ServerLogic::Initialize()
     delete _system;
 
     _physicsManager = new Engine::PHI::Manager();
-    _physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, true);
+    _physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, false);
     //_physicsManager->Initialize(Engine::Physics::PhysicsType::Physx, false);
 
     //============================
@@ -173,7 +173,7 @@ void ServerLogic::UpdateObject(float deltaTime)
         _playerSlot[i]._flag = _playerSlot[i]._controller->GetCollisionFlag();
         _playerSlot[i]._controller->FixedUpdate();
 
-        if (_playerSlot[i]._state & (1 << 4) && _playerSlot[i]._controller->IsJump() == false) {
+        if (_playerSlot[i]._state & (1 << 7) && _playerSlot[i]._controller->IsJump() == false) {
             _stateChange.set_stateinfo(1);
             _stateChange.SerializeToString(&_msgBuffer);
             Server::BroadCast(_msgBuffer, (short)PacketID::StateChange, _stateChange.ByteSizeLong(), _playerSlot[i]._serialNumber);
@@ -250,6 +250,8 @@ void ServerLogic::EnterProcess(const Packet& packet)
             Server::BroadCast(_msgBuffer, (short)PacketID::Sync, _addObject.ByteSizeLong(), _playerSlot[i]._serialNumber);
 
         }  // for end
+
+        Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 9001);
         //for (int i = 0; i < _buildings.size(); i++) {
         //    _addObject.set_grantnumber(_buildings[i]->_serialNumber);
         //    _addObject.set_classid(_buildings[i]->_resourceId);
@@ -744,19 +746,19 @@ void ServerLogic::RegistPlayer(Player* player)
     Engine::Physics::ControllerDesc cd;
     cd.position = Engine::Math::Vector3(0, 0, 0);
     cd.height = 10.f;
-    cd.radius = 5.f;
-    //cd.gravity = { 0.f, -0.98f, 0.f };
-    cd.gravity = { 0.f, 0.f, 0.f };
+    cd.radius = 10.f;
+    cd.gravity = { 0.f, -98.f, 0.f };
+    //cd.gravity = { 0.f, 0.f, 0.f };
     cd.contactOffset = 0.2f;
     //cd.stepOffset = 10.f;
-    cd.slopeLimit = 0.1f;
+    //cd.slopeLimit = 0.1f;
     Engine::Physics::IController* controller = player->_controller;
     _physicsManager->CreatePlayerController(&controller, _mainScene, cd);
     player->_controller = static_cast<Engine::Physics::Controller*>(controller);
     player->_controller->SetOwner(&player);
-    player->_controller->SetBottomPosition(Engine::Math::Vector3(0.f, (cd.height + cd.radius) * 0.5f, 0.f));
+    player->_controller->SetBottomPosition(Engine::Math::Vector3(0.f, (cd.height + cd.radius) * 0.5f + 15.f, 0.f));
     player->_controller->Initialize();
-    player->_controller->SetPosition(Engine::Math::Vector3(0, 0, 0));
+    player->_controller->SetPosition(Engine::Math::Vector3(0, 200, 0));
 }
 
 void ServerLogic::RegistGround(Ground& ground)

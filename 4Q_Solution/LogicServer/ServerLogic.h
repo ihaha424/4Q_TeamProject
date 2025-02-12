@@ -242,8 +242,7 @@ private:
 	void Puzzle2(int objectId);
 	void Puzzle3(int objectId);
 	void Puzzle4(int objectId);
-	void Puzzle5(int objectId);
-	void Puzzle6(int objectId, int triggerboxId);
+	void Puzzle5(int objectId, int triggerboxId);
 	
 	
 	

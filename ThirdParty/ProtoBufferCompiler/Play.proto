@@ -8,11 +8,13 @@ message SelectPart {
 
 message PickObject {
 	optional int32 targetserialnumber = 1;
+	optional int32 playerid = 2;
 }
 
 message PutObject {
 	optional int32 targetserialnumber = 1;
-	repeated float position = 2;
+	optional int32 playerid = 2;
+	repeated float position = 3;
 }
 
 message SoundPlay {
@@ -21,6 +23,7 @@ message SoundPlay {
 
 message InteractObject {
 	optional int32 objectserialnumber = 1;
+	optional int32 playerid = 2;
 }
 
 message TriggerObject {

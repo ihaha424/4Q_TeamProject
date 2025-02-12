@@ -64,7 +64,7 @@ namespace Engine::PHI
 		overlapInfo.num = data.num;
 		overlapInfo.UserDatas.reserve(data.num);
 		for (size_t i = 0; i < data.num; i++)
-			overlapInfo.UserDatas.push_back(static_cast<Collision<Engine::Physics::Component>*>(data.UserDatas[0])->rigidComponent);
+			overlapInfo.UserDatas.push_back(static_cast<Collision<Engine::Physics::Component>*>(data.UserDatas[i])->rigidComponent);
 
 		return result;
 	}

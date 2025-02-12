@@ -381,6 +381,19 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	//RegisterHelp<Obj_Props_Bermiore_Loom_1>(L"Obj_Props_Bermiore_Loom_1", loadManager, objectFactory);
 	//RegisterHelp<Obj_Props_Bermiore_Loom_2>(L"Obj_Props_Bermiore_Loom_2", loadManager, objectFactory);
 
+
+
+		// Puzzle Manager
+	{
+		objectFactory->Register<MainPuzzleManager>();
+		objectFactory->Register<PuzzleManager00>();
+		objectFactory->Register<PuzzleManager01>();
+		objectFactory->Register<PuzzleManager02>();
+		objectFactory->Register<PuzzleManager03>();
+		objectFactory->Register<PuzzleManager04>();
+	}
+
+
 	// Components
 	{
 		const auto componentFactory = contentManager->GetComponentFactory();

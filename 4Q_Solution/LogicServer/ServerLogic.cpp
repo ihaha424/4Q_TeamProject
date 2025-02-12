@@ -250,6 +250,8 @@ void ServerLogic::EnterProcess(const Packet& packet)
             Server::BroadCast(_msgBuffer, (short)PacketID::Sync, _addObject.ByteSizeLong(), _playerSlot[i]._serialNumber);
 
         }  // for end
+
+        Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 9001);
         //for (int i = 0; i < _buildings.size(); i++) {
         //    _addObject.set_grantnumber(_buildings[i]->_serialNumber);
         //    _addObject.set_classid(_buildings[i]->_resourceId);
@@ -745,11 +747,9 @@ void ServerLogic::RegistPlayer(Player* player)
     cd.position = Engine::Math::Vector3(0, 0, 0);
     cd.height = 10.f;
     cd.radius = 5.f;
-    //cd.gravity = { 0.f, -0.98f, 0.f };
+    cd.gravity = { 0.f, -0.98f, 0.f };
     cd.gravity = { 0.f, 0.f, 0.f };
     cd.contactOffset = 0.2f;
-    //cd.stepOffset = 10.f;
-    cd.slopeLimit = 0.1f;
     Engine::Physics::IController* controller = player->_controller;
     _physicsManager->CreatePlayerController(&controller, _mainScene, cd);
     player->_controller = static_cast<Engine::Physics::Controller*>(controller);

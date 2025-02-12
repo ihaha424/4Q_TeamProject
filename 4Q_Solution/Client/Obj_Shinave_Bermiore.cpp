@@ -17,6 +17,12 @@ void Obj_Shinave_Bermiore::PreInitialize(const Engine::Modules& modules)
 {
 	InteractObject::PreInitialize(modules);
 	_sync->SetSerialNumber(11101);
+	myManager = modules.gameStateManager->FindSubManager(L"puzzle_00");
+	myManager->Subscribe(L"Data", [this](const std::wstring& name, const std::any& value)
+		{
+			DataChangeCallBack(name, value);
+		}
+	, this);
 }
 
 void Obj_Shinave_Bermiore::DisposeComponents()
@@ -39,9 +45,17 @@ void Obj_Shinave_Bermiore::SendInteractToServer()
 
 void Obj_Shinave_Bermiore::Interact()
 {
-	SendInteractToServer();
+	if (_activate)
+	{
+		SendInteractToServer();
+	}
 }
 
 void Obj_Shinave_Bermiore::DataChangeCallBack(const std::wstring& name, const std::any& value)
 {
+	auto data = std::any_cast<Puzzle_00>(value);
+	if (data._start)
+		_activate = true;
+	if (data._finish)
+		_activate = false;
 }

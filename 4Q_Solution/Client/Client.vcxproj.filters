@@ -22,9 +22,6 @@
     <Filter Include="World">
       <UniqueIdentifier>{b91d8580-9a65-44c2-be84-b723c4a01858}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Light">
-      <UniqueIdentifier>{23c4e8d4-35c7-4ea6-9018-a439026c241b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\SkyBox">
       <UniqueIdentifier>{716308c1-4293-4856-bf1e-a58530687c52}</UniqueIdentifier>
     </Filter>
@@ -169,6 +166,15 @@
     <Filter Include="Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_1">
       <UniqueIdentifier>{86ba4639-df1c-49ab-8d91-7f6f3aed61dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\MapData\Light">
+      <UniqueIdentifier>{23c4e8d4-35c7-4ea6-9018-a439026c241b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\Manager">
+      <UniqueIdentifier>{5d02307c-1679-464c-844f-b9239f227b80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Puzzle\Manager\Object">
+      <UniqueIdentifier>{f7abad50-9913-4435-9e68-da864ec06da8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -193,7 +199,7 @@
       <Filter>World</Filter>
     </ClInclude>
     <ClInclude Include="GlobalLight.h">
-      <Filter>Object\Light</Filter>
+      <Filter>Object\MapData\Light</Filter>
     </ClInclude>
     <ClInclude Include="SkyBox.h">
       <Filter>Object\SkyBox</Filter>
@@ -540,6 +546,33 @@
     <ClInclude Include="Obj_Ornoa_Soundblock_1.h">
       <Filter>Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_1</Filter>
     </ClInclude>
+    <ClInclude Include="GrabData.h">
+      <Filter>Object\GrabbedObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PuzzleManager.h">
+      <Filter>Object\Puzzle\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="PuzzleManager03.h">
+      <Filter>Object\Puzzle\Manager\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="MainPuzzleManager.h">
+      <Filter>Object\Puzzle\Manager\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PuzzleManager00.h">
+      <Filter>Object\Puzzle\Manager\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PuzzleManager01.h">
+      <Filter>Object\Puzzle\Manager\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PuzzleManager02.h">
+      <Filter>Object\Puzzle\Manager\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PuzzleManager04.h">
+      <Filter>Object\Puzzle\Manager\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PuzzleManagerSet.h">
+      <Filter>Object\Puzzle\Manager\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -558,7 +591,7 @@
       <Filter>World</Filter>
     </ClCompile>
     <ClCompile Include="GlobalLight.cpp">
-      <Filter>Object\Light</Filter>
+      <Filter>Object\MapData\Light</Filter>
     </ClCompile>
     <ClCompile Include="SkyBox.cpp">
       <Filter>Object\SkyBox</Filter>
@@ -874,6 +907,30 @@
     </ClCompile>
     <ClCompile Include="Obj_Ornoa_Soundblock_1.cpp">
       <Filter>Object\Puzzle\05. Puzzle\Object\Obj_Ornoa_Soundblock_1</Filter>
+    </ClCompile>
+    <ClCompile Include="GrabData.cpp">
+      <Filter>Object\GrabbedObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PuzzleManager.cpp">
+      <Filter>Object\Puzzle\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="PuzzleManager03.cpp">
+      <Filter>Object\Puzzle\Manager\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="MainPuzzleManager.cpp">
+      <Filter>Object\Puzzle\Manager\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="PuzzleManager00.cpp">
+      <Filter>Object\Puzzle\Manager\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="PuzzleManager01.cpp">
+      <Filter>Object\Puzzle\Manager\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="PuzzleManager02.cpp">
+      <Filter>Object\Puzzle\Manager\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="PuzzleManager04.cpp">
+      <Filter>Object\Puzzle\Manager\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

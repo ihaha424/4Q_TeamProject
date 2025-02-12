@@ -110,13 +110,10 @@ void Player::PreInitialize(const Engine::Modules& modules)
 
 	Engine::Physics::ControllerDesc cd;
 	cd.position = Engine::Math::Vector3(0.f, 0.f, 0.f);
-	cd.height = 100.f;
-	cd.radius = 20.f;
+	cd.height = 10.f;
+	cd.radius = 5.f;
 	// TODO: Player Gravity
 	//cd.gravity = { 0.f, -9.8f, 0.f };
-	cd.contactOffset = 0.1f;
-	cd.stepOffset = 1.f;
-	cd.slopeLimit = 0.707f;
 
 	Engine::Physics::IController* controller;
 	PhysicsManager->CreatePlayerController(&controller, PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::mainScene)), cd);
@@ -290,7 +287,7 @@ void Player::InteractStarted()
 		auto PhysicsManager = Engine::Application::GetPhysicsManager();
 		auto raycastScene = PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::mainScene));
 		auto rayDirection = _transform.GetForward();	// WHy????????? I don't konw Why flip the X-axis
-		rayDirection.x *= -1;
+		rayDirection.z *= -1;
 		raycastScene->Raycast(queryData, _transform.position, rayDirection, 1000.f);
 		if (queryData.num > 0)
 		{

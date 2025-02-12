@@ -16,6 +16,9 @@
 
 #include "TestSprite.h"
 #include "GameCoreData.h"
+#include "GrabData.h"
+
+#include "PuzzleManagerSet.h"
 
 
 

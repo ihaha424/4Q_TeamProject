@@ -26,6 +26,8 @@ void Obj_Bermiore_Woolball_4::PreInitialize(const Engine::Modules& modules)
 void Obj_Bermiore_Woolball_4::DataChangeCallBack(const std::wstring& name, const std::any& value)
 {
 	auto data = std::any_cast<Puzzle_01>(value);
-	if (data.isFinish)
+	if (data._finish)
 		_activate = false;
+	if (data._start)
+		_activate = true;
 }

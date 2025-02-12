@@ -18,6 +18,7 @@ protected:
 
 	Engine::Component::Synchronize* _sync;
 	int player;
+	bool _activate = false;
 
 	// InteractObject을(를) 통해 상속됨
 	void Interact() override;

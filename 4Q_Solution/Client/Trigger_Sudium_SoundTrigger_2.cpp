@@ -38,7 +38,7 @@ void Trigger_Sudium_SoundTrigger_2::TriggerEvent(const PlayMsg::TriggerObject* m
 void Trigger_Sudium_SoundTrigger_2::PreInitialize(const Engine::Modules& modules)
 {
 	TriggerArea::PreInitialize(modules);
-	_sync->SetSerialNumber(8011);
+	_sync->SetSerialNumber(8012);
 	_sync->AddCallback((short)PacketID::TriggerObject, &Trigger_Sudium_SoundTrigger_2::TriggerEvent, this);
 
 	_trigger->BindBeginInteraction([this]() {

@@ -5,6 +5,11 @@ namespace Engine::GEGraphics
 	class Manager;
 }
 
+namespace Engine::DSHHud
+{
+	class Manager;
+}
+
 namespace Engine
 {
 	class Application
@@ -22,12 +27,16 @@ namespace Engine
 		void Run(int showCommand);
 		void End();
 
+		static Math::Size GetSize();
+
 	protected:
 		virtual void LoadData(Load::IManager* loadManager) = 0;
 		virtual void DeclareInputActions(Input::IManager* inputManager) = 0;
 		virtual void Register(Content::IManager* contentManager, Load::IManager* loadManager);
 		virtual void PrepareInitialWorld(Content::Factory::World* worldFactory) = 0;
+		virtual void PrepareInitialHUD(DSHHud::Manager* hudManager) = 0;
 
+		static Math::Size _size;
 	private:
 		static void CreateManagers();
 		void InitializeManagers() const;
@@ -42,7 +51,6 @@ namespace Engine
 
 		// TODO: Setup from file.
 		std::wstring _title;
-		Math::Size _size;
 
 	public:
 		static Time::IManager* GetTimeManager();
@@ -55,6 +63,7 @@ namespace Engine
 		static Logger::IManager* GetLoggerManager();
 		static GameState::IManager* GetGameStateManager();
 		static Audio::IManager* GetSoundManager();
+		static DSHHud::Manager* GetHudManager();
 
 	private:
 		static void CreateTimeManager(Time::Manager** timeManager);
@@ -68,6 +77,7 @@ namespace Engine
 		static void CreateLoggerManager(Logger::Manager** loggerManager);
 		static void CreateGameStateManager(GameState::Manager** gameStateManager);
 		static void CreateSoundManager(DSHAudio::Manager** soundManager);
+		static void CreateHudManager(DSHHud::Manager** hudManager);
 
 		static Time::Manager* _timeManager;
 		static Window::Manager* _windowManager;
@@ -80,6 +90,7 @@ namespace Engine
 		static Logger::Manager* _loggerManager;
 		static GameState::Manager* _gameStateManager;
 		static DSHAudio::Manager* _soundManager;
+		static DSHHud::Manager* _hudManager;
 	};
 }
 

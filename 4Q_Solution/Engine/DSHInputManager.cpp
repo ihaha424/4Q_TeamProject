@@ -118,6 +118,11 @@ void Engine::DSHInput::Manager::SetActiveMappingContext(Input::IMappingContext* 
 	_mappingContext = reinterpret_cast<Input::MappingContext*>(mappingContext);
 }
 
+void Engine::DSHInput::Manager::SetActiveMappingContext(const std::wstring& name)
+{
+	SetActiveMappingContext(&_mappingContexts.at(name));
+}
+
 void Engine::DSHInput::Manager::GetModifier(Input::Modifier::INegative** negative)
 {
 	if (negative == nullptr) Utility::ThrowIfFailed()(E_INVALIDARG);

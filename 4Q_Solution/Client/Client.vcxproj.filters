@@ -181,6 +181,30 @@
     <Filter Include="Utilities\DelayCall">
       <UniqueIdentifier>{7ec779a9-7b8b-479c-ba8b-9cfa0093c92e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Canvas">
+      <UniqueIdentifier>{28df2601-1c54-4987-988f-3076c2880f8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Canvas\Main">
+      <UniqueIdentifier>{fa71e9a0-e353-4433-a197-d94f776d1659}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World\EmptyWorld">
+      <UniqueIdentifier>{22556cbd-66a1-46ff-b453-db243ac00374}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\SimpleCamera">
+      <UniqueIdentifier>{afaaabca-0ecd-4345-8122-99602b6136a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Canvas\InGame">
+      <UniqueIdentifier>{0c1e44ed-f9a3-4a74-9293-e49505c27df9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterfaces">
+      <UniqueIdentifier>{edc175f5-fd73-4ad3-85a1-e9f011e7d504}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterfaces\InteractImage">
+      <UniqueIdentifier>{38c0f078-acd6-4237-ba2c-a7675f4a62c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterfaces\GrabImage">
+      <UniqueIdentifier>{aef9e139-4525-42a8-8b31-3e928b5e81ae}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Object\Puzzle\01. Puzzle\BermioreFabricLight">
       <UniqueIdentifier>{0b2b9e41-fcaa-4252-81da-368a8bb53b60}</UniqueIdentifier>
     </Filter>
@@ -582,6 +606,24 @@
     <ClInclude Include="DelayCall.h">
       <Filter>Utilities\DelayCall</Filter>
     </ClInclude>
+    <ClInclude Include="MainCanvas.h">
+      <Filter>Canvas\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="EmptyWorld.h">
+      <Filter>World\EmptyWorld</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleCamera.h">
+      <Filter>Object\SimpleCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="InGameCanvas.h">
+      <Filter>Canvas\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="InteractImage.h">
+      <Filter>UserInterfaces\InteractImage</Filter>
+    </ClInclude>
+    <ClInclude Include="GrabImage.h">
+      <Filter>UserInterfaces\GrabImage</Filter>
+    </ClInclude>
     <ClInclude Include="Puzzle_02_ObjectData.h">
       <Filter>Object\Puzzle\02. Puzzle</Filter>
     </ClInclude>
@@ -596,6 +638,9 @@
     </ClInclude>
     <ClInclude Include="Trigger_Sudium_SoundTrigger_5.h">
       <Filter>Object\Puzzle\02. Puzzle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="NPC.h">
+      <Filter>Object\NPC</Filter>
     </ClInclude>
     <ClInclude Include="BermioreFabricLight.h">
       <Filter>Object\Puzzle\01. Puzzle\BermioreFabricLight</Filter>
@@ -976,6 +1021,27 @@
     </ClCompile>
     <ClCompile Include="BermioreFabricLight.cpp">
       <Filter>Object\Puzzle\01. Puzzle\BermioreFabricLight</Filter>
+    </ClCompile>
+    <ClCompile Include="MainCanvas.cpp">
+      <Filter>Canvas\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="EmptyWorld.cpp">
+      <Filter>World\EmptyWorld</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleCamera.cpp">
+      <Filter>Object\SimpleCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="InGameCanvas.cpp">
+      <Filter>Canvas\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractImage.cpp">
+      <Filter>UserInterfaces\InteractImage</Filter>
+    </ClCompile>
+    <ClCompile Include="GrabImage.cpp">
+      <Filter>UserInterfaces\GrabImage</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC.cpp">
+      <Filter>Object\NPC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

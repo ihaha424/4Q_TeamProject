@@ -256,7 +256,9 @@ void ServerLogic::EnterProcess(const Packet& packet)
 
         }  // for end
 
+        Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 9001);
         Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 9002);
+        Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 9003);
         //for (int i = 0; i < _buildings.size(); i++) {
         //    _addObject.set_grantnumber(_buildings[i]->_serialNumber);
         //    _addObject.set_classid(_buildings[i]->_resourceId);
@@ -975,21 +977,25 @@ void ServerLogic::SoundPlayProgress(int objectId)
 
 void ServerLogic::PuzzleProcess(int objectId)
 {
+    Puzzle1(objectId);
+    Puzzle2(objectId);
+    Puzzle3(objectId);
+
     switch (_currentPuzzleNumber) {
 
     case 1:
     {
-        Puzzle1(objectId);
+        
         break;
     }
     case 2:
     {
-        Puzzle2(objectId);
+        
         break;
     }
     case 3:
     {
-        Puzzle3(objectId);
+        
         break;
     }
     case 4:

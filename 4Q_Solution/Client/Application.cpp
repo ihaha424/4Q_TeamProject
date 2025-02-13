@@ -1,10 +1,31 @@
 #include "pch.h"
 #include "Application.h"
 
+#include "MainCanvas.h"
+#include "InGameCanvas.h"
 #include "TestWorld.h"
+#include "EmptyWorld.h"
+#include "NPC_Hide.h"
+#include "NPC_Ornoa.h"
+#include "NPC_Ornoa_Elder.h"
+#include "SimpleCamera.h"
+#include "../Engine/DSHHudManager.h"
+
+InGameCanvas* GameClient::Application::_inGameCanvas = nullptr;
 
 GameClient::Application::Application(const HINSTANCE instanceHandle) : Engine::Application(instanceHandle)
 {
+}
+
+GameClient::Application::~Application()
+{
+	delete _mainCanvas;
+	delete _inGameCanvas;
+}
+
+InGameCanvas* GameClient::Application::GetInGameCanvas()
+{
+	return _inGameCanvas;
 }
 
 void GameClient::Application::LoadData(Engine::Load::IManager* loadManager)
@@ -15,14 +36,18 @@ void GameClient::Application::LoadData(Engine::Load::IManager* loadManager)
 
 void GameClient::Application::DeclareInputActions(Engine::Input::IManager* inputManager)
 {
-	Engine::Input::IMappingContext* mappingContext = nullptr;
-	inputManager->GetMappingContext(L"Default", &mappingContext);
+	Engine::Input::IMappingContext* gameMappingContext = nullptr;
+	inputManager->GetMappingContext(L"Default", &gameMappingContext);
 
-	DeclareMoveAction(inputManager, mappingContext);
-	DeclareCameraAction(inputManager, mappingContext);
-	DeclareSystemAction(inputManager, mappingContext);
+	Engine::Input::IMappingContext* uiMappingContext = nullptr;
+	inputManager->GetMappingContext(L"UI", &uiMappingContext);
 
-	inputManager->SetActiveMappingContext(mappingContext);
+	DeclareUIAction(inputManager, uiMappingContext, gameMappingContext);
+	DeclareMoveAction(inputManager, gameMappingContext);
+	DeclareCameraAction(inputManager, gameMappingContext);
+	DeclareSystemAction(inputManager, gameMappingContext);
+
+	inputManager->SetActiveMappingContext(uiMappingContext);
 }
 
 void GameClient::Application::Register(Engine::Content::IManager* contentManager, Engine::Load::IManager* loadManager)
@@ -30,9 +55,11 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	Engine::Application::Register(contentManager, loadManager);
 
 	const auto worldFactory = contentManager->GetWorldFactory();
+	worldFactory->Register<EmptyWorld>();
 	worldFactory->Register<TestWorld>();
 
 	const auto objectFactory = contentManager->GetObjectFactory();
+	objectFactory->Register<SimpleCamera>();
 	objectFactory->Register<GlobalLight>();
 	objectFactory->Register<Ray>(L"Assets/Models/Ray.fbx");
 	objectFactory->Register<RemoteRay>(L"Assets/Models/Ray.fbx");
@@ -41,8 +68,17 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	objectFactory->Register<SkyBox>(L"Assets/Models/skybox.fbx");
 	objectFactory->Register<BermioreFabricLight>();
 
+
+	// NPC
+	{
+		objectFactory->Register<NPC_Hide>();
+		objectFactory->Register<NPC_Ornoa>();
+		objectFactory->Register<NPC_Ornoa_Elder>();
+	}
+
+
 	// BG_Terrain
-	{		
+	{
 		objectFactory->Register<BG_Terrain>(L"Assets/Models/BG_Terrain.fbx", L"Assets/Models/BG_Terrain.fbx");
 	}
 
@@ -208,7 +244,7 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Sudium_red").value();
 		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
 		objectFactory->Register<Obj_Sudium_red>(buildingProperty, buildingProperty);
-	}	
+	}
 
 	// Obj_BG_Tree_3_Active
 	{
@@ -456,8 +492,91 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 
 void GameClient::Application::PrepareInitialWorld(Engine::Content::Factory::World* worldFactory)
 {
+	//worldFactory->Clone<EmptyWorld>();
 	worldFactory->Clone<TestWorld>();
 }
+
+void GameClient::Application::PrepareInitialHUD(Engine::DSHHud::Manager* hudManager)
+{
+	_mainCanvas = new MainCanvas(_size);
+	_inGameCanvas = new InGameCanvas(_size);
+	hudManager->SetCanvas(_mainCanvas);
+	_mainCanvas->BindOnFadeIn([hudManager, this]()
+		{
+			hudManager->SetCanvas(_inGameCanvas);
+			GetInputManager()->SetActiveMappingContext(L"Default");
+		});
+}
+
+void GameClient::Application::DeclareUIAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mainMappingContext, Engine::Input::IMappingContext* defaultMappingContext)
+{
+	Engine::Input::Device::IController* controller = nullptr;
+	inputManager->GetDevice(&controller);
+
+	Engine::Input::Device::IMouse* mouse = nullptr;
+	inputManager->GetDevice(&mouse);
+
+	// UINext
+	Engine::Input::IAction* action = nullptr;
+	mainMappingContext->GetAction(L"UINext", &action);
+
+	Engine::Input::Trigger::IDown* leftClickTrigger = nullptr;
+	action->GetTrigger(&leftClickTrigger);
+	Engine::Input::Component::IButtonComponent* leftClick = nullptr;
+	mouse->GetComponent(Engine::Input::Device::IMouse::Button::Left, &leftClick);
+	leftClickTrigger->SetComponent(leftClick);
+
+	Engine::Input::Trigger::IDown* bButtonTrigger = nullptr;
+	action->GetTrigger(&bButtonTrigger);
+	Engine::Input::Component::IButtonComponent* bButton = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Button::B, &bButton);
+	bButtonTrigger->SetComponent(bButton);
+
+	Engine::Input::Trigger::IDown* aButtonTrigger = nullptr;
+	action->GetTrigger(&aButtonTrigger);
+	Engine::Input::Component::IButtonComponent* aButton = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Button::A, &aButton);
+	aButtonTrigger->SetComponent(aButton);
+
+	Engine::Input::Trigger::IDown* xButtonTrigger = nullptr;
+	action->GetTrigger(&xButtonTrigger);
+	Engine::Input::Component::IButtonComponent* xButton = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Button::X, &xButton);
+	xButtonTrigger->SetComponent(xButton);
+
+	Engine::Input::Trigger::IDown* yButtonTrigger = nullptr;
+	action->GetTrigger(&yButtonTrigger);
+	Engine::Input::Component::IButtonComponent* yButton = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Button::Y, &yButton);
+	yButtonTrigger->SetComponent(yButton);
+
+	// InGame Fade In
+	action->AddListener(Engine::Input::Trigger::Event::Started, [this](auto) {
+		_mainCanvas->FadeIn();
+		});
+
+	// Move Tutorial
+	Engine::Input::IAction* moveTutorialAction = nullptr;
+	defaultMappingContext->GetAction(L"Move", &moveTutorialAction);
+	moveTutorialAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto) {
+		_inGameCanvas->MoveTutorialDone();
+		});
+
+	// View Tutorial
+	Engine::Input::IAction* viewTutorialAction = nullptr;
+	defaultMappingContext->GetAction(L"Camera", &viewTutorialAction);
+	viewTutorialAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto) {
+		_inGameCanvas->ViewTutorialDone();
+		});
+
+	// Jump Tutorial
+	Engine::Input::IAction* jumpTutorialAction = nullptr;
+	defaultMappingContext->GetAction(L"Jump", &jumpTutorialAction);
+	jumpTutorialAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto) {
+		_inGameCanvas->JumpTutorialDone();
+		});
+}
+
 
 void GameClient::Application::DeclareMoveAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext)
 {

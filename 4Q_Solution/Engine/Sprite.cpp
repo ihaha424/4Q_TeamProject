@@ -8,6 +8,7 @@ Engine::Component::Sprite::Sprite()
 	, _width(0.f), _height(0.f)
 {
 	_geSpriteDescription.activeDraw = true;
+	_geSpriteDescription.alpha = 1.f;
 	_geSpriteDescription.type = GE::SpriteDescription::D2D;
 }
 
@@ -58,5 +59,11 @@ void Engine::Component::Sprite::SetFilePath(const std::filesystem::path& filePat
 void Engine::Component::Sprite::SetActiveDraw(bool isActive)
 {
 	_geSpriteDescription.activeDraw = isActive;
+	_geSpriteRenderer->SetDesc(&_geSpriteDescription);
+}
+
+void Engine::Component::Sprite::SetAlpha(float alpha)
+{
+	_geSpriteDescription.alpha = alpha;
 	_geSpriteRenderer->SetDesc(&_geSpriteDescription);
 }

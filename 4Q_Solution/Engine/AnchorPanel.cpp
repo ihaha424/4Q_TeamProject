@@ -12,10 +12,10 @@ Engine::UI::Panel::Anchor::~Anchor()
 	_children.clear();
 }
 
-void Engine::UI::Panel::Anchor::Initialize()
+void Engine::UI::Panel::Anchor::Initialize(const Modules& modules)
 {
-	UserInterface::Initialize();
-	std::ranges::for_each(_children, [](const Child* child) { child->Initialize(); });
+	UserInterface::Initialize(modules);
+	std::ranges::for_each(_children, [&modules](const Child* child) { child->Initialize(modules); });
 }
 
 void Engine::UI::Panel::Anchor::Attach()
@@ -59,9 +59,9 @@ Engine::UI::Panel::Anchor::Child::Child(UserInterface* child):
 {
 }
 
-void Engine::UI::Panel::Anchor::Child::Initialize() const
+void Engine::UI::Panel::Anchor::Child::Initialize(const Modules& modules) const
 {
-	_child->Initialize();
+	_child->Initialize(modules);
 }
 
 void Engine::UI::Panel::Anchor::Child::Attach() const

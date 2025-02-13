@@ -49,6 +49,10 @@ private:
 	void InteractTriggered();
 	void InteractCompleted();
 
+	void RayCast();
+	void ShowHintUIFromRayCast();
+
+	void ChangeSplitAnimation(const char* animation, StateFlag flag, SplitType type);
 	void ChangeSplitAnimation(const char* animation, StateFlag flag, SplitType type, float speed = 1.f);
 	void SyncPatialAnimation(const char* animation, StateFlag flag, SplitType parent, SplitType child);
 	
@@ -88,6 +92,7 @@ protected:
 	Engine::Math::Quaternion _offset;
 	float _speed;
 
+	Engine::Physics::AdditionalQueryData _queryData;
 
 	GrabbedObject* grabbedObject;
 
@@ -104,5 +109,12 @@ public:
 	// 이 함수는 최초 입장 했을 때 초기 위치 설정을 위한 함수입니다.
 	void SetLocation(const MoveMsg::MoveSync* msg);
 	void StateChange(const MoveMsg::StateChange* msg);
+
+
+private:
+	bool _prevInteractRay;
+	bool _prevGrabRay;
+	bool _interactRay;
+	bool _grabRay;
 };
 

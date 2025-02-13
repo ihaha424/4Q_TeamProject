@@ -27,6 +27,7 @@ namespace Engine::DSHInput
 
 		void GetMappingContext(const wchar_t* name, Input::IMappingContext** mappingContext) override;
 		void SetActiveMappingContext(Input::IMappingContext* mappingContext) override;
+		void SetActiveMappingContext(const std::wstring& name) override;
 
 		void GetModifier(Input::Modifier::INegative** negative) override;
 		void GetModifier(Input::Modifier::ISwizzleAxis::Type type, Input::Modifier::ISwizzleAxis** swizzleAxis) override;

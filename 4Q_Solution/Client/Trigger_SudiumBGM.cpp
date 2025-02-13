@@ -4,7 +4,7 @@
 void Trigger_SudiumBGM::Prepare(Engine::Content::Factory::Component* componentFactory)
 {
 	_trigger = componentFactory->Clone<TriggerBox>(this);
-	_sound = componentFactory->Clone<Engine::Component::EffectSound>(this);
+	_sound = componentFactory->Clone<Engine::Component::BackgroundMusic>(this);
 }
 
 

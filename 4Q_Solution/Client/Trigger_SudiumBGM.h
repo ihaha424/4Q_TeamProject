@@ -19,7 +19,7 @@ public:
 
 protected:
 	TriggerBox* _trigger;
-	Engine::Component::EffectSound* _sound;
+	Engine::Component::BackgroundMusic* _sound;
 
 	bool _isPublic;
 	bool _isDynamic;

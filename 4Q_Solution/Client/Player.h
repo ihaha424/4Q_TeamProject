@@ -52,7 +52,6 @@ private:
 	void RayCast();
 	void ShowHintUIFromRayCast();
 
-	void ChangeSplitAnimation(const char* animation, StateFlag flag, SplitType type);
 	void ChangeSplitAnimation(const char* animation, StateFlag flag, SplitType type, float speed = 1.f);
 	void SyncPatialAnimation(const char* animation, StateFlag flag, SplitType parent, SplitType child);
 	

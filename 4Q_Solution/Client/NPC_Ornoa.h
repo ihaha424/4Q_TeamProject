@@ -1,5 +1,9 @@
 #pragma once
-class NPC_Ornoa
+#include "NPC.h"
+
+class NPC_Ornoa : public NPC
 {
+public:
+	NPC_Ornoa();
 };
 

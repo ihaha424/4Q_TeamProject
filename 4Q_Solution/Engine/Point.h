@@ -4,6 +4,8 @@ namespace Engine::Math
 {
 	struct Point : POINT
 	{
+		static const Point Zero;
+
 		Point() noexcept = default;
 		Point(long x, long y);
 

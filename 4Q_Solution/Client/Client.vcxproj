@@ -161,11 +161,17 @@
     <ClInclude Include="BG_Ornoa_Cloth_3.h" />
     <ClInclude Include="BG_Props_Fence.h" />
     <ClInclude Include="DelayCall.h" />
+    <ClInclude Include="GrabImage.h" />
+    <ClInclude Include="InteractImage.h" />
+    <ClInclude Include="NPC.h" />
     <ClInclude Include="PuzzleManager03.h" />
+    <ClInclude Include="EmptyWorld.h" />
     <ClInclude Include="GameCoreData.h" />
     <ClInclude Include="GrabData.h" />
     <ClInclude Include="Hide_SoundTrigger.h" />
     <ClInclude Include="MainPuzzleManager.h" />
+    <ClInclude Include="InGameCanvas.h" />
+    <ClInclude Include="MainCanvas.h" />
     <ClInclude Include="Not_Puzzle_ObjectData.h" />
     <ClInclude Include="NPCData.h" />
     <ClInclude Include="InteractObject.h" />
@@ -274,6 +280,7 @@
     <ClInclude Include="RemoteRay.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SceneFillter.h" />
+    <ClInclude Include="SimpleCamera.h" />
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="StaticObject.h" />
     <ClInclude Include="Obj_Props_Bermiore_Cloth_1.h" />
@@ -299,7 +306,13 @@
     <ClCompile Include="BG_Ornoa_Cloth_2.cpp" />
     <ClCompile Include="BG_Ornoa_Cloth_3.cpp" />
     <ClCompile Include="BG_Props_Fence.cpp" />
+    <ClCompile Include="EmptyWorld.cpp" />
+    <ClCompile Include="GrabImage.cpp" />
+    <ClCompile Include="InGameCanvas.cpp" />
+    <ClCompile Include="InteractImage.cpp" />
+    <ClCompile Include="MainCanvas.cpp" />
     <ClCompile Include="DelayCall.cpp" />
+    <ClCompile Include="NPC.cpp" />
     <ClCompile Include="PuzzleManager03.cpp" />
     <ClCompile Include="GameCoreData.cpp" />
     <ClCompile Include="GrabData.cpp" />
@@ -403,6 +416,7 @@
     <ClCompile Include="RemoteLive.cpp" />
     <ClCompile Include="RemoteMove.cpp" />
     <ClCompile Include="RemoteRay.cpp" />
+    <ClCompile Include="SimpleCamera.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="StaticObject.cpp" />
     <ClCompile Include="Obj_Props_Bermiore_Cloth_1.cpp" />

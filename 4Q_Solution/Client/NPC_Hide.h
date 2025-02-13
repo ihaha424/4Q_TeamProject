@@ -1,5 +1,9 @@
 #pragma once
-class NPC_Hide
+#include "NPC.h"
+
+class NPC_Hide : public NPC
 {
+public:
+	NPC_Hide();
 };
 

@@ -14,6 +14,7 @@ SamplerState samLinear_wrap  : register(s0);
 
 float4 main(PS_INPUT input) : SV_Target
 {
-    float3 color = txSprite.Sample(samLinear_wrap, input.uv).rgb;
-    return float4(color, alpha);
+    float4 color = txSprite.Sample(samLinear_wrap, input.uv);
+    color.a *= alpha;
+    return color;
 }

@@ -24,6 +24,9 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 	//_ray = objectFactory->Clone<Ray>(this);
 	_light = objectFactory->Clone<GlobalLight>(this);
 	_skyBox = objectFactory->Clone<SkyBox>(this);
+
+	objectFactory->Clone<BermioreFabricLight>(this);
+
 	//_testSprite = objectFactory->Clone<TestSprite>(this);
 
 	// BG_Terrain

@@ -81,7 +81,7 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	_fixedArm->SetTarget(&_transform);
 	_fixedArm->SetCameraComponent(_camera);
 	_fixedArm->SetDistance(60.f);
-	_fixedArm->SetCameraPosition(Engine::Math::Vector2{ 0.f, 1000.f });
+	_fixedArm->SetCameraPosition(Engine::Math::Vector2{ 0.f, 10.f });
 	_fixedArm->SetRotationSpeed(Engine::Math::Vector2{ 0.02f, 0.04f });
 	_fixedArm->SetFollowSpeed(0.01f);
 	
@@ -111,6 +111,16 @@ void Player::PreInitialize(const Engine::Modules& modules)
 	interactAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value) { InteractStarted(); });
 	interactAction->AddListener(Engine::Input::Trigger::Event::Triggered, [this](auto value) { InteractTriggered(); });
 	interactAction->AddListener(Engine::Input::Trigger::Event::Completed, [this](auto value) { InteractCompleted(); });
+
+
+	//const auto inputManager = Engine::Application::GetInputManager();
+	//Engine::Input::IMappingContext* mappingContext = nullptr;
+	//inputManager->GetMappingContext(L"Default", &mappingContext);
+
+	Engine::Input::IAction* TestAction = nullptr;
+	mappingContext->GetAction(L"TestKey01", &TestAction);
+	TestAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto value)
+		{ printf("%f, %f, %f\n", _transform.position.x, _transform.position.y, _transform.position.z); });
 
 	auto PhysicsManager = Engine::Application::GetPhysicsManager();
 
@@ -177,7 +187,8 @@ void Player::PostInitialize(const Engine::Modules& modules)
 void Player::PostUpdate(float deltaTime)
 {
 	Object::PostUpdate(deltaTime);
-	_fixedArm->SetCameraPosition(Engine::Math::Vector2{ 0.f, 10.f });
+	//printf("%f", deltaTime);
+	//_fixedArm->SetCameraPosition(Engine::Math::Vector2{ 0.f, 10.f });
 
 	auto container = std::ranges::remove_if(_delayQueue, [deltaTime](auto& delayCall)
 		{
@@ -436,7 +447,7 @@ void Player::UpdateState()
 				_delayQueue.push_back(DelayCall([=]() {
 					_bitFlag->OnFlag(StateFlag::Jump_Triggered);
 					SendStateMessage();
-					printf("Jump Triggered\n");
+					//printf("Jump Triggered\n");
 					}, 0.05f));
 				
 				_animator->ChangeAnimation("rig|Anim_Jump_loop");

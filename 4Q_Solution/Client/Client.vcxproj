@@ -156,6 +156,7 @@
     <ClInclude Include="BaseMiniStone.h" />
     <ClInclude Include="BaseStone.h" />
     <ClInclude Include="BaseWoolball.h" />
+    <ClInclude Include="BermioreFabricLight.h" />
     <ClInclude Include="BG_Ornoa_Cloth_1.h" />
     <ClInclude Include="BG_Ornoa_Cloth_2.h" />
     <ClInclude Include="BG_Ornoa_Cloth_3.h" />
@@ -295,6 +296,7 @@
     <ClCompile Include="BaseMiniStone.cpp" />
     <ClCompile Include="BaseStone.cpp" />
     <ClCompile Include="BaseWoolball.cpp" />
+    <ClCompile Include="BermioreFabricLight.cpp" />
     <ClCompile Include="BG_Ornoa_Cloth_1.cpp" />
     <ClCompile Include="BG_Ornoa_Cloth_2.cpp" />
     <ClCompile Include="BG_Ornoa_Cloth_3.cpp" />

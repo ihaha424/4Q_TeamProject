@@ -181,6 +181,9 @@
     <Filter Include="Utilities\DelayCall">
       <UniqueIdentifier>{7ec779a9-7b8b-479c-ba8b-9cfa0093c92e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Puzzle\01. Puzzle\BermioreFabricLight">
+      <UniqueIdentifier>{0b2b9e41-fcaa-4252-81da-368a8bb53b60}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -594,6 +597,9 @@
     <ClInclude Include="Trigger_Sudium_SoundTrigger_5.h">
       <Filter>Object\Puzzle\02. Puzzle\Object</Filter>
     </ClInclude>
+    <ClInclude Include="BermioreFabricLight.h">
+      <Filter>Object\Puzzle\01. Puzzle\BermioreFabricLight</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -967,6 +973,9 @@
     </ClCompile>
     <ClCompile Include="Trigger_Sudium_SoundTrigger_5.cpp">
       <Filter>Object\Puzzle\02. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="BermioreFabricLight.cpp">
+      <Filter>Object\Puzzle\01. Puzzle\BermioreFabricLight</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

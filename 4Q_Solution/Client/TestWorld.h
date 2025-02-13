@@ -22,7 +22,6 @@
 #include "PuzzleManagerSet.h"
 
 
-
 class TestWorld : public Engine::World
 {
 public:

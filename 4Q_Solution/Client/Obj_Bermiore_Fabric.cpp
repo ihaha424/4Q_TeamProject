@@ -87,6 +87,8 @@ void Obj_Bermiore_Fabric::PostInitialize(const Engine::Modules& modules)
 	_soundClear->SetMinDistance(10.f);
 	_soundClear->SetMaxDistance(20.f);
 	_soundClear->SetPosition(_transform.position);
+
+	_matrix = _transform.GetMatrix();
 }
 
 void Obj_Bermiore_Fabric::Interact()

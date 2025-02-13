@@ -39,6 +39,7 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	objectFactory->Register<Live>(L"Assets/Models/Live.fbx");
 	objectFactory->Register<RemoteLive>(L"Assets/Models/Live.fbx");
 	objectFactory->Register<SkyBox>(L"Assets/Models/skybox.fbx");
+	objectFactory->Register<BermioreFabricLight>();
 
 	// BG_Terrain
 	{		
@@ -669,4 +670,15 @@ void GameClient::Application::DeclareSystemAction(Engine::Input::IManager* input
 	hideAction->AddListener(Engine::Input::Trigger::Event::Started, [mouse](auto value) {
 		mouse->HideCursor();
 		});
+
+
+	// Test Key
+	Engine::Input::IAction* testKey01 = nullptr;
+	mappingContext->GetAction(L"TestKey01", &testKey01);
+
+	Engine::Input::Trigger::IDown* oButton = nullptr;
+	testKey01->GetTrigger(&oButton);
+	Engine::Input::Component::IButtonComponent* oBtn = nullptr;
+	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::O, &oBtn);
+	oButton->SetComponent(oBtn);
 }

@@ -421,6 +421,15 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<Obj_Ornoa_Soundblock_1>(L"Obj_Ornoa_Soundblock_1", objectFactory);
 	}
 
+	// Trigger_HideBGM
+	{
+		objectFactory->Clone<Trigger_AtelierBGM>(this);
+		objectFactory->Clone<Trigger_HideBGM>(this);
+		objectFactory->Clone<Trigger_OrnoaBGM>(this);
+		objectFactory->Clone<Trigger_SinaveBGM>(this);
+		objectFactory->Clone<Trigger_SudiumBGM>(this);
+	}
+
 	// Puzzle Manager
 	{
 		objectFactory->Clone<MainPuzzleManager>(this);
@@ -535,7 +544,7 @@ void TestWorld::EnterAccept(const ConnectMsg::AddObject* msg) {
 		_ray = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Ray>(this);
 		playerSerialNum = msg->grantnumber();
 		_ray->SetSerialNumber(msg->grantnumber());
-		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 1 });
+		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 3 });
 
 		_currentPlayer = _ray;
 	}

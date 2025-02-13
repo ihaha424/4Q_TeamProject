@@ -21,6 +21,9 @@
 
 #include "PuzzleManagerSet.h"
 
+#include "BGM_List.h"
+
+
 
 
 class TestWorld : public Engine::World

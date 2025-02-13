@@ -181,6 +181,9 @@
     <Filter Include="Utilities\DelayCall">
       <UniqueIdentifier>{7ec779a9-7b8b-479c-ba8b-9cfa0093c92e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\RegionBGM">
+      <UniqueIdentifier>{d81a7e7c-b0cb-4c90-aa08-e390179688d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -594,6 +597,24 @@
     <ClInclude Include="Trigger_Sudium_SoundTrigger_5.h">
       <Filter>Object\Puzzle\02. Puzzle\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Trigger_AtelierBGM.h">
+      <Filter>Object\RegionBGM</Filter>
+    </ClInclude>
+    <ClInclude Include="Trigger_HideBGM.h">
+      <Filter>Object\RegionBGM</Filter>
+    </ClInclude>
+    <ClInclude Include="Trigger_OrnoaBGM.h">
+      <Filter>Object\RegionBGM</Filter>
+    </ClInclude>
+    <ClInclude Include="Trigger_SinaveBGM.h">
+      <Filter>Object\RegionBGM</Filter>
+    </ClInclude>
+    <ClInclude Include="Trigger_SudiumBGM.h">
+      <Filter>Object\RegionBGM</Filter>
+    </ClInclude>
+    <ClInclude Include="BGM_List.h">
+      <Filter>Object\RegionBGM</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -967,6 +988,21 @@
     </ClCompile>
     <ClCompile Include="Trigger_Sudium_SoundTrigger_5.cpp">
       <Filter>Object\Puzzle\02. Puzzle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Trigger_SudiumBGM.cpp">
+      <Filter>Object\RegionBGM</Filter>
+    </ClCompile>
+    <ClCompile Include="Trigger_AtelierBGM.cpp">
+      <Filter>Object\RegionBGM</Filter>
+    </ClCompile>
+    <ClCompile Include="Trigger_HideBGM.cpp">
+      <Filter>Object\RegionBGM</Filter>
+    </ClCompile>
+    <ClCompile Include="Trigger_OrnoaBGM.cpp">
+      <Filter>Object\RegionBGM</Filter>
+    </ClCompile>
+    <ClCompile Include="Trigger_SinaveBGM.cpp">
+      <Filter>Object\RegionBGM</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

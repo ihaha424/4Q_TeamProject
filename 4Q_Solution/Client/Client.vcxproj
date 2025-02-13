@@ -156,6 +156,7 @@
     <ClInclude Include="BaseMiniStone.h" />
     <ClInclude Include="BaseStone.h" />
     <ClInclude Include="BaseWoolball.h" />
+    <ClInclude Include="BGM_List.h" />
     <ClInclude Include="BG_Ornoa_Cloth_1.h" />
     <ClInclude Include="BG_Ornoa_Cloth_2.h" />
     <ClInclude Include="BG_Ornoa_Cloth_3.h" />
@@ -277,6 +278,11 @@
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="StaticObject.h" />
     <ClInclude Include="Obj_Props_Bermiore_Cloth_1.h" />
+    <ClInclude Include="Trigger_AtelierBGM.h" />
+    <ClInclude Include="Trigger_HideBGM.h" />
+    <ClInclude Include="Trigger_OrnoaBGM.h" />
+    <ClInclude Include="Trigger_SinaveBGM.h" />
+    <ClInclude Include="Trigger_SudiumBGM.h" />
     <ClInclude Include="Trigger_Sudium_SoundTrigger_1.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="BG_Terrain.h" />
@@ -407,6 +413,11 @@
     <ClCompile Include="StaticObject.cpp" />
     <ClCompile Include="Obj_Props_Bermiore_Cloth_1.cpp" />
     <ClCompile Include="BG_Terrain.cpp" />
+    <ClCompile Include="Trigger_AtelierBGM.cpp" />
+    <ClCompile Include="Trigger_HideBGM.cpp" />
+    <ClCompile Include="Trigger_OrnoaBGM.cpp" />
+    <ClCompile Include="Trigger_SinaveBGM.cpp" />
+    <ClCompile Include="Trigger_SudiumBGM.cpp" />
     <ClCompile Include="Trigger_Sudium_SoundTrigger_1.cpp" />
     <ClCompile Include="TestSprite.cpp" />
     <ClCompile Include="TestWorld.cpp" />

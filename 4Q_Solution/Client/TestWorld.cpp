@@ -107,6 +107,11 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 		helpPrepare<BG_Props_Fence>(L"BG_Props_Fence", objectFactory);
 	}
 
+	// Obj_Buildings_Shinav
+	{
+		helpPrepare<Obj_Buildings_Shinave>(L"Obj_Buildings_Shinave", objectFactory);
+	}
+
 	// Obj_Buildings_Sudium
 	{
 		helpPrepare<Obj_Buildings_Sudium>(L"Obj_Buildings_Sudium", objectFactory);
@@ -261,7 +266,33 @@ void TestWorld::Prepare(Engine::Content::Factory::Object* objectFactory)
 
 	// Obj_Bermiore_Woolball_inBox
 	{
-		// TODO: Bermiore_Woolball_inBox
+		{
+			helpPrepare<Obj_Bermiore_Soundblock>(L"Obj_Bermiore_Soundblock", objectFactory);
+		}
+		{
+			helpPrepare<Obj_Bermiore_Fabric>(L"Obj_Bermiore_Fabric", objectFactory);
+		}
+		{
+			helpPrepare<Obj_Bermiore_Hanger>(L"Obj_Bermiore_Hanger", objectFactory);
+		}
+		{
+			helpPrepare<Obj_Bermiore_Woolball_1>(L"Obj_Bermiore_Woolball_1", objectFactory);
+		}
+		{
+			helpPrepare<Obj_Bermiore_Woolball_2>(L"Obj_Bermiore_Woolball_2", objectFactory);
+		}
+		{
+			helpPrepare<Obj_Bermiore_Woolball_3>(L"Obj_Bermiore_Woolball_3", objectFactory);
+		}
+		{
+			helpPrepare<Obj_Bermiore_Woolball_4>(L"Obj_Bermiore_Woolball_4", objectFactory);
+		}
+		{
+			helpPrepare<Obj_Bermiore_Woolball_5>(L"Obj_Bermiore_Woolball_5", objectFactory);
+		}
+		{
+			helpPrepare<Obj_Bermiore_Woolball_6>(L"Obj_Bermiore_Woolball_6", objectFactory);
+		}
 	}
 
 	// TODO: Wool Series
@@ -498,7 +529,7 @@ void TestWorld::EnterAccept(const ConnectMsg::AddObject* msg) {
 		_ray = Engine::Application::GetContentManager()->GetObjectFactory()->Clone<Ray>(this);
 		playerSerialNum = msg->grantnumber();
 		_ray->SetSerialNumber(msg->grantnumber());
-		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 3 });
+		Engine::Application::GetGameStateManager()->RegisterData(L"GameCoreData", GameCoreData{ 1 });
 
 		_currentPlayer = _ray;
 	}

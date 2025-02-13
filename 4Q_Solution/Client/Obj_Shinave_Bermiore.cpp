@@ -23,6 +23,15 @@ void Obj_Shinave_Bermiore::PreInitialize(const Engine::Modules& modules)
 			DataChangeCallBack(name, value);
 		}
 	, this);
+
+	_matrix = Engine::Math::Matrix::CreateScale(0.01f) * 
+		Engine::Math::Matrix::CreateFromQuaternion(
+			Engine::Math::Quaternion::CreateFromYawPitchRoll(std::numbers::pi_v<float>, 0.f, 0.f))  * _transform.GetMatrix();
+}
+
+void Obj_Shinave_Bermiore::PostInitialize(const Engine::Modules& modules)
+{
+	//_staticMesh->SetZWrite(false);
 }
 
 void Obj_Shinave_Bermiore::DisposeComponents()

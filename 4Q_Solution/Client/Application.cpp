@@ -179,6 +179,13 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 		objectFactory->Register<Obj_Buildings_Sudium>(buildingProperty, buildingProperty);
 	}
 
+	// Obj_Buildings_Sudium
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Shinave").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Shinave>(buildingProperty, buildingProperty);
+	}
+
 	// Obj_Buildings_Hide_House_5
 	{
 		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Hide_House_5").value();
@@ -316,9 +323,53 @@ void GameClient::Application::Register(Engine::Content::IManager* contentManager
 	}
 
 	// Obj_Bermiore_Woolball_inBox
-	{
-		// TODO: Bermiore_Woolball_inBox
-	}
+		{
+			{
+				auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Soundblock").value();
+				auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+				objectFactory->Register<Obj_Bermiore_Soundblock>(buildingProperty, buildingProperty);
+			}
+			{
+				auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Fabric").value();
+				auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+				objectFactory->Register<Obj_Bermiore_Fabric>(buildingProperty, buildingProperty);
+			}
+			{
+				auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Hanger").value();
+				auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+				objectFactory->Register<Obj_Bermiore_Hanger>(buildingProperty, buildingProperty);
+			}
+			{
+				auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Woolball_1").value();
+				auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+				objectFactory->Register<Obj_Bermiore_Woolball_1>(buildingProperty, buildingProperty);
+			}
+			{
+				auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Woolball_2").value();
+				auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+				objectFactory->Register<Obj_Bermiore_Woolball_2>(buildingProperty, buildingProperty);
+			}
+			{
+				auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Woolball_3").value();
+				auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+				objectFactory->Register<Obj_Bermiore_Woolball_3>(buildingProperty, buildingProperty);
+			}
+			{
+				auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Woolball_4").value();
+				auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+				objectFactory->Register<Obj_Bermiore_Woolball_4>(buildingProperty, buildingProperty);
+			}
+			{
+				auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Woolball_5").value();
+				auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+				objectFactory->Register<Obj_Bermiore_Woolball_5>(buildingProperty, buildingProperty);
+			}
+			{
+				auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Woolball_6").value();
+				auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+				objectFactory->Register<Obj_Bermiore_Woolball_6>(buildingProperty, buildingProperty);
+			}
+		}
 
 	// TODO: Wool Series
 	// TODO: Wool ball Series

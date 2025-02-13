@@ -1,4 +1,5 @@
 #pragma once
+#include "DelayCall.h"
 
 class GrabbedObject;
 
@@ -52,6 +53,7 @@ private:
 	void ShowHintUIFromRayCast();
 
 	void ChangeSplitAnimation(const char* animation, StateFlag flag, SplitType type);
+	void ChangeSplitAnimation(const char* animation, StateFlag flag, SplitType type, float speed = 1.f);
 	void SyncPatialAnimation(const char* animation, StateFlag flag, SplitType parent, SplitType child);
 	
 private:
@@ -93,6 +95,8 @@ protected:
 	Engine::Physics::AdditionalQueryData _queryData;
 
 	GrabbedObject* grabbedObject;
+
+	std::list<DelayCall> _delayQueue;
 
 private:
 	// State Test

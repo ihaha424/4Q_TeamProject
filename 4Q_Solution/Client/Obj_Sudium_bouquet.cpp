@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "Obj_Sudium_bouquet.h"
 
-Obj_Sudium_bouquet::Obj_Sudium_bouquet(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath) :
-	InteractObject(std::forward<std::filesystem::path>(meshPath), std::forward<std::filesystem::path>(physicsPath)),
+Obj_Sudium_bouquet::Obj_Sudium_bouquet(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath) :
+	InteractObject((meshPath), (physicsPath)),
 	_gameStateManager(nullptr)
 {
 	_index = 0;

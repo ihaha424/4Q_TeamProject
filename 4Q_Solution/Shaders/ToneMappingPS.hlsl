@@ -41,8 +41,10 @@ float4 main(PS_INPUT input) : SV_Target
     txLuminance.GetDimensions(0, width, height, level);
     float avgLuminance = txLuminance.SampleLevel(samLinear_wrap, input.uv, level - 1).r;
     float pixelLuminance = GetLuminance(texColor);
-    texColor *= 2;
-    //texColor = pixelLuminance * 0.042 / avgLuminance;
+    float luminanceFactor = pixelLuminance / avgLuminance;   
+    
+    texColor *= 4;
+    texColor *= (0.8 + 0.2 * luminanceFactor);
 
     float3 curr = Uncharted2Tonemap(texColor);
 
@@ -50,6 +52,6 @@ float4 main(PS_INPUT input) : SV_Target
     float3 color = curr * whiteScale;
       
     float3 retColor = LinearToGammaSpace(color);
-    return float4(retColor, 1);
+    return float4(color, 1);
 #endif
 }

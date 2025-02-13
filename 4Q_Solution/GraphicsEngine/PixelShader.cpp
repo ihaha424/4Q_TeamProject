@@ -46,14 +46,13 @@ HRESULT PixelShader::LoadResource(const std::filesystem::path& filePath)
 	CompileShader(pixelShaderData, filePath, "main", "ps_5_0");
 #else
 	std::vector<uint8_t> pixelShaderData = ReadData(filePath.c_str());
-#endif
-
-	/*std::vector<uint8_t> pixelShaderData = ReadData(filePath.c_str());
 
 	if (pixelShaderData.empty())
 	{
 		CompileShader(pixelShaderData, filePath, "main", "ps_5_0");
-	}*/
+	}
+#endif
+
 
 	ID3D11ShaderReflection* pReflector{ nullptr };
 	D3DReflect(pixelShaderData.data(), pixelShaderData.size(), IID_ID3D11ShaderReflection, (void**)&pReflector);

@@ -11,6 +11,7 @@ void BaseStone::Prepare(Engine::Content::Factory::Component* componentFactory)
 	InteractObject::Prepare(componentFactory);
 	_sync = componentFactory->Clone<Engine::Component::Synchronize>(this);
 	_sound = componentFactory->Clone<Engine::Component::Effect3DSound>(this);
+	_trigger = componentFactory->Clone<TriggerBox>(this);
 }
 
 void BaseStone::DisposeComponents()
@@ -18,6 +19,8 @@ void BaseStone::DisposeComponents()
 	InteractObject::DisposeComponents();
 	_sync->Dispose();
 	_sound->Dispose();
+	_trigger->Dispose();
+
 }
 
 void BaseStone::PreInitialize(const Engine::Modules& modules)
@@ -31,6 +34,19 @@ void BaseStone::PreInitialize(const Engine::Modules& modules)
 								}
 	, this);
 
+	auto PhysicsManager = Engine::Application::GetPhysicsManager();
+	Engine::Physics::RigidComponentDesc desc;
+	desc.rigidType = Engine::Physics::RigidBodyType::Static;
+	desc.shapeDesc.geometryDesc.type = Engine::Physics::GeometryShape::Sphere;
+	desc.shapeDesc.geometryDesc.data = { 20.f, _boxScale.y, _boxScale.z, 0 };
+	desc.shapeDesc.isExclusive = true;
+	desc.shapeDesc.materialDesc.data = { 0.f,0.f,0.f };
+
+	Engine::Transform shapeTransform{};
+	PhysicsManager->CreateStatic(&_trigger->_triggerBox, desc, _transform, shapeTransform);
+	_trigger->_triggerBox->SetOwner(this);
+
+	PhysicsManager->GetScene(static_cast<unsigned int>(SceneFillter::mainScene))->AddActor(_trigger->_triggerBox);
 }
 
 void BaseStone::SendInteractToServer()

@@ -16,6 +16,7 @@
 #include "Obj_Buildings_Ornoa_House_3.h"
 #include "Obj_Buildings_Ornoa_House_4.h"
 #include "Obj_Buildings_Sudium.h"
+#include "Obj_Buildings_Shinave.h"
 #include "Obj_Hide_Plant.h"
 #include "Obj_Hide_Xylophone.h"
 #include "Obj_Ornoa_Hint.h"
@@ -28,8 +29,6 @@
 #include "Obj_Props_Rock.h"
 #include "Obj_Sudium_blue.h"
 #include "Obj_Sudium_red.h"
-
-//#include "Obj_Buildings_Shinave.h"
 
 
 

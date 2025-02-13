@@ -146,6 +146,11 @@ void ServerLogic::MessageDispatch()
             DataRequestProcess(packet);
             break;
         }
+        case PacketID::TriggerObject:
+        {
+            ObjectTriggerProcess(packet);
+            break;
+        }
         default:
             break;
         } // switch end
@@ -251,7 +256,7 @@ void ServerLogic::EnterProcess(const Packet& packet)
 
         }  // for end
 
-        Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 9001);
+        Server::BroadCast("", (short)PacketID::PuzzleStart, 0, 9002);
         //for (int i = 0; i < _buildings.size(); i++) {
         //    _addObject.set_grantnumber(_buildings[i]->_serialNumber);
         //    _addObject.set_classid(_buildings[i]->_resourceId);
@@ -351,8 +356,8 @@ void ServerLogic::StateChangeProcess(const Packet& packet)
 {
     _stateChange.ParseFromArray(packet._data, PacketDataSize(packet._packetSize));
 
-    _playerSlot[packet._serialNumber - 1]._state ^= _stateChange.stateinfo();
-    printf("Player%d State Changed. CurrentState : %d\n", packet._serialNumber, _stateChange.stateinfo());
+    _playerSlot[packet._serialNumber - 1]._state = _stateChange.stateinfo();
+    //printf("Player%d State Changed. CurrentState : %d\n", packet._serialNumber, _stateChange.stateinfo());
     _stateChange.SerializeToString(&_msgBuffer);
     Server::BroadCast(_msgBuffer, (short)PacketID::StateChange, _stateChange.ByteSizeLong(), packet._serialNumber);
 }
@@ -1008,7 +1013,7 @@ void ServerLogic::Puzzle1(int objectId)
     int maxCorrectCount = 3;
     static int activeObjectId = 11103;
     // 리브가 상호작용을 했을 때 이쪽으로 와야함.
-    if (objectId == 11107 || objectId == 11108 || objectId == 11109) {
+    if (objectId == 11106 || objectId == 11108 || objectId == 11109) {
         curCorrectCount++;
         // send puzzleSuccess.
         //_objectActive.set_objectserialnumber(activeObjectId);
@@ -1034,7 +1039,7 @@ void ServerLogic::Puzzle2(int objectId)
             Server::BroadCast(_msgBuffer, (short)PacketID::InteractObject, _interactObject.ByteSizeLong(), objectId);
         }
     }
-    if (objectId < 12102 && objectId > 12107) {
+    if (objectId < 12102 || objectId > 12107) {
         return;
     }
     int index = objectId - 12102;

@@ -295,15 +295,15 @@ void DX11Renderer::LigthingPass(SkyBoxRenderer* pSkyBox, std::list<DrawData>* al
 
 	SkyBoxPass(skyBoxes);
 
-	_pDeviceContext->OMSetBlendState(blendState, nullptr, 0xFFFFFFFF);
+	//_pDeviceContext->OMSetBlendState(blendState, nullptr, 0xFFFFFFFF);
 
 	// zWrite
 	ForwardLigthing(alphaMeshes[On]);
 
 	// zNoneWrite
-	_pDeviceContext->OMSetDepthStencilState(_pAlphaDepthState, 1);
+	//_pDeviceContext->OMSetDepthStencilState(_pAlphaDepthState, 1);
 	ForwardLigthing(alphaMeshes[Off]);
-	_pDeviceContext->OMSetDepthStencilState(nullptr, 1);
+	//_pDeviceContext->OMSetDepthStencilState(nullptr, 1);
 
 	//AmbientOcclusion();
 	_pDeviceContext->OMSetBlendState(nullptr, nullptr, 0xFFFFFFFF);

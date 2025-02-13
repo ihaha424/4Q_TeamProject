@@ -4,7 +4,7 @@
 class Obj_Sudium_bouquet : public InteractObject
 {
 public:
-	explicit Obj_Sudium_bouquet(std::filesystem::path&& meshPath, std::filesystem::path&& physicsPath);
+	explicit Obj_Sudium_bouquet(const std::filesystem::path& meshPath, const std::filesystem::path& physicsPath);
 
 	virtual ~Obj_Sudium_bouquet() = default;
 

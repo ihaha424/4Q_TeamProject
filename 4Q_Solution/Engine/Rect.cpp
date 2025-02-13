@@ -5,3 +5,8 @@ Engine::Math::Rect::Rect(const long x, const long y, const long width, const lon
 	Rectangle(x, y, width, height)
 {
 }
+
+Engine::Math::Rect::Rect(const Point point, const Size size) noexcept :
+	Rectangle(point.x, point.y, size.cx, size.cy)
+{
+}

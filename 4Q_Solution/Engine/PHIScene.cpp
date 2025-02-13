@@ -39,7 +39,13 @@ namespace Engine::PHI
 		raycastInfo.num = data.num;
 		raycastInfo.UserDatas.reserve(data.num);
 		for(size_t i = 0; i < data.num; i++)
-			raycastInfo.UserDatas.push_back(static_cast<Collision<Engine::Physics::Component>*>(data.UserDatas[i])->rigidComponent);
+		{
+			if (raycastInfo.num < raycastInfo.UserDatas.size())
+				raycastInfo.UserDatas[i] = static_cast<Collision<Engine::Physics::Component>*>(data.UserDatas[i])->rigidComponent;
+			else
+				raycastInfo.UserDatas.push_back(static_cast<Collision<Engine::Physics::Component>*>(data.UserDatas[i])->rigidComponent);
+		}
+
 		raycastInfo.normal = PhysicsVector3ToVector3(data.normal);
 		raycastInfo.position = PhysicsVector3ToVector3(data.position);
 		raycastInfo.distance = data.distance;

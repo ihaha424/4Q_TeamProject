@@ -112,6 +112,7 @@ private:
 	PlayMsg::ObjectActive _objectActive;
 	PlayMsg::ObjectDisable _objectDisable;
 	PlayMsg::DialogNext _dialogNext;
+	PlayMsg::TriggerOut _triggerOut;
 
 	std::string _msgBuffer = std::string(256, '\0');
 
@@ -208,7 +209,7 @@ private:
 	// Puzzle Area
 	// =============================
 	
-	int _currentPuzzleNumber = 1;
+	int _currentPuzzleNumber = 2;
 	// 오브젝트를 상호작용 할 때마다 갱신해줘야함. 
 	int _currentInteractObject = -1;
 

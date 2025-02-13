@@ -8,6 +8,7 @@ namespace Engine::Math
 	public:
 		Matrix() = default;
 		Matrix(const GE::Matrix4x4& matrix) : GE::Matrix4x4(matrix) {};
+		Matrix(const DirectX::SimpleMath::Matrix& matrix) : GE::Matrix4x4(matrix) {};
 
 		Matrix& operator=(const GE::Matrix4x4& matrix)
 		{

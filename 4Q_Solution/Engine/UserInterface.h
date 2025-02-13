@@ -13,7 +13,7 @@ namespace Engine::UI
 		virtual ~UserInterface() = default;
 
 
-        virtual void Initialize();
+        virtual void Initialize(const Modules& modules);
 		virtual void Attach();
 		virtual void Update(float deltaGameTime);
 		virtual void FixedUpdate();

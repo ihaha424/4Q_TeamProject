@@ -10,7 +10,7 @@ Engine::UI::UserInterface::UserInterface(Math::Rect* rect):
 {
 }
 
-void Engine::UI::UserInterface::Initialize()
+void Engine::UI::UserInterface::Initialize(const Modules& modules)
 {
 }
 

@@ -15,7 +15,7 @@ namespace Engine::UI::Panel
 		explicit Anchor(Math::Rect* rect);
 		~Anchor() override;
 
-		void Initialize() override;
+		void Initialize(const Modules& modules) override;
 		void Attach() override;
 		void Update(float deltaGameTime) override;
 		void FixedUpdate() override;
@@ -25,12 +25,13 @@ namespace Engine::UI::Panel
 		void AddChild(Child* child);
 
 		template <typename T, typename... Args>
+		requires std::derived_from<T, UserInterface> && std::constructible_from<T, Math::Rect*, Args...>
 		ChildPair<T> CreateChild(Args&&... args)
 		{
-			T* child = new T(std::forward<Args>(args)...);
-			Child* anchorChild = new Child(child);
-			AddChild(anchorChild);
-			return { anchorChild, child };
+			T* control = new T(&_childRect, std::forward<Args>(args)...);
+			Child* child = new Child(control);
+			AddChild(child);
+			return { child, control };
 		}
 
 	private:
@@ -44,7 +45,7 @@ namespace Engine::UI::Panel
             enum class VerticalAnchoring : unsigned char;
             explicit Child(UserInterface* child);
 
-            void Initialize() const;
+            void Initialize(const Modules& modules) const;
 			void Attach() const;
 			void Update(float deltaGameTime) const;
 			void FixedUpdate() const;

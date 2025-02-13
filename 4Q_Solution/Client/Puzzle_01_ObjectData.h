@@ -9,3 +9,4 @@
 #include "Obj_Bermiore_Woolball_5.h"
 #include "Obj_Bermiore_Woolball_6.h"
 #include "Obj_Bermiore_Soundblock.h"
+#include "BermioreFabricLight.h"

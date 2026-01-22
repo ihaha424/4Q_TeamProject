@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Interfaces">
+      <UniqueIdentifier>{baa6ffc8-2ce0-4aec-ac44-48c7d1605f69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{b1071a85-3000-4c2b-853f-7638acde5b72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities\Functions">
+      <UniqueIdentifier>{67534bb9-ba4c-491c-be5d-6500ade3449e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\ISystem">
+      <UniqueIdentifier>{fec85625-5724-4df5-8f2a-810f4dd2aabb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IHandle">
+      <UniqueIdentifier>{1248e125-4dea-4cc2-bc0c-374f1bbf4fc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{4d6e9525-d34e-480f-958f-50b1e409cf11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IClass">
+      <UniqueIdentifier>{be411af5-8f00-4a44-8ef5-c28279905a2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class">
+      <UniqueIdentifier>{29830d01-a351-437e-849e-4a694fcbb9db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Handle">
+      <UniqueIdentifier>{cc42a0fe-7918-4017-9e65-73f4a53f11b7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Exports.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Requires.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Functions.h">
+      <Filter>Utilities\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="ISystem.h">
+      <Filter>Interfaces\ISystem</Filter>
+    </ClInclude>
+    <ClInclude Include="IClass.h">
+      <Filter>Interfaces\IClass</Filter>
+    </ClInclude>
+    <ClInclude Include="IHandle.h">
+      <Filter>Interfaces\IHandle</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Class.h">
+      <Filter>Class</Filter>
+    </ClInclude>
+    <ClInclude Include="Handle.h">
+      <Filter>Handle</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Functions.cpp">
+      <Filter>Utilities\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="ISystem.cpp">
+      <Filter>Interfaces\ISystem</Filter>
+    </ClCompile>
+    <ClCompile Include="IClass.cpp">
+      <Filter>Interfaces\IClass</Filter>
+    </ClCompile>
+    <ClCompile Include="IHandle.cpp">
+      <Filter>Interfaces\IHandle</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Class.cpp">
+      <Filter>Class</Filter>
+    </ClCompile>
+    <ClCompile Include="Handle.cpp">
+      <Filter>Handle</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

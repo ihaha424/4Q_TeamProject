@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{d5925c35-03e2-427a-83a7-dbd49bc110e0}</ProjectGuid>
+    <RootNamespace>Client</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Properties\Additional Include Directories.props" />
+    <Import Project="..\Properties\Output Directory.props" />
+    <Import Project="..\Properties\Debug Target Name.props" />
+    <Import Project="..\Properties\Additional Library Directories.props" />
+    <Import Project="..\Properties\CPP Version.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Properties\Additional Include Directories.props" />
+    <Import Project="..\Properties\Output Directory.props" />
+    <Import Project="..\Properties\Additional Library Directories.props" />
+    <Import Project="..\Properties\CPP Version.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Properties\Additional Include Directories.props" />
+    <Import Project="..\Properties\Output Directory.props" />
+    <Import Project="..\Properties\Debug Target Name.props" />
+    <Import Project="..\Properties\Additional Library Directories.props" />
+    <Import Project="..\Properties\CPP Version.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Properties\Additional Include Directories.props" />
+    <Import Project="..\Properties\Output Directory.props" />
+    <Import Project="..\Properties\Additional Library Directories.props" />
+    <Import Project="..\Properties\CPP Version.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnableManifest>true</VcpkgEnableManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="BaseMiniStone.h" />
+    <ClInclude Include="BaseStone.h" />
+    <ClInclude Include="BaseWoolball.h" />
+    <ClInclude Include="BGM_List.h" />
+    <ClInclude Include="BermioreFabricLight.h" />
+    <ClInclude Include="BG_Ornoa_Cloth_1.h" />
+    <ClInclude Include="BG_Ornoa_Cloth_2.h" />
+    <ClInclude Include="BG_Ornoa_Cloth_3.h" />
+    <ClInclude Include="BG_Props_Fence.h" />
+    <ClInclude Include="DelayCall.h" />
+    <ClInclude Include="GrabImage.h" />
+    <ClInclude Include="InteractImage.h" />
+    <ClInclude Include="NPC.h" />
+    <ClInclude Include="PuzzleManager03.h" />
+    <ClInclude Include="EmptyWorld.h" />
+    <ClInclude Include="GameCoreData.h" />
+    <ClInclude Include="GrabData.h" />
+    <ClInclude Include="Hide_SoundTrigger.h" />
+    <ClInclude Include="MainPuzzleManager.h" />
+    <ClInclude Include="InGameCanvas.h" />
+    <ClInclude Include="MainCanvas.h" />
+    <ClInclude Include="Not_Puzzle_ObjectData.h" />
+    <ClInclude Include="NPCData.h" />
+    <ClInclude Include="InteractObject.h" />
+    <ClInclude Include="NPC_Hide.h" />
+    <ClInclude Include="NPC_Hide_Leader.h" />
+    <ClInclude Include="NPC_Ornoa.h" />
+    <ClInclude Include="NPC_OrnoaHide.h" />
+    <ClInclude Include="NPC_Ornoa_Elder.h" />
+    <ClInclude Include="Obj_Bermiore_Fabric.h" />
+    <ClInclude Include="Obj_Bermiore_Hanger.h" />
+    <ClInclude Include="Obj_Bermiore_Soundblock.h" />
+    <ClInclude Include="Obj_Bermiore_Woolball_1.h" />
+    <ClInclude Include="Obj_Bermiore_Woolball_2.h" />
+    <ClInclude Include="Obj_Bermiore_Woolball_3.h" />
+    <ClInclude Include="Obj_Bermiore_Woolball_4.h" />
+    <ClInclude Include="Obj_Bermiore_Woolball_5.h" />
+    <ClInclude Include="Obj_Bermiore_Woolball_6.h" />
+    <ClInclude Include="Obj_BG_Tree_1_Active.h" />
+    <ClInclude Include="Obj_BG_Tree_3_Active.h" />
+    <ClInclude Include="Obj_Mini_Platform_Spawn.h" />
+    <ClInclude Include="Obj_Mini_Stone_1.h" />
+    <ClInclude Include="Obj_Mini_Stone_2.h" />
+    <ClInclude Include="Obj_Mini_Stone_3.h" />
+    <ClInclude Include="Obj_Mini_Stone_4.h" />
+    <ClInclude Include="Obj_Mini_Stone_5.h" />
+    <ClInclude Include="Obj_BG_Tree_3.h" />
+    <ClInclude Include="Obj_Buildings_Hide_House_5.h" />
+    <ClInclude Include="Obj_Hide_Box.h" />
+    <ClInclude Include="Obj_Hide_Box_2.h" />
+    <ClInclude Include="Obj_Hide_Plant.h" />
+    <ClInclude Include="Obj_Hide_Potion.h" />
+    <ClInclude Include="Obj_Hide_Xylophone.h" />
+    <ClInclude Include="Obj_Ornoa_Hint.h" />
+    <ClInclude Include="Obj_Ornoa_Print.h" />
+    <ClInclude Include="Obj_Ornoa_Soundblock_1.h" />
+    <ClInclude Include="Obj_Ornoa_Soundblock_2.h" />
+    <ClInclude Include="Obj_Ornoa_Soundblock_3.h" />
+    <ClInclude Include="Obj_Ornoa_Soundblock_4.h" />
+    <ClInclude Include="Obj_Ornoa_Soundblock_5.h" />
+    <ClInclude Include="Obj_Props_Rock.h" />
+    <ClInclude Include="Obj_Mini_Platform_Set.h" />
+    <ClInclude Include="GrabbedObject.h" />
+    <ClInclude Include="Obj_Shinave_Stone_1.h" />
+    <ClInclude Include="Obj_Shinave_Stone_2.h" />
+    <ClInclude Include="Obj_Shinave_Stone_3.h" />
+    <ClInclude Include="Obj_Shinave_Stone_4.h" />
+    <ClInclude Include="Obj_Shinave_Stone_5.h" />
+    <ClInclude Include="Obj_Shinave_Bermiore.h" />
+    <ClInclude Include="Obj_Shinave_Platform_Set.h" />
+    <ClInclude Include="Obj_Shinave_Platform_Spawn_1.h" />
+    <ClInclude Include="Obj_Shinave_Platform_Spawn_2.h" />
+    <ClInclude Include="Obj_Shinave_Platform_Spawn_3.h" />
+    <ClInclude Include="Obj_Shinave_SteppedSudium.h" />
+    <ClInclude Include="Obj_Sudium_blue.h" />
+    <ClInclude Include="Obj_Sudium_bouquet.h" />
+    <ClInclude Include="Obj_Sudium_red.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Live.h" />
+    <ClInclude Include="Obj_Buildings_Ornoa_House_3.h" />
+    <ClInclude Include="Obj_Props_Bermiore_Cloth_2.h" />
+    <ClInclude Include="Obj_Buildings_Sudium.h" />
+    <ClInclude Include="Obj_Buildings_Hide_House_1.h" />
+    <ClInclude Include="Obj_Buildings_Hide_House_3.h" />
+    <ClInclude Include="Obj_Buildings_Hide_House_2.h" />
+    <ClInclude Include="Obj_Buildings_Hide_House_4.h" />
+    <ClInclude Include="Obj_Buildings_Ornoa_House_1.h" />
+    <ClInclude Include="Obj_Buildings_Ornoa_House_2.h" />
+    <ClInclude Include="Obj_Buildings_Ornoa_House_4.h" />
+    <ClInclude Include="Obj_BG_Tree_1.h" />
+    <ClInclude Include="Obj_Props_Bermiore_Loom_2.h" />
+    <ClInclude Include="Obj_BG_Tree_2.h" />
+    <ClInclude Include="Obj_BG_Mountain.h" />
+    <ClInclude Include="Obj_Props_Fence.h" />
+    <ClInclude Include="Obj_Buildings_Shinave.h" />
+    <ClInclude Include="Obj_Buildings_Bermiore_Atelier_1.h" />
+    <ClInclude Include="Obj_Buildings_Bermiore_Atelier_2.h" />
+    <ClInclude Include="Obj_Buildings_Bermiore_Atelier_3.h" />
+    <ClInclude Include="Obj_Props_Bermiore_Loom_1.h" />
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="GlobalLight.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="PuzzleData.h" />
+    <ClInclude Include="PuzzleManager.h" />
+    <ClInclude Include="PuzzleManager00.h" />
+    <ClInclude Include="PuzzleManager01.h" />
+    <ClInclude Include="PuzzleManager02.h" />
+    <ClInclude Include="PuzzleManager04.h" />
+    <ClInclude Include="PuzzleManagerSet.h" />
+    <ClInclude Include="Puzzle_00.h" />
+    <ClInclude Include="Puzzle_00_ObjectData.h" />
+    <ClInclude Include="Puzzle_02.h" />
+    <ClInclude Include="Puzzle_01_ObjectData.h" />
+    <ClInclude Include="Puzzle_02_ObjectData.h" />
+    <ClInclude Include="Puzzle_01.h" />
+    <ClInclude Include="Puzzle_05.h" />
+    <ClInclude Include="Puzzle_04.h" />
+    <ClInclude Include="Puzzle_04_ObjectData.h" />
+    <ClInclude Include="Puzzle_05_ObjectData.h" />
+    <ClInclude Include="Puzzle_03.h" />
+    <ClInclude Include="Puzzle_03_ObjectData.h" />
+    <ClInclude Include="Ray.h" />
+    <ClInclude Include="RayComponent.h" />
+    <ClInclude Include="Remote.h" />
+    <ClInclude Include="RemoteLive.h" />
+    <ClInclude Include="RemoteMove.h" />
+    <ClInclude Include="RemoteRay.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="SceneFillter.h" />
+    <ClInclude Include="SimpleCamera.h" />
+    <ClInclude Include="SkyBox.h" />
+    <ClInclude Include="StaticObject.h" />
+    <ClInclude Include="Obj_Props_Bermiore_Cloth_1.h" />
+    <ClInclude Include="Trigger_AtelierBGM.h" />
+    <ClInclude Include="Trigger_HideBGM.h" />
+    <ClInclude Include="Trigger_OrnoaBGM.h" />
+    <ClInclude Include="Trigger_SinaveBGM.h" />
+    <ClInclude Include="Trigger_SudiumBGM.h" />
+    <ClInclude Include="Trigger_Sudium_SoundTrigger_1.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="BG_Terrain.h" />
+    <ClInclude Include="TestSprite.h" />
+    <ClInclude Include="TestWorld.h" />
+    <ClInclude Include="MapData.h" />
+    <ClInclude Include="TriggerArea.h" />
+    <ClInclude Include="TriggerBox.h" />
+    <ClInclude Include="Trigger_Sudium_SoundTrigger_2.h" />
+    <ClInclude Include="Trigger_Sudium_SoundTrigger_3.h" />
+    <ClInclude Include="Trigger_Sudium_SoundTrigger_4.h" />
+    <ClInclude Include="Trigger_Sudium_SoundTrigger_5.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="BaseMiniStone.cpp" />
+    <ClCompile Include="BaseStone.cpp" />
+    <ClCompile Include="BaseWoolball.cpp" />
+    <ClCompile Include="BermioreFabricLight.cpp" />
+    <ClCompile Include="BG_Ornoa_Cloth_1.cpp" />
+    <ClCompile Include="BG_Ornoa_Cloth_2.cpp" />
+    <ClCompile Include="BG_Ornoa_Cloth_3.cpp" />
+    <ClCompile Include="BG_Props_Fence.cpp" />
+    <ClCompile Include="EmptyWorld.cpp" />
+    <ClCompile Include="GrabImage.cpp" />
+    <ClCompile Include="InGameCanvas.cpp" />
+    <ClCompile Include="InteractImage.cpp" />
+    <ClCompile Include="MainCanvas.cpp" />
+    <ClCompile Include="DelayCall.cpp" />
+    <ClCompile Include="NPC.cpp" />
+    <ClCompile Include="PuzzleManager03.cpp" />
+    <ClCompile Include="GameCoreData.cpp" />
+    <ClCompile Include="GrabData.cpp" />
+    <ClCompile Include="Hide_SoundTrigger.cpp" />
+    <ClCompile Include="InteractObject.cpp" />
+    <ClCompile Include="MainPuzzleManager.cpp" />
+    <ClCompile Include="NPC_Hide.cpp" />
+    <ClCompile Include="NPC_Hide_Leader.cpp" />
+    <ClCompile Include="NPC_Ornoa.cpp" />
+    <ClCompile Include="NPC_OrnoaHide.cpp" />
+    <ClCompile Include="NPC_Ornoa_Elder.cpp" />
+    <ClCompile Include="Obj_Bermiore_Fabric.cpp" />
+    <ClCompile Include="Obj_Bermiore_Hanger.cpp" />
+    <ClCompile Include="Obj_Bermiore_Soundblock.cpp" />
+    <ClCompile Include="Obj_Bermiore_Woolball_2.cpp" />
+    <ClCompile Include="Obj_Bermiore_Woolball_3.cpp" />
+    <ClCompile Include="Obj_Bermiore_Woolball_4.cpp" />
+    <ClCompile Include="Obj_Bermiore_Woolball_5.cpp" />
+    <ClCompile Include="Obj_Bermiore_Woolball_6.cpp" />
+    <ClCompile Include="Obj_Bermiore_Woolball_1.cpp" />
+    <ClCompile Include="Obj_BG_Tree_1_Active.cpp" />
+    <ClCompile Include="Obj_BG_Tree_3.cpp" />
+    <ClCompile Include="Obj_BG_Tree_3_Active.cpp" />
+    <ClCompile Include="Obj_Buildings_Hide_House_5.cpp" />
+    <ClCompile Include="Obj_Hide_Box.cpp" />
+    <ClCompile Include="Obj_Hide_Box_2.cpp" />
+    <ClCompile Include="Obj_Hide_Plant.cpp" />
+    <ClCompile Include="Obj_Hide_Potion.cpp" />
+    <ClCompile Include="Obj_Hide_Xylophone.cpp" />
+    <ClCompile Include="Obj_Mini_Platform_Spawn.cpp" />
+    <ClCompile Include="Obj_Ornoa_Hint.cpp" />
+    <ClCompile Include="Obj_Ornoa_Print.cpp" />
+    <ClCompile Include="Obj_Ornoa_Soundblock_1.cpp" />
+    <ClCompile Include="Obj_Ornoa_Soundblock_2.cpp" />
+    <ClCompile Include="Obj_Ornoa_Soundblock_3.cpp" />
+    <ClCompile Include="Obj_Ornoa_Soundblock_4.cpp" />
+    <ClCompile Include="Obj_Ornoa_Soundblock_5.cpp" />
+    <ClCompile Include="Obj_Props_Rock.cpp" />
+    <ClCompile Include="Obj_Mini_Platform_Set.cpp" />
+    <ClCompile Include="Obj_Mini_Stone_1.cpp" />
+    <ClCompile Include="Obj_Mini_Stone_2.cpp" />
+    <ClCompile Include="Obj_Mini_Stone_3.cpp" />
+    <ClCompile Include="Obj_Mini_Stone_4.cpp" />
+    <ClCompile Include="Obj_Mini_Stone_5.cpp" />
+    <ClCompile Include="GrabbedObject.cpp" />
+    <ClCompile Include="Obj_Shinave_Stone_1.cpp" />
+    <ClCompile Include="Obj_Shinave_Stone_2.cpp" />
+    <ClCompile Include="Obj_Shinave_Stone_3.cpp" />
+    <ClCompile Include="Obj_Shinave_Stone_4.cpp" />
+    <ClCompile Include="Obj_Shinave_Stone_5.cpp" />
+    <ClCompile Include="Obj_Shinave_Bermiore.cpp" />
+    <ClCompile Include="Obj_Shinave_Platform_Set.cpp" />
+    <ClCompile Include="Obj_Shinave_Platform_Spawn_1.cpp" />
+    <ClCompile Include="Obj_Shinave_Platform_Spawn_2.cpp" />
+    <ClCompile Include="Obj_Shinave_Platform_Spawn_3.cpp" />
+    <ClCompile Include="Obj_Shinave_SteppedSudium.cpp" />
+    <ClCompile Include="Obj_Sudium_blue.cpp" />
+    <ClCompile Include="Obj_Sudium_red.cpp" />
+    <ClCompile Include="Obj_Sudium_bouquet.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Live.cpp" />
+    <ClCompile Include="Obj_Buildings_Ornoa_House_3.cpp" />
+    <ClCompile Include="Obj_Props_Bermiore_Cloth_2.cpp" />
+    <ClCompile Include="Obj_Buildings_Sudium.cpp" />
+    <ClCompile Include="Obj_Buildings_Hide_House_1.cpp" />
+    <ClCompile Include="Obj_Buildings_Hide_House_3.cpp" />
+    <ClCompile Include="Obj_Buildings_Hide_House_2.cpp" />
+    <ClCompile Include="Obj_Buildings_Hide_House_4.cpp" />
+    <ClCompile Include="Obj_Buildings_Ornoa_House_1.cpp" />
+    <ClCompile Include="Obj_Buildings_Ornoa_House_2.cpp" />
+    <ClCompile Include="Obj_Buildings_Ornoa_House_4.cpp" />
+    <ClCompile Include="Obj_BG_Tree_1.cpp" />
+    <ClCompile Include="Obj_Props_Bermiore_Loom_2.cpp" />
+    <ClCompile Include="Obj_BG_Tree_2.cpp" />
+    <ClCompile Include="Obj_BG_Mountain.cpp" />
+    <ClCompile Include="Obj_Props_Fence.cpp" />
+    <ClCompile Include="Obj_Buildings_Shinave.cpp" />
+    <ClCompile Include="Obj_Buildings_Bermiore_Atelier_1.cpp" />
+    <ClCompile Include="Obj_Buildings_Bermiore_Atelier_2.cpp" />
+    <ClCompile Include="Obj_Buildings_Bermiore_Atelier_3.cpp" />
+    <ClCompile Include="Obj_Props_Bermiore_Loom_1.cpp" />
+    <ClCompile Include="GlobalLight.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="PuzzleManager.cpp" />
+    <ClCompile Include="PuzzleManager00.cpp" />
+    <ClCompile Include="PuzzleManager01.cpp" />
+    <ClCompile Include="PuzzleManager02.cpp" />
+    <ClCompile Include="PuzzleManager04.cpp" />
+    <ClCompile Include="Puzzle_00.cpp" />
+    <ClCompile Include="Puzzle_02.cpp" />
+    <ClCompile Include="Puzzle_01.cpp" />
+    <ClCompile Include="Puzzle_05.cpp" />
+    <ClCompile Include="Puzzle_04.cpp" />
+    <ClCompile Include="Puzzle_03.cpp" />
+    <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="RayComponent.cpp" />
+    <ClCompile Include="Remote.cpp" />
+    <ClCompile Include="RemoteLive.cpp" />
+    <ClCompile Include="RemoteMove.cpp" />
+    <ClCompile Include="RemoteRay.cpp" />
+    <ClCompile Include="SimpleCamera.cpp" />
+    <ClCompile Include="SkyBox.cpp" />
+    <ClCompile Include="StaticObject.cpp" />
+    <ClCompile Include="Obj_Props_Bermiore_Cloth_1.cpp" />
+    <ClCompile Include="BG_Terrain.cpp" />
+    <ClCompile Include="Trigger_AtelierBGM.cpp" />
+    <ClCompile Include="Trigger_HideBGM.cpp" />
+    <ClCompile Include="Trigger_OrnoaBGM.cpp" />
+    <ClCompile Include="Trigger_SinaveBGM.cpp" />
+    <ClCompile Include="Trigger_SudiumBGM.cpp" />
+    <ClCompile Include="Trigger_Sudium_SoundTrigger_1.cpp" />
+    <ClCompile Include="TestSprite.cpp" />
+    <ClCompile Include="TestWorld.cpp" />
+    <ClCompile Include="TriggerArea.cpp" />
+    <ClCompile Include="TriggerBox.cpp" />
+    <ClCompile Include="Trigger_Sudium_SoundTrigger_2.cpp" />
+    <ClCompile Include="Trigger_Sudium_SoundTrigger_3.cpp" />
+    <ClCompile Include="Trigger_Sudium_SoundTrigger_4.cpp" />
+    <ClCompile Include="Trigger_Sudium_SoundTrigger_5.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Client.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Client.ico" />
+    <Image Include="small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Engine\Engine.vcxproj">
+      <Project>{69d0a4c4-f145-4667-bab4-294ff02675e9}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,83 @@
+#pragma once
+
+class Remote : public Engine::Object
+{
+	enum StateFlag : unsigned long long
+	{
+		Idle				= 1 << 0,
+		Walk				= 1 << 1,
+		Jump				= 1 << 2,
+		Interact			= 1 << 3,
+		Move_Started		= 1 << 4,
+		Move_Completed		= 1 << 5,
+		Jump_Started		= 1 << 6,
+		Jump_Triggered		= 1 << 7,
+		Jump_Completed		= 1 << 8,
+		Interact_Started	= 1 << 9,
+		Interact_Triggered	= 1 << 10,
+		Interact_Completed	= 1 << 11
+	};
+
+	enum SplitType { Lower, Upper, End };
+
+public:
+	Remote();
+
+	void Prepare(Engine::Content::Factory::Component* componentFactory) override;
+
+	void SetCapsuleScale(Engine::Math::Vector3 capsuleScale);
+protected:
+	void DisposeComponents() override;
+
+	void PreInitialize(const Engine::Modules& modules) override;
+	void PostInitialize(const Engine::Modules& modules) override;
+	void PostUpdate(float deltaTime) override;
+	void PostAttach() override;
+
+private:
+	void MoveStarted();
+	void MoveCompleted();
+
+	void JumpStarted();
+	void JumpCompleted();
+
+	void InteractStarted();
+	void InteractCompleted();
+
+	void ChangeSplitAnimation(const char* animation, StateFlag flag, SplitType type);
+	void SyncPatialAnimation(const char* animation, StateFlag flag, SplitType parent, SplitType child);
+
+protected:
+	std::filesystem::path _meshPath;
+	Engine::Math::Matrix _worldMatrix;
+
+	Engine::Component::Movement* _movement;
+	Engine::Component::SkeletalMesh* _skeletalMesh;
+	Engine::Component::Animator* _animator;
+
+	Engine::Component::ChractorController* _rigid;
+	Engine::Component::Synchronize* _sync;
+	RemoteMove* _remote;
+
+	Engine::Component::BitFlag* _bitFlag;
+
+protected:
+	Engine::Math::Vector3 _capsuleScale;
+	Engine::Math::Quaternion _offset;
+
+	GrabbedObject* grabbedObject;
+
+private:
+	// State Test
+	void UpdateState();
+
+public:
+	void SetSerialNumber(int num);
+	const int GetSerialNumber() const;
+	void StateChange(const MoveMsg::StateChange* msg);
+	void SyncMove(const MoveMsg::MoveSync* msg);
+	// 이 함수는 최초 입장 했을 때 초기 위치 설정을 위한 함수입니다.
+	void SetLocation(const MoveMsg::MoveSync* msg);
+	void Grab(const std::wstring& name, const std::any& value);
+};
+

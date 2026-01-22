@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="문서">
+      <UniqueIdentifier>{8a5f7a0e-a3af-4bba-ab0e-061b58771f86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library">
+      <UniqueIdentifier>{95ceac8a-9da8-4a63-b86f-0979a1f75a75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\0. Interface">
+      <UniqueIdentifier>{eca40d84-0475-4d41-bbb8-a0acdd911030}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\0. Interface\00. ISystem">
+      <UniqueIdentifier>{31347f7a-bf22-48d0-a73d-82e3794aaa3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\0. Interface\00. ISystem\IFactory">
+      <UniqueIdentifier>{fcc45ebe-6e11-41bc-ae17-ff424d3cc96e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\0. Interface\00. ISystem\ICreate">
+      <UniqueIdentifier>{6ada2938-cba4-42e4-b517-212db6d67bdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\0. Interface\00. ISystem\IUpdate">
+      <UniqueIdentifier>{edf548bc-183b-4f28-9904-ed0dc57f8831}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\0. Interface\01. IScene">
+      <UniqueIdentifier>{fb451c8c-a617-497a-a8c0-20a550ed577b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\0. Interface\02. IObject">
+      <UniqueIdentifier>{ce94470c-246a-4e90-b304-ba3945b24fc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\0. Interface\03. IShape">
+      <UniqueIdentifier>{236f7597-85ba-4366-b89f-5d957fd55333}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\0. Interface\05. IMaterial">
+      <UniqueIdentifier>{aeb9ce44-e543-4a58-8002-aaea87300dcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\0. Interface\04. IGeometry">
+      <UniqueIdentifier>{71e059b7-b3b2-4e07-bcef-eaa76474b99d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\1. System">
+      <UniqueIdentifier>{4f182618-626c-4a88-93aa-67ec65ad5b25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\1. System\00. PhysX">
+      <UniqueIdentifier>{9b3dc55d-95bd-4e4f-909e-325b5b665efd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\1. System\00. PhysX\001. Scene">
+      <UniqueIdentifier>{0e81ff66-dfdf-403c-91b8-9ccb9b2e40d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\1. System\00. PhysX\000. System">
+      <UniqueIdentifier>{0af2d29d-90f0-4c74-83ab-bfb918ae2d18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\1. System\00. PhysX\002. Actor">
+      <UniqueIdentifier>{2d6eaa86-a295-4c31-8b8f-982e3a900c2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\1. System\00. PhysX\003. Shape">
+      <UniqueIdentifier>{a3504e7a-a93e-462d-938e-8660a21ad5de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\1. System\00. PhysX\004. Geometry">
+      <UniqueIdentifier>{4d3e2800-77a0-4c31-a30e-a5fcdf5db6a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\1. System\00. PhysX\005. Material">
+      <UniqueIdentifier>{e65bbb0e-e4b6-4b72-8627-318a4eaed497}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\0. Interface\98. IUserData">
+      <UniqueIdentifier>{ba410ad4-44ff-4bac-9647-c3a5e613d549}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\0. Interface\99. ICollision">
+      <UniqueIdentifier>{827e127c-105c-482c-9239-5e621007d3bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\0. Interface\01. IScene\ISceneQuery">
+      <UniqueIdentifier>{4a8b8a50-6a9d-4658-8648-c71cda8d71c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\0. Interface\02. IObject\IDynamicObject">
+      <UniqueIdentifier>{e78b1cb9-2bbb-4bdc-b553-dc0d9060127b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\0. Interface\02. IObject\IStaticObject">
+      <UniqueIdentifier>{4f2c3e77-2347-4b0d-a665-3c2ff3f3b961}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\0. Interface\02. IObject\IKinematicObject">
+      <UniqueIdentifier>{5ac1a9a6-04c2-46be-8376-db964861e313}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\1. System\00. PhysX\002. Actor\PhysXDynamicActor">
+      <UniqueIdentifier>{3e9701e4-f0ef-4620-82b1-ab3b74e86e28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\1. System\00. PhysX\002. Actor\PhysXStaticActor">
+      <UniqueIdentifier>{e65ffa0c-8726-49df-bca7-a1b0911eb065}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\1. System\00. PhysX\002. Actor\PhysXKinematicActor">
+      <UniqueIdentifier>{8fa69c46-39f0-4299-8b69-1854eb785d68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\1. System\00. PhysX\998. Collision">
+      <UniqueIdentifier>{2e677df2-ed9a-405c-a4da-462b75f6f27c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\1. System\00. PhysX\999. Utils">
+      <UniqueIdentifier>{f76fd226-1ea8-49aa-9189-7064dde3de09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\1. System\00. PhysX\998. Collision\CollisionEvent">
+      <UniqueIdentifier>{97d001f6-850e-4354-8ce8-597ddede6ff3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\1. System\00. PhysX\006. Controller">
+      <UniqueIdentifier>{a058d35e-e7fc-4165-8990-d83a94b79833}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\2. Utils">
+      <UniqueIdentifier>{3d3cc417-2a37-45c5-acac-526896c59d8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\1. System\00. PhysX\006. Controller\CallbackFunction">
+      <UniqueIdentifier>{7cd74ea3-4889-4ea1-b65d-75f242cc3282}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\9. Loader">
+      <UniqueIdentifier>{aad2f8ec-4ac2-4d21-827b-6b78c6f83498}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\9. Loader\MeshLoader">
+      <UniqueIdentifier>{f4f85ee9-4823-4743-b335-0a996688070a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\9. Loader\ImageLoader">
+      <UniqueIdentifier>{f991fb73-dbb2-4113-a671-401450fd92f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\0. Interface\06. IContrillor">
+      <UniqueIdentifier>{2bbd1080-2c49-4100-9b10-de0b350962b0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysXSystem.h">
+      <Filter>Library\1. System\00. PhysX\000. System</Filter>
+    </ClInclude>
+    <ClInclude Include="IPhysicsSystem.h">
+      <Filter>Library\0. Interface\00. ISystem</Filter>
+    </ClInclude>
+    <ClInclude Include="IScene.h">
+      <Filter>Library\0. Interface\01. IScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Description.h">
+      <Filter>Library\2. Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="InterfaceAPI.h">
+      <Filter>Library\0. Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysXScene.h">
+      <Filter>Library\1. System\00. PhysX\001. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="DLLExport.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="IObject.h">
+      <Filter>Library\0. Interface\02. IObject</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructure.h">
+      <Filter>Library\2. Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Library\2. Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Library\2. Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="IGeometry.h">
+      <Filter>Library\0. Interface\04. IGeometry</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysXActor.h">
+      <Filter>Library\1. System\00. PhysX\002. Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysXGeometry.h">
+      <Filter>Library\1. System\00. PhysX\004. Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysXShape.h">
+      <Filter>Library\1. System\00. PhysX\003. Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="IShape.h">
+      <Filter>Library\0. Interface\03. IShape</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysXElement.h">
+      <Filter>Library\1. System\00. PhysX</Filter>
+    </ClInclude>
+    <ClInclude Include="IMaterial.h">
+      <Filter>Library\0. Interface\05. IMaterial</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysXMaterial.h">
+      <Filter>Library\1. System\00. PhysX\005. Material</Filter>
+    </ClInclude>
+    <ClInclude Include="IElementDeclaration.h">
+      <Filter>Library\0. Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IFactory.h">
+      <Filter>Library\0. Interface\00. ISystem\IFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="ICreate.h">
+      <Filter>Library\0. Interface\00. ISystem\ICreate</Filter>
+    </ClInclude>
+    <ClInclude Include="IUpdate.h">
+      <Filter>Library\0. Interface\00. ISystem\IUpdate</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemInterfaceStructure.h">
+      <Filter>Library\0. Interface\00. ISystem</Filter>
+    </ClInclude>
+    <ClInclude Include="ICollision.h">
+      <Filter>Library\0. Interface\99. ICollision</Filter>
+    </ClInclude>
+    <ClInclude Include="IUserData.h">
+      <Filter>Library\0. Interface\98. IUserData</Filter>
+    </ClInclude>
+    <ClInclude Include="ISceneQuery.h">
+      <Filter>Library\0. Interface\01. IScene\ISceneQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="IKinematicObject.h">
+      <Filter>Library\0. Interface\02. IObject\IKinematicObject</Filter>
+    </ClInclude>
+    <ClInclude Include="IDynamicObject.h">
+      <Filter>Library\0. Interface\02. IObject\IDynamicObject</Filter>
+    </ClInclude>
+    <ClInclude Include="IStaticObject.h">
+      <Filter>Library\0. Interface\02. IObject\IStaticObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysXDynamicActor.h">
+      <Filter>Library\1. System\00. PhysX\002. Actor\PhysXDynamicActor</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysXKinematicActor.h">
+      <Filter>Library\1. System\00. PhysX\002. Actor\PhysXKinematicActor</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysXStaticActor.h">
+      <Filter>Library\1. System\00. PhysX\002. Actor\PhysXStaticActor</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysXUtils.h">
+      <Filter>Library\1. System\00. PhysX\999. Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysXActorFunction.h">
+      <Filter>Library\1. System\00. PhysX\002. Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysxCollisionEvent.h">
+      <Filter>Library\1. System\00. PhysX\998. Collision\CollisionEvent</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysXCollision.h">
+      <Filter>Library\1. System\00. PhysX\998. Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="IController.h">
+      <Filter>Library\0. Interface\06. IContrillor</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysXController.h">
+      <Filter>Library\1. System\00. PhysX\006. Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysXBehaviorCallback.h">
+      <Filter>Library\1. System\00. PhysX\006. Controller\CallbackFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysXReportCallback.h">
+      <Filter>Library\1. System\00. PhysX\006. Controller\CallbackFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshLoader.h">
+      <Filter>Library\9. Loader\MeshLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageLoader.h">
+      <Filter>Library\9. Loader\ImageLoader</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXSystem.cpp">
+      <Filter>Library\1. System\00. PhysX\000. System</Filter>
+    </ClCompile>
+    <ClCompile Include="IScene.cpp">
+      <Filter>Library\0. Interface\01. IScene</Filter>
+    </ClCompile>
+    <ClCompile Include="InterfaceAPI.cpp">
+      <Filter>Library\0. Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXScene.cpp">
+      <Filter>Library\1. System\00. PhysX\001. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="IPhysicsSystem.cpp">
+      <Filter>Library\0. Interface\00. ISystem</Filter>
+    </ClCompile>
+    <ClCompile Include="IGeometry.cpp">
+      <Filter>Library\0. Interface\04. IGeometry</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXGeometry.cpp">
+      <Filter>Library\1. System\00. PhysX\004. Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXActor.cpp">
+      <Filter>Library\1. System\00. PhysX\002. Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXShape.cpp">
+      <Filter>Library\1. System\00. PhysX\003. Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="IShape.cpp">
+      <Filter>Library\0. Interface\03. IShape</Filter>
+    </ClCompile>
+    <ClCompile Include="IMaterial.cpp">
+      <Filter>Library\0. Interface\05. IMaterial</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXMaterial.cpp">
+      <Filter>Library\1. System\00. PhysX\005. Material</Filter>
+    </ClCompile>
+    <ClCompile Include="IObject.cpp">
+      <Filter>Library\0. Interface\02. IObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ICollision.cpp">
+      <Filter>Library\0. Interface\99. ICollision</Filter>
+    </ClCompile>
+    <ClCompile Include="IUserData.cpp">
+      <Filter>Library\0. Interface\98. IUserData</Filter>
+    </ClCompile>
+    <ClCompile Include="IKinematicObject.cpp">
+      <Filter>Library\0. Interface\02. IObject\IKinematicObject</Filter>
+    </ClCompile>
+    <ClCompile Include="IDynamicObject.cpp">
+      <Filter>Library\0. Interface\02. IObject\IDynamicObject</Filter>
+    </ClCompile>
+    <ClCompile Include="IStaticObject.cpp">
+      <Filter>Library\0. Interface\02. IObject\IStaticObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXDynamicActor.cpp">
+      <Filter>Library\1. System\00. PhysX\002. Actor\PhysXDynamicActor</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXKinematicActor.cpp">
+      <Filter>Library\1. System\00. PhysX\002. Actor\PhysXKinematicActor</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXStaticActor.cpp">
+      <Filter>Library\1. System\00. PhysX\002. Actor\PhysXStaticActor</Filter>
+    </ClCompile>
+    <ClCompile Include="IFactory.cpp">
+      <Filter>Library\0. Interface\00. ISystem\IFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="IUpdate.cpp">
+      <Filter>Library\0. Interface\00. ISystem\IUpdate</Filter>
+    </ClCompile>
+    <ClCompile Include="ISceneQuery.cpp">
+      <Filter>Library\0. Interface\01. IScene\ISceneQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXUtils.cpp">
+      <Filter>Library\1. System\00. PhysX\999. Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXActorFunction.cpp">
+      <Filter>Library\1. System\00. PhysX\002. Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysxCollisionEvent.cpp">
+      <Filter>Library\1. System\00. PhysX\998. Collision\CollisionEvent</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXCollision.cpp">
+      <Filter>Library\1. System\00. PhysX\998. Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="IController.cpp">
+      <Filter>Library\0. Interface\06. IContrillor</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXController.cpp">
+      <Filter>Library\1. System\00. PhysX\006. Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXBehaviorCallback.cpp">
+      <Filter>Library\1. System\00. PhysX\006. Controller\CallbackFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXReportCallback.cpp">
+      <Filter>Library\1. System\00. PhysX\006. Controller\CallbackFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshLoader.cpp">
+      <Filter>Library\9. Loader\MeshLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLoader.cpp">
+      <Filter>Library\9. Loader\ImageLoader</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="개발참고자료.txt">
+      <Filter>문서</Filter>
+    </Text>
+    <Text Include="사용법.txt">
+      <Filter>문서</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+    <None Include="ICreate.cpp">
+      <Filter>Library\0. Interface\00. ISystem\ICreate</Filter>
+    </None>
+  </ItemGroup>
+</Project>

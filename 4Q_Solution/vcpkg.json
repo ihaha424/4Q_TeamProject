@@ -1,0 +1,9 @@
+{
+  "dependencies": [
+    "assimp",
+    "directxtex",
+    "directxtk",
+    "protobuf",
+    "nlohmann-json"
+  ]
+}

@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\Utils">
+      <UniqueIdentifier>{19329cb0-b96d-4454-9bbb-672a5db3e25d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Utils\StreamBuffer">
+      <UniqueIdentifier>{3c8f0651-b82c-40e0-bc9c-6b8df270e635}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Server">
+      <UniqueIdentifier>{78e6021c-568c-4535-a54e-e7cb2588f67c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Server\MAIN">
+      <UniqueIdentifier>{c943848b-cf4c-4f61-a4b7-9d1daa3dd41c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Common">
+      <UniqueIdentifier>{788c27ed-9669-4c58-8ab7-079f6e5faeda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Common\Interface">
+      <UniqueIdentifier>{b12ac0f5-388e-4139-b452-1e612c5c0553}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Common\Packet">
+      <UniqueIdentifier>{c2b02efd-6c39-4caf-bfc0-d42f667d56c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Common\Socket">
+      <UniqueIdentifier>{5d2ab8d1-4558-467f-b3b1-6abc34ed3460}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Client">
+      <UniqueIdentifier>{d72427b1-9b8a-413f-83f4-83742faa0a41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Server\Entrance">
+      <UniqueIdentifier>{f4e77242-74a6-423a-9364-e92519976bf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Client\Entrance">
+      <UniqueIdentifier>{075290e7-2aad-4af4-8ddc-cfbb236bc555}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Common\PacketDispatcher">
+      <UniqueIdentifier>{abc00f3c-a3f7-4de8-be02-c2e14db9d0a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Server\Session">
+      <UniqueIdentifier>{4acf6b61-7f31-4475-afef-5146c89cf8f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Client\MAIN">
+      <UniqueIdentifier>{a76306b2-a4b9-4a64-81dd-91c0bb6bb697}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DLLSetting.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalDef.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ISocket.h">
+      <Filter>소스 파일\Common\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IPacketDispatcher.h">
+      <Filter>소스 파일\Common\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Overlapped.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ISession.h">
+      <Filter>소스 파일\Common\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Socket.h">
+      <Filter>소스 파일\Common\Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="Session.h">
+      <Filter>소스 파일\Server\Session</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketDispatcher.h">
+      <Filter>소스 파일\Common\PacketDispatcher</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\StreamBuffer.h">
+      <Filter>소스 파일\Utils\StreamBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkMain.h">
+      <Filter>소스 파일\Server\MAIN</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerEntrance.h">
+      <Filter>소스 파일\Server\Entrance</Filter>
+    </ClInclude>
+    <ClInclude Include="Packet.h">
+      <Filter>소스 파일\Common\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientNetwork.h">
+      <Filter>소스 파일\Client\MAIN</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientEntrance.h">
+      <Filter>소스 파일\Client\Entrance</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Socket.cpp">
+      <Filter>소스 파일\Common\Socket</Filter>
+    </ClCompile>
+    <ClCompile Include="Session.cpp">
+      <Filter>소스 파일\Server\Session</Filter>
+    </ClCompile>
+    <ClCompile Include="PacketDispatcher.cpp">
+      <Filter>소스 파일\Common\PacketDispatcher</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\StreamBuffer.cpp">
+      <Filter>소스 파일\Utils\StreamBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkMain.cpp">
+      <Filter>소스 파일\Server\MAIN</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerEntrance.cpp">
+      <Filter>소스 파일\Server\Entrance</Filter>
+    </ClCompile>
+    <ClCompile Include="ISession.cpp">
+      <Filter>소스 파일\Common\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Packet.cpp">
+      <Filter>소스 파일\Common\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientNetwork.cpp">
+      <Filter>소스 파일\Client\MAIN</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientEntrance.cpp">
+      <Filter>소스 파일\Client\Entrance</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

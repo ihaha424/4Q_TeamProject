@@ -1,0 +1,106 @@
+#include "pch.h"
+#include "Object.h"
+#include "PHIObject.h"
+
+void Engine::Object::Dispose()
+{
+	DisposeComponents();
+	_isDispose = true;
+}
+
+bool Engine::Object::IsDisposed() const
+{
+	return _isDispose;
+}
+
+void Engine::Object::PreInitialize(const Modules& modules)
+{
+}
+
+void Engine::Object::PostInitialize(const Modules& modules)
+{
+}
+
+void Engine::Object::PreAttach()
+{
+}
+
+void Engine::Object::PostAttach()
+{
+}
+
+void Engine::Object::PreUpdate(float deltaTime)
+{
+}
+
+void Engine::Object::PostUpdate(float deltaTime)
+{
+}
+
+void Engine::Object::PreLazyUpdate(float deltaTime)
+{
+}
+
+void Engine::Object::PostLazyUpdate(float deltaTime)
+{
+}
+
+void Engine::Object::PreFixedUpdate()
+{
+}
+
+void Engine::Object::PostFixedUpdate()
+{
+}
+
+void Engine::Object::PreDetach()
+{
+}
+
+void Engine::Object::PostDetach()
+{
+}
+
+void Engine::Object::PreFinalize()
+{
+}
+
+void Engine::Object::PostFinalize()
+{
+}
+
+void Engine::Object::Hide()
+{
+}
+
+void Engine::Object::Show()
+{
+}
+
+void Engine::Object::Activate()
+{
+}
+
+void Engine::Object::Deactivate()
+{
+}
+
+void Engine::Object::SetOwner(World* owner)
+{
+	_owner = owner;
+}
+
+Engine::World* Engine::Object::GetOwner() const
+{
+	return _owner;
+}
+
+void Engine::Object::SetTransform(const Engine::Transform& transform)
+{
+	_transform = transform;
+}
+
+Engine::Transform Engine::Object::GetTransform() const
+{
+	return _transform;
+}

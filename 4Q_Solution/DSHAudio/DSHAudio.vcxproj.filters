@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{8fbaa71d-205a-4970-873e-2eaa8bb42574}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces">
+      <UniqueIdentifier>{d137ee32-4197-4fbe-84ae-06a9217654f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities\Functions">
+      <UniqueIdentifier>{55840594-7d0c-452e-b500-7b33d4fe809b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\ISystem">
+      <UniqueIdentifier>{555266b8-6f33-4372-b102-17f820453df4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\ISound">
+      <UniqueIdentifier>{e9f95c9b-50f6-484a-96c4-93e0ad4fd300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{8b9e0b66-b8fe-4bc1-ba81-35c003b67203}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{4283b0fd-7534-431f-8bd0-0982caccf33f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities\Helper">
+      <UniqueIdentifier>{c6623b92-1a06-4dc8-adaf-0094ac1cedd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound3D">
+      <UniqueIdentifier>{55249472-5699-420b-bd0d-9f2217645a5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Declare">
+      <UniqueIdentifier>{24ccbaaf-bd25-44ef-a471-b4dd175b798b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Declare\ChannelGroupType">
+      <UniqueIdentifier>{9843cf60-7479-427d-8643-cfbe162e4f39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Declare\Vector">
+      <UniqueIdentifier>{477d1440-f367-4e70-9611-9cc433ae34ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IListener">
+      <UniqueIdentifier>{440bf552-f252-4359-8e6a-77af46dfed7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\ISound3D">
+      <UniqueIdentifier>{65f3d049-239b-470e-bf6b-7cad2ef4ca74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Listener">
+      <UniqueIdentifier>{bdac3eff-422b-4f5b-9b0b-ff9cb5970ecf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Exports.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Requires.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Functions.h">
+      <Filter>Utilities\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="ISystem.h">
+      <Filter>Interfaces\ISystem</Filter>
+    </ClInclude>
+    <ClInclude Include="ISound.h">
+      <Filter>Interfaces\ISound</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper.h">
+      <Filter>Utilities\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound3D.h">
+      <Filter>Sound3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Declare.h">
+      <Filter>Declare</Filter>
+    </ClInclude>
+    <ClInclude Include="ChannelGroupType.h">
+      <Filter>Declare\ChannelGroupType</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Declare\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="IListener.h">
+      <Filter>Interfaces\IListener</Filter>
+    </ClInclude>
+    <ClInclude Include="ISound3D.h">
+      <Filter>Interfaces\ISound3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Listener.h">
+      <Filter>Listener</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Functions.cpp">
+      <Filter>Utilities\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="ISystem.cpp">
+      <Filter>Interfaces\ISystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ISound.cpp">
+      <Filter>Interfaces\ISound</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Helper.cpp">
+      <Filter>Utilities\Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound3D.cpp">
+      <Filter>Sound3D</Filter>
+    </ClCompile>
+    <ClCompile Include="ChannelGroupType.cpp">
+      <Filter>Declare\ChannelGroupType</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector.cpp">
+      <Filter>Declare\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="IListener.cpp">
+      <Filter>Interfaces\IListener</Filter>
+    </ClCompile>
+    <ClCompile Include="ISound3D.cpp">
+      <Filter>Interfaces\ISound3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Listener.cpp">
+      <Filter>Listener</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

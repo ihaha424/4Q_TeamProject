@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package ConnectMsg;
+
+message EnterAccept {
+	optional int32 grantnumber = 1;
+}
+
+message SyncPlayer {
+	optional float x = 1;
+	optional float y = 2;
+	optional float z = 3;
+}
+
+message SyncObject {
+	optional bool public = 1;
+	repeated float position = 2;
+	repeated float rotation = 3;
+	repeated float scale = 4;
+}
+
+message AddObject {
+	optional int32 grantnumber = 1;
+	optional string classid = 2;
+}

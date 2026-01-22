@@ -1,0 +1,324 @@
+Shape
+	: PxRigidActor::attachShape()를 사용하여 부탁
+	PxRigidActor::detachShape()를 사용하여 액터에서 셰이프를 분리합니다.
+	분리할 셰이프가 PxActor::createShape()로 생성된 경우, 액터는 유일하게 계산된 레퍼런스를 보유합니다,
+	따라서 셰이프가 분리되면 그 참조도 소멸됩니다. 
+
+================================================================================
+Joint (관절체)
+	PxD6Joint
+	PxRevoluteJoint
+	PxSphericalJoint
+	PxDistanceJoint	
+	PxPrismaticJoint
+	PxFixedJoint
+================================================================================
+PxAggregate 
+	PxAggregate에 포함된 객체들은 내부적으로 최적화된 구조로 처리되며, 같은 그룹 내 객체 간의 충돌 계산을 선택적으로 무시할 수 있습니다.
+	그룹 간 충돌 계산이 더 빠르게 이루어집니다.
+	언제 사용하나요?
+		많은 객체를 포함하는 씬(Scene):
+			예를 들어, 게임에서 여러 적 캐릭터, 파괴 가능한 물체, 고정된 장애물을 포함하는 경우.
+		성능 최적화가 중요한 경우:
+			객체 수가 많고 복잡한 충돌 계산이 필요한 상황에서 Aggregate를 사용하면 충돌 처리 속도가 크게 향상됩니다.
+		특정 그룹으로 관리가 필요한 경우:
+			특정 객체 그룹을 한 번에 추가하거나 제거하려는 경우 편리합니다.
+================================================================================
+PxTriangleMesh
+	PxTriangleMesh는 정적 삼각형 메쉬를 정의하는 클래스입니다. 복잡한 비구형 객체(예: 건물, 바위, 지형 등)를 물리적으로 시뮬레이션할 때 사용됩니다.
+	주요 사용처
+		:건물, 지형, 바위처럼 움직이지 않는 복잡한 정적 모델의 충돌 처리.
+		정적 객체
+
+PxHeightField
+	PxHeightField는 높이 맵 기반의 지형을 정의하는 클래스입니다. 지형을 효율적으로 표현하고 충돌 처리를 최적화합니다.
+	특징:
+		높이 맵 데이터(2D 배열 형태의 높이 값)를 사용해 3D 지형을 정의.
+		주로 지형이나 게임 월드의 바닥을 표현하는 데 사용.
+		삼각형 메쉬보다 메모리와 계산 효율이 높음.
+	주요 사용처:
+		오픈 월드 게임의 지형 충돌 처리.
+		고도 기반의 맵 생성.
+		대규모 지형
+
+PxConvexMesh
+	PxConvexMesh는 **볼록 다면체(Convex Hull)**를 정의하는 클래스입니다. 이는 동적 객체(Dynamic Object)의 충돌 처리를 위해 사용됩니다.
+	특징:
+		물리적으로 볼록한 형태의 객체만 표현 가능(비볼록한 형태는 분해 필요).
+		삼각형 메쉬와 달리 동적 객체로 사용할 수 있습니다.
+		충돌 계산이 효율적이며, 동적 시뮬레이션에서 자주 사용.
+	주요 사용처:
+		차량, 상자, 캐릭터와 같은 동적 객체.
+		단순화된 충돌 모델로 효율적인 물리 계산.
+		동적 객체
+
+PxMaterial
+	PxMaterial은 물리 객체의 마찰 계수와 반발 계수를 정의하는 클래스입니다.
+	이는 객체의 표면 물리 특성을 설정하는 데 사용됩니다.
+	특징:
+		각 객체 또는 PxShape에 적용.
+		두 객체가 충돌할 때 PhysX는 각각의 재질(Material)을 참고하여 충돌 효과를 계산.
+	속성:
+		마찰 계수(staticFriction, dynamicFriction): 정지 및 움직임 마찰 계수.
+		반발 계수(restitution): 충돌 후 반발 정도.
+	주요 사용처:
+		서로 다른 물리적 표면(예: 얼음, 나무, 금속)의 물리 특성을 표현.
+		충돌 시의 상호작용 및 운동 효과를 세밀하게 조정.
+		표면의 물리적 특성 (마찰, 반발)
+
+
+
+physx::PxGeometry;
+		// Geometry
+		{
+			PxSphereGeometry;
+			PxCapsuleGeometry;
+			PxBoxGeometry;
+			PxPlaneGeometry;
+
+			//IsCooking /  Vertex and Face Data
+			PxConvexMeshGeometry;
+			PxTriangleMeshGeometry;	// 이게 원하는 메쉬 모양의 데이터네
+			PxHeightFieldGeometry;
+
+			-> 특정 Geometry(예: PxConvexMeshGeometry 또는 PxTriangleMeshGeometry)에는 스케일 조정을 위한 PxMeshScale이 포함되어 있습니다.
+
+			//Additional
+			PxCustomGeometry;
+			PxHairSystemGeometry;
+			PxParticleSystemGeometry;
+			PxTetrahedronMeshGeometry;
+		}
+
+================================================================================
+	// 자신의 타입으로 변환
+		충돌 생각할때 상대방의 정보를 보내 주어야하는데 어떻게 보낼까?
+
+		자신의 어느 shape이랑 상대의 어느 shape하고 충돌이 났는지 서로의 오브젝트한테 보낸다.
+		(일단 충격량같은 충돌 정보는 이후...)
+
+		static_cast<ICollision>(userdata)->Collision& Triier(ContactData);
+		-> userdata == ColliderComponet : public ICompoennt / 
+		-> ColliderComponet는 ContactData에 따라서 충돌 정보를 파악하여 클라이언트의 코드를 실행 시킴
+			-> 이러면 피직스와 엔진의 결합 / 엔진과 클라의 결합이 있지만,
+				피직스와 클라 / 피직스X와 엔진의 결합도는 없음.
+
+================================================================================
+		// physx::PxDefaultSimulationFilterShader; is Default Filter
+
+
+기본 충돌 및 접촉 처리
+eSOLVE_CONTACT (1 << 0)
+충돌 쌍에 대해 동적 시뮬레이션(물리 계산)에서 접촉 처리를 수행합니다.
+Rigid body(강체) 간 충돌에만 영향을 미칩니다.
+접촉 수정 및 사용자 정의 콜백
+eMODIFY_CONTACTS (1 << 1)
+접촉 수정 콜백을 호출하도록 설정합니다.
+접촉 데이터를 사용자 정의로 수정할 수 있습니다.
+접촉 이벤트 통지(콜백)
+eNOTIFY_TOUCH_FOUND (1 << 2)
+
+두 객체가 접촉을 시작했을 때 콜백을 호출합니다.
+트리거(trigger)와의 충돌 또는 강체 간 접촉에서 사용됩니다.
+eNOTIFY_TOUCH_PERSISTS (1 << 3)
+
+접촉이 지속되는 동안 콜백을 호출합니다.
+트리거에는 적용되지 않습니다.
+eNOTIFY_TOUCH_LOST (1 << 4)
+
+접촉이 종료될 때(충돌이 멈출 때) 콜백을 호출합니다.
+트리거에서 객체가 나갈 때에도 호출됩니다.
+eNOTIFY_TOUCH_CCD (1 << 5)
+
+CCD(Continuous Collision Detection) 과정 중 접촉이 발생할 때마다 콜백을 호출합니다.
+트리거는 지원되지 않습니다.
+힘(Force) 임계값 이벤트 통지
+eNOTIFY_THRESHOLD_FORCE_FOUND (1 << 6)
+
+두 객체 사이의 접촉력이 임계값을 초과할 때 콜백을 호출합니다.
+eNOTIFY_THRESHOLD_FORCE_PERSISTS (1 << 7)
+
+임계값을 초과하는 접촉력이 계속 유지될 때 콜백을 호출합니다.
+eNOTIFY_THRESHOLD_FORCE_LOST (1 << 8)
+
+접촉력이 임계값 아래로 떨어질 때(또는 접촉이 끝날 때) 콜백을 호출합니다.
+추가 정보 제공 옵션
+eNOTIFY_CONTACT_POINTS (1 << 9)
+
+접촉 보고서에서 접촉 지점 정보를 제공합니다.
+ePRE_SOLVER_VELOCITY (1 << 12)
+
+접촉 해결 전 강체의 속도를 보고서에 포함합니다.
+ePOST_SOLVER_VELOCITY (1 << 13)
+
+접촉 해결 후 강체의 속도를 보고서에 포함합니다.
+eCONTACT_EVENT_POSE (1 << 14)
+
+접촉 이벤트 발생 시 강체의 자세(포즈)를 보고서에 포함합니다.
+충돌 감지 설정
+eDETECT_DISCRETE_CONTACT (1 << 10)
+
+이 쌍에서 불연속적(Discrete) 충돌 감지를 수행합니다.
+eSOLVE_CONTACT가 활성화된 경우에만 동작합니다.
+eDETECT_CCD_CONTACT (1 << 11)
+
+이 쌍에서 연속적(CCD) 충돌 감지를 수행합니다.
+CCD가 활성화된 씬(Scene)에서만 동작하며, 트리거는 지원되지 않습니다.
+사전 정의된 기본 플래그
+eCONTACT_DEFAULT
+
+간단한 접촉 처리를 위한 기본값입니다.
+포함: eSOLVE_CONTACT | eDETECT_DISCRETE_CONTACT
+eTRIGGER_DEFAULT
+
+일반적으로 사용되는 트리거 동작의 기본값입니다.
+포함: eNOTIFY_TOUCH_FOUND | eNOTIFY_TOUCH_LOST | eDETECT_DISCRETE_CONTACT
+================================================================================
+PxCapsuleController	관련 내용
+====================================================
+System에 추가할 내용
+CreateContriller
+====================================================
+Scene에 추가할 내용
+PxControllerManager*		-> IScene에 Get/Set
+
+====================================================
+PxCapsuleController
+	Discription
+	{
+		PxControllerDesc
+				position					: 캐릭터 컨트롤러의 초기 월드 좌표 (PxExtendedVec3)
+				UpDirection					: 컨트롤러의 "위쪽 방향"을 나타내는 벡터 (PxVec3)
+				slopeLimit					: 캐릭터가 올라갈 수 있는 최대 경사각(라디안 단위, 기본값 0.0)
+				invisibleWallHeight			: 보이지 않는 벽의 높이 (기본값 0.0)
+												캐릭터 컨트롤러가 특정 지점 이상으로 이동하지 못하도록 하는 보이지 않는 벽의 높이를 설정합니다.
+				maxJumpHeight				: 최대 점프 높이 (기본값 0.0)
+				contactOffset				: 충돌 감지를 위한 추가 오프셋 거리
+				stepOffset					: 계단을 올라갈 때 허용되는 최대 높이
+				density						: 컨트롤러의 밀도 (기본값 0.0, 동작에는 영향 없음)
+				scaleCoeff					: 내부 충돌 감지를 위한 스케일 계수 (기본값 0.9)
+												충돌 검사에서 컨트롤러의 크기를 조정하는 계수입니다.
+												일반적으로 캐릭터의 캡슐 또는 박스 크기를 약간 축소하여 더 부드러운 충돌 처리를 가능하게 합니다.
+												기본값인 0.9이면 컨트롤러의 실제 크기의 90%로 충돌을 감지하게 됩니다.
+				volumeGrowth				: 컨트롤러 볼륨이 성장하는 비율
+												충돌 감지 시 컨트롤러의 충돌 볼륨을 확장하는 정도를 나타냅니다.
+												특정 프레임에서 충돌이 감지되지 않는 경우, 충돌 감지를 더 확실하게 하기 위해 볼륨을 증가시킬 수 있습니다.
+												높은 값으로 설정하면 더 넓은 영역에서 충돌을 감지하지만, 너무 높으면 불필요한 충돌이 발생할 수 있습니다.
+				reportCallback				: PxUserControllerHitReport 인터페이스를 구현한 충돌 이벤트 콜백
+												컨트롤러가 다른 객체와 충돌할 때 호출되는 콜백 함수입니다.
+												PxUserControllerHitReport를 상속받은 사용자 정의 클래스에서 구현해야 합니다.
+												충돌 이벤트(예: 벽에 부딪힘, 바닥 충돌 등)를 감지하고 원하는 동작을 수행할 수 있습니다.
+				behaviorCallback			: PxControllerBehaviorCallback 인터페이스를 구현한 사용자 정의 동작 콜백
+												컨트롤러의 행동을 사용자 정의할 때 사용되는 콜백입니다.
+												PxControllerBehaviorCallback을 상속받아 특정 오브젝트에 대해 캐릭터의 반응을 제어할 수 있습니다.
+				nonWalkableMode				: PxControllerNonWalkableMode 설정 (경사를 넘을 수 있는 방식 결정)
+												캐릭터가 "걷기 불가능한 표면"을 만났을 때의 동작을 설정합니다.
+												보통 slopeLimit 값보다 가파른 경사를 걸을 수 없도록 제한하는 용도로 사용됩니다.
+				material					: 컨트롤러에 적용할 PxMaterial 포인터
+				registerDeletionListener	: 컨트롤러 삭제 시 리스너 등록 여부
+				userData					: 사용자 정의 데이터를 저장할 수 있는 포인터
+		
+		PxCapsuleControllerDesc
+				radius				: 캡슐 컨트롤러의 반지름
+				height				: 캡슐 컨트롤러의 높이 (세로 방향)
+				climbingMode		: PxCapsuleClimbingMode 설정 (경사 및 계단을 올라가는 방식 결정)
+										eEASY,			: 간단한 계단 탐지
+										eCONSTRAINED	: 보다 정밀한 탐지
+										2가지가 있음
+	}
+	기능
+	{
+		PxController
+			getType
+			release
+			move
+			setPosition
+			getPosition
+			setFootPosition
+			getFootPosition
+			getActor
+			setStepOffset
+			getStepOffset
+			setNonWalkableMode
+			getNonWalkableMode
+			getContactOffset
+			setContactOffset
+			getUpDirection
+			setUpDirection
+			getSlopeLimit
+			setSlopeLimit
+			invalidateCache
+			getScene
+			getUserData
+			setUserData
+			getState
+			getStats
+			resize
+		PxCapsuleController
+			getRadius
+			setRadius
+			getHeight
+			setHeight
+			getClimbingMode
+			setClimbingMode
+	}
+
+1. 플레이어가 특정 오브젝트를 "들고 갈 수 있도록" 설정하는 콜백
+class MyBehaviorCallback : public PxControllerBehaviorCallback {
+public:
+    PxControllerBehaviorFlags getBehaviorFlags(const PxShape&, const PxActor& actor) override {
+        // 특정 오브젝트(예: 'pickupable' 태그가 있는 물체)에 대해서만 동작
+        if (actor.userData && strcmp(static_cast<const char*>(actor.userData), "pickupable") == 0) {
+            return PxControllerBehaviorFlag::eCCT_USER_DEFINED_RIDE;  // 사용자 정의 상호작용 가능
+        }
+        return PxControllerBehaviorFlag::eCCT_NONE;
+    }
+};
+2. 플레이어가 오브젝트를 들고 이동하도록 설정
+class Player {
+public:
+    PxController* controller;
+    PxRigidDynamic* carriedObject = nullptr; // 현재 플레이어가 들고 있는 물체
+    PxPhysics* physics;
+
+    Player(PxController* ctrl, PxPhysics* phys) : controller(ctrl), physics(phys) {}
+
+    void pickupObject(PxRigidDynamic* object) {
+        if (carriedObject == nullptr) { // 이미 들고 있는 물체가 없을 때만 가능
+            carriedObject = object;
+            carriedObject->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true); // 오브젝트를 키네마틱으로 설정하여 플레이어가 움직일 때 함께 이동
+        }
+    }
+
+    void dropObject() {
+        if (carriedObject) {
+            carriedObject->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, false); // 원래의 물리 동작 복구
+            carriedObject = nullptr;
+        }
+    }
+
+    void updatePosition() {
+        if (carriedObject) {
+            PxExtendedVec3 playerPos = controller->getPosition();
+            PxVec3 objectOffset(0.0f, 1.0f, 0.5f); // 플레이어 앞쪽으로 위치 조정
+            carriedObject->setGlobalPose(PxTransform(PxVec3(playerPos.x, playerPos.y, playerPos.z) + objectOffset));
+        }
+    }
+};
+3. 입력 처리 (키 입력으로 줍기/버리기)
+void handleInput(Player& player, PxRigidDynamic* nearbyObject, bool pickKeyPressed, bool dropKeyPressed) {
+    if (pickKeyPressed && nearbyObject) {
+        player.pickupObject(nearbyObject);
+    }
+    if (dropKeyPressed) {
+        player.dropObject();
+    }
+}
+4. 게임 루프에서 위치 업데이트
+void gameLoop(Player& player) {
+    while (true) { // 게임 루프
+        player.updatePosition(); // 플레이어가 이동할 때 오브젝트 위치도 함께 업데이트
+        // 기타 게임 로직...
+    }
+}
+

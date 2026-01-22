@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Interfaces">
+      <UniqueIdentifier>{b3a07aa9-51b5-42e2-8c26-1a3ac75c23aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{e18cfe99-1147-45fe-947d-295f398cb8e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities\Functions">
+      <UniqueIdentifier>{c72d3be3-9b77-413e-b5a8-8083301da617}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\ISystem">
+      <UniqueIdentifier>{0acf3864-8528-4e6b-9cbf-8ae97f09efb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{be179162-1ce6-4251-8974-65f7964775d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IDevices">
+      <UniqueIdentifier>{01889ee1-2c85-4c23-aebf-982e11b8191d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IDevices\IDevice">
+      <UniqueIdentifier>{1a75965e-27fb-437c-82ab-d320a6ab5483}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IDevices\IKeyboard">
+      <UniqueIdentifier>{c1d469d9-fb73-4856-9cc9-ef19f7dd2278}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IDevices\IMouse">
+      <UniqueIdentifier>{1d7d47f4-c905-4514-a1e3-2972e2b21098}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities\Value">
+      <UniqueIdentifier>{ec2a3243-3433-480f-97d5-882318eb1781}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IDevices\IController">
+      <UniqueIdentifier>{614641be-4334-4918-9009-ad296a602ac4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IComponents">
+      <UniqueIdentifier>{dd8adbe6-eb33-42aa-86a8-3e4f0c8d7f49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IComponents\IComponent">
+      <UniqueIdentifier>{61b1184d-5b4c-4902-8d01-6c69a9f0b2f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IComponents\IButtonComponent">
+      <UniqueIdentifier>{a0a1bbd8-e3fd-4584-ab4e-893bd230c641}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IComponents\IAxisComponent">
+      <UniqueIdentifier>{7bfe8559-c099-438f-8070-89a57bacc49b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Device">
+      <UniqueIdentifier>{e2ae1592-ed5c-4891-a947-5514b0a1bab8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Device\Keyboard">
+      <UniqueIdentifier>{5b30e7c4-26d7-4765-8086-8fdaec76e362}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Device\Mouse">
+      <UniqueIdentifier>{b322badd-41fb-4b8b-9798-78cc440f42dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Device\Controller">
+      <UniqueIdentifier>{6f045b78-6ea9-43f4-a1de-f558dee24e1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{e8d998fc-5d61-4873-863f-d41589a575d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\ButtonComponent">
+      <UniqueIdentifier>{5c3c1d9c-4ce9-4b9d-a82c-8a8ea75fe082}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\AxisComponent">
+      <UniqueIdentifier>{55a7b637-2730-4dc2-835e-9be3e8b82a4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IMappingContext">
+      <UniqueIdentifier>{d4da14e1-26fa-4de8-a84f-57c7d29336fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MappingContext">
+      <UniqueIdentifier>{42512a37-5180-4026-9012-32529ea5a32a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IAction">
+      <UniqueIdentifier>{c0b84367-3d78-4eb9-9d38-f270bcb38c4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Action">
+      <UniqueIdentifier>{9aaf0d34-a6bb-4fc4-b337-62f1c0f019c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\ITriggers">
+      <UniqueIdentifier>{482643a1-7824-4ff4-8290-2fb94f15f22d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\ITriggers\Event">
+      <UniqueIdentifier>{4fa11bcb-bdb3-4d48-af9d-41f7a4061606}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\ITriggers\IDown">
+      <UniqueIdentifier>{2e8ab9c5-d5ed-4b5d-9b97-0396522ffc12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\ITriggers\ITrigger">
+      <UniqueIdentifier>{3ef58b5f-fbe3-471b-b0c3-5be52cfdc7fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trigger">
+      <UniqueIdentifier>{3106feda-7ff1-44f2-8d12-55be3ae77d6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trigger\Down">
+      <UniqueIdentifier>{5bf1b343-f1c8-4d74-a681-fe29d81f56b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modifiers">
+      <UniqueIdentifier>{53af87e7-426d-4c53-8d12-5c6fe36a9e4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modifiers\Negative">
+      <UniqueIdentifier>{69e1ec3e-34e4-4246-ae5d-0dec1a43bba7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modifiers\SwizzleAxis">
+      <UniqueIdentifier>{30b134f9-2469-4127-b14d-510e5acb1872}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IModifiers">
+      <UniqueIdentifier>{d5be2599-6cd4-463c-ad02-85e07d688fda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IModifiers\IModifier">
+      <UniqueIdentifier>{3ef2d673-d3b8-4fbd-903a-de0a73526a77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IModifiers\INegative">
+      <UniqueIdentifier>{4d27a808-ff4c-47a4-8677-0fe57f4136d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IModifiers\ISwizzleAxis">
+      <UniqueIdentifier>{26e03b9d-0613-4ebc-8ded-ead710e05830}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trigger\ChordAction">
+      <UniqueIdentifier>{ae0b4d4d-82c4-4a44-923e-fed45e3dceee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\ITriggers\IChordAction">
+      <UniqueIdentifier>{dff47bda-5552-4944-a677-769adc64399b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Exports.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Requires.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="ISystem.h">
+      <Filter>Interfaces\ISystem</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="IDevices.h">
+      <Filter>Interfaces\IDevices</Filter>
+    </ClInclude>
+    <ClInclude Include="IDevice.h">
+      <Filter>Interfaces\IDevices\IDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="IKeyboard.h">
+      <Filter>Interfaces\IDevices\IKeyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="IMouse.h">
+      <Filter>Interfaces\IDevices\IMouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Value.h">
+      <Filter>Utilities\Value</Filter>
+    </ClInclude>
+    <ClInclude Include="IController.h">
+      <Filter>Interfaces\IDevices\IController</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponents.h">
+      <Filter>Interfaces\IComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponent.h">
+      <Filter>Interfaces\IComponents\IComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="IButtonComponent.h">
+      <Filter>Interfaces\IComponents\IButtonComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="IAxisComponent.h">
+      <Filter>Interfaces\IComponents\IAxisComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>Device\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>Device\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Device\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonComponent.h">
+      <Filter>Component\ButtonComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="AxisComponent.h">
+      <Filter>Component\AxisComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="IMappingContext.h">
+      <Filter>Interfaces\IMappingContext</Filter>
+    </ClInclude>
+    <ClInclude Include="MappingContext.h">
+      <Filter>MappingContext</Filter>
+    </ClInclude>
+    <ClInclude Include="IAction.h">
+      <Filter>Interfaces\IAction</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Action</Filter>
+    </ClInclude>
+    <ClInclude Include="ITriggers.h">
+      <Filter>Interfaces\ITriggers</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Interfaces\ITriggers\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="IDown.h">
+      <Filter>Interfaces\ITriggers\IDown</Filter>
+    </ClInclude>
+    <ClInclude Include="ITrigger.h">
+      <Filter>Interfaces\ITriggers\ITrigger</Filter>
+    </ClInclude>
+    <ClInclude Include="Down.h">
+      <Filter>Trigger\Down</Filter>
+    </ClInclude>
+    <ClInclude Include="Negative.h">
+      <Filter>Modifiers\Negative</Filter>
+    </ClInclude>
+    <ClInclude Include="Functions.h">
+      <Filter>Utilities\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="SwizzleAxis.h">
+      <Filter>Modifiers\SwizzleAxis</Filter>
+    </ClInclude>
+    <ClInclude Include="IModifiers.h">
+      <Filter>Interfaces\IModifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="IModifier.h">
+      <Filter>Interfaces\IModifiers\IModifier</Filter>
+    </ClInclude>
+    <ClInclude Include="INegative.h">
+      <Filter>Interfaces\IModifiers\INegative</Filter>
+    </ClInclude>
+    <ClInclude Include="ISwizzleAxis.h">
+      <Filter>Interfaces\IModifiers\ISwizzleAxis</Filter>
+    </ClInclude>
+    <ClInclude Include="ChordAction.h">
+      <Filter>Trigger\ChordAction</Filter>
+    </ClInclude>
+    <ClInclude Include="IChordAction.h">
+      <Filter>Interfaces\ITriggers\IChordAction</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Functions.cpp">
+      <Filter>Utilities\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="ISystem.cpp">
+      <Filter>Interfaces\ISystem</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="IDevice.cpp">
+      <Filter>Interfaces\IDevices\IDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="IKeyboard.cpp">
+      <Filter>Interfaces\IDevices\IKeyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="IMouse.cpp">
+      <Filter>Interfaces\IDevices\IMouse</Filter>
+    </ClCompile>
+    <ClCompile Include="Value.cpp">
+      <Filter>Utilities\Value</Filter>
+    </ClCompile>
+    <ClCompile Include="IController.cpp">
+      <Filter>Interfaces\IDevices\IController</Filter>
+    </ClCompile>
+    <ClCompile Include="IComponent.cpp">
+      <Filter>Interfaces\IComponents\IComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="IButtonComponent.cpp">
+      <Filter>Interfaces\IComponents\IButtonComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="IAxisComponent.cpp">
+      <Filter>Interfaces\IComponents\IAxisComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>Device\Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>Device\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Device\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonComponent.cpp">
+      <Filter>Component\ButtonComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="AxisComponent.cpp">
+      <Filter>Component\AxisComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="IMappingContext.cpp">
+      <Filter>Interfaces\IMappingContext</Filter>
+    </ClCompile>
+    <ClCompile Include="MappingContext.cpp">
+      <Filter>MappingContext</Filter>
+    </ClCompile>
+    <ClCompile Include="IAction.cpp">
+      <Filter>Interfaces\IAction</Filter>
+    </ClCompile>
+    <ClCompile Include="Action.cpp">
+      <Filter>Action</Filter>
+    </ClCompile>
+    <ClCompile Include="IDown.cpp">
+      <Filter>Interfaces\ITriggers\IDown</Filter>
+    </ClCompile>
+    <ClCompile Include="ITrigger.cpp">
+      <Filter>Interfaces\ITriggers\ITrigger</Filter>
+    </ClCompile>
+    <ClCompile Include="Down.cpp">
+      <Filter>Trigger\Down</Filter>
+    </ClCompile>
+    <ClCompile Include="Negative.cpp">
+      <Filter>Modifiers\Negative</Filter>
+    </ClCompile>
+    <ClCompile Include="SwizzleAxis.cpp">
+      <Filter>Modifiers\SwizzleAxis</Filter>
+    </ClCompile>
+    <ClCompile Include="IModifier.cpp">
+      <Filter>Interfaces\IModifiers\IModifier</Filter>
+    </ClCompile>
+    <ClCompile Include="INegative.cpp">
+      <Filter>Interfaces\IModifiers\INegative</Filter>
+    </ClCompile>
+    <ClCompile Include="ISwizzleAxis.cpp">
+      <Filter>Interfaces\IModifiers\ISwizzleAxis</Filter>
+    </ClCompile>
+    <ClCompile Include="ChordAction.cpp">
+      <Filter>Trigger\ChordAction</Filter>
+    </ClCompile>
+    <ClCompile Include="IChordAction.cpp">
+      <Filter>Interfaces\ITriggers\IChordAction</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

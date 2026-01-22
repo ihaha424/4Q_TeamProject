@@ -1,0 +1,60 @@
+#pragma once
+
+#include <assert.h>
+#include <string>
+#include <filesystem>
+#include <ranges>
+#include <any>
+#include <optional>
+#include <typeinfo>
+#include <typeindex>
+#include <fstream>
+
+#include "directxtk/SimpleMath.h"
+#include "nlohmann/json.hpp"
+
+#include "DSHTime/Time.h"
+#include "DSHWindow/Window.h"
+#include "DSHInput/Input.h"
+#include "DSHLogger/Logger.h"
+#include "DSHAudio/Audio.h"
+
+#include "GraphicsEngine/GraphicsEngine.h"
+
+#ifdef NDEBUG
+	#define PhysicsDebuger false
+#else
+	#define PhysicsDebuger true
+#endif
+
+#define LEFT_HANDED_COORDINATE_SYSTEM
+
+// If you want to left haned coirdinate system, Define This Flag.
+#ifdef LEFT_HANDED_COORDINATE_SYSTEM
+#define AXIS -1
+#else
+#define AXIS 1
+#endif
+
+#include "Physics/InterfaceAPI.h"
+
+
+#include "Server/ClientEntrance.h"
+#include "../Packet/ProtoInclude.h"
+#include "../Packet/PacketID.h"
+#include "PacketFilter.h"
+
+#include "Math.h"
+
+#include "Transform.h"
+
+#include "Modules.h"
+
+#include "Components.h"
+#include "Object.h"
+#include "World.h"
+
+#include "UserInterfaces.h"
+#include "Canvas.h"
+
+#include "Application.h"

@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package PlayMsg;
+
+message SelectPart {
+	optional int32 selectpart = 1;
+}
+
+message PickObject {
+	optional int32 targetserialnumber = 1;
+	optional int32 playerid = 2;
+}
+
+message PutObject {
+	optional int32 targetserialnumber = 1;
+	optional int32 playerid = 2;
+	repeated float position = 3;
+}
+
+message SoundPlay {
+	optional int32 soundid = 1;
+}
+
+message InteractObject {
+	optional int32 objectserialnumber = 1;
+	optional int32 playerid = 2;
+}
+
+message TriggerObject {
+	optional int32 objectserialnumber = 1;
+	optional int32 triggerboxid = 2;
+}
+
+message TriggerOut {
+	optional int32 objectserialnumber = 1;
+	optional int32 triggerboxid = 2;
+}
+
+message InteractDialog {
+	optional int32 currentdialogid = 1;
+}
+
+message DialogProgress {
+	optional int32 nextdialogid = 1;
+}
+
+message QuestStart {
+	optional int32 questid = 1;
+}
+
+message QuestEnd {
+	optional int32 questid = 1;
+}
+
+message PuzzleStart {
+	optional int32 puzzleid = 1;
+}
+
+message ObjectActive {
+	optional int32 objectserialnumber = 1;
+}
+
+message ObjectDisable {
+	repeated int32 objectserialnumber = 1;
+}
+
+message DialogNext {
+	optional int32 playerid = 1;
+}

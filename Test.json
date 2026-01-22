@@ -1,0 +1,53 @@
+"GameData":
+{
+	"title": "시나브로"
+	"Worlds":
+	[
+	{
+		"Type":"TestWorld"
+		"Objects":
+		[
+		{
+			"Type":"Player"
+			"Transform":
+			{
+				"Position":
+				{
+					"x": 100.0
+					"y": 100.0
+					"z": 100.0
+				}
+				"Rotation":
+				{
+					"x": 0.0
+					"y": 0.0
+					"z": 0.0
+				}
+				"Scale":
+				{
+					"x": 1.0
+					"y": 1.0
+					"z": 1.0
+				}
+			}
+		},
+		]
+	},
+	]
+	"Objects":
+	[
+	{
+		"Type":"Player"
+		"MeshPath":"Resource/fbx/player.fbx"
+	},
+		{
+		"Type":"RemotePlayer"
+	},
+		{
+		"Type":"Box"
+	},
+		{
+		"Type":"Hi"
+	},
+	]
+}

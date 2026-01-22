@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\ProtoBuf">
+      <UniqueIdentifier>{bfca1285-987b-4959-93bf-22f7c99a76ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\JSON">
+      <UniqueIdentifier>{63382a51-1bc9-43f6-bd9b-2f88af919e29}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LogicServer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerLogic.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packet\Connect.pb.cc">
+      <Filter>소스 파일\ProtoBuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packet\Move.pb.cc">
+      <Filter>소스 파일\ProtoBuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packet\Play.pb.cc">
+      <Filter>소스 파일\ProtoBuf</Filter>
+    </ClCompile>
+    <ClCompile Include="JSONLoad.cpp">
+      <Filter>소스 파일\JSON</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ServerLogic.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\Connect.pb.h">
+      <Filter>소스 파일\ProtoBuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\Move.pb.h">
+      <Filter>소스 파일\ProtoBuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\Play.pb.h">
+      <Filter>소스 파일\ProtoBuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\ProtoInclude.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packet\PacketID.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="JSONLoad.h">
+      <Filter>소스 파일\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>소스 파일\JSON</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

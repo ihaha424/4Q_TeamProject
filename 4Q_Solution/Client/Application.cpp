@@ -1,0 +1,816 @@
+#include "pch.h"
+#include "Application.h"
+
+#include "MainCanvas.h"
+#include "InGameCanvas.h"
+#include "TestWorld.h"
+#include "EmptyWorld.h"
+#include "NPC_Hide.h"
+#include "NPC_Ornoa.h"
+#include "NPC_Ornoa_Elder.h"
+#include "SimpleCamera.h"
+#include "../Engine/DSHHudManager.h"
+
+InGameCanvas* GameClient::Application::_inGameCanvas = nullptr;
+
+GameClient::Application::Application(const HINSTANCE instanceHandle) : Engine::Application(instanceHandle)
+{
+}
+
+GameClient::Application::~Application()
+{
+	delete _mainCanvas;
+	delete _inGameCanvas;
+}
+
+InGameCanvas* GameClient::Application::GetInGameCanvas()
+{
+	return _inGameCanvas;
+}
+
+void GameClient::Application::LoadData(Engine::Load::IManager* loadManager)
+{
+	loadManager->LoadRegisterData(L"Assets/Test/MapData.json");
+	loadManager->LoadCloneData(L"Assets/Test/MapData.json");
+}
+
+void GameClient::Application::DeclareInputActions(Engine::Input::IManager* inputManager)
+{
+	Engine::Input::IMappingContext* gameMappingContext = nullptr;
+	inputManager->GetMappingContext(L"Default", &gameMappingContext);
+
+	Engine::Input::IMappingContext* uiMappingContext = nullptr;
+	inputManager->GetMappingContext(L"UI", &uiMappingContext);
+
+	DeclareUIAction(inputManager, uiMappingContext, gameMappingContext);
+	DeclareMoveAction(inputManager, gameMappingContext);
+	DeclareCameraAction(inputManager, gameMappingContext);
+	DeclareSystemAction(inputManager, gameMappingContext);
+
+	inputManager->SetActiveMappingContext(uiMappingContext);
+}
+
+void GameClient::Application::Register(Engine::Content::IManager* contentManager, Engine::Load::IManager* loadManager)
+{
+	Engine::Application::Register(contentManager, loadManager);
+
+	const auto worldFactory = contentManager->GetWorldFactory();
+	worldFactory->Register<EmptyWorld>();
+	worldFactory->Register<TestWorld>();
+
+	const auto objectFactory = contentManager->GetObjectFactory();
+	objectFactory->Register<SimpleCamera>();
+	objectFactory->Register<GlobalLight>();
+	objectFactory->Register<Ray>(L"Assets/Models/Ray.fbx");
+	objectFactory->Register<RemoteRay>(L"Assets/Models/Ray.fbx");
+	objectFactory->Register<Live>(L"Assets/Models/Live.fbx");
+	objectFactory->Register<RemoteLive>(L"Assets/Models/Live.fbx");
+	objectFactory->Register<SkyBox>(L"Assets/Models/skybox.fbx");
+	objectFactory->Register<BermioreFabricLight>();
+
+
+	// NPC
+	{
+		objectFactory->Register<NPC_Hide>();
+		objectFactory->Register<NPC_Ornoa>();
+		objectFactory->Register<NPC_Ornoa_Elder>();
+	}
+
+
+	// BG_Terrain
+	{
+		objectFactory->Register<BG_Terrain>(L"Assets/Models/BG_Terrain.fbx", L"Assets/Models/BG_Terrain.fbx");
+	}
+
+	// Obj_Bermiore_Fabric
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Fabric").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Bermiore_Fabric>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Bermiore_Hanger
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Hanger").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Bermiore_Hanger>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_SteppedSudium
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_SteppedSudium").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_SteppedSudium>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Ornoa_Print
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Ornoa_Print_1").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Ornoa_Print>(buildingProperty, buildingProperty);
+	}
+
+	// BG_Ornoa_Cloth_3
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"BG_Ornoa_Cloth_3").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<BG_Ornoa_Cloth_3>(buildingProperty, buildingProperty);
+	}
+
+	// BG_Ornoa_Cloth_2
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"BG_Ornoa_Cloth_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<BG_Ornoa_Cloth_2>(buildingProperty, buildingProperty);
+	}
+
+	// BG_Ornoa_Cloth_1
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"BG_Ornoa_Cloth_1").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<BG_Ornoa_Cloth_1>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_BG_Tree_3
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_BG_Tree_3").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_BG_Tree_3>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_BG_Tree_2
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_BG_Tree_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_BG_Tree_2>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_BG_Tree_1
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_BG_Tree_1").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_BG_Tree_1>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Ornoa_House_1
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Ornoa_House_1").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Ornoa_House_1>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Ornoa_House_2
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Ornoa_House_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Ornoa_House_2>(buildingProperty, buildingProperty);
+	}
+
+	// BG_Props_Fence
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"BG_Props_Fence").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<BG_Props_Fence>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Sudium
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Sudium").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Sudium>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Sudium
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Shinave").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Shinave>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Hide_House_5
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Hide_House_5").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Hide_House_5>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Hide_House_4
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Hide_House_4").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Hide_House_4>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Hide_House_3
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Hide_House_3").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Hide_House_3>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Hide_House_2
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Hide_House_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Hide_House_2>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Hide_House_1
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Hide_House_1").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Hide_House_1>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Hide_Xylophone
+	{
+		// TODO: Hide_Xylophone
+	}
+
+	// Obj_Hide_Plant
+	{
+		// TODO: Hide_Plant
+	}
+
+	// Obj_Sudium_blue
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Sudium_blue").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Sudium_blue>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Sudium_red
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Sudium_red").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Sudium_red>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_BG_Tree_3_Active
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_BG_Tree_3_Active").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_BG_Tree_3_Active>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_BG_Tree_1_Active
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_BG_Tree_1_Active").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_BG_Tree_1_Active>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_Stone_1
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Stone_1").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Stone_1>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_Stone_2
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Stone_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Stone_2>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_Stone_3
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Stone_3").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Stone_3>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_Stone_4
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Stone_4").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Stone_4>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_Stone_5
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Stone_5").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Stone_5>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_Platform_Set
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Platform_Set").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Platform_Set>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_Platform_Spawn_1
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Platform_Spawn_1").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Platform_Spawn_1>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_Platform_Spawn_2
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Platform_Spawn_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Platform_Spawn_2>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_Platform_Spawn_3
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Platform_Spawn_3").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Platform_Spawn_3>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Bermiore_Woolball_inBox
+		{
+			{
+				auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Soundblock").value();
+				auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+				objectFactory->Register<Obj_Bermiore_Soundblock>(buildingProperty, buildingProperty);
+			}
+			{
+				auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Fabric").value();
+				auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+				objectFactory->Register<Obj_Bermiore_Fabric>(buildingProperty, buildingProperty);
+			}
+			{
+				auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Hanger").value();
+				auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+				objectFactory->Register<Obj_Bermiore_Hanger>(buildingProperty, buildingProperty);
+			}
+			{
+				auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Woolball_1").value();
+				auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+				objectFactory->Register<Obj_Bermiore_Woolball_1>(buildingProperty, buildingProperty);
+			}
+			{
+				auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Woolball_2").value();
+				auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+				objectFactory->Register<Obj_Bermiore_Woolball_2>(buildingProperty, buildingProperty);
+			}
+			{
+				auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Woolball_3").value();
+				auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+				objectFactory->Register<Obj_Bermiore_Woolball_3>(buildingProperty, buildingProperty);
+			}
+			{
+				auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Woolball_4").value();
+				auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+				objectFactory->Register<Obj_Bermiore_Woolball_4>(buildingProperty, buildingProperty);
+			}
+			{
+				auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Woolball_5").value();
+				auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+				objectFactory->Register<Obj_Bermiore_Woolball_5>(buildingProperty, buildingProperty);
+			}
+			{
+				auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Woolball_6").value();
+				auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+				objectFactory->Register<Obj_Bermiore_Woolball_6>(buildingProperty, buildingProperty);
+			}
+		}
+
+		// BGM
+		{
+			{
+				objectFactory->Register<Trigger_AtelierBGM>();
+				objectFactory->Register<Trigger_HideBGM>();
+				objectFactory->Register<Trigger_OrnoaBGM>();
+				objectFactory->Register<Trigger_SinaveBGM>();
+				objectFactory->Register<Trigger_SudiumBGM>();
+			}
+
+
+		}
+
+	// TODO: Wool Series
+	// TODO: Wool ball Series
+
+	// Obj_Buildings_Bermiore_Atelier_1
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Bermiore_Atelier_1").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Bermiore_Atelier_1>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Bermiore_Atelier_2
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Bermiore_Atelier_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Bermiore_Atelier_2>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Buildings_Bermiore_Atelier_3
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Buildings_Bermiore_Atelier_3").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Buildings_Bermiore_Atelier_3>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Hide_Potion
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Hide_Potion").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Hide_Potion>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Shinave_Bermiore
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Shinave_Bermiore").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Shinave_Bermiore>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Bermiore_Soundblock
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Bermiore_Soundblock").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Bermiore_Soundblock>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Hide_Box
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Hide_Box").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Hide_Box>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Ornoa_Soundblock_5
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Ornoa_Soundblock_5").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Ornoa_Soundblock_5>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Ornoa_Soundblock_4
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Ornoa_Soundblock_4").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Ornoa_Soundblock_4>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Ornoa_Soundblock_3
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Ornoa_Soundblock_3").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Ornoa_Soundblock_3>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Ornoa_Soundblock_2
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Ornoa_Soundblock_2").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Ornoa_Soundblock_2>(buildingProperty, buildingProperty);
+	}
+
+	// Obj_Ornoa_Soundblock_1
+	{
+		auto buildingConfig = loadManager->GetObjectRegisterData(L"Obj_Ornoa_Soundblock_1").value();
+		auto buildingProperty = buildingConfig.GetProperty<std::filesystem::path>(L"fbxPath").value();
+		objectFactory->Register<Obj_Ornoa_Soundblock_1>(buildingProperty, buildingProperty);
+	}
+
+	//Test
+	{
+		//objectFactory->Register<GrabbedObject>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");
+		//objectFactory->Register<TriggerArea>("Assets/Test/cube.fbx", L"Assets/Test/cube.fbx");
+		//objectFactory->Register<TestSprite>();
+	}
+
+	//RegisterHelp<Obj_Props_Bermiore_Loom_1>(L"Obj_Props_Bermiore_Loom_1", loadManager, objectFactory);
+	//RegisterHelp<Obj_Props_Bermiore_Loom_2>(L"Obj_Props_Bermiore_Loom_2", loadManager, objectFactory);
+
+
+
+		// Puzzle Manager
+	{
+		objectFactory->Register<MainPuzzleManager>();
+		objectFactory->Register<PuzzleManager00>();
+		objectFactory->Register<PuzzleManager01>();
+		objectFactory->Register<PuzzleManager02>();
+		objectFactory->Register<PuzzleManager03>();
+		objectFactory->Register<PuzzleManager04>();
+	}
+
+
+	// Components
+	{
+		const auto componentFactory = contentManager->GetComponentFactory();
+		componentFactory->Register<RemoteMove>();
+		componentFactory->Register<TriggerBox>();
+	}
+}
+
+void GameClient::Application::PrepareInitialWorld(Engine::Content::Factory::World* worldFactory)
+{
+	//worldFactory->Clone<EmptyWorld>();
+	worldFactory->Clone<TestWorld>();
+}
+
+void GameClient::Application::PrepareInitialHUD(Engine::DSHHud::Manager* hudManager)
+{
+	_mainCanvas = new MainCanvas(_size);
+	_inGameCanvas = new InGameCanvas(_size);
+	hudManager->SetCanvas(_mainCanvas);
+	_mainCanvas->BindOnFadeIn([hudManager, this]()
+		{
+			hudManager->SetCanvas(_inGameCanvas);
+			GetInputManager()->SetActiveMappingContext(L"Default");
+		});
+}
+
+void GameClient::Application::DeclareUIAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mainMappingContext, Engine::Input::IMappingContext* defaultMappingContext)
+{
+	Engine::Input::Device::IController* controller = nullptr;
+	inputManager->GetDevice(&controller);
+
+	Engine::Input::Device::IMouse* mouse = nullptr;
+	inputManager->GetDevice(&mouse);
+
+	// UINext
+	Engine::Input::IAction* action = nullptr;
+	mainMappingContext->GetAction(L"UINext", &action);
+
+	Engine::Input::Trigger::IDown* leftClickTrigger = nullptr;
+	action->GetTrigger(&leftClickTrigger);
+	Engine::Input::Component::IButtonComponent* leftClick = nullptr;
+	mouse->GetComponent(Engine::Input::Device::IMouse::Button::Left, &leftClick);
+	leftClickTrigger->SetComponent(leftClick);
+
+	Engine::Input::Trigger::IDown* bButtonTrigger = nullptr;
+	action->GetTrigger(&bButtonTrigger);
+	Engine::Input::Component::IButtonComponent* bButton = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Button::B, &bButton);
+	bButtonTrigger->SetComponent(bButton);
+
+	Engine::Input::Trigger::IDown* aButtonTrigger = nullptr;
+	action->GetTrigger(&aButtonTrigger);
+	Engine::Input::Component::IButtonComponent* aButton = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Button::A, &aButton);
+	aButtonTrigger->SetComponent(aButton);
+
+	Engine::Input::Trigger::IDown* xButtonTrigger = nullptr;
+	action->GetTrigger(&xButtonTrigger);
+	Engine::Input::Component::IButtonComponent* xButton = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Button::X, &xButton);
+	xButtonTrigger->SetComponent(xButton);
+
+	Engine::Input::Trigger::IDown* yButtonTrigger = nullptr;
+	action->GetTrigger(&yButtonTrigger);
+	Engine::Input::Component::IButtonComponent* yButton = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Button::Y, &yButton);
+	yButtonTrigger->SetComponent(yButton);
+
+	// InGame Fade In
+	action->AddListener(Engine::Input::Trigger::Event::Started, [this](auto) {
+		_mainCanvas->FadeIn();
+		});
+
+	// Move Tutorial
+	Engine::Input::IAction* moveTutorialAction = nullptr;
+	defaultMappingContext->GetAction(L"Move", &moveTutorialAction);
+	moveTutorialAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto) {
+		_inGameCanvas->MoveTutorialDone();
+		});
+
+	// View Tutorial
+	Engine::Input::IAction* viewTutorialAction = nullptr;
+	defaultMappingContext->GetAction(L"Camera", &viewTutorialAction);
+	viewTutorialAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto) {
+		_inGameCanvas->ViewTutorialDone();
+		});
+
+	// Jump Tutorial
+	Engine::Input::IAction* jumpTutorialAction = nullptr;
+	defaultMappingContext->GetAction(L"Jump", &jumpTutorialAction);
+	jumpTutorialAction->AddListener(Engine::Input::Trigger::Event::Started, [this](auto) {
+		_inGameCanvas->JumpTutorialDone();
+		});
+}
+
+
+void GameClient::Application::DeclareMoveAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext)
+{
+	Engine::Input::Modifier::INegative* negative = nullptr;
+	inputManager->GetModifier(&negative);
+	Engine::Input::Modifier::ISwizzleAxis* swizzleAxis = nullptr;
+	inputManager->GetModifier(Engine::Input::Modifier::ISwizzleAxis::Type::ZXY, &swizzleAxis);
+
+	Engine::Input::Device::IKeyboard* keyboard = nullptr;
+	inputManager->GetDevice(&keyboard);
+
+	Engine::Input::Device::IController* controller = nullptr;
+	inputManager->GetDevice(&controller);
+
+	// Move
+	Engine::Input::IAction* moveAction = nullptr;
+	mappingContext->GetAction(L"Move", &moveAction);
+
+	Engine::Input::Trigger::IDown* leftTrigger = nullptr;
+	moveAction->GetTrigger(&leftTrigger);
+	Engine::Input::Component::IButtonComponent* left = nullptr;
+	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::A, &left);
+	leftTrigger->AddModifier(negative);
+	leftTrigger->SetComponent(left);
+
+	Engine::Input::Trigger::IDown* rightTrigger = nullptr;
+	moveAction->GetTrigger(&rightTrigger);
+	Engine::Input::Component::IButtonComponent* right = nullptr;
+	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::D, &right);
+	rightTrigger->SetComponent(right);
+
+	Engine::Input::Trigger::IDown* forwardTrigger = nullptr;
+	moveAction->GetTrigger(&forwardTrigger);
+	Engine::Input::Component::IButtonComponent* up = nullptr;
+	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::W, &up);
+	forwardTrigger->AddModifier(swizzleAxis);
+	forwardTrigger->SetComponent(up);
+
+	Engine::Input::Trigger::IDown* backwardTrigger = nullptr;
+	moveAction->GetTrigger(&backwardTrigger);
+	Engine::Input::Component::IButtonComponent* down = nullptr;
+	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::S, &down);
+	backwardTrigger->AddModifier(swizzleAxis);
+	backwardTrigger->AddModifier(negative);
+	backwardTrigger->SetComponent(down);
+
+	Engine::Input::Trigger::IDown* leftStickXTrigger = nullptr;
+	moveAction->GetTrigger(&leftStickXTrigger);
+	Engine::Input::Component::IAxisComponent* leftStickX = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Thumb::LeftX, &leftStickX);
+	leftStickXTrigger->SetComponent(leftStickX);
+
+	Engine::Input::Trigger::IDown* leftStickYTrigger = nullptr;
+	moveAction->GetTrigger(&leftStickYTrigger);
+	Engine::Input::Component::IAxisComponent* leftStickY = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Thumb::LeftY, &leftStickY);
+	leftStickYTrigger->SetComponent(leftStickY);
+	leftStickYTrigger->AddModifier(swizzleAxis);
+
+	// Jump
+	Engine::Input::IAction* jumpAction = nullptr;
+	mappingContext->GetAction(L"Jump", &jumpAction);
+
+	Engine::Input::Trigger::IDown* keyTrigger = nullptr;
+	jumpAction->GetTrigger(&keyTrigger);
+	Engine::Input::Component::IButtonComponent* space = nullptr;
+	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::Space, &space);
+	keyTrigger->SetComponent(space);
+
+	Engine::Input::Trigger::IDown* buttonTrigger = nullptr;
+	jumpAction->GetTrigger(&buttonTrigger);
+	Engine::Input::Component::IButtonComponent* aButton = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Button::A, &aButton);
+	buttonTrigger->SetComponent(aButton);
+
+	// Temp
+	Engine::Input::IAction* interactAction = nullptr;
+	mappingContext->GetAction(L"Interact", &interactAction);
+
+	Engine::Input::Trigger::IDown* eButtonTrigger = nullptr;
+	interactAction->GetTrigger(&eButtonTrigger);
+	Engine::Input::Component::IButtonComponent* E = nullptr;
+	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::E, &E);
+	eButtonTrigger->SetComponent(E);
+
+	Engine::Input::Trigger::IDown* xButtonTrigger = nullptr;
+	interactAction->GetTrigger(&xButtonTrigger);
+	Engine::Input::Component::IButtonComponent* xButton = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Button::X, &xButton);
+	xButtonTrigger->SetComponent(xButton);
+}
+
+void GameClient::Application::DeclareCameraAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext)
+{
+	Engine::Input::Modifier::INegative* negative = nullptr;
+	inputManager->GetModifier(&negative);
+	Engine::Input::Modifier::ISwizzleAxis* swizzleAxis = nullptr;
+	inputManager->GetModifier(Engine::Input::Modifier::ISwizzleAxis::Type::YXZ, &swizzleAxis);
+
+	Engine::Input::IAction* action = nullptr;
+	mappingContext->GetAction(L"Camera", &action);
+
+	Engine::Input::Device::IMouse* mouse = nullptr;
+	inputManager->GetDevice(&mouse);
+
+	Engine::Input::Trigger::IDown* mouseXTrigger = nullptr;
+	action->GetTrigger(&mouseXTrigger);
+	Engine::Input::Component::IAxisComponent* mouseXAxis = nullptr;
+	mouse->GetComponent(Engine::Input::Device::IMouse::Axis::X, &mouseXAxis);
+	mouseXTrigger->SetComponent(mouseXAxis);
+	mouseXTrigger->AddModifier(swizzleAxis);
+
+	Engine::Input::Trigger::IDown* mouseYTrigger = nullptr;
+	action->GetTrigger(&mouseYTrigger);
+	Engine::Input::Component::IAxisComponent* mouseYAxis = nullptr;
+	mouse->GetComponent(Engine::Input::Device::IMouse::Axis::Y, &mouseYAxis);
+	mouseYTrigger->SetComponent(mouseYAxis);
+
+	Engine::Input::Device::IController* controller = nullptr;
+	inputManager->GetDevice(&controller);
+
+	Engine::Input::Trigger::IDown* rightStickXTrigger = nullptr;
+	action->GetTrigger(&rightStickXTrigger);
+	Engine::Input::Component::IAxisComponent* rightStickX = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Thumb::RightX, &rightStickX);
+	rightStickXTrigger->SetComponent(rightStickX);
+	rightStickXTrigger->AddModifier(swizzleAxis);
+
+	Engine::Input::Trigger::IDown* rightStickYTrigger = nullptr;
+	action->GetTrigger(&rightStickYTrigger);
+	Engine::Input::Component::IAxisComponent* rightStickY = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Thumb::RightY, &rightStickY);
+	rightStickYTrigger->SetComponent(rightStickY);
+	rightStickYTrigger->AddModifier(negative);
+}
+
+void GameClient::Application::DeclareSystemAction(Engine::Input::IManager* inputManager, Engine::Input::IMappingContext* mappingContext)
+{
+	Engine::Input::Device::IMouse* mouse = nullptr;
+	inputManager->GetDevice(&mouse);
+
+	Engine::Input::Device::IKeyboard* keyboard = nullptr;
+	inputManager->GetDevice(&keyboard);
+
+	Engine::Input::Device::IController* controller = nullptr;
+	inputManager->GetDevice(&controller);
+
+	Engine::Input::IAction* unlockAction = nullptr;
+	mappingContext->GetAction(L"UnlockCursor", &unlockAction);
+
+	Engine::Input::Trigger::IDown* f1Trigger = nullptr;
+	unlockAction->GetTrigger(&f1Trigger);
+	Engine::Input::Component::IButtonComponent* f1 = nullptr;
+	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::F1, &f1);
+	f1Trigger->SetComponent(f1);
+
+	unlockAction->AddListener(Engine::Input::Trigger::Event::Started, [mouse](auto) {
+		mouse->ShowCursor();
+		mouse->UnlockCursor();
+		});
+
+	Engine::Input::IAction* lockAction = nullptr;
+	mappingContext->GetAction(L"LockCursor", &lockAction);
+
+	Engine::Input::Trigger::IDown* f2Trigger = nullptr;
+	lockAction->GetTrigger(&f2Trigger);
+	Engine::Input::Component::IButtonComponent* f2 = nullptr;
+	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::F2, &f2);
+	f2Trigger->SetComponent(f2);
+
+	lockAction->AddListener(Engine::Input::Trigger::Event::Started, [mouse](auto) {
+		mouse->HideCursor();
+		mouse->LockCursor();
+		});
+
+	Engine::Input::IAction* showAction = nullptr;
+	mappingContext->GetAction(L"ShowCursor", &showAction);
+
+	Engine::Input::Trigger::IDown* mouseXTrigger = nullptr;
+	showAction->GetTrigger(&mouseXTrigger);
+	Engine::Input::Component::IAxisComponent* mouseXAxis = nullptr;
+	mouse->GetComponent(Engine::Input::Device::IMouse::Axis::X, &mouseXAxis);
+	mouseXTrigger->SetComponent(mouseXAxis);
+
+	Engine::Input::Trigger::IDown* mouseYTrigger = nullptr;
+	showAction->GetTrigger(&mouseYTrigger);
+	Engine::Input::Component::IAxisComponent* mouseYAxis = nullptr;
+	mouse->GetComponent(Engine::Input::Device::IMouse::Axis::Y, &mouseYAxis);
+	mouseYTrigger->SetComponent(mouseYAxis);
+
+	showAction->AddListener(Engine::Input::Trigger::Event::Started, [mouse](auto value) {
+		if (mouse->IsCursorLocked() == false) mouse->ShowCursor();
+		});
+
+	Engine::Input::IAction* hideAction = nullptr;
+	mappingContext->GetAction(L"HideCursor", &hideAction);
+
+	Engine::Input::Trigger::IDown* rightStickXTrigger = nullptr;
+	hideAction->GetTrigger(&rightStickXTrigger);
+	Engine::Input::Component::IAxisComponent* rightStickX = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Thumb::RightX, &rightStickX);
+	rightStickXTrigger->SetComponent(rightStickX);
+
+	Engine::Input::Trigger::IDown* rightStickYTrigger = nullptr;
+	hideAction->GetTrigger(&rightStickYTrigger);
+	Engine::Input::Component::IAxisComponent* rightStickY = nullptr;
+	controller->GetComponent(Engine::Input::Device::IController::Thumb::RightY, &rightStickY);
+	rightStickYTrigger->SetComponent(rightStickY);
+
+	hideAction->AddListener(Engine::Input::Trigger::Event::Started, [mouse](auto value) {
+		mouse->HideCursor();
+		});
+
+
+	// Test Key
+	Engine::Input::IAction* testKey01 = nullptr;
+	mappingContext->GetAction(L"TestKey01", &testKey01);
+
+	Engine::Input::Trigger::IDown* oButton = nullptr;
+	testKey01->GetTrigger(&oButton);
+	Engine::Input::Component::IButtonComponent* oBtn = nullptr;
+	keyboard->GetComponent(Engine::Input::Device::IKeyboard::Key::O, &oBtn);
+	oButton->SetComponent(oBtn);
+}
